@@ -7,6 +7,10 @@
     <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
 </head>
 <style>
+    body {
+        background-color: #000;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
     #gamecanvas {
       border: #fff 10px solid;
       border-radius: 10px;
@@ -42,12 +46,39 @@
         margin-left: 6px;
         display: none;
     }
+    .sliders {
+        position: absolute;
+        accent-color: #aff;
+        z-index: 10;
+        transform: scale(1.5);
+        left: 40px;
+        top: 13px;
+    }
+    #leninput {
+
+        top: 70px
+    }
+    .text2 {
+        position: absolute;
+        left: 12px;
+        top: 30px;
+        color: #fff;
+        font-size: 17px;
+        z-index: 12;
+    }
+    #lentext {
+        top: 90px
+    }
 </style>
 <body>
     <canvas id="gamecanvas"></canvas>
-    <p id="alert" class="text">Click to start</p>
+    <p id="alert" class="text" style="line-height: 0.5;">Click to start <br></br> Press Esc to exit</p>
     <p id="error" class="text">Please Wait!</p>
     <p id="recover" class="text">Object Offscreen, press r to recover</p>
+    <input id="capinput" class = "sliders" min = "1" max="3" step="1" type="range" value="2">
+    <div class="text2" id="linecaptext">linecap: round</div>
+    <input id="leninput" class = "sliders" min = "1" max="300" step="1" type="range" value="75">
+    <div class="text2" id="lentext">length: 75</div>
 </div>
 </body>
 <script>
@@ -59,6 +90,7 @@
     const alert = document.getElementById("alert");
     const error = document.getElementById("error");
     const recover = document.getElementById("recover");
+    const sliders = document.getElementsByClassName("sliders")
     let mouseX = null;
     let mouseY = null;
     let prevMouseX = 0;
@@ -66,10 +98,11 @@
     let mouseLocked = true; 
     let xpos = 0;
     let ypos = 0;
+    let linecap = "round"
     let mouseXv = 0;
     let mouseYv = 0;
     let posHist = [];
-    const maxlength = 75;
+    let maxlength = 75;
     const trailwidth = 40;
     let mouseDown = false;
     let mouseMoved = false;
@@ -143,25 +176,30 @@
         ctx.fillStyle = "#000"
         ctx.fillRect(2,canvas.height - 48,76,46);
 
-        ctx.fillStyle = `hsl(${(t*10)%360},50%,70%)`
+        ctx.fillStyle = `hsl(${(t*50)%360},50%,70%)`
         ctx.fillRect(80,canvas.height - 50,80,50);
         ctx.fillStyle = "#000"
         ctx.fillRect(82,canvas.height - 48,76,46);
 
-        ctx.fillStyle = `hsl(${(t*10)%360},50%,70%)`
+        ctx.fillStyle = `hsl(${(t*50)%360},50%,70%)`
         ctx.fillRect(160,canvas.height - 50,80,50);
-        ctx.fillStyle = `hsl(${(t*10)%360},50%,10%)`
+        ctx.fillStyle = `hsl(${(t*50)%360},50%,10%)`
         ctx.fillRect(162,canvas.height - 48,76,46);
 
 
-        if (ypos <=  canvas.height && ypos >= canvas.height-48) {
-           if (xpos <= 76) {
-              mode = 1;
-        }  else if (xpos <= 82+76) {
-             mode = 2;
-        } else if (xpos <= 162+76){
-            mode = 3;
+        let hue = 0;
+        for (let x = 240; x < 240+80*8; x += 80) {
+            ctx.fillStyle = `hsl(${hue},50%,70%)`;
+            ctx.fillRect(x, canvas.height - 50, 80, 50);
+            ctx.fillStyle = "#000";
+            ctx.fillRect(x + 2, canvas.height - 48, 76, 46);
+            hue += 45;
         }
+   
+
+
+        if (ypos <=  canvas.height && ypos >= canvas.height-48) {
+            mode = Math.floor(xpos/80)+1
     }
 
         let color = 0;
@@ -170,24 +208,22 @@
             const p0 = posHist[i];
             const p1 = posHist[i + 1];
 
-            // const dx = p1.x - p0.x;
-            // const dy = p1.y - p0.y;
-            // const distance = Math.sqrt(dx * dx + dy * dy);
-
             ctx.beginPath();
 
             if (mode == 2 || mode == 3) {
                 ctx.strokeStyle = `hsl(${((color)+t*50)%360},50%,70%)`;
             } else if (mode == 1) {
                 ctx.strokeStyle = "#fff";
-            } else {
+            } else if (mode == 2 || mode == 3) {
                 ctx.strokeStyle = "#fff";
+            } else if (mode < 12) {
+                ctx.strokeStyle = `hsl(${(mode-4)*45},50%,70%)`
             }
 
-            ctx.lineWidth = Math.min(1 + (i * trailwidth / maxlength), maxlength / 2);
+            ctx.lineWidth = 1+i*(trailwidth/maxlength)
             ctx.moveTo(p0.x, p0.y);
             ctx.lineTo(p1.x, p1.y);
-            ctx.lineCap = "round";
+            ctx.lineCap = linecap;
             ctx.stroke();
 
             color+=6;
@@ -195,7 +231,7 @@
    
         color = 0;
 
-        for (let i = 0; i < posHist.length - 1; i++) {
+        for (let i = 0; i < posHist.length-1; i++) {
             const p0 = posHist[i];
             const p1 = posHist[i + 1];
             ctx.beginPath();
@@ -205,22 +241,22 @@
                 ctx.strokeStyle = "#000";
             }
 
-            ctx.lineWidth = Math.min(1 + (i * (trailwidth / 1.2) / maxlength), maxlength / 2);
+            ctx.lineWidth = 1+i/1.2*(trailwidth/maxlength)
             ctx.moveTo(p0.x, p0.y);
             ctx.lineTo(p1.x, p1.y);
-            ctx.lineCap = "round";
+            ctx.lineCap = linecap;
             ctx.stroke();
 
             color +=6
         }
+
+
         if (pointerLocked) {
            posHist.push({ x: xpos, y: ypos });
              if (posHist.length > maxlength) {
               posHist = posHist.slice(0 - maxlength);
-           }
+             }
           }
-
-
 
         requestAnimationFrame(draw);
     }
@@ -238,6 +274,26 @@
     }
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
+
+    sliders[0].addEventListener("input", function(event) {
+        const names = ["line","round","square"];
+        const names2 = ["butt","round","square"]
+        const value = Number(event.target.value);
+        document.getElementById("linecaptext").textContent = `linecap: ${names[value-1]}`;
+        linecap = names2[value-1];
+    })
+
+    sliders[1].addEventListener("input", function(event) {
+        const value = Number(event.target.value);
+        document.getElementById("lentext").textContent = `length: ${value}`;
+        posHist = [];
+        maxlength = value;
+        for (let i = 0; i < maxlength; i++) {
+                xpos = canvas.width/2; ypos = canvas.height/2;
+                posHist.push({ x: xpos, y: ypos});
+            }
+    })
+
 
     let first = true;
     canvas.addEventListener("mousemove", function(event) {
@@ -262,6 +318,7 @@
             mouseY = null;
         }
     }
+
     document.addEventListener('pointerlockchange', handlePointerLockChange);
 
     canvas.addEventListener("pointermove", function(event) {
@@ -273,7 +330,7 @@
         mouseMoved = true;
     });
 
-    window.addEventListener("mousedown", function(event) {
+    canvas.addEventListener("mousedown", function(event) {
         mouseDown = true;
         if (!pointerLocked && document.pointerLockElement !== canvas) {
             canvas.requestPointerLock();
@@ -292,9 +349,12 @@
 
     window.addEventListener('keydown', function(e) {
       keysPressed[e.key] = true;
-      if (e.key = "r") {
+      if (e.key == "r") {
         xpos = canvas.width/2;
         ypos = canvas.height/2
+      }
+      if (e.key == "f") {
+        posHist = [];            posHist = [];            posHist = [];            posHist = [];            posHist = [];
       }
     });
 
