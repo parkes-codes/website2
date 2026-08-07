@@ -198,7 +198,7 @@
    
 
 
-        if (ypos <=  canvas.height && ypos >= canvas.height-48) {
+        if (ypos <=  canvas.height && ypos >= canvas.height-48 && xpos < 880) {
             mode = Math.floor(xpos/80)+1
     }
 
@@ -218,7 +218,7 @@
                 ctx.strokeStyle = "#fff";
             } else if (mode < 12) {
                 ctx.strokeStyle = `hsl(${(mode-4)*45},50%,70%)`
-            }
+            } 
 
             ctx.lineWidth = 1+i*(trailwidth/maxlength)
             ctx.moveTo(p0.x, p0.y);
