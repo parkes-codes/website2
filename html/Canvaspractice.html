@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas practice</title>
+  <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+ #canv {
+    width: 500px;
+    height: 500px;
+    border: #000000 10px solid;
+    background-color: #fff;
+ }
+ #column {
+    display: flex;
+    flex-direction:  column;
+ }
+ #eraseButton {
+    width: 100px;
+    margin-bottom: 10px;
+ }
+ body {
+  background-image: url("plinkk.gif");
+ }
+ #sizetext {
+  color: #fff
+ }
+</style>
+<body>
+  <h1 style="color: #fff">Draw on the canvas</h1>
+<div id="column">
+  <button onclick="eraseAll()" id="eraseButton">Erase all</button>
+  <canvas id="canv">oog booga</canvas>
+  <div id="row">
+    <button onclick="sizeup()">Size+</button>
+    <button onclick="sizedown()">Size-</button>
+    <div id="sizetext">Size: 10</div>
+  </div>
+</div>
+</body>
+<script>
+    const canvas = document.getElementById("canv");
+    const ctx = canvas.getContext("2d");
+    const sizetext = document.getElementById("sizetext");
+    
+    canvas.width = 500;
+    canvas.height = 500;
+
+let mouseX = 0;
+let mouseY = 0;
+let mouseX1 = 0;
+let mouseY1 = 0;
+let size = 10;
+let isDown = false;
+let drawcoords = [];
+
+function getCanvasCoords(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  const style = getComputedStyle(canvas);
+  const borderLeft = parseFloat(style.borderLeftWidth) || 0;
+  const borderTop = parseFloat(style.borderTopWidth) || 0;
+  const scaleX = canvas.width / canvas.clientWidth;
+  const scaleY = canvas.height / canvas.clientHeight;
+  return {
+    x: (clientX - rect.left - borderLeft) * scaleX,
+    y: (clientY - rect.top - borderTop) * scaleY,
+  };
+}
+
+document.addEventListener("mousemove", (event) => {
+  mouseX1 = event.clientX;
+  mouseY1 = event.clientY;
+});
+
+function eraseAll() {
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+    drawcoords = [];
+}
+
+function sizeup() {
+  size++;
+  sizetext.textContent = `Size: ${size}`
+}
+
+function sizedown() {
+  size--;
+  sizetext.textContent = `Size: ${size}`
+}
+
+
+
+function draw() {
+  const pos = getCanvasCoords(mouseX1, mouseY1);
+  mouseX = pos.x - size / 2;
+  mouseY = pos.y - size / 2;
+  if (isDown) {
+    drawcoords.push({ x: mouseX, y: mouseY , size: size});
+  }
+
+  for (let i = 0; i < drawcoords.length - 1; i++) { // I CODED THIS ALL ON MY OWN! POGGIES
+    if (drawcoords[i].penUp || drawcoords[i + 1].penUp) continue;
+    ctx.beginPath();
+    ctx.moveTo(drawcoords[i].x, drawcoords[i].y); 
+    ctx.lineTo(drawcoords[i+1].x, drawcoords[i+1].y); 
+    ctx.lineWidth = drawcoords[i].size; 
+    ctx.strokeStyle = 'blue';
+    ctx.stroke(); 
+  }
+  requestAnimationFrame(draw);
+}
+
+    draw();
+
+  canvas.addEventListener("mousedown", () => isDown = true);
+  canvas.addEventListener("mouseup", () => {
+    isDown = false;
+    drawcoords.push({ penUp: true });
+  });
+</script>
+</html>

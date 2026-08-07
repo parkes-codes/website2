@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blobs 2</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+    }
+      #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #ha {
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        accent-color: #aff;
+        z-index: 10;
+        width: 100px;
+        height: 20px;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+ <input min="1" max="30" step="0.01" id="ha" type="range" value="6">
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d', {alpha : false});
+let keysPressed = [];
+
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 60;
+let blobs = [];
+let t = 0;
+
+// wait until canvas auto resizes to spawn balls
+setTimeout(() => {for (let i = 0; i< 15; i++) {
+    blobs.push({x: Math.random()*canvas.width, y: Math.random() * canvas.height, xdir: ((Math.floor(Math.random()*2)*2)-1), ydir: ((Math.floor(Math.random()*2)*2)-1) })
+}}, 100)
+
+function stampPixel(x,y,color,w) {
+    ctx.fillStyle = `hsl(${color%360},50%,50%)`;
+    ctx.fillRect(x,y,w,w);
+}
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    t+= 100/fpsAv
+
+    for (let i = 0; i < blobs.length; i++) {
+        if (blobs[i].x < 0) {
+            blobs[i].xdir *= -1;
+            blobs[i].x = 1
+        }
+        if (blobs[i].x > canvas.width) {
+            blobs[i].xdir *= -1;
+            blobs[i].x = canvas.width - 1
+        }
+        blobs[i].x += blobs[i].xdir * 180/fpsAv
+
+        if (blobs[i].y < 0) {
+            blobs[i].ydir *= -1;
+            blobs[i].y = 1
+        }
+        if (blobs[i].y > canvas.height) {
+            blobs[i].ydir *= -1;
+            blobs[i].y = canvas.height - 1
+        }
+        blobs[i].y += blobs[i].ydir * 180/fpsAv;
+    }
+
+    for (let y = 0; y<canvas.height; y+=3) {
+            for (let x = 0; x<canvas.width; x+=3) {
+                let color = 1;
+                for (let i = 0; i<blobs.length; i++) {
+                    color = color * (Math.sqrt(Math.pow(x-blobs[i].x,2)+Math.pow(y-blobs[i].y,2)));
+                }
+                color = (color/(Math.pow(Math.E,0.13)-0.99))/(Math.pow(10,(5-Math.E)*blobs.length))/100;
+                let dist = Math.pow(Number(document.getElementById("ha").value),2)
+                if (color < dist/2) {stampPixel(x,y,((dist*5)/(Math.log(Math.abs(color)+1)))+t,3)}
+            }
+    }
+
+//     ctx.fillStyle = `#fff`;
+
+//     for (let i = 0; i<blobs.length; i++) {
+//    ctx.beginPath();
+//    ctx.arc(blobs[i].x, blobs[i].y, 5, 0, Math.PI * 2);
+//    ctx.fill();
+//     }
+
+    requestAnimationFrame(draw)
+}
+
+draw();
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+}
+
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+  keysPressed[e.key.toLowerCase()] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+  keysPressed[e.key.toLowerCase()] = false;
+});
+
+let lastTimestamp;
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+
+
+
+
+
+</script>
+</html>

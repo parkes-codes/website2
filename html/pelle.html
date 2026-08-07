@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pelle Celestial Emulator</title>
+  <style>
+    body {
+      background: #111;
+      color: #f00;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    #transformer {
+      font-size: 3em;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+      text-shadow: 0 2px 8px #222, 0 0 3px #760909;
+      min-height: 1.2em;
+      margin-bottom: 1em;
+      max-width: 80vw;
+      white-space: pre-wrap;
+      word-break: break-word;
+      /* Remove flexbox properties to allow native wrapping! */
+      /* display: flex; */
+      /* flex-wrap: wrap; */
+      /* align-items: center; */
+    }
+    .glitch-part {
+      display: inline-block;
+      min-width: 1em;
+      box-sizing: content-box;
+      vertical-align: bottom;
+      white-space: pre;
+    }
+    .glitch-wrap {
+      display: inline;
+      /* Remove flex here too! */
+      /* flex-direction: row; */
+      /* align-items: center; */
+      /* justify-content: center;  */
+      text-align: inherit;
+    }
+    textarea, button {
+      font-family: inherit;
+      font-size: 1.2em;
+      margin: 4px 0;
+      background: #222;
+      color: #f33;
+      border: 1px solid #800;
+      border-radius: 3px;
+      padding: 4px 8px;
+      outline: none;
+    }
+    textarea {
+      width: 480px;
+      min-height: 2em;
+      resize: vertical horizontal;
+      box-sizing: border-box;
+    }
+    button {
+      cursor: pointer;
+      font-size: 1em;
+      padding: 6px 16px;
+      margin-left: 8px;
+    }
+    .offscreen-anim,
+    .width-calc-measure {
+      position: absolute;
+      left: -99999px;
+      top: 0;
+      pointer-events: none;
+      opacity: 0;
+      white-space: pre;
+    }
+    .width-calc-measure {
+      font-size: 3em;
+      letter-spacing: 0.1em;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      text-shadow: 0 2px 8px #222, 0 0 3px #760909;
+      font-variant-ligatures: none;
+      font-feature-settings: "liga" 0;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <div id="transformer">Disorder</div>
+  <textarea id="customText" spellcheck="false" placeholder='Type something like: "It appears you hit a &lt;glitch["error", "issue", "problem"]&gt;. Please Refresh." And this code will animate everything in the &lt;glitch&gt; tag as if pelle had corrupted it, keeping the rest of the text normal. Works as an amazing scary effect.'></textarea>
+  <br />
+  <button id="showBtn">Show Custom Glitch</button>
+  <script>
+    let allActiveAnimationIds = [];
+    let requestAnimationFrameIds = [];
+    let defaultLoopActive = false;
+    let defaultLoopStop = null;
+    let customLoopActive = false;
+    let lastCustomInput = "";
+    let customStructure = null;
+
+    function clearAllTimeouts() {
+      for (const t of allActiveAnimationIds) clearTimeout(t);
+      for (const r of requestAnimationFrameIds) cancelAnimationFrame(r);
+      allActiveAnimationIds.length = 0;
+      requestAnimationFrameIds.length = 0;
+    }
+
+    const scaryChars = [
+      'Ä','Å','Ę','Ö','Ø','Ŧ','Đ','Ξ','¥','ß','Ž','Æ','Œ',
+      'Š','Č','Ř','Ň','Ł','Ø','Œ','Ð','§','µ','Þ','þ','Ɓ',
+      'Ƈ','Ɗ','Ƒ','Ɠ','Ɩ','Ƙ','Ɯ','Ɲ','Ȥ','Ψ','⚚','Φ','Ҝ',
+      'ж','њ','Ѯ','Ѳ','Ҩ','Ӂ','Ӝ','Ӧ','Ұ','Җ'
+    ];
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function makeGlitchString(base, mask, glitchAmount = 1.0, lengthOverride = undefined) {
+      let useBase = base;
+      if (typeof lengthOverride === "number" && lengthOverride > base.length) {
+        useBase = base + " ".repeat(lengthOverride - base.length);
+      }
+      let res = '';
+      let alphaIndices = [];
+      for (let i = 0; i < useBase.length; ++i) {
+        if ((!mask || mask[i]) && /[A-Za-z]/.test(useBase[i])) alphaIndices.push(i);
+      }
+      let numToReplace = Math.max(1, Math.floor(glitchAmount * alphaIndices.length));
+      let chosen = new Set();
+      while (chosen.size < numToReplace && chosen.size < alphaIndices.length) {
+        let idx = alphaIndices[randomInt(0, alphaIndices.length - 1)];
+        chosen.add(idx);
+      }
+      for (let i = 0; i < useBase.length; ++i) {
+        if (chosen.has(i) && (!mask || mask[i]) && /[A-Za-z]/.test(useBase[i])) {
+          res += scaryChars[randomInt(0, scaryChars.length - 1)];
+        } else {
+          res += useBase[i];
+        }
+      }
+      return res;
+    }
+
+    function stopAllAnimations() {
+      clearAllTimeouts();
+      defaultLoopActive = false;
+      customLoopActive = false;
+      defaultLoopStop = null;
+    }
+
+    function glitchTransition(displayElem, fromStr, toStr, callback, isCustom = false, longestStr = null) {
+      const duration = isCustom ? 650 : 325;
+      let frame = 0;
+      const frameRate = 1000 / 60;
+      const steps = Math.max(7, Math.floor(duration / frameRate));
+      function glitchStep() {
+        if (!isCustom && !defaultLoopActive) return;
+        if (isCustom && !customLoopActive) return;
+        if (frame < steps) {
+          let amt = (0.3 + 0.7 * (frame / steps));
+          let maxLen = longestStr ? longestStr.length : Math.max(fromStr.length, toStr.length);
+          displayElem.textContent = makeGlitchString(fromStr, null, amt, maxLen);
+          frame++;
+          let reqId = requestAnimationFrame(glitchStep);
+          requestAnimationFrameIds.push(reqId);
+        } else {
+          morphGlitchReplaceGradual(displayElem, fromStr, toStr, callback, isCustom, longestStr);
+        }
+      }
+      glitchStep();
+    }
+
+    function morphGlitchReplaceGradual(displayElem, fromStr, toStr, callback, isCustom = false, longestStr = null) {
+      const fromLen = fromStr.length;
+      const toLen = toStr.length;
+      const lengthSteps = Math.abs(toLen - fromLen);
+      const morphSteps = isCustom ? 14 : 7;
+      let progress = 0;
+      let intermediate = fromStr;
+      function padRight(s, n) {
+        return s.length < n ? s + ' '.repeat(n - s.length) : s;
+      }
+      function step() {
+        if (!isCustom && !defaultLoopActive) return;
+        if (isCustom && !customLoopActive) return;
+        if (progress < lengthSteps) {
+          if (toLen > fromLen) {
+            let newChar = scaryChars[randomInt(0, scaryChars.length-1)];
+            intermediate += newChar;
+          } else {
+            intermediate = intermediate.slice(0, intermediate.length - 1);
+          }
+          let curLen = Math.max(intermediate.length, toStr.length);
+          let glitchAmt = Math.min(1, 0.3 + 0.7 * (progress / (lengthSteps || 1)));
+          let padLen = longestStr ? longestStr.length : curLen;
+          displayElem.textContent = makeGlitchString(padRight(intermediate, padLen), null, glitchAmt, padLen);
+          progress++;
+          let id = setTimeout(step, isCustom ? Math.round(18 * 1.2) : Math.round(18 * 1.2));
+          allActiveAnimationIds.push(id);
+        } else {
+          let morphProg = 0;
+          function morphStep() {
+            if (!isCustom && !defaultLoopActive) return;
+            if (isCustom && !customLoopActive) return;
+            let amt = morphProg / morphSteps;
+            let curStr = intermediate;
+            let out = "";
+            for (let i = 0; i < toLen; ++i) {
+              if (amt < 0.35) {
+                out += scaryChars[randomInt(0, scaryChars.length-1)];
+              } else if (amt < 0.85) {
+                if (Math.random() < (amt-0.35)/0.5) {
+                  out += toStr[i];
+                } else if (/[A-Za-z]/.test(curStr[i] || '') || /[A-Za-z]/.test(toStr[i] || '')) {
+                  out += scaryChars[randomInt(0, scaryChars.length-1)];
+                } else if (toStr[i] !== undefined) {
+                  out += toStr[i];
+                } else {
+                  out += '';
+                }
+              } else {
+                out += toStr[i];
+              }
+            }
+            // pad to longest if provided
+            let padLen = longestStr ? longestStr.length : toLen;
+            displayElem.textContent = out + (out.length < padLen ? ' '.repeat(padLen - out.length) : '');
+            morphProg++;
+            if (morphProg <= morphSteps) {
+              let id = setTimeout(morphStep, isCustom ? Math.round(18 * 1.2) : Math.round(18 * 1.2));
+              allActiveAnimationIds.push(id);
+            } else {
+              let finalOut = toStr;
+              let padLen = longestStr ? longestStr.length : finalOut.length;
+              displayElem.textContent = finalOut + (finalOut.length < padLen ? ' '.repeat(padLen - finalOut.length) : '');
+              if (callback) {
+                callback();
+              }
+            }
+          }
+          morphStep();
+        }
+      }
+      step();
+    }
+
+    const TOTAL_CYCLE_TIME = 2000;
+
+    function parseGlitchSegments(str) {
+      let regex = /<glitch\[((?:[^\[\]>]|"(?:\\.|[^"\\])*")*)\]>/g;
+      let pos = 0;
+      let match;
+      let segments = [];
+
+      while ((match = regex.exec(str)) !== null) {
+        if (match.index > pos) {
+          segments.push({
+            type: 'text',
+            value: str.slice(pos, match.index)
+          });
+        }
+        let opts = [];
+        try {
+          opts = JSON.parse('[' + match[1] + ']');
+        } catch (e) {
+          opts = [];
+        }
+        segments.push({
+          type: 'glitch',
+          options: opts,
+          raw: match[0]
+        });
+        pos = regex.lastIndex;
+      }
+      if (pos < str.length) {
+        segments.push({
+          type: 'text',
+          value: str.slice(pos)
+        });
+      }
+      return segments;
+    }
+
+    function removeAllOffscreenAnims() {
+      let prevs = document.querySelectorAll('.offscreen-anim, .width-calc-measure');
+      for (let prev of prevs) prev.parentNode && prev.parentNode.removeChild(prev);
+    }
+
+    function stripGlitchTags(text) {
+      return text.replace(/<glitch\[(?:.|\n)*?\]>/g, "");
+    }
+
+    const display = document.getElementById('transformer');
+    const customTextInput = document.getElementById('customText');
+    const showBtn = document.getElementById('showBtn');
+
+    function hasGlitchStructure(str) {
+      return /<glitch\[(.+?)\]>/.test(str);
+    }
+
+    // --- Helper function for measuring the rendered width of content in glitch-part ---
+    function getLongestStringAndWidth(strs) {
+      let maxW = 0, maxStr = '';
+      let measureId = 'glitch-width-calc-measure';
+      let measureElem = document.getElementById(measureId);
+      if (!measureElem) {
+        measureElem = document.createElement('span');
+        measureElem.className = 'width-calc-measure';
+        measureElem.id = measureId;
+        document.body.appendChild(measureElem);
+      }
+      for (let s of strs) {
+        // During animation, a space is added to pad smaller strings, so simulate that for correct width
+        let padLen = Math.max(...strs.map(q => (q||'').length));
+        let padded = (s||'') + ' '.repeat(padLen - (s||'').length);
+        measureElem.textContent = padded;
+        let width = measureElem.offsetWidth;
+        if (width > maxW) {
+          maxW = width;
+          maxStr = s;
+        }
+      }
+      return {maxW, maxStr};
+    }
+
+    // NEW: Render as true inline with spans instead of divs, addresses wrapping issue!
+    function runCustomMultiEpicGlitch(inputString) {
+      removeAllOffscreenAnims();
+      display.innerHTML = '';
+
+      let segments = parseGlitchSegments(inputString);
+
+      if (!segments.some(seg => seg.type === 'glitch')) {
+        return;
+      }
+
+      stopAllAnimations();
+      customLoopActive = true;
+
+      let offscreenAnims = [];
+      let glitchSpans = [];
+
+      segments.forEach((segment, i) => {
+        if (segment.type === 'text') {
+          let txt = stripGlitchTags(segment.value);
+          if (txt) {
+            // Just a span, display inline for proper wrapping
+            let span = document.createElement('span');
+            span.textContent = txt;
+            display.appendChild(span);
+          }
+        } else if (segment.type === 'glitch') {
+          // Use an inline span for glitch-wrap too!
+          let glitchWrap = document.createElement('span');
+          glitchWrap.className = 'glitch-wrap';
+          let glitchSpan = document.createElement('span');
+          glitchSpan.className = 'glitch-part';
+
+          let customList = Array.from(segment.options.length ? segment.options : ['']);
+
+          // Compute the longest string and rendered width in pixels for this glitch-part
+          let {maxW, maxStr} = getLongestStringAndWidth(customList);
+          let padLen = Math.max(...customList.map(q=>(q||'').length));
+          // Set minWidth to the measured width in px, for width stability, otherwise leave unset for wrapping
+          glitchSpan.style.display = 'inline-block';
+          glitchSpan.style.minWidth = maxW + 'px';
+
+          glitchSpan.textContent = customList[0] || '';
+          glitchWrap.appendChild(glitchSpan);
+          display.appendChild(glitchWrap);
+          glitchSpans.push(glitchSpan);
+
+          let offElem = document.createElement('div');
+          offElem.className = 'offscreen-anim';
+          offElem.id = `offscreen-glitch-anim-${i}-${+Date.now()}-${Math.random().toString(36).slice(2)}`;
+          document.body.appendChild(offElem);
+          offscreenAnims.push(offElem);
+
+          if (!customList.length) return;
+
+          function loopedTransition(seq, displayElem, glitchUpdateCallback) {
+            let idx = 0;
+            let obs = new MutationObserver(function() {
+              glitchSpan.textContent = displayElem.textContent;
+              // Manually trigger wrapping if needed
+            });
+            obs.observe(displayElem, { characterData: true, subtree: true, childList: true });
+            function next() {
+              if (!customLoopActive) return;
+              let nowStr = seq[idx];
+              let nextIdx = (idx + 1) % seq.length;
+              let nextStr = seq[nextIdx];
+              let transitionStartTime = Date.now();
+              glitchTransition(
+                displayElem,
+                nowStr, nextStr,
+                () => {
+                  idx = nextIdx;
+                  let animationEndTime = Date.now();
+                  let elapsed = animationEndTime - transitionStartTime;
+                  let remaining = TOTAL_CYCLE_TIME - elapsed;
+                  if (remaining < 0) remaining = 0;
+                  let id = setTimeout(next, remaining);
+                  allActiveAnimationIds.push(id);
+                },
+                true,
+                maxStr.padEnd(padLen)
+              );
+            }
+            next();
+          }
+          loopedTransition(customList, offElem, v => {
+            glitchSpan.textContent = v;
+          });
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hardcodedAnim = 'Hi Pelle, God of <glitch["Sacrafice","Celestials","Suffering","Agony"]>Whats up big guy?\n\nPelle: You <glitch["Dissapoint","Annoy","Dissatisfy"]> Me.';
+      stopAllAnimations();
+      removeAllOffscreenAnims();
+      lastCustomInput = hardcodedAnim;
+      runCustomMultiEpicGlitch(hardcodedAnim);
+    });
+
+    showBtn.addEventListener('click', () => {
+      let val = customTextInput.value.trim();
+      if (!val) return;
+
+      stopAllAnimations();
+      lastCustomInput = val;
+      if (hasGlitchStructure(val)) {
+        runCustomMultiEpicGlitch(val);
+      } else {
+        removeAllOffscreenAnims();
+        display.innerHTML = '';
+      }
+    });
+
+    customTextInput.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        showBtn.click();
+      }
+    });
+
+    customTextInput.addEventListener('blur', () => {
+      let val = customTextInput.value.trim();
+      if (val.length === 0) {
+        stopAllAnimations();
+        removeAllOffscreenAnims();
+        runCustomMultiEpicGlitch(hardcodedAnim);
+      }
+    });
+
+  </script>
+</body>
+</html>

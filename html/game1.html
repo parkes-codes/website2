@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Arass io</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background: #060609;
+            overflow: hidden;
+        }
+        body {
+            box-sizing: border-box;
+            width: 100vw;
+            height: 100vh;
+        }
+        #gamecanvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: #fff 5px solid;
+            margin: 0;
+            padding: 0;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+        }
+        .pluh {
+            margin: 0;
+            padding: 7px 14px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1.5px solid #ccc;
+            background: #181820;
+            color: #fff;
+            outline: none;
+            box-sizing: border-box;
+            height: 38px;
+            line-height: 1.1;
+            /* Force vertical alignment */
+            display: flex;
+            align-items: center;
+            flex: 1 1 0px;
+            min-width: 120px;
+            max-width: 240px;
+        }
+        .pluh:focus {
+            border-color: #6dd2fa;
+            box-shadow: 0 0 4px #6dd2fa44;
+        }
+        .top-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 24px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 56px;
+            background: rgba(20,20,24,0.84);
+            z-index: 10;
+            box-sizing: border-box;
+            padding: 8px 24px;
+             box-shadow: 0 2px 12px 0 rgba(0,0,0,.12);
+            overflow: visible;
+            min-width: 350px;
+        }
+    </style>
+</head>
+<body style="margin:0;padding:0;">
+    <div class="top-row">
+        <input class="pluh" type="number" id="firespeedInput" placeholder="reload duration" />
+        <input class="pluh" type="number" id="recoilInput" placeholder="recoil strength" />
+        <input class="pluh" type="number" id="recoilTypeInput" placeholder="recoil type (1 or 2)" />
+        <input class="pluh" type="number" id="speedInput" placeholder="move speed" />
+        <input class="pluh" type="number" id="bsInput" placeholder="bullet speed" />
+    </div>
+    <canvas id="gamecanvas"></canvas>
+</body>
+<script>
+    const pi = Math.PI;
+
+    const canvas = document.getElementById("gamecanvas");
+    const ctx = canvas.getContext("2d");
+    const base = new Image();
+    base.src = "../images/base.png";
+    const gun = new Image();
+    gun.src = "../images/gun.png";
+    const fireinput = document.getElementById("firespeedInput");
+    const recoilinput = document.getElementById("recoilInput");
+    const speedinput = document.getElementById("speedInput");
+    const recoiltypeinput = document.getElementById("recoilTypeInput");
+    const bsinput = document.getElementById("bsInput");
+
+    let x = 0;
+    let y = 0;
+    // Movement velocity
+    let xvel = 0;
+    let yvel = 0;
+    // Recoil velocity
+    let xvelRecoil = 0;
+    let yvelRecoil = 0;
+
+    let recoilStrength = 5;
+    let moveSpeed = 0.6;
+
+    let mouseX = 0; let mouseY = 0;
+    const size = 50;
+    let bulletspeed = 7;
+    let firespeed = 600;
+    let cooldown = 0;
+    let dir = Math.random() * 360;
+
+    const keysPressed = {};
+    const bullets = [];
+
+    // --- FPS and Delta Time Setup ---
+    let lastTimestamp = null;
+    let fps = 60;
+    let delta = 1; // Ratio of frame time to ideal 60fps frame (1 means 16.666ms per frame)
+    function getDelta(current) {
+        if (lastTimestamp === null) {
+            lastTimestamp = current;
+            return 1;
+        }
+        const frameTime = (current - lastTimestamp) || (1000/60);
+        lastTimestamp = current;
+        fps = 1000 / frameTime;
+        return frameTime / (1000/60); // Delta (relative to 60 fps)
+    }
+    // --------------------------------
+
+    window.addEventListener('keydown', (e) => {
+        keysPressed[e.key.toLowerCase()] = true;
+    });
+
+    window.addEventListener('keyup', (e) => {
+        keysPressed[e.key.toLowerCase()] = false;
+    });
+
+    function resizeCanvas() {
+        const topRow = document.querySelector('.top-row');
+        const topRowHeight = topRow ? topRow.offsetHeight : 56;
+        canvas.width = window.innerWidth - 10;
+        canvas.height = window.innerHeight - topRowHeight - 10;
+        canvas.style.width = `${canvas.width}px`;
+        canvas.style.height = `${canvas.height}px`;
+        canvas.style.top = `${topRowHeight}px`;
+        canvas.style.position = 'absolute';
+        canvas.style.left = `0px`;
+        canvas.style.zIndex = '1'; 
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function updateVelocity(frameDelta) {
+        moveSpeed = speedinput.value ? speedinput.value : 6;
+        // The /10 divisor makes this "units per frame"; multiply by frameDelta to make it not frame dependent
+        if (keysPressed['w']) yvel -= (moveSpeed/10) * frameDelta;
+        if (keysPressed['s']) yvel += (moveSpeed/10) * frameDelta;
+        if (keysPressed['a']) xvel -= (moveSpeed/10) * frameDelta;
+        if (keysPressed['d']) xvel += (moveSpeed/10) * frameDelta;
+    }
+
+    let originalDraw;
+    if (typeof draw === "function") {
+        originalDraw = draw;
+        function drawWithInput() {
+            updateVelocity(delta);
+            originalDraw();
+        }
+        draw = drawWithInput;
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    });
+
+    function collision() {
+        // Make sure top boundary is the top of canvas (not the page)
+        const topRow = document.querySelector('.top-row');
+        const topRowHeight = topRow ? topRow.offsetHeight : 56;
+        let boundingLow = window.innerHeight - topRowHeight - size - 10;
+        let boundingRight = document.body.clientWidth - size - 10;
+        if (x >= boundingRight) {
+            while (x >= boundingRight) {
+                x--;
+            }
+            xvel = 0;
+            xvelRecoil=0;
+        }
+        if (x <= 0) {
+            while (x <= 0) {
+                x++;
+            }
+            xvel = 0;
+            xvelRecoil=0;
+        }
+        if (y >= boundingLow) {
+            while (y >= boundingLow) {
+                y--;
+            }
+            yvel=0;
+            yvelRecoil=0;
+        }
+        if (y <= 0) {
+            while (y <= 0) {
+                y++;
+            }
+            yvel=0;
+            yvelRecoil=0;
+        }
+    }
+
+    let centerX = 0;
+    let centerY = 0;
+
+    function drawWithDelta(currentTime) {
+        delta = getDelta(currentTime); // Get new delta for this frame
+
+        firespeed = fireinput.value ? fireinput.value : 500;
+        recoilStrength = (recoilinput.value ? recoilinput.value : 5)*Math.log((firespeed+300)/100)/10;
+        bulletspeed = bsinput.value ? bsinput.value : 8
+
+        // Cooldown (should be framerate independent)
+        if (cooldown > 0) {
+            cooldown -= (0.03333/Math.max((firespeed/1000),0.01)) * delta;
+        }
+
+        // Apply velocity: total is movement + recoil (framerate independent)
+        x += (xvel + xvelRecoil) * delta;
+        y += (yvel + yvelRecoil) * delta;
+        // Decay movement velocity quickly (frame rate independent exponential decay)
+        xvel *= Math.pow(0.9, delta);
+        yvel *= Math.pow(0.9, delta);
+        // Decay recoil velocity more slowly (framerate independent)
+        xvelRecoil *= Math.pow(0.97, delta);
+        yvelRecoil *= Math.pow(0.97, delta);
+        collision();
+
+        const fixedbaseWidth = size;
+        const fixedbaseHeight = base.naturalHeight && base.naturalWidth / (150 / size);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < bullets.length; i++) {
+            let bullet = bullets[i];
+            if (bullet) {
+                ctx.beginPath();
+                ctx.arc(bullet.x, bullet.y, 10, 0, 2 * pi);
+                ctx.fillStyle = "#fff";
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(bullet.x, bullet.y, 8, 0, 2 * pi);
+                ctx.fillStyle = "#000";
+                ctx.fill();
+                // Move bullet, framerate independent
+                bullets[i].x += Math.sin(bullet.dir) * bulletspeed * delta;
+                bullets[i].y += Math.cos(bullet.dir) * bulletspeed * delta;
+                bullets[i].t += 0.033333 * delta;
+                if (bullet.t > 100/(Math.max(bulletspeed,0.01))) {
+                    bullets.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+        centerX = x + fixedbaseWidth / 2;
+        centerY = y + fixedbaseHeight / 2;
+        dir = Math.atan2(mouseY - centerY, mouseX - centerX);
+
+        const distance = size / 1.48 - Math.max(Math.asin(Math.sin(cooldown*pi))*5,0);
+        const gunX = centerX + Math.cos(dir) * distance;
+        const gunY = centerY + Math.sin(dir) * distance;
+
+        ctx.save();
+        ctx.translate(gunX, gunY);
+        ctx.rotate(Math.atan2(centerY - gunY, centerX - gunX));
+        ctx.drawImage(
+            gun,
+            -fixedbaseWidth / 4,
+            -fixedbaseHeight / 4,
+            fixedbaseWidth / 2,
+            fixedbaseHeight / 2
+        );
+        ctx.restore();
+
+        ctx.drawImage(base, x, y, fixedbaseWidth, fixedbaseHeight);
+
+        // Call updateVelocity AFTER possible mouse events (for WASD responsive to real delta time)
+        updateVelocity(delta);
+
+        requestAnimationFrame(drawWithDelta);
+    }
+
+    // REMOVED problematic document.body.appendChild() calls
+
+    let mouseDown = false;
+    canvas.addEventListener('mousedown', (e) => {
+        mouseDown = true;
+        function fireBullet() {
+            if (mouseDown && cooldown <= 0) {
+                cooldown = 1;
+                bullets.push({
+                    x: centerX - Math.sin(dir - pi / 2) * size / 2, 
+                    y: centerY + Math.cos(dir - pi / 2) * size / 2, 
+                    dir: pi / 2 - dir+(Math.random()-0.5)*0.4,
+                    t: 0
+                });
+
+                const recoilType = recoiltypeinput.value ? recoiltypeinput.value : 2
+                if (recoilType == 1) {
+                     xvelRecoil = Math.sin(dir - pi / 2) * recoilStrength;
+                     yvelRecoil = 0-(Math.cos(dir - pi / 2) * recoilStrength);
+                } else {
+                    xvelRecoil += Math.sin(dir - pi / 2) * recoilStrength;
+                    yvelRecoil += 0-(Math.cos(dir - pi / 2) * recoilStrength);
+                }
+
+            }
+            if (mouseDown) {
+                // Repeated fire rate should be frame rate independent
+                setTimeout(fireBullet, (firespeed/10) / (fps/60)); // Adjust for real FPS (so at 120fps this is about half the ms)
+            }
+        }
+        fireBullet();
+        canvas.addEventListener('mouseup', () => {
+            mouseDown = false;
+        }, { once: true });
+
+    });
+
+    // Initial call
+    requestAnimationFrame(drawWithDelta);
+
+</script>
+</html>

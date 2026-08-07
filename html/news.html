@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>ANN Daily News</title>
+        <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+        <style>
+            @keyframes disco-time {
+                0%   { filter: hue-rotate(0deg);   text-shadow: 0 0 0.5rem hsl(0, 90%, 60%);}
+                100% { filter: hue-rotate(360deg); text-shadow: 0 0 0.5rem hsl(360, 90%, 60%);}
+            }
+            @keyframes a-text-grow {
+                0%   { transform: scale(1);}
+                50%  { transform: scale(1.08);}
+                100% { transform: scale(1);}
+            }
+            body {
+                background-color: #000;
+                color: #fff;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            #news-container {
+                position: absolute;
+                right: 0;
+                top: 5px;
+                width: fit-content;
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+            }
+            #newsmsg {
+                display: block;
+                opacity: 100%;
+                text-align: right;
+                position: absolute;
+                left: 0;
+                white-space: nowrap;
+                text-align: center;
+                text-shadow: 2px 2px 4px #fff5;
+            }
+            /* The animated news style, only applied (via JS) 1 in 100 times */
+            .news-animated {
+                animation: disco-time 0.4s infinite, a-text-grow 0.4s infinite;
+            }
+            #underline {
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                top: 28px;
+                background: #fff;
+                height: 2px;
+            }
+            .plink-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+            .plink-img {
+                height: 28px;
+                width: auto;
+                vertical-align: middle;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="news-container">
+            <div id="newsmsg">Loading news...</div>
+        </div>
+        <div id="underline"></div>
+    </body>
+    <script src="../js/newsMessages.js"></script>
+    <script>
+        // Set a timer to alert if news messages haven't loaded after 100ms
+        let newsLoadAlertTimeout = setTimeout(function() {
+            try {
+                if (typeof newsMessages === "undefined") {
+                    alert("News could not be loaded");
+                }
+            } catch (err) {
+                alert("Unexpected error while checking for newsMessages: " + (err && err.message ? err.message : err));
+            }
+        }, 100);
+
+        // Helper to escape HTML special characters
+        function escapeHtml(text) {
+            try {
+                const span = document.createElement('span');
+                span.textContent = text;
+                return span.innerHTML;
+            } catch (err) {
+                return "";
+            }
+        }
+
+        function format(...args) {
+            try {
+                if (
+                    args.length >= 2 &&
+                    args[0] === Number.MAX_VALUE &&
+                    args[1] === 2
+                ) {
+                    return "1.78e308";
+                }
+                return args.join(", ");
+            } catch (err) {
+                return args.toString();
+            }
+        }
+   
+
+        function getNewsText(newsObj) {
+            try {
+                if (!newsObj) return "";
+                if (
+                    Object.prototype.hasOwnProperty.call(newsObj, "text") &&
+                    typeof newsObj.text === "string"
+                ) {
+                    return newsObj.text;
+                }
+                try {
+                    if ("text" in newsObj) {
+                        const val = newsObj.text;
+                        if (typeof val === "string") return val;
+                    }
+                } catch (_) {
+                }
+                return "";
+            } catch (err) {
+                return "";
+            }
+        }
+
+        // --- MESSAGE HISTORY LOGIC ---
+
+        // Holds the last 100 picked message unique IDs, to avoid repeats
+        const recentNewsIds = [];
+        const MAX_RECENT_NEWS = 100;
+
+        function getNewsMessageId(obj) {
+            if (obj && typeof obj.id === "string") return obj.id;
+            if (obj && typeof obj.text === "string") return "txt_" + obj.text;
+            if (obj && "text" in obj) {
+                try {
+                    const val = obj.text;
+                    if (typeof val === "string") return "txt_" + val;
+                } catch (_) {}
+            }
+            return "unknown";
+        }
+
+        function maybeAnimatedNews() {
+            return Math.floor(Math.random() * 100) === 0;
+        }
+
+        // New: 1 in 101 chance for Plinkk
+        function maybePlinkk() {
+            return Math.floor(Math.random() * 101) === 0;
+        }
+
+        function getNextMsg() {
+            try {
+                var newsmsgEl = document.getElementById("newsmsg");
+                // Plinkk special event
+                if (maybePlinkk()) {
+                    if (newsmsgEl) {
+                        newsmsgEl.classList.remove("news-animated");
+                        newsmsgEl.innerHTML = `<span class="plink-container"><img src="plinkk.gif" alt="Plinkk" class="plink-img" style="height:20px;width:60px;"><span>Plink Plonk.</span><img src="plinkk.gif" alt="Plinkk" class="plink-img" style="height:20px;width:60px;"></span>`;
+                    }
+                    return 0;
+                }
+
+                if (
+                    typeof newsMessages !== "undefined" &&
+                    Array.isArray(newsMessages) &&
+                    newsMessages.length > 0
+                ) {
+                    let tries = 0;
+                    let randomMsgObj, randomIndex, msgId, text;
+                    let possibleIndexes = [];
+                    for (let i = 0; i < newsMessages.length; ++i) {
+                        const id = getNewsMessageId(newsMessages[i]);
+                        if (!recentNewsIds.includes(id)) possibleIndexes.push(i);
+                    }
+                    if (possibleIndexes.length === 0) {
+                        recentNewsIds.length = 0;
+                        for (let i = 0; i < newsMessages.length; ++i) {
+                            possibleIndexes.push(i);
+                        }
+                    }
+                    randomIndex = possibleIndexes[Math.floor(Math.random() * possibleIndexes.length)];
+                    randomMsgObj = newsMessages[randomIndex];
+                    msgId = getNewsMessageId(randomMsgObj);
+
+                    text = "";
+                    let messageHadError = false;
+                    try {
+                        text = getNewsText(randomMsgObj);
+                    } catch (err) {
+                        text = "";
+                        messageHadError = true;
+                    }
+                    // If text is empty or error, try to show the .text property directly
+                    if (!text || messageHadError) {
+                        if (randomMsgObj && typeof randomMsgObj.text === "string") {
+                            text = randomMsgObj.text;
+                        } else if (randomMsgObj && "text" in randomMsgObj && typeof randomMsgObj.text === "string") {
+                            text = randomMsgObj.text;
+                        } else if (!text) {
+                            text = "News Property Error";
+                        }
+                    }
+
+                    recentNewsIds.push(msgId);
+                    if (recentNewsIds.length > MAX_RECENT_NEWS) {
+                        recentNewsIds.splice(0, recentNewsIds.length - MAX_RECENT_NEWS);
+                    }
+
+                    if (newsmsgEl) {
+                        newsmsgEl.classList.remove("news-animated");
+                        try {
+                            newsmsgEl.innerHTML = text;
+                        } catch (e) {
+                            // if error using .innerHTML, try using .text property string representation
+                            try {
+                                if (randomMsgObj && typeof randomMsgObj.text === "string") {
+                                    newsmsgEl.innerHTML = escapeHtml(randomMsgObj.text);
+                                } else if (randomMsgObj && "text" in randomMsgObj && typeof randomMsgObj.text === "string") {
+                                    newsmsgEl.innerHTML = escapeHtml(randomMsgObj.text);
+                                } else {
+                                    newsmsgEl.innerText = "News Could Not Be Converted To String";
+                                }
+                            } catch (_) {
+                                newsmsgEl.innerText = "News Could Not Be Converted To String";
+                            }
+                        }
+                        if (maybeAnimatedNews()) {
+                            newsmsgEl.classList.add("news-animated");
+                        }
+                    }
+                } else {
+                    try {
+                        if (newsmsgEl) newsmsgEl.innerHTML = "Improper News Object Type";
+                    } catch (err) {}
+                }
+                return 0;
+            } catch (err) {
+                console.error("News ticker failed:", err && err.message ? err.message : err);
+                return 0;
+            }
+        }
+
+        window.onload = () => {
+            try {
+                if (typeof newsMessages !== "undefined") {
+                    try { clearTimeout(newsLoadAlertTimeout); } catch(_) {}
+                }
+
+                let t;
+                try {
+                    t = getNextMsg();
+                } catch(err) {
+                    t = 0;
+                }
+
+                let speed = 5;
+                let news, cont;
+                try {
+                    news = document.getElementById("newsmsg");
+                    cont = document.getElementById("news-container");
+                } catch (err) {
+                    return;
+                }
+
+                function getRectSafe(el) {
+                    try {
+                        el.offsetWidth;
+                        return el.getBoundingClientRect();
+                    } catch(err) {
+                        return {width: 0};
+                    }
+                }
+
+                let waitingForNextMsg = false;
+
+                function tickNews() {
+                    try {
+                        if (waitingForNextMsg) {
+                            // don't continue ticking while waiting
+                            return;
+                        }
+                        const newsRect = getRectSafe(news);
+                        const msgWidth = newsRect.width;
+                        const contWidth = msgWidth;
+                        const pageWidth = document.documentElement.clientWidth + contWidth;
+
+                        if (msgWidth < 1) {
+                            setTimeout(tickNews, 33);
+                            return;
+                        }
+
+                        let leftPos = (t * speed * -1) + 100;
+                        news.style.left = leftPos + "px";
+                        t += 1;
+                        if (t * speed > pageWidth + 150) {
+                            // Wait 1 second (1000ms) before showing the next message
+                            waitingForNextMsg = true;
+                            setTimeout(() => {
+                                try {
+                                    t = getNextMsg(); // Reset t and get a new news message
+                                } catch(err) {
+                                    t = 0;
+                                }
+                                waitingForNextMsg = false;
+                                requestAnimationFrame(tickNews);
+                            }, 1000);
+                            return; // stop animation frame so the waiting doesn't loop/redraw
+                        }
+                        requestAnimationFrame(tickNews);
+                    } catch(err) {
+                        console.error("Ticker error:", err && err.message ? err.message : err);
+                        setTimeout(() => { try { tickNews(); } catch(_){} }, 100);
+                    }
+                }
+                setTimeout(() => { try { tickNews(); } catch(_){} }, 20);
+
+            } catch (mainErr) {
+                console.error("Fatal news ticker error:", mainErr && mainErr.message ? mainErr.message : mainErr);
+            }
+        };
+    </script>
+</html>

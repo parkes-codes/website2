@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Satisfying 1</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+    }
+      #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #leninput {
+        position: absolute;
+        left: 7px;
+        bottom: 9px;
+        width: 50px;
+        height: 15px;
+        z-index: 2;
+    }
+    #diminput {
+        position: absolute;
+        left: 69px;
+        bottom: 9px;
+        width: 50px;
+        height: 15px;
+        z-index: 2;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+ <input id="leninput" type="number" value="1" step="0.02" placeholder="length">
+ <input id="diminput" type="number" value="100" step="2" placeholder="amt">
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+const leninput = document.getElementById("leninput");
+const diminput = document.getElementById("diminput")
+let keysPressed = []
+let dims = 200;
+let t = 0;
+let intensity = 3.14;
+
+
+
+
+function draw() {
+    dims = diminput.value
+
+
+    if (!window._lastFrameTime) window._lastFrameTime = performance.now();
+    const now = performance.now();
+    const deltatime = (now - window._lastFrameTime) / 1000;
+    window._lastFrameTime = now;
+
+    t += deltatime;
+
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    for (let i = 0; i < dims; i++) {
+        for (let j = 0; j < dims; j++) {
+            let x  = j * (canvas.width / dims);
+            let y = i * (canvas.height / dims);
+
+            // angle = distance to center (canvas.width/2, canvas.height/2)
+            let dx = x - centerX;
+            let dy = y - centerY;
+            let angle = intensity*Math.sin((dx*dx + dy*dy)*(0.0001)+t*3.14)+3.14159/2
+
+            let forward = ((canvas.width)/(dims*2))*leninput.value;
+            let x2 = x + Math.cos(angle) * forward;
+            let y2 = y + Math.sin(angle) * forward;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x2, y2);
+            ctx.lineWidth = (canvas.width*canvas.height)/(dims*5000);
+            ctx.strokeStyle = "#fff";
+            ctx.stroke();
+        }
+    }
+   
+    
+
+
+
+    requestAnimationFrame(draw)
+}
+
+draw();
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+}
+
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+  keysPressed[e.key.toLowerCase()] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+  keysPressed[e.key.toLowerCase()] = false;
+});
+
+
+
+
+
+</script>
+</html>

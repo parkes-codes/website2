@@ -1,0 +1,1202 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fractal Explorer</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        overflow: hidden;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #info {
+        position: absolute;
+        left: 6px;
+        top: 5px;
+        color: #fff;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 10px;
+        z-index: 2;
+    }
+    #resinput, #iterinput, #juliaslidera, #juliasliderb, #fractalslider, #fractallabel, #quarticmandela, #lyapunov-seq, #fourier-step-input, #fourier-step-label {
+        position: absolute;
+        top: 6px;
+        height: 13px;
+        font-size: 10px;
+        z-index: 2;
+    }
+    #resinput {
+        right: 8px;
+        width: 40px;
+    }
+    #iterinput {
+        right: 60px;
+        width: 40px;
+    }
+    #juliaslidera {
+        right: 112px;
+        width: 40px;
+    }
+    #juliasliderb {
+        right: 164px;
+        width: 40px;
+    }
+    #julialabel {
+        position: absolute;
+        right: 216px;
+        top: 9px;
+        color: #fff;
+        font-size: 10px;
+        font-family: 'Lucida Sans', Verdana, sans-serif;
+        z-index: 2;
+        background: rgba(0,0,0,0.5);
+        padding:0 3px 0 3px;
+        border-radius: 2px;
+        height: 17px;
+    }
+    #fractalslider {
+        right: 410px;
+        width: 180px;
+        top: 10px;
+        height: 17px;
+        background: transparent;
+    }
+    #fractallabel {
+        right: 590px;
+        width: 180px;
+        top: 9px;
+        color: #fff;
+        font-size: 10px;
+        font-family: 'Lucida Sans', Verdana, sans-serif;
+        z-index: 2;
+        background: rgba(0,0,0,0.5);
+        padding:0 3px 0 3px;
+        border-radius: 2px;
+        height: 17px;
+    }
+    #quarticmandela {
+        right: 773px;
+        width: 60px;
+    }
+    #lyapunov-seq {
+        right: 835px;
+        width: 80px;
+    }
+    #lyapunov-label {
+        position: absolute;
+        right: 917px;
+        top: 8px;
+        color: #fff;
+        font-size: 10px;
+        font-family: 'Lucida Sans', Verdana, sans-serif;
+        z-index: 2;
+        background: rgba(0,0,0,0.5);
+        padding:0 3px 0 3px;
+        border-radius: 2px;
+        height: 17px;
+    }
+    #fourier-step-label {
+        position: absolute;
+        right: 577px;
+        top: 25px;
+        color: #fff;
+        font-size: 10px;
+        font-family: 'Lucida Sans', Verdana, sans-serif;
+        z-index: 2;
+        background: rgba(0,0,0,0.5);
+        padding:0 3px 0 3px;
+        border-radius: 2px;
+        height: 15px;
+        display: none;
+    }
+    #fourier-step-input {
+        right: 110px;
+        top: 6px;
+        width: 70px;
+        display: block;
+        height: 13px;
+        z-index:2;
+    }
+    #color-multiplier-container {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        background: rgba(0,0,0,0.5);
+        border-radius: 4px;
+        z-index: 5;
+        padding: 3px 7px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    #color-multiplier-label {
+        color: #fff;
+        font-size: 12px;
+        font-family: 'Lucida Sans', Verdana, sans-serif;
+    }
+    #color-multiplier {
+        width: 45px;
+        font-size: 11px;
+        border-radius: 2px;
+        border: 1px solid #222;
+        background: #0c0c0c;
+        color: #fff;
+        padding: 2px;
+    }
+    #modebtn {
+        display: none;
+    }
+</style>
+<body>
+ <canvas id="gamecanvas"></canvas>
+ <div id="info"></div>
+ <label id="fractallabel" for="fractalslider">Fractal:</label>
+ <!-- Fractal max is now 12 for Fourier Fractal addition -->
+ <input id="fractalslider" type="range" min="0" max="12" step="1" value="0" title="Select Fractal Set">
+ <label id="julialabel" for="juliaslidera">c = </label>
+ <input id="juliaslidera" type="number" value="-0.7" min="-2" max="2" step="0.01" placeholder="Re(c)">
+ <input id="juliasliderb" type="number" value="0.27015" min="-2" max="2" step="0.01" placeholder="Im(c)">
+ <input id="iterinput" value="50" min="1" max="100" step="2" placeholder="iter" type="number">
+ <input id="resinput" value="1" min="0.5" max="5" step=0.1 placeholder="res" type="number">
+ <input id="quarticmandela" type="number" value="1" min="-10" max="10" step="0.01" placeholder="a">
+ <label id="lyapunov-label" for="lyapunov-seq" style="display:none;">Lyapunov seq:</label>
+ <input id="lyapunov-seq" type="text" value="AB" pattern="[ABab]+" style="display:none;" title="Sequence of A and B for Lyapunov fractal">
+ <!-- Fourier steps input UI -->
+ <label id="fourier-step-label" for="fourier-step-input">Fourier Steps:</label>
+ <input id="fourier-step-input" type="number" min="50" max="100000" step="10" value="400" placeholder="steps" title="Number of samples (points) for Fourier Fractal Shape">
+ <div id="color-multiplier-container">
+    <label id="color-multiplier-label" for="color-multiplier" title="Vibrancy (color multiplier)">Color:</label>
+    <input id="color-multiplier" type="number" min="0.1" max="10" step="0.01" value="1" placeholder="x" title="Color Multiplier">
+ </div>
+ <button id="modebtn" title="Toggle Fractal Set" style="display: none;">Fractal</button>
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d', { alpha: false });
+const infoDiv = document.getElementById("info");
+const resInput = document.getElementById("resinput");
+const iterInput = document.getElementById("iterinput");
+const juliaReInput = document.getElementById("juliaslidera");
+const juliaImInput = document.getElementById("juliasliderb");
+const juliaLabel = document.getElementById("julialabel");
+const fractalSlider = document.getElementById("fractalslider");
+const fractalLabel = document.getElementById("fractallabel");
+const quarticAInput = document.getElementById("quarticmandela");
+const colorMultiplierInput = document.getElementById("color-multiplier");
+const lyapunovSeqInput = document.getElementById("lyapunov-seq");
+const lyapunovLabel = document.getElementById("lyapunov-label");
+// --- Fourier steps UI additions ---
+const fourierStepInput = document.getElementById("fourier-step-input");
+const fourierStepLabel = document.getElementById("fourier-step-label");
+
+const FRACTAL_NAMES = [
+    "Mandelbrot",              // 0
+    "Julia",                   // 1
+    "Burning Ship",            // 2
+    "Newton",                  // 3
+    "Tricorn",                 // 4
+    "Celtic",                  // 5
+    "Quartic Mandelbrot",      // 6
+    "Perpendicular Mandelbrot",// 7
+    "Burning Mandelbrot",      // 8
+    "Mandelship",              // 9
+    "Magnet 1",                // 10
+    "Lyapunov",                // 11
+    "Fourier Fractal"          // 12
+];
+let fractalMode = parseInt(fractalSlider.value,10); // ... 12 = Fourier
+
+let keysPressed = [];
+let iterations = 50;
+let res = 1.5;
+let juliaRe = parseFloat(juliaReInput.value);
+let juliaIm = parseFloat(juliaImInput.value);
+let quarticA = parseFloat(quarticAInput.value);
+let colorMultiplier = parseFloat(colorMultiplierInput.value) || 1;
+let lyapunovSeq = lyapunovSeqInput.value || "AB";
+
+// LYAPUNOV view window (independent)
+let lyap_rAmin = 2.0, lyap_rAmax = 4.0, lyap_rBmin = 2.0, lyap_rBmax = 4.0;
+
+// Camera for Mandelbrot, Julia, and Fourier
+let centerX = 0.0;
+let centerY = 0.0;
+let scale = 2.71828; // Side length of complex plane visible in min(viewport width, height)
+let pseudoZoom = 1;
+let leftX = 0;
+let rightX = 0;
+let pixelsDrawn = 0;
+
+let mousePos = { x: canvas.width/2, y: canvas.height/2 };
+
+// --- Move Camera via ASWD ---
+let cameraMoveAnimationFrame = null;
+let lastFrameTime = null;
+function moveCamera(deltaTime) {
+    let moved = false;
+    if (fractalMode === 11) {
+        // Lyapunov: Move "rA/rB window"
+        const speedA = (lyap_rAmax - lyap_rAmin) * 0.08 * (deltaTime / 1000);
+        const speedB = (lyap_rBmax - lyap_rBmin) * 0.08 * (deltaTime / 1000);
+        if (keysPressed["a"]) { lyap_rAmin -= speedA; lyap_rAmax -= speedA; moved = true; }
+        if (keysPressed["d"]) { lyap_rAmin += speedA; lyap_rAmax += speedA; moved = true; }
+        if (keysPressed["w"]) { lyap_rBmin -= speedB; lyap_rBmax -= speedB; moved = true; }
+        if (keysPressed["s"]) { lyap_rBmin += speedB; lyap_rBmax += speedB; moved = true; }
+        if (moved) {
+            draw();
+        }
+    } else {
+        const speed = (scale / 8) * (deltaTime / 1000);
+        if (keysPressed["a"]) { centerX -= speed; moved = true; }
+        if (keysPressed["d"]) { centerX += speed; moved = true; }
+        if (keysPressed["w"]) { centerY -= speed; moved = true; }
+        if (keysPressed["s"]) { centerY += speed; moved = true; }
+        if (moved) {
+            const viewSize = Math.min(canvas.width, canvas.height);
+            const centerY_px = Math.floor(canvas.height / 2);
+            const l = pixelToComplex(0, centerY_px);
+            const r = pixelToComplex(canvas.width - 1, centerY_px);
+            function complexToString(z) {
+              return `(${z.re.toFixed(6)}${z.im >= 0 ? "+" : ""}${z.im.toFixed(6)}i)`;
+            }
+            leftX = complexToString(l);
+            rightX = complexToString(r);
+            draw();
+        }
+    }
+}
+function cameraMoveLoop(ts) {
+    if (!lastFrameTime) lastFrameTime = ts;
+    const dt = ts - lastFrameTime;
+    lastFrameTime = ts;
+    moveCamera(dt);
+    cameraMoveAnimationFrame = requestAnimationFrame(cameraMoveLoop);
+}
+window.addEventListener("keydown", (e) => {
+    const key = e.key.toLowerCase();
+    if(["a","s","w","d"].includes(key) && !(document.activeElement.tagName === "INPUT" && document.activeElement.type === "number" && document.activeElement.id !== "lyapunov-seq")) {
+        if (!keysPressed[key]) {
+            keysPressed[key] = true;
+        }
+        if (cameraMoveAnimationFrame === null) {
+            lastFrameTime = null;
+            cameraMoveAnimationFrame = requestAnimationFrame(cameraMoveLoop);
+        }
+    } else {
+        keysPressed[key] = true;
+    }
+
+    if (e.key === "=" || e.key === "+") {
+        applyZoom(0.7, mousePos);
+        draw();
+    }
+    if (e.key === "-") {
+        applyZoom(1/0.7, mousePos);
+        draw();
+    }
+    // Shift+I for Magnet 1 (inverted only)
+    if ((e.key === 'i' || e.key === 'I') && e.shiftKey) {
+        fractalMode = 10;
+        fractalSlider.value = 10;
+        updateFractalUI();
+        draw();
+    }
+    // Shift+Y for Lyapunov fractal
+    if ((e.key === 'y' || e.key === 'Y') && e.shiftKey) {
+        fractalMode = 11;
+        fractalSlider.value = 11;
+        updateFractalUI();
+        draw();
+    }
+    // Shift+O for Fourier Fractal
+    if ((e.key === 'o' || e.key === 'O') && e.shiftKey) {
+        fractalMode = 12;
+        fractalSlider.value = 12;
+        updateFractalUI();
+        draw();
+    }
+    // Shift+M toggles Mandelbrot/Julia
+    if ((e.key === 'm' || e.key === 'M') && e.shiftKey) {
+        if (fractalMode === 1) fractalMode = 0;
+        else fractalMode = 1;
+        fractalSlider.value = fractalMode;
+        updateFractalUI();
+        draw();
+    }
+    if ((e.key === 'b' || e.key === 'B') && e.shiftKey) {
+        fractalMode = 2;
+        fractalSlider.value = 2;
+        updateFractalUI();
+        draw();
+    }
+    if ((e.key === 'n' || e.key === 'N') && e.shiftKey) {
+        fractalMode = 3;
+        fractalSlider.value = 3;
+        updateFractalUI();
+        draw();
+    }
+    if ((e.key === 't' || e.key === 'T') && e.shiftKey) {
+        fractalMode = 4;
+        fractalSlider.value = 4;
+        updateFractalUI();
+        draw();
+    }
+    if ((e.key === 'c' || e.key === 'C') && e.shiftKey) {
+        fractalMode = 5;
+        fractalSlider.value = 5;
+        updateFractalUI();
+        draw();
+    }
+    if ((e.key === 'q' || e.key === 'Q') && e.shiftKey) {
+        fractalMode = 6;
+        fractalSlider.value = 6;
+        updateFractalUI();
+        draw();
+    }
+    if ((e.key === 'p' || e.key === 'P') && e.shiftKey) {
+        fractalMode = 7;
+        fractalSlider.value = 7;
+        updateFractalUI();
+        draw();
+    }
+    if ((e.key === 'u' || e.key === 'U') && e.shiftKey) {
+        fractalMode = 8;
+        fractalSlider.value = 8;
+        updateFractalUI();
+        draw();
+    }
+    if ((e.key === 'h' || e.key === 'H') && e.shiftKey) {
+        fractalMode = 9;
+        fractalSlider.value = 9;
+        updateFractalUI();
+        draw();
+    }
+});
+window.addEventListener("keyup", (e) => {
+    const key = e.key.toLowerCase();
+    keysPressed[key] = false;
+    if (!keysPressed["a"] && !keysPressed["s"] && !keysPressed["w"] && !keysPressed["d"]) {
+        if (cameraMoveAnimationFrame !== null) {
+            cancelAnimationFrame(cameraMoveAnimationFrame);
+            cameraMoveAnimationFrame = null;
+            lastFrameTime = null;
+        }
+    }
+});
+
+// --- FRACTAL MODE MANAGEMENT ---
+function updateFractalUI() {
+    fractalLabel.textContent = "Fractal: " + FRACTAL_NAMES[fractalMode]
+    + (fractalMode === 6 ? ' (a·z⁴+c)' : '');
+    if(fractalMode === 1) {
+        juliaReInput.style.display = '';
+        juliaImInput.style.display = '';
+        juliaLabel.style.display = '';
+    } else {
+        juliaReInput.style.display = 'none';
+        juliaImInput.style.display = 'none';
+        juliaLabel.style.display = 'none';
+    }
+    if(fractalMode === 6) {
+        quarticAInput.style.display = '';
+    } else {
+        quarticAInput.style.display = 'none';
+    }
+    // Lyapunov controls: seq input
+    if(fractalMode === 11) {
+        lyapunovSeqInput.style.display = '';
+        lyapunovLabel.style.display = '';
+    } else {
+        lyapunovSeqInput.style.display = 'none';
+        lyapunovLabel.style.display = 'none';
+    }
+    // Fourier controls: steps input
+    if(fractalMode === 12) {
+        fourierStepInput.style.display = '';
+        fourierStepLabel.style.display = '';
+    } else {
+        fourierStepInput.style.display = 'none';
+        fourierStepLabel.style.display = 'none';
+    }
+    fractalSlider.max = "" + (FRACTAL_NAMES.length - 1);
+}
+
+canvas.addEventListener("mousemove", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mousePos.x = e.clientX - rect.left;
+  mousePos.y = e.clientY - rect.top;
+});
+
+function pixel(x, y, w, h, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, w, h);
+  pixelsDrawn+=w*h
+}
+function pixelToComplex(px, py) {
+  const viewSize = Math.min(canvas.width, canvas.height);
+  const scalePerPixel = scale / viewSize;
+  return {
+    re: centerX + (px - canvas.width * 0.5) * scalePerPixel,
+    im: centerY + (py - canvas.height * 0.5) * scalePerPixel
+  };
+}
+
+function hslStr(hue, sat, light) {
+    return `hsl(${(hue*colorMultiplier)%360},${Math.max(0,Math.min(100,sat))}%,${Math.max(0,Math.min(100,light))}%)`;
+}
+
+// Helper for Lyapunov
+function isLyapunovSequenceValid(seq) {
+    return /^[AaBb]{1,30}$/.test(seq);
+}
+function lyapunovColor(rA, rB, seq, n) {
+    let x = 0.5, L = 0;
+    let len = seq.length;
+    let anyNaN = false;
+    for (let i = 0; i < n; ++i) {
+        let r = (seq[i % len] == 'A' || seq[i % len] == 'a') ? rA : rB;
+        x = r * x * (1 - x);
+        let d = Math.abs(r * (1 - 2 * x));
+        if (!isFinite(x) || !isFinite(d) || d < 1e-9) {
+            anyNaN = true;
+            break;
+        }
+        L += Math.log(d);
+    }
+    if (anyNaN) {
+        return {color:"#000", isBlack:true};
+    }
+    L = L / n;
+    if (L > 0) {
+        let mag = Math.min(1, L / 1.5);
+        return { color: hslStr(30 + 100*mag, 100, 50 + 30*mag), isBlack: false };
+    } else if (L < 0) {
+        let mag = Math.max(-1, L / 2); 
+        return { color: hslStr(180 + 60*mag, 60 + 40*(-mag), 60 + 20*mag), isBlack: false };
+    } else {
+        return { color: "#fff", isBlack: false };
+    }
+}
+
+function lyapunovMap(px, py) {
+    // Map pixel to rA, rB using current window
+    let rA = lyap_rAmin + ((px + 0.5) / canvas.width) * (lyap_rAmax - lyap_rAmin);
+    let rB = lyap_rBmin + ((py + 0.5) / canvas.height) * (lyap_rBmax - lyap_rBmin);
+    return {rA, rB};
+}
+
+// =========================
+// Fourier Fractal Utilities - Only compute points ONCE per draw, use those for all pixel color queries
+// =========================
+function generateFractal(depth) {
+    let rotspeed = [];
+    let length = [];
+    for (let i = depth; i > 0; i--) {
+        if (i % 2 === 1) {
+            rotspeed.push(Math.pow(2, i) * -1);
+        } else {
+            rotspeed.push(Math.pow(2, i) * 1);
+        }
+        length.push(200 / Math.pow(2, i));
+    }
+    return { rotspeed, length };
+}
+let fourierCenterX = 0.0;
+let fourierCenterY = 0.0;
+let fourierScale = 400.0; // Side length covered by min(canvas.width,canvas.height)
+
+function syncFourierCameraWithGeneralCamera() {
+    fourierCenterX = centerX;
+    fourierCenterY = centerY;
+    fourierScale = scale / 2.71828 * 400;
+}
+function syncGeneralCameraWithFourier() {
+    centerX = fourierCenterX;
+    centerY = fourierCenterY;
+    scale = fourierScale / 400 * 2.71828;
+}
+function pixelToFourierCoord(px, py) {
+    const viewSize = Math.min(canvas.width, canvas.height);
+    const scalePerPixel = fourierScale / viewSize;
+    return {
+        x: fourierCenterX + (px - canvas.width * 0.5) * scalePerPixel,
+        y: fourierCenterY + (py - canvas.height * 0.5) * scalePerPixel
+    };
+}
+// --- SHAPE: Only Compute Once Per Draw ---
+function getFourierShapeData(depth, steps) {
+    let {rotspeed, length} = generateFractal(depth);
+    let arr = new Array(steps);
+    for (let s = 0; s < steps; ++s) {
+        let t = s / steps * Math.PI * 2;
+        let x = 0, y = 0;
+        for (let k = 0; k < depth; ++k) {
+            x += length[k] * Math.cos(rotspeed[k] * t);
+            y += length[k] * Math.sin(rotspeed[k] * t);
+        }
+        arr[s] = [x, y];
+    }
+    // Compute bounds
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (let pt of arr) {
+        let x = pt[0], y = pt[1];
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+    }
+    return { points: arr, bounds: {minX, minY, maxX, maxY}, steps };
+}
+// All the functions below now take precomputed shapeData and use it
+function fourierFractalColorDistanceWithShape(px, py, shapeData) {
+    let shapePoints = shapeData.points;
+    let steps = shapeData.steps;
+    let bounds = shapeData.bounds;
+
+    let {x: fx, y: fy} = pixelToFourierCoord(px, py);
+    let scaleX = (bounds.maxX - bounds.minX);
+    let scaleY = (bounds.maxY - bounds.minY);
+    let norm = Math.max(scaleX, scaleY, 10);
+
+    // Minimum distance from (fx,fy) to polyline shape in full shapePoints
+    let minDist = Infinity;
+    for (let i = 0; i < steps; ++i) {
+        let x1 = shapePoints[i][0], y1 = shapePoints[i][1];
+        let x2 = shapePoints[(i+1)%steps][0], y2 = shapePoints[(i+1)%steps][1];
+        let dx = x2 - x1;
+        let dy = y2 - y1;
+        let len2 = dx*dx + dy*dy;
+        let t;
+        if (len2 === 0) {
+            t = 0;
+        } else {
+            t = ((fx - x1)*dx + (fy - y1)*dy) / len2;
+            t = Math.max(0, Math.min(1, t));
+        }
+        let projX = x1 + t * dx;
+        let projY = y1 + t * dy;
+        let dist = Math.hypot(fx - projX, fy - projY);
+        if (dist < minDist) minDist = dist;
+    }
+    // Is it inside?
+    let crossings = 0;
+    for (let i = 0; i < steps; ++i) {
+        let x1 = shapePoints[i][0], y1 = shapePoints[i][1];
+        let x2 = shapePoints[(i+1)%steps][0], y2 = shapePoints[(i+1)%steps][1];
+        if (((y1 > fy) !== (y2 > fy)) && (fx < (x2-x1)*(fy-y1)/(y2-y1) + x1)) {
+            crossings++;
+        }
+    }
+    let inside = (crossings % 2) == 1;
+
+    // Coloring
+    let d = minDist;
+    let hue = (210 + colorMultiplier * 80 + 80*Math.sin(fx*0.05+fy*0.08)) % 360;
+    let color;
+    if (inside) {
+        if (d < 2) {
+            color = `hsl(${hue},90%,90%)`;
+        } else {
+            let sat = Math.max(60, 95-10*d);
+            let light = Math.max(15, 85-7*d);
+            color = `hsl(${hue},${sat}%,${light}%)`;
+        }
+    } else {
+        let alpha = Math.exp(-d*0.5);
+        let light = Math.max(0, 75 * alpha);
+        color = `hsl(${hue},40%,${light}%)`;
+    }
+    // Edge fadeout
+    if (Math.abs(fx) > 400 || Math.abs(fy) > 400) {
+        return {color: "#000", isBlack:true};
+    }
+    return {color: color, isBlack: false};
+}
+// =========================
+
+function fractalColor(px, py, fourierShapeData=null) {
+    // All original fractal modes, modify for Fourier mode
+    const viewSize = Math.min(canvas.width, canvas.height);
+    const scalePerPixel = scale / viewSize;
+    let a = juliaRe;
+    let b = juliaIm;
+    let zx, zy;
+    let mode = fractalMode;
+    if (mode === 1) { // Julia
+      zx = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      zy = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 2) { // Burning Ship
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 3) { // Newton
+      zx = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      zy = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 4) { // Tricorn
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 5) { // Celtic
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 10) { // Magnet 1 (inverted)
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 6) { // Quartic Mandelbrot (a·z^4 + c)
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 7) { // Perpendicular Mandelbrot
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 8) { // Burning Mandelbrot - original
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 9) { // Mandelship - flip Burning Mandelbrot order
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    } else if (mode === 11) {
+      let {rA, rB} = lyapunovMap(px, py);
+      let seq = lyapunovSeq.toUpperCase();
+      return lyapunovColor(rA, rB, seq, iterations);
+    } else if (mode === 12 && fourierShapeData) {
+      return fourierFractalColorDistanceWithShape(px, py, fourierShapeData);
+    }
+    else { // Mandelbrot
+      zx = 0;
+      zy = 0;
+      a = centerX + (px - canvas.width * 0.5) * scalePerPixel;
+      b = centerY + (py - canvas.height * 0.5) * scalePerPixel;
+    }
+    // ... unchanged rest of fractalColor function except for Fourier, Lyapunov handoff (which is above) ...
+    // For brevity, see the original for the rest!
+    // The rest is as in your source except that we pass fourierShapeData where needed.
+    // [Begin unchanged from your code:]
+    if (mode === 11) {
+        let {rA, rB} = lyapunovMap(px, py);
+        let seq = lyapunovSeq.toUpperCase();
+        return lyapunovColor(rA, rB, seq, iterations);
+    }
+    if (mode === 12 && fourierShapeData) {
+        return fourierFractalColorDistanceWithShape(px, py, fourierShapeData);
+    }
+    // Magnet 1
+    if (mode === 10) {
+        let n = 0;
+        let modulus = 0;
+        for (; n < iterations; n++) {
+            let denomRe = 2 * zx + a - 2;
+            let denomIm = 2 * zy + b;
+            let denomAbs2 = denomRe*denomRe + denomIm*denomIm;
+            if (denomAbs2 === 0) break;
+            let zx2 = zx*zx - zy*zy;
+            let zy2 = 2*zx*zy;
+            let numRe = zx2 + a - 1;
+            let numIm = zy2 + b;
+            let newRe = (numRe*denomRe + numIm*denomIm)/denomAbs2;
+            let newIm = (numIm*denomRe - numRe*denomIm)/denomAbs2;
+            let tmpRe = newRe*newRe - newIm*newIm;
+            let tmpIm = 2*newRe*newIm;
+            zx = tmpRe;
+            zy = tmpIm;
+            modulus = zx*zx + zy*zy;
+            if (modulus > 4.0) break;
+        }
+        let hue, light, sat;
+        if (n < iterations) {
+            let mod2 = Math.sqrt(modulus);
+            let nu = Math.log(Math.log(mod2 + 1e-8)/Math.LN2)/Math.LN2;
+            hue = ((n + 1 - nu) * 720 / iterations + 100) % 360;
+            light = 40 + 40 * Math.sin(0.07 * n + nu * 5);
+            sat = 70 + 30 * Math.cos(0.12 * n + nu * 2);
+            light = Math.max(10, Math.min(90, light));
+            sat = Math.max(15, Math.min(100, sat));
+            if (hue < 0) hue += 360;
+            return {
+                color: hslStr(hue, sat, light),
+                isBlack: false
+            };
+        } else {
+            return {
+                color: "#000",
+                isBlack: true
+            };
+        }
+    } else if (mode !== 3 && mode !== 6 && mode !== 7 && mode !== 8 && mode !== 9) {
+        let n = 0;
+        for (; n < iterations; n++) {
+            let zx2 = zx * zx, zy2 = zy * zy;
+            if (zx2 + zy2 > 4.0) break;
+            let xtemp;
+            if (mode === 2) { // Burning Ship
+                xtemp = zx2 - zy2 + a;
+                zy = Math.abs(2 * zx * zy) + b;
+                zx = Math.abs(xtemp);
+            } else if (mode === 4) { // Tricorn
+                xtemp = zx2 - zy2 + a;
+                zy = -2 * zx * zy + b;
+                zx = xtemp;
+            } else if (mode === 5) { // Celtic
+                xtemp = Math.abs(zx2 - zy2) + a;
+                zy = 2 * zx * zy + b;
+                zx = xtemp;
+            } else { // Mandelbrot/Julia z^2 + c
+                xtemp = zx2 - zy2 + a;
+                zy = 2 * zx * zy + b;
+                zx = xtemp;
+            }
+        }
+        let hue, sat = 80, light = n === iterations ? 0 : 50;
+        if (n === iterations) {
+            hue = 0;
+        } else {
+            let modulus = Math.sqrt(zx*zx + zy*zy);
+            let nu = Math.log(Math.log(modulus + 1e-8)/Math.LN2)/Math.LN2;
+            hue = ((n + 1 - nu) * 360 / iterations) % 360;
+            if (mode === 2) hue = (hue + 200) % 360;
+            if (mode === 4) hue = (hue + 60) % 360;
+            if (mode === 5) hue = (hue + 120) % 360;
+            if (hue < 0) hue += 360;
+        }
+        return {
+            color: hslStr(hue, sat, light),
+            isBlack: n === iterations
+        };
+    } else if (mode === 6) {
+        let n = 0;
+        let az = typeof quarticA === "number" && !isNaN(quarticA) ? quarticA : 1;
+        for (; n < iterations; n++) {
+            let zx2 = zx*zx - zy*zy;
+            let zy2 = 2*zx*zy;
+            let zx_2 = zx2; let zy_2 = zy2;
+            let zx4 = zx_2*zx_2 - zy_2*zy_2;
+            let zy4 = 2*zx_2*zy_2;
+            let zx4a = az*zx4;
+            let zy4a = az*zy4;
+            zx = zx4a + a;
+            zy = zy4a + b;
+            if (zx*zx + zy*zy > 8.0) break;
+        }
+        let hue, sat = 80, light = n === iterations ? 0 : 50;
+        if (n === iterations) {
+            hue = 0;
+        } else {
+            let modulus = Math.sqrt(zx*zx + zy*zy);
+            let nu = Math.log(Math.log(modulus + 1e-8)/Math.LN2)/Math.LN2;
+            hue = ((n + 1 - nu) * 360 / iterations) % 360;
+            hue = (hue + 270) % 360;
+            if (hue < 0) hue += 360;
+        }
+        return {
+            color: hslStr(hue, sat, light),
+            isBlack: n === iterations
+        };
+    } else if (mode === 7) {
+        let n = 0;
+        for (; n < iterations; n++) {
+            let zx2 = zx * zx, zy2 = zy * zy;
+            if (zx2 + zy2 > 4.0) break;
+            let xtemp = zx2 - zy2 + a;
+            zy = -2 * Math.abs(zx) * zy + b;
+            zx = xtemp;
+        }
+        let hue, sat = 80, light = n === iterations ? 0 : 50;
+        if (n === iterations) {
+            hue = 0;
+        } else {
+            let modulus = Math.sqrt(zx*zx + zy*zy);
+            let nu = Math.log(Math.log(modulus + 1e-8)/Math.LN2)/Math.LN2;
+            hue = ((n + 1 - nu) * 360 / iterations) % 360;
+            hue = (hue + 320) % 360;
+            if (hue < 0) hue += 360;
+        }
+        return {
+            color: hslStr(hue, sat, light),
+            isBlack: n === iterations
+        };
+    } else if (mode === 8) {
+        let n = 0;
+        for (; n < iterations; n++) {
+            let zx2 = zx * zx, zy2 = zy * zy;
+            if (zx2 + zy2 > 4.0) break;
+            let xtemp;
+            if (n % 2 === 1) { 
+                xtemp = zx2 - zy2 + a;
+                zy = Math.abs(2 * zx * zy) + b;
+                zx = Math.abs(xtemp);
+            } else { 
+                xtemp = zx2 - zy2 + a;
+                zy = 2 * zx * zy + b;
+                zx = xtemp;
+            }
+        }
+        let hue, sat = 90, light = n === iterations ? 0 : 50;
+        if (n === iterations) {
+            hue = 0;
+        } else {
+            let modulus = Math.sqrt(zx*zx + zy*zy);
+            let nu = Math.log(Math.log(modulus + 1e-8)/Math.LN2)/Math.LN2;
+            hue = ((n + 1 - nu) * 360 / iterations) % 360;
+            hue = (hue + 90) % 360;
+            if (hue < 0) hue += 360;
+        }
+        return {
+            color: hslStr(hue, sat, light),
+            isBlack: n === iterations
+        };
+    } else if (mode === 9) {
+        let n = 0;
+        for (; n < iterations; n++) {
+            let zx2 = zx * zx, zy2 = zy * zy;
+            if (zx2 + zy2 > 4.0) break;
+            let xtemp;
+            if (n % 2 === 0) { 
+                xtemp = zx2 - zy2 + a;
+                zy = Math.abs(2 * zx * zy) + b;
+                zx = Math.abs(xtemp);
+            } else { 
+                xtemp = zx2 - zy2 + a;
+                zy = 2 * zx * zy + b;
+                zx = xtemp;
+            }
+        }
+        let hue, sat = 90, light = n === iterations ? 0 : 50;
+        if (n === iterations) {
+            hue = 0;
+        } else {
+            let modulus = Math.sqrt(zx*zx + zy*zy);
+            let nu = Math.log(Math.log(modulus + 1e-8)/Math.LN2)/Math.LN2;
+            hue = ((n + 1 - nu) * 360 / iterations) % 360;
+            hue = (hue + 200) % 360;
+            if (hue < 0) hue += 360;
+        }
+        return {
+            color: hslStr(hue, sat, light),
+            isBlack: n === iterations
+        };
+    } else {
+        let z = { re: zx, im: zy };
+        let root;
+        const roots = [
+            { re: 1, im: 0 },
+            { re: -0.5, im: Math.sqrt(3)/2 },
+            { re: -0.5, im: -Math.sqrt(3)/2 }
+        ];
+        let threshold = 1e-5;
+        let converged = false;
+        let n;
+        for (n = 0; n < iterations; n++) {
+            let r = z.re, i = z.im;
+            let r2 = r*r, i2 = i*i;
+            let z3re = r2*r - 3*r*i2;
+            let z3im = 3*r2*i - i2*i;
+            let z2re = r2 - i2;
+            let z2im = 2*r*i;
+            let fre = z3re - 1;
+            let fim = z3im;
+            let f1re = 3*z2re;
+            let f1im = 3*z2im;
+            let denom = f1re*f1re + f1im*f1im + 1e-30;
+            let qre = (fre*f1re + fim*f1im) / denom;
+            let qim = (fim*f1re - fre*f1im) / denom;
+            z = { re: r - qre, im: i - qim };
+            for (let j=0; j<3; ++j) {
+                let dr = z.re - roots[j].re, di = z.im - roots[j].im;
+                if (dr*dr + di*di < threshold*threshold) {
+                    root = j;
+                    converged = true;
+                    break;
+                }
+            }
+            if (converged) break;
+        }
+        let hues = [0, 120, 240];
+        let saturation = 90;
+        let lightness = converged ? 65 - (n / iterations) * 50 : 0;
+        let hue = root !== undefined ? hues[root] : 0;
+        return {
+            color: hslStr(hue, saturation, lightness),
+            isBlack: !converged
+        };
+    }
+}
+function hslStr(hue, sat, light) {
+    return `hsl(${(hue*colorMultiplier)%360},${Math.max(0,Math.min(100,sat))}%,${Math.max(0,Math.min(100,light))}%)`;
+}
+// ===================== DRAW ===========================
+async function draw() {
+    if (!window.__brotDrawToken__) window.__brotDrawToken__ = { value: 1 };
+    const myDrawToken = ++window.__brotDrawToken__.value;
+    const stillMyDraw = () => window.__brotDrawToken__ && window.__brotDrawToken__.value === myDrawToken;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    juliaRe = parseFloat(juliaReInput.value);
+    juliaIm = parseFloat(juliaImInput.value);
+    quarticA = parseFloat(quarticAInput.value);
+    colorMultiplier = parseFloat(colorMultiplierInput.value) || 1;
+    lyapunovSeq = lyapunovSeqInput.value || "AB";
+
+    // --- Fourier: get shape points/cache ONCE only if mode 12 ---
+    let fourierShapeData = null;
+    if (fractalMode === 12 && (typeof fourierCenterX === "undefined" || typeof fourierScale === "undefined")) {
+        fourierCenterX = 0.0;
+        fourierCenterY = 0.0;
+        fourierScale = 400.0;
+    }
+    if (fractalMode === 12) {
+        const leftF = {x: fourierCenterX - fourierScale/2, y: fourierCenterY};
+        const rightF = {x: fourierCenterX + fourierScale/2, y: fourierCenterY};
+        leftX = `(${leftF.x.toFixed(2)},${leftF.y.toFixed(2)})`;
+        rightX = `(${rightF.x.toFixed(2)},${rightF.y.toFixed(2)})`;
+        // Get step count for resolution as before
+        let inputSteps = parseInt(fourierStepInput.value, 10) || 400;
+        let viewSize = Math.max(canvas.width, canvas.height);
+        let steps = Math.max(inputSteps, Math.floor(viewSize * 1.5));
+        let depth = Math.max(2, Math.round(iterInput.value));
+        fourierShapeData = getFourierShapeData(depth, steps);
+    } else {
+        syncFourierCameraWithGeneralCamera();
+        const centerY_px = Math.floor(canvas.height / 2);
+        const l = pixelToComplex(0, centerY_px);
+        const r = pixelToComplex(canvas.width - 1, centerY_px);
+        function complexToString(z) {
+          return `(${z.re.toFixed(6)}${z.im >= 0 ? "+" : ""}${z.im.toFixed(6)}i)`;
+        }
+        leftX = complexToString(l);
+        rightX = complexToString(r);
+    }
+    let lyapText = "";
+    if (fractalMode === 11) {
+        lyapText = `, rA=[${lyap_rAmin.toFixed(3)},${lyap_rAmax.toFixed(3)}] rB=[${lyap_rBmin.toFixed(3)},${lyap_rBmax.toFixed(3)}]`;
+    }
+
+    if (fractalMode === 1) {
+      juliaLabel.textContent = `c = ${juliaRe >= 0 ? "+" : ""}${juliaRe.toFixed(5)} ${juliaIm >= 0 ? "+" : "-"} ${Math.abs(juliaIm).toFixed(5)}i`;
+    }
+
+    const resval = resInput.value;
+    res = (resval>=0.25) ? resval : 4;
+    const blocksize = Math.max(0.5, res);
+    let fillPercent = 0;
+    pixelsDrawn = 0;
+    const width = canvas.width;
+    const height = canvas.height;
+    const r2 = blocksize;
+    const totalBlocksX = Math.ceil(width / blocksize);
+    const totalBlocksY = Math.ceil(height / blocksize);
+    const batchSize = 512;
+    let setName = FRACTAL_NAMES[fractalMode];
+
+    let cText =
+      (fractalMode === 1
+        ? `c = (${juliaRe.toFixed(5)}${juliaIm >= 0 ? "+" : ""}${juliaIm.toFixed(5)}i)`
+        : "")
+      + (fractalMode === 6 ? `, a = ${isNaN(quarticA) ? 1 : +quarticA}` : "")
+      + (colorMultiplier !== 1 ? `, Color×${colorMultiplier}` : "")
+      + (fractalMode === 11 ? `, seq="${lyapunovSeq}"` : "")
+      + lyapText
+      + (fractalMode === 12 && fourierShapeData ? `, depth=${Math.max(2, Math.round(iterInput.value))}, steps=${fourierShapeData.steps}` : "");
+
+    if (fractalMode === 11 && !/^[AaBb]{1,30}$/.test(lyapunovSeq)) {
+        infoDiv.innerHTML = `<span style="color:red;">Invalid Lyapunov sequence! Use only A and B, 1-30 chars.</span>`;
+        return;
+    }
+
+    infoDiv.innerHTML= `
+      ${setName} ${cText}
+      <br>Left: ${leftX}, Right: ${rightX} Zoom ${pseudoZoom.toFixed(2)}x Iter:${iterations}
+      <br>${fillPercent}%</br>
+    `;
+
+    let coords = [];
+    for (let by = 0; by < totalBlocksY; ++by) {
+        for (let bx = 0; bx < totalBlocksX; ++bx) {
+            coords.push({x: bx * blocksize, y: by * blocksize});
+        }
+    }
+    for (let i = coords.length - 1; i > 0; --i) {
+        const j = (Math.random() * (i + 1)) | 0;
+        [coords[i], coords[j]] = [coords[j], coords[i]];
+    }
+
+    const totalPixels = width * height;
+
+    for (let i = 0; i < coords.length; i += batchSize) {
+        if (!stillMyDraw()) return;
+        const batch = coords.slice(i, i + batchSize);
+
+        for (const {x: px, y: py} of batch) {
+            let s;
+            if (fractalMode === 12 && fourierShapeData) {
+                s = fourierFractalColorDistanceWithShape(px, py, fourierShapeData);
+            } else {
+                s = fractalColor(px, py, fourierShapeData);
+            }
+            if (s.isBlack && blocksize > 1) {
+                let cornersBlack = true;
+                outer: for (let dy = 0; dy <= blocksize; dy += blocksize) {
+                    for (let dx = 0; dx <= blocksize; dx += blocksize) {
+                        if (px + dx < width && py + dy < height) {
+                            let testS;
+                            if (fractalMode === 12 && fourierShapeData) {
+                                testS = fourierFractalColorDistanceWithShape(px + dx, py + dy, fourierShapeData);
+                                if (!testS.isBlack) {
+                                    cornersBlack = false; break outer;
+                                }
+                            } else if (!fractalColor(px + dx, py + dy, fourierShapeData).isBlack) {
+                                cornersBlack = false; break outer;
+                            }
+                        }
+                    }
+                }
+                if (cornersBlack) {
+                    pixel(px, py, blocksize, blocksize, s.color);
+                    continue;
+                }
+            }
+            for (let y2 = py; y2 < py + blocksize && y2 < height; y2 += r2) {
+                for (let x2 = px; x2 < px + blocksize && x2 < width; x2 += r2) {
+                    let c = (fractalMode === 12 && fourierShapeData)
+                        ? fourierFractalColorDistanceWithShape(x2, y2, fourierShapeData)
+                        : fractalColor(x2, y2, fourierShapeData);
+                    pixel(x2, y2, r2, r2, c.color);
+                }
+            }
+        }
+        fillPercent = Math.min(100, ((pixelsDrawn / totalPixels) * 100).toFixed(1));
+        infoDiv.innerHTML= `
+        ${setName} ${cText}
+        <br>Left: ${leftX}, Right: ${rightX} Zoom ${pseudoZoom.toFixed(2)}x Iter:${iterations}
+        <br>${fillPercent.toFixed(2)}%</br>
+        `;
+        await new Promise(r => setTimeout(r, 0));
+    }
+}
+
+// ... unchanged code follows for resize/inputs...
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+  draw();
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function onChangeRedraw() {
+  iterations = Math.max(iterInput.value, Math.floor(iterInput.value * (2.0 / scale)));
+  draw();
+}
+resInput.addEventListener("input", onChangeRedraw);
+iterInput.addEventListener("input", onChangeRedraw);
+juliaReInput.addEventListener("input", onChangeRedraw);
+juliaImInput.addEventListener("input", onChangeRedraw);
+quarticAInput.addEventListener("input", onChangeRedraw);
+colorMultiplierInput.addEventListener("input", () => {
+    colorMultiplier = parseFloat(colorMultiplierInput.value) || 1;
+    draw();
+});
+lyapunovSeqInput.addEventListener("input", () => {
+    lyapunovSeq = lyapunovSeqInput.value;
+    draw();
+});
+fractalSlider.addEventListener("input", () => {
+    fractalMode = parseInt(fractalSlider.value, 10);
+    updateFractalUI();
+    if (fractalMode === 11) {
+        lyap_rAmin = 2.0; lyap_rAmax = 4.0; lyap_rBmin = 2.0; lyap_rBmax = 4.0;
+    }
+    if (fractalMode === 12) {
+        syncFourierCameraWithGeneralCamera();
+    } else {
+        syncGeneralCameraWithFourier();
+    }
+    draw();
+});
+document.getElementById("modebtn").addEventListener("click", () => {
+    fractalMode = (fractalMode+1)%FRACTAL_NAMES.length;
+    fractalSlider.value = fractalMode;
+    updateFractalUI();
+    if (fractalMode === 11) {
+        lyap_rAmin = 2.0; lyap_rAmax = 4.0; lyap_rBmin = 2.0; lyap_rBmax = 4.0;
+    }
+    if (fractalMode === 12) {
+        syncFourierCameraWithGeneralCamera();
+    } else {
+        syncGeneralCameraWithFourier();
+    }
+    draw();
+});
+// --- Fourier steps input event: UNCAPPED! ---
+fourierStepInput.addEventListener("input", function() {
+    let val = parseInt(fourierStepInput.value, 10);
+    if (isNaN(val) || val < 50) fourierStepInput.value = 50;
+    else if (val > 100000) fourierStepInput.value = 100000;
+    draw();
+});
+
+// --- Independent Zoom for Lyapunov/Fourier vs scale/center for all others (unchanged) ---
+function applyZoom(factor, mousePoint) {
+  if (fractalMode === 11) {
+    const mx = mousePoint.x / canvas.width, my = mousePoint.y / canvas.height;
+    const rA_mouse = lyap_rAmin + mx * (lyap_rAmax - lyap_rAmin);
+    const rB_mouse = lyap_rBmin + my * (lyap_rBmax - lyap_rBmin);
+    const rAspan = (lyap_rAmax - lyap_rAmin) * factor;
+    const rBspan = (lyap_rBmax - lyap_rBmin) * factor;
+    lyap_rAmin = rA_mouse - (mx) * rAspan;
+    lyap_rAmax = rA_mouse + (1-mx) * rAspan;
+    lyap_rBmin = rB_mouse - (my) * rBspan;
+    lyap_rBmax = rB_mouse + (1-my) * rBspan;
+    pseudoZoom /= factor;
+  } else if (fractalMode === 12) {
+    const viewSize = Math.min(canvas.width, canvas.height);
+    pseudoZoom /= factor;
+    let lx = fourierCenterX + (mousePoint.x - canvas.width/2) * (fourierScale / viewSize);
+    let ly = fourierCenterY + (mousePoint.y - canvas.height/2) * (fourierScale / viewSize);
+    fourierScale *= factor;
+    fourierCenterX = lx - (mousePoint.x - canvas.width/2) * (fourierScale / viewSize);
+    fourierCenterY = ly - (mousePoint.y - canvas.height/2) * (fourierScale / viewSize);
+  } else {
+    const viewSize = Math.min(canvas.width, canvas.height);
+    pseudoZoom /= factor;
+    let { re: mouseRe, im: mouseIm } = pixelToComplex(mousePoint.x, mousePoint.y);
+    scale *= factor;
+    centerX = mouseRe - (mousePoint.x - canvas.width/2) * (scale / viewSize);
+    centerY = mouseIm - (mousePoint.y - canvas.height/2) * (scale / viewSize);
+    iterations = Math.max(iterInput.value, Math.floor(iterInput.value * (2.0 / scale)));
+    syncFourierCameraWithGeneralCamera();
+  }
+}
+
+updateFractalUI();
+setTimeout(() => {draw();}, 20);
+</script>
+</html>

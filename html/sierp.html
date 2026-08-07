@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sierpinski Fractal N Sides</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <style>
+      body {
+        background-color: #111;
+        color: #fafafa;
+        font-family: "Courier New", Courier, monospace;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #controls {
+        margin: 16px 0;
+      }
+      #fractalCanvas {
+        background: #222;
+        margin-top: 8px;
+        border: 1px solid #333;
+        /* The CSS width/height will *display* this size, but the actual canvas
+           will have much higher pixel density for sharpness. */
+        width: 600px;
+        height: 600px;
+      }
+      label, input, button {
+        font-size: 1rem;
+        margin-right: 8px;
+        color: #fafafa;
+        background: transparent;
+        border: none;
+      }
+      input[type="number"] {
+        width: 3em;
+        border-bottom: 1px solid #fafafa;
+        background: #222;
+        color: #fafafa;
+        text-align: center;
+      }
+      button {
+        padding: 4px 8px;
+        border: 1px solid #fafafa;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Generalized Sierpinski Fractal</h1>
+    <div id="controls">
+      <label for="sides">Sides:</label>
+      <input type="number" id="sides" min="3" max="12" value="3">
+      <label for="depth">Depth:</label>
+      <input type="number" id="depth" min="1" max="8" value="5">
+      <button id="drawBtn">Draw Fractal</button>
+    </div>
+    <canvas id="fractalCanvas" width="1800" height="1800"></canvas>
+
+    <script>
+      // Increase canvas resolution by 3x by setting
+      // CSS width/height to 600, real pixel width/height to 1800
+
+      // On load, and if window is resized, make sure the CSS size stays at 600x600
+      // while internal resolution is high (done by hard setting in HTML and CSS)
+
+      function polygonVertices(cx, cy, r, n, angleOffset = 0) {
+        // Return array of {x, y} of regular polygon vertices
+        const verts = [];
+        for (let i = 0; i < n; ++i) {
+          const angle = 2 * Math.PI * i / n + angleOffset;
+          verts.push({
+            x: cx + r * Math.cos(angle),
+            y: cy + r * Math.sin(angle),
+          });
+        }
+        return verts;
+      }
+
+      function drawPolygon(ctx, verts) {
+        ctx.beginPath();
+        ctx.moveTo(verts[0].x, verts[0].y);
+        for (let i = 1; i < verts.length; ++i) {
+          ctx.lineTo(verts[i].x, verts[i].y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      function sierpFractal(ctx, verts, depth) {
+        if (depth === 0) return;
+
+        // Draw outer polygon
+        drawPolygon(ctx, verts);
+
+        // For each vertex, create shrunken polygon towards that vertex and recurse
+        const n = verts.length;
+        for (let i = 0; i < n; ++i) {
+          // To build a smaller polygon near vertex i:
+          // For all vertices, linearly interpolate from the center towards the vertex i by a ratio
+          const center = verts.reduce(
+            (acc, v) => ({ x: acc.x + v.x / n, y: acc.y + v.y / n }),
+            {x:0, y:0}
+          );
+          const ratio = 0.5; // Shrinkage factor
+
+          const newVerts = verts.map((v) => ({
+            x: center.x + ratio * (v.x - center.x) + (1 - ratio) * (verts[i].x - center.x),
+            y: center.y + ratio * (v.y - center.y) + (1 - ratio) * (verts[i].y - center.y),
+          }));
+
+          sierpFractal(ctx, newVerts, depth-1);
+        }
+      }
+
+      function drawFractal() {
+        const canvas = document.getElementById('fractalCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Defensive: always ensure display size is 600x600 regardless of devicePixelRatio
+        canvas.style.width = "600px";
+        canvas.style.height = "600px";
+
+        const sides = Math.max(3, Math.min(12, parseInt(document.getElementById('sides').value)));
+        const depth = Math.max(1, Math.min(8, parseInt(document.getElementById('depth').value)));
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.save();
+        ctx.strokeStyle = '#fafafa';
+        ctx.lineWidth = 1.2 * 3; // Scale up line width for higher resolution
+
+        // Make polygon fit the canvas (now 1800x1800 actual pixels)
+        const r = canvas.width * 0.41;
+
+        const offset = -Math.PI/2;
+        const verts = polygonVertices(canvas.width/2, canvas.height/2, r, sides, offset);
+
+        sierpFractal(ctx, verts, depth);
+
+        ctx.restore();
+      }
+
+      document.getElementById('drawBtn').onclick = drawFractal;
+      window.onload = drawFractal;
+    </script>
+  </body>
+</html>

@@ -1,1 +1,1 @@
-Hello World
+This is my new cool git repository, poggies.

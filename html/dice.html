@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dice Stats</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        overflow: hidden;
+    }
+      #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+        max-height: 500px;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+let keysPressed = [];
+
+const diceChars = [
+    "⚀","⚁","⚂","⚃","⚄","⚅"
+]
+
+let dice = [
+    1,1,1,1,1
+]
+
+let mults = [
+    1,1,1,
+]
+
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 0;
+let tick = 0;
+let tick2 = 0;
+let gained = 0;
+let money = 0;
+let multd = 1;
+let mx = 0, my = 0;
+
+function updateMousePosition(e) {
+    const rect = canvas.getBoundingClientRect();
+    mx = canvas.width/-2 + ((e.clientX - rect.left) * (canvas.width / rect.width));
+    my = canvas.height/2 - ((e.clientY - rect.top) * (canvas.height / rect.height));
+
+}
+
+canvas.addEventListener('mousemove', updateMousePosition);
+
+function sleep(ms) {
+        return new Promise(resolve => {
+            setTimeout(resolve, ms);
+        });
+    }
+
+async function waitUntil(condition) {
+    while (!condition()) {
+        await sleep(10);
+    }
+}
+
+
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let x = -dice.length*66-260;
+    for (let i = 0; i<dice.length; i++) {
+        ctx.save();
+        x += 120;
+        ctx.translate(canvas.width / 2 + x, canvas.height -70 -200*Math.sin(tick*Math.PI/2));
+        ctx.rotate(tick * Math.PI);
+
+        ctx.fillStyle = "#eff";
+        ctx.font = "150px monospace";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        ctx.fillText(diceChars[dice[i]-1], 0, 0); 
+        ctx.restore();
+    }
+
+    x+=120
+
+    for (let i = 0; i<mults.length; i++) {
+        ctx.save();
+        x += 120;
+        ctx.translate(canvas.width / 2 + x, canvas.height -70 -200*Math.sin(tick*Math.PI/2));
+        ctx.rotate(tick * Math.PI);
+
+        ctx.fillStyle = "#edf";
+        ctx.font = "150px monospace";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        ctx.fillText(diceChars[mults[i]-1], 0, 0); 
+        ctx.restore();
+    }
+
+    if (gained > 0) {
+        ctx.save();
+        ctx.fillStyle = "#fff";
+        ctx.font = `${(Math.sin(tick2*3.14)/(tick2*tick2+4))*25+25}px monospace`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.translate(canvas.width / 2,  140);
+        ctx.globalAlpha = Math.max(1-tick,0)
+        ctx.rotate(Math.sin(tick2*6.28)/(tick2*tick2+2));
+
+        ctx.fillText(`${gained} * ${multd} = +${gained*multd}`, 0, 0); 
+        ctx.restore();
+    }
+
+        ctx.save();
+        ctx.fillStyle = "#fff";
+        ctx.font = `${(Math.sin(tick2*6.28)/(tick2*tick2+4))*40+40}px monospace`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.translate(canvas.width / 2, 50);
+        ctx.globalAlpha = 1;
+
+        ctx.fillText(`$${money}`, 0, 0); 
+        ctx.restore();
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+let cooldown = false;
+
+let tick2Animation = { cancelled: false, promise: null };
+
+async function animate() {
+    cooldown = true;
+    tick = 0;
+    if (tick2Animation && tick2Animation.cancelled === false) {
+        tick2Animation.cancelled = true;
+        if (tick2Animation.promise) await tick2Animation.promise;
+    }
+    tick2 = 0;
+    while (tick < 2) {
+        tick += 0.5 / fps;
+        await sleep(1 / fps);
+        if (tick < 1.9) {
+            for (let i = 0; i < dice.length; i++) {
+                dice[i] = Math.ceil(Math.random() * 6);
+            }
+            for (let i = 0; i < mults.length; i++) {
+                mults[i] = Math.ceil(Math.random() * 6);
+            }
+        }
+    }
+    tick = 0;
+    tick2 = 0;
+    cooldown = false;
+    gained = dice.reduce((acc, val) => acc + val, 0);
+    multd = mults.reduce((acc, val) => acc * val, 1);
+    money+=gained*multd
+
+
+
+    // Start a new tick2 animation that can be cancelled
+    tick2Animation = { cancelled: false, promise: null };
+    tick2Animation.promise = (async () => {
+        while (tick2 < 5 && !tick2Animation.cancelled) {
+            tick2 += 1 / fps;
+            await sleep(1 / fps);
+        }
+        tick2 = 0;
+    })();
+    await tick2Animation.promise;
+}
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = Math.min((window.innerHeight) - 25,500);
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+  keysPressed[e.key.toLowerCase()] = true;
+  if (e.key == " " && !cooldown) {
+   animate(); 
+  }
+});
+
+window.addEventListener("keyup", (e) => {
+  keysPressed[e.key.toLowerCase()] = false;
+});
+
+let lastTimestamp;
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>thingy</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 40px; }
+      label, input, textarea, button { display: block; margin-bottom: 12px; }
+      textarea { width: 300px; height: 100px; }
+      #output { margin-top: 16px; font-weight: bold; white-space: pre-wrap; }
+    </style>
+    <script>
+      function insertEntersEvery250() {
+        const input = document.getElementById('textInput').value;
+        // Remove all line breaks first (optional: keep if you want to treat input as a single line before wrapping)
+        const noLineBreaks = input.replace(/(\r\n|\n|\r)/gm, '');
+        // Insert an enter (newline) every 250 characters
+        const output = noLineBreaks.replace(/(.{250})/g, '$1\n');
+        document.getElementById('output').textContent = output;
+      }
+      function selectAllOutput() {
+        const outputDiv = document.getElementById('output');
+        if (navigator.clipboard && window.getSelection && document.createRange) {
+          // Create a range encompassing the output div
+          const range = document.createRange();
+          range.selectNodeContents(outputDiv);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <label for="textInput">Enter a string (with line breaks):</label>
+    <textarea id="textInput"></textarea>
+    <button onclick="insertEntersEvery250()">Insert Enter Every 250</button>
+    <button onclick="selectAllOutput()">Select All Output</button>
+    <div id="output"></div>
+  </body>
+</html>

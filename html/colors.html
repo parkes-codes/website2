@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Color Picker UI</title>
+        <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    </head>
+    <style>
+        body {
+            background-color: #111;
+            color: #eee;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            transform: scale(2);
+            margin-top: 110px;
+        }
+        .rangee {
+            accent-color: #aff;
+            min-width: 170px;
+            height: 10px;
+        }
+   
+        #slidersCont {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: fit-content;
+            background: #347;
+            padding-left: 50px;
+            width: 285px;
+            height: fit-content;
+            border-radius: 10px;
+        }
+        .rangeCont {
+            display: flex;
+            flex-direction: row;
+            transform: scale(1.5);
+            background: #459;
+            width: 175px;
+            height: fit-contet;
+            margin-top: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .labels {
+            padding: none;
+            margin: 0;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+        #mainContainer {
+            position: relative;
+            justify-self: center;
+            top: 0px;
+            display: flex;
+            flex-direction: row;
+            background: #225;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        #previewCanvas {
+            width: 150px;
+            height: 150px;
+            border: #fff 5px solid;
+            margin-left: 10px;
+            border-radius: 8px;
+        }
+        #sliderBtnCol {
+            display: flex;
+            flex-direction: column;
+        }
+        #btnRow {
+            display: flex;
+            flex-direction: row;
+            gap: 7px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .btn {
+            width: 60px;
+            height: 35px;
+            border-radius: 5px;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-color: #789;
+            font-size: 20px;
+            color: #fff;
+        }
+        .btn:hover {
+            background-color: #357;
+            transform: scale(1.1);
+        }
+
+    </style>
+    <body>
+        <div id="mainContainer">
+            <div id="sliderBtnCol">
+                <div id="slidersCont">
+                    <div class="rangeCont"><input type="range" min="0" max="100" step="0.01" value="50" class="rangee"><span class="labels">0</span></div>
+                    <div class="rangeCont"><input type="range" min="0" max="100" step="0.01" value="50" class="rangee"><span class="labels">0</span></div>
+                    <div class="rangeCont"><input type="range" min="0" max="100" step="0.01" value="50" class="rangee"><span class="labels">0</span></div>
+                </div>
+                <div id="btnRow">
+                    <button class="btn">HSL</button>
+                    <button class="btn">RGB</button>
+                    <button class="btn">HEX</button>
+                </div>
+            </div>
+            <canvas id="previewCanvas"></canvas>
+        </div>
+    </body>
+    <script>
+        const labels = document.getElementsByClassName("labels");
+        const sliders = document.getElementsByClassName("rangee");
+        const canvas = document.getElementById("previewCanvas");
+        const buttons = document.getElementsByClassName("btn");
+        const ctx = canvas.getContext("2d")
+        let inputs = [0,0,0];
+        let mode = "HSL";
+
+        function toHex(num) {
+            let clamped = Math.max(0, Math.min(255, Math.round(num)));
+            return clamped.toString(16).padStart(2, '0').toUpperCase();
+        }
+
+        function update() {
+            for (let i = 0; i < labels.length; i++) {
+                if (mode == "HSL") {
+                    let mult = (i==0) ? 3.6 : 1;
+                    let percent = (i>0) ? "%" : "°"
+                    labels[i].textContent = `${(mult*Number(sliders[i].value)).toFixed(2)}${percent}`;
+                    inputs[i] = Number(sliders[i].value)
+                } else if (mode == "RGB") {
+                    labels[i].textContent = `${(Number(sliders[i].value)*2.55).toFixed(2)}`;
+                    inputs[i] = Number(sliders[i].value)*2.55
+                } else if (mode == "HEX") {
+                    labels[i].textContent = `${toHex((Number(sliders[i].value)*2.55).toFixed(0))}`;
+                }
+                
+
+
+
+       
+
+                
+            }
+            if (mode == "HSL") {
+                ctx.fillStyle = `hsl(${inputs[0]*3.6},${inputs[1]}%,${inputs[2]}%)`
+            } else if (mode == "RGB") {
+                ctx.fillStyle = `rgb(${inputs[0]},${inputs[1]},${inputs[2]})`
+            } else if (mode == "HEX") {
+                let hex = `#${labels[0].textContent}${labels[1].textContent}${labels[2].textContent}`;
+                 ctx.fillStyle = hex
+            }
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+
+            let data = ctx.getImageData(0, 0, 1, 1).data;
+            let invColor = `rgb(${255-data[0]},${255-data[1]},${255-data[2]})`;
+
+            ctx.font = "20px Arial";
+            ctx.fillStyle = invColor;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.setTransform(2, 0, 0, 1, 0, 0);
+            ctx.fillText(mode, 75, 141);
+        }
+   
+        
+        for (let i = 0; i < sliders.length; i++) {
+            sliders[i].addEventListener("input", update);
+        }
+        
+        buttons[0].addEventListener("click", () => { mode = "HSL"; update(); });
+        buttons[1].addEventListener("click", () => { mode = "RGB"; update(); });
+        buttons[2].addEventListener("click", () => { mode = "HEX"; update(); });
+   
+
+
+        update();
+   
+    </script>
+</html>

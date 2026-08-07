@@ -1,0 +1,319 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Idk</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        overflow: hidden;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #display {
+        position: absolute;
+        top: -4px;
+        left: 8px;
+        color: #f00;
+        font-size: 50px;
+        z-index: 99;
+        font-family: monospace;
+    }
+    #display2 {
+        position: absolute;
+        top: 45px;
+        left: 6px;
+        color: #fff;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 13px;
+        z-index: 10;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+ <div id="display"></div>
+ <div id="display2">pts 0 time 5</div>
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+const display = document.getElementById("display");
+const display2 = document.getElementById("display2")
+let keysPressed = [];
+let t = 0;
+
+
+let highscore = 0;
+if (localStorage.getItem("hs") !== null && !isNaN(parseInt(localStorage.getItem("hs")))) {
+    highscore = parseInt(localStorage.getItem("hs"));
+} else {
+    highscore = 0;
+    localStorage.setItem("hs", "0");
+}
+
+
+let pipes = [];
+let players = [];
+let paused = false;
+let realTime = 0;
+
+function updateHighscore(points) {
+    if (points > highscore) {
+        highscore = points;
+        localStorage.setItem("hs", highscore);
+    }
+}
+
+function resetGame() {
+    paused = true;
+    let lastPoints = players[0]?.points ?? 0;
+    updateHighscore(lastPoints);
+    setTimeout(() => {
+        pipes = [];
+        players = [];
+        realTime = 0;
+        players.push(new Player(50,canvas.height-500,0,-6,5,0))
+        setTimeout(() => {
+            paused = false;
+        },500)
+    },500)
+}
+
+class Player {
+    constructor(x,y,xv,yv,lives,points){
+        this.x = x;
+        this.y = y;
+        this.xv = xv;
+        this.yv = yv;
+        this.lives = lives;
+        this.points = points;
+        this.inv = null;
+    }
+
+    draw(ctx) {
+        ctx.beginPath();
+        ctx.fillStyle = "#eef";
+        ctx.fillRect(this.x,this.y,20,20);
+    }
+    update() {
+        if (keysPressed['w']) {
+            this.yv -= 1
+        }
+        if (keysPressed['s']) {
+            this.yv += 1
+        }
+        if (keysPressed['a']) {
+            this.xv -= 0.5
+        }
+        if (keysPressed['d']) {
+            this.xv += 0.5
+        }
+        this.x += this.xv;
+        this.y += this.yv;
+        this.yv += 0.3;
+        this.xv *= 0.99;
+        if (this.y + 20 > canvas.height) {
+            this.y = canvas.height - 20;
+            this.yv = this.yv * -0.5;
+        }
+        if (this.x < 0) {
+            this.x = 0;
+            this.xv = -0.5 * this.xv;
+        }
+        if (this.y < 0) {
+            this.y = 0;
+            this.yv = this.yv * -0.5;
+        }
+        if (this.x > canvas.width - 20) {
+            this.x = canvas.width - 20;
+            this.xv = -0.5 * this.xv;
+        }
+
+        for (let pipe of pipes) {
+            let px = pipe.x;
+            let pw = 100;
+
+            let gapStart = (pipe.gapY - 0.13) * canvas.height;
+            let gapEnd = (pipe.gapY) * canvas.height;
+            let playerLeft = this.x;
+            let playerRight = this.x + 20;
+            let playerTop = this.y;
+            let playerBottom = this.y + 20;
+
+            if (playerRight > px && playerLeft < px + pw) {
+                if (playerTop < gapStart || playerBottom > gapEnd) {
+                    if (!this.inv) { 
+                        this.lives -= 1;
+                        this.inv = 15; 
+                    }
+                }
+            }
+        }
+        if (this.inv) {
+            this.inv--;
+            if (this.inv <= 0) this.inv = null;
+        }
+
+        let temp = "";
+        let i = 0;
+        while (i < this.lives) {
+            temp += "♥︎";
+            i++;
+        }
+        while (i < 5) {
+            temp += "♡";
+            i++;
+        }
+        display.textContent = temp;
+
+        if (this.lives < 1) {
+            resetGame();
+        }
+    }
+}
+
+class Pipe {
+    constructor(x, gapY, pointed){
+        this.x = x;
+        this.gapY = gapY;
+        this.pointed = false;
+    }
+
+    draw(ctx) {
+        ctx.beginPath();
+        ctx.fillStyle = "#dff";
+        ctx.fillRect(this.x,this.gapY*canvas.height,100,canvas.height-this.gapY*canvas.height);
+        ctx.fillRect(this.x,(this.gapY-0.13)*canvas.height,100,(-1*canvas.height)-(1*this.gapY*canvas.height));
+    }
+
+    update() {
+        if (this.x < -100 && !this.pointed) {
+            if (players[0]) {
+                players[0].points++;
+                updateHighscore(players[0].points);
+            }
+            this.pointed = true;
+        }
+        if (this.x < -1000) { 
+            const idx = pipes.indexOf(this);
+            if (idx !== -1) {
+                pipes.splice(idx, 1);
+            }
+        } else {
+            this.x -= 750/60;
+        }
+    }
+}
+
+let lastY = 0.5, thisY = 0.5;
+setInterval(() => {
+    thisY = lastY + (Math.random() - 0.5);
+    thisY = Math.max(0.2, Math.min(0.8, thisY));
+    pipes.push(new Pipe(canvas.width, thisY, false));
+    lastY = thisY;
+}, 1200);
+
+setTimeout(()=>{players.push(new Player(50,canvas.height-500,0,-6,5,0))},100)
+
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 0;
+
+let mx = 0, my = 0;
+
+let frameToggle = false;
+function drawAll() {
+    ctx.fillStyle = "#15151550"
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    for (let pipe of pipes) {
+        if (!paused) {pipe.update()};
+        pipe.draw(ctx);
+    }
+    for (let player of players) {
+        if (!paused){player.update()};
+        player.draw(ctx);
+    }
+}
+
+function drawController() {
+    realTime+=1/fps;
+    display2.textContent = `pts ${players[0]?.points ?? 0} time ${realTime.toFixed(2)} hs ${highscore}`;
+    if (fps < 31) {
+        drawAll();
+        drawAll();
+        requestAnimationFrame(drawController);
+    } else if (fps > 119) {
+        frameToggle = !frameToggle;
+        if (frameToggle) {
+            drawAll();
+        }
+        requestAnimationFrame(drawController);
+    } else {
+        drawAll();
+        requestAnimationFrame(drawController);
+    }
+}
+
+drawController();
+
+function updateMousePosition(e) {
+    const rect = canvas.getBoundingClientRect();
+    mx = canvas.width/-2 + ((e.clientX - rect.left) * (canvas.width / rect.width));
+    my = canvas.height/2 - ((e.clientY - rect.top) * (canvas.height / rect.height));
+}
+canvas.addEventListener('mousemove', updateMousePosition);
+
+function resizeCanvas() {
+    canvas.width = (window.innerWidth) - 25;
+    canvas.height = (window.innerHeight) - 25;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+    keysPressed[e.key.toLowerCase()] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+    keysPressed[e.key.toLowerCase()] = false;
+});
+
+let lastTimestamp;
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+
+</script>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Screensaver</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+const pi = Math.PI;
+let length = 40;
+let mult = 1;
+
+// Function to calculate pointsam based on current window area
+
+let pointsam = 70
+console.log([pointsam]);
+let points = [];
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Generate points based on pointsam
+async function generatePoints() {
+    points = [];
+    let i = 0;
+    while (i < pointsam) {
+        await sleep(2000 / pointsam);
+        let rand = Math.random() * 2 * pi;
+        points.push({
+            x: Math.random() * canvas.width/mult, 
+            y: Math.random() * canvas.height/mult, 
+            color: Math.random() * 360, 
+            xv: Math.sin(rand), 
+            yv: Math.cos(rand)
+        });
+        i++;
+    } 
+}
+
+generatePoints();
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+
+    for (let i = 0; i < points.length; i++) {
+        // Calculate scaled coordinates
+        const x_i = points[i].x * mult;
+        const y_i = points[i].y * mult;
+
+        ctx.beginPath();
+        ctx.strokeStyle = `hsl(${points[i].color}, 30%, 80%)`;
+        ctx.lineWidth = 3;
+        ctx.arc(x_i, y_i, 1, 0, pi*2);
+        ctx.stroke();
+        let len2 = length*(2*Math.sqrt(mult))
+
+        for (let j = 0; j < points.length; j++) {
+            if (i === j) continue;
+            const x_j = points[j].x * mult;
+            const y_j = points[j].y * mult;
+            let dx = x_i - x_j;
+            let dy = y_i - y_j;
+            let dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < len2) {
+                ctx.beginPath();
+                ctx.moveTo(x_i, y_i);
+                ctx.lineTo(x_j, y_j);
+                ctx.strokeStyle = `hsla(${points[i].color}, 30%, 80%, ${((len2)-dist)*(1/(len2))})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+
+        // Move points
+        points[i].x += (points[i].xv/Math.sqrt(mult))*1;
+        points[i].y += (points[i].yv/Math.sqrt(mult))*1;
+
+        if (points[i].x > (canvas.width-3)/mult) {
+            points[i].xv *= -1
+            points[i].x = (canvas.width - 4 )/mult
+        } 
+        if (points[i].x < 4/mult) {
+            points[i].xv *= -1
+            points[i].x = 4/mult;
+        } 
+        if (points[i].y > (canvas.height-4)/mult) {
+            points[i].yv *= -1
+            points[i].y = (canvas.height - 4 )/mult
+        } 
+        if (points[i].y < 4/mult) {
+            points[i].yv *= -1
+            points[i].y = 4/mult;
+        } 
+    }
+
+    requestAnimationFrame(draw)
+}
+
+draw();
+
+function resizeCanvas() {
+    canvas.width = (window.innerWidth) - 25;
+    canvas.height = (window.innerHeight) - 25;
+
+    mult = (canvas.width * canvas.height)/125000
+    console.log(mult)
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+</script>
+</html>

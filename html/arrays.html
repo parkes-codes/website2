@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Arays stuff</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        overflow: hidden;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    #thingy {
+        line-height: 0.7;
+    }
+    
+    
+</style>
+<body>
+    <div id="thingy" style="color: #fff"></div>
+</body>
+
+<script>
+    const thingy = document.getElementById("thingy");
+
+    const array1 = [0,1,2,3,4,5,6,7,8,9]
+    const array2 = [10,11,12,13,14,15,16,17,18,19];
+
+    thingy.innerHTML= `
+        Array1: <span style="color: #af5">${array1}</span> <br></br>
+        Array2: <span style="color: #af5">${array2}</span> <br></br><br></br>
+        .concat(array) Will combine two arrays together. <br></br>
+        Like this: array1.concat(array2) is <span style="color: #ff9">${array1.concat(array2)}</span> <br></br><br></br>
+        .copyWithin(target,start,end) Will copy the items from starting until end and put them at the position target. <br></br>
+        Like this: array1.copyWithin(3,0,4) is <span style="color: #ff9">${array1.copyWithin(3,0,4)}</span><br></br><br></br>
+        .entries() Returns a new Array Iterator object that contains the key/value pairs for each index in the array.<br></br>
+        Like this: array2.entries() looks like <span style="color: #ff9">${Array.from(array2.entries()).map(([index, value]) => `[${index}, ${value}]`).join(", ")}</span><br></br> <br></br>
+        .fill(value,start,end) Changes all array elements from start to end index to a static value and returns the modified array. <br></br>
+        Like this: array1.fill(4,0,5) id <span style="color: #ff9">${array1.fill(4,0,5)}</span><br></br><br></br>
+        .filter(condition) Returns the elements of an array that meet the condition specified in a callback function. <br></br>
+        Like this: array2.filter(x => x % 2 === 0) is <span style="color: #ff9">${array2.filter(x => x % 2 === 0)}</span><br></br><br></br>
+        .find is just like .filter, but it returns the first value that matches the condition. <br></br>
+        Like this: array1.find(x => x*2>5) is <span style="color: #ff9">${array1.find(x => x * 2 > 5)}</span><br></br><br></br>
+    `
+</script>
+</html>

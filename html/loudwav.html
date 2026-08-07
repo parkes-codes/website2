@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boost WAV Volume</title>
+  <style>
+    body { font-family: sans-serif; margin: 2em; }
+    label { font-weight: bold; }
+    #status { margin-top: 1em; color: green; }
+  </style>
+</head>
+<body>
+  <h2>Make WAV File Louder</h2>
+  <input type="number" id="booostinput" style="width: 50px" placeholder="Db+">
+  <input type="file" id="fileInput" accept=".wav,audio/wav" />
+  <button id="boostBtn" style="margin-left: -80px;">Boost and Download</button>
+  <div id="status"></div>
+  <p></p>
+  <a href="https://www.freeconvert.com/wav-compressor">Compress it (external site)</a>
+
+
+  <script>
+    const boostInput = document.getElementById("booostinput");
+    // Helper: Convert AudioBuffer to WAV Blob (PCM 16-bit)
+    function audioBufferToWav(buffer) {
+      const numOfChan = buffer.numberOfChannels,
+            length = buffer.length * numOfChan * 2 + 44,
+            bufferArr = new ArrayBuffer(length),
+            view = new DataView(bufferArr),
+            channels = [],
+            sampleRate = buffer.sampleRate;
+      let offset = 0;
+
+      // Write WAV header
+      function writeString(view, offset, string) {
+        for (let i = 0; i < string.length; i++) {
+          view.setUint8(offset + i, string.charCodeAt(i));
+        }
+      }
+
+      writeString(view, 0, 'RIFF');
+      view.setUint32(4, length - 8, true);
+      writeString(view, 8, 'WAVE');
+      writeString(view, 12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, numOfChan, true);
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * numOfChan * 2, true);
+      view.setUint16(32, numOfChan * 2, true);
+      view.setUint16(34, 16, true);
+      writeString(view, 36, 'data');
+      view.setUint32(40, length - 44, true);
+
+      // Write interleaved PCM samples
+      let chanData = [];
+      for (let i = 0; i < numOfChan; i++) {
+        chanData.push(buffer.getChannelData(i));
+      }
+
+      let interleaved = new Float32Array(buffer.length * numOfChan);
+      for (let i = 0; i < buffer.length; i++) {
+        for (let c = 0; c < numOfChan; c++) {
+          interleaved[i * numOfChan + c] = chanData[c][i];
+        }
+      }
+
+      // PCM 16-bit
+      offset = 44;
+      for (let i = 0; i < interleaved.length; i++, offset += 2) {
+        // Remove clamping on volume: allow overflows for max loudness/gain, even if it distorts
+        // This writes out-of-range values into the 16-bit range, possibly causing distortion.
+        let s = interleaved[i];
+        // Remove Math.max(-1, Math.min(1, ...))
+        view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+      }
+
+      return new Blob([bufferArr], { type: "audio/wav" });
+    }
+
+    async function boostAndDownload(file) {
+      document.getElementById('status').textContent = "";
+
+      // 1. Read as ArrayBuffer
+      const arrayBuffer = await file.arrayBuffer();
+
+      // 2. Decode to AudioBuffer
+      const audioContext = new AudioContext();
+      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+      // --- Boost by user-specified dB ---
+      let dbBoost = parseFloat(boostInput.value);
+      if (isNaN(dbBoost)) dbBoost = 0;
+      const boostFactor = Math.pow(10, dbBoost / 20);
+
+      // Create a new AudioBuffer to hold the boosted samples
+      const boostedBuffer = audioContext.createBuffer(
+        audioBuffer.numberOfChannels,
+        audioBuffer.length,
+        audioBuffer.sampleRate
+      );
+
+      for (let ch = 0; ch < audioBuffer.numberOfChannels; ch++) {
+        const input = audioBuffer.getChannelData(ch);
+        const output = boostedBuffer.getChannelData(ch);
+        for (let i = 0; i < input.length; i++) {
+          // Remove clamp to -1.0..1.0. Allow unlimited gain/overflow for maximum loudness.
+          let sample = input[i] * boostFactor;
+          output[i] = sample;
+        }
+      }
+
+      // Convert to WAV and download
+      const wavBlob = audioBufferToWav(boostedBuffer);
+      const url = URL.createObjectURL(wavBlob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "louder_audio.wav";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      document.getElementById('status').textContent = "Boosted file generated and download started!";
+    }
+
+    document.getElementById('boostBtn').addEventListener('click', async () => {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files && fileInput.files[0];
+
+      if (!file) {
+        document.getElementById('status').textContent = "Please select a WAV file first.";
+        return;
+      }
+
+      if (!file.name.endsWith(".wav")) {
+        document.getElementById('status').textContent = "Please select a valid WAV file (.wav).";
+        return;
+      }
+
+      try {
+        await boostAndDownload(file);
+      } catch (err) {
+        document.getElementById('status').textContent = "Error processing file: " + err;
+      }
+    });
+  </script>
+</body>
+</html>

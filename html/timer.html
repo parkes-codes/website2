@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Completely Normal Timer</title>
+        <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    </head>
+    <style>
+        body {
+            background-color: #111;
+        }
+        #timer-container {
+            position: absolute;
+            align-self: center;
+            justify-self: center;
+            top: calc(50% - 50px);
+            background-color: #000;
+            padding: 5px 15px; /* Adds space around content to make background bigger */
+            border-radius: 20px; /* Optional: rounded corners for visual appeal */
+            transition: transform 0.5s cubic-bezier(.8,2,.6,1); /* smooth rotation */
+            box-shadow: 0px 0px 10px #000f;
+        }
+        #timer {
+            text-align: right;
+            font-family: monospace;
+            color: #fff;
+            font-size: 50px;
+            color: #8d7;
+            text-shadow: 0px 0px 5px #05ffd1; 
+        }
+        #clickblocker {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            z-index: 10;
+        }
+        #time {
+            position: absolute;
+            left: 5px;
+            bottom: 5px;
+            color: #fff;
+            font-size: 10px;
+            text-align: left;
+        }
+    </style>
+    <body>
+        <div id="timer-container">
+          <div id="timer">click to start</div>
+        </div>
+        <div id="clickblocker"></div>
+    </body>
+    <script>
+        console.clear();
+        const timer = document.getElementById("timer");
+        const timerContainer = document.getElementById("timer-container");
+        let time = 60*30; // 10 minutes
+        let speed = 1;
+        let realTime = 0;
+        let timeout = 0;
+        let fps = 60;
+        let fpsHist = [];
+        let fpsAv = 0;
+        let sound = new Audio()
+        sound.src = "click.wav"
+
+        let reverseTimeActive = false;
+        let reverseTimeRemaining = 0;
+
+        // New: Rotation state variables
+        let rotationActive = false;
+        let rotationRemaining = 0;
+        let rotationStartedAt = 0; // Track when rotation started for enforcing max duration
+
+        const MAX_ROTATION_DURATION = 10; // in real seconds
+
+        // New Approach: Effect triggers ONLY on actual real passage of a second,
+        // not when "time" skips due to an effect. 
+        // We do this by using realTime, not computed timer seconds.
+
+        // Various effects, unchanged from before
+        function effect() {
+            // sound.currentTime = 0;
+            // sound.play();
+            let randNum = Math.ceil(Math.random()*10)
+            if (randNum == 1) {
+                speed *=2
+            } else if (randNum == 2) {
+                speed = Math.max(speed/2,0.01);
+            } else if (randNum == 3) {
+                if (Math.random() < 0.1) {
+                  timeout = 4/speed; // faster speed means faster time so we want to timout slower
+                }
+            } else if (randNum == 4) {
+                if (Math.random() < 0.1) {
+                  reverseTimeActive = true;
+                  reverseTimeRemaining = 10 / speed; // same thing here
+                }
+            } else if (randNum == 5) {
+                time += speed*2
+            } else if (randNum == 6) {
+                if (Math.random()<0.3) {
+                    if (!rotationActive) {
+                        rotationActive = true;
+                        rotationRemaining = 4 / speed; // and here
+                        rotationStartedAt = realTime; // store the realTime at start
+                        timerContainer.style.transform = "rotate(180deg)";
+                    } else {
+                        const remainingAllowed = MAX_ROTATION_DURATION - (realTime - rotationStartedAt);
+                        if (remainingAllowed > 0) {
+                            rotationRemaining = Math.min(rotationRemaining + (4 / speed), remainingAllowed);
+                        } else {
+                            // Disallow extension past 10s
+                            rotationRemaining = 0;
+                        }
+                    }
+                }
+            } else if (randNum == 6) {
+                if (Math.random()<0.5) {
+                  speed = 1;
+                }
+            } else if (randNum == 7) {
+            if (Math.random() < 0.3) {
+                time = 
+                    Math.floor(time / 3600) * 3600 + // hours part
+                    Math.min(Math.floor(time % 60), 59) * 60 + // minutes <- previous seconds
+                    Math.min(Math.floor((Math.floor(time) / 60) % 60), 59) + // seconds <- previous minutes
+                    (time - Math.floor(time)); // milli's
+                }
+            } else if (randNum == 8) {
+                if (Math.random() < 0.2) {
+                    time *= 2;
+                }
+            } else if (randNum == 9) {
+                if (Math.random() < 0.5) {
+                    let millis = 1;
+                    let halfFloor = Math.floor(time / 2);
+
+                    time = halfFloor + millis; 
+               
+                }
+            } else if (randNum == 10) {
+                time += 60;
+            }
+        }
+
+
+
+        function tick() {
+            realTime += 1 / fps;
+
+            // Handle rotation effect duration with real-time based hard max of 10 seconds
+            if (rotationActive) {
+                rotationRemaining -= speed / fps;
+
+                // Check if max real time has passed
+                const realRotationElapsed = realTime - rotationStartedAt;
+                if (rotationRemaining <= 0 || realRotationElapsed >= MAX_ROTATION_DURATION) {
+                    rotationActive = false;
+                    rotationRemaining = 0;
+                    rotationStartedAt = 0;
+                    timerContainer.style.transform = ""; // remove rotation
+                }
+            }
+
+            if (reverseTimeActive) {
+                time += (speed) / fps;
+                reverseTimeRemaining -= speed / fps;
+                if (reverseTimeRemaining <= 0) {
+                    reverseTimeActive = false;
+                    reverseTimeRemaining = 0;
+                }
+            } else {
+                time -= (speed) / fps;
+            }
+
+            
+
+            let milli = `${(time % 1).toFixed(3)}`.slice(2);
+
+            let seconds = `${Math.floor(time) % 60}`;
+            if (seconds.length == 1) { seconds = "0" + seconds }
+            let minutes = `${Math.floor(time / 60) % 60}`;
+            if (minutes.length == 1) { minutes = "0" + minutes }
+            let hours = `${Math.floor(time / 3600)}`
+            timer.textContent = `${hours}:${minutes}:${seconds}.${milli}`;
+
+
+            if (time < 0) {
+                timer.textContent = "0:00:00.000"; 
+                return;
+            }
+        
+            if (timeout<= 0) {setTimeout(() => tick(), 1000 / fps)} else {
+                setTimeout(() => {tick(); timeout = 0;}, (timeout*1000))
+            }
+        }
+
+        // monitorSeconds is NO LONGER USED -- realTime-based effect runs inside tick instead!
+
+        let started = false;
+        document.addEventListener("click", () => {
+            if (!started) {
+                tick();
+                started = true;
+            }
+        });
+
+        let lastTimestamp;
+
+        function sampleFPS() {
+            const now = performance.now();
+            const delta = now - lastTimestamp;
+
+            if (delta > 0 && delta < 1000) {
+                fps = 1000 / delta;
+            }
+            fpsHist.unshift(fps)
+            fpsAv = 0;
+            for (let i = 0; i < fpsHist.length; i++) {
+                fpsAv += fpsHist[i];
+            }
+            fpsAv /= fpsHist.length
+            if (fpsHist[60]) { fpsHist.splice(60, 1) }
+            lastTimestamp = now;
+
+            requestAnimationFrame(sampleFPS);
+        }
+        sampleFPS();
+
+    // Async function to run effect when time%1 < speed/fps; then wait until time%1 > speed/fps;
+    async function monitorMillisAndEffect() {
+        const threshold = (speed / fps)*2;
+        while (true) {
+            // Wait for crossing below threshold
+            while ((time % 1) > threshold) {
+                await new Promise(requestAnimationFrame);
+            }
+            effect();
+            // Wait for crossing above threshold
+            while ((time % 1) < threshold) {
+                await new Promise(requestAnimationFrame);
+            }
+        }
+    }
+    monitorMillisAndEffect();
+
+    </script>
+</html>

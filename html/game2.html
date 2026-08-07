@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jetpack Horse Ultra Pro Extreme 3d</title>
+    <link rel="icon" type="image/x-icon" href="../images/iconhorse.ico" />
+    <style>
+      body {
+        background-image: url("../images/space.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      #background-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("../images/plinkk.gif");
+        background-repeat: repeat;
+        background-size: 128px 128px;
+      }
+      #gamecanvas {
+        border: #fff 10px solid;
+        border-radius: 10px;
+        width: calc(100vw - 25px);
+        height: calc(100vh - 25px);
+        margin-left: -5px;
+        margin-top: -5px;
+        position: relative;
+        z-index: 1;
+        display: block;
+      }
+      #display {
+        color: #000;
+        text-align: center;
+        pointer-events: none;
+        font-size: 20px;
+        font-family: sans-serif;
+      }
+      #textcontainer {
+        position: absolute;
+        width: fit-content;
+        height: fit-content;
+        background: #fff;
+        margin-top: 15px;
+        margin-left: 10px;
+        width: auto;
+        height: 24px;
+        z-index: 20;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="background-layer"></div>
+    <div id="textcontainer">
+      <div id="display">T</div>
+    </div>
+    <canvas id="gamecanvas"></canvas>
+    <img
+      id="firegif"
+      src="../images/fire2.gif"
+      style="position: absolute; left: 0; top: 0; transform: rotate(180deg); width: 80px; height: 80px; pointer-events: none; display: none; z-index: 10;"
+    />
+    <img
+      id="firegif2"
+      src="../images/fire2.gif"
+      style="position: absolute; left: 0; top: 0; transform: rotate(180deg); width: 80px; height: 80px; pointer-events: none; display: none; z-index: 10;"
+    />
+  </body>
+  <script>
+    const backgroundImageUrl = '../images/plinkk.gif';
+    let backgroundImageSize = 128;
+
+    // Moved background-image stuff to #background-layer for opacity
+
+    const backgroundLayer = document.getElementById('background-layer');
+    function updateBackgroundLayerPosition(x, y) {
+      backgroundLayer.style.backgroundPosition = `${-x}px ${-y}px`;
+      backgroundLayer.style.backgroundSize = `${backgroundImageSize}px ${backgroundImageSize}px`;
+    }
+
+    const canvas = document.getElementById("gamecanvas");
+    const ctx = canvas.getContext("2d");
+    const display = document.getElementById("display");
+    const playerimg = new Image();
+    playerimg.src = "../images/honse.png";
+
+    const fireGifElem = document.getElementById("firegif");
+    const fireGifElem2 = document.getElementById("firegif2");
+    const platforms = [];
+
+    // Start position and state variables, moved to allow resetting via initpos
+    let px, py, yv, xv, camy, t, fuelUsed, platformsDrawn, grounded, dir, firstmove, delta;
+    const maxHold = 26.35;
+    let jumptimer = 0;
+    const baseFps = 60;
+
+    // Generate starting platforms and initial player position
+    function initpos() {
+      // Clear old platforms
+      platforms.length = 0;
+      let why = -200;
+      for (let i = 0; i <= 2; i++) {
+        platforms.push({ x: Math.random() * 150, y: why });
+        why += Math.random() * 200 + 150;
+      }
+      // Set player at first platform
+      px = platforms[0].x + 8;
+      py = -101;
+      yv = 2;
+      xv = 0;
+      camy = 0;
+      t = 0;
+      fuelUsed = 0;
+      platformsDrawn = 0;
+      grounded = false;
+      dir = "right";
+      firstmove = false;
+      delta = 0;
+      jumptimer = 0;
+      // Immediately clear and redraw to avoid visual glitch
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    // Initialize for start
+    initpos();
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth - 25;
+      canvas.height = window.innerHeight - 25;
+      // Also resize background-layer to cover all
+      backgroundLayer.style.width = window.innerWidth + 'px';
+      backgroundLayer.style.height = window.innerHeight + 'px';
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const keysPressed = {};
+
+    window.addEventListener("keydown", (e) => {
+      keysPressed[e.key.toLowerCase()] = true;
+      // Optional: quick keyboard restart with R key
+      if (e.key.toLowerCase() === 'r') {
+        initpos();
+      }
+    });
+
+    window.addEventListener("keyup", (e) => {
+      keysPressed[e.key.toLowerCase()] = false;
+    });
+
+    let collided = 0;
+
+    // -- REFACTORED COLLISION-PLATFORM LOGIC: Use swept AABB style
+
+    function platform(x, y) {
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(
+        canvas.width / 2 + x - 50,
+        canvas.height / 2 - y + camy,
+        100,
+        10
+      );
+
+      platformsDrawn++;
+      // Player dimensions
+      const playerWidth = 80;
+      const playerHeight = 50;
+      const feetOffset = -25;
+      const playerLeft = px - playerWidth / 2 + 12;
+      const playerRight = px + playerWidth / 2 - 12;
+      const platLeft = x - 50;
+      const platRight = x + 50;
+      const platTop = y;
+      const platBottom = y + 10;
+
+      // Calculate previous and current foot locations accurately
+      // vdelta: how far the player actually moved since last frame
+      let stepY = yv * delta * baseFps;
+      const prevFeetY = py - stepY - playerHeight / 2 + feetOffset;
+      const curFeetY = py - playerHeight / 2 + feetOffset;
+
+      // Only check if player is moving down (yv <= 0)
+      if (yv <= 0) {
+        // Swept AABB: did the foot pass the top of platform this frame?
+        if (
+          prevFeetY > platTop &&
+          curFeetY <= platTop &&
+          playerRight > platLeft &&
+          playerLeft < platRight
+        ) {
+          py = platTop + playerHeight / 2 - feetOffset + 0.01;
+          yv = 0; // absorb full vertical speed
+          collided++;
+        }
+        // If the foot is right at the platform, also snap & stick
+        else if (
+          Math.abs(curFeetY - platTop) < 2 &&
+          playerRight > platLeft &&
+          playerLeft < platRight
+        ) {
+          py = platTop + playerHeight / 2 - feetOffset + 0.01;
+          yv = 0;
+          collided++;
+        }
+      }
+    }
+
+    function fire() {
+      if (jumptimer <=  (maxHold/delta)/baseFps && keysPressed["w"]) {
+        fireGifElem.style.display = "block";
+
+        let fire1offset = 20;
+        let fire2offset = -33;
+        if (dir === "right") {
+          fire1offset = 0;
+          fire2offset = -50;
+        }
+
+        const rect = canvas.getBoundingClientRect();
+        const fireX = rect.left + window.scrollX + (canvas.width / 2 + px + fire1offset);
+        const fireY = rect.top + window.scrollY + (canvas.height / 2 - py + camy + 50+yv);
+        fireGifElem.style.left = fireX + "px";
+        fireGifElem.style.top = fireY + "px";
+        fireGifElem.style.width = "30px";
+        fireGifElem.style.height = "30px";
+
+
+        fireGifElem2.style.display = "block";
+        const fireX2 = rect.left + window.scrollX + (canvas.width / 2 + px + 20 + fire2offset);
+        fireGifElem2.style.left = fireX2 + "px";
+        fireGifElem2.style.top = fireY + "px";
+        fireGifElem2.style.width = "30px";
+        fireGifElem2.style.height = "30px";
+
+      } else {
+        fireGifElem.style.display = "none";
+        fireGifElem2.style.display = "none";
+      }
+    }
+    let backgroundX = 0;
+    let backgroundY = 0;
+    const backgroundSpeedX = 0.7;
+    const backgroundSpeedY = 0.7;
+
+    function updateBackground(delta) {
+      backgroundX += backgroundSpeedX * delta;
+      backgroundY += backgroundSpeedY * delta;
+
+      // update opacity-layer background position
+      updateBackgroundLayerPosition(backgroundX, backgroundY);
+    }
+
+    // FPS/delta setup
+    let lastTime = performance.now();
+
+    function draw() {
+      if (py < -1000) {
+        initpos();
+      }
+
+      const now = performance.now();
+      delta = (now - lastTime) / 1000; // in seconds
+      lastTime = now;
+
+      // Clamp delta to prevent jumps on tab switch etc.
+      if (delta > 0.1) delta = 0.1; // max 100ms per frame
+
+      if (firstmove) {
+        t += delta;
+      }
+      if (yv == 0) {
+        grounded = true;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      updateBackground(delta * baseFps);
+
+      // gravity, divided by fps
+      yv -= (0.4 * delta * baseFps);
+      if (yv < -30) {
+        yv = -30;
+      }
+
+      // divide velocities per frame by fps so the game speed does not depend on frame rate
+      px += xv * delta * baseFps;
+      py += yv * delta * baseFps;
+
+      camy = py + yv * delta * baseFps;
+
+      xv *= Math.pow(0.9, delta * baseFps);
+
+      if (grounded) {
+        jumptimer = 0;
+      }
+
+      if (keysPressed["w"]) {
+        firstmove = true;
+        if (!grounded) {
+          jumptimer++;
+        }
+        if (jumptimer <= (maxHold/delta)/baseFps) {
+          yv += 1.06*delta*baseFps
+          fuelUsed += Math.abs(yv * yv * yv) / 500 * delta * baseFps;
+          grounded = false;
+        }
+      }
+
+      if (keysPressed["a"]) {
+        firstmove = true;
+        dir = "left";
+        if (xv > -5) {
+          xv -= (0.5 * delta * baseFps);
+        } else {
+          xv = -5;
+        }
+      }
+
+      if (keysPressed["d"]) {
+        firstmove = true;
+        dir = "right";
+        if (xv < 5) {
+          xv += (0.5 * delta * baseFps);
+        } else {
+          xv = 5;
+        }
+      }
+
+      collided = 0;
+      platformsDrawn = 0;
+
+      let needNewPlatform = true;
+      for (let i = 0; i < platforms.length; i++) {
+        const currentPlatform = platforms[i];
+        if (
+          currentPlatform.y > camy - canvas.height / 2 &&
+          currentPlatform.y < canvas.height / 2 + camy + 1
+        ) {
+          platform(currentPlatform.x, currentPlatform.y);
+        }
+        if (collided > 0) {
+          grounded = true;
+        }
+        if (currentPlatform.y > camy + canvas.height / 2 - 150) {
+          needNewPlatform = false;
+        }
+      }
+
+      if (needNewPlatform) {
+        platforms.push({
+          x: Math.random() * 300 - 150,
+          y: camy + canvas.height / 2 + Math.random() * 100 + 100,
+        });
+      }
+
+      if (dir === "right") {
+        ctx.save();
+        ctx.translate(
+          canvas.width / 2 + px + 40,
+          canvas.height / 2 - py + camy + yv * delta * baseFps
+        );
+        ctx.scale(-1, 1);
+        ctx.drawImage(playerimg, 0, 0, 80, 50);
+        ctx.restore();
+      } else {
+        ctx.drawImage(
+          playerimg,
+          canvas.width / 2 + px - 40,
+          canvas.height / 2 - py + camy + yv * delta * baseFps,
+          80,
+          50
+        );
+      }
+
+      fire();
+      display.textContent = `Height: ${(py / 100 + 1.5).toFixed(2)}m Time: ${t.toFixed(2)}s Fuel Used: ${(fuelUsed / 100).toFixed(2)}L`
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</html>

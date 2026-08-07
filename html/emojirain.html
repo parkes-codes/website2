@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Emoji Rain</title>
+  <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      background: #111;
+      color: #fff;
+    }
+    #display {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .emoji-wrapper {
+      position: absolute;
+      will-change: transform;
+      pointer-events: none;
+      user-select: none;
+      animation: fall-wrapper linear;
+    }
+    .emoji-wrapper.rise {
+      animation: rise-wrapper linear;
+    }
+    .emoji-wrapper.left {
+      animation: left-wrapper linear;
+    }
+    .emoji-wrapper.right {
+      animation: right-wrapper linear;
+    }
+    /* New radius animation style (will be set inline as well) */
+    .emoji-wrapper.radius {
+      animation: none !important;
+      /* transform handled via JS for radius direction */
+    }
+    .emoji {
+      display: inline-block;
+      will-change: transform;
+      pointer-events: none;
+      user-select: none;
+      /* Animation: rotate emoji as it falls */
+      animation: spin-emoji linear;
+      /* --- Limit visible area to "1 emoji" --- */
+      width: 1em;
+      height: 1em;
+      font-size: 2em; /* emoji size default */
+      line-height: 1em;
+      overflow: hidden;
+      text-align: center;
+      vertical-align: middle;
+      text-overflow: clip;
+      min-width: 1em;
+      max-width: 1em;
+      min-height: 1em;
+      max-height: 1em;
+    }
+
+    @keyframes fall-wrapper {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(calc(100vh + 100px));
+      }
+    }
+    @keyframes rise-wrapper {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(calc(-100vh - 150px));
+      }
+    }
+    @keyframes left-wrapper {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(calc(-100vw - 150px));
+      }
+    }
+    @keyframes right-wrapper {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(calc(100vw + 150px));
+      }
+    }
+    @keyframes spin-emoji {
+      0% {
+        transform: rotate(var(--emoji-start-rotation, 0deg));
+      }
+      100% {
+        transform: rotate(calc(var(--emoji-start-rotation, 0deg) + 360deg));
+      }
+    }
+    #speedinput, #typeinput, #gravinput {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 100px;
+        z-index: 10000;
+        accent-color: #ffa;
+    }
+    #typeinput {
+        top: 22px;
+        accent-color: #aff;
+    }
+    #gravinput {
+      top: 40px;
+      accent-color: #faf;
+    }
+    #display2, #display3, #display4 {
+        position: absolute;
+        top: -5px;
+        left: 115px;
+        width: fit-content;
+        z-index: 10000;
+        font-size: 13px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    #display3 {
+      top: 12px;
+    }
+    #display4 {
+      top: 29px;
+    }
+  </style>
+</head>
+<body>
+    <div id="display"></div>
+  <input id="speedinput" type="range" min="60" max="100" step="0.01">
+  <p id="display2"></p>
+  <input id="typeinput" type="range" min="1" max="2" step="1" value="1">
+  <p id="display3">Emojis</p>
+  <input id="gravinput" type="range" min="1" max="8" step="1" value="1">
+  <p id="display4">Fall</p>
+</body>
+<script src="../js/emojis.js"></script>
+<script>
+    const plinkSrc = "../images/plinkk.gif";
+    const speedinput = document.getElementById("speedinput");
+    const gravinput = document.getElementById("gravinput");
+    let speed = 50;
+    let type = 1;
+    let emojis = 0;
+    let grav = 1
+    const display2 = document.getElementById("display2");
+    const typeinput = document.getElementById("typeinput");
+    const display3 = document.getElementById("display3");
+    const display4 = document.getElementById("display4");
+
+    const lettersList = [
+      "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+      "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+      "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+      "u", "v", "w", "x", "y", "z",
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+      "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+      "U", "V", "W", "X", "Y", "Z",
+      "∑", "⩖", "⧰", "∉", "ℶ", "∬", "⨎",
+      "€", "¥", "¢", "£", "₽", "₩", "฿", "₺", "₮", "₱",
+      "₭", "₴", "₦", "₹", "₲", "₡", "₫", "₢", "₳", "₥",
+      "ⱺ", "ß", "ƛ", "ȣ", "ℵ"
+    ];
+
+    const types = [
+      "Emojis",
+      "Letters"
+    ];
+
+    const gravs = [
+      "Fall",
+      "Rise",
+      "Fall & Rise",
+      "Left",
+      "Right",
+      "Left & Right",
+      "All",
+      "Radius"
+    ];
+
+    function randomChar() {
+      if (type == 1) {
+        return emojiList[Math.floor(Math.random() * emojiList.length)];
+      } else {
+        return lettersList[Math.floor(Math.random() * lettersList.length)];
+      }
+    }
+
+    function spawnChar() {
+      const wrapper = document.createElement("div");
+      wrapper.className = "emoji-wrapper";
+
+      grav = Number(gravinput.value);
+
+      // variables for position and animation
+      let duration = 2 + Math.random() * 2.5; // seconds
+      let startPos, startLeft, endTravel, timeToDelete;
+      let direction = grav;
+
+      // random selector for composite gravities
+      // 1: Fall, 2: Rise, 3: Fall & Rise, 4: Left, 5: Right, 6: Left & Right, 7: All, 8: Radius
+      if (direction === 3) { // Fall & Rise
+        direction = (Math.random() < 0.5) ? 1 : 2;
+      } else if (direction === 6) { // Left & Right
+        direction = (Math.random() < 0.5) ? 4 : 5;
+      } else if (direction === 7) { // All
+        const pick = Math.floor(Math.random() * 4);
+        direction = [1, 2, 4, 5][pick];
+      } else if (direction === 8) { // Radius (nothing randomize - unique mode)
+        // Stay as 8
+      }
+
+      let isRadiusMode = (direction === 8);
+
+      if (!isRadiusMode) {
+        if (direction === 1) {
+          startLeft = Math.random() * (window.innerWidth);
+          startPos = -100;
+          wrapper.style.left = `${startLeft-50}px`;
+          wrapper.style.top = `${startPos}px`;
+          wrapper.style.animationDuration = `${duration}s`;
+          endTravel = window.innerHeight + 150 - startPos;
+          timeToDelete = duration * (endTravel / (window.innerHeight + 50));
+        } else if (direction === 2) {
+          // Rise: from bottom to top
+          startLeft = Math.random() * (window.innerWidth - 48);
+          startPos = window.innerHeight + 100;
+          wrapper.classList.add("rise");
+          wrapper.style.left = `${startLeft}px`;
+          wrapper.style.top = `${startPos}px`;
+          wrapper.style.animationDuration = `${duration}s`;
+          endTravel = startPos + 100;
+          timeToDelete = duration * (endTravel / (window.innerHeight + 50));
+        } else if (direction === 4) {
+          // Left: from right side to left
+          startPos = Math.random() * (window.innerHeight - 48);
+          startLeft = window.innerWidth + 100;
+          wrapper.classList.add("left");
+          wrapper.style.left = `${startLeft}px`;
+          wrapper.style.top = `${startPos}px`;
+          wrapper.style.animationDuration = `${duration}s`;
+          endTravel = startLeft + 150;
+          timeToDelete = duration * (endTravel / (window.innerWidth + 50));
+        } else if (direction === 5) {
+          // Right: from left side to right
+          startPos = Math.random() * (window.innerHeight - 48);
+          startLeft = -100;
+          wrapper.classList.add("right");
+          wrapper.style.left = `${startLeft}px`;
+          wrapper.style.top = `${startPos}px`;
+          wrapper.style.animationDuration = `${duration}s`;
+          endTravel = window.innerWidth + 150 - startLeft;
+          timeToDelete = duration * (endTravel / (window.innerWidth + 50));
+        }
+      }
+
+      // 1 in 200 chance to show plink image instead of emoji
+      const isPlink = Math.floor(Math.random() * (500 * ((type == 2) ? 2 : 1)) * emojis) === 0;
+
+      let emojiNode, theEmoji;
+      if (isPlink) {
+        emojiNode = document.createElement("img");
+        emojiNode.src = plinkSrc;
+        emojiNode.alt = "plink";
+        emojiNode.className = "emoji";
+        emojiNode.style.borderRadius = "10px";
+        const size = 24 + Math.random() * 30; // px
+        emojiNode.style.width = `${size}px`;
+        emojiNode.style.height = "auto";
+      } else {
+        emojiNode = document.createElement("span");
+        emojiNode.className = "emoji";
+        theEmoji = randomChar();
+        emojiNode.textContent = theEmoji
+        // Font size and initial rotation -- fontSize is already set default to 2em in CSS, but we can randomize
+        const size = 1.1 + Math.random() * 2; // em
+        emojiNode.style.fontSize = `${size}em`;
+      }
+
+      // Rotation for both emoji and plink
+      const startRotation = Math.floor(Math.random() * 360);
+      emojiNode.style.setProperty('--emoji-start-rotation', `${startRotation}deg`);
+      emojiNode.style.animationDuration = `${duration}s`;
+
+      // Add emoji or plink to wrapper, wrapper to display
+      wrapper.appendChild(emojiNode);
+      document.getElementById("display").appendChild(wrapper);
+
+      if (!isRadiusMode) {
+        setTimeout(() => {
+          wrapper.remove();
+        }, timeToDelete * 1000);
+      } else {
+        // ---- EDGE-TO-CENTER MODE ANIMATION ----
+
+        wrapper.classList.add("radius");
+
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+
+        // Pick a random edge: 0=top, 1=right, 2=bottom, 3=left
+        const edge = Math.floor(Math.random() * 4);
+        let ex, ey;
+
+        const offset = 50; 
+
+        if (edge === 0) { // Top
+          ex = Math.random() * window.innerWidth;
+          ey = -offset;
+        } else if (edge === 1) { // Right
+          ex = window.innerWidth + offset;
+          ey = Math.random() * window.innerHeight;
+        } else if (edge === 2) { // Bottom
+          ex = Math.random() * window.innerWidth;
+          ey = window.innerHeight + offset;
+        } else { // Left
+          ex = -offset;
+          ey = Math.random() * window.innerHeight;
+        }
+
+        // End = mirrored across center (goes out the other side by same distance from center)
+        const dx = ex - cx;
+        const dy = ey - cy;
+        const endx = cx - dx -50;
+        const endy = cy - dy -50;
+
+        // For transform-origin: make the center of the text point at center, with rotation
+        wrapper.style.left = `0px`;
+        wrapper.style.top = `0px`;
+
+        // The base angle for movement direction (toward center)
+        const angleRad = Math.atan2(cy - ey, cx - ex);
+        const angleDeg = angleRad * (180 / Math.PI);
+
+        // For emoji spinning: use a per-emoji spin speed
+        const spinDuration = duration * 0.5; // Seconds for one full rotation
+        const startRotation = Math.floor(Math.random() * 360);
+
+        // Override emoji CSS animation for spin: do it in JS, so it always spins
+        emojiNode.style.animation = "none";
+
+        // Animation: animate position & rotation from ex/ey to endx/endy over duration
+        const t0 = performance.now();
+        const totalMs = (duration * 4000) / 2; // 4x faster animation
+
+        function animate(now) {
+          let t = (now - t0) / totalMs;
+          if (t > 1) t = 1;
+          // Linear interpolation for constant speed (no easing)
+          const x = ex + (endx - ex) * t;
+          const y = ey + (endy - ey) * t;
+          // Move emoji toward center, spinning as it goes
+          wrapper.style.transform = `translate(${x}px,${y}px) rotate(${angleDeg + 90}deg)`;
+
+          // Calculate spinning: full spin every spinDuration seconds
+          const sinceStart = (now - t0) / 1000; // seconds
+          const spin = startRotation + (sinceStart / spinDuration) * 360;
+          emojiNode.style.transform = `rotate(${spin}deg)`;
+
+          if (t < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            wrapper.remove();
+          }
+        }
+   
+   
+
+        requestAnimationFrame(animate);
+
+      }
+    }
+
+    // --- Interval logic: Changeable interval ---
+    let intervalId = null;
+    let interval = 0;
+
+    function getCurrentInterval() {
+      const winW = window.innerWidth || 1;
+      const speedValue = speedinput.value ? speedinput.value : 50;
+      interval = ((100 - speedValue) * 3000) / winW;
+      return Math.max(interval, 10); // clamp to at least 10ms to avoid weird rapid firing
+    }
+
+    function runRain() {
+      emojis = Math.ceil((Math.pow(window.innerWidth, 1.5) / (5000 / ((type==2) ? 2 : 1))) / ((grav == 8) ? 4 : 1));
+      speed = ((5000) / (Number(100-speedinput.value) - 33.333));
+      for (let i = 0; i < emojis; i++) {
+        spawnChar();
+      }
+    }
+
+    speedinput.addEventListener("input",() => {
+      display2.textContent = `⚡️${Number((speedinput.value-60)*100/40).toFixed(4)}`
+    });
+
+    typeinput.addEventListener("input", () => {
+      type = typeinput.value;
+      display3.textContent = types[type-1]
+    });
+
+    gravinput.addEventListener("input", () => {
+      grav = Number(gravinput.value);
+      display4.textContent = gravs[grav-1]
+    });
+
+    function resetInterval() {
+      if (intervalId !== null) {
+        clearInterval(intervalId);
+      }
+      const interval = getCurrentInterval();
+      intervalId = setInterval(runRain, interval);
+    }
+
+    // Re-calculate interval on speed change or window resize
+    speedinput.addEventListener('input', resetInterval);       // range changes
+    window.addEventListener('resize', resetInterval);          // screen size changes
+    gravinput.addEventListener('input', resetInterval);        // gravity changes
+
+    // Start rain
+    resetInterval();
+
+</script>
+</html>

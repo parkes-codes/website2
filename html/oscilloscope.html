@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MP3 Oscilloscope / Exporter</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+        background: #000;
+      }
+      body {
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+      #column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        max-width: 100%;
+        max-height: 100%;
+      }
+      #row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      #oscilloscope {
+        --osc-size: min(calc(100vw - 2rem), calc(100dvh - 5rem));
+        width: var(--osc-size);
+        height: var(--osc-size);
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+      }
+      #time {
+        color: #fff;
+      }
+      #fileInput {
+        margin-right: -160px;
+      }
+      #scaleInput {
+        width: 56px;
+        font-size: 14px;
+        padding: 2px 4px;
+        border-radius: 3px;
+        border: 1px solid #bbb;
+        background: #111;
+        color: #fff;
+      }
+      #fadeinput {
+        width: 56px;
+        font-size: 14px;
+        padding: 2px 4px;
+        border-radius: 3px;
+        border: 1px solid #bbb;
+        background: #111;
+        color: #fff;
+      }
+      #pointsInput {
+        width: 56px;
+        font-size: 14px;
+        padding: 2px 4px;
+        border-radius: 3px;
+        border: 1px solid #bbb;
+        background: #111;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="column">
+      <div id="row">
+        <input type="file" id="fileInput" accept="audio/mp3, audio/mpeg" />
+        <div id="time">time:</div>
+        <button id="end" onclick="endandlog()">End&Export</button>
+        <span style="color: #fff">Scale</span>
+        <input id="scaleInput" type="number" step="0.1" min="0.1" max="50" value="0.15" title="Scale" />
+        <span style="color: #fff">Fadespeed</span>
+        <input id="fadeinput" type="number" step="0.01" min="0.01" max="10" value="0.1" title="Fadespeed">
+        <span style="color: #fff">PtsPerExportFrame</span>
+        <input id="pointsInput" type="number" step="1" min="8" max="1024" value="128" title="Points per Frame" />
+      </div>
+      <canvas id="oscilloscope" style="border:1px solid #ccc;"></canvas>
+    </div>
+    <script>
+      // --- DOM ELEMENTS ---
+      const fileInput = document.getElementById('fileInput');
+      const canvas = document.getElementById('oscilloscope');
+      const ctx = canvas.getContext('2d');
+      const timediv = document.getElementById("time");
+      const scaleInput = document.getElementById("scaleInput");
+      const fadeInput = document.getElementById("fadeinput");
+      const pointsInput = document.getElementById("pointsInput");
+
+      // --- AUDIO VARIABLES ---
+      let audio;
+      let source;
+      let splitter;
+      let analyserL;
+      let analyserR;
+      let dataL, dataR;
+
+      const BUFFER_SIZE = 2048;
+      let scaleboost = parseFloat(scaleInput.value);
+
+      // --- Fadespeed Variable (in seconds to fade out) ---
+      let fadespeed = parseFloat(fadeInput.value);
+      if (isNaN(fadespeed) || fadespeed <= 0) fadespeed = 0.1;
+
+      // --- Points Per Frame Variable (controls how many (x,y) pairs in frame string, not rendering) ---
+      let pointsPerFrame = parseInt(pointsInput.value, 10);
+      if (isNaN(pointsPerFrame) || pointsPerFrame < 8) pointsPerFrame = 128;
+
+      // UI: Scale input handler
+      scaleInput.addEventListener('input', function() {
+        let val = parseFloat(this.value);
+        if (!isNaN(val) && val > 0) {
+          scaleboost = val;
+        }
+      });
+
+      // UI: Fade input handler
+      fadeInput.addEventListener('input', function() {
+        let val = parseFloat(this.value);
+        if (!isNaN(val) && val >= 0) {
+          fadespeed = val;
+        }
+      });
+
+      // UI: Points per frame input handler
+      pointsInput.addEventListener('input', function() {
+        let val = parseInt(this.value, 10);
+        if (!isNaN(val) && val >= 8 && val <= 1024) {
+          pointsPerFrame = val;
+        }
+      });
+
+      // --- Resize Canvas Dynamically ---
+      function resizeCanvas() {
+        const size = Math.floor(canvas.getBoundingClientRect().width);
+        if (size > 0 && (canvas.width !== size || canvas.height !== size)) {
+          canvas.width = size;
+          canvas.height = size;
+        }
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // --- Audio Context Setup ---
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      function setup() {
+        analyserL = audioCtx.createAnalyser();
+        analyserR = audioCtx.createAnalyser();
+        analyserL.fftSize = BUFFER_SIZE;
+        analyserR.fftSize = BUFFER_SIZE;
+        analyserL.smoothingTimeConstant = 0;
+        analyserR.smoothingTimeConstant = 0;
+        dataL = new Float32Array(analyserL.fftSize);
+        dataR = new Float32Array(analyserR.fftSize);
+      }
+
+      // --- Frame list string for storing all drawn frames ---
+      // Each frame is appended as (x1,y1,...,xn,yn) per frame, values between -25 and 25 with 2 decimals, with n=user-chosen pointsPerFrame
+      let frameListString = "";
+
+      // --- Oscilloscope Draw Loop ---
+
+      let animationFrameId = null;
+      let drawing = false; // Used to make sure only one frame is drawn at a time
+      let lastFrameTime = performance.now();
+
+      // Helper to check if a frame is all zero volume
+      function isFrameSilent(coords) {
+        // Ignore tiny epsilon
+        for (let i = 0; i < coords.length; i++) {
+          if (Math.abs(coords[i]) > 1e-4) return false;
+        }
+        return true;
+      }
+
+      function draw() {
+        if (drawing) return; // Prevent overlapping frames
+        drawing = true;
+
+        animationFrameId = requestAnimationFrame(() => {
+          drawing = false;
+          draw();
+        });
+
+        const now = performance.now();
+        const deltaTime = (now - lastFrameTime) / 1000; // seconds
+        lastFrameTime = now;
+
+        timediv.textContent = "time:" +
+          (audio && !isNaN(audio.currentTime) ? " " + audio.currentTime.toFixed(2) : "");
+        
+        if (!analyserL || !analyserR) return;
+        analyserL.getFloatTimeDomainData(dataL);
+        analyserR.getFloatTimeDomainData(dataR);
+
+        // Compute fade alpha based on desired fadeout seconds
+        let fadeAlpha = 1 - (deltaTime / fadespeed);
+        fadeAlpha = Math.max(0, Math.min(1, fadeAlpha));
+
+        ctx.globalAlpha = 1 - fadeAlpha;
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 1;
+
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#00ff88";
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = "#00ff88";
+
+        // --------- FIX: Only call beginPath once and only call moveTo/lineTo once per frame ---------
+        ctx.beginPath();
+
+        if (!dataL || !dataR) return;
+
+        // --- Build frame of (pointsPerFrame) (x,y) pairs and add to string ---
+        const scale = 25; // output range: -25 to 25
+
+        // We'll sample (renderPairs) evenly spaced indices between 0 and BUFFER_SIZE-1
+        const renderPairs = 128; // always render 128 points for display smoothness, decoupled from frame string
+
+        // --- FIX: Remove extra call(s) to ctx.lineTo; Ensure only one path is rendered per frame ---
+        for (let i = 0; i < renderPairs; i++) {
+          // Pick index spread over buffer (avoid exceeding array)
+          let bufIndex = Math.floor(i * (BUFFER_SIZE - 1) / (renderPairs - 1));
+          let x = dataL[bufIndex] * 1.4;
+          let y = dataR[bufIndex] * 1.4;
+
+          // For drawing, map to canvas size using drawX/drawY
+          const drawX = Math.round(canvas.width / 2 + x * canvas.width * scaleboost * 2);
+          const drawY = Math.round(canvas.height / 2 - y * canvas.height * scaleboost * 2);
+
+          if (i === 0) {
+            ctx.moveTo(drawX, drawY);
+          } else {
+            ctx.lineTo(drawX, drawY);
+          }
+        }
+
+        ctx.stroke();
+
+        // -------- Frame String Generation for export: pointsPerFrame, NOT renderPairs --------
+        let coords = [];
+        for (let i = 0; i < pointsPerFrame; i++) {
+          let bufIndex = Math.floor(i * (BUFFER_SIZE - 1) / (pointsPerFrame - 1));
+          let x = dataL[bufIndex] * 1.4;
+          let y = dataR[bufIndex] * 1.4;
+
+          // Clamp and format values to [-25,25] with 2 decimals
+          let frameX = Math.max(-scale, Math.min(scale, x * scale));
+          let frameY = Math.max(-scale, Math.min(scale, y * scale));
+          frameX = Math.round(frameX * 100) / 100;
+          frameY = Math.round(frameY * 100) / 100;
+          coords.push(frameX, frameY);
+        }
+        // Append this frame to frameListString with "(x1,y1,x2,y2,...)"
+        // Only add if frame is not silent (no nonzero points means silent)
+        if (!isFrameSilent(coords)) {
+          frameListString += "(" + coords.join(",") + ")";
+        }
+      }
+
+      // Only start one animation frame loop!
+      function startDrawLoop() {
+        if (animationFrameId === null) {
+          lastFrameTime = performance.now();
+          animationFrameId = requestAnimationFrame(draw);
+        }
+      }
+      function stopDrawLoop() {
+        if (animationFrameId !== null) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+          drawing = false;
+        }
+      }
+      // Start draw loop ONCE when the page loads.
+      startDrawLoop();
+
+      // --- End Button ---
+      function endandlog() {
+        if (audio) audio.pause();
+
+        navigator.clipboard.writeText(frameListString).then(() => {
+          alert("Frame data copied to clipboard.");
+        }).catch(err => {
+          alert("Failed to copy frame data: " + err);
+        });
+   
+      }
+
+      // --- File Input Handler ---
+      fileInput.addEventListener('change', async () => {
+        // Stop previous audio
+        if (audio) {
+          audio.pause();
+          if (source) source.disconnect();
+          if (splitter) splitter.disconnect();
+          audio.removeEventListener('ended', audio._onEndedHandler);
+        }
+
+        // Reset the frame string list for a new file
+        frameListString = "";
+
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        const url = URL.createObjectURL(file);
+        audio = new Audio(url);
+        audio.loop = false;
+        audio._onEndedHandler = function () {};
+        audio.addEventListener('ended', audio._onEndedHandler);
+
+        await audio.play();
+
+        if (audioCtx.state === "suspended") {
+          await audioCtx.resume();
+        }
+
+        source = audioCtx.createMediaElementSource(audio);
+        splitter = audioCtx.createChannelSplitter(2);
+        setup();
+
+        source.connect(splitter);
+        splitter.connect(analyserL, 0);
+        splitter.connect(analyserR, 1);
+        source.connect(audioCtx.destination);
+
+        // Prevent multiple animation loops if file is loaded again
+        stopDrawLoop();
+        startDrawLoop();
+      });
+    </script>
+  </body>
+</html>

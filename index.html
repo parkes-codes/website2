@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home | Parkes-Codes</title>
+    <meta name="description" content="The homepage of Parkes-Codes. Explore coding projects, interactive math, and resources." />
+    <meta name="keywords" content="Parkes, Codes, Programming, Coding, Projects, Tutorials, JavaScript, Interactive, Graphs, HTML, CSS, Developer" />
+    <meta name="author" content="Parkes Lawrence" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Home | Parkes-Codes">
+    <meta property="og:description" content="The homepage of Parkes-Codes. Explore coding projects, interactive math, and resources.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://parkes-codes.github.io/website">
+    <meta property="og:image" content="https://parkes-codes.github.io/website/icon.ico">
+    <meta property="og:image:type" content="image/x-icon"/>
+    <meta property="og:image:width" content="256"/>
+    <meta property="og:image:height" content="256"/>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Home | Parkes-Codes" />
+    <meta name="twitter:description" content="The homepage of Parkes-Codes. Explore coding projects, tutorials, and resources." />
+    <meta name="twitter:image" content="https://parkes-codes.github.io/website/icon.ico"/>
+    <link rel="icon" type="image/x-icon" href="images/icon.ico" />
+    <style>
+      html, body {
+        height: 100%;
+        background-image: url("images/plinkk.gif");
+        min-height: 100vh;
+        font-family: "Courier New", courier, monospace;
+        font-size: 16px;
+        color: #f0f0f0;
+        margin-top: -10px;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+      a, a:visited, a:active, a:focus {
+        text-decoration: none;
+        outline: none;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+      }
+      .button {
+        background: #000000;
+        border: #ffffff 2px solid;
+        color: #ffffff;
+        margin: 3.2px 0;
+        cursor: pointer;
+        border-radius: 4px;
+        min-height: 35px;
+        font-family: "Courier New", courier, monospace;
+        transition: transform 0.28s cubic-bezier(0.23,1.3,0.32,1);
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+        flex: 1 1 0;
+        font-size: 0.8rem;
+        padding: 3.2px 8px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        z-index: 5;
+        position: relative;
+      }
+      .text {
+        color: hsl(0, 100%, 100%);
+        z-index:  5;
+        position: relative;
+      }
+      .profilepic-link {
+        transform-origin: center center;
+        display: block;
+        transition: transform 0.28s cubic-bezier(0.23,1.3,0.32,1);
+        border-radius: 10%;
+        margin: 0 auto;
+        margin-top: 6px;
+        position: static;
+        width: 100px !important;
+        height: 100px !important;
+        max-width: 100px !important;
+        max-height: 100px !important;
+        min-width: 100px !important;
+        min-height: 100px !important;
+        object-fit: cover;
+        z-index: 5;
+      }
+      .profilepic-link:hover {
+        transform: scale(1.13) rotate(-5deg);
+        box-shadow: 0 4px 26px #113388cc, 0 0 0 5px #a0a0ff22;
+        z-index: 2;
+      }
+      .button:hover,
+      .button:focus-visible {
+        transform: scale(1.04);
+        box-shadow: 0 4px 26px #113388cc, 0 0 0 5px #a0a0ff22;
+        z-index: 5;
+      }
+      #column {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding: 0 4vw;
+      }
+      .button-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        justify-items: stretch;
+        align-items: stretch;
+      }
+      .linkbutton, .button-list > button {
+        display: flex;
+        box-sizing: border-box;
+        min-width: 0 !important;
+        max-width: 100%;
+      }
+      .linkbutton > .button, .button-list > button.button {
+        width: 100%;
+      }
+      @media (max-width: 1200px) {
+        .button-list {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      @media (max-width: 900px) {
+        #column {
+          max-width: 100vw;
+          padding: 0 3vw;
+        }
+        .button-list {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 720px) {
+        #column {
+          max-width: 100vw;
+          padding: 0 2vw;
+        }
+        .button-list {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 8px;
+        }
+      }
+      @media (max-width: 450px) {
+        .button-list {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+
+      #backgroundOverlay {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: rgba(7, 9, 32, 0.9);
+        z-index: 0; 
+        pointer-events: none; 
+      }
+      #thingy, #thingy2 {
+        color: #f0f0f0; 
+        font-size: 15px;
+        text-align:center;
+        position: relative;
+      }
+      #linksRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+      }
+      #linksRow > * {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      .profilepic-link {
+        z-index: 4;
+        border-radius: 10px;
+      }
+      .linkpicStyle {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        width: fit-content;
+        margin-left: auto; 
+        margin-right: auto;
+        height: 100px;
+      }
+      .linkheader {
+        font-size: 15px;
+      }
+      #funbutton {
+        border-width: 4px;
+      }
+      @media (max-width: 240px) {
+        #linksRow {
+          flex-direction: column;
+          align-items: center;
+        }
+        #linksRow > .pfp-container {
+          width: 100%;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
+      }
+      @media (max-width: 450px) {
+        #linksRow {
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: stretch;
+        }
+        #linksRow > .pfp-container {
+          width: 45%;
+          min-width: 140px;
+          max-width: 100%;
+          margin: 4vw 2vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="backgroundOverlay"></div>
+    <h1 class="text" style="z-index: 50; position: relative; margin-bottom: -8px; text-align:center; font-size: 26px;" id="velkomm">¡Bienvenido a mi sitio web!</h1>
+    <h3 class="text" style="margin-bottom: 9px; text-align:center; position: relative; font-weight: 100; font-size: 13px;">↓Visita mis redes sociales↓</h3>
+    <div id="linksRow">
+      <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
+        <div class="text linkheader">Scratch</div>
+        <a href="https://scratch.mit.edu/users/sadie_is_awesome" target="_blank" class="linkpicStyle" style="margin: 0;">
+          <img src="images/scratch.jpg" class="profilepic-link" id="profilepicture" alt="My Scratch Profile Picture and Link" width="100" height="100" style="width:100px;height:100px;object-fit:cover;">
+        </a>
+      </div>
+      <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
+        <div class="text linkheader">OneCompiler</div>
+        <a href="https://onecompiler.com/users/436g67qxt" target="_blank" class="linkpicStyle" style="margin: 0;">
+          <img src="images/OnecompLogo.png" class="profilepic-link" id="onecompLink" alt="My One Compiler Profile link" width="100" height="100" style="width:100px;height:100px;object-fit:cover;">
+        </a>
+      </div>
+      <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
+        <div class="text linkheader">YouTube</div>
+        <a href="https://youtube.com/@parkes24" target="_blank" class="linkpicStyle" style="margin: 0;">
+          <img src="images/youtubeprofpic.jpg" class="profilepic-link" id="ytlink" alt="My Youtube Channel Profile Picture and Link" width="100" height="100" style="width:100px;height:100px;object-fit:cover;">
+        </a>
+      </div>
+      <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
+        <div class="text linkheader">Github</div>
+        <a href="https://github.com/parkes-codes" target="_blank" class="linkpicStyle" style="margin: 0;">
+          <img src="images/bigstupid.png" class="profilepic-link" id="githublink" alt="My Github Profile Picture and Link" width="100" height="100" style="width:100px;height:100px;object-fit:contain;">
+        </a>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-top: 0px; margin-bottom: -8px;">
+     <p id="thingy" class="text">
+      Les presento una colección de scripts que he escrito.
+     </p>
+     <p style="font-size: 9px; color: #ffffffc0; margin-left: 18px;" class="text">
+     ver aug 3 2026
+    </p>
+  </div>
+    <div id="column">
+      <div class="button-list">
+        <a href="html/Amazing_Graphs_2" target="_blank" class="linkbutton"><button class="button text" id="ag2text">Open Amazing Graphs 2</button></a>
+        <a href="html/trigslideshow" target="_blank" class="linkbutton"><button class="button text">Open Trigonometery Slideshow</button></a>
+        <a href="html/gol" target="_blank" class="linkbutton"><button class="button text" id="golbtn">Open GOL</button></a>
+        <a href="html/coreball" target="_blank" class="linkbutton"><button class="button text" id="corbtn" style="color: #000; font-weight: bold; text-shadow: 0px 0px 5px #ffff;">Open Coreball</button></a>
+        <a href="html/clicker" target="_blank" class="linkbutton"><button class="button text">Open My Clicker Game</button></a>
+        <a href="html/Listpractice" target="_blank" class="linkbutton"><button class="button text">Open List Learning</button></a>
+        <a href="html/Canvaspractice" target="_blank" class="linkbutton"><button class="button text">Open Canvasse</button></a>
+        <a href="html/oscilloscope" target="_blank" class="linkbutton"><button class="button text">Open Oscilloscope</button></a>
+        <a href="html/spectrogram" target="_blank" class="linkbutton"><button class="button text">Open Spectrogram</button></a>
+        <a href="html/flappy" target="_blank" class="linkbutton"><button class="button text">Open Flappy Bird</button></a>
+        <a href="html/2048" target="_blank" class="linkbutton"><button class="button text">Open 2048</button></a>
+        <a href="html/tetris" target="_blank" class="linkbutton"><button class="button text">Open Tetris</button></a>
+        <a href="html/dvd" target="_blank" class="linkbutton"><button class="button text">Open DVD Sim</button></a>
+        <a href="html/game1" target="_blank" class="linkbutton"><button class="button text">Open Arrassio</button></a>
+        <a href="html/game2" target="_blank" class="linkbutton"><button class="button text">Open Jetpack Horse Ultra Pro Extreme 3D</button></a>
+        <a href="javascript:void(0);" class="linkbutton"><button class="button text" id="funbutton" onclick="movestuff()">Fun button</button></a>
+        <a href="html/sierp" target="_blank" class="linkbutton"><button class="button text">Open Fractals</button></a>
+        <a href="html/ant" target="_blank" class="linkbutton"><button class="button text" style="color: rgb(184, 205, 252)">Open Langton's Ant</button></a>
+        <a href="html/mousetrails" target="_blank" class="linkbutton"><button class="button text" style="color: #eef; font-weight: bold;" >Open Mouse Trails</button></a>
+        <a href="html/WaterSort" target="_blank" class="linkbutton"><button class="button text">Open Water Sort</button></a>
+        <a href="html/texteffects" target="_blank" class="linkbutton"><button class="button text">Open Text Effects</button></a>
+        <a href="html/funnytext" target="_blank" class="linkbutton"><button class="button text">Open Funny Text</button></a>
+        <a href="html/rocketlaunch" target="_blank" class="linkbutton"><button class="button text" style="color: #fed">Open Rocket Launch</button></a>
+        <a href="html/car" target="_blank" class="linkbutton"><button class="button text">Open Car</button></a>
+        <a href="html/particles" target="_blank" class="linkbutton"><button class="button text" style="color: #dfd">Open Particles</button></a>
+        <a href="html/fourier" target="_blank" class="linkbutton">
+          <button class="button text">
+            <span class="text" style="color: #dfd;">Open </span> <span class="text" style="color: #cff;">Fourier </span> <span class="text" style="color: #bcf;">Draw</span>
+          </button>
+        </a>
+        <a href="html/screensaver" target="_blank" class="linkbutton"><button class="button text">Open Screensaver</button></a>
+        <a href="html/blockyblast" target="_blank" class="linkbutton"><button class="button text">Open Blocky Blast</button></a>
+        <a href="html/encoding" target="_blank" class="linkbutton"><button class="button text">Open Encoders</button></a>
+        <a href="html/loudwav" target="_blank" class="linkbutton"><button class="button text">Open LOUD Audio</button></a>
+        <a href="html/cooltext" target="_blank" class="linkbutton"><button class="button text">Open Cool Text</button></a>
+        <a href="html/voronoi" target="_blank" class="linkbutton"><button class="button text">Open Plinkonoi</button></a>
+        <a href="html/dino" target="_blank" class="linkbutton"><button class="button text">Open Dino Game</button></a>
+        <a href="html/emojirain" target="_blank" class="linkbutton"><button class="button text">Open Emoji Rain</button></a>
+        <a href="html/leftright" target="_blank" class="linkbutton"><button class="button text">Open MP3 Combiner</button></a>
+        <a href="html/blobs" target="_blank" class="linkbutton"><button class="button text">Open Blob 1</button></a>
+        <a href="html/blob2" target="_blank" class="linkbutton"><button class="button text">Open Blob 2</button></a>
+        <a href="html/sorting" target="_blank" class="linkbutton"><button class="button text" id="algoText">Open Sorting Algos</button></a>
+        <a href="html/Ovogame" target="_blank" class="linkbutton"><button class="button text">Open OvO Embed</button></a>
+        <!-- <a href="html/vibrate" target="_blank" class="linkbutton"><button class="button text">Open Vibrate</button></a> -->
+        <a href="html/brot" target="_blank" class="linkbutton"><button class="button text">Open Fractals</button></a>
+        <a href="html/countdown" target="_blank" class="linkbutton"><button class="button text">Open Countdown</button></a>
+        <a href="html/spiral" target="_blank" class="linkbutton"><button class="button text">Open Spiral</button></a>
+        <a href="html/news" target="_blank" class="linkbutton"><button class="button text">Open Antimatter News</button></a>
+        <a href="html/plinko" target="_blank" class="linkbutton"><button class="button text">Open Plinko</button></a>
+        <a href="html/fryer" target="_blank" class="linkbutton"><button class="button text">Open Image Deep Fryer</button></a>
+        <a href="html/lightning" target="_blank" class="linkbutton"><button class="button text">Open Mouse Lightning</button></a>
+        <a href="html/3d" target="_blank" class="linkbutton"><button class="button text">Open Image To Cube</button></a>
+        <a href="html/timer" target="_blank" class="linkbutton"><button class="button text">Open 30 Minute Timer</button></a>
+        <a href="html/typing" target="_blank" class="linkbutton"><button class="button text">Open Typing Test</button></a>
+        <a href="html/pelle" target="_blank" class="linkbutton"><button class="button text">Open Scary Text</button></a>
+        <a href="html/hacking" target="_blank" class="linkbutton" id="hack-link-anchor">
+          <button class="button text" id="hacktext"><span>Open&nbsp;</span><span id="hacknum" style="color: #8f8">0101010010</span></button>
+        </a>
+        <a href="html/colors" target="_blank" class="linkbutton"><button class="button text">Open Color Creator</button></a>
+        <a href="html/plinkdefense" target="_blank" class="linkbutton"><button class="button text">Open Tower Defense</button></a>
+        <a href="html/flappy2" target="_blank" class="linkbutton"><button class="button text">Open Flappy Bird 2</button></a>
+        <a href="html/game3" target="_blank" class="linkbutton"><button class="button text">Open Aclassio</button></a>
+        <a href="html/skilltree" target="_blank" class="linkbutton"><button class="button text">Open Skill Tree</button></a>
+        <a href="html/maze" target="_blank" class="linkbutton"><button class="button text">Open Maze (fun)</button></a>
+        <a href="html/tomb" target="_blank" class="linkbutton"><button class="button text">Open Momb of the Task (not fun)</button></a>
+        <a href="html/plinkemon" target="_blank" class="linkbutton"><button class="button text">Open Inventory</button></a>
+
+      </div>
+    </div>
+    <p class="text" style="left: 0%; text-align: center; opacity: 50%;">Warning: These links are desinged for 60fps computer devices!</p>
+  </body>
+    <script>
+      const bounceSound = new Audio("sounds/click.wav");
+      const profileLinks = Array.from(document.querySelectorAll('.profilepic-link')).map(el => {
+        const rect = el.getBoundingClientRect();
+        let dx = 3;
+        let dy = 3;
+        const w = el.offsetWidth || rect.width || 100;
+        const h = el.offsetHeight || rect.height || 100;
+        let sx = el.offsetLeft || rect.left;
+        let sy = el.offsetTop || rect.top;
+        el.style.zIndex = 14;
+        el.style.pointerEvents = "auto";
+        return {
+          el: el,
+          x: sx,
+          y: sy,
+          dx: dx,
+          dy: dy,
+          hue: 0 
+        };
+      });
+      let dvdAnimating = false;
+      function updateProfileLinksDVD() {
+        const scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft || 0;
+        const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        profileLinks.forEach(obj => {
+          let {el, x, y, dx, dy} = obj;
+          const w = el.offsetWidth || 100;
+          const h = el.offsetHeight || 100;
+          const maxX = (window.innerWidth || document.documentElement.clientWidth) + scrollX - w;
+          const maxY = (window.innerHeight || document.documentElement.clientHeight) + scrollY - h - 10;
+          let bounced = false;
+          x += dx;
+          y += dy;
+          if (x >= maxX) {
+            dx = -Math.abs(dx);
+            obj.hue += 37;
+            bounced = true;
+            x = maxX;
+          }
+          if (x <= scrollX) {
+            dx = Math.abs(dx);
+            obj.hue += 47;
+            bounced = true;
+            x = scrollX;
+          }
+          if (y >= maxY) {
+            dy = -Math.abs(dy);
+            obj.hue += 59;
+            bounced = true;
+            y = maxY;
+          }
+          if (y <= scrollY) {
+            dy = Math.abs(dy);
+            obj.hue += 41;
+            bounced = true;
+            y = scrollY;
+          }
+          obj.x = x;
+          obj.y = y;
+          obj.dx = dx;
+          obj.dy = dy;
+          el.style.position = window.innerWidth > 700 ? "absolute" : "fixed";
+          el.style.left = `${x}px`;
+          el.style.top = `${y}px`;
+          el.style.margin = "0"; 
+          if (bounced) {
+            try {
+              bounceSound.currentTime = 0;
+              bounceSound.play();
+            } catch (e) {}
+            el.style.filter = `hue-rotate(${obj.hue}deg)`;
+          }
+        });
+        if (dvdAnimating) {
+          requestAnimationFrame(updateProfileLinksDVD);
+        }
+      }
+      let t = 0;
+      const pi = Math.PI;
+      const funbutton = document.getElementById("funbutton");
+      const golbutton = document.getElementById("golbtn");
+      const corbutton = document.getElementById("corbtn");
+      const ag2text = document.getElementById("ag2text");
+      const algoText = document.getElementById("algoText");
+      const hacktext = document.getElementById("hacktext");
+      const hacknum = document.getElementById("hacknum");
+      const thingy = document.getElementById("thingy");
+      const bgOverlay = document.getElementById("backgroundOverlay");
+      const velkomm = document.getElementById("velkomm");
+
+      let funclicked = false;
+      const buttonOriginalTransformMap = new WeakMap();
+      function getBaseTransform(el) {
+        const style = window.getComputedStyle(el);
+        let tf = style.transform;
+        if (el.hasAttribute('data-base-transform')) {
+          return el.getAttribute('data-base-transform') || "";
+        } else {
+          el.setAttribute('data-base-transform', tf === "none" ? "" : tf);
+          return tf === "none" ? "" : tf;
+        }
+      }
+      function randomRotate() {
+        return Math.random() * 10 - 5; 
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(function(btn) {
+          btn.addEventListener('mouseenter', function() {
+            let base = getBaseTransform(btn);
+            const deg = randomRotate();
+            btn.style.transform = (base ? base + " " : "") + `rotate(${deg}deg) scale(1.05)`;
+            btn.style.transition = "transform 0.28s cubic-bezier(0.23,1.3,0.32,1)";
+          });
+          btn.addEventListener('mouseleave', function() {
+            let base = btn.getAttribute('data-base-transform') || "";
+            btn.style.transform = base;
+          });
+          btn.addEventListener('focus', function() {
+            const deg = randomRotate();
+            let base = getBaseTransform(btn);
+            btn.style.transform = (base ? base + " " : "") + `rotate(${deg}deg) scale(1.05)`;
+            btn.style.transition = "transform 0.28s cubic-bezier(0.23,1.3,0.32,1)";
+          });
+          btn.addEventListener('blur', function() {
+            let base = btn.getAttribute('data-base-transform') || "";
+            btn.style.transform = base;
+          });
+        });
+
+        function adjustPfpGrid() {
+          const linksRow = document.getElementById('linksRow');
+          const minPfpWidth = 140 * 2 + 20 * 2
+          if (window.innerWidth <= minPfpWidth + 20) {
+            linksRow.style.flexDirection = "column";
+            Array.from(linksRow.children).forEach(el => el.style.width = "100%");
+          } else if (window.innerWidth <= 450) {
+            linksRow.style.flexDirection = "row";
+            Array.from(linksRow.children).forEach(el => el.style.width = "45%");
+          } else {
+            linksRow.style.flexDirection = "row";
+            Array.from(linksRow.children).forEach(el => el.style.width = "");
+          }
+        }
+        adjustPfpGrid();
+        window.addEventListener('resize', adjustPfpGrid);
+      });
+
+      function randomDxDy() {
+        let dx = 0, dy = 0;
+        while (Math.abs(dx) < 1.5) {
+          dx = Math.random() * 10 - 5;
+        }
+        while (Math.abs(dy) < 1.5) {
+          dy = Math.random() * 10 - 5;
+        }
+        return { dx, dy };
+      }
+
+      function movestuff() {
+        if (!funclicked) {
+          profileLinks.forEach(obj => {
+            const {dx, dy} = randomDxDy();
+            obj.dx = dx;
+            obj.dy = dy;
+          });
+          if (profileLinks.length > 0 && !dvdAnimating) {
+            profileLinks.forEach(obj => {
+              const el = obj.el;
+              el.style.position = window.innerWidth > 700 ? 'absolute' : 'fixed';
+              el.style.left = `${obj.x}px`;
+              el.style.top = `${obj.y}px`;
+              el.style.margin = "0"; 
+              el.style.zIndex = 14;
+            });
+            dvdAnimating = true;
+            requestAnimationFrame(updateProfileLinksDVD);
+          }
+        } 
+        funclicked = true;
+        const texts = document.getElementsByClassName("text");
+        for (let i = 0; i < texts.length; i++) {
+          texts[i].style.color = `hsl(${t * 100 % 360}, 50%, 70%)`;
+          texts[i].style.transform = `rotate(${Math.sin(t + i) * 10}deg) scale(${Math.sin(t*2+i)*0.1+1})`;
+        }
+
+        bgOverlay.style.backgroundColor = `hsla(${(t*30)%360},50%,50%,0.3)`
+
+        requestAnimationFrame(movestuff);
+      }
+      function tick() {
+        t += 0.1;
+        if (funbutton)
+          funbutton.style.borderColor = `hsl(${(t * 50) % 360},50%,80%)`;
+        if (golbutton)
+          golbutton.style.color = `hsl(0,0%,${(Math.sin(t)) * 10 + 85}%)`;
+        if (corbutton) 
+          corbutton.style.textShadow = `0px 0px ${Math.sin(t/4)*2+3}px #ffff`
+        if (ag2text)
+          ag2text.style.color = `hsl(200,50%,${(Math.sin(t)) * 8 + 85}%)`;
+        if (algoText) {
+          algoText.style.color = `hsl(${(t*30)%360},50%,90%)`;
+        }
+        if (hacknum) {
+          let temp = "";
+          for (let i = 0; i < 10; i++) {
+            temp += Math.floor(Math.random() * 2);
+          }
+          hacknum.textContent = temp;
+        }
+
+        requestAnimationFrame(tick);
+      }
+      tick();
+    </script>
+  </body>
+</html>

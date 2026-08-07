@@ -1,0 +1,396 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Momb of the Task</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        overflow: hidden;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+</style>
+<body>
+<canvas id="gamecanvas"></canvas>
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+let keysPressed = {};
+
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 0;
+
+let camera = { x:0, y:0, z:1 };
+
+let player = { x: 0, y: 0 };
+const PLAYER_SIZE = 49;
+
+// Every level is a single, non-overlapping, continuous path of points (like Level 1),
+// keeping the "looping" or return structure, with subtle variations.
+const levels = [
+    // Level 1: Original loop
+    [
+        {x:0,y:0},
+        {x:0,y:2},
+        {x:-2,y:2},
+        {x:-2,y:-2},
+        {x:2,y:-2},
+        {x:2,y:4},
+        {x:-4,y:4},
+    ],
+    // Level 2: Very hard, requires precise movement and alignment
+    [
+        {x:0, y:0},
+        {x:2, y:0},
+        {x:2, y:5},
+        {x:-2, y:5},
+        {x:-2, y:2},
+        {x:-5, y:2},
+        {x:-5, y:0},
+        {x:-2, y:0},
+        {x:-2, y:-5},
+        {x:2, y:-5},
+        {x:2, y:-2},
+        {x:5, y:-2},
+        {x:5, y:0},
+        {x:2, y:0},
+        {x:2, y:0},
+    ],
+    [
+        {x:2, y:0},
+        {x:3, y:0},
+        {x:3, y:-3},
+        {x:-3, y:-3},
+        {x:-3, y:2},
+        {x:2, y:2},
+        {x:2, y:5},
+        {x:-5, y:5},
+        {x:-5, y:-5},
+        {x:5, y:-5},
+        {x:5, y:3},
+        {x:0, y:3},
+        {x:0, y:0},
+        {x:0, y:-1},
+        {x:-7, y:-1 }
+    ],
+    // "I give up" as the level (these points will, when drawn and connected, write out the letters)
+    [
+        // Letter I (with serifs)
+        {x:0, y:0},    // Start
+        {x:2, y:0},    // right for bottom serif (x only)
+        {x:2, y:4},    // up for stem (y only)
+        {x:0, y:4},    // left for top serif (x only)
+
+        // Space to next letter - must only change x or y per step
+        {x:3, y:4},    // right to setup space (x only)
+        {x:3, y:0},    // down for next letter (y only)
+
+        // Letter G - only move x OR y from prev.
+        {x:4, y:0},    // x only
+        {x:8, y:0},    // x only
+        {x:8, y:4},    // y only
+        {x:4, y:4},    // x only
+        {x:4, y:2},    // y only
+        {x:6, y:2},    // x only
+        {x:6, y:3},    // y only
+        {x:7, y:3},    // x only
+        {x:7, y:1},    // y only
+        {x:8, y:1},    // x only
+
+        // Space to next letter, moves separated for axis step
+        {x:9, y:1},    // x only
+        {x:9, y:0},    // y only
+
+        // Letter I (vertically as before)
+        {x:10, y:0},   // x only
+        {x:12, y:0},   // x only
+        {x:12, y:4},   // y only
+        {x:10, y:4},   // x only
+
+        // Space
+        {x:13, y:4},   // x only
+        {x:13, y:0},   // y only
+
+        // Letter V - Only x or y at each step (blocky V)
+        {x:14, y:0},   // x only
+        {x:14, y:4},   // y only
+        {x:15, y:4},   // x only
+        {x:15, y:0},   // y only
+        {x:16, y:0},   // x only
+        {x:16, y:4},   // y only
+
+        // join to base for looping path clarity
+        {x:17, y:4},   // x only
+        {x:17, y:0},   // y only
+
+        // Letter E - blocky, only x or y per move
+        {x:18, y:0},   // x only
+        {x:18, y:4},   // y only
+        {x:22, y:4},   // x only
+        {x:22, y:2},   // y only
+        {x:18, y:2},   // x only
+        {x:18, y:0},   // y only
+        {x:22, y:0},   // x only
+
+        // Space
+        {x:23, y:0},   // x only
+
+        // Letter U - only x or y
+        {x:24, y:0},   // x only
+        {x:24, y:4},   // y only
+        {x:27, y:4},   // x only
+        {x:27, y:0},   // y only
+
+        // Space
+        {x:28, y:0},   // x only
+        {x:28, y:4},   // y only
+
+        // Letter P - only x or y
+        {x:29, y:4},   // x only
+        {x:32, y:4},   // x only
+        {x:32, y:2},   // y only
+        {x:29, y:2},   // x only
+        {x:29, y:0}    // y only
+    ]
+   
+    
+    
+];
+
+let level = 0;
+let path = levels[level];
+
+// Store the player's path as an array of previous positions
+let playerPath = [
+    { x: path[0].x, y: path[0].y }
+];
+
+player.x = path[0].x;
+player.y = path[0].y;
+
+function loadLevel(levelIndex) {
+    level = levelIndex;
+    path = levels[level];
+    player.x = path[0].x;
+    player.y = path[0].y;
+    camera.x = player.x*-50;
+    camera.y = player.y*50;
+    playerPath = [{ x: player.x, y: player.y }];
+}
+
+function checkIfPlayerAtGoal() {
+    let lastPoint = path[path.length - 1];
+    return Math.abs(player.x - lastPoint.x) < 0.01 && Math.abs(player.y - lastPoint.y) < 0.01;
+}
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.save();
+    ctx.fillStyle = "#111"
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.save();
+    ctx.strokeStyle = "#444";
+    ctx.lineCap = "square"
+    ctx.lineWidth = 50;
+
+    ctx.beginPath();
+
+    function moveeTo(x, y) {
+        ctx.moveTo(
+            canvas.width / 2 + (camera.x + x) * camera.z,
+            canvas.height / 2 + (camera.y - y) * camera.z
+        );
+    }
+    function lineeTo(x, y) {
+        ctx.lineTo(
+            canvas.width / 2 + (camera.x + x) * camera.z,
+            canvas.height / 2 + (camera.y - y) * camera.z
+        );
+    }
+
+    moveeTo(path[0].x*50, path[0].y*50);
+    for (let i = 1; i < path.length; i++) {
+        lineeTo(path[i].x*50, path[i].y*50);
+    }
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = "#afa";
+    let fx = canvas.width/2 + (camera.x + levels[level][levels[level].length-1].x*50) * camera.z;
+    let fy = canvas.height/2 + (camera.y - levels[level][levels[level].length-1].y*50) * camera.z;
+    ctx.fillRect(
+        fx - 25,
+        fy - 25,
+        50,
+        50
+    );
+
+    // Draw the player's path/trail
+    if (playerPath.length > 1) {
+      ctx.beginPath();
+      ctx.strokeStyle = "#cc0";
+      ctx.lineWidth = 8;
+      const start = playerPath[0];
+      ctx.moveTo(
+          canvas.width / 2 + (camera.x + start.x*50) * camera.z,
+          canvas.height / 2 + (camera.y - start.y*50) * camera.z
+      );
+      for (let i = 1; i < playerPath.length; i++) {
+          ctx.lineTo(
+              canvas.width / 2 + (camera.x + playerPath[i].x*50) * camera.z,
+              canvas.height / 2 + (camera.y - playerPath[i].y*50) * camera.z
+          );
+      }
+      ctx.stroke();
+    }
+
+    ctx.beginPath();
+    ctx.fillStyle = "#ffa";
+    let px = canvas.width/2 + (camera.x + player.x*50) * camera.z;
+    let py = canvas.height/2 + (camera.y - player.y*50) * camera.z;
+    ctx.fillRect(
+        px - PLAYER_SIZE/2,
+        py - PLAYER_SIZE/2,
+        PLAYER_SIZE,
+        PLAYER_SIZE
+    );
+
+    ctx.restore();
+
+
+    // if (checkIfPlayerAtGoal()) {
+    //     if (level + 1 < levels.length) {
+    //         setTimeout(() => {loadLevel(level + 1)},600)
+    //     } else {
+    //         setTimeout(() => {loadLevel(0)},600)
+    //     }
+    // }
+
+
+    requestAnimationFrame(draw)
+}
+
+draw();
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function getDirForKey(key) {
+    switch (key.toLowerCase()) {
+        case 'w': return {dx: 0, dy: -1};
+        case 's': return {dx: 0, dy: 1};
+        case 'a': return {dx: -1, dy: 0};
+        case 'd': return {dx: 1, dy: 0};
+        default:  return {dx: 0, dy: 0};
+    }
+}
+
+let moveInterval = null;
+function isTouchingBackground(px, py) {
+    // Just check the 4 corners of the square
+    let testPoints = [
+        [px - PLAYER_SIZE/2, py - PLAYER_SIZE/2],
+        [px + PLAYER_SIZE/2, py - PLAYER_SIZE/2],
+        [px - PLAYER_SIZE/2, py + PLAYER_SIZE/2],
+        [px + PLAYER_SIZE/2, py + PLAYER_SIZE/2],
+    ];
+    for (let [tx, ty] of testPoints) {
+        let imageData = ctx.getImageData(Math.floor(tx), Math.floor(ty), 1, 1).data;
+        if (imageData[0] === 17 && imageData[1] === 17 && imageData[2] === 17) {
+            return true;
+        }
+    }
+    return false;
+}
+
+window.addEventListener("keydown", (e) => {
+    let k = e.key.toLowerCase();
+    if (!keysPressed[k]) {
+        keysPressed[k] = true;
+        const {dx, dy} = getDirForKey(k);
+        if ((dx !== 0 || dy !== 0) && !moveInterval) {
+            startMoveInDirection(dx, dy);
+        }
+    }
+    if (e.key == "n") {
+        loadLevel(level+1)
+        level
+    }
+});
+
+window.addEventListener("keyup", (e) => {
+    keysPressed[e.key.toLowerCase()] = false;
+});
+
+function startMoveInDirection(dx, dy) {
+    if (moveInterval) return;
+    let stepSize = 2;
+    moveInterval = setInterval(() => {
+        let px = canvas.width/2 + (camera.x + player.x*50) * camera.z;
+        let py = canvas.height/2 + (camera.y - player.y*50) * camera.z;
+        let nextPx = px + dx * stepSize;
+        let nextPy = py + dy * stepSize;
+        if (isTouchingBackground(nextPx, nextPy)) {
+            clearInterval(moveInterval);
+            player.x = Math.round(player.x); //since path is all integers this is perfect
+            player.y = Math.round(player.y);
+
+                playerPath.push({ x: player.x, y: player.y});
+            
+            moveInterval = null;
+        } else {
+            let prevX = player.x;
+            let prevY = player.y;
+            player.x += dx * (stepSize/10);
+            player.y -= dy * (stepSize/10);
+            camera.x = player.x*-50;
+            camera.y = player.y*50;
+            let last = playerPath[playerPath.length - 1];
+        }
+    }, 1000 / fps);
+}
+
+let lastTimestamp = performance.now();
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+
+</script>
+</html>

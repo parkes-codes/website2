@@ -1,0 +1,531 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plinko</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #222;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(70vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -8px;
+        display: block;
+        position: relative;
+        z-index: 1;
+        background: none;
+    }
+    #plinko-controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: fit-content;
+        z-index: 20;
+    }
+    #plinko-btn, #plinko-btn-all {
+        position: static;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        background: #444;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        opacity: 0.97;
+        box-shadow: 0 2px 8px #0007;
+        transition: background 0.2s;
+        z-index: 10;
+        margin: 0;
+    }
+    #chips-remaining {
+        color: #fcfcae;
+        font-size: 24px;
+        font-family: monospace;
+        background: #222c;
+        padding: 7px 30px;
+        border-radius: 8px;
+        text-shadow: 0 2px 7px #000, 0 1px 0 #fff3;
+        z-index: 13;
+        pointer-events: none;
+        box-shadow: 0 2px 8px #0008;
+        margin-left: 0;
+        margin-right: 0;
+        min-width: 80px;
+        text-align: center;
+    }
+</style>
+<body>
+    <canvas id="gamecanvas"></canvas>
+    <div id="plinko-controls">
+        <button id="plinko-btn">Drop 1 Chip</button>
+        <button id="plinko-btn-all">Drop All Chips</button>
+        <div id="chips-remaining"></div>
+    </div>
+</body>
+<script>
+// --- Settings ---
+const START_CHIPS = 25;
+
+// ---- Plinko Model ----
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+
+// --- Load the chip texture image ---
+const chipTextureImg = new Image();
+chipTextureImg.src = "../images/plinkkstatic.png";
+let chipTextureLoaded = false;
+chipTextureImg.onload = () => {
+    chipTextureLoaded = true;
+};
+
+// We'll make the Plinko game less wide horizontally
+function resizeCanvas() {
+    // Use 70vw instead of full width, keep -25 for border consistency
+    const targetWidth = Math.min(window.innerWidth * 0.70, window.innerWidth) - 25;
+    const targetHeight = window.innerHeight - 25;
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// ----- PLINKO MODEL -----
+const BIN_REWARDS = [500,20,5,3,2,0,1,1,1,1,1,0,2,3,5,20,500];
+const BIN_COUNT = BIN_REWARDS.length;
+const PLINKO_LEVELS = BIN_COUNT - 2; // 15 levels for 17 bins, 15+2 = 17.
+const PLINKO_OPTIONS = level => level + 1;
+
+// Geometry
+let plinkoSpacingX, plinkoSpacingY, plinkoStartY, plinkoStartX, plinkoPegRadius, plinkoChipRadius, binWidth;
+function computePlinkoGeometry() {
+    const padY = 70;
+    const padX = 60;
+    plinkoSpacingY = (canvas.height - 2 * padY) / (PLINKO_LEVELS + 2);
+    plinkoSpacingX = (canvas.width - 2 * padX) / (BIN_COUNT - 1);
+    plinkoStartY = padY;
+    plinkoStartX = canvas.width / 2;
+    plinkoPegRadius = Math.max(4, Math.min(plinkoSpacingX, plinkoSpacingY) * 0.15);
+    plinkoChipRadius = plinkoPegRadius * 1.35;
+    binWidth = plinkoSpacingX;
+}
+computePlinkoGeometry();
+window.addEventListener("resize", computePlinkoGeometry);
+
+function getPegPosition(level, index) {
+    const totalPegs = PLINKO_OPTIONS(level);
+    const pegsAreaWidth = (BIN_COUNT - 1) * plinkoSpacingX;
+    const firstPegX = canvas.width / 2 - pegsAreaWidth / 2 + ((BIN_COUNT - totalPegs) / 2) * plinkoSpacingX;
+    return {
+        x: firstPegX + index * plinkoSpacingX,
+        y: plinkoStartY + level * plinkoSpacingY
+    };
+}
+function getBinPosition(binIndex) {
+    const baseLevel = PLINKO_LEVELS + 1;
+    const pos = getPegPosition(baseLevel, binIndex);
+    return pos;
+}
+
+// Animate and drop logic
+class PlinkoChip {
+    constructor() {
+        this.path = [];
+        for (let l = 0; l < PLINKO_LEVELS; ++l) {
+            this.path.push(Math.random() < 0.5 ? 0 : 1);
+        }
+        this.path.push(Math.random() < 0.5 ? 0 : 1);
+
+        this.currentLevel = 0;
+        this.currentPeg = 0;
+        this.points = [];
+        let pegIndex = 0;
+        for (let level = 0; level <= PLINKO_LEVELS; ++level) {
+            this.points.push(getPegPosition(level, pegIndex));
+            if (level < this.path.length) {
+                pegIndex += this.path[level];
+            }
+        }
+        const landingLevel = PLINKO_LEVELS + 1;
+        const landingBinIndex = pegIndex;
+        const landingPos = getPegPosition(landingLevel, landingBinIndex);
+        const landingPosDeeper = {
+            x: landingPos.x,
+            y: landingPos.y + 100
+        };
+        this.points.push(landingPosDeeper);
+
+        this.finalBinIndex = landingBinIndex;
+
+        this.progress = 0;
+        this.done = false;
+        this.animWobbleSeed = Math.random() * 100;
+        this.color = `hsl(${Math.floor(Math.random()*360)},50%,80%)`;
+        this.fadeAlpha = 1;
+        this.fadeStartTime = null;
+        this.hasLanded = false;
+        this.landedPosition = null;
+
+        this.animSpeedMultiplier = 0.94 + Math.random()*0.14;
+
+        this.animAngle = 0; // track current angle for fade
+
+        // --- For smooth fade-out after landing ---
+        this.isFading = false;
+        this.fadeDuration = 550; // ms
+        this.fadeStartTimestamp = null;
+    }
+    update(dt, now) {
+        if (!this.done) {
+            const baseAnimSpeed = 2.3 / 15;
+            const animSpeed = baseAnimSpeed * this.animSpeedMultiplier;
+            this.progress += (dt * animSpeed) / plinkoSpacingY;
+            if (this.progress >= this.points.length - 1) {
+                this.progress = this.points.length - 1;
+                this.done = true;
+                this.fadeStartTime = now;
+                const bx = this.points[this.points.length - 1].x;
+                const baseY = this.points[this.points.length - 1].y - plinkoChipRadius / 2;
+                this.landedPosition = { x: bx, y: baseY };
+                this.hasLanded = true;
+                // We now start handy fade transition ourselves after landing
+            }
+        } else if (this.hasLanded && !this.isFading) {
+            // Stay "landed" until handed to fading phase in draw loop
+            // The actual fade animation will be managed by isFading/fadeStartTimestamp below
+        } else if (this.isFading && this.fadeStartTimestamp != null) {
+            let elapsed = now - this.fadeStartTimestamp;
+            this.fadeAlpha = 1 - (elapsed / this.fadeDuration);
+            if (this.fadeAlpha < 0) this.fadeAlpha = 0;
+        }
+    }
+    startFading(now) {
+        this.isFading = true;
+        this.fadeStartTimestamp = now;
+        this.fadeAlpha = 1;
+    }
+    draw(ctx, isFading = false) {
+        let x, y;
+        let alpha = 0.98;
+        let angle = 0;
+        if ((isFading || this.isFading) && this.landedPosition) {
+            x = this.landedPosition.x;
+            y = this.landedPosition.y;
+            alpha = this.fadeAlpha * 0.98;
+            angle = this.animAngle || 0;
+        } else {
+            let p = this.progress;
+            let i = Math.floor(p);
+            let t = p - i;
+            if (i >= this.points.length - 1) i = this.points.length - 2, t = 1;
+            const from = this.points[i], to = this.points[i+1];
+            x = from.x * (1-t) + to.x * t;
+            y = from.y * (1-t) + to.y * t;
+            let arcAmt = Math.sin(Math.PI * t) * plinkoSpacingX * 0.18;
+            x += ((to.x > from.x) ? 1 : -1) * arcAmt * (Math.abs(to.x - from.x) > 1 ? 1 : 0);
+            y -= Math.abs(Math.sin(Date.now() * 0.006 + this.animWobbleSeed + i)) * plinkoSpacingY * 0.08 * (1-t);
+            if (i <= PLINKO_LEVELS) {
+                y -= 20;
+            }
+
+            // Compute angle: use the current interpolated direction
+            // To do this, get the derivative w.r.t. t between from and to, including arc and wobble if you want (or just direction from from to to).
+            // To match visual direction, use the direction from x/y to where it will be slightly ahead:
+            // Step a small dt forward in progress and get its position, then use atan2.
+
+            // Forward difference for rotation direction: (see comments above for derivation)
+            const EPSILON = 0.01;
+            let nextP = Math.min(this.progress + EPSILON, this.points.length-1);
+            let nextI = Math.floor(nextP);
+            let nextT = nextP - nextI;
+            if (nextI >= this.points.length - 1) nextI = this.points.length - 2, nextT = 1;
+            const from2 = this.points[nextI], to2 = this.points[nextI+1];
+            let nx = from2.x * (1-nextT) + to2.x * nextT;
+            let ny = from2.y * (1-nextT) + to2.y * nextT;
+            let n_arcAmt = Math.sin(Math.PI * nextT) * plinkoSpacingX * 0.18;
+            nx += ((to2.x > from2.x) ? 1 : -1) * n_arcAmt * (Math.abs(to2.x - from2.x) > 1 ? 1 : 0);
+            ny -= Math.abs(Math.sin(Date.now() * 0.006 + this.animWobbleSeed + nextI)) * plinkoSpacingY * 0.08 * (1-nextT);
+            if (nextI <= PLINKO_LEVELS)
+                ny -= 20;
+
+            angle = Math.atan2(ny - y, nx - x);
+            this.animAngle = angle;
+        }
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.shadowColor = "#fff2";
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(x, y, plinkoChipRadius, 0, 2 * Math.PI, false);
+        ctx.closePath();
+
+        // Only draw textured chip if image loaded
+        if (chipTextureLoaded) {
+            // Setup for rotation
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(x, y, plinkoChipRadius, 0, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.clip();
+
+            ctx.translate(x, y);
+            ctx.rotate(angle * 2);
+
+            // Draw the texture image centered on the chip
+            // If the image is not perfect aspect square, we'll scale to fill the chip
+            const img = chipTextureImg;
+            let iw = img.width, ih = img.height;
+            // Draw covering whole circle bounding box, centered at 0,0 (because we have translated)
+            ctx.drawImage(
+                img,
+                -plinkoChipRadius,
+                -plinkoChipRadius,
+                plinkoChipRadius * 2,
+                plinkoChipRadius * 2
+            );
+
+            ctx.restore();
+        } else {
+            // Fallback: plain colored chip
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+
+        // Outline: fade out alpha if fading
+        ctx.globalAlpha = alpha;
+        ctx.shadowBlur = 0;
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#fff";
+        ctx.beginPath();
+        ctx.arc(x, y, plinkoChipRadius, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        ctx.restore();
+    }
+    getFinalBin() {
+        return this.finalBinIndex;
+    }
+}
+
+let playerChips = START_CHIPS;
+let chips = [];
+let fadingChips = [];
+let dropBatch = [];
+let droppedChipCount = 0;
+
+const chipsUI = document.getElementById("chips-remaining");
+function updateChipsUI() {
+    chipsUI.innerHTML = `Chips: <b>${playerChips}</b>`;
+}
+updateChipsUI();
+
+function dropChip() {
+    if (playerChips <= 0) return;
+    playerChips--;
+    chips.push(new PlinkoChip());
+    droppedChipCount++;
+    updateChipsUI();
+}
+
+let dropAllChipsInProgress = false;
+function dropAllChips() {
+    if (playerChips <= 0 || dropAllChipsInProgress) return;
+    const dropCount = playerChips;
+    if (dropCount === 0) return;
+    dropAllChipsInProgress = true;
+    const totalTime = 400;
+    const minDelay = 10;
+    const batches = Math.ceil(totalTime / minDelay);
+    const chipsPerBatch = Math.max(1, Math.ceil(dropCount / batches));
+    let dropped = 0;
+
+    function dropNextBatch() {
+        if (dropped >= dropCount) {
+            dropAllChipsInProgress = false;
+            return;
+        }
+        let chipsThisBatch = Math.min(chipsPerBatch, dropCount - dropped);
+        for (let i = 0; i < chipsThisBatch; ++i) {
+            if (playerChips > 0) {
+                playerChips--;
+                chips.push(new PlinkoChip());
+                droppedChipCount++;
+            }
+        }
+        updateChipsUI();
+        dropped += chipsThisBatch;
+        if (dropped < dropCount) {
+            setTimeout(dropNextBatch, minDelay);
+        } else {
+            dropAllChipsInProgress = false;
+        }
+    }
+    dropNextBatch();
+}
+
+document.getElementById("plinko-btn").addEventListener('click', dropChip);
+document.getElementById("plinko-btn-all").addEventListener('click', dropAllChips);
+
+function drawPlinkoPegs(ctx) {
+    for (let l = 0; l <= PLINKO_LEVELS; ++l) {
+        for (let i = 0; i < PLINKO_OPTIONS(l); ++i) {
+            const pos = getPegPosition(l, i);
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, plinkoPegRadius, 0, 2 * Math.PI, false);
+            ctx.fillStyle = "#fff";
+            ctx.shadowColor = "#09f6";
+            ctx.shadowBlur = 7;
+            ctx.globalAlpha = 0.75;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
+        }
+    }
+}
+
+function drawPlinkoBinLabels(ctx) {
+    const labelY = plinkoStartY + (PLINKO_LEVELS + 1) * plinkoSpacingY + plinkoSpacingY * 1.0;
+    for (let i = 0; i < BIN_COUNT; ++i) {
+        const pos = getBinPosition(i);
+        ctx.save();
+        ctx.font = `bold ${Math.floor(plinkoPegRadius * 2.6)}px monospace`;
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#fcfcae";
+        ctx.globalAlpha = 0.95;
+        let labelVal = BIN_REWARDS[i] > 0 ? `+${BIN_REWARDS[i]}` : "0";
+        ctx.fillText(labelVal, pos.x, labelY+15);
+        ctx.globalAlpha = 1;
+        ctx.restore();
+    }
+}
+
+// -------- Animation Loop -----------
+
+class RewardPop {
+    constructor(binIndex, reward, color, createdTime) {
+        this.bin = binIndex;
+        this.reward = reward;
+        this.color = color;
+        this.startTime = createdTime;
+        this.duration = 1200;
+        this.x = getBinPosition(binIndex).x;
+        const baseLabelY = plinkoStartY + (PLINKO_LEVELS + 1) * plinkoSpacingY + plinkoSpacingY * 1.0;
+        this.y0 = baseLabelY - 26 + (Math.random() - 0.5) * 8;
+        this.yRise = 35 + Math.random() * 10;
+    }
+    draw(ctx, now) {
+        let elapsed = now - this.startTime;
+        if (elapsed >= this.duration) return false;
+        let t = elapsed / this.duration;
+        let y = this.y0 - this.yRise * t;
+        let alpha = (1 - t) * 0.88 + 0.10;
+        ctx.save();
+        ctx.font = `bold ${Math.floor(plinkoPegRadius*2.5)}px monospace`;
+        ctx.textAlign = "center";
+        ctx.globalAlpha = alpha;
+        if (this.reward == 0) {
+            ctx.fillStyle = "#ff3b3b";
+            ctx.shadowColor = "#ff6c6c";
+        } else {
+            ctx.fillStyle = this.color ?? "#ff9";
+            ctx.shadowColor = "#fff6";
+        }
+        ctx.shadowBlur = 5 + 10*(1-t);
+        ctx.fillText(`+${this.reward}`, this.x, y);
+        ctx.restore();
+        return true;
+    }
+}
+
+let rewardPops = [];
+
+let lastTimestamp = performance.now();
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawPlinkoPegs(ctx);
+
+    let now = performance.now();
+    let dt = Math.min(now - lastTimestamp, 30);
+    lastTimestamp = now;
+
+    for (let i = chips.length - 1; i >= 0; --i) {
+        let chip = chips[i];
+        chip.update(dt, now);
+        chip.draw(ctx);
+
+        // Only remove chip from chips[] after fade is over, not instantly on landing!
+        if (chip.done && chip.hasLanded && !chip.isFading) {
+            // On landing, reward immediately and begin fading
+            let bin = chip.getFinalBin();
+            let reward = BIN_REWARDS[bin] ?? 0;
+            if (reward > 0) {
+                playerChips += reward;
+                rewardPops.push(new RewardPop(bin, reward, chip.color, now));
+            } else {
+                rewardPops.push(new RewardPop(bin, reward, null, now));
+            }
+            updateChipsUI();
+
+            // Instead of moving immediately to fadingChips array, we begin the fade on the object in-place
+            chip.startFading(now);
+        }
+    }
+
+    // Remove and no longer draw fully faded-out chips
+    for (let i = chips.length - 1; i >= 0; --i) {
+        let chip = chips[i];
+        if (chip.isFading) {
+            chip.update(0, now);
+            chip.draw(ctx, true);
+            if (chip.fadeAlpha <= 0) {
+                chips.splice(i, 1);
+            }
+        }
+    }
+
+    for (let i = rewardPops.length - 1; i >= 0; --i) {
+        const alive = rewardPops[i].draw(ctx, now);
+        if (!alive) {
+            rewardPops.splice(i, 1);
+        }
+    }
+    drawPlinkoBinLabels(ctx);
+
+    requestAnimationFrame(draw);
+}
+draw();
+
+window.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        e.preventDefault()
+        dropChip();
+    }
+});
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === "r" || e.key === "R") {
+        playerChips = START_CHIPS;
+        droppedChipCount = 0;
+        chips = [];
+        fadingChips = [];
+        rewardPops = [];
+        updateChipsUI();
+    }
+});
+</script>
+</html>

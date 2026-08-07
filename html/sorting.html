@@ -1,0 +1,1399 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sorting Algorithms</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        overflow: hidden;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    .rangee {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        z-index: 2;
+        accent-color: #8aa;
+    }
+    .text {
+        z-index: 5;
+        position: absolute;
+        top: -10px;
+        left: 140px;
+        color: #fff
+    }
+    #st {
+        top: 26px;
+    }
+    #sorttext {
+        top: 12px
+    }
+    #amt {
+        top: 47px;
+    }
+    #lentext{
+        top: 32px
+    }
+    #tickDisp {
+        top: -12px;
+        left: unset;
+        right: 8px;
+        text-align: right;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+ <input type="range" id="tpt" min="0.0001" max="100"  value="10" class="rangee" step="0.001">
+ <p id="speedtext" class="text">⚡️10</p>
+ <!-- Extended to 16 for Pancake Sort -->
+ <input type="range" id="st" min="1" max="16" value="1" class="rangee">
+ <p id="sorttext" class="text">Bubble Sort</p>
+ <input type="range" id="amt" min="2" max="1000" value="100" class="rangee" step="1">
+ <p id="lentext" class="text">100 items</p>
+ <p id="tickDisp" class="text">t10</p>
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+const tptinput = document.getElementById("tpt");
+const sortText = document.getElementById("sorttext");
+const sortTypeInput = document.getElementById("st");
+const lenInput = document.getElementById("amt");
+const lenText = document.getElementById("lentext");
+const ticksDisplay = document.getElementById("tickDisp");
+let ticks = 0;
+
+let keysPressed = [];
+let sorttype = "bubble";
+
+let sortsNames = [
+    "Bubble Sort",
+    "Cocktail Shaker Sort",
+    "Selection Sort",
+    "Insertion Sort",
+    "Merge Sort",
+    "Quick Sort",
+    "Heap Sort",
+    "3-Way Merge Sort",
+    "Stooge Sort",
+    "Radix Sort",
+    "Gnome Sort",
+    "Slowsort",
+    "Shell Sort",
+    "Odd-Even Sort",
+    "Comb Sort",
+    "Pancake Sort"
+];
+
+// Add Pancake Sort detection in index 16 and extend max value for the range input
+sortTypeInput.addEventListener("input", () => {
+    sortText.textContent = sortsNames[sortTypeInput.value - 1];
+    if (sortTypeInput.value == "1") {
+        sorttype = "bubble";
+    } else if (sortTypeInput.value == "2") {
+        sorttype = "cocktail";
+    } else if (sortTypeInput.value == "3") {
+        sorttype = "selection";
+    } else if (sortTypeInput.value == "4") {
+        sorttype = "insertion";
+    } else if (sortTypeInput.value == "5") {
+        sorttype = "merge";
+    } else if (sortTypeInput.value == "6") {
+        sorttype = "quick";
+    } else if (sortTypeInput.value == "7") {
+        sorttype = "heap";
+    } else if (sortTypeInput.value == "8") {
+        sorttype = "3waymerge";
+    } else if (sortTypeInput.value == "9") {
+        sorttype = "stooge";
+    } else if (sortTypeInput.value == "10") {
+        sorttype = "radix";
+    } else if (sortTypeInput.value == "11") {
+        sorttype = "gnome";
+    } else if (sortTypeInput.value == "12") {
+        sorttype = "slowsort";
+    } else if (sortTypeInput.value == "13") {
+        sorttype = "shell";
+    } else if (sortTypeInput.value == "14") {
+        sorttype = "oddeven";
+    } else if (sortTypeInput.value == "15") {
+        sorttype = "comb";
+    } else if (sortTypeInput.value == "16") {
+        sorttype = "pancake";
+    }
+    generateList();
+    resetSortState();
+})
+
+let list = [];
+
+// Gnome sort variables
+let gnomeSortIndex = 0;
+let gnomeSortDone = false;
+
+// Slowsort variables
+let slowsortStack = [];
+let slowsortSorted = false;
+let slowsortInited = false;
+
+// Shell Sort variables
+let shellSortGap = 0;
+let shellSortI = 0;
+let shellSortJ = 0;
+let shellSortDone = false;
+
+// Cocktail Shaker Sort variables
+let cocktailLeft = 0;
+let cocktailRight = 0;
+let cocktailIndex = 0;
+let cocktailDirection = 1; // 1 = right, -1 = left
+let cocktailSorted = false;
+
+// Odd-Even Sort variables
+let oddEvenSortPhase = "even"; // "even" or "odd"
+let oddEvenSortIndex = 0;
+let oddEvenSorted = false;
+let oddEvenSwapped = true;
+
+// Comb Sort variables
+let combSortGap = 0;
+let combSortSwapped = false;
+let combSortIndex = 0;
+let combSortDone = false;
+
+// Pancake sort variables
+let pancakeSortCurrN = 0;
+let pancakeSortPhase = 0; // 0=search max, 1=flip max to front, 2=flip to correct place
+let pancakeSortMaxIdx = 0;
+let pancakeSortFlipIndex = 0;
+let pancakeSortFlipTarget = 0;
+let pancakeSortStep = 0;
+let pancakeSortDone = false;
+
+function generateList(length) {
+    list = [];
+    ticks = 0;
+
+    for (let i = 0; i < lenInput.value; i++) {
+        if (sorttype === 'radix') {
+            list.push(Math.floor(Math.random() * 10000)); // [0, 9999]
+        } else {
+            list.push(Math.random() * 100);
+        }
+    }
+    gnomeSortIndex = 0;
+    gnomeSortDone = false;
+
+    slowsortStack = [];
+    slowsortSorted = false;
+    slowsortInited = false;
+
+    // Shell sort reset
+    shellSortGap = 0;
+    shellSortI = 0;
+    shellSortJ = 0;
+    shellSortDone = false;
+
+    // Cocktail sort reset
+    cocktailLeft = 0;
+    cocktailRight = list.length - 1;
+    cocktailIndex = 0;
+    cocktailDirection = 1;
+    cocktailSorted = false;
+
+    // Odd-Even sort reset
+    oddEvenSortPhase = "even";
+    oddEvenSortIndex = 0;
+    oddEvenSorted = false;
+    oddEvenSwapped = true;
+
+    // Comb sort reset
+    combSortGap = list.length;
+    combSortSwapped = true;
+    combSortIndex = 0;
+    combSortDone = false;
+
+    // Pancake sort
+    pancakeSortCurrN = list.length;
+    pancakeSortPhase = 0;
+    pancakeSortMaxIdx = 0;
+    pancakeSortFlipIndex = 0;
+    pancakeSortFlipTarget = 0;
+    pancakeSortStep = 0;
+    pancakeSortDone = false;
+}
+
+function sleep(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById("speedtext").textContent = `⚡️${Number(tptinput.value).toFixed(3)}`;
+    ticksDisplay.textContent = `t${ticks}`;
+    let drawX = 0;
+    for (let i = 0; i < list.length; i++) {
+        let colorValue = list[i];
+        if (sorttype === "radix") {
+            colorValue = (list[i] / 9999) * 100;
+        }
+        ctx.fillStyle = `hsl(${colorValue * 3.6},50%,50%)`;
+        const height = colorValue * canvas.height / 100
+        ctx.fillRect(drawX, canvas.height - height, canvas.width / list.length, height);
+        drawX += canvas.width / list.length;
+    }
+    requestAnimationFrame(draw)
+}
+
+// --- Sorting state variables for all sort algorithms (same as before, omitted for brevity) ---
+let bubbleSortIndex = 0;
+let bubbleSorted = false;
+let selectionSortCurrent = 0;
+let selectionSortMinIndex = 0;
+let selectionSortInner = 1;
+let selectionSorted = false;
+let insertionSortCurrent = 1;
+let insertionSortInner = 1;
+let insertionSortDone = false;
+let mergeSortStack = [];
+let mergeSortAux = [];
+let mergeSortWidth = 1;
+let mergeSortDone = false;
+let mergeSortStep = 0;
+let mergeSortPos = 0;
+let quickSortStack = [];
+let quickSortDone = false;
+let quickSortPartition = null;
+let quickSortStep = 0;
+let quickSortSorted = false;
+let heapSortSize = 0;
+let heapSortPhase = "heapify";
+let heapSortI = 0;
+let heapSortDone = false;
+let heapSortHeapifyI = 0;
+let heapSortIsNew = true;
+let heapSortHeapifyAction = null;
+let heapSortSortdownJ = 0;
+let heapSortSortdownSwap = false;
+let merge3SortWidth = 1;
+let merge3SortStep = 0;
+let merge3SortPos = 0;
+let merge3SortAux = [];
+let merge3SortDone = false;
+let merge3Left = undefined, merge3Mid1 = undefined, merge3Mid2 = undefined, merge3End = undefined, merge3Target = undefined;
+let merge3I = undefined, merge3J = undefined, merge3K = undefined;
+let stoogeSortStack = [];
+let stoogeSorted = false;
+let stoogeSortInited = false;
+let radixSortDone = false;
+let radixSortDigit = 0;
+let radixSortMaxDigit = 0;
+let radixSortBuckets = [];
+let radixSortPhase = "init";
+let radixSortPos = 0;
+let radixSortBucketIndex = 0;
+let radixSortCollectIndex = 0;
+let radixSortCollectSubIndex = 0;
+let radixSortMax = 0;
+
+// Comb Sort state variables already declared above
+
+// Pancake Sort state is above
+
+let waiting = false;
+
+
+function slowsortTick() {
+    if (slowsortSorted) return;
+
+    if (!slowsortInited) {
+        slowsortStack = [{
+            start: 0,
+            end: list.length - 1,
+            step: 0
+        }];
+        slowsortInited = true;
+    }
+
+    while (slowsortStack.length > 0) {
+        let frame = slowsortStack[slowsortStack.length - 1];
+        let start = frame.start;
+        let end = frame.end;
+        if (start >= end) {
+            slowsortStack.pop();
+            continue; // done for this call
+        }
+        let mid = Math.floor((start + end) / 2);
+
+        if (frame.step === 0) {
+            // Call slowsort(start, mid)
+            slowsortStack.push({
+                start: start,
+                end: mid,
+                step: 0
+            });
+            frame.step = 1;
+            break; // Only one action per tick
+        } else if (frame.step === 1) {
+            // Call slowsort(mid+1, end)
+            slowsortStack.push({
+                start: mid + 1,
+                end: end,
+                step: 0
+            });
+            frame.step = 2;
+            break;
+        } else if (frame.step === 2) {
+            // Swap if list[end] < list[mid]
+            if (list[end] < list[mid]) {
+                let temp = list[end];
+                list[end] = list[mid];
+                list[mid] = temp;
+            }
+            // Call slowsort(start, end-1)
+            slowsortStack.push({
+                start: start,
+                end: end - 1,
+                step: 0
+            });
+            frame.step = 3;
+            break;
+        } else if (frame.step === 3) {
+            slowsortStack.pop();
+            continue;
+        }
+    }
+    if (slowsortStack.length === 0 && !slowsortSorted) {
+        slowsortSorted = fullySorted();
+    }
+}
+
+// ===== Shell Sort (tick-based, per gap and per pass) =====
+function shellSortTick() {
+    if (shellSortDone) return;
+    let n = list.length;
+
+    if (shellSortGap === 0) {
+        shellSortGap = Math.floor(n / 2);
+        shellSortI = shellSortGap;
+        shellSortJ = shellSortI;
+    }
+
+    while (shellSortGap > 0 && shellSortI < n) {
+        if (shellSortJ >= shellSortGap && list[shellSortJ] < list[shellSortJ - shellSortGap]) {
+            // Swap
+            let temp = list[shellSortJ];
+            list[shellSortJ] = list[shellSortJ - shellSortGap];
+            list[shellSortJ - shellSortGap] = temp;
+            shellSortJ -= shellSortGap;
+            // Only one swap/tick for visuals
+            return;
+        } else {
+            shellSortI++;
+            shellSortJ = shellSortI;
+        }
+    }
+
+    if (shellSortGap > 0 && shellSortI >= n) {
+        shellSortGap = Math.floor(shellSortGap / 2);
+        shellSortI = shellSortGap;
+        shellSortJ = shellSortI;
+        if (shellSortGap === 0) {
+            shellSortDone = fullySorted();
+        }
+    }
+}
+
+// ===== Comb Sort (tick-based) =====
+function combSortTick() {
+    if (combSortDone) return;
+    let n = list.length;
+    let shrink = 1.3;
+    if (combSortGap > 1) {
+        combSortGap = Math.floor(combSortGap / shrink);
+        if (combSortGap < 1) combSortGap = 1;
+    }
+    combSortSwapped = false;
+    // Iterate through the array with current gap
+    if (typeof combSortIndex === "undefined" || combSortIndex >= n - combSortGap) combSortIndex = 0;
+    if (combSortGap === 1 && fullySorted()) {
+        combSortDone = true;
+        return;
+    }
+    if (combSortIndex < n - combSortGap) {
+        if (list[combSortIndex] > list[combSortIndex + combSortGap]) {
+            let temp = list[combSortIndex];
+            list[combSortIndex] = list[combSortIndex + combSortGap];
+            list[combSortIndex + combSortGap] = temp;
+            combSortSwapped = true;
+        }
+        combSortIndex++;
+    } else {
+        if (combSortGap === 1 && !combSortSwapped && fullySorted()) {
+            combSortDone = true;
+        }
+        combSortIndex = 0;
+    }
+}
+
+// ===== Pancake Sort (tick-based) =====
+function pancakeSortTick() {
+    if (pancakeSortDone) return;
+    if (pancakeSortCurrN <= 1) {
+        pancakeSortDone = fullySorted();
+        return;
+    }
+
+    // Phase 0: find max index in unsorted prefix
+    if (pancakeSortPhase === 0) {
+        pancakeSortMaxIdx = 0;
+        for (let i = 1; i < pancakeSortCurrN; i++) {
+            if (list[i] > list[pancakeSortMaxIdx]) {
+                pancakeSortMaxIdx = i;
+            }
+        }
+        if (pancakeSortMaxIdx === pancakeSortCurrN - 1) {
+            // Max already at end, skip to next n
+            pancakeSortCurrN--;
+            pancakeSortPhase = 0;
+            return;
+        }
+        pancakeSortFlipIndex = 0;
+        pancakeSortFlipTarget = pancakeSortMaxIdx;
+        pancakeSortPhase = 1;
+        // No break, do not flip in same tick
+        return;
+    }
+    // Phase 1: flip the prefix up to max to front (if needed)
+    else if (pancakeSortPhase === 1) {
+        if (pancakeSortFlipTarget > 0) {
+            // Only do one swap per tick for animation
+            if (pancakeSortFlipIndex < pancakeSortFlipTarget - pancakeSortFlipIndex) {
+                let tmp = list[pancakeSortFlipIndex];
+                list[pancakeSortFlipIndex] = list[pancakeSortFlipTarget - pancakeSortFlipIndex];
+                list[pancakeSortFlipTarget - pancakeSortFlipIndex] = tmp;
+                pancakeSortFlipIndex++;
+                return;
+            } else {
+                pancakeSortPhase = 2;
+                pancakeSortFlipIndex = 0;
+                pancakeSortFlipTarget = pancakeSortCurrN - 1;
+                return;
+            }
+        } else {
+            pancakeSortPhase = 2;
+            pancakeSortFlipIndex = 0;
+            pancakeSortFlipTarget = pancakeSortCurrN - 1;
+            return;
+        }
+    }
+    // Phase 2: flip from 0..currN-1 to move max to correct position
+    else if (pancakeSortPhase === 2) {
+        if (pancakeSortFlipTarget > 0) {
+            if (pancakeSortFlipIndex < pancakeSortFlipTarget - pancakeSortFlipIndex) {
+                let tmp = list[pancakeSortFlipIndex];
+                list[pancakeSortFlipIndex] = list[pancakeSortFlipTarget - pancakeSortFlipIndex];
+                list[pancakeSortFlipTarget - pancakeSortFlipIndex] = tmp;
+                pancakeSortFlipIndex++;
+                return;
+            } else {
+                pancakeSortCurrN--;
+                pancakeSortPhase = 0;
+                pancakeSortFlipIndex = 0;
+                pancakeSortFlipTarget = 0;
+                return;
+            }
+        } else {
+            pancakeSortCurrN--;
+            pancakeSortPhase = 0;
+            pancakeSortFlipIndex = 0;
+            pancakeSortFlipTarget = 0;
+            return;
+        }
+    }
+}
+
+function cocktailSortTick() {
+    if (cocktailSorted) return;
+    if (cocktailLeft >= cocktailRight) {
+        cocktailSorted = fullySorted();
+        return;
+    }
+    if (cocktailDirection === 1) {
+        // Sweep right
+        if (cocktailIndex < cocktailRight) {
+            if (list[cocktailIndex] > list[cocktailIndex + 1]) {
+                let temp = list[cocktailIndex];
+                list[cocktailIndex] = list[cocktailIndex + 1];
+                list[cocktailIndex + 1] = temp;
+            }
+            cocktailIndex++;
+        } else {
+            cocktailRight--;
+            cocktailDirection = -1;
+            cocktailIndex = cocktailRight;
+        }
+    } else {
+        // Sweep left
+        if (cocktailIndex > cocktailLeft) {
+            if (list[cocktailIndex] < list[cocktailIndex - 1]) {
+                let temp = list[cocktailIndex];
+                list[cocktailIndex] = list[cocktailIndex - 1];
+                list[cocktailIndex - 1] = temp;
+            }
+            cocktailIndex--;
+        } else {
+            cocktailLeft++;
+            cocktailDirection = 1;
+            cocktailIndex = cocktailLeft;
+        }
+    }
+    if (cocktailLeft >= cocktailRight) {
+        cocktailSorted = fullySorted();
+    }
+}
+
+// ===== Odd-Even Sort (Brick Sort, tick-based) =====
+function oddEvenSortTick() {
+    if (oddEvenSorted) return;
+    let n = list.length;
+    if (!oddEvenSwapped && oddEvenSortPhase === "even" && oddEvenSortIndex === 0) {
+        oddEvenSorted = fullySorted();
+        return;
+    }
+    if (oddEvenSortIndex === 0) {
+        oddEvenSwapped = false;
+    }
+    // Main tick: do one comparison (and swap if needed) per tick
+    if (oddEvenSortPhase === "even") {
+        if (oddEvenSortIndex < n - 1) {
+            if (list[oddEvenSortIndex] > list[oddEvenSortIndex + 1]) {
+                let tmp = list[oddEvenSortIndex];
+                list[oddEvenSortIndex] = list[oddEvenSortIndex + 1];
+                list[oddEvenSortIndex + 1] = tmp;
+                oddEvenSwapped = true;
+            }
+            oddEvenSortIndex += 2;
+        } else {
+            // Switch to odd phase
+            oddEvenSortPhase = "odd";
+            oddEvenSortIndex = 1;
+        }
+    } else { // odd phase
+        if (oddEvenSortIndex < n - 1) {
+            if (list[oddEvenSortIndex] > list[oddEvenSortIndex + 1]) {
+                let tmp = list[oddEvenSortIndex];
+                list[oddEvenSortIndex] = list[oddEvenSortIndex + 1];
+                list[oddEvenSortIndex + 1] = tmp;
+                oddEvenSwapped = true;
+            }
+            oddEvenSortIndex += 2;
+        } else {
+            // Switch to even phase
+            oddEvenSortPhase = "even";
+            oddEvenSortIndex = 0;
+        }
+    }
+}
+
+function resetSortState() {
+    bubbleSortIndex = 0;
+    bubbleSorted = false;
+
+    cocktailLeft = 0;
+    cocktailRight = list.length - 1;
+    cocktailIndex = 0;
+    cocktailDirection = 1;
+    cocktailSorted = false;
+
+    selectionSortCurrent = 0;
+    selectionSortMinIndex = 0;
+    selectionSortInner = selectionSortCurrent + 1;
+    selectionSorted = false;
+    insertionSortCurrent = 1;
+    insertionSortInner = 1;
+    insertionSortDone = false;
+
+    mergeSortAux = new Array(list.length);
+    mergeSortWidth = 1;
+    mergeSortStep = 0;
+    mergeSortPos = 0;
+    mergeSortDone = false;
+
+    quickSortStack = [];
+    if (list.length > 0) {
+        quickSortStack.push({ left: 0, right: list.length - 1 });
+    }
+    quickSortDone = false;
+    quickSortPartition = null;
+    quickSortStep = 0;
+    quickSortSorted = false;
+
+    heapSortSize = list.length;
+    heapSortI = Math.floor(list.length / 2) - 1;
+    heapSortHeapifyI = heapSortI;
+    heapSortPhase = "heapify";
+    heapSortHeapifyAction = null;
+    heapSortSortdownJ = list.length - 1;
+    heapSortSortdownSwap = false;
+    heapSortIsNew = true;
+    heapSortDone = false;
+
+    merge3SortAux = new Array(list.length);
+    merge3SortWidth = 1;
+    merge3SortStep = 0;
+    merge3SortPos = 0;
+    merge3SortDone = false;
+    merge3Left = undefined; merge3Mid1 = undefined; merge3Mid2 = undefined; merge3End = undefined; merge3Target = undefined;
+    merge3I = undefined; merge3J = undefined; merge3K = undefined;
+
+    stoogeSortStack = [];
+    stoogeSorted = false;
+    stoogeSortInited = false;
+
+    radixSortDone = false;
+    radixSortDigit = 0;
+    radixSortMaxDigit = 0;
+    radixSortBuckets = [];
+    radixSortPhase = "init";
+    radixSortPos = 0;
+    radixSortBucketIndex = 0;
+    radixSortCollectIndex = 0;
+    radixSortCollectSubIndex = 0;
+    radixSortMax = 0;
+
+    gnomeSortIndex = 0;
+    gnomeSortDone = false;
+
+    slowsortStack = [];
+    slowsortSorted = false;
+    slowsortInited = false;
+
+    // Reset shell sort
+    shellSortGap = 0;
+    shellSortI = 0;
+    shellSortJ = 0;
+    shellSortDone = false;
+
+    // Reset cocktail shaker sort
+    cocktailLeft = 0;
+    cocktailRight = list.length - 1;
+    cocktailIndex = 0;
+    cocktailDirection = 1;
+    cocktailSorted = false;
+
+    // Reset odd-even sort
+    oddEvenSortPhase = "even";
+    oddEvenSortIndex = 0;
+    oddEvenSorted = false;
+    oddEvenSwapped = true;
+
+    // Reset comb sort
+    combSortGap = list.length;
+    combSortSwapped = true;
+    combSortIndex = 0;
+    combSortDone = false;
+
+    // Reset pancake sort
+    pancakeSortCurrN = list.length;
+    pancakeSortPhase = 0;
+    pancakeSortMaxIdx = 0;
+    pancakeSortFlipIndex = 0;
+    pancakeSortFlipTarget = 0;
+    pancakeSortStep = 0;
+    pancakeSortDone = false;
+
+    waiting = false;
+}
+
+function fullySorted() {
+    if (sorttype === "radix") {
+        for (let i = 0; i < list.length - 1; i++) {
+            if (Math.floor(list[i]) > Math.floor(list[i + 1])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    for (let i = 0; i < list.length - 1; i++) {
+        if (list[i] > list[i + 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function mergeSortTick() {
+    if (mergeSortDone) return;
+
+    let n = list.length;
+    if (mergeSortWidth >= n) {
+        mergeSortDone = fullySorted();
+        return;
+    }
+
+    let start = mergeSortStep * 2 * mergeSortWidth;
+    if (start >= n) {
+        mergeSortWidth *= 2;
+        mergeSortStep = 0;
+        mergeSortPos = 0;
+        if (mergeSortWidth >= n) {
+            mergeSortDone = fullySorted();
+            return;
+        }
+        return;
+    }
+    let mid = Math.min(start + mergeSortWidth, n);
+    let end = Math.min(start + 2 * mergeSortWidth, n);
+
+    if (mergeSortPos === 0) {
+        for (let i = start; i < end; i++) {
+            mergeSortAux[i] = list[i];
+        }
+        mergeSortLeft = start;
+        mergeSortRight = mid;
+        mergeSortTarget = start;
+    }
+
+    if (typeof mergeSortLeft === 'undefined') mergeSortLeft = start;
+    if (typeof mergeSortRight === 'undefined') mergeSortRight = mid;
+    if (typeof mergeSortTarget === 'undefined') mergeSortTarget = start;
+
+    if (mergeSortLeft < mid && (mergeSortRight >= end || mergeSortAux[mergeSortLeft] <= mergeSortAux[mergeSortRight])) {
+        list[mergeSortTarget] = mergeSortAux[mergeSortLeft];
+        mergeSortLeft++;
+        mergeSortTarget++;
+        mergeSortPos++;
+    } else if (mergeSortRight < end) {
+        list[mergeSortTarget] = mergeSortAux[mergeSortRight];
+        mergeSortRight++;
+        mergeSortTarget++;
+        mergeSortPos++;
+    } else {
+        mergeSortStep++;
+        mergeSortPos = 0;
+        mergeSortLeft = undefined;
+        mergeSortRight = undefined;
+        mergeSortTarget = undefined;
+    }
+}
+
+// ===== 3-Way Merge Sort implementation (bottom-up, iterative) =====
+function merge3SortTick() {
+    if (merge3SortDone) return;
+    let n = list.length;
+    if (merge3SortWidth >= n) {
+        merge3SortDone = fullySorted();
+        return;
+    }
+    let start = merge3SortStep * 3 * merge3SortWidth;
+    if (start >= n) {
+        merge3SortWidth *= 3;
+        merge3SortStep = 0;
+        merge3SortPos = 0;
+        if (merge3SortWidth >= n) {
+            merge3SortDone = fullySorted();
+            return;
+        }
+        return;
+    }
+
+    let mid1 = Math.min(start + merge3SortWidth, n);
+    let mid2 = Math.min(start + 2 * merge3SortWidth, n);
+    let end = Math.min(start + 3 * merge3SortWidth, n);
+
+    if (merge3SortPos === 0) {
+        for (let i = start; i < end; i++) {
+            merge3SortAux[i] = list[i];
+        }
+        merge3Left = start;
+        merge3Mid1 = mid1;
+        merge3Mid2 = mid2;
+        merge3End = end;
+        merge3Target = start;
+        merge3I = start;
+        merge3J = mid1;
+        merge3K = mid2;
+    }
+
+    if (typeof merge3I === "undefined") merge3I = start;
+    if (typeof merge3J === "undefined") merge3J = mid1;
+    if (typeof merge3K === "undefined") merge3K = mid2;
+    if (typeof merge3Target === "undefined") merge3Target = start;
+
+    function v(i, upper, arr) {
+        return (i < upper) ? arr[i] : Infinity;
+    }
+
+    if (merge3I < mid1 || merge3J < mid2 || merge3K < end) {
+        let vi = v(merge3I, mid1, merge3SortAux);
+        let vj = v(merge3J, mid2, merge3SortAux);
+        let vk = v(merge3K, end, merge3SortAux);
+
+        if (vi <= vj && vi <= vk) {
+            list[merge3Target] = vi;
+            merge3I++;
+        } else if (vj <= vi && vj <= vk) {
+            list[merge3Target] = vj;
+            merge3J++;
+        } else {
+            list[merge3Target] = vk;
+            merge3K++;
+        }
+        merge3Target++;
+        merge3SortPos++;
+    } else {
+        merge3SortStep++;
+        merge3SortPos = 0;
+        merge3Left = undefined;
+        merge3Mid1 = undefined;
+        merge3Mid2 = undefined;
+        merge3End = undefined;
+        merge3Target = undefined;
+        merge3I = undefined;
+        merge3J = undefined;
+        merge3K = undefined;
+    }
+}
+
+// ===== Stooge Sort tick-based iterative visual implementation =====
+function stoogeSortTick() {
+    if (stoogeSorted) return;
+
+    if (!stoogeSortInited) {
+        stoogeSortStack = [{
+            left: 0,
+            right: list.length - 1,
+            phase: 0
+        }];
+        stoogeSortInited = true;
+    }
+
+    if (stoogeSortStack.length === 0) {
+        stoogeSorted = true;
+        return;
+    }
+
+    let frame = stoogeSortStack[stoogeSortStack.length - 1];
+
+    let i = frame.left;
+    let j = frame.right;
+
+    if (i >= j) {
+        stoogeSortStack.pop();
+        return;
+    }
+
+    let len = j - i + 1;
+    let t = Math.floor(len / 3);
+
+    switch (frame.phase) {
+
+        case 0:
+            if (list[i] > list[j]) {
+                let temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+            }
+
+            if (len <= 2) {
+                stoogeSortStack.pop();
+            } else {
+                frame.phase = 1;
+            }
+            break;
+
+        case 1:
+            frame.phase = 2;
+            stoogeSortStack.push({
+                left: i,
+                right: j - t,
+                phase: 0
+            });
+            break;
+
+        case 2:
+            frame.phase = 3;
+            stoogeSortStack.push({
+                left: i + t,
+                right: j,
+                phase: 0
+            });
+            break;
+
+        case 3:
+            frame.phase = 4;
+            stoogeSortStack.push({
+                left: i,
+                right: j - t,
+                phase: 0
+            });
+            break;
+
+        case 4:
+            stoogeSortStack.pop();
+            break;
+    }
+}
+
+function quickSortTick() {
+    if (quickSortDone) return;
+    if (quickSortStack.length === 0) {
+        quickSortSorted = fullySorted();
+        quickSortDone = quickSortSorted;
+        return;
+    }
+
+    let frame = quickSortPartition || quickSortStack[quickSortStack.length - 1];
+    if (!quickSortPartition) {
+        frame = {
+            left: frame.left,
+            right: frame.right,
+            pivot: list[frame.right],
+            i: frame.left - 1,
+            j: frame.left,
+            done: false
+        };
+    }
+    let left = frame.left, right = frame.right;
+    if (left >= right) {
+        quickSortStack.pop();
+        quickSortPartition = null;
+        return;
+    }
+
+    if (frame.j < right) {
+        if (list[frame.j] < frame.pivot) {
+            frame.i++;
+            let temp = list[frame.i];
+            list[frame.i] = list[frame.j];
+            list[frame.j] = temp;
+        }
+        frame.j++;
+        quickSortPartition = frame;
+    } else {
+        let temp = list[frame.i + 1];
+        list[frame.i + 1] = list[right];
+        list[right] = temp;
+        let pi = frame.i + 1;
+        quickSortStack.pop();
+        if (pi + 1 < right) {
+            quickSortStack.push({ left: pi + 1, right: right });
+        }
+        if (left < pi - 1) {
+            quickSortStack.push({ left: left, right: pi - 1 });
+        }
+        quickSortPartition = null;
+    }
+}
+
+function heapSortTick() {
+    if (heapSortDone) return;
+    if (list.length <= 1) {
+        heapSortDone = true;
+        return;
+    }
+    if (heapSortPhase === "heapify") {
+        if (heapSortIsNew) {
+            heapSortHeapifyI = Math.floor(list.length / 2) - 1;
+            heapSortIsNew = false;
+        }
+        if (heapSortHeapifyI < 0) {
+            heapSortPhase = "sortdown";
+            heapSortSortdownJ = list.length - 1;
+            return;
+        }
+        let i = heapSortHeapifyI;
+        let n = list.length;
+        if (!heapSortHeapifyAction) {
+            heapSortHeapifyAction = {i, largest: i, left: 2*i+1, right: 2*i+2, step: "start"};
+        }
+        let a = heapSortHeapifyAction;
+        if (a.left < n && list[a.left] > list[a.largest]) {
+            a.largest = a.left;
+        }
+        if (a.right < n && list[a.right] > list[a.largest]) {
+            a.largest = a.right;
+        }
+        if (a.largest != a.i) {
+            let temp = list[a.i];
+            list[a.i] = list[a.largest];
+            list[a.largest] = temp;
+            heapSortHeapifyAction = {i: a.largest, largest: a.largest, left: 2*a.largest+1, right: 2*a.largest+2, step: "continue"};
+        } else {
+            heapSortHeapifyI--;
+            heapSortHeapifyAction = null;
+        }
+    } else if (heapSortPhase === "sortdown") {
+        if (heapSortSortdownJ <= 0) {
+            heapSortDone = fullySorted();
+            return;
+        }
+        if (!heapSortSortdownSwap) {
+            let temp = list[0];
+            list[0] = list[heapSortSortdownJ];
+            list[heapSortSortdownJ] = temp;
+            heapSortSortdownSwap = true;
+            heapSortHeapifyAction = {i: 0, largest: 0, left: 1, right: 2, n: heapSortSortdownJ, step: "start"};
+            return;
+        }
+
+        let n = heapSortSortdownJ;
+        let a = heapSortHeapifyAction;
+        if (!a) {
+            heapSortSortdownJ--;
+            heapSortSortdownSwap = false;
+            return;
+        }
+        if (a.left < n && list[a.left] > list[a.largest]) {
+            a.largest = a.left;
+        }
+        if (a.right < n && list[a.right] > list[a.largest]) {
+            a.largest = a.right;
+        }
+        if (a.largest != a.i) {
+            let temp = list[a.i];
+            list[a.i] = list[a.largest];
+            list[a.largest] = temp;
+            heapSortHeapifyAction = {i: a.largest, largest: a.largest, left: 2*a.largest+1, right: 2*a.largest+2, n: n, step: "continue"};
+        } else {
+            heapSortSortdownJ--;
+            heapSortSortdownSwap = false;
+            heapSortHeapifyAction = null;
+        }
+    }
+}
+
+// ===== Radix Sort (LSD, base-10, non-negative only, iterative, per-tick visual steps) =====
+function radixSortTick() {
+    if (radixSortDone) return;
+    if (list.length <= 1) {
+        radixSortDone = true;
+        return;
+    }
+    switch (radixSortPhase) {
+        case "init":
+            // Only work with non-negative integers
+            radixSortMax = Math.max(0, ...list.map(x => Math.floor(x)));
+            radixSortDigit = 0;
+            radixSortMaxDigit = 0;
+            let tmp = radixSortMax;
+            while (tmp > 0) {
+                radixSortMaxDigit++;
+                tmp = Math.floor(tmp / 10);
+            }
+            if (radixSortMaxDigit === 0) radixSortMaxDigit = 1;
+            radixSortBuckets = Array.from({length:10}, () => []);
+            radixSortPhase = "distribute";
+            radixSortPos = 0;
+            radixSortBucketIndex = 0;
+            radixSortCollectIndex = 0;
+            radixSortCollectSubIndex = 0;
+            break;
+        case "distribute":
+            // Distribute elements to buckets — do one element per tick
+            if (radixSortPos < list.length) {
+                let val = Math.floor(list[radixSortPos]);
+                let digit = Math.floor(val / Math.pow(10, radixSortDigit)) % 10;
+                radixSortBuckets[digit].push(list[radixSortPos]);
+                radixSortPos++;
+            } else {
+                radixSortPhase = "collect";
+                radixSortBucketIndex = 0;
+                radixSortCollectIndex = 0;
+                radixSortCollectSubIndex = 0;
+            }
+            break;
+        case "collect":
+            // Collect elements from buckets, one bucket element per tick
+            if (radixSortBucketIndex < 10) {
+                if (radixSortCollectSubIndex < radixSortBuckets[radixSortBucketIndex].length) {
+                    list[radixSortCollectIndex] = radixSortBuckets[radixSortBucketIndex][radixSortCollectSubIndex];
+                    radixSortCollectIndex++;
+                    radixSortCollectSubIndex++;
+                } else {
+                    radixSortBucketIndex++;
+                    radixSortCollectSubIndex = 0;
+                }
+            } else {
+                radixSortDigit++;
+                if (radixSortDigit >= radixSortMaxDigit) {
+                    radixSortDone = fullySorted();
+                    radixSortPhase = "done";
+                } else {
+                    // Setup for next pass
+                    radixSortBuckets = Array.from({length:10}, () => []);
+                    radixSortPos = 0;
+                    radixSortBucketIndex = 0;
+                    radixSortCollectIndex = 0;
+                    radixSortCollectSubIndex = 0;
+                    radixSortPhase = "distribute";
+                }
+            }
+            break;
+        case "done":
+            radixSortDone = fullySorted();
+            break;
+    }
+}
+
+// ===== Gnome Sort (tick-based) =====
+function gnomeSortTick() {
+    if (gnomeSortDone) return;
+    let n = list.length;
+    // Gnome sort index starts at 0
+    if (gnomeSortIndex >= n - 1 && fullySorted()) {
+        gnomeSortDone = true;
+        return;
+    }
+    // Main gnome sort logic: one swap and index movement per tick
+    if (gnomeSortIndex < n && gnomeSortIndex > 0 && list[gnomeSortIndex] < list[gnomeSortIndex - 1]) {
+        // Swap with previous
+        let tmp = list[gnomeSortIndex];
+        list[gnomeSortIndex] = list[gnomeSortIndex - 1];
+        list[gnomeSortIndex - 1] = tmp;
+        gnomeSortIndex--;
+    } else {
+        gnomeSortIndex++;
+    }
+    if (gnomeSortIndex >= n && fullySorted()) {
+        gnomeSortDone = true;
+    }
+}
+
+function sortTick() {
+    if (sorttype == "bubble") {
+        if (waiting) { return }
+        if (bubbleSorted) {
+            return;
+        }
+        if (bubbleSortIndex < list.length - 1) {
+            if (list[bubbleSortIndex] > list[bubbleSortIndex + 1]) {
+                let temp = list[bubbleSortIndex];
+                list[bubbleSortIndex] = list[bubbleSortIndex + 1];
+                list[bubbleSortIndex + 1] = temp;
+            }
+            bubbleSortIndex++;
+        } else {
+            bubbleSortIndex = 0;
+            bubbleSorted = fullySorted();
+        }
+    } else if (sorttype == "cocktail") {
+        if (waiting) { return }
+        if (cocktailSorted) return;
+        cocktailSortTick();
+    } else if (sorttype == "selection") {
+        if (waiting) { return }
+        if (selectionSorted) {
+            return;
+        }
+        if (selectionSortCurrent >= list.length - 1) {
+            selectionSorted = fullySorted();
+            return;
+        }
+        selectionSortMinIndex = selectionSortCurrent;
+        for (let j = selectionSortCurrent + 1; j < list.length; j++) {
+            if (list[j] < list[selectionSortMinIndex]) {
+                selectionSortMinIndex = j;
+            }
+        }
+        if (selectionSortMinIndex !== selectionSortCurrent) {
+            let temp = list[selectionSortCurrent];
+            list[selectionSortCurrent] = list[selectionSortMinIndex];
+            list[selectionSortMinIndex] = temp;
+        }
+        selectionSortCurrent++;
+        selectionSortInner = selectionSortCurrent + 1;
+        if (selectionSortCurrent >= list.length - 1) {
+            selectionSorted = fullySorted();
+        }
+    } else if (sorttype == "insertion") {
+        if (waiting) { return }
+        if (insertionSortDone) {
+            return;
+        }
+        if (insertionSortCurrent >= list.length) {
+            insertionSortDone = fullySorted();
+            return;
+        }
+        if (insertionSortInner > 0 && list[insertionSortInner] < list[insertionSortInner - 1]) {
+            let temp = list[insertionSortInner];
+            list[insertionSortInner] = list[insertionSortInner - 1];
+            list[insertionSortInner - 1] = temp;
+            insertionSortInner--;
+        } else {
+            insertionSortCurrent++;
+            insertionSortInner = insertionSortCurrent;
+        }
+        if (insertionSortCurrent >= list.length) {
+            insertionSortDone = fullySorted();
+        }
+    } else if (sorttype == "merge") {
+        if (waiting) { return }
+        if (mergeSortDone) {
+            return;
+        }
+        mergeSortTick();
+    } else if (sorttype == "quick") {
+        if (waiting) { return }
+        if (quickSortDone) {
+            return;
+        }
+        quickSortTick();
+    } else if (sorttype == "heap") {
+        if (waiting) { return }
+        if (heapSortDone) {
+            return;
+        }
+        heapSortTick();
+    } else if (sorttype == "3waymerge") {
+        if (waiting) { return }
+        if (merge3SortDone) return;
+        merge3SortTick();
+    } else if (sorttype == "stooge") {
+        if (waiting) { return }
+        if (stoogeSorted) return;
+        stoogeSortTick();
+    } else if (sorttype == "radix") {
+        if (waiting) { return }
+        if (radixSortDone) return;
+        radixSortTick();
+    } else if (sorttype == "gnome") {
+        if (waiting) { return }
+        if (gnomeSortDone) return;
+        gnomeSortTick();
+    } else if (sorttype == "slowsort") {
+        if (waiting) { return }
+        if (slowsortSorted) return;
+        slowsortTick();
+    } else if (sorttype == "shell") {
+        if (waiting) { return }
+        if (shellSortDone) return;
+        shellSortTick();
+    } else if (sorttype == "oddeven") {
+        if (waiting) { return }
+        if (oddEvenSorted) return;
+        oddEvenSortTick();
+    } else if (sorttype == "comb") {
+        if (waiting) { return }
+        if (combSortDone) return;
+        combSortTick();
+    } else if (sorttype == "pancake") {
+        if (waiting) { return }
+        if (pancakeSortDone) return;
+        pancakeSortTick();
+    }
+}
+
+async function sort() {
+    if (
+        (
+            (sorttype === "bubble" && bubbleSorted)
+            || (sorttype === "cocktail" && cocktailSorted)
+            || (sorttype === "selection" && selectionSorted)
+            || (sorttype === "insertion" && insertionSortDone)
+            || (sorttype === "merge" && mergeSortDone)
+            || (sorttype === "quick" && quickSortDone)
+            || (sorttype === "heap" && heapSortDone)
+            || (sorttype === "3waymerge" && merge3SortDone)
+            || (sorttype === "stooge" && stoogeSorted)
+            || (sorttype === "radix" && radixSortDone)
+            || (sorttype === "gnome" && gnomeSortDone)
+            || (sorttype === "slowsort" && slowsortSorted)
+            || (sorttype === "shell" && shellSortDone)
+            || (sorttype === "oddeven" && oddEvenSorted)
+            || (sorttype === "comb" && combSortDone)
+            || (sorttype === "pancake" && pancakeSortDone)
+        )
+        && !waiting
+    ) {
+        waiting = true;
+        setTimeout(() => {
+            generateList();
+            resetSortState();
+        }, 500);
+    }
+
+    let tptVal = tptinput.value;
+    if (sorttype == "bubble") { tptVal *= 4 }
+    if (sorttype == "cocktail") { tptVal *= 4 }
+    if (sorttype == "selection") { tptVal /= 30 }
+    if (sorttype == "insertion") { tptVal *= 1 }
+    if (sorttype == "merge") { tptVal /= 3 }
+    if (sorttype == "quick") { tptVal /= 3 }
+    if (sorttype == "heap") { tptVal /= 3 }
+    if (sorttype == "3waymerge") { tptVal /= 3 }
+    if (sorttype == "stooge") { tptVal *= 10 }
+    if (sorttype == "radix") { tptVal /= 3 }
+    if (sorttype == "gnome") { tptVal *= 1 }
+    if (sorttype == "slowsort") { tptVal *=100 }
+    if (sorttype == "shell") { tptVal /= 3 }
+    if (sorttype == "oddeven") { tptVal *= 2 }
+    if (sorttype == "comb") { tptVal *= 4 }
+    if (sorttype == "pancake") { tptVal = Math.pow(tptVal,1+list.length/1500) }
+    tptVal = Math.ceil(tptVal)
+
+    for (let i = 0; i < tptVal; i++) {
+        sortTick();
+        if (!fullySorted()) {ticks++}
+    }
+    requestAnimationFrame(sort)
+}
+
+draw();
+setTimeout(() => sort(), 100);
+
+function resizeCanvas() {
+    canvas.width = (window.innerWidth) - 25;
+    canvas.height = (window.innerHeight) - 25;
+    if (typeof generateListTimeout === "undefined" || !generateListTimeout) {
+        generateListTimeout = setTimeout(() => {
+            generateList();
+            resetSortState();
+            generateListTimeout = null;
+        }, 100);
+    }
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+    keysPressed[e.key.toLowerCase()] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+    keysPressed[e.key.toLowerCase()] = false;
+});
+
+let lenInputTimeout = null;
+lenInput.addEventListener("input", () => {
+    lenText.textContent = `${lenInput.value} items`;
+    if (lenInputTimeout) clearTimeout(lenInputTimeout);
+    lenInputTimeout = setTimeout(() => {
+        resetSortState();
+        generateList();
+        lenInputTimeout = null;
+    }, 100);
+});
+</script>
+</html>

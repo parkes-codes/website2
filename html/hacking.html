@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>01010010110001100</title>
+        <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+        <style>
+            body {
+                color: #6f6f;
+                font-family:  monospace;
+                background: #000;
+                margin: 0;
+                overflow: hidden;
+            }
+            #bgtext {
+                width: calc(100% - 5px);
+                position: absolute;
+                left: 5px;
+                top: 5px;
+                height: calc(100% - 5px);
+                white-space: pre-wrap;
+                word-break: break-all;
+                pointer-events: none;
+                opacity: 0.16;
+                z-index: 1;
+                font-size: 1.05em;
+            }
+            .falling-text {
+                position: absolute;
+                left: 0;
+                white-space: pre;
+                font-family: inherit;
+                color: #6f65;
+                z-index: 2;
+                user-select: none;
+                pointer-events: none;
+                will-change: transform;
+            }
+            .falling-img {
+                position: absolute;
+                left: 0;
+                z-index: 2;
+                user-select: none;
+                pointer-events: none;
+                filter: drop-shadow(0 0 6px #8ff588cc) hue-rotate(70deg) brightness(1.2) saturate(1.6) grayscale(0);
+                will-change: transform;
+                opacity: 0.94;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="bgtext"></div>
+    </body>
+    <script>
+        // --- BACKGROUND ANIMATION ---
+        const bgtext = document.getElementById("bgtext");
+        let binaryArr = [];
+        // Fix: bgtext.width and height are undefined. Use clientWidth/clientHeight, fallback to window
+        function getBinaryLen() {
+            // bgtext may not be visible, fallback to window size
+            const w = bgtext && bgtext.clientWidth ? bgtext.clientWidth : window.innerWidth;
+            const h = bgtext && bgtext.clientHeight ? bgtext.clientHeight : window.innerHeight;
+            return Math.floor((w * h) / 120);
+        }
+        let BINARY_LEN = getBinaryLen();
+        window.addEventListener('resize', () => { BINARY_LEN = getBinaryLen(); });
+   
+        function initBinaryArr() {
+            binaryArr = [];
+            for (let i = 0; i < BINARY_LEN; i++) {
+                binaryArr.push(Math.floor(Math.random() * 2).toString());
+            }
+        }
+        function bgTick() {
+            let temp = ""
+            for(let i = 0; i<25; i++) {temp+=(Math.random() < 0.5) ? "𝟏" : "𝟢"}
+            document.title = temp
+            if (binaryArr.length !== BINARY_LEN) {
+                initBinaryArr();
+            } else {
+                for (let i = 0; i < binaryArr.length; i++) {
+                    if (Math.random() < 0.1) {
+                        binaryArr[i] = (binaryArr[i] === '0' ? '1' : '0');
+                    }
+                }
+            }
+            bgtext.textContent = binaryArr.join('');
+            requestAnimationFrame(bgTick);
+        }
+        initBinaryArr();
+        bgTick();
+
+        // --- FAST FALLING TEXT (MATRIX-STYLE) ANIMATION ---
+        // PERFORMANCE OPTIMIZED! KEEP COLUMN COUNT AT 200!!
+
+        const FALLING_COLUMNS = 300;
+        const COLUMNS = [];
+        const binaryChars = ['0', '1'];
+        const COLUMN_LINE_LENGTH = 1;
+
+        // Font size range (px)
+        const MIN_FONT_SIZE = 16;
+        const MAX_FONT_SIZE = 48; // 16 + 32
+
+        function randomFontSize() {
+            return (MIN_FONT_SIZE + Math.random() * (MAX_FONT_SIZE - MIN_FONT_SIZE));
+        }
+
+        function speedForFontSize(fontSize) {
+            return fontSize * 0.85 / 10;
+        }
+
+        function opacityForFontSize(fontSize) {
+            const minO = 0.32;
+            const maxO = 0.99;
+            const normalized = (fontSize - MIN_FONT_SIZE) / (MAX_FONT_SIZE - MIN_FONT_SIZE);
+            return (minO + (maxO-minO)*normalized).toFixed(2);
+        }
+
+        const PLINKK_CHANCE = 0.004; // 5% chance to become plinkk.gif at reset
+
+        // -- OPTIMIZED: Precompute for left position ensuring columns do not spawn offscreen horizontally
+        let precomputedColLefts = [];
+        function computeColLefts() {
+            precomputedColLefts.length = 0;
+            let W = window.innerWidth;
+
+            // Use the max font size for safe boundaries
+            // For text, roughly font size = width
+            // For plinkk.gif, scaled as fontSize * 1.3
+            // So safe width: maxImgWidth = MAX_FONT_SIZE * 1.3
+
+            const maxColWidth = MAX_FONT_SIZE * 1.3; // covers both .falling-text and .falling-img
+            const leftPadding = Math.ceil(maxColWidth / 2);
+            const rightPadding = Math.ceil(maxColWidth / 2);
+
+            // columns placed centered within [leftPadding, W - rightPadding]
+            let availableW = W - leftPadding - rightPadding;
+            for (let i = 0; i < FALLING_COLUMNS; i++) {
+                let frac = (i + 0.5) / FALLING_COLUMNS;
+                precomputedColLefts.push(leftPadding + (frac * availableW));
+            }
+        }
+
+        function createColumn(colIdx, columnsTotal) {
+            const div = document.createElement('div');
+            div.className = 'falling-text';
+
+            const img = document.createElement('img');
+            img.src = 'plinkk.gif';
+            img.className = 'falling-img';
+            img.style.display = 'none';
+
+            let fontSize = randomFontSize();
+            div.style.fontSize = `${fontSize}px`;
+
+            // Use precomputed left (which is always safe horizontally)
+            let colLeft = precomputedColLefts[colIdx];
+            div.style.left = `${colLeft}px`;
+            img.style.left = `${colLeft}px`;
+            div.textContent = "";
+
+            div.style.opacity = opacityForFontSize(fontSize);
+
+            document.body.appendChild(div);
+            document.body.appendChild(img);
+
+            const lineLength = COLUMN_LINE_LENGTH;
+            let chars = Array(lineLength).fill().map(() => binaryChars[Math.floor(Math.random() * 2)]);
+            let y = -800;
+            let speed = speedForFontSize(fontSize);
+            let maxY = window.innerHeight + Math.random() * 60;
+            let isPlinkk = false;
+            let plinkkShowTimer = null;
+
+            // Performance: store string so textContent is only updated when it changes, plus y
+            let lastRenderedY = null;
+            let lastRenderedText = null;
+            let lastRenderedOpacity = null;
+
+            // Attach updateChars as a method on the returned object
+            function updateChars() {
+                // Reduce char mutation checks, only randomize every ~4 frames for perf
+                if (!isPlinkk && Math.random() < 0.025) {
+                    const idx = Math.floor(Math.random() * lineLength);
+                    if (Math.random() < 0.9) {
+                        chars[idx] = chars[idx] === '0' ? '1' : '0';
+                    } else {
+                        chars[idx] = binaryChars[Math.floor(Math.random() * 2)];
+                    }
+                }
+            }
+
+            const colObject = {
+                div,
+                img,
+                chars,
+                y,
+                speed,
+                fontSize,
+                lineLength,
+                maxY,
+                colIdx,
+                isPlinkk,
+                plinkkShowTimer,
+                lastRenderedY,
+                lastRenderedText,
+                lastRenderedOpacity,
+                updateChars, // fix: attach method so it's accessible outside!
+                reset: function () {
+                    if (!this.isPlinkk && Math.random() < PLINKK_CHANCE) {
+                        if (this.plinkkShowTimer) {
+                            clearTimeout(this.plinkkShowTimer);
+                            this.plinkkShowTimer = null;
+                        }
+                        this.isPlinkk = true;
+                        this.div.style.display = 'none';
+                        this.img.style.display = 'none';
+                        this.fontSize = randomFontSize();
+                        this.img.style.width = `${this.fontSize * 1.3}px`;
+                        this.img.style.height = `${this.fontSize * 1.3}px`;
+                        // Use precomputed left (always safe)
+                        let colLeft = precomputedColLefts[this.colIdx];
+                        this.img.style.left = `${colLeft}px`;
+                        this.y = -Math.random() * 700 - 140;
+                        this.speed = speedForFontSize(this.fontSize) * 1.18;
+                        this.maxY = window.innerHeight + Math.random() * 60;
+                        this.lastRenderedY = null;
+
+                        this.plinkkShowTimer = setTimeout(() => {
+                            this.img.style.display = 'block';
+                            this.plinkkShowTimer = null;
+                        }, 100);
+                    } else {
+                        if (this.plinkkShowTimer) {
+                            clearTimeout(this.plinkkShowTimer);
+                            this.plinkkShowTimer = null;
+                        }
+                        this.isPlinkk = false;
+                        this.div.style.display = '';
+                        this.img.style.display = 'none';
+
+                        this.fontSize = randomFontSize();
+                        this.div.style.fontSize = `${this.fontSize}px`;
+                        this.div.style.opacity = opacityForFontSize(this.fontSize);
+                        // Use precomputed left (always safe)
+                        let colLeft = precomputedColLefts[this.colIdx];
+                        this.div.style.left = `${colLeft}px`;
+                        this.y = -Math.random() * 600 - 200;
+                        this.speed = speedForFontSize(this.fontSize);
+                        this.maxY = window.innerHeight + Math.random() * 60;
+                        for (let i = 0; i < this.lineLength; i++) {
+                            this.chars[i] = binaryChars[Math.floor(Math.random() * 2)];
+                        }
+                        this.lastRenderedText = null;
+                        this.lastRenderedOpacity = null;
+                        this.lastRenderedY = null;
+                    }
+                }
+            };
+            return colObject;
+        }
+
+        function resizeColumns() {
+            for (let col of COLUMNS) {
+                if (col.plinkkShowTimer) {
+                    clearTimeout(col.plinkkShowTimer);
+                    col.plinkkShowTimer = null;
+                }
+                col.div.remove();
+                if (col.img) col.img.remove();
+            }
+            COLUMNS.length = 0;
+            computeColLefts();
+            for (let i = 0; i < FALLING_COLUMNS; i++) {
+                COLUMNS.push(createColumn(i, FALLING_COLUMNS));
+            }
+        }
+
+        let lastW = window.innerWidth, lastH = window.innerHeight;
+        function adaptSize() {
+            if (window.innerWidth !== lastW || window.innerHeight !== lastH) {
+                while (document.querySelector('.falling-text')) {
+                    document.querySelector('.falling-text').remove();
+                }
+                while (document.querySelector('.falling-img')) {
+                    document.querySelector('.falling-img').remove();
+                }
+                resizeColumns();
+                lastW = window.innerWidth;
+                lastH = window.innerHeight;
+            }
+        }
+
+        // --- Animation batching: combines all DOM reads/writes per frame and minimizes them ---
+
+        resizeColumns();
+        window.addEventListener('resize', adaptSize);
+
+        // Major perf win: batch what can be batched, minimize style/text writes, clamp animation FPS to 60
+        let lastAnimationFrame = 0;
+
+        function animateFalling(ts) {
+            adaptSize();
+            // Only run at real 60fps, skip extra RAFs (sometimes browser calls more)
+            if (ts - lastAnimationFrame < 14.5) {
+                requestAnimationFrame(animateFalling);
+                return;
+            }
+            lastAnimationFrame = ts;
+
+            for (let i = 0; i < COLUMNS.length; i++) {
+                let col = COLUMNS[i];
+                if (typeof col.updateChars === 'function') { // Defensive: ensure method exists
+                    col.updateChars();
+                }
+
+                // --- TEXT COLUMN ---
+                if (!col.isPlinkk) {
+                    // Only update .textContent if changed
+                    let txt = col.chars[0];
+                    if (txt !== col.lastRenderedText) {
+                        col.div.textContent = txt;
+                        col.lastRenderedText = txt;
+                    }
+
+                    // Only update .transform if changed
+                    if (col.y !== col.lastRenderedY) {
+                        col.div.style.transform = `translateY(${col.y}px)`;
+                        col.lastRenderedY = col.y;
+                    }
+                    col.y += col.speed;
+
+                    // Only update opacity if necessary
+                    let op = opacityForFontSize(col.fontSize);
+                    if (op !== col.lastRenderedOpacity) {
+                        col.div.style.opacity = op;
+                        col.lastRenderedOpacity = op;
+                    }
+                    if (col.y > col.maxY) {
+                        col.reset();
+                    }
+                // --- PLINKK COLUMN ---
+                } else {
+                    if (col.y !== col.lastRenderedY) {
+                        col.img.style.transform = `translateY(${col.y}px)`;
+                        col.lastRenderedY = col.y;
+                    }
+                    col.y += col.speed;
+
+                    // no need to update opacity for image
+                    if (col.y > col.maxY) {
+                        col.isPlinkk = false;
+                        if (col.plinkkShowTimer) {
+                            clearTimeout(col.plinkkShowTimer);
+                            col.plinkkShowTimer = null;
+                        }
+                        col.reset();
+                    }
+                }
+            }
+            requestAnimationFrame(animateFalling);
+        }
+        requestAnimationFrame(animateFalling);
+
+    </script>
+</html>

@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>OvO</title>
+        <style>
+            .fullscreen-btn {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                z-index: 10;
+                padding: 8px 16px;
+                background: #222;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+				cursor: pointer;
+                font-size: 16px;
+                opacity: 0.85;
+                transition: opacity 0.2s;
+            }
+            .fullscreen-btn:hover {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+		<div class="game-center">
+			<div id="Games" style="position:relative;">
+                <button class="fullscreen-btn" onclick="makeGameFullscreen()">Fullscreen</button>
+				<iframe id="game" title="OvO" src="https://www.hoodamath.com/mobile/games/ovo/game.html?nocheckorient=1" scrolling="no" allow="autoplay; fullscreen" style="width:728px;height:546px;margin:0;border:0;padding:0;"></iframe>
+				<div class="game-menu-bar" style="width:728px">
+				</div>
+			</div>
+		</div>
+	</center>
+        <script>
+            function makeGameFullscreen() {
+                var iframe = document.getElementById('game');
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.mozRequestFullScreen) { // Firefox
+                    iframe.mozRequestFullScreen();
+                } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) { // IE/Edge
+                    iframe.msRequestFullscreen();
+                }
+            }
+        </script>
+    </body>
+</html>

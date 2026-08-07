@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image to 3D Spinnable Cube</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #20222B;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #container {
+            width: 600px;
+            height: 600px;
+            margin: 40px auto 10px;
+            background: #111;
+            border-radius: 12px;
+            box-shadow: 0 8px 50px #0007 inset;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ctrl-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+        input[type="file"] {
+            display: block;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+        .hint {
+            margin: 10px;
+            font-size: 1.1em;
+            color: #bbb;
+        }
+        #autoSpinBtn {
+            display: block;
+            background: #284B63;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 22px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 0;
+            transition: background 0.2s;
+        }
+        #autoSpinBtn:hover {
+            background: #3c6b88;
+        }
+        select#rotMode {
+            margin: 0 4px;
+            padding: 7px 9px;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            background: #20222B;
+            color: #fff;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>Image To Cube</h2>
+    <div class="ctrl-row">
+        <input type="file" id="imgUpload" accept="image/*">
+        <button id="autoSpinBtn">Auto Spin</button>
+        <select id="rotMode" title="Cube rotation type">
+            <option value="y">Spin Y</option>
+            <option value="x">Spin X</option>
+            <option value="z">Spin Z</option>
+            <option value="xyz">Spin All Axes</option>
+            <option value="siney">Sine-Y (oscillate)</option>
+            <option value="sinexy">Sine-X/Y (oscillate)</option>
+            <option value="sinex">Sine-X (oscillate)</option>
+            <option value="sinez">Sine-Z (oscillate)</option>
+            <option value="diag">Diagonal Spin</option>
+            <option value="sinexyz">Sine X+Y+Z (oscillate)</option>
+            <option value="siney_x">Sine(Y) + spin Y</option>
+        </select>
+    </div>
+    <div class="hint">Upload an image - drag to spin, scroll to zoom</div>
+    <div id="container"></div>
+    
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script>
+        let canvas, engine, scene, camera, cube, defaultMaterial, userTexture = null;
+        // Auto-spin state
+        let autoSpin = false;
+        let autoSpinStartTime = 0;
+
+        function createScene() {
+            canvas = document.createElement("canvas");
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            canvas.width = 600;
+            canvas.height = 600;
+            document.getElementById('container').appendChild(canvas);
+            engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+            scene = new BABYLON.Scene(engine);
+            scene.clearColor = new BABYLON.Color3(0.125, 0.133, 0.168);
+            camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI/2, 6, BABYLON.Vector3.Zero(), scene);
+            camera.attachControl(canvas, true);
+            camera.lowerBetaLimit = null;
+            camera.upperBetaLimit = null;
+            camera.allowUpsideDown = true;
+            camera.angularSensibilityX = 400;
+            camera.angularSensibilityY = 400;
+            camera.lowerRadiusLimit = 2;
+            camera.upperRadiusLimit = 15;
+            camera.panningSensibility = 0;
+            const light = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0, 1, 0), scene);
+            light.intensity = 1.0;
+            light.diffuse = new BABYLON.Color3(1, 1, 1);
+            light.specular = new BABYLON.Color3(1, 1, 1);
+            light.groundColor = new BABYLON.Color3(1, 1, 1);
+            cube = BABYLON.MeshBuilder.CreateBox("cube", {size: 2}, scene);
+            defaultMaterial = new BABYLON.StandardMaterial("default", scene);
+            defaultMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1);
+            defaultMaterial.specularColor = new BABYLON.Color3(1, 1, 1);
+            defaultMaterial.emissiveColor = new BABYLON.Color3(1, 1, 1);
+            defaultMaterial.ambientColor = new BABYLON.Color3(1, 1, 1);
+            defaultMaterial.disableLighting = true;
+            cube.material = defaultMaterial;
+        }
+
+        function makeCubeSixFaceMaterials(imageUrl, onDone) {
+            let facesLoaded = 0;
+            const faceMats = [];
+            for (let i = 0; i < 6; ++i) {
+                const mat = new BABYLON.StandardMaterial("cube_face_" + i, scene);
+                const tex = new BABYLON.Texture(imageUrl, scene, false, false, BABYLON.Texture.TRILINEAR_SAMPLINGMODE, function() {
+                    facesLoaded++;
+                    if (facesLoaded === 6 && typeof onDone === "function") onDone(faceMats);
+                });
+                tex.hasAlpha = false;
+                mat.diffuseTexture = tex;
+                mat.diffuseColor = new BABYLON.Color3(1, 1, 1);
+                mat.specularColor = new BABYLON.Color3(1, 1, 1);
+                mat.emissiveColor = new BABYLON.Color3(1, 1, 1);
+                mat.ambientColor = new BABYLON.Color3(1, 1, 1);
+                mat.backFaceCulling = false;
+                mat.disableLighting = true;
+                faceMats.push(mat);
+            }
+            return faceMats;
+        }
+
+        function applySixFaceMaterialsToCube(imgUrl) {
+            if (!cube) return;
+            if (cube.material) {
+                if (cube.material instanceof BABYLON.MultiMaterial && cube.material.subMaterials) {
+                    cube.material.subMaterials.forEach(m => { 
+                        if (m && m.diffuseTexture) m.diffuseTexture.dispose();
+                        if (m) m.dispose();
+                    });
+                } else if (cube.material.diffuseTexture) {
+                    cube.material.diffuseTexture.dispose();
+                }
+                cube.material = null;
+            }
+            makeCubeSixFaceMaterials(imgUrl, faceMats => {
+                const multiMat = new BABYLON.MultiMaterial("cube-multimat", scene);
+                multiMat.subMaterials = faceMats;
+                cube.material = multiMat;
+                cube.subMeshes?.forEach(sm => sm.dispose && sm.dispose());
+                cube.subMeshes = [];
+                const faceVertexCount = 4;
+                const faceIndexCount = 6;
+                for (let f = 0; f < 6; f++) {
+                    new BABYLON.SubMesh(
+                        f,
+                        f * faceVertexCount,
+                        faceVertexCount,
+                        f * faceIndexCount,
+                        faceIndexCount,
+                        cube
+                    );
+                }
+            });
+        }
+
+        function getRotationFunc(mode, t, period) {
+            switch (mode) {
+                case "y":
+                    return {x: 0, y: 2 * Math.PI * t, z: 0};
+                case "x":
+                    return {x: 2 * Math.PI * t, y: 0, z: 0};
+                case "z":
+                    return {x: 0, y: 0, z: 2 * Math.PI * t};
+                case "xyz":
+                    return {x: 2 * Math.PI * t, y: 2 * Math.PI * t * 1.1, z: 2 * Math.PI * t * 1.2};
+                case "diag":
+                    return {x: 2 * Math.PI * t, y: 2 * Math.PI * t, z: 2 * Math.PI * t};
+                case "siney":
+                    return {x: 0, y: Math.sin(t * 2 * Math.PI) * (Math.PI/2), z: 0};
+                case "sinexy":
+                    return {x: Math.sin(t * 2 * Math.PI) * (Math.PI/3), y: Math.sin((t + 0.25) * 2 * Math.PI) * (Math.PI/2), z: 0 };
+                case "sinex":
+                    return {x: Math.sin(t * 2 * Math.PI) * (Math.PI/2), y: 0, z: 0 };
+                case "sinez":
+                    return {x: 0, y: 0, z: Math.sin(t * 2 * Math.PI) * (Math.PI/2) };
+                case "sinexyz":
+                    // Sine on all three axes, different phase for fun
+                    return {
+                        x: Math.sin(t * 2 * Math.PI) * (Math.PI/3),
+                        y: Math.sin((t + 0.33) * 2 * Math.PI) * (Math.PI/3),
+                        z: Math.sin((t + 0.66) * 2 * Math.PI) * (Math.PI/3)
+                    };
+                case "siney_x":
+                    return {
+
+                   
+                    };
+                   
+                    
+                default:
+                    return {x: 0, y: 2 * Math.PI * t, z: 0};
+            }
+        }
+
+        function mainRenderLoop() {
+            if (scene) {
+                if (autoSpin && cube) {
+                    let t = (performance.now() - autoSpinStartTime) * 0.001;
+                    let rotMode = rotModeSel.value || "xyz";
+                    let rot;
+                    if (
+                        rotMode === "siney" ||
+                        rotMode === "sinexy" ||
+                        rotMode === "sinex" ||
+                        rotMode === "sinez" ||
+                        rotMode === "sinexyz"
+                    ) {
+                        let duration = 2.0;
+                        let cycleT = (t % duration) / duration;
+                        rot = getRotationFunc(rotMode, cycleT, duration);
+                    } else if (rotMode === "siney_x") {
+                        let duration = 2.0;
+                        let cycleT = (t % duration) / duration;
+
+                        rot = {
+                            x: Math.sin(cycleT * 2 * Math.PI) * (Math.PI * 3 / 8) , // Keep linear accumulation (not periodic!)
+                            y: 0.5 * Math.PI * t, // Sine y, 1.5x amplitude
+                            z: 0
+                        };
+                    } else {
+                        rot = (function() {
+                            switch (rotMode) {
+                                case "y":
+                                    return {x: 0, y: t * 2 * Math.PI / 4.0, z: 0};
+                                case "x":
+                                    return {x: t * 2 * Math.PI / 4.0, y: 0, z: 0};
+                                case "z":
+                                    return {x: 0, y: 0, z: t * 2 * Math.PI / 4.0};
+                                case "diag":
+                                    return {x: t * 2 * Math.PI / 4.0, y: t * 2 * Math.PI / 4.0, z: t * 2 * Math.PI / 4.0};
+                                case "xyz":
+                                default:
+                                    return {
+                                        x: t * 2 * Math.PI / 4.0,
+                                        y: t * 2 * Math.PI * 1.1 / 4.0,
+                                        z: t * 2 * Math.PI * 1.2 / 4.0
+                                    };
+                            }
+                        })();
+                    }
+                    cube.rotation.x = rot.x;
+                    cube.rotation.y = rot.y;
+                    cube.rotation.z = rot.z;
+                }
+                scene.render();
+            }
+        }
+
+        let rotModeSel;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createScene();
+            document.getElementById('imgUpload').addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    if (userTexture && userTexture.dispose) userTexture.dispose();
+                    userTexture = null;
+                    applySixFaceMaterialsToCube(event.target.result);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            const autoSpinBtn = document.getElementById('autoSpinBtn');
+            autoSpinBtn.addEventListener('click', function () {
+                autoSpin = !autoSpin;
+                if (autoSpin) {
+                    autoSpinStartTime = performance.now();
+                    autoSpinBtn.textContent = "Stop Auto Spin";
+                } else {
+                    autoSpinBtn.textContent = "Auto Spin 3 Axes";
+                }
+            });
+
+            rotModeSel = document.getElementById('rotMode');
+
+            engine.runRenderLoop(mainRenderLoop);
+
+            window.addEventListener("resize", function () {
+                engine.resize();
+            });
+        });
+    </script>
+</body>
+</html>

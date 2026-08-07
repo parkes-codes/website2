@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>who up lighting they ning</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        overflow: hidden;
+    }
+      #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #modeInput {
+        accent-color: #aff;
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+        z-index: 5;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+ <input id="modeInput" type="range" min="1" max="2" step="1" value="1">
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+let keysPressed = [];
+
+let mouseDown = false;
+
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 0;
+let len = 0;
+let mouseX = 0;
+let mouseY = 0;
+let mode = 1;
+let t = 0;
+
+const modeSlider = document.getElementById("modeInput");
+
+modeSlider.addEventListener("input", (e) => {
+    mode = Number(modeSlider.value)
+})
+
+
+
+
+function draw() {
+    if (mouseDown) {t+=1/fps}
+    if (mouseDown && len < 100 && mode == 1) {len++}
+    ctx.fillStyle = "rgba(0,0,0,0.1)"
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    let x,y = 0;
+    if (mode == 1) {
+        if (mouseDown) {
+            ctx.strokeStyle = "#faf";
+            ctx.lineWidth = 5;
+            for (let n = 0; n<3; n++) {
+                x = -1* (canvas.width/2 - mouseX);
+                y = -1* (canvas.height/2 - mouseY);
+                let dir = Math.random() * Math.PI * 2;
+                for (let i = 0; i<len-Math.floor(Math.random()*(len/6)); i++) {
+                    ctx.strokeStyle = `hsl(${Math.random()*50+150},50%,60%)`;
+                    ctx.beginPath()
+                    ctx.moveTo(canvas.width/2+x,canvas.height/2+y);
+                    x+=Math.sin(dir+Math.random()*(1+len/30))*10; y+= Math.cos(dir+Math.random()*(1+len/30))*10
+                    ctx.lineTo(canvas.width/2 + x,canvas.height/2 + y)
+                    ctx.stroke()
+                }
+            }
+        } 
+    } else  {
+        ctx.fillStyle = "#111";
+        
+
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2 - 50, canvas.height);
+        ctx.lineTo(canvas.width / 2 + 50, canvas.height);
+        ctx.lineTo(canvas.width / 2, canvas.height - 300);
+        ctx.closePath();
+        ctx.fillStyle = "#111";
+        ctx.fill();
+
+
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height - 300, 30, 0, Math.PI * 2, false);
+        ctx.closePath();
+        ctx.fillStyle = `hsla(${Math.sin(t*3) * 30 + 170},50%,75%)`;
+        ctx.fill();
+
+    if (mouseDown) {
+        let tipX = canvas.width / 2;
+        let tipY = canvas.height - 300;
+
+        let currX = tipX;
+        let currY = tipY;
+        let stepLength = 10;
+
+        let particleTouchedMouse = false;
+
+        let safetyCounter = 0;
+        while (!particleTouchedMouse && safetyCounter < 2000) {
+            safetyCounter++;
+            let dx = mouseX - currX;
+            let dy = mouseY - currY;
+            let dist = Math.hypot(dx, dy);
+
+            if (!particleTouchedMouse && dist < stepLength) {
+                particleTouchedMouse = true;
+                for (let j = 0; j < 10+safetyCounter/2.5; j++) {
+                    let baseAngle = Math.atan2(dy, dx);
+                    let jitter = (Math.random() - 0.5) * (Math.PI / 3) * 4;
+                    let angle = baseAngle + jitter;
+
+                    let nextX = currX + Math.cos(angle) * stepLength;
+                    let nextY = currY + Math.sin(angle) * stepLength;
+
+                    ctx.strokeStyle = `hsl(${Math.random() * 50 + 150},50%,60%)`;
+                    ctx.lineWidth = 2 + Math.random() * 3;
+                    ctx.beginPath();
+                    ctx.moveTo(currX, currY);
+                    ctx.lineTo(nextX, nextY);
+                    ctx.stroke();
+
+                    currX = nextX;
+                    currY = nextY;
+                }
+                break;
+            }
+
+            let baseAngle = Math.atan2(dy, dx);
+            let jitter = (Math.random() - 0.5) * (Math.PI / 2);
+            let angle = baseAngle + jitter;
+
+            let nextX = currX + Math.cos(angle) * stepLength;
+            let nextY = currY + Math.sin(angle) * stepLength;
+
+            ctx.strokeStyle = `hsl(${Math.random() * 50 + 150},50%,60%)`;
+            ctx.lineWidth = 2 + Math.random() * 3;
+            ctx.beginPath();
+            ctx.moveTo(currX, currY);
+            ctx.lineTo(nextX, nextY);
+            ctx.stroke();
+
+            currX = nextX;
+            currY = nextY;
+        }
+    }
+
+
+   
+
+    }
+    requestAnimationFrame(draw)
+}
+
+draw();
+setTimeout(() => {
+ctx.fillStyle = "rgb(100,100,100)"
+ctx.fillRect(0,0,canvas.width,canvas.height)
+},10)
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+}
+
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+  keysPressed[e.key.toLowerCase()] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+  keysPressed[e.key.toLowerCase()] = false;
+});
+
+canvas.addEventListener("mousedown", () => {
+    if (!mouseDown) {len = 0}
+  mouseDown = true;
+});
+canvas.addEventListener("mouseup", () => {
+  mouseDown = false;
+});
+
+
+canvas.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX/(window.innerWidth/(canvas.width+8)); mouseY = e.clientY/(window.innerHeight/(canvas.height+8))
+})
+
+let lastTimestamp;
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+
+
+
+
+
+</script>
+</html>

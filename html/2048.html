@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2048</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />> />
+    <style>
+        body {
+        font-family: "Courier New";
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 108vh;
+        margin: 0;
+        overflow: hidden;
+        transform: scale(0.8);
+    }
+    #game {
+        width: 600px;
+        height: 600px;
+        background: #000;
+        border-radius: 10px;
+        margin-top: 0px;
+        position: fixed;
+        display: grid;
+        grid-template-columns: repeat(0, 1fr);
+        grid-template-rows: repeat(0, 1fr);
+        transform: scale(1);
+        transform-origin: center;
+        border: 15px solid #fff;
+    }
+    #infoDisplay{
+     color: #fff;
+     height: 30px;
+    font-size: 25px;
+    margin-bottom: 750px;
+    margin-right: 0px;
+    width: 150px;
+    text-align: center;
+    border: 6px #fff solid;
+    background: #000;
+    line-height: 30px;
+    position: absolute;
+    transform: scale(0.8);
+    }
+    #dropdown {
+      z-index: 1;
+      font-size: 30px;
+      margin-bottom: 480px;
+      width: 350px;
+      text-align: center;
+      margin-left: 0px;
+      background-color: #000;
+      color: #fff;
+      font-family: "Courier New";
+      border-width: 7px;
+      border-color: #fff;
+      
+    }
+        .tile {
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 5px #0fe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    background: #ff0;
+    margin: 5px;
+}
+.tile[data-value="2"] { background: #eee4da; }
+.tile[data-value="4"] { background: #ede0c8; }
+.tile[data-value="8"] { background: #f2b179; }
+.tile[data-value="16"] { background: #f59563; }
+.tile[data-value="32"] { background: #f67c5f; }
+.tile[data-value="64"] { background: #ff4b1e; }
+.tile[data-value="128"] { background: #f9f86e; }
+.tile[data-value="256"] { background: #f8e06e; }
+.tile[data-value="512"] { background: #f5d06f; }
+.tile[data-value="1024"] { background: #edc22e; }
+.tile[data-value="2048"] { background: #ff0; }
+    </style>
+</head>
+<body>
+    <div id="game"></div>
+    <select id="dropdown" onchange="setStuff()">
+      <option value="o" disabled selected>Open Settings Menu</option>
+      <option value="size">Set Game Size</option>
+      <option value="spawn">Set how many new tiles per move</option>
+      <option value="canc">Hallucination Mode</option>
+      <option value="auto">Auto Moves Mode</option>
+    </select>
+    <div id="infoDisplay">e</div>
+    <script>
+        const game = document.getElementById('game');
+        const dropdown = document.getElementById('dropdown');
+        let firstMove = true;
+        let tilesPer = 1;
+        let stop = false;
+        let auto = 0;
+        let score = 0;
+        let moves = 0;
+        let dimension = 0;
+        let pooo = localStorage.getItem("dem")
+        if (!isNum(pooo)) {
+          pooo = 4;
+        }
+        dimension = pooo ;
+        
+        const di = (4 / dimension) * 1; // onecompiler game scale
+        const dim = (dimension * 100) + "px" // game width
+        const dimm = (4 / dimension) * 1.5; // game scale
+        const dimmm = (dimension * 2.5) + "px" // border width
+        const dimmmm = (dimension * 6) + "px" // border radius
+        const dimmmmm = (dimension * 50) + "px" // scale for onecompiler
+        const de = 0
+        const dee = dimension * 5
+        
+       game.style.width = `${dim}`
+       game.style.height = `${dim}`
+       game.style.gridTemplateColumns = `repeat(${dimension}, 1fr)`
+       game.style.gridTemplateRows = `repeat(${dimension}, 1fr)`
+       game.style.borderWidth = `${dimmm}`
+       game.style.borderRadius = `${dimmmm}`
+       game.style.boxShadow = `0px 0px 18px 5px #0fe`
+       
+       
+        let board = Array.from({ length: dimension }, () => Array(dimension).fill(0));
+        if (window.location.href.includes("onecompiler.com")) {
+    game.style.transform = `scale(${di})`; // Scale 1 for OneCompiler
+} else {
+    game.style.transform = `scale(${dimm})`; // Scale 1.8 for other environments
+    dropdown.style.marginBottom = "660px"
+    game.style.marginTop =  "40px"
+}
+        function createTile(value, x, y) {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.innerText = value;
+    tile.style.gridColumnStart = x + 1;
+    tile.style.gridRowStart = y + 1;
+    tile.dataset.value = value;
+
+    game.appendChild(tile);
+
+    // Trigger the animation after appending
+    requestAnimationFrame(() => {
+        tile.style.transform = 'scale(1)'; // Scale to original size
+    });
+}
+
+function setStuff() {
+  const selectedValue = dropdown.value;
+  if (selectedValue === "size") {
+    setDimension();
+  } else if (selectedValue === "canc") {
+    cancer = !cancer
+    resetC();
+  } else if (selectedValue === "spawn") {
+    const newSpawn = prompt("Set how many tiles are spawned per move.")
+    if (isNum(newSpawn) || newSpawn === "0") {
+      tilesPer = newSpawn;
+    }
+  } else if (selectedValue === "auto") {
+    const newAuto = prompt('Set an auto moves preset: 1=URDL 2=UD 3=LR 4=LDRD 5=DR 6=RANDOM 7=NONE')
+    if (isNum(newAuto)&&(newAuto <= 7) && (newAuto >=1)) {
+auto = Math.round(newAuto);
+  autoEnabled = (auto !== 7);
+  if (autoEnabled) autoMove();
+  }}
+   dropdown.selectedIndex = 0
+   dropdown.blur();
+}
+
+function drawBoard() {
+    game.innerHTML = ''; // Clear the board
+    for (let x = 0; x < dimension; x++) {
+        for (let y = 0; y < dimension; y++) {
+            if (board[x][y] !== 0) {
+                createTile(board[x][y], x, y);
+            }
+        }
+    }
+} //  1=URDL 2=UD 3=LR 4=DLDR 5=DR 6=RANDOM
+let tickk = 0;
+let bound = 4;
+function autoMove() {
+   if (auto == 7) {
+     return;
+   }
+   tickk+=1;
+   let dir = ""
+   
+  if (tickk > bound) {
+    tickk = 1;
+  }
+  if (auto == 1) {
+    bound = 4;
+    if (tickk === 1) {
+      dir = "up";
+    } else if (tickk === 2) {
+      dir = "right";
+    } else if (tickk === 3) {
+      dir = "down" ;
+    } else if (tickk === 4) {
+      dir = "left";
+    }
+  } else if (auto == 2) {
+    bound = 2;
+    if (tickk === 1) {
+      dir = "up";
+    } else if (tickk === 2) {
+      dir = "down";
+    }
+  } else if (auto == 3) {
+    bound = 2;
+    if (tickk === 1) {
+      dir = "left";
+    } else if (tickk === 2) {
+      dir = "right";
+    }
+  } else if (auto == 4) {
+    bound = 4;
+    if (tickk === 1) {
+      dir = "down";
+    } else if (tickk === 2) {
+      dir = "left";
+    } else if (tickk === 3) {
+      dir = "down";
+    } else if (tickk === 4) {
+      dir = "right"
+    }
+  } else if (auto == 5) {
+    bound = 2;
+    if (tickk === 1) {
+      dir = "down";
+    } else if (tickk === 2) {
+      dir = "right";
+    }
+  } else if (auto == 6) {
+    bound=4;
+    tickk = Math.round(Math.random() * 3) + 1
+    if (tickk === 1) {
+      dir = "down";
+    } else if (tickk === 2) {
+      dir = "left";
+    } else if (tickk === 3) {
+      dir = "up";
+    } else if (tickk === 4) {
+      dir = "right"
+    }
+  }
+  requestAnimationFrame(autoMove);
+  if (!(auto == 7)) {
+  move(dir) }
+}
+
+function canMove() {
+    for (let x = 0; x < dimension; x++) {
+        for (let y = 0; y < dimension; y++) {
+            // Check for empty tiles
+            if (board[x][y] === 0) return true;
+            // Check down
+            if (x < (dimension - 1) && board[x][y] === board[x + 1][y]) return true;
+            // Check right
+            if (y < (dimension - 1) && board[x][y] === board[x][y + 1]) return true;
+        }
+    }
+    return false; // No moves available
+}
+
+        function addRandomTile() {
+    let emptyTiles = [];
+    for (let x = 0; x < dimension; x++) {
+        for (let y = 0; y < dimension; y++) {
+            if (board[x][y] === 0) {
+                emptyTiles.push({ x, y });
+            }
+        }
+    }
+    if (emptyTiles.length > 0) {
+        const { x, y } = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
+        board[x][y] = Math.random() < 0.9 ? 2 : 4; // spawn random between 2 vals
+    }
+}
+
+function slide(row) {
+    let newRow = row.filter(value => value);
+    for (let i = 0; i < newRow.length - 1; i++) {
+        if (newRow[i] === newRow[i + 1]) {
+            newRow[i] *= 2;
+            score += newRow[i]; // <-- add this line
+            newRow.splice(i + 1, 1);
+        }
+    }
+    while (newRow.length < dimension) {
+        newRow.push(0);
+    }
+    return newRow;
+}
+function resetBoard() {
+    board = Array.from({ length: dimension }, () => Array(dimension).fill(0)); // Reset the board to empty
+    fixUndefined();
+    stop = false;
+    moves = 0;
+    score = 0;
+    firstMove = true;
+    addRandomTile(); // Add a new random tile to start the game
+    drawBoard();
+    
+}
+ let cancer = false;
+ let milliseconds = 0;
+ let ah = 0;
+ let ahh = -125;
+ let ahhh = 0;
+ 
+function resetC() {
+  milliseconds = 0;
+  ah = -250;
+  ahh = -125;
+  ahhh = 0;
+}
+
+ 
+function animate() {
+  const infoDisplay = document.getElementById('infoDisplay');
+  infoDisplay.textContent = `Moves:${moves} Score:${score}`;
+  const textLength = infoDisplay.textContent.length;
+  infoDisplay.style.width = ((textLength - 6) * 15 + 105) + "px";
+    const time = new Date();
+    milliseconds += 16;
+    if (cancer) {
+    ah += (Math.sin(milliseconds / 500) * 16)
+    ahh += (Math.cos(milliseconds / 500) * 10)
+    ahhh += (Math.sin(milliseconds / 1888) * 6.15)
+    
+    const aa = (ah - 150) + "px"
+    const bb = ahh + 130 + "px"
+    const cc = ahhh + "deg"
+    
+    game.style.marginLeft = `${aa}`
+    game.style.marginBottom = `${bb}`
+    game.style.rotate = `${cc}`
+    
+} else {
+  game.style.marginLeft = `0px`
+  game.style.marginBottom = `0px`
+  game.style.rotate = `0deg`
+}
+const plop = `0fe`
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => {
+        tile.style.boxShadow = `0px 0px 10px 5px #${plop}`; // Apply the dynamic shadow color
+        if (cancer) {
+          tile.style.rotate = `${milliseconds / 10}deg`
+        } else {
+          tile.style.rotate = `0deg`
+        }
+    });
+
+    requestAnimationFrame(animate);
+}
+
+function move(direction) {
+    // Make a deep copy of the board before sliding/merging
+    let oldBoard = board.map(row => [...row]);
+
+    // Slide/merge as before
+    if (direction === 'up' || direction === 'down') {
+        for (let i = 0; i < dimension; i++) {
+            let originalRow = [...board[i]];
+            if (direction === 'up') {
+                board[i] = slide(originalRow);
+            } else {
+                board[i] = slide(originalRow.reverse()).reverse();
+            }
+        }
+    } else if (direction === 'left' || direction === 'right') {
+        for (let i = 0; i < dimension; i++) {
+            let originalCol = board.map(row => row[i]);
+            let newCol = (direction === 'left') ? slide(originalCol) : slide(originalCol.reverse()).reverse();
+            for (let j = 0; j < dimension; j++) {
+                board[j][i] = newCol[j];
+            }
+        }
+    }
+
+    // Only increment moves if the board actually changed from the slide/merge!
+    if (JSON.stringify(board) !== JSON.stringify(oldBoard)) {
+        moves++;
+    }
+
+    // Always spawn tiles, regardless of move
+    for (let x = 0; x < tilesPer; x++) {
+        addRandomTile();
+    }
+    drawBoard();
+}function fixUndefined() {
+    for (let x = 0; x < dimension; x++) {
+        for (let y = 0; y < dimension; y++) {
+            if (board[x][y] === undefined) {
+                board[x][y] = 0; // Set undefined values to 0
+            }
+        }
+    }
+}
+
+function isNum(input) {
+  if (input === null || input === "" || isNaN(input) || input <= 0 || input > 250 || (input - Math.ceil(input)) !== 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+function setDimension() { // worst code of the century
+    let dime = dimension;
+    dimension = prompt("Set a value for the game size (default is 4)");
+
+    if (dimension === null || dimension === "" || isNaN(dimension) || dimension <= 0 || dimension > 250 || (dimension - Math.ceil(dimension)) !== 0) {
+        dimension = dime;
+        return;
+    }
+    localStorage.setItem("dem", dimension)
+    board = Array.from({ length: dimension }, () => Array(dimension).fill(0));
+
+    const di = (4 / dimension) * 1; // onecompiler game scale
+    const dim = (dimension * 100) + "px"; // game width
+    const dimm = (4 / dimension) * 1.5; // game scale
+    const dimmm = (dimension * 2.5) + "px"; // border width
+    const dimmmm = Math.min((400 / dimension), 40) + "px"; // border radius
+    const dimmmmmm = (dimension); // shadow size
+    const dimmmmmmm = (dimension * 5); // shadow spread
+
+// update
+    game.style.width = `${dim}`;
+    game.style.height = `${dim}`;
+    game.style.gridTemplateColumns = `repeat(${dimension}, 1fr)`;
+    game.style.gridTemplateRows = `repeat(${dimension}, 1fr)`;
+    game.style.borderWidth = `${dimmm}`;
+    game.style.borderRadius = `${dimmmm}`;
+    game.style.boxShadow = `0px 0px ${dimmmmmmm}px ${dimmmmmm}px #0fe`;
+
+// Update view size
+game.style.transform = window.location.href.includes("onecompiler.com") ? `scale(${di})` : `scale(${dimm})`;
+
+
+    drawBoard(); // Redraw the board
+    resetBoard();
+}
+
+
+        function handleKeyPress(event) {
+        if (stop) {return;}
+        if (!canMove()) {
+      drawBoard();
+      stop = true;
+      alert("You died :C")
+      resetBoard();
+      return;
+    }
+    switch (event.key) {
+        case 'ArrowLeft':
+        case 'a':
+            move('left');
+            break;
+        case 'ArrowRight':
+        case 'd':
+            move('right');
+            break;
+        case 'ArrowUp':
+        case 'w':
+            move('up');
+            break;
+        case 'ArrowDown':
+        case 's':
+            move('down');
+            break;
+    }
+}
+
+function handleMouseClick(event) {
+}
+
+        document.addEventListener('click', handleMouseClick);
+        document.addEventListener('keydown', handleKeyPress);
+        resetBoard();
+        animate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trigonometry Slideshow</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+    }
+      #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #numInput {
+        position: absolute;
+        accent-color: #aff;
+        right: 10px;
+        top: 5px;
+        z-index: 5;
+    }
+    #display {
+        position: absolute;
+        right: 40px;
+        top: 22px;
+        color: #fff;
+        font-size: 12px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+ <input type="range" min="1" max="6" step="1" id="numInput" value="6">
+ <div id="display">Graph #1</div>
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d', alpha = false);
+let keysPressed = [];
+const graphNumInput = document.getElementById("numInput")
+
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 60;
+let t= 0;
+const pi = Math.PI;
+let graphNum = 1;
+let mouseX = 0;
+let mouseY = 0;
+
+function sin(inn) {
+    return Math.sin(inn)
+}
+
+function cos(inn) {
+    return Math.cos(inn)
+}
+
+function asin(inn) {
+    if (Math.abs(inn) > 1) {return 0} else {return Math.asin(inn)}
+}
+
+
+
+function goTo(x,y) {
+    ctx.moveTo(canvas.width/2+x*100,canvas.height/2-y*100);
+}
+ 
+
+function getX(graphNum, i) {
+    switch (graphNum) {
+        case 1:
+            return sin(i + t);
+        case 2: 
+            return sin(i*1.5);
+        case 3: 
+            return asin(sin(i)*cos(i*(9/5)+t))*1.5;
+        case 4: 
+            return (sin(i*3.25+t*2.5))+asin(sin(i*(50/100)+t/2)*0.7);
+        case 5: 
+            return cos(i*0.9+t)+asin(sin(i*1.1+t*1.2)*(sin(mouseX*-1)));
+        case 6: 
+            return sin(i*4096*100 + t*2) 
+        default:
+            break;
+    }
+
+    return sin(i+t);
+}
+
+function getY(graphNum, i) {
+    switch (graphNum) {
+        case 1:
+             return asin(sin(i/2+t*2)*0.5)*pi;
+        case 2: 
+             return asin(sin(i+t)*0.5)*pi;
+        case 3:  
+             return asin(cos(i*(9/5)+t))*1.5;
+        case 4: 
+             return sin(i*3.25)+asin(sin(i*0.5)*0.7);
+        case 5: 
+             return sin(i*0.9+t*1.05) - asin(sin(i*1.1+sin(mouseY)));
+        case 6: 
+             return Math.pow(Math.E,sin(i*1024*100)*5)/40-2;
+        default: 
+            break;
+    }
+
+    return Math.cos(i+t);
+}
+
+function getPeriod(graphNum) {
+    switch (graphNum) {
+        case 1: 
+            return pi*4;
+        case 2:
+            return pi*4;
+        case 3: 
+            return pi*12;
+        case 4: 
+            return pi*8;
+        case 5: 
+            return pi*20;
+        case 6: 
+            return pi*8
+        default: 
+            break;
+    }
+
+    return pi*2
+}
+
+function draw() {
+    t += 1 / fpsAv;
+    graphNum = Number(graphNumInput.value)
+
+    document.getElementById("display").textContent = `Graph #${graphNum}`
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.lineWidth = 5;
+
+    let hue = 0;
+    ctx.beginPath();
+
+    // Change the graphNum as needed (currently using 1 for this demo)
+
+
+    let prevX = getX(graphNum, 0);
+    let prevY = getY(graphNum, 0);
+    goTo(prevX, prevY);
+
+    for (let i = 0; i <= getPeriod(graphNum); i += 0.001) {
+        const currX = getX(graphNum, i);
+        const currY = getY(graphNum, i);
+        ctx.strokeStyle = `hsl(${hue/3+90}, 100%, 60%)`;
+        ctx.lineTo(canvas.width / 2 + currX * 100, canvas.height / 2 - currY * 100);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2 + currX * 100, canvas.height / 2 - currY * 100);
+        hue = (hue + 1) % 360;
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+}
+
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+  keysPressed[e.key.toLowerCase()] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+  keysPressed[e.key.toLowerCase()] = false;
+});
+
+let lastTimestamp;
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+
+
+    canvas.addEventListener("mousemove", function(e) {
+        mouseX = e.clientX/300;
+        mouseY = e.clientY/300;
+    })
+
+
+
+
+
+</script>
+</html>

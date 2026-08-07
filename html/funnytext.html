@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>font thingy</title>
+  </head>
+  <body>
+    <h1 class="title">font thingy</h1>
+    <input type="text" id="textInput" placeholder="Type here..." />
+  
+    <div id="modeButtons" style="margin: 10px 0;">
+    </div>
+    
+    <pre id="outputText" style="margin:0;padding:0;background:none;border:none;"></pre>
+    <button id="copyBtn" style="display:none;">Copy</button>
+<style>
+  #textInput{
+    width: 300px;
+  }
+  body {
+    background-color: #111;
+    color: #fff
+  }
+  #outputText {
+    font-family: inherit;
+    white-space: pre-wrap;
+    background: none;
+    color: inherit;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<script>
+  const input = document.getElementById('textInput');
+  const output = document.getElementById('outputText');
+  const copyBtn = document.getElementById('copyBtn');
+  const modeButtons = document.getElementById('modeButtons');
+
+  let textMode = 1;
+
+  for(let i = 1; i <= 19; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    btn.style.marginRight = '5px';
+    btn.addEventListener('click', () => {
+      setMode(i);
+    });
+    modeButtons.appendChild(btn);
+  }
+
+  function highlightSelectedButton(selected) {
+    [...modeButtons.children].forEach(button => {
+      button.style.fontWeight = button.textContent == selected ? 'bold' : 'normal';
+    });
+  }
+
+  highlightSelectedButton(textMode);
+
+  function alternateCaps(text) {
+    return text.replace(/(\S+)/g, word =>
+      word.split('').map((char, idx) =>
+        ((idx + textMode) % 2 === 0) ? char.toUpperCase() : char.toLowerCase()
+      ).join('')
+    );
+  }
+
+  function randomizeWords(text) {
+    let parts = Array.from(text.matchAll(/(\S+|\s+)/g)).map(x => x[0]);
+    let wordIndices = [];
+    for (let i = 0; i < parts.length; i++) {
+      if (/\S/.test(parts[i])) wordIndices.push(i);
+    }
+    let shuffled = wordIndices.slice();
+    for(let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const swapWords = parts.slice();
+    for (let i = 0; i < wordIndices.length; i++) {
+      swapWords[wordIndices[i]] = parts[shuffled[i]];
+    }
+    return swapWords.join('');
+  }
+
+  function alphabetizeWords(str) {
+    let parts = Array.from(str.matchAll(/(\S+|\s+)/g)).map(x => x[0]);
+    let words = parts.filter(x => /\S/.test(x));
+    let sortedWords = [...words].sort((a, b) => a.localeCompare(b));
+    let wi = 0;
+    return parts.map(x => /\S/.test(x) ? sortedWords[wi++] : x).join('');
+  }
+
+  function lengthSort(str) {
+    let parts = Array.from(str.matchAll(/(\S+|\s+)/g)).map(x => x[0]);
+    let indexedWords = [];
+    for (let i = 0; i < parts.length; i++) {
+      if (/\S/.test(parts[i])) {
+        const cleanLen = parts[i].replace(/[^a-zA-Z0-9]/g, "").length;
+        indexedWords.push({ i, word: parts[i], cleanLen });
+      }
+    }
+    indexedWords.sort((a, b) => {
+      if (a.cleanLen !== b.cleanLen) return a.cleanLen - b.cleanLen;
+      if (a.word !== b.word) return a.word.localeCompare(b.word);
+      return a.i - b.i;
+    });
+    let swapParts = parts.slice();
+    let idx = 0;
+    for (let i = 0; i < parts.length; i++) {
+      if (/\S/.test(parts[i])) {
+        swapParts[i] = indexedWords[idx++].word;
+      }
+    }
+    return swapParts.join('');
+  }
+
+  function reverseLetters(str) {
+    return str.replace(/\S+/g, w => {
+      const m = /^([a-zA-Z0-9'-]+)([^a-zA-Z0-9'-]+)?$/.exec(w);
+      if (m) {
+        return m[1].split('').reverse().join('') + (m[2] || '');
+      } else {
+        return w.split('').reverse().join('');
+      }
+    });
+  }
+
+  function reverseWords(str) {
+    let parts = Array.from(str.matchAll(/(\S+|\s+)/g)).map(x => x[0]);
+    let words = parts.filter(x => /\S/.test(x)).reverse();
+    let wi = 0;
+    return parts.map(x => /\S/.test(x) ? words[wi++] : x).join('');
+  }
+
+  function shuffleLetters(str) {
+    return str.replace(/\S+/g, w => {
+      const m = /^([a-zA-Z0-9'-]+)([^a-zA-Z0-9'-]+)?$/.exec(w);
+      if (m) {
+        let arr = m[1].split('');
+        for(let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr.join('') + (m[2] || '');
+      } else {
+        const arr = w.split('');
+        for(let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr.join('');
+      }
+    });
+  }
+
+  function shuffleSentences(text) {
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+    let result = [];
+    let pos = 0;
+    let regex = /[^.!?,]+[.!?,]?[\s]*/g;
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+      let sentence = match[0];
+      let tokens = Array.from(sentence.matchAll(/(\s+|[^\s]+)/g)).map(x => x[0]);
+      let wordIdxs = [];
+      for (let ti = 0; ti < tokens.length; ti++) {
+        if (/\S/.test(tokens[ti]) && /[a-zA-Z0-9]/.test(tokens[ti])) {
+          wordIdxs.push(ti);
+        }
+      }
+      if (wordIdxs.length >= 2) {
+        let shuffled = wordIdxs.slice();
+        shuffle(shuffled);
+        let swapTokens = tokens.slice();
+        for (let wi = 0; wi < wordIdxs.length; wi++) {
+          swapTokens[wordIdxs[wi]] = tokens[shuffled[wi]];
+        }
+        result.push(swapTokens.join(''));
+      } else {
+        result.push(sentence);
+      }
+    }
+    return result.join('');
+  }
+
+  function typoSwap(word) {
+    if (word.length < 2) return word;
+    let arr = word.split('');
+    const dir = Math.random() < 0.5 ? -1 : 1;
+    let i;
+    if (dir === -1) {
+      i = Math.floor(Math.random() * (arr.length - 1)) + 1;
+    } else {
+      i = Math.floor(Math.random() * (arr.length - 1));
+    }
+    [arr[i], arr[i + dir]] = [arr[i + dir], arr[i]];
+    return arr.join('');
+  }
+
+  function typosMode(text) {
+    let parts = Array.from(text.matchAll(/(\S+|\s+)/g)).map(x => x[0]);
+    for (let i = 0; i < parts.length; i++) {
+      if (/\S/.test(parts[i]) && Math.random() < 0.5) {
+        parts[i] = typoSwap(parts[i]);
+      }
+    }
+    return parts.join('');
+  }
+
+  function germanAccentSort(str) {
+    return str
+      .replace(/\bthis\b/gi, 'zees')
+      .replace(/\bthe\b/gi, 'zee')
+      .replace(/\bwhat\b/gi, 'vat')
+      .replace(/\bis\b/gi, 'eez')
+      .replace(/\bany\b/gi, 'eeny')
+      .replace(/\bof\b/gi, 'ov')
+      .replace(/\bpart\b/gi, 'paart')
+      .replace(/\bcan\b/gi, 'coon')
+      .replace(/\bare\b/gi, 'arr')
+      .replace(/\btheir\b/gi, 'thair')
+      .replace(/\bthen\b/gi, 'theen')
+      .replace(/\band\b/gi, 'eend')
+      .replace(/\bhave\b/gi, 'hav')
+      .replace(/\bover\b/gi, 'ovah')
+      .replace(/\bother\b/gi, 'uthah')
+      .replace(/\bcolor\b/gi, 'collar')
+      .replace(/\bcolour\b/gi, 'collar')
+      .replace(/\btreated\b/gi, 'treeated')
+      .replace(/\bzealand\b/gi, 'zeeland')
+      .replace(/\bonly\b/gi, 'oonly')
+      .replace(/\bkill\b/gi, 'keel')
+      .replace(/\blay\b/gi, 'laye')
+      .replace(/\bby\b/gi, 'bie')
+      .replace(/\bgroup\b/gi, 'groop')
+      .replace(/\bthat\b/gi, 'zat')
+      .replace(/\btribe\b/gi, 'trieb')
+      .replace(/\bwhere\b/gi, 'weere')
+      .replace(/\bwere\b/gi, 'weer')
+      .replace(/\bto\b/gi, 'too')
+      .replace(/\bwith\b/gi, 'weeth')
+      .replace(/\bappear\b/gi, 'appeer')
+      .replace(/\ball\b/gi, 'oll')
+      .replace(/\bband\b/gi, 'bond')
+      .replace(/\bon\b/gi, 'oon')
+      .replace(/\bwe\b/gi, 'wee')
+      .replace(/um/gi, 'oom')
+      .replace(/ittle/gi, 'eetle')
+      .replace(/kid/gi, 'keed')
+      .replace(/ack/gi, 'eek')
+      .replace(/or/gi, 'oor')
+      .replace(/tec/gi, 'teec')
+      .replace(/fem/gi, 'feem')
+      .replace(/ten/gi, 'teen')
+      .replace(/in/gi, 'een')
+      .replace(/hair/gi, 'har')
+      .replace(/ead/gi, 'eed')
+      .replace(/you/gi, 'yoo')
+      .replace(/uck/gi, 'ook')
+      .replace(/re/gi, 'ree')
+      .replace(/land/gi, 'leend')
+      .replace(/mania/gi, 'meenia')
+      .replace(/s/gi, 'z')
+      .replace(/zh/gi, 'sh')
+      .replace(/ity/gi, 'eety')
+      .replace(/ical/gi, 'eecal')
+      .replace(/ight/gi, 'eeght')
+      .replace(/oid/gi, 'eoid');
+  }
+
+  function caveman(text) {
+    const contractions = {
+      "that's":"that","thats":"that",
+      "it's":"it","its":"it",
+      "there's":"there","theres":"there",
+      "what's":"what","whats":"what",
+      "who's":"who","whos":"who",
+      "where's":"where","wheres":"where",
+      "when's":"when","whens":"when",
+      "why's":"why","whys":"why",
+      "how's":"how","hows":"how"
+    };
+
+    const pronouns = {
+      "i":"me","me":"me","my":"me",
+      "you":"you","your":"you",
+      "he":"him","him":"him",
+      "she":"her","her":"her",
+      "they":"them","them":"them",
+      "we":"us","us":"us",
+      "it":"thing"
+    };
+
+    const remove = new Set([
+      "the","a","an",
+      "to","from","in","on","at","by","with","about","against","between",
+      "into","through","during","before","after","above","below","under",
+      "over","near","of","for","as",
+      "is","are","was","were","am","been","being",
+      "do","does","did",
+      "very","really","just","quite","maybe","basically"
+    ]);
+    let out = [];
+    let match = Array.from(text.matchAll(/(\s+|[^\s]+)/g)).map(x => x[0]);
+    let lastWord = undefined;
+    for (let token of match) {
+      if (/^\s+$/.test(token)) {
+        out.push(token);
+        continue;
+      }
+      let raw = token.toLowerCase().replace(/[^\w\s']/g,"");
+      if (!raw) {
+        out.push(token);
+        continue;
+      }
+      let w = contractions[raw] || raw;
+      if (remove.has(w)) continue;
+      if (pronouns[w]) w = pronouns[w];
+      if (w.endsWith("ing") && w.length > 4) w = w.slice(0,-3);
+      else if (w.endsWith("ed") && w.length > 3) w = w.slice(0,-2);
+      if (lastWord !== w) {
+        out.push(w);
+        lastWord = w;
+      }
+    }
+    return out.join('');
+  }
+
+  function uncomfortableCaps(text) {
+    return text.replace(/\S+/g, w =>
+      w.replace(/[a-zA-Z]/, c => c.toUpperCase())
+    );
+  }
+
+  function wideText(text) {
+    return text.split('').join(' ');
+  }
+
+  function removeVowels(text) {
+    return text.replace(/[aeiouAEIOU]/g, '');
+  }
+
+  function removeConsonants(text) {
+    return text.replace(/([b-df-hj-np-tv-z])/gi, '');
+  }
+
+  function doubleUnsilentVowels(text) {
+    function isTrailingESilent(word) {
+      if (word.length < 3) return false;
+      if (word[word.length-1].toLowerCase() !== 'e') return false;
+      if (["the","he","be","me","we","she"].includes(word.toLowerCase())) return false;
+      let prev = word[word.length-2].toLowerCase();
+      if (!/[b-df-hj-np-tv-z]/.test(prev)) return false;
+      if (!/[aeiouy]/i.test(word.slice(0,-1))) return false;
+      return true;
+    }
+    return text.replace(/\b([a-zA-Z]+)\b/g, function(fullmatch, word){
+      let chars = word.split('');
+      let out = [];
+      let len = chars.length;
+      let vowels = "aeiouAEIOU";
+      let silentE = isTrailingESilent(word);
+      for(let i=0;i<len;i++) {
+        let c = chars[i];
+        let isLastChar = (i === len-1);
+        let isVowel = vowels.includes(c);
+        if (isVowel && !(isLastChar && silentE)) {
+          out.push(c + c);
+        } else {
+          out.push(c);
+        }
+      }
+      return out.join('');
+    });
+  }
+
+  function fontskisMode(text) {
+    return text.replace(/(\S+)/g, function(word) {
+      let m = /^([a-zA-Z0-9'-]+)([^a-zA-Z0-9'-]+)?$/.exec(word);
+      if (m) {
+        return m[1] + "skis" + (m[2] || "");
+      } else {
+        return word + "skis";
+      }
+    });
+  }
+
+  function apostropheFirstMode(text) {
+    return text.replace(/(\S+)/g, function(word) {
+      let m = /^([a-zA-Z0-9'-]+)([^a-zA-Z0-9'-]+)?$/.exec(word);
+      if (m) {
+        let core = m[1];
+        let rest = m[2] || "";
+        if (core.length >= 4) {
+          return "'" + core.slice(1) + rest;
+        } else {
+          return word;
+        }
+      } else {
+        return word;
+      }
+    });
+  }
+
+  function SON(text) {
+    let text2 = text.replace(/son/gi, 'SON')
+                    .replace(/sun/gi, 'SON')
+                    .replace(/sin/gi, 'SON')
+                    .replace(/sen/gi, 'SON')
+                    .replace(/san/gi, 'SON')
+                    .replace(/syn/gi, 'SON');
+    return text2;
+  }
+
+  function transformAndDisplay(text) {
+    let transformed = '';
+    switch (textMode) {
+      case 1: transformed = alternateCaps(text); break;
+      case 2: transformed = randomizeWords(text); break;
+      case 3: transformed = alphabetizeWords(text); break;
+      case 4: transformed = lengthSort(text); break;
+      case 5: transformed = reverseLetters(text); break;
+      case 6: transformed = reverseWords(text); break;
+      case 7: transformed = shuffleLetters(text); break;
+      case 8: transformed = germanAccentSort(text); break;
+      case 9: transformed = caveman(text); break;
+      case 10: transformed = uncomfortableCaps(text); break;
+      case 11: transformed = wideText(text); break;
+      case 12: transformed = typosMode(text); break;
+      case 13: transformed = shuffleSentences(text); break;
+      case 14: transformed = removeVowels(text); break;
+      case 15: transformed = removeConsonants(text); break;
+      case 16: transformed = doubleUnsilentVowels(text); break;
+      case 17: transformed = fontskisMode(text); break;
+      case 18: transformed = apostropheFirstMode(text); break;
+      case 19: transformed = SON(text); break;
+      default: transformed = text; break;
+    }
+    
+    output.textContent = '';
+    output.innerText = '';
+    output.textContent = transformed;
+    copyBtn.style.display = transformed.replace(/\s/g,'').length > 0 ? 'inline-block' : 'none';
+  }
+
+  input.addEventListener('input', () => {
+    transformAndDisplay(input.value);
+  });
+
+  copyBtn.addEventListener('click', () => {
+    const textToCopy = output.textContent;
+    if (textToCopy.replace(/\s/g,'').length > 0) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(textToCopy)
+          .then(() => {
+            alert('Copied to clipboard!');
+          })
+          .catch(err => {
+            fallbackCopy(textToCopy);
+          });
+      } else {
+        fallbackCopy(textToCopy);
+      }
+    }
+  });
+
+  function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      const successful = document.execCommand('copy');
+      alert(successful ? 'Copied to clipboard!' : 'Failed to copy text.');
+    } catch (err) {
+      alert('Failed to copy text: ' + err);
+    }
+    document.body.removeChild(textarea);
+  }
+  
+  const title = document.querySelector('.title');
+  const titles = [
+    'fOnT tHiNgY  (alternating caps)',
+    'thingy font (randomized words)',
+    'font thingy (alphabetical sort)',
+    'font thingy (length sort)',
+    'tnof ygniht (reverse words)',
+    'thingy font (reverse words)',
+    'ftno thigny (shuffle letters)',
+    'foont theengy (german sort)',
+    'me change font (confusing)',
+    'Font Thingy (Title Caps)',
+    'F o n t  T h i n g y (Wide)',
+    'Fnot Thnigy (Typos)',
+    'font thingy (shuffle sentences)',
+    'fnt thngy (remove vowels)',         
+    'o i (remove consonants)',     
+    'foont thiiingy (longer words)',        
+    'fontskis thingyskis (skis)',          
+    "'ont 'ingy (idk)",
+    "font thingy (SON)"
+  ];
+
+function updateTitle(mode) {
+  if (titles[mode - 1]) {
+    title.textContent = titles[mode - 1];
+  }
+}
+
+function setMode(newMode) {
+  textMode = newMode;
+  highlightSelectedButton(newMode);
+  updateTitle(newMode);
+  transformAndDisplay(input.value);
+}
+
+updateTitle(textMode);
+
+</script>
+
+  </body>
+</html>

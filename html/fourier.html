@@ -1,0 +1,852 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fourier Draw</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+body {
+    background-color: #000;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#gamecanvas {
+    border: #fff 5px solid;
+    border-radius: 10px;
+    width: calc(100vw - 11px);
+    height: calc(100vh - 11px);
+    margin-left: -8px;
+    margin-top: -8px;
+    position: relative;
+    z-index: 1;
+    display: block;
+    background: none;
+}
+#numinput {
+    position: absolute;
+    z-index: 2;
+    left: -1px;
+    bottom: 16px;
+    width: 30px;
+    height: 12px;
+    font-size: 10px
+}
+#display {
+    position: absolute;
+    z-index: 2;
+    right: 17px;
+    bottom: 7px;
+    width: 75%;
+    height: 12px;
+    font-size: 12px;
+    color: #fff;
+    text-align: right;
+}
+#speedinput {
+    position: absolute;
+    z-index: 2;
+    left: 40px;
+    bottom: 16px;
+    width: 40px;
+    height: 12px;
+    font-size: 10px;
+}
+#inputnames {
+    position: absolute;
+    z-index: 3;
+    left: 4px;
+    bottom: 24px;
+    width: fit-content;
+    height: 12px;
+    font-size: 8px;
+    color: #cefff7;
+}
+#clearbtn {
+    position: absolute;
+    z-index: 3;
+    left: 0px;
+    top: 0px;
+    width: 50px;
+    height: 22px;
+    font-size: 13px;
+}
+#depthinput {
+    position: absolute;
+    z-index: 2;
+    left: 91px;
+    bottom: 16px;
+    width: 30px;
+    height: 12px;
+    font-size: 10px;
+}
+#layersContainer {
+    position: absolute;
+    z-index: 2;        
+    top: 7px;
+    left: 0px;
+    width: max-content;
+    height: fit-content;
+    max-height: 100vh;
+    font-size: 10px;
+    background-color: rgba(0,0%,0%,0);
+    color: #fff;
+}
+/* Make sure checkbox containers align as columns are added */
+.checkboxCont {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-top: -7px;
+    margin-bottom: -7px;
+    font-size: 8px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#linethickinput, #filltypeinput, #fillopacityinput {
+    width: 25px ;
+    height: 10px !important;
+    font-size: 8px;
+}
+#fillopacityinput {
+    width: 35px;
+}
+#lineThickCont {
+    margin-top: 5px;
+    text-align: right;
+}
+#versiondisplay {
+    position: absolute;
+    z-index: 2;
+    left: 3px;
+    top: 18px;
+    width: fit-content;
+    height: 12px;
+    font-size: 7px;
+    color: #ffffffc0;
+}
+#mutebtn {
+    position: absolute;
+    width: 1em;
+    height: fit-content;
+    z-index: 4;
+    left: 55px;
+    top: 4px;
+    filter: invert(1);
+}
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+ <input id="numinput" type="number" value="1" max="11" min="1">
+ <p id="display"></p>
+ <input id="speedinput" type="number" value="1" max="10" min="0" step="0.08">
+ <p id="inputnames"></p>
+ <button id="clearbtn" onclick="clearr()">Clear</button>
+ <img src="../images/plinkk.gif" id="mutebtn" alt="Mute Button" onclick="toggleSound()">
+ <p id="versiondisplay">ver jul 6 2026</p>
+ <input id="depthinput" type="number" value="10" max="15" min="1">
+ <div id="layersContainer">
+    <!-- Rod checkboxes will be dynamically generated here -->
+ </div>
+
+</body>
+<script>
+
+// Utility functions to calculate GCD and LCM
+function gcd(a, b) {
+    if (!b) return a;
+    return gcd(b, a % b);
+}
+
+function lcm(a, b) {
+    if (a === 0 || b === 0) return 0;
+    return Math.abs(a * b) / gcd(Math.abs(a), Math.abs(b));
+}
+
+function lcmOfFloatList(arr, tol = 1e-8) {
+    function toFraction(x, tol = 1e-8) {
+        let h1=1, h2=0, k1=0, k2=1, b=x;
+        do {
+            let a = Math.floor(b);
+            let aux = h1; h1 = a*h1+h2; h2 = aux;
+            aux = k1; k1 = a*k1+k2; k2 = aux;
+            b = 1/(b-a);
+        } while (Math.abs(x - h1/k1) > x * tol);
+        return [h1, k1]; // numerator, denominator
+    }
+    let denoms = arr.map(v => {
+        let val = Math.abs(v);
+        if (Math.floor(val) === val) return 1;
+        return toFraction(val, tol)[1];
+    });
+    let commonDenom = denoms.reduce((acc, d) => lcm(acc, d), 1);
+    let ints = arr.map(n => Math.round(n * commonDenom));
+    let lcmNum = ints.reduce((acc, n) => lcm(acc, Math.abs(n)), 1);
+
+    if (commonDenom === 0) return 0;
+    return lcmNum / commonDenom;
+}
+
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+const numin = document.getElementById("numinput");
+const speedin = document.getElementById("speedinput");
+const depthin = document.getElementById("depthinput");
+const display = document.getElementById("display")
+const layersctojtntaino = document.getElementById("layersContainer")
+const inputnames = document.getElementById("inputnames")
+const mutebtn = document.getElementById("mutebtn");
+const clickSfx = new Audio()
+clickSfx.src = "../sounds/click.wav"
+let rotspeed = [];
+let length = [];
+let offset = [];
+let enabled = [];
+let t = 0
+let res = 3;
+let filltype = 0;
+let pi = Math.PI;
+let sound = true;
+let paused = false;
+let fillTypeValue;
+let fillOpacityValue = 0.35;
+
+// Use an object to hold arrays of positions for each rod (by index), and the endpoint as 'end'
+let poslist = {};
+
+function toggleSound() {
+    sound = !sound;
+    mutebtn.src = sound ? "../images/soundtrue.png" : "../images/soundfalse.png"
+}
+
+toggleSound();
+
+// --- Matched Rods Flash (Flash state management) ---
+let rodsToFlash = new Set();      // Set of rod indices to flash
+let rodsFlashTime = {};           // rodIdx: base ms of flash start
+let rodsFlashPeakTime = {};       // rodIdx: time ms when brightness peaked (brightness decay will start)
+let rodsFlashState = {};          // rodIdx: 'rising' or 'falling', for animation phase
+
+/**
+ * Get the animated brightness for a flashing rod (0..1) based on time since flash started.
+ * @returns 1.0 at 100ms, decays to 0 at 200ms. Else 0.
+ */
+function getRodFlashBrightness(idx, now=Date.now()) {
+    if (!rodsToFlash.has(idx)) return 0;
+    const start = rodsFlashTime[idx] || 0;
+    const peak = start + 100;
+    const end = start + 200;
+    if (now < start) return 0;
+    if (now < peak) {
+        // ramp up linearly to 1.0
+        return (now - start) / 100;
+    } else if (now < end) {
+        // decay from 1.0 to 0.0
+        return 1 - (now - peak) / 100;
+    }
+    return 0;
+}
+
+function generateFractal(depth) {
+    rotspeed = []
+    length = []
+    offset = []
+
+    for (let i = depth; i > 0; i--) {
+        if (i%2 == 1) {
+            rotspeed.push(Math.pow(2,i)*-1)
+        } else {
+            rotspeed.push(Math.pow(2,i)*1)
+        }
+        length.push(200/Math.pow(2,i));
+        offset.push(pi/2)
+    }
+    rotspeed.reverse();
+    length.reverse();
+    offset.reverse();
+}
+
+let speedmult = 0;
+let bigspeedmult = 1;
+let lenmult = 0;
+let masterlenmult = 1;
+let endX = 0;
+let endY = 0;
+let period = 0;
+
+
+function getSystemPeriod(speedlist, speedmultReal) {
+    if (!speedlist || speedlist.length === 0) return null;
+    if (speedlist.some(s => s === 0)) return null;
+    let absSpeeds = speedlist.map(s => Math.abs(s));
+    let allInts = absSpeeds.every(n => Number.isInteger(n));
+    let basePeriod;
+
+    if (allInts) {
+        let minGcd = absSpeeds.reduce((acc, n) => gcd(acc, n), absSpeeds[0]);
+        if (minGcd === 0) return null;
+        basePeriod = 2 * Math.PI / minGcd;
+    } else {
+        let recipSpeeds = absSpeeds.map(s => 1/s);
+        let lcmRecip = lcmOfFloatList(recipSpeeds);
+        if (!isFinite(lcmRecip) || lcmRecip === 0) return null;
+        basePeriod = 2 * Math.PI * lcmRecip;
+    }
+    if (!speedmultReal) return null;
+    return basePeriod / speedmultReal;
+}
+
+function clearr() {
+    poslist = {};
+    let p = getSystemPeriod(rotspeed, speedmult);
+    if (typeof p === "number" && isFinite(p)) {
+        t = p%getSystemPeriod(rotspeed, speedmult);
+    } else {
+        t = 0;
+    }
+}
+
+// (unchanged UI setup code...)
+let thicknessInput = null;
+let thicknessValue = '2';
+
+function updateRodCheckboxes() {
+    enabled = [];
+
+    layersctojtntaino.innerHTML = '';
+    const existing = document.getElementById('lineThickCont');
+    if (existing) existing.remove();
+
+    const masterDiv = document.createElement('div');
+    masterDiv.id = 'masterdiv';
+    masterDiv.className = 'checkboxCont'
+    const masterLabel = document.createElement('label');
+    masterLabel.textContent = 'All';
+    masterLabel.style.marginTop = "3.5px"
+    masterLabel.style.fontSize = "10px"
+    const masterCheckbox = document.createElement('input');
+    masterCheckbox.type = 'checkbox';
+    masterCheckbox.style.transform = "scale(1.3)";
+    masterDiv.style.marginBottom = "4px"
+    masterCheckbox.checked = true;
+    masterDiv.appendChild(masterLabel);
+    masterDiv.appendChild(masterCheckbox);
+    layersctojtntaino.appendChild(masterDiv);
+
+    masterCheckbox.addEventListener('change', function() {
+        if (masterCheckbox.checked) {
+            for (let i = 0; i < rotspeed.length; i++) {
+                enabled[i] = true;
+            }
+        } else {
+            for (let i = 0; i < rotspeed.length; i++) {
+                enabled[i] = false;
+            }
+            enabled[enabled.length-1] = true;
+        }
+        for (let i = 0; i < rotspeed.length; i++) {
+            const rodBox = document.getElementById(`rodcb_${i}`);
+            if (rodBox) {
+                rodBox.checked = enabled[i];
+            }
+        }
+    });
+
+    for (let i = 0; i < rotspeed.length; i++) {
+        enabled.push(true);
+        const boxDiv = document.createElement('div');
+        boxDiv.className = 'checkboxCont';
+        const label = document.createElement('p');
+        label.textContent = `Show Rod ${i + 1} Path`;
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `rodcb_${i}`;
+        boxDiv.appendChild(label);
+        boxDiv.appendChild(checkbox);
+        layersctojtntaino.appendChild(boxDiv);
+        checkbox.checked = true; 
+
+        checkbox.addEventListener('change', function() {
+            enabled[i] = checkbox.checked;
+            if (i !== rotspeed.length-1 && checkbox.checked && masterCheckbox.checked) {
+                masterCheckbox.checked = false;
+            }
+            let onlyLastOn = enabled.filter((v, ind) => ind !== rotspeed.length-1).every(v => !v) && enabled[rotspeed.length-1];
+            if (onlyLastOn) {
+                masterCheckbox.checked = true;
+            } else {
+                if (masterCheckbox.checked && i !== rotspeed.length-1) masterCheckbox.checked = false;
+            }
+        });
+    }
+
+    const lineThickCont = document.createElement('div');
+    lineThickCont.id = 'lineThickCont';
+
+    const lineThickLabel = document.createElement('label');
+    lineThickLabel.htmlFor = 'linethickinput';
+    lineThickLabel.textContent = 'Line Thickness: ';
+    const lineThickInput = document.createElement('input');
+    lineThickInput.type = 'number';
+    lineThickInput.id = 'linethickinput';
+    lineThickInput.min = '1';
+    lineThickInput.max = '10';
+    lineThickInput.value = thicknessValue;
+    lineThickInput.addEventListener('input', function() {
+        thicknessValue = lineThickInput.value;
+    });
+    thicknessInput = lineThickInput;
+
+    lineThickLabel.appendChild(lineThickInput);
+    lineThickCont.appendChild(lineThickLabel);
+
+    // Fill Type Input (existing)
+    const fillTypeWrapper = document.createElement('div');
+    const fillTypeLabel = document.createElement('label');
+    fillTypeLabel.htmlFor = 'filltypeinput';
+    fillTypeLabel.textContent = 'Fill Type: ';
+    const fillTypeInput = document.createElement('input');
+    fillTypeInput.type = 'number';
+    fillTypeInput.id = 'filltypeinput';
+    fillTypeInput.min = '0';
+    fillTypeInput.max = '2';
+    fillTypeInput.step = '1';
+    fillTypeInput.value = typeof fillTypeValue !== 'undefined' ? fillTypeValue : '0';
+    fillTypeInput.addEventListener('input', function() {
+        fillTypeValue = fillTypeInput.value;
+    });
+    fillTypeLabel.appendChild(fillTypeInput);
+    fillTypeWrapper.appendChild(fillTypeLabel);
+
+    // New: Fill Opacity Input (identical to filltype logic)
+    const fillOpacityWrapper = document.createElement('div');
+    const fillOpacityLabel = document.createElement('label');
+    fillOpacityLabel.htmlFor = 'fillopacityinput';
+    fillOpacityLabel.textContent = 'Fill Opacity: ';
+    const fillOpacityInput = document.createElement('input');
+    fillOpacityInput.type = 'number';
+    fillOpacityInput.id = 'fillopacityinput';
+    fillOpacityInput.min = '0';
+    fillOpacityInput.max = '1';
+    fillOpacityInput.step = '0.01';
+    fillOpacityInput.value = (typeof fillOpacityValue !== 'undefined') ? fillOpacityValue : '0.25';
+    fillOpacityInput.addEventListener('input', function() {
+        fillOpacityValue = fillOpacityInput.value;
+    });
+    fillOpacityLabel.appendChild(fillOpacityInput);
+    fillOpacityWrapper.appendChild(fillOpacityLabel);
+
+    lineThickCont.appendChild(fillTypeWrapper);
+    lineThickCont.appendChild(fillOpacityWrapper);
+
+    layersctojtntaino.appendChild(lineThickCont);
+}
+
+// Modified: returns alpha parameter, to be used for fill opacity per requirements
+function fillMainPathWithAlpha(path, color, alpha) {
+    if (!path || path.length < 3) return;
+    ctx.save();
+    ctx.beginPath();
+    let start = path[0];
+    ctx.moveTo(start.x + canvas.width / 2, -start.y + canvas.height / 2);
+    for (let i = 1; i < path.length; i++) {
+        ctx.lineTo(path[i].x + canvas.width / 2, -path[i].y + canvas.height / 2);
+    }
+    ctx.closePath();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+    ctx.restore();
+}
+
+// --- REWRITTEN drawPath: No flashing the path, only the rod flashes ---
+function drawPath(path, color, width = 2, rodIndex = null, rodCount = null, doFillOverride = false) {
+    if (!path || path.length < 2) return;
+    ctx.lineWidth = width;
+
+    let isLast = (path == poslist['end']);
+    let baseColor = isLast ? "#fff" : color;
+    let normalizedOpacity = 1.0; // default
+    if (typeof fillOpacityValue !== 'undefined' && fillOpacityValue !== null && fillOpacityValue !== "") {
+        let parsed = parseFloat(fillOpacityValue);
+        if (!isNaN(parsed)) {
+            if (parsed === 0) {
+                normalizedOpacity = 0;
+            } else if (parsed > 0 && parsed <= 1) {
+                normalizedOpacity = parsed;
+            } else if (parsed > 1 && parsed <= 100) {
+                normalizedOpacity = parsed / 100;
+            }
+            // Clamp
+            normalizedOpacity = Math.max(0, Math.min(1, normalizedOpacity));
+        }
+    }
+
+    for (let i = 1; i < path.length; i++) {
+        const start = path[i - 1];
+        let lineColor = baseColor;
+        if (!isLast) {
+            let sum = start.x + start.y;
+            let hue = ((sum % 360) + 360) % 360;
+            let sat = "80%";
+            let light = "60%";
+            let useAlpha = 1.0;
+
+            if (filltype == 2 && rodIndex !== null && rodCount !== null) {
+                // Use line opacity to match fill, as well
+                useAlpha = ((rodIndex + 1) * 1.0) / rodCount;
+                useAlpha = useAlpha * normalizedOpacity;
+            } else if ((filltype == 1 || doFillOverride) && isLast && path.length > 2) {
+                useAlpha = normalizedOpacity;
+            }
+            // NO animated flash color, just use static color scales
+            lineColor = useAlpha === 1.0
+                ? `hsl(${hue},${sat},${light})`
+                : `hsla(${hue},${sat},${light},${useAlpha})`;
+        }
+
+        ctx.strokeStyle = lineColor;
+        ctx.beginPath();
+        ctx.moveTo(start.x + canvas.width / 2, -start.y + canvas.height / 2);
+        ctx.lineTo(path[i].x + canvas.width / 2, -path[i].y + canvas.height / 2);
+        ctx.stroke();
+    }
+}
+
+function drawRod(x, y, dir, len, speed, it) {
+    // --- Animate brightness for flash, default to normal color ---
+    let brightness = getRodFlashBrightness(it);
+    let color;
+    if (brightness > 0) {
+        // Blend toward white with brightness
+        let h = (rotspeed.length - it - 1) * (360 / rotspeed.length);
+        let s = 60;
+        let l = 70;
+        function hslToRgb(h,s,l){
+            s = s/100;
+            l = l/100;
+            let c = (1 - Math.abs(2 * l - 1)) * s;
+            let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+            let m = l - c / 2;
+            let r1, g1, b1;
+            if (h < 60) [r1, g1, b1] = [c, x, 0];
+            else if (h < 120) [r1, g1, b1] = [x, c, 0];
+            else if (h < 180) [r1, g1, b1] = [0, c, x];
+            else if (h < 240) [r1, g1, b1] = [0, x, c];
+            else if (h < 300) [r1, g1, b1] = [x, 0, c];
+            else [r1, g1, b1] = [c, 0, x];
+            let r = Math.round((r1 + m) * 255);
+            let g = Math.round((g1 + m) * 255);
+            let b = Math.round((b1 + m) * 255);
+            return [r,g,b];
+        }
+        let [r, g, b] = hslToRgb(h, s, l);
+        r = Math.round(r + (255 - r) * brightness);
+        g = Math.round(g + (255 - g) * brightness);
+        b = Math.round(b + (255 - b) * brightness);
+        color = `rgb(${r},${g},${b})`;
+    } else {
+        color = `hsl(${(rotspeed.length - it-1)*(360/rotspeed.length)},60%,70%)`;
+    }
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 4;
+    const nextX = x + Math.sin(dir + (t * speed)) * len;
+    const nextY = y + Math.cos(dir + (t * speed)) * len;
+    const x1 = canvas.width / 2 + x;
+    const y1 = canvas.height / 2 - y;
+    const x2 = canvas.width / 2 + nextX;
+    const y2 = canvas.height / 2 - nextY;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+
+    // Store the endpoint for this rod (in its own path)
+    if (!poslist[it]) poslist[it] = [];
+    let prev = poslist[it][poslist[it].length-1];
+    if (!prev || prev.x !== nextX || prev.y !== nextY) {
+        poslist[it].push({x: nextX, y: nextY});
+    }
+    return {x: nextX, y: nextY};
+}
+
+let changecheck = "";
+function draw() {
+    bigspeedmult = speedin.value;
+    period = getSystemPeriod(rotspeed, speedmult);
+    filltype = fillTypeValue;
+
+    const computedWidth = window.getComputedStyle(layersctojtntaino).width;
+    const widthNum = parseFloat(computedWidth);
+    layersctojtntaino.style.left = `calc(100% - ${(isNaN(widthNum) ? 0 : widthNum)+15}px)`;
+
+    let shouldUpdate = false;
+    if (`${numin.value}v${depthin.value}` !== changecheck) {
+        clearr();
+        shouldUpdate = true;
+    }
+
+    changecheck = `${numin.value}v${depthin.value}`;
+
+    let num = numin.value;
+
+    if (num == 1) {
+        inputnames.textContent = "Draw #          Speed           Depth";
+        depthin.style.display = "block"
+    } else {
+        inputnames.textContent = "Draw #          Speed"
+        depthin.style.display = "none" 
+    }
+
+    if (num == 1) {
+        speedmult = 0.05;
+        lenmult = 1.8 * res * masterlenmult;
+        generateFractal(depthin.value);
+    } else if (num == 2) {
+        rotspeed = [4, -5, -11];
+        length = [4, 8, 2];
+        offset = [0, 0, 0];
+        speedmult = 0.2;
+        lenmult = 20 * res * masterlenmult;
+    } else if (num == 3) {
+        rotspeed = [7, 4, -3];
+        offset = [0, 0, 0];
+        length = [6, 6, 3];
+        speedmult = 0.2;
+        lenmult = 20 * res * masterlenmult;
+    } else if (num == 4) {
+        rotspeed = [6, 10, 14];
+        length = [2.5, 2.5, 3.8];
+        offset = [0, 0, 0];
+        speedmult = 0.2;
+        lenmult = 30 * res * masterlenmult;
+    } else if (num == 5) {
+        rotspeed = [3, 4, 12];
+        length = [5, 1, 1];
+        offset = [0, 0, 0];
+        speedmult = 0.2;
+        lenmult = 30 * res * masterlenmult;
+    } else if (num == 6) {
+        rotspeed = [1, -8, 16];
+        length = [6, 1, 0.5];
+        offset = [0, 0, 0];
+        speedmult = 0.2;
+        lenmult = 30 * res * masterlenmult;
+    } else if (num == 7) {
+        rotspeed = [1, -4, 8, 16];
+        length = [3, 3, 1.5, 0.5];
+        offset = [0, 0, 0, 0];
+        speedmult = 0.2;
+        lenmult = 30 * res * masterlenmult;
+    } else if (num == 8 ) {
+        rotspeed = [2.5, -5, -20];
+        length = [7, 7, 2];
+        offset = [0, 0, 0];
+        speedmult = 0.2;
+        lenmult =20 * res * masterlenmult;
+    } else if (num == 9 ) {
+        rotspeed = [2.25, 9, -18];
+        length = [7.7, 5.4, 5.4];
+        offset = [0, 0, 0];
+        speedmult = 0.2;
+        lenmult =15 * res * masterlenmult;
+    } else if (num == 10 ) {
+        rotspeed = [4, -5, 2.5];
+        length = [6, 6, 4.5];
+        offset = [0, 0, 0];
+        speedmult = 0.5;
+        lenmult =15 * res * masterlenmult;
+    } else if (num == 11 ) {
+        rotspeed = [4.5, -2.25, 4.5,-9,18];
+        length = [3, 3, 3,3,3];
+        offset = [0, 0, 0,0,0];
+        speedmult = 0.2;
+        lenmult =20 * res * masterlenmult;
+    }
+
+    if (shouldUpdate) updateRodCheckboxes();
+
+    let lastEnd = poslist['end'] && poslist['end'].length > 0 ? poslist['end'][poslist['end'].length-1] : null;
+
+    // ---- FIX: Compute normalizedOpacity (same logic as in drawPath) ----
+    let normalizedOpacity = 1.0; // default
+    if (typeof fillOpacityValue !== 'undefined' && fillOpacityValue !== null && fillOpacityValue !== "") {
+        let parsed = parseFloat(fillOpacityValue);
+        if (!isNaN(parsed)) {
+            if (parsed === 0) {
+                normalizedOpacity = 0;
+            } else if (parsed > 0 && parsed <= 1) {
+                normalizedOpacity = parsed;
+            } else if (parsed > 1 && parsed <= 100) {
+                normalizedOpacity = parsed / 100;
+            }
+            // Clamp
+            normalizedOpacity = Math.max(0, Math.min(1, normalizedOpacity));
+        }
+    }
+    // ---- END FIX ----
+
+    // --- Clear out expired flashes ---
+    const now = Date.now();
+    for (const idx of rodsToFlash) {
+        if (!(idx in rodsFlashTime) || rodsFlashTime[idx] + 200 < now) {
+            rodsToFlash.delete(idx);
+            delete rodsFlashTime[idx];
+            delete rodsFlashPeakTime[idx];
+            delete rodsFlashState[idx];
+        }
+    }
+
+    if (!paused) {t += bigspeedmult / 60;}
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // New: Fill all visible rod paths as solid for filltype==2, using alpha = (i+1)/rodscount
+    if (filltype == 2) {
+        for (let i = 0; i < rotspeed.length; i++) {
+            if (enabled[i] && poslist[i] && poslist[i].length > 2) {
+                let alpha = ((i + 1) * 1.0) / rotspeed.length;
+                fillMainPathWithAlpha(poslist[i], `hsl(${(rotspeed.length - i - 2)*(360/rotspeed.length)},50%,50%)`, alpha*normalizedOpacity);
+            }
+        }
+        // For filltype 2 we do NOT need a separate solid fill for 'end', since that is already handled in above loop as i==rotspeed.length-1 if enabled
+    } else if (filltype == 1 && enabled[enabled.length-1] && poslist['end'] && poslist['end'].length > 2) {
+        // For filltype 1 only fill main endpoint
+        fillMainPathWithAlpha(poslist['end'], "#fff", 0.7);
+    }
+
+    // Draw all rods' trails as usual -- no flash logic for path
+    for(let i = 0; i < rotspeed.length; i++) {
+        let color = `hsl(${(rotspeed.length-i-2)*(360/rotspeed.length)},80%,30%)`;
+        if (enabled[i]) {
+            // Don't pass any flash index logic -- drawPath ignores it for color now
+            drawPath(poslist[i], color, thicknessInput.value, i, rotspeed.length);
+        }
+    }
+
+    if (enabled[enabled.length-1]) {
+        if (filltype == 2) {
+            drawPath(poslist['end'], "#fff", 2, rotspeed.length-1, rotspeed.length);
+        } else if (filltype == 1) {
+            drawPath(poslist['end'], "#fff", 2, rotspeed.length, rotspeed.length+1, true);
+        } else {
+            drawPath(poslist['end'], "#fff", 2);
+        }
+    }
+
+    // now walk the rods, record path for each rod and update the endpoint
+    let x = 0, y = 0;
+    let dir = (num == 1) ? Math.PI / 2 : 0;
+    for (let i = 0; i < rotspeed.length; i++) {
+        let pt = drawRod(x, y, offset[i], length[i] * lenmult, rotspeed[i] * speedmult, i);
+        x = pt.x;
+        y = pt.y;
+    }
+    endX = x;
+    endY = y;
+
+    // Track endpoint as "end" in poslist
+    if (!poslist['end']) poslist['end'] = [];
+    let lastMain = poslist['end'][poslist['end'].length-1];
+    if (!lastMain || lastMain.x !== endX || lastMain.y !== endY) {
+        poslist['end'].push({ x: endX, y: endY });
+    }
+
+    // Velocity only for main end point
+    let speed = 0;
+    if (lastEnd) {
+        let dx = endX - lastEnd.x;
+        let dy = endY - lastEnd.y;
+        speed = Math.sqrt(dx * dx + dy * dy);
+    }
+
+    let velVal = ((speed/speedmult)/bigspeedmult);
+    let velocityText = `Velocity: ${isNaN(velVal) ? "0.0000" : velVal.toFixed(4)}`;
+    if (period && isFinite(period)) {
+        velocityText += ` | Period: ${period.toFixed(4)}`;
+    } else {
+        velocityText += ` | Period: ∞`;
+    }
+    velocityText+= ` | Time: ${t.toFixed(3)}`
+    display.textContent = velocityText ;
+    if (typeof matchedRodPairs === "undefined") matchedRodPairs = new Set();
+
+    if (rotspeed.length > 1) {
+        let newMatchingPairs = new Set();
+
+        for (let i = 0; i < rotspeed.length - 1; i++) {
+            // Only check adjacent pairs (i,i+1)
+            let j = i+1;
+
+            let angleA = ((offset[i] || 0) + (t * (rotspeed[i] || 0) * speedmult ));
+            let angleB = ((offset[j] || 0) + (t * (rotspeed[j] || 0) * speedmult ));
+            let modA = ((angleA % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+            let modB = ((angleB % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+            let diff = Math.abs(modA - modB);
+            diff = Math.min(diff, 2 * Math.PI - diff);
+            let threshold = 0;
+            if (num == 1) {
+               threshold = (1+Math.log(rotspeed[i]*2))/60  * Math.PI;
+            } else {
+                threshold = 1/30 * Math.PI;
+            }
+            let id = i < j ? `${i},${j}` : `${j},${i}`;
+
+            if (diff < threshold) {
+                newMatchingPairs.add(id);
+                if (!matchedRodPairs.has(id)) {
+                    
+                    if (sound) {
+                     let sfx = new Audio(clickSfx.src);
+                     sfx.currentTime = 0;
+                     sfx.play();
+                    }
+
+                    let nowTime = Date.now();
+
+                    [i, j].forEach(idx => {
+                        rodsToFlash.add(idx);
+                        rodsFlashTime[idx] = nowTime;
+                    });
+                }
+            }
+        }
+
+        matchedRodPairs = newMatchingPairs;
+    } else {
+        matchedRodPairs = new Set();
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+function resizeCanvas() {
+    canvas.width = (window.innerWidth*res) - 25;
+    canvas.height = (window.innerHeight*res) -25;
+    masterlenmult = Math.min(canvas.height,canvas.width) / 2200
+    clearr();
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+    if (e.key == "r") {
+        clearr();
+    } else if (e.key == ' ') {
+        paused = !paused
+    }
+});
+
+</script>
+</html>

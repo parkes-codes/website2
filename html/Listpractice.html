@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List practice n stuff</title>
+  <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<body>
+    <button id="generatebutton" onclick="generate()">Generate Random Name</button>
+    <div id ="randomitem">
+    </div>
+    <div id="bingoboard">
+      <button class="grid-item"><div>bingo slot1</div></button>
+      <button class="grid-item"><div>bingo slot2</div></button>
+      <button class="grid-item"><div>bingo slot3</div></button>
+      <button class="grid-item"><div>bingo slot4</div></button>
+      <button class="grid-item"><div>bingo slot5</div></button>
+      <button class="grid-item"><div>bingo slot6</div></button>
+      <button class="grid-item"><div>bingo slot7</div></button>
+      <button class="grid-item"><div>bingo slot8</div></button>
+      <button class="grid-item"><div>bingo slot9</div></button>
+      <button class="grid-item"><div>bingo slot10</div></button>
+      <button class="grid-item"><div>bingo slot11</div></button>
+      <button class="grid-item"><div>bingo slot12</div></button>
+      <button class="grid-item"><div>bingo slot13</div></button>
+      <button class="grid-item"><div>bingo slot14</div></button>
+      <button class="grid-item"><div>bingo slot15</div></button>
+      <button class="grid-item"><div>bingo slot16</div></button>
+      <button class="grid-item"><div>bingo slot17</div></button>
+      <button class="grid-item"><div>bingo slot18</div></button>
+      <button class="grid-item"><div>bingo slot19</div></button>
+      <button class="grid-item"><div>bingo slot20</div></button>
+      <button class="grid-item"><div>bingo slot21</div></button>
+      <button class="grid-item"><div>bingo slot22</div></button>
+      <button class="grid-item"><div>bingo slot23</div></button>
+      <button class="grid-item"><div>bingo slot24</div></button>
+      <button class="grid-item"><div>bingo slot25</div></button>
+    </div>
+    <style>
+      body {
+        background-color: #001111;
+      }
+        #bingoboard {
+          display: grid;
+          grid-template-columns: repeat(5,100px);
+          grid-template-rows: repeat(5,100px);
+          gap: 0px;
+        }
+        .grid-item {
+          background-color: #000000;
+          border: #ffffff 1px solid;
+          color:#ffffff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          cursor: pointer;
+        }
+        .grid-item.selected {
+          background-color: #dd5555;
+        }
+        #randomitem {
+          color: #fff
+        }
+    </style>
+    <script>
+       const adjectives = [
+  "able", "active", "adorable", "alert", "angry",
+ /* "attractive" */, "average", /* "beautiful" */, "better", "black",
+  "blue", "brave", "brief", "bright", "broad",
+  "calm", "careful", "cautious", "charming", "cheerful",
+  "clean", "clear", "clever", "close", "colorful",
+  "cool", "courageous", "crazy", "cute", "dark",
+  "deep", "delicate", "determined", "different", "difficult",
+  "dirty", "dry", "eager", "early", "easy",
+  "elegant", "empty", "excited", "expert", "fair",
+  "faithful", "famous", "fast", "fine", "friendly",
+  "funny", "gentle", "gifted", "good", "great",
+  "happy", "heavy", "helpful", /* "hot" */,
+  "important", "kind", "large", "light", "little",
+  "long", "lovely", "lucky", "modern", "narrow",
+  "nice", "old", "open", "perfect", "polite",
+  "poor", "pretty", "proud", "quick", "quiet",
+  "rapid", "rich", "right", "rough", "sad",
+  "safe", "short", "shy", "silent", "simple",
+  "small", "smart", /* "sexy" */, "soft", "strong", "sweet",
+  "tall", "tiny", "weak", "white", "young"
+];
+
+const nouns = [
+  "aardvark", "albatross", "alligator", "alpaca", "anteater", "antelope", "armadillo", "badger", 
+  "barracuda", "bat", "bear", "beaver", "beluga", "bison", "boa", "buffalo", "butterfly", "camel", 
+  "chameleon", "cheetah", "chimpanzee", "cobra", /* "cougar" */, "coyote", "crocodile", "deer", "dingo", 
+  "dolphin", "donkey", "dragon", "dragonfly", "eagle", "echidna", "elephant", "elk", "falcon", 
+  "fennec", "ferret", "flamingo", "fox", "frog", "gazelle", "gecko", "giraffe", "gnu", "goose", 
+  "gorilla", "griffin", "grizzly", "hedgehog", "hippopotamus", "honeybee", "hyena", "iguana", 
+  "jackal", "jaguar", "kangaroo", "kiwi", "koala", "komodo", "kraken", "lemur", "leopard", "llama", 
+  "lobster", "lynx", "macaw", /* "mama" */, "mammoth", "manatee", "mantis", "meerkat", "mink", "monkey", "moose", 
+  "narwhal", "newt", "octopus", "ostrich", "otter", "owl", "panda", "panther", "parrot", "penguin", 
+  "platypus", "porcupine", "puma", "quokka", "rabbit", "raccoon", "rhinoceros", "salamander", 
+  "scorpion", "seal", "shark", "sloth", "snail", "snake", "sphinx", "tiger", "unicorn", "walrus", 
+  "whale", "wolf", "wombat", "yak", "zebra", /* "woman" */
+];
+        const display = document.getElementById("randomitem");
+
+        function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
+        function generate(){
+                display.textContent = `${capitalizeFirstLetter(adjectives[getRandomInt(1,adjectives.length-1)])} ${capitalizeFirstLetter(nouns[getRandomInt(1,nouns.length-1)])}`
+        }
+
+        // make each bingo button toggle style on click using `this`
+        document.querySelectorAll('.grid-item').forEach(function(btn) {
+          btn.addEventListener('click', function () {
+            this.classList.toggle('selected');
+          });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Text effects</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+   body {
+        background-color: #000;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+   }
+   #textinput {
+    position: fixed;
+    width: 100px;
+    left: calc(50vw - 50px);
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+   }
+   #generate {
+    position: fixed;
+    width: 70px;
+    left: calc(50vw - 33px);
+    margin-top: 80px;
+   }
+   #textcontainer {
+    position: fixed;
+    width: 80vw;
+    left: 10vw;
+    margin-top: 140px;
+    font-size: 25px;
+    max-width: 80vw;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    word-break: break-word;
+    flex-wrap: wrap;
+   }
+   .letter {
+    align-self: center;
+   }
+   #title {
+    font-size: 20px;
+   }
+</style>
+<body>
+    <h1 id="title">text effects wow poggies</h1>
+    <input id="textinput" type="string">
+    <button id="generate" onclick="generate()">Generate</button>
+    <div id="buttonContainer">
+        <button onclick="setMode(1)">Doug</button>
+        <button onclick="setMode(2)">Sine</button>
+        <button onclick="setMode(3)">Arcsine</button>
+        <button onclick="setMode(4)">Rotate</button>
+    </div>
+    <div id="textcontainer"></div>
+</body>
+<script>
+   const textinput = document.getElementById("textinput");
+   const textcontainer = document.getElementById("textcontainer");
+   const generate2 = document.getElementById("generate")
+   let letterdata = [];
+   let t = 0;
+   let t2 = 0;
+   let delay = 10;
+   let speed = 15;
+   let mode = 1;
+   let rotate = false;
+
+    function animate() {
+        generate2.style.transform = `translateY(${Math.cos(t2)*7.5}px) translateX(${Math.sin(t2)*7.5}px)`;
+
+        const measureSpan = document.createElement('span');
+
+        const inputStyles = window.getComputedStyle(textinput);
+        measureSpan.style.fontSize = inputStyles.fontSize;
+        measureSpan.style.fontFamily = inputStyles.fontFamily;
+        measureSpan.style.fontWeight = inputStyles.fontWeight;
+        measureSpan.style.letterSpacing = inputStyles.letterSpacing;
+        measureSpan.style.padding = inputStyles.padding;
+
+        measureSpan.textContent = textinput.value || ' ';
+        document.body.appendChild(measureSpan);
+
+
+        const maxInputWidth = 700; 
+        let displayLength = measureSpan.offsetWidth;
+        displayLength = Math.min(displayLength , maxInputWidth);
+        textinput.style.transform = `translateX(${0-displayLength/2+50}px)`;
+        generate2.style.backgroundColor = `hsl(${(t*100)%360},50%,95%)`;
+   
+
+        measureSpan.remove();
+   
+        textinput.style.width =`${displayLength}px`
+   
+        t += 1/60;
+        t2+= 1/60
+
+        const letters = document.getElementsByClassName("letter");
+        if (mode == 1) {
+           const n = letterdata.length + delay;
+            for (let i = 0; i < letters.length; i++) {
+              const letter = letters[i];
+              const phase = (t * speed - 1) % (2 * n);
+               if (phase > i + 1 && phase <= n + i + 1) {
+                     letter.style.transform = `translateY(${-2}px)`;
+              } else if (phase > n + i + 1) {
+                  letter.style.transform = `translateY(0px)`;
+              } else {
+                 letter.style.transform = `translateY(0px)`;
+              }
+               letter.style.color = `hsl(${(t * 60 + i * 5) % 360},50%,90%)`;
+         }
+       } else if (mode == 2) {
+        for (let i = 0; i < letters.length; i++) {
+
+              letters[i].style.transform = `translateY(${Math.sin(t*1+i/2)*10}px)`;
+
+         }
+       } else if (mode == 3) {
+        for (let i = 0; i < letters.length; i++) {
+              letters[i].style.transform = `translateY(${Math.asin(Math.sin(t*1+i/2))*10}px)`;
+
+         }
+       } else if (mode == 4) {
+        for (let i = 0; i < letters.length; i++) {
+              letters[i].style.transform = `rotate(${(Math.sin(t*2+i/2))*120}deg)`;
+         }
+       }
+
+       for (let i = 0; i < letters.length; i++) {
+               letters[i].style.color = `hsl(${(t * 60 + i * 5) % 360},50%,90%)`;
+               if (mode==4) {
+                              letters[i].style.margin = `5px`
+               } else {
+                              letters[i].style.margin = `0px`
+               }
+         }
+       
+
+
+       requestAnimationFrame(animate);
+    }
+
+    function generate() {
+        t=0;
+        letterdata = [];
+        const container = document.getElementById("textcontainer");
+
+        const text = textinput.value;
+
+
+        container.innerHTML = "";
+        for (let i = 0; i < text.length; i++) {
+            const span = document.createElement("span");
+            span.textContent = text[i] === " " ? "\u00A0" : text[i];
+            span.style.display = "inline-block";
+            span.className = "letter";
+            letterdata.push(false);
+            container.appendChild(span);
+        }
+
+        speed = Math.min(text.length,120)
+        delay = speed;
+    }
+
+
+    function setMode(num) {
+        mode = num;
+    }
+
+
+    animate();
+
+</script>
+</html>

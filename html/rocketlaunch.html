@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Rocket launch</title>
+	<link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+	body {
+		background-color: #020000;
+	}
+	#launchbutton {
+		position: fixed;
+		left: calc(50vw - 50px);
+		margin-top: 100px;
+		width: 100px;
+		transition: all 300ms ease;
+		opacity: 100%;
+		background-color: #eee;
+        top: 0
+	}
+	#rocket {
+		width: 100px;
+		position: fixed;
+		left: calc(50vw - 50px);
+		top: calc(100vh)
+	}
+	#fire {
+		width: 60px;
+		position: fixed;
+		left: calc(50vw - 30px);
+		top: calc((100vh + 30px));
+		transform: rotate(180deg);
+		filter: hue-rotate(190deg);
+	}
+    .circle {
+        border-radius: 100%;
+        width: 100px;
+        height: 100px;
+        background-color: #222;
+        border: #ee0 10px solid;
+        margin: 5px;
+        cursor: pointer;
+        transition: all 200ms ease;
+    }
+</style>
+<body>
+	<button id="launchbutton" onclick="launch()">Launch</button>
+	<img id="rocket" src="../images/rocket2.png">
+	<img id="fire" src="../images/fire2.gif">
+</body>
+<script>
+	const launchbutton = document.getElementById("launchbutton");
+	const rocket = document.getElementById("rocket")
+	const fire = document.getElementById("fire");
+
+	let launchsize = 1;
+	let clickable = true;
+    let t = 0;
+
+	function tickrocket() {
+		t *= 1.02;
+		let shakeX = Math.random() * 25 - 12.5;
+		rocket.style.transform = `translateX(${shakeX}px) translateY(${0-t}px)`;
+		fire.style.transform = `translateX(${shakeX}px) translateY(${0-t+100}px) rotate(180deg)`;
+		if (((window.innerHeight * 1.0) + 200 - t) > 0) {
+			requestAnimationFrame(tickrocket)
+		}
+	}
+
+
+	function launch() {
+		if (!clickable) return;
+
+		clickable = false;
+		launchbutton.style.backgroundColor = `#aaa`
+		launchbutton.style.transition = "all 300ms ease";
+		launchsize = 1;
+
+		for (let i = 1; i < 4; i++) {
+			setTimeout(() => {
+				launchsize += 0.5;
+				launchbutton.style.transform = `scale(${launchsize})`
+				launchbutton.style.backgroundColor = `hsl(${120 - (i*30)},70%,50%)`
+				launchbutton.textContent = `${4-i}`
+			}, i * 1000);
+		}
+		setTimeout(() => {
+			launchbutton.style.transition = `all 500ms ease`;
+			launchbutton.textContent = "0"
+			launchbutton.style.transform = `scale(${7})`
+			launchbutton.style.backgroundColor = `hsl(0,50%,50%)`
+			launchbutton.style.opacity = `0%`
+		}, 4000);
+
+		t = 1;
+
+		setTimeout(() => {
+			tickrocket();
+		}, 3000)
+
+		setTimeout(() => {
+			launchbutton.style.transition = "all 1000ms ease";
+			launchbutton.style.transform = "scale(1)";
+			launchbutton.style.backgroundColor = "#eee";
+			launchbutton.style.opacity = "0%";
+			launchbutton.style.top = "-100px";
+			launchbutton.textContent = "Launch";
+			clickable = true;
+		}, 10000);
+		setTimeout(() => {
+			launchbutton.style.top = "0px";
+			launchbutton.style.opacity = "100%";
+		}, 11000);
+	}
+
+    function sleep(ms) {
+        return new Promise(resolve => {
+            setTimeout(resolve, ms);
+        });
+    }
+
+    async function waitUntil(condition) {
+        while (!condition()) {
+            await sleep(10);
+        }
+    }
+
+</script>
+</html>

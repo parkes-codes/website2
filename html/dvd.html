@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DVD</title>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    </head>
+        <style>
+            body {
+                background-color: #000000;
+                color: #ffffff;
+            }
+            #dvd {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        </style>
+    <body>
+      <div id="dvd">
+        <img src="../images/scratch.jpg" alt="dvd" id="dvdImage" width="100" height="100">
+      </div>
+    </body>
+    <script>
+        const dvd = document.getElementById("dvd");
+        let x=0;
+        let xdir=1;
+        let y=0;
+        let ydir=1;
+        const pi = Math.PI;
+        const bounceSound = new Audio("../sounds/click.wav");
+
+        t=0
+        function tick() {
+            x+=xdir*3;
+            y+=ydir*3;
+            dvd.style.left = `${x}px`;
+            dvd.style.top = `${y}px`;
+            t += 0.01;
+            bounce();
+            requestAnimationFrame(tick);
+        }
+
+        function bounce() {
+            if (x >= document.body.clientWidth - 85) {
+                xdir = -1;
+                while (x >= document.body.clientWidth - 85) {
+                    x--;
+                }
+                bounceSound.play()
+            }
+            if (x <= 0) {
+                xdir = 1;
+                while (x <=0) {
+                    x++
+                }
+                bounceSound.play()
+            }
+            if (y >= window.innerHeight-100) {
+                ydir = -1;
+                while (y >= window.innerHeight-100) {
+                    y--;
+                }
+                bounceSound.play()
+            }
+            if (y<=0) {
+                ydir=1;
+                while (y<=0) {
+                    y++;
+                }
+                bounceSound.play()
+            }
+        }
+        alert("click to start")
+        window.addEventListener("click", (e) => {
+            tick();
+        })
+    </script>
+</html>

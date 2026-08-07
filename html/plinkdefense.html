@@ -1,0 +1,634 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Objects Poggies</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    .buttons {
+        width: fit-content;
+        height: 20px;
+        border-radius: 5px;
+        background-color: #eee;
+        transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    .buttons:hover {
+        background-color: #eea;
+        transform: scale(1.1);
+    }
+    .buttons:active {
+        background-color: #ddd;
+    }
+
+    #upgrades {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 7px;
+        right: 10px;
+        z-index: 888;
+        gap: 0px;
+        align-items: flex-end;
+    }
+
+</style>
+<body>
+    <canvas id="gamecanvas"></canvas>
+    <div id="upgrades">
+        <button id="dmgBtn" class="buttons" onclick="dmgUp()">Upgrade Damage</button>
+        <button id="speedBtn" class="buttons" onclick="speedUp()">Upgrade Attack Speed</button>
+        <button id="rangeBtn" class="buttons" onclick="rangeUp()">Upgrade Attack Range</button>
+    </div>
+</body>
+<script>
+// --- Setup canvas and context for drawing ---
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+
+// Object to store which keys are currently held down
+let keysPressed = {};
+
+// Variables for tracking and averaging FPS for performance display
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 0;
+
+// Mouse position (relative to center of canvas)
+let mx = 0, my = 0;
+
+/**
+ * Updates the mouse coordinates (mx, my) based on current position.
+ * The coordinates are transformed so that (0,0) is at the canvas center.
+ * - mx: right is positive, left is negative
+ * - my: up is positive, down is negative
+ */
+function updateMousePosition(e) {
+    // Get location and size of canvas on the page
+    const rect = canvas.getBoundingClientRect();
+    // Convert mouse coordinates to game-space (centered)
+    mx = canvas.width / -2 + ((e.clientX - rect.left) * (canvas.width / rect.width));
+    my = canvas.height / 2 - ((e.clientY - rect.top) * (canvas.height / rect.height));
+}
+// Listen for mouse movement to update mx/my
+canvas.addEventListener('mousemove', updateMousePosition);
+
+// ===== MAIN GAME OBJECT & CLASSES =====
+
+/**
+ * The main Game container object.
+ * Holds arrays of all major game components:
+ * - towers: Where you place your defenses
+ * - entities: (can be used for non-enemy, non-tower things, but unused here)
+ * - enemies: All the enemies currently on the field
+ * - projectiles: (for things you shoot, unused here)
+ * - money: How much cash the player has
+ * - wave: current wave number
+ * - enemiesToSpawn: how many left to spawn this wave
+ * - nextWaveTimeout: flag for scheduling next wave
+ * - lastSpawnTime: for spawn pacing
+ */
+class Game {
+    constructor() {
+        this.towers = [];       // Array of Tower instances
+        this.entities = [];     // (currently unused, placeholder)
+        this.enemies = [];      // Array of Enemy instances
+        this.projectiles = [];  // (currently unused, placeholder)
+        this.money = 100;       // Player's available money
+
+        // Wave properties
+        this.wave = 0;
+        this.enemiesToSpawn = 0;
+        this.nextWaveTimeout = null;
+        this.lastSpawnTime = 0;
+        this.spawnInterval = 40000; // ms between spawns for the wave
+    }
+
+    // Start the next wave, increase difficulty
+    startNextWave() {
+        this.wave += 1;
+        // Start with 5 enemies then increase each wave
+        // e.g., wave 1=5, 2=8, 3=11, 4=14, 5=17...
+        this.enemiesToSpawn = 1 + (this.wave - 1) * 3;
+        this.lastSpawnTime = performance.now() - this.spawnInterval; // so it spawns immediately
+    }
+
+    // Per-frame automatic spawning
+    trySpawnEnemy() {
+        if (this.enemiesToSpawn <= 0) return;
+        const now = performance.now();
+        this.spawnInterval = 0+(500/this.wave)
+        if (now - this.lastSpawnTime >= this.spawnInterval) {
+            // Find the center position (first tower)
+            let tx = 0, ty = 0;
+            if (this.towers.length > 0) {
+                tx = this.towers[0].x;
+                ty = this.towers[0].y;
+            }
+            // Random angle around the tower
+            const angle = Math.random() * Math.PI * 2;
+            const dist = game.towers[0].range * 1.5 + Math.random() * 120;
+
+            const ex = tx + Math.cos(angle) * dist;
+            const ey = ty + Math.sin(angle) * dist;
+
+            // Make enemy stronger per wave: +7hp and +2 bodyDmg per wave after first, and color gets more dangerous
+            let hp = 5 + 7 * (this.wave-1);
+            let dmg = 8 + 2 * (this.wave-1);
+            let colStrength = Math.floor(Math.min(255, 170 + 18*(this.wave-1)));
+            let color = `rgb(${colStrength},${Math.max(30, 200-12*(this.wave-1))},${Math.max(80,255-18*(this.wave-1))})`;
+
+            let enemy = new Enemy(ex, ey);
+
+            enemy.hitPoints = hp;
+            enemy.bodyDmg = dmg;
+            enemy.color = color;
+
+            this.enemies.push(enemy);
+            this.enemiesToSpawn -= 1;
+            this.lastSpawnTime = now;
+        }
+    }
+
+    // Should be called after all enemies of the wave are dead and spawned
+    isWaveFinished() {
+        return this.enemiesToSpawn <= 0 && this.enemies.every(e => !e._isAlive);
+    }
+}
+
+/**
+ * Base class for anything that exists in the game world.
+ * Other classes (like Enemy, Tower) will "extend" this to inherit position etc.
+ */
+class Entity {
+    constructor(x, y) {
+        this.x = x;  // x-position (centered coordinates)
+        this.y = y;  // y-position (centered coordinates)
+    }
+
+    // Called every frame to update logic (intended to be overridden)
+    update() {}
+
+    // Called every frame to draw on canvas (intended to be overridden)
+    draw(ctx) {}
+}
+
+/**
+ * Enemy class - extends Entity so it has x/y, but adds its own logic.
+ * Each enemy will move toward the closest tower each frame.
+ */
+class Enemy extends Entity {
+    constructor(x, y) {
+        super(x, y);       // Call Entity's constructor for position
+        this.radius = 10;  // Drawing size for the enemy (circle)
+        this.color = "#aff"; // Default enemy color (white, may be overridden per wave)
+        this.bodyDmg = 8;  // Amount of damage this enemy deals when touching a tower per hit
+        this._isAlive = true; // for future extensibility
+        this.lastHitTime = 0; // for possible rate-limiting if needed in future
+        this.hitPoints = 30;
+    }
+
+    // Move toward closest tower, at a max speed of 2 units per update
+    update() {
+        if (!this._isAlive) return;
+        // Find closest tower to move towards
+        let closestTower = null;
+        let minDist = Infinity;
+        let dx = 0, dy = 0, dist = 0;
+        for (let tower of game.towers) {
+            const tx = tower.x - this.x;
+            const ty = tower.y - this.y;
+            const tdist = Math.hypot(tx, ty); // Straight-line distance
+            if (tdist < minDist) {
+                minDist = tdist;
+                closestTower = tower;
+                dx = tx;
+                dy = ty;
+                dist = tdist;
+            }
+        }
+        // If a tower is found, move towards it
+        if (closestTower) {
+            if (dist > 0) {
+                // Only move up to 2 units per frame
+                const moveDist = Math.min(2, dist);
+                this.x += (dx / dist) * moveDist; // Move fractionally toward tower
+                this.y += (dy / dist) * moveDist;
+            }
+        }
+        // Check if we're overlapping a tower, and back off if so
+        if (closestTower && minDist < closestTower.radius*1.5) {
+            // Amount to move backward: overlap = closestTower.radius - minDist
+            const overlap = closestTower.radius*1.5 - minDist;
+            if (minDist > 0 && dist > 0) {
+                // Move away from tower by overlap amount
+                this.x -= (dx / dist) * overlap;
+                this.y -= (dy / dist) * overlap;
+            } else if (overlap > 0) {
+                // If completely overlapping (dist 0), move in a random direction
+                const angle = Math.random() * 2 * Math.PI;
+                this.x += Math.cos(angle) * overlap;
+                this.y += Math.sin(angle) * overlap;
+            }
+        }
+        // Check if we're overlapping any other enemy and back off if so
+        for (let other of game.enemies) {
+            if (other !== this) {
+                const ex = other.x - this.x;
+                const ey = other.y - this.y;
+                const edist = Math.hypot(ex, ey);
+                const minEnemyDist = (this.radius) + (other.radius || 10); // fallback for bad enemy
+                if (edist < minEnemyDist && edist > 0) {
+                    // Amount to move backward: overlap = minEnemyDist - edist
+                    const overlap = minEnemyDist - edist;
+                    // Move away from the other enemy by the overlap amount, along the vector between us
+                    this.x -= (ex / edist) * overlap;
+                    this.y -= (ey / edist) * overlap;
+                } else if (edist === 0 && (other.radius || 10) > 0) {
+                    // If completely overlapping, random direction
+                    const overlap = (other.radius || 10);
+                    const angle = Math.random() * 2 * Math.PI;
+                    this.x += Math.cos(angle) * overlap;
+                    this.y += Math.sin(angle) * overlap;
+                }
+            }
+        }
+    }
+
+    // Draw the enemy on the canvas as a filled circle
+    draw(ctx) {
+        if (!this._isAlive) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    }
+}
+
+/**
+ * Tower class - the player's defense
+ * Inherits from Entity (so it has x/y already)
+ * Shoots a line at an enemy within 150 distance every 0.333s (333ms).
+ * Modified for attack speed logic: If intervall < 33.333..., shoot extra attacks.
+ *
+ * ATTACK LINE FADING IS NOW FRAME-BASED AND ALWAYS OCCURS!
+ */
+class Tower extends Entity {
+    constructor(x, y) {
+        super(x, y);         // Set x/y via Entity
+        this.radius = 18;    // Size for drawing the tower
+        this.color = "#4ef"; // Tower color (light blue)
+        this.health = 100;
+        this.damage = 8;
+        this.intervall = 500;
+        this.range = 150;
+
+        this.lastDmgTime = 0; // Time of last time the tower took damage (milliseconds)
+        this.lastShootTime = 0; // Time of last shot fired (milliseconds)
+        // Change: instead of a single target/line, store all last shots for multiple lines
+        this.lastShotTargets = []; // Array of {x, y}
+        this.shotLineFade = 0; // For fading out shot lines
+
+        // For strict frame-based fading:
+        this._prevDrawFrameTime = performance.now();
+    }
+
+    // Helper: Find multiple closest alive enemies within range (damages first n)
+    getClosestEnemies(game, count) {
+        // Filter for enemies within range and alive
+        const enemiesInRange = [];
+        for (let enemy of game.enemies) {
+            if (!enemy || typeof enemy.x !== "number" || typeof enemy.y !== "number" || !enemy._isAlive) continue;
+            const dx = this.x - enemy.x;
+            const dy = this.y - enemy.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < this.range) {
+                enemiesInRange.push({enemy, dist});
+            }
+        }
+        // Sort by distance
+        enemiesInRange.sort((a, b) => a.dist - b.dist);
+        return enemiesInRange.slice(0, count).map(e => e.enemy);
+    }
+
+    // Update the tower, checking if any enemies are touching it & shooting at enemies
+    update(game) {
+        const now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+
+        // --- Shooting logic with multiple attacks for speed ---
+        let attacks = 1;
+        let threshold = 1000 / 30; // ~33.3333 ms
+
+        if (this.intervall < threshold) {
+            attacks = 2;
+            let left = threshold;
+            let workInt = this.intervall;
+            while (workInt < left / 20) {
+                attacks++;
+                left = left / 20;
+            }
+        }
+
+        // Calculate effective damage per shot, scaling inversely with attack speed
+        let damagePerShot = this.damage / (100/this.intervall);
+
+        // How many intervals since lastShootTime?
+        let intervalTime = now - this.lastShootTime;
+        let nFires = 0;
+        if (intervalTime >= this.intervall) {
+            nFires = Math.floor(intervalTime / this.intervall);
+            for (let volley = 0; volley < nFires; volley++) {
+                // Pick targets: closest, second closest, third closest, no duplicate hits
+                let targets = this.getClosestEnemies(game, attacks);
+
+                // For every attack, record the positions for the shot lines
+                let attackedSet = new Set();
+                let shotLines = [];
+                for (let i = 0; i < attacks; i++) {
+                    let target = targets[i];
+                    // Only shoot if the enemy exists, is alive, and hasn't already been attacked in this volley
+                    if (
+                        target &&
+                        target._isAlive &&
+                        !attackedSet.has(target)
+                    ) {
+                        attackedSet.add(target);
+                        if (typeof target.hitPoints === "undefined" || target.hitPoints === null) {
+                            target.hitPoints = 5;
+                        }
+                        target.hitPoints -= damagePerShot;
+                        if (target.hitPoints <= 0) {
+                            target._isAlive = false;
+                        }
+                        // Record the shot line (to target position)
+                        shotLines.push({ x: target.x, y: target.y });
+                    }
+                }
+                // Set lastShotTargets if at least one shot was made
+                if (shotLines.length > 0) {
+                    this.lastShotTargets = shotLines;
+                    this.shotLineFade = 1.0;
+                    // Note: no "lastShotLineTime" for this version; fade always handled in draw()
+                }
+            }
+            this.lastShootTime += this.intervall * nFires;
+        }
+        // No 'else' branch anymore: fade always handled in draw() per frame.
+
+        // --- Tower taking damage from overlapping enemies as before ---
+        if (now - this.lastDmgTime >= 1000) {
+            let dmg = 0;
+            for (let enemy of game.enemies) {
+                if (!enemy || typeof enemy.x !== "number" || typeof enemy.y !== "number" || !enemy._isAlive) continue;
+                const dx = this.x - enemy.x;
+                const dy = this.y - enemy.y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < this.radius * 1.55) {
+                    dmg += (enemy.bodyDmg || 0);
+                }
+            }
+            if (dmg > 0) {
+                this.health -= dmg;
+                this.lastDmgTime = now;
+            }
+        }
+    }
+
+    draw(ctx) {
+        // Draw range outline with 0.2 alpha
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.range, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(80,220,255,0.2)";
+        ctx.lineWidth = 5;
+        ctx.stroke();
+        ctx.restore();
+
+        // Draw tower body
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#09f";
+        ctx.stroke();
+        ctx.restore();
+
+        // Optionally show health
+        ctx.save();
+        ctx.font = "bold 14px sans-serif";
+        ctx.fillStyle = "#fff";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(Math.max(0, Math.round(this.health)), this.x, this.y - this.radius - 12);
+        ctx.restore();
+
+        // Draw & always fade out last shot lines - fade is frame-based, not interval-based!
+        if (
+            Array.isArray(this.lastShotTargets) &&
+            this.lastShotTargets.length > 0 &&
+            this.shotLineFade > 0
+        ) {
+            ctx.save();
+            ctx.strokeStyle = "rgba(255,80,40," + this.shotLineFade.toFixed(2) + ")";
+            ctx.lineWidth = 3;
+            ctx.shadowColor = "rgba(255,184,128,0.8)";
+            ctx.shadowBlur = 10 * this.shotLineFade;
+            for (const targetPos of this.lastShotTargets) {
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(targetPos.x, targetPos.y);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        // --- FORCE attack line fade every frame, so they always fade out even with absurd attack speed!
+        // (fading in draw() guarantees fade even if update() called multiple times per frame or attack is instant)
+        if (this.shotLineFade > 0) {
+            // Use a fade duration equivalent to old behavior (about 14 frames at 60fps ~= 0.07 per frame)
+            // But adjust with exact time delta if performance.now() is available
+            let now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+            let dt = (now - (this._prevDrawFrameTime || now)) / 1000; // in seconds
+            if (dt > 0.2) dt = 1/60; // Clamp to typical frame, avoid huge slow frame fade
+            let fadePerSecond = 0.07 * 60; // fade out in ~14 frames (1.0 -> 0 in ~0.23s)
+            this.shotLineFade -= fadePerSecond * dt;
+            if (this.shotLineFade < 0) this.shotLineFade = 0;
+            this._prevDrawFrameTime = now;
+        }
+    }
+}
+
+// ===== GAME INITIALIZATION =====
+const game = new Game(); // Create the main game object
+
+// Add a tower at the center (0,0) of the canvas
+game.towers.push(new Tower(0, 0));
+
+/**
+ * Main draw loop.
+ * - Clears the screen
+ * - Draws all towers and enemies (positioned relative to canvas center)
+ * - Moves all enemies (calls update on them)
+ * - Handles per-wave/scheduled enemy spawning and wave progression
+ */
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Compute where the origin (0, 0) is on screen
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    // --- Remove dead enemies from the list ---
+    game.enemies = game.enemies.filter(e => e && e._isAlive !== false);
+
+    // Handle wave and spawning logic before updates/draws
+    // Start wave 1 if not started yet
+    if (game.wave === 0 && game.nextWaveTimeout === null) {
+        game.startNextWave();
+    }
+
+    // Try to spawn new enemies if there are still spawns left in current wave
+    if (game.wave > 0 && game.enemiesToSpawn > 0) {
+        game.trySpawnEnemy();
+    }
+
+    // If wave finished (all enemies dead and all spawned), start a short break before next wave
+    if (game.wave > 0 && game.enemiesToSpawn <= 0 && game.enemies.length === 0 && game.nextWaveTimeout === null) {
+        // 1.3 seconds between waves (for clarity)
+        game.nextWaveTimeout = setTimeout(() => {
+            game.nextWaveTimeout = null;
+            game.startNextWave();
+        }, 1300);
+    }
+
+    // First, call update on towers so they can check for collisions and take damage and shoot.
+    for (let tower of game.towers) {
+        if (tower && typeof tower.update === "function") {
+            tower.update(game);
+        }
+    }
+
+    // Draw all towers (this will also draw their shot lines and handle fading)
+    for (let tower of game.towers) {
+        if (tower && typeof tower.draw === "function") {
+            ctx.save();
+            ctx.translate(centerX, centerY); // Move drawing origin to center
+            tower.draw(ctx);                 // Draw at (tower.x, tower.y), handles line fade
+            ctx.restore();
+        }
+    }
+
+    // Update (move) and draw all enemies
+    for (let enemy of game.enemies) {
+        if (enemy && enemy._isAlive !== false && typeof enemy.update === "function" && typeof enemy.draw === "function") {
+            enemy.update(); // Move towards closest tower
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            // If hitPoints property exists, draw a simple life bar above enemy
+            if ('hitPoints' in enemy) {
+                ctx.save();
+                ctx.strokeStyle = "#fff";
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(enemy.x - 12, enemy.y - enemy.radius - 10);
+                ctx.lineTo(enemy.x + 12, enemy.y - enemy.radius - 10);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.strokeStyle = "#f44";
+                ctx.lineWidth = 3.5;
+                let hpMax = 5+7*(game.wave-1)
+                let lifeRatio = Math.max(0, Math.min(1, enemy.hitPoints / hpMax));
+                ctx.moveTo(enemy.x - 12, enemy.y - enemy.radius - 10);
+                ctx.lineTo(enemy.x - 12 + 24 * lifeRatio, enemy.y - enemy.radius - 10);
+                ctx.stroke();
+                ctx.restore();
+            }
+            enemy.draw(ctx);
+            ctx.restore();
+        }
+    }
+
+    // Keep looping (this function will be called ~60x per second)
+    requestAnimationFrame(draw);
+}
+
+function dmgUp() {
+    for (let i = 0; i < game.towers.length; i++) {
+            game.towers[i].damage++;
+    }
+}
+
+function speedUp() {
+    for (let i = 0; i < game.towers.length; i++) {
+            game.towers[i].intervall/=1.2;
+    }
+}
+
+function rangeUp() {
+    for (let i = 0; i < game.towers.length; i++) {
+            game.towers[i].range*=1.1;
+    }
+}
+/**
+ * Resizes the canvas to fit the window, minus some padding (so it fits on screen)
+ * This helps make sure the canvas always uses the available space.
+ */
+function resizeCanvas() {
+    canvas.width = window.innerWidth - 25;
+    canvas.height = window.innerHeight - 25;
+}
+// Set initial size
+resizeCanvas();
+// Listen for window resizes to auto-resize canvas
+window.addEventListener("resize", resizeCanvas);
+
+// Track which keys are pressed for potential movement/controls
+window.addEventListener("keydown", (e) => {
+    keysPressed[e.key.toLowerCase()] = true;
+});
+window.addEventListener("keyup", (e) => {
+    keysPressed[e.key.toLowerCase()] = false;
+});
+
+/**
+ * Samples and averages the frames per second, storing recent values in fpsHist.
+ * Useful for testing if your game loop is running slow!
+ */
+let lastTimestamp = performance.now();
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta; // Calculate FPS as the inverse of ms per frame
+    }
+    fpsHist.unshift(fps); // Add latest FPS to start of list
+    if (fpsHist.length > 60) fpsHist.length = 60; // Keep history at 60 samples
+    // Average the FPS history
+    fpsAv = fpsHist.reduce((a, b) => a + b, 0) / fpsHist.length;
+    lastTimestamp = now;
+    requestAnimationFrame(sampleFPS); // Keep looping
+}
+// Start both render and FPS loop
+sampleFPS();
+draw();
+</script>
+</html>

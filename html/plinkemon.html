@@ -1,0 +1,311 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inventory</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+ #gridd {
+    display: grid;
+    grid-template-columns: repeat(10, 80px);
+    grid-gap: 10px;
+    padding: 20px;
+    background: #222;
+    border-radius: 12px;
+    width: max-content;
+    margin: 30px auto;
+    z-index: 1;
+ }
+ .grid-item {
+    background: #444;
+    border: 2px solid #888;
+    border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    user-select: none;
+    position: relative;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    z-index: 1;
+  
+ }
+ .grid-item:hover {
+   transform: scale(1.1);
+ }
+ .plinks {
+   width: 100%;
+   height: 100%;
+   display: block;
+   margin: auto;
+   border-radius: 8px;
+   z-index: 0;
+   pointer-events: none;
+ }
+
+ .common {
+   filter: none;
+   box-shadow: 0px 0px 5px #fff;
+   color: #fff;
+   text-shadow: none;
+ }
+ .uncommon {
+   filter: hue-rotate(25deg) saturate(1.5) brightness(1.1);
+   box-shadow: 0px 0px 10px #ffd;
+   color: #ffd;
+   text-shadow: 0px 0px 10px #ffd;
+ }
+ .rare {
+   filter: hue-rotate(-30deg);
+   box-shadow: 0px 0px 18px rgb(196, 120, 207);
+   color: rgb(196, 120, 207);
+   text-shadow: 0px 0px 18px rgb(196, 120, 207);
+ }
+ .legendary {
+   filter: saturate(2) brightness(1.1);
+   box-shadow: 0px 0px 25px rgb(250, 0, 0);
+   color: rgb(250, 0, 0);
+   text-shadow: 0px 0px 25px rgb(250, 0, 0);
+ }
+ .mythic {
+   filter: hue-rotate(170deg) saturate(1.2) brightness(1.2);
+   box-shadow: 0px 0px 30px rgb(255, 119, 119);
+   color: rgb(0, 217, 255);
+   text-shadow: 0px 0px 30px rgb(119, 255, 241);
+ }
+ .ultra {
+   filter: hue-rotate(10deg) saturate(1.2) brightness(1.1);
+   box-shadow: 0px 0px 35px rgb(249, 1, 84);
+   color: rgb(249, 1, 154);;
+   text-shadow: 0px 0px 30px rgb(249, 1, 84);
+ }
+ .super {
+    filter: hue-rotate(0deg) saturate(1.2) brightness(1.1);
+   box-shadow: 0px 0px 40px rgb(1, 249, 179);
+   color: rgb(6, 255, 180);
+   text-shadow: 0px 0px 30px rgb(1, 249, 179);;
+ }
+
+ .floating-tooltip {
+    display: none;
+    position: absolute;
+    width: 180px;
+    background-color: #222;
+    color: #fff;
+    text-align: left;
+    border-radius: 8px;
+    padding: 10px 12px;
+    /* Always on top of everything */
+    z-index: 99999 !important;
+    left: 0;
+    top: 0;
+    border: 1.5px solid #888;
+    transition: opacity 0.2s;
+    font-size: 15px;
+    pointer-events: none;
+    box-shadow: 0 2px 12px #111;
+    white-space: pre-line;
+    opacity: 0;
+    pointer-events: none;
+    text-shadow:  none !important; 
+ }
+ .floating-tooltip.visible {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+ }
+ .grid-item.empty {
+    background: #2a2a2a;
+    border: 2px dashed #555;
+    cursor: pointer;
+    z-index: 0;
+}
+.overlays {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0; top: 0;
+    opacity: 1;
+    z-index: 2;
+    border-radius: inherit;
+    pointer-events: none;
+    background: rgba(231, 0, 85, 0.2);
+    transition: background 0.3s;
+}
+</style>
+<body>
+
+<div id="gridd">
+    
+</div>
+
+<!-- Move the tooltip markup OUTSIDE the grid, where it won't be clipped or stacked below -->
+<div id="floating-tooltip" class="floating-tooltip"></div>
+
+</body>
+<script>
+    let gridSize = 100;
+    let inventory = Array(gridSize).fill(null);
+    let initialItems = [
+        {rarity: "common", damage: "1000", plinkyness: 35.24},
+        {rarity: "uncommon", damage: "2000", plinkyness: 45.76},
+        {rarity: "rare", damage: "3000", plinkyness: 54.2},
+        {rarity: "legendary", damage: "4000", plinkyness: 60.14},
+        {rarity: "mythic", damage: "5000", plinkyness: 77.77},
+        {rarity: "ultra", damage: "6000", plinkyness: 84.93},
+        {rarity: "super", damage: "7000", plinkyness: 87.87},
+    ];
+
+    for (let i = 0; i < initialItems.length; i++) {
+        inventory[i] = initialItems[i];
+    }
+
+    let dragSourceIndex = null;
+
+    // Tooltip state
+    const floatingTooltip = document.getElementById('floating-tooltip');
+    let tooltipTimeout = null;
+
+    function showFloatingTooltip(content, clientRect, rarity) {
+        clearTimeout(tooltipTimeout);
+
+        floatingTooltip.innerHTML = content;
+        floatingTooltip.className = `floating-tooltip visible`;
+
+        const tooltipWidth = 180;
+        const tooltipHeight = 95; 
+
+        let top = clientRect.bottom + window.scrollY + 6;
+        let left = clientRect.left + window.scrollX + clientRect.width / 2 - tooltipWidth / 2;
+        left = Math.max(10, Math.min(left, window.innerWidth - tooltipWidth - 10));
+        if (top + tooltipHeight > window.innerHeight + window.scrollY) {
+            top = clientRect.top + window.scrollY - tooltipHeight - 8;
+        }
+        floatingTooltip.style.top = `${top}px`;
+        floatingTooltip.style.left = `${left}px`;
+
+        floatingTooltip.className = `floating-tooltip visible ${rarity || ''}`;
+    }
+    function hideFloatingTooltip() {
+        floatingTooltip.className = "floating-tooltip";
+        tooltipTimeout = setTimeout(() => {
+
+        }, 250);
+    }
+
+    function update() {
+        const grid = document.getElementById('gridd');
+        grid.innerHTML = ""; 
+
+        for (let i = 0; i < inventory.length; i++) {
+            const isFilled = inventory[i] !== null;
+            const item = document.createElement('div');
+            item.className = isFilled ? 'grid-item' : 'grid-item empty';
+            item.setAttribute('data-index', i);
+
+            if (isFilled) {
+                item.setAttribute('draggable', 'true');
+
+                item.addEventListener('dragstart', function(e) {
+                    if (e.target.closest('.floating-tooltip')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+                    dragSourceIndex = i;
+                    item.style.opacity = "0.5";
+                });
+                item.addEventListener('dragend', function(e) {
+                    dragSourceIndex = null;
+                    item.style.opacity = "1";
+                });
+
+            } else {
+                item.setAttribute('draggable', 'false');
+            }
+
+            // All grid slots are drop targets
+            item.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                item.style.outline = '2px solid #aaa';
+            });
+            item.addEventListener('dragleave', function(e) {
+                item.style.outline = '';
+            });
+            item.addEventListener('drop', function(e) {
+                e.preventDefault();
+                item.style.outline = '';
+
+                if (dragSourceIndex !== null && dragSourceIndex !== i && inventory[dragSourceIndex]) {
+                    let tmp = inventory[i];
+                    inventory[i] = inventory[dragSourceIndex];
+                    inventory[dragSourceIndex] = tmp;
+                    update();
+                }
+            });
+
+            if (isFilled) {
+                const img = document.createElement('img');
+                img.src = "../images/plinkk.gif";
+                img.className = `${inventory[i].rarity} plinks`;
+
+                // Tooltip data: normal rarity classes, not tooltip-rarity
+                const tooltipHTML =
+                    `<strong>Rarity:</strong> <span class="${inventory[i].rarity}" style="box-shadow: none">${inventory[i].rarity.charAt(0).toUpperCase() + inventory[i].rarity.slice(1)}</span><br>
+                        <strong>Damage:</strong> ${inventory[i].damage}<br>
+                        <strong>Plinkyness:</strong> ${inventory[i].plinkyness}`;
+
+                // Mouse events for tooltip
+                item.addEventListener('mouseenter', function(e) {
+                    showFloatingTooltip(tooltipHTML, item.getBoundingClientRect(), inventory[i].rarity);
+                });
+                item.addEventListener('mousemove', function(e) {
+                    showFloatingTooltip(tooltipHTML, item.getBoundingClientRect(), inventory[i].rarity);
+                });
+                item.addEventListener('mouseleave', function(e) {
+                    hideFloatingTooltip();
+                });
+
+                // Keyboard accessibility for tooltip display
+                item.addEventListener('focusin', function(e) {
+                    showFloatingTooltip(tooltipHTML, item.getBoundingClientRect(), inventory[i].rarity);
+                });
+                item.addEventListener('focusout', function(e) {
+                    hideFloatingTooltip();
+                });
+
+                const overlay = document.createElement("div");
+                overlay.className = "overlays";
+
+                if (inventory[i].rarity == "ultra") {
+                    overlay.style.background = "rgba(249, 1, 84, 0.22)";
+                } else if (inventory[i].rarity == "super") {
+                    overlay.style.background = "rgba(1, 249, 179, 0.22)";
+                }
+           
+           
+                item.appendChild(img);
+                if (inventory[i].rarity == "ultra" || inventory[i].rarity == "super") item.appendChild(overlay); 
+                grid.appendChild(item);
+            } else {
+                grid.appendChild(item);
+            }
+        }
+    }
+
+    update();
+
+    // On scroll or resize, hide tooltip to avoid misalignment
+    window.addEventListener('scroll', hideFloatingTooltip, true);
+    window.addEventListener('resize', hideFloatingTooltip, true);
+</script>
+</html>

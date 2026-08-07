@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spectrogram</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+        background: #000;
+      }
+      body {
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+      #column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        max-width: 100%;
+        max-height: 100%;
+      }
+      #row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+      }
+      #row label {
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      #bassWidth {
+        width: 60px;
+      }
+      .title {
+        color: #5C6AC4;
+      }
+      #spectrograph {
+        background-color: #000;
+        border: #fff 5px solid;
+        max-width: 100%;
+        max-height: calc(100dvh - 6rem);
+        width: auto;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="column">
+      <div id="row">
+        <input type="file" id="audioFile" accept="audio/mp3" />
+        <label for="bassWidth">
+          Bass widen:
+          <input type="number" id="bassWidth" min="1" max="5" step="0.1" value="2.5" />
+        </label>
+      </div>
+      <canvas id="spectrograph" width="800" height="800"></canvas>
+    </div>
+
+      <script>
+        const canvas = document.getElementById('spectrograph');
+const ctx = canvas.getContext('2d');
+const fileInput = document.getElementById('audioFile');
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+let analyser;
+let source;
+let dataArray;
+let bufferLength;
+
+let isPlaying = false;
+
+fileInput.onchange = async function () {
+  if (!this.files.length) return;
+
+  if (source) {
+    source.disconnect();
+  }
+  const file = this.files[0];
+  const arrayBuffer = await file.arrayBuffer();
+  const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+
+  if (isPlaying) {
+    audioCtx.close();
+  }
+
+  // Create a new AudioContext if closed (some browsers suspend it on close)
+  if (audioCtx.state === 'closed') {
+    window.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  // Create source, analyser
+  source = audioCtx.createBufferSource();
+  source.buffer = audioBuffer;
+
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 2048;
+  bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+
+  source.start();
+  isPlaying = true;
+  draw();
+};
+
+
+const bassWidthInput = document.getElementById('bassWidth');
+let bassWidenExponent = parseFloat(bassWidthInput.value);
+
+bassWidthInput.addEventListener('input', () => {
+  const val = parseFloat(bassWidthInput.value);
+  if (!isNaN(val) && val >= 1 && val <= 5) {
+    bassWidenExponent = val;
+  }
+});
+
+function draw() {
+  requestAnimationFrame(draw);
+
+  analyser.getByteFrequencyData(dataArray);
+
+  const width = canvas.width;
+  const height = canvas.height;
+
+  const imageData = ctx.getImageData(0, 1, width, height - 1);
+  ctx.putImageData(imageData, 0, 0);
+
+  for (let x = 0; x < width; x++) {
+    const normX = x / width;
+    const stretchedX = Math.pow(normX, bassWidenExponent);
+
+    const bin = Math.floor(stretchedX * (bufferLength - 1));
+
+    const value = dataArray[bin];
+    const intensity = value / 255;
+
+    if (intensity < 0.1) {
+      ctx.fillStyle = 'rgba(10,10,30,0.05)';
+    } else {
+      const hueBase = 220;
+      const hueRange = 160;
+      const hue = hueBase - normX * hueRange * intensity;
+      const saturation = 100;
+      const lightness = 30 + intensity * 50;
+      ctx.fillStyle = `hsl(${hue},${saturation}%,${lightness}%)`;
+    }
+
+    ctx.fillRect(x, height - 1, 1, 1);
+  }
+}
+        
+      </script>
+  </body>
+</html>

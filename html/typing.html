@@ -1,0 +1,432 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Typing</title>
+        <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+        <style>
+            body {
+                background: #111;
+                color: #fff;
+                font-family: monospace;
+                margin: 0;
+                padding: 24px;
+            }
+            #typingAreaContainer {
+                display: flex;
+                align-items: flex-start;
+                position: relative;
+                max-width: 700px;
+            }
+            #targetText {
+                font-size: 1.4rem;
+                line-height: 2rem;
+                max-width: 700px;
+                user-select: none;
+                word-break: break-word;
+                word-wrap: break-word;
+                white-space: pre-wrap;
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+            .correct {
+                color: #ffff99;
+            }
+            .incorrect {
+                color: #ff4444;
+            }
+            .neutral {
+                color: #fff;
+            }
+            #externalBlinker {
+                display: none; /* initially hidden */
+                width: 1ch;
+                height: 1.4rem;
+                vertical-align: bottom;
+                background: none;
+                border-left: 2px solid #aefef8;
+                margin: 0 0 0 0.02ch;
+                /* set animation via JS */
+                position: absolute;
+                pointer-events: none;
+            }
+            .blinking {
+                animation: blinkCursor 1s steps(1) infinite;
+            }
+            .solid {
+                animation: none !important;
+                opacity: 1 !important;
+            }
+            @keyframes blinkCursor {
+                0%, 60% { opacity: 1;}
+                61%, 100% { opacity: 0; }
+            }
+            #typedInput {
+                min-width: 350px;
+                min-height: 2.5rem;
+                opacity: 0;
+                pointer-events: none;
+                position: fixed; /* changed from absolute for viewport pinning */
+                left: 0;
+                top: 0;
+                width: 1px;
+                height: 1px;
+                z-index: -1; /* keep it out of stacking context but not visually disturbing */
+            }
+            #loadingOverlay {
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0,0,0,0.85);
+                color: #fff;
+                font-size: 1.6rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+            }
+            #wpmDisplay {
+                margin-bottom: 23px;
+                font-size: 1.1rem;
+                color: #8fffa0;
+                min-height: 1.5rem;
+                font-family: inherit;
+                text-shadow: 0 2px 6px #114d2a;
+                letter-spacing: 1.3px;
+                user-select: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loadingOverlay">Fetching random Wikipedia summaries…</div>
+        <div id="wpmDisplay">WPM: 0</div>
+        <div id="typingAreaContainer">
+            <div id="targetText"></div>
+            <span id="externalBlinker"></span>
+        </div>
+        <!-- Hidden input, so we can capture typing without focus issues -->
+        <input id="typedInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+        <script>
+            let target = ""; // Will be set to concatenated Wikipedia texts
+            let typed = "";
+            let startTime = null;
+            let finished = false;
+            let intervalId = null;
+
+            const targetDiv = document.getElementById('targetText');
+            const typedInput = document.getElementById('typedInput');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const wpmDisplay = document.getElementById('wpmDisplay');
+            const blinker = document.getElementById('externalBlinker');
+            const typingArea = document.getElementById('typingAreaContainer');
+            typedInput.value = "";
+
+            // Blinker timer variables
+            let blinkerMode = 'solid'; // 'solid' or 'blinking'
+            let blinkerTimeoutId = null;
+
+            function setBlinkerSolid() {
+                if (blinkerMode === 'solid') return;
+                blinkerMode = 'solid';
+                blinker.classList.remove('blinking');
+                blinker.classList.add('solid');
+                blinker.style.opacity = '1';
+            }
+
+            function setBlinkerBlinking() {
+                if (blinkerMode === 'blinking') return;
+                blinkerMode = 'blinking';
+                blinker.classList.remove('solid');
+                blinker.classList.add('blinking');
+                // No need to set opacity, CSS animation takes over
+            }
+
+            function resetBlinkerSolidWithTimeout() {
+                setBlinkerSolid();
+                // Clear previous timeout
+                if (blinkerTimeoutId !== null) {
+                    clearTimeout(blinkerTimeoutId);
+                }
+                blinkerTimeoutId = setTimeout(() => {
+                    setBlinkerBlinking();
+                }, 0);
+            }
+
+            // Always focus hidden input, so user typing is captured -- but prevent scroll
+            function focusTypedInputNoScroll() {
+                if (typeof typedInput.focus === "function") {
+                    try {
+                        typedInput.focus({ preventScroll: true });
+                    } catch (e) {
+                        typedInput.focus(); // fallback if not supported
+                    }
+                }
+            }
+            window.addEventListener('mousedown', focusTypedInputNoScroll);
+            window.addEventListener('keydown', focusTypedInputNoScroll);
+
+            // New colorizeText: properly shows real \n and \n\n as single/double newlines (paragraph breaks)
+            function colorizeText() {
+                if (!target) {
+                    targetDiv.innerHTML = '';
+                    blinker.style.display = "none";
+                    return;
+                }
+                let html = '';
+                // Split by /\n\n/ to identify paragraphs, preserve double-newlines
+                // This allows for correct Enter key behavior and preserves all single/double newlines
+                let paraStartIdx = 0;
+                let i = 0;
+                while (i < target.length) {
+                    // scan for double newline
+                    if (target[i] === '\n' && target[i+1] === '\n') {
+                        // render up to i (excluding \n\n) as a paragraph
+                        html += renderSpanRange(paraStartIdx, i, typed, target);
+                        // render the two newlines as two <br> for true blank line
+                        for (let k = 0; k < 2; ++k) {
+                            let spanClass;
+                            let charIdx = i + k;
+                            if (charIdx < typed.length) {
+                                spanClass = (typed[charIdx] === '\n') ? "correct" : "incorrect";
+                            } else {
+                                spanClass = "neutral";
+                            }
+                            html += `<span class="${spanClass}" data-nl="1" data-index="${i+k}" style="display:inline-block;width:100%;height:0.5em;"></span>`;
+                        }
+                        i += 2;
+                        paraStartIdx = i;
+                    } else if (target[i] === '\n') {
+                        html += renderSpanRange(paraStartIdx, i, typed, target);
+                        let spanClass;
+                        if (i < typed.length) {
+                            spanClass = (typed[i] === '\n') ? "correct" : "incorrect";
+                        } else {
+                            spanClass = "neutral";
+                        }
+                        html += `<span class="${spanClass}" data-nl="1" data-index="${i}" style="display:inline-block;width:100%;height:0.5em;"></span>`;
+                        i += 1;
+                        paraStartIdx = i;
+                    } else {
+                        i += 1;
+                    }
+                }
+                if (paraStartIdx < target.length) {
+                    html += renderSpanRange(paraStartIdx, target.length, typed, target);
+                }
+                targetDiv.innerHTML = html;
+
+                // Now, position the blinking cursor AFTER the last typed character's rendered span (including newlines)
+                requestAnimationFrame(() => {
+                    let textNode = targetDiv;
+
+                    // Build an array mapping *each* target character (including newlines) to a span and its offset
+                    let charNodeSpans = [];
+                    let charIndex = 0;
+                    for (let ci = 0; ci < textNode.childNodes.length; ci++) {
+                        let node = textNode.childNodes[ci];
+                        if (
+                            node.nodeType === 1 &&
+                            (node.classList.contains('correct') ||
+                            node.classList.contains('incorrect') ||
+                            node.classList.contains('neutral'))
+                        ) {
+                            charNodeSpans.push(node);
+                            charIndex++;
+                        }
+                    }
+                    let targetIndex = typed.length;
+                    if (targetIndex > charNodeSpans.length) targetIndex = charNodeSpans.length;
+
+                    let parentRect = typingArea.getBoundingClientRect();
+
+                    blinker.style.display = (typed.length <= target.length && !finished) ? "inline-block" : "none";
+
+                    if (charNodeSpans.length === 0 || targetIndex === 0) {
+                        blinker.style.top = "0";
+                        blinker.style.left = "0";
+                        return;
+                    }
+
+                    const getNodePosition = (span) => {
+                        const rect = span.getBoundingClientRect();
+                        return {top: rect.top - parentRect.top, left: rect.left - parentRect.left, right: rect.right - parentRect.left, height: rect.height};
+                    };
+
+                    let prevNode = charNodeSpans[targetIndex - 1];
+                    if (prevNode && prevNode.hasAttribute("data-nl")) {
+                        if (targetIndex < charNodeSpans.length) {
+                            const nextNode = charNodeSpans[targetIndex];
+                            if (nextNode && nextNode.hasAttribute("data-nl")) {
+                                let pos = getNodePosition(nextNode);
+                                blinker.style.top = pos.top + "px";
+                                blinker.style.left = pos.left + "px";
+                                return;
+                            }
+                        }
+                        let pos = getNodePosition(prevNode);
+                        blinker.style.top = (pos.top + pos.height) + "px";
+                        blinker.style.left = "0";
+                        return;
+                    }
+
+                    if (targetIndex < charNodeSpans.length) {
+                        let nodeRect = charNodeSpans[targetIndex].getBoundingClientRect();
+                        let blinkerTop = nodeRect.top - parentRect.top;
+                        let blinkerLeft = nodeRect.left - parentRect.left;
+                        blinker.style.top = blinkerTop + "px";
+                        blinker.style.left = blinkerLeft + "px";
+                    } else if (charNodeSpans.length > 0) {
+                        let lastNode = charNodeSpans[charNodeSpans.length-1];
+                        let lastRect = lastNode.getBoundingClientRect();
+                        blinker.style.top = (lastRect.top - parentRect.top) + "px";
+                        blinker.style.left = (lastRect.right - parentRect.left) + "px";
+                    }
+                });
+            }
+
+            function renderSpanRange(start, end, typed, target) {
+                let html = '';
+                for (let i = start; i < end; ++i) {
+                    const targetChar = target[i];
+                    let spanClass;
+                    if (i < typed.length) {
+                        spanClass = (typed[i] === targetChar) ? "correct" : "incorrect";
+                    } else {
+                        spanClass = "neutral";
+                    }
+                    html += `<span class="${spanClass}" data-index="${i}">${escapeHtml(targetChar)}</span>`;
+                }
+                return html;
+            }
+
+            function updateWPM() {
+                if (!startTime) {
+                    wpmDisplay.textContent = "WPM: 0";
+                    return;
+                }
+                const minutes = (Date.now() - startTime) / 60000;
+                const wordCount = typed.trim().split(/\s+/).filter(Boolean).length;
+                let wpm = minutes > 0 ? Math.round(wordCount / minutes) : 0;
+                if (!isFinite(wpm) || wpm > 500 || wpm < 0) wpm = 0;
+                wpmDisplay.textContent = `WPM: ${wpm}`;
+            }
+
+            function escapeHtml(text) {
+                return text.replace(/[&<>"']/g, function(m) {
+                    return ({
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#39;'
+                    })[m];
+                });
+            }
+
+            // --- MODIFIED: On Enter, insert a space " " instead of newline ---
+            typedInput.addEventListener('keydown', e => {
+                if (e.key === "Enter") {
+                    const start = typedInput.selectionStart;
+                    const end = typedInput.selectionEnd;
+                    const value = typedInput.value;
+
+                    // Insert a space at the cursor instead of newline
+                    typedInput.value = value.slice(0, start) + " " + value.slice(end);
+                    typedInput.selectionStart = typedInput.selectionEnd = start + 1;
+                    e.preventDefault();
+                    // Trigger input handler for coloring etc.
+                    const evt = new Event('input', {bubbles: true});
+                    typedInput.dispatchEvent(evt);
+                }
+            });
+
+            typedInput.addEventListener('input', e => {
+                if (!startTime && target && typedInput.value.length > 0) {
+                    startTime = Date.now();
+                    finished = false;
+                    if (intervalId == null) {
+                        intervalId = setInterval(updateWPM, 300);
+                    }
+                }
+                typed = typedInput.value;
+                colorizeText();
+                updateWPM();
+
+                resetBlinkerSolidWithTimeout();
+
+                if (target && typed === target && !finished) {
+                    finished = true;
+                    setTimeout(() => {
+                        fetchWikipediaSummaries();
+                    }, 400);
+                }
+            });
+
+            function resetBlinkingStateOnNewText() {
+                setBlinkerSolid();
+                if (blinkerTimeoutId !== null) {
+                    clearTimeout(blinkerTimeoutId);
+                }
+            }
+
+            window.onload = function() {
+                focusTypedInputNoScroll();
+            };
+
+            async function fetchWikipediaSummaries() {
+                loadingOverlay.style.display = "flex";
+                typed = "";
+                target = "";
+                colorizeText();
+                typedInput.value = "";
+                wpmDisplay.textContent = "WPM: 0";
+                startTime = null;
+                finished = false;
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+
+                if (blinkerTimeoutId) {
+                    clearTimeout(blinkerTimeoutId);
+                    blinkerTimeoutId = null;
+                }
+
+                try {
+                    const summaryPromises = [0, 1, 2].map(() =>
+                        fetch("https://en.wikipedia.org/api/rest_v1/page/random/summary")
+                            .then(response => {
+                                if (!response.ok) throw new Error("Wiki fetch failed");
+                                return response.json();
+                            })
+                            .then(data => (
+                                (data.extract && data.extract.trim()) ||
+                                (data.description && data.description.trim()) ||
+                                (data.title && data.title.trim()) ||
+                                "Wikipedia fetch error!"
+                            ))
+                            .catch(() => "Wikipedia fetch error!")
+                    );
+                    const summaries = await Promise.all(summaryPromises);
+
+                    target = summaries.join('\n\n');
+                } catch (e) {
+                    target = "Could not fetch Wikipedia summaries. Check your connection and try reloading.";
+                }
+                loadingOverlay.style.display = "none";
+                typed = "";
+                typedInput.value = "";
+                colorizeText();
+                wpmDisplay.textContent = "WPM: 0";
+                focusTypedInputNoScroll();
+                resetBlinkingStateOnNewText();
+            }
+
+            fetchWikipediaSummaries();
+
+            document.addEventListener('DOMContentLoaded', () => {
+                resetBlinkingStateOnNewText();
+            });
+        </script>
+    </body>
+</html>

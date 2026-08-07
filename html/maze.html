@@ -1,0 +1,837 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maze</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        color: #fff;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        overflow: hidden;
+    }
+    #gamecanvas {
+        position: fixed;
+        left: 0;
+        top: 0;
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        z-index: 1;
+        display: block;
+        opacity: 0%;
+        background: none;
+        transition: opacity 1s linear;
+    }
+    #display {
+        position: absolute;
+        left: 8px;
+        bottom: 8px;
+        z-index: 5;
+        font-size: 15px;
+    }
+    #startCont {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-self: center;
+        align-items: center;
+        justify-content: center;
+        gap: 0px;
+        opacity: 100%;
+        margin-top: -20px;
+        z-index: 99999;
+        transition: all 1s linear;
+    }
+    .sliders {
+        accent-color: #aff;
+        margin-top: -15px;
+        margin-bottom: 15px;
+        transform: scale(2);
+        z-index: 9999999;
+    }
+    #bestTime {
+        font-size: 15px;
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+    #startbtn {
+        width: 60px;
+        height: 30px;
+        color: #8aa;
+        background-color: #111;
+        border-radius: 5px;
+        box-shadow: #fff 0px 0px 5px;
+        font-size: 19px;
+        z-index: 2489;
+        transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    #startbtn:hover {
+        background-color: #dff;
+        color: #111;
+        transform: scale(1.06);
+    }
+</style>
+<body>
+<div id="startCont">
+    <h1 style="color: #fff; font-size: 50px;">Maze</h1>
+    <input id="sizeinput" class="sliders" type="range" min="10" max="150" step="1" value="30">
+    <span style="color: #fff; font-size: 30px;" id="sizedisp">Size:30x30</span>
+    <div style="display: flex; flex-direction: row; margin-top: 10px;">
+        <button id="startbtn">Start</button>
+        <div id="bestTime">Best: Unset</div>
+    </div>
+</div>
+ <canvas id="gamecanvas"></canvas>
+ <div id="display"></div>
+
+</body>
+<script>
+// Mobile detection
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
+}
+const isMobile = isMobileDevice();
+
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+const display = document.getElementById("display");
+const sizedisp = document.getElementById("sizedisp");
+const sizer = document.getElementById("sizeinput");
+const startbtn = document.getElementById("startbtn");
+const menuCont = document.getElementById("startCont");
+const bestTimeDiv = document.getElementById("bestTime");
+
+let ROWS = 30;
+let COLS = 30;
+let finishedMaze = false;
+
+function formatTime(seconds) {
+    seconds = Number(seconds);
+    if (isNaN(seconds) || seconds < 0) return "0:00.000";
+    const hours = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    const ms = Math.floor((seconds - Math.floor(seconds)) * 1000);
+    const minsStr = mins.toString().padStart(2, '0');
+    const secsStr = secs.toString().padStart(2, '0');
+    const msStr = ms.toString().padStart(3, '0');
+
+    if (hours > 0) {
+        return `${hours}:${minsStr}:${secsStr}.${msStr}`;
+    } else {
+        return `${mins}:${secsStr}.${msStr}`;
+    }
+}
+
+sizer.addEventListener("input", (e) => {
+    sizedisp.textContent = `Size:${Number(e.target.value)}x${Number(e.target.value)}`;
+    ROWS = Number(e.target.value);
+    COLS = Number(e.target.value);
+    updateBestTimeDisplay();
+})
+
+function updateBestTimeDisplay() {
+    let key = `maze_best_${ROWS}x${COLS}`;
+    let val = localStorage.getItem(key);
+    if (val !== null) {
+        bestTimeDiv.textContent = `Best: ${formatTime(parseFloat(val).toFixed(2))}`;
+    } else {
+        bestTimeDiv.textContent = "Best: Unset";
+    }
+}
+
+updateBestTimeDisplay();
+
+let mobileTouching = false;
+let touchTarget = {x: null, y: null}; // This stores the current finger coord for direction
+let lastTouchPos = null;
+let mobileHintDiv = null;
+
+startbtn.addEventListener("click", () => {
+    menuCont.style.opacity = "0%";
+    canvas.style.opacity = "100%";
+    generateMaze();
+    draw()
+    updateBestTimeDisplay();
+    finishedMaze = false;
+    t = 0;
+
+    // On mobile, tracing (trail) is always disabled
+    if (!isMobile) {
+        canvas.addEventListener("mousedown", () => {
+            tracing = !tracing;
+            path.push({x: player.x, y:player.y, draw: false})
+        });
+    }
+
+    // Show a hint if on mobile
+    if (isMobile) {
+        if (!mobileHintDiv) {
+            mobileHintDiv = document.createElement("div");
+            mobileHintDiv.style.position = "fixed";
+            mobileHintDiv.style.bottom = "60px";
+            mobileHintDiv.style.left = "0";
+            mobileHintDiv.style.right = "0";
+            mobileHintDiv.style.textAlign = "center";
+            mobileHintDiv.style.color = "#fff";
+            mobileHintDiv.style.fontSize = "17px";
+            mobileHintDiv.style.zIndex = 199999;
+            mobileHintDiv.style.pointerEvents = "none";
+            mobileHintDiv.textContent = "Tap and hold anywhere, drag to control movement direction!";
+            mobileHintDiv.style.opacity = "0.86";
+            document.body.appendChild(mobileHintDiv);
+            setTimeout(() => {
+                if (mobileHintDiv) mobileHintDiv.style.opacity = "0";
+            }, 3000);
+        }
+    }
+});
+
+let keysPressed = [];
+
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 0;
+let t = 0;
+let started = false;
+
+const playerSize = 0.1;
+
+let player = {
+    x: 0,
+    y: 0,
+    xv: 0,
+    yv: 0,
+    z: 2
+}
+
+let path = [];
+let tracing = true;
+
+let mx = 0, my = 0;
+
+let maze = [];
+let exitCol = 0;
+
+function getCell(x, y) {
+    if (x < 0 || x >= COLS || y < 0 || y >= ROWS) return undefined; 
+    return maze[y][x];
+}
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+let entranceCol = 0;
+
+function generateMaze(x = 0, y = 0) {
+    maze = []
+    for (let y = 0; y < ROWS; y++) { 
+        let row = [];
+        for (let x = 0; x < COLS; x++) {
+            row.push({x, y, walls: [true, true, true, true], visited: false});
+        }
+        maze.push(row);
+    }
+    let stack = []; 
+    let current = getCell(x, y);
+    current.visited = true;      
+    stack.push(current);
+
+    while (stack.length > 0) { 
+        current = stack[stack.length - 1];
+
+        let neighbors = [];
+        let dirs = [
+            {dx: 0, dy: -1, wall: 0, opp: 2},
+            {dx: 1, dy: 0, wall: 1, opp: 3}, 
+            {dx: 0, dy: 1, wall: 2, opp: 0}, 
+            {dx: -1, dy: 0, wall: 3, opp: 1},
+        ];
+        shuffle(dirs); 
+
+        for (let dir of dirs) {
+            let nx = current.x + dir.dx; 
+            let ny = current.y + dir.dy; 
+            let neighbor = getCell(nx, ny);
+            if (neighbor && !neighbor.visited) {
+                neighbors.push({neighbor, dir});
+            }
+        }
+
+        if (neighbors.length > 0) {
+            let {neighbor, dir} = neighbors[0];
+            current.walls[dir.wall] = false;     
+            neighbor.walls[dir.opp] = false;    
+            neighbor.visited = true;             
+            stack.push(neighbor);                
+        } else {
+            stack.pop();
+        }
+    }
+
+    let possibleEntrances = [];
+    for (let col = 0; col < COLS; col++) {
+        let cell = maze[0][col];
+        if (!cell.walls[2]) {
+            possibleEntrances.push(col);
+        }
+    }
+    if (possibleEntrances.length > 0) {
+        entranceCol = possibleEntrances[Math.floor(Math.random() * possibleEntrances.length)];
+    } else {
+        entranceCol = 0;
+        maze[0][entranceCol].walls[2] = false;
+        maze[1][entranceCol].walls[0] = false;
+    }
+    maze[0][entranceCol].walls[0] = false; 
+
+    let possibleExits = [];
+    for (let col = 0; col < COLS; col++) {
+        let cell = maze[ROWS - 1][col];
+        if (!cell.walls[0]) {
+            possibleExits.push(col);
+        }
+    }
+    if (possibleExits.length > 0) {
+        exitCol = possibleExits[Math.floor(Math.random() * possibleExits.length)];
+    } else {
+        exitCol = COLS - 1;
+        maze[ROWS - 1][exitCol].walls[0] = false;
+        maze[ROWS - 2][exitCol].walls[2] = false;
+    }
+    maze[ROWS - 1][exitCol].walls[2] = false; 
+
+    player.x = entranceCol+0.5;
+    player.y = -0.6;
+}
+
+// Mouse/Touch/Pointer input
+function updateMousePosition(e) {
+    const rect = canvas.getBoundingClientRect();
+    mx = canvas.width / -2 + ((e.clientX - rect.left) * (canvas.width / rect.width));
+    my = canvas.height / 2 - ((e.clientY - rect.top) * (canvas.height / rect.height));
+}
+
+// Desktop mouse move event
+if (!isMobile) {
+    canvas.addEventListener('mousemove', updateMousePosition);
+}
+
+// MOBILE: Moves in direction of touch only while touch is down, and only at a much slower speed
+if (isMobile) {
+    canvas.style.touchAction = "none";
+    function calcMazeCoordsFromEvent(e) {
+        const rect = canvas.getBoundingClientRect();
+        let xCanvas, yCanvas;
+        if (e.touches && e.touches.length > 0) {
+            xCanvas = (e.touches[0].pageX - window.scrollX - rect.left) * (canvas.width / rect.width);
+            yCanvas = (e.touches[0].pageY - window.scrollY - rect.top) * (canvas.height / rect.height);
+        } else {
+            xCanvas = (e.clientX - rect.left) * (canvas.width / rect.width);
+            yCanvas = (e.clientY - rect.top) * (canvas.height / rect.height);
+        }
+        let thingy = player.z * 50;
+        let mazeX = player.x + ((xCanvas - canvas.width/2) / thingy);
+        let mazeY = player.y - ((yCanvas - canvas.height/2) / thingy);
+        return {x: mazeX, y: mazeY};
+    }
+
+    // Only update direction while touching or holding down
+    function setTargetFromEvent(e) {
+        if (finishedMaze) return;
+        mobileTouching = true;
+        let coords = calcMazeCoordsFromEvent(e);
+        touchTarget.x = coords.x;
+        touchTarget.y = coords.y;
+        e.preventDefault && e.preventDefault();
+    }
+    function updateTargetFromEvent(e) {
+        if (!mobileTouching || finishedMaze) return;
+        let coords = calcMazeCoordsFromEvent(e);
+        touchTarget.x = coords.x;
+        touchTarget.y = coords.y;
+        e.preventDefault && e.preventDefault();
+    }
+    function clearTarget(e) {
+        mobileTouching = false;
+        touchTarget.x = null;
+        touchTarget.y = null;
+        e.preventDefault && e.preventDefault();
+    }
+
+    // Listen for pointerdown/pointermove/pointerup as well as touch
+    canvas.addEventListener("pointerdown", setTargetFromEvent, {passive: false});
+    canvas.addEventListener("pointermove", updateTargetFromEvent, {passive: false});
+    canvas.addEventListener("pointerup", clearTarget, {passive: false});
+    canvas.addEventListener("pointerleave", clearTarget, {passive: false});
+
+    canvas.addEventListener("touchstart", setTargetFromEvent, {passive: false});
+    canvas.addEventListener("touchmove", updateTargetFromEvent, {passive: false});
+    canvas.addEventListener("touchend", clearTarget, {passive: false});
+    canvas.addEventListener("touchcancel", clearTarget, {passive: false});
+}
+
+// =====================
+
+function resolvePlayerCollision(px, py) {
+    let half = playerSize / 2;
+    let newX = px;
+    let newY = py;
+    let cellX = Math.floor(px);
+    let cellY = Math.floor(py);
+
+    let isEntrance = cellY === 0 && cellX === entranceCol;
+    let isExit = cellY === (ROWS - 1) && cellX === exitCol;
+
+    if (cellX < 0 || cellX >= COLS || cellY < 0 || cellY >= ROWS) {
+        if (!isEntrance && !isExit) {
+            newX = Math.min(Math.max(px, half), COLS - half);
+            newY = Math.min(Math.max(py, half), ROWS - half);
+        }
+        return {x: newX, y: newY};
+    }
+
+    let cell = getCell(cellX, cellY);
+    if (!cell) return {x: px, y: py};
+
+    if (cell.walls[0]) {
+        const topEdge = cellY;
+        if (py + half > topEdge + 1) {
+
+        } else if (py - half < topEdge) {
+            newY = topEdge + half;
+        }
+    }
+
+    if (cell.walls[1]) {
+        const rightEdge = cellX + 1;
+        if (px + half > rightEdge) {
+            newX = rightEdge - half;
+        }
+    }
+
+    if (cell.walls[2]) {
+        const bottomEdge = cellY + 1;
+        if (py + half > bottomEdge) {
+            newY = bottomEdge - half;
+        }
+    }
+
+    if (cell.walls[3]) {
+        const leftEdge = cellX;
+        if (px - half < leftEdge) {
+            newX = leftEdge + half;
+        }
+    }
+
+    if (px + half > cellX + 1 && getCell(cellX + 1, cellY)) {
+        let nbr = getCell(cellX + 1, cellY);
+        if (nbr.walls[3]) {
+            let over = (px + half) - (cellX + 1);
+            if (over > 0) newX = cellX + 1 - half;
+        }
+    }
+    if (px - half < cellX && getCell(cellX - 1, cellY)) {
+        let nbr = getCell(cellX - 1, cellY);
+        if (nbr.walls[1]) {
+            let over = cellX - (px - half);
+            if (over > 0) newX = cellX + half;
+        }
+    }
+    if (py + half > cellY + 1 && getCell(cellX, cellY + 1)) {
+        let nbr = getCell(cellX, cellY + 1);
+        if (nbr.walls[0]) {
+            let over = (py + half) - (cellY + 1);
+            if (over > 0) newY = cellY + 1 - half;
+        }
+    }
+    if (py - half < cellY && getCell(cellX, cellY - 1)) {
+        let nbr = getCell(cellX, cellY - 1);
+        if (nbr.walls[2]) {
+            let over = cellY - (py - half);
+            if (over > 0) newY = cellY + half;
+        }
+    }
+
+    if (!isEntrance && !isExit) {
+        if (newX < half) newX = half;
+        if (newX > COLS - half) newX = COLS - half;
+        if (newY < half) newY = half;
+        if (newY > ROWS - half) newY = ROWS - half;
+    }
+
+    return {x: newX, y: newY};
+}
+
+let zoomout = false;
+
+// Enhanced animateZoomout: 
+// calculates the ideal zoom so the full maze fits in the current canvas with some padding/margin.
+// Will slowly zoom out and pan towards the maze center, and keep adjusting if the canvas resizes during zoomout.
+function getMazeFitZoom() {
+    // Maze width and height in "cells"
+    // thingy = player.z * 50, so: 
+    // width in px = COLS * thingy, want thingy such that maze fits in canvas and has a margin
+    // -> thingy_max = min(canvas.width, canvas.height) / (max(COLS, ROWS) + margin_in_cells)
+    // z_max = thingy_max / 50
+    const marginCells = 1.3;  // number of cells to add as margin on all sides
+    const mazeWidth = COLS;
+    const mazeHeight = ROWS;
+    // want both width and height to fit INSIDE the canvas, so use min of ratio for each
+    const availW = canvas.width;
+    const availH = canvas.height;
+    // avoid div 0
+    if (mazeWidth === 0 || mazeHeight === 0) return 1;
+    const zW = availW / ((mazeWidth + marginCells) * 50);
+    const zH = availH / ((mazeHeight + marginCells) * 50);
+    return Math.min(zW, zH);
+}
+
+function animateZoomout() {
+    if (!zoomout) return;
+    const centerX = COLS / 2;
+    const centerY = ROWS / 2;
+
+    // Smoothly pan player position to maze center
+    player.x += (centerX - player.x) * 0.005;
+    player.y += (centerY - player.y) * 0.005;
+
+    // Calculate the desired max zoom so the maze *fully* fits within the current canvas size
+    const targetZoom = getMazeFitZoom();
+
+    // Smoothly interpolate current zoom towards targetZoom
+    player.z += (targetZoom - player.z) * 0.07;
+
+    // Clamp zoom exactly if very close
+    if (Math.abs(player.z - targetZoom) < 0.0001) {
+        player.z = targetZoom;
+    }
+
+    requestAnimationFrame(animateZoomout);
+}
+
+// ---------- DRAW LOOP -----------
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if (!finishedMaze) {t+=1/fps}
+    let thingy = player.z*50;
+
+    ctx.restore();
+
+    if (!finishedMaze) {
+        let dx = player.x - (exitCol + 0.5);
+        let dy = player.y - (ROWS - 0.5);
+        let dist = Math.max(Math.abs(dx), Math.abs(dy));
+        let threshold = (playerSize * 0.65); 
+        if (dist < threshold) {
+            finishedMaze = true;
+            let key = `maze_best_${ROWS}x${COLS}`;
+            let prev = localStorage.getItem(key);
+            if (prev === null || parseFloat(t.toFixed(3)) < parseFloat(prev)) {
+                localStorage.setItem(key, t.toFixed(3));
+            }
+            updateBestTimeDisplay();
+            zoomout = true;
+            animateZoomout();
+        }
+    }
+
+    // Mobile: ONLY move when finger is held down, and move in the direction, not to the position, and at slower speed
+    if (
+        isMobile &&
+        mobileTouching &&
+        touchTarget.x !== null &&
+        touchTarget.y !== null &&
+        !zoomout &&
+        !finishedMaze
+    ) {
+        // Compute direction vector from player to touch
+        let dx = touchTarget.x - player.x;
+        let dy = touchTarget.y - player.y;
+        let dist = Math.hypot(dx, dy);
+        const minDist = 0.02; // deadzone
+        const maxSpeed = 0.045 * (60 / fps) * 0.6; // Multiplied by 0.6 for mobile speed reduction
+        if (dist > minDist) {
+            // Move in the direction of the finger, but don't move directly to it
+            let angle = Math.atan2(dy, dx);
+            player.xv = Math.cos(angle) * maxSpeed;
+            player.yv = Math.sin(angle) * maxSpeed;
+        } else {
+            player.xv *= 0.6;
+            player.yv *= 0.6;
+        }
+    }
+
+    // Desktop: keyboard controls
+    if (!isMobile) {
+        if (keysPressed["w"]) {
+            player.yv += 0.003*(60/fps);
+        }
+        if (keysPressed["a"]) {
+            player.xv -= 0.003*(60/fps);
+        }
+        if (keysPressed["s"]) {
+            player.yv -= 0.003*(60/fps);
+        }
+        if (keysPressed["d"]) {
+            player.xv += 0.003*(60/fps);
+        }
+        if (keysPressed["q"]) {
+            player.z = Math.min(Math.max(player.z/1.01,0.1),10)
+        }
+        if (keysPressed["e"]) {
+            player.z = Math.min(Math.max(player.z*1.01,0.1),10)
+        }
+    }
+
+    player.xv *= 0.93;
+    player.yv *= 0.93;
+
+    if (!zoomout) {
+        let oldX = player.x;
+        let oldY = player.y;
+
+        let tryX = player.x + player.xv;
+        let tryY = player.y;
+        let resX = resolvePlayerCollision(tryX, tryY);
+        if (Math.abs(resX.x - tryX) > 1e-6) player.xv = 0;
+        player.x = resX.x;
+
+        tryX = player.x;
+        tryY = player.y + player.yv;
+        let resY = resolvePlayerCollision(tryX, tryY);
+        if (Math.abs(resY.y - tryY) > 1e-6) player.yv = 0;
+        player.y = resY.y;
+    }
+
+    if (path.length > 0) {
+        ctx.save();
+        ctx.strokeStyle = "#8ff";
+        ctx.globalAlpha = zoomout ? 1 : 0.5
+        ctx.lineWidth = player.z*(zoomout ? 4 : 2);
+
+        let i = 0;
+        while (i < path.length) {
+            ctx.beginPath();
+                while (path[i] && path[i + 1] && path[i].draw && path[i + 1].draw) {
+                    ctx.moveTo(
+                        (canvas.width / 2) + (path[i].x - player.x) * thingy,
+                        (canvas.height / 2) - (path[i].y - player.y) * thingy
+                    );
+                    ctx.lineTo(
+                        (canvas.width / 2) + (path[i + 1].x - player.x) * thingy,
+                        (canvas.height / 2) - (path[i + 1].y - player.y) * thingy
+                    );
+                    i++;
+                }
+            ctx.stroke();
+            i++;
+        }
+    }
+    ctx.restore();
+
+    for (let y = 0; y < ROWS; y++) {
+        for (let x = 0; x < COLS; x++) {
+            let thiscell = getCell(x, y);
+
+            let px = (canvas.width / 2) + (x - player.x) * thingy;
+            let py = (canvas.height / 2) - (y - player.y) * thingy;
+
+            ctx.strokeStyle = "#fff";
+            ctx.lineWidth = player.z*(zoomout ? 4 : 2);
+
+            if (thiscell.walls[0]) {
+                ctx.beginPath();
+                ctx.moveTo(px, py);
+                ctx.lineTo(px + thingy, py);
+                ctx.stroke();
+            }
+
+            if (thiscell.walls[1]) {
+                ctx.beginPath();
+                ctx.moveTo(px + thingy, py);
+                ctx.lineTo(px + thingy, py - thingy);
+                ctx.stroke();
+            }
+
+            if (thiscell.walls[2]) {
+                ctx.beginPath();
+                ctx.moveTo(px + thingy, py - thingy);
+                ctx.lineTo(px, py - thingy);
+                ctx.stroke();
+            }
+
+            if (thiscell.walls[3]) {
+                ctx.beginPath();
+                ctx.moveTo(px, py - thingy);
+                ctx.lineTo(px, py);
+                ctx.stroke();
+            }
+        }
+    }
+
+    // Draw green square at finish line
+    let finishX = (canvas.width / 2) + ((exitCol + 0.5) - player.x) * thingy;
+    let finishY = (canvas.height / 2) - ((ROWS - 0.5) - player.y) * thingy;
+    let squareSize = playerSize * thingy * 1.3;
+
+    ctx.save();
+    ctx.fillStyle = "green";
+    ctx.globalAlpha = 0.5;
+
+    ctx.fillRect(
+        finishX - squareSize / 2,
+        finishY - squareSize / 2,
+        squareSize,
+        squareSize
+    );
+    ctx.restore()
+
+    if (!zoomout) {
+        ctx.save();
+        ctx.fillStyle = "#fff";
+        let renderW = playerSize * thingy;
+        let renderH = playerSize * thingy;
+        let px = (canvas.width / 2) - (renderW / 2);
+        let py = (canvas.height / 2) - (renderH / 2);
+        ctx.fillRect(px, py, renderW, renderH);
+        ctx.restore();
+    }
+
+    // Draw an indicator arrow pointing toward the finish line when it's offscreen
+
+    // Calculate angle to finish
+    let dx = (exitCol + 0.5) - player.x;
+    let dy = (ROWS - 0.5) - player.y;
+    let dir = Math.atan2(0-dy, dx);
+
+    // Indicator distance from player
+    let indicatorDist = 400; // px
+
+    // Indicator screen position
+    let indX = (canvas.width / 2) + Math.cos(dir) * indicatorDist;
+    let indY = (canvas.height / 2) + Math.sin(dir) * indicatorDist;
+
+    // Arrow scale variable
+    let arrowScale = 1.5; // Change this value to resize arrow
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, Math.max(0, (Math.pow(Math.hypot(dx, dy),6) / 6000)))/2;
+    if (zoomout) ctx.globalAlpha = 0;
+    ctx.translate(indX, indY);
+    ctx.rotate(dir + Math.PI / 2); // rotate 90 degrees to the right
+    ctx.scale(arrowScale, arrowScale);
+    ctx.beginPath();
+    ctx.moveTo(0, -18);    // tip of the triangle
+    ctx.lineTo(10, 8);      // bottom right
+    ctx.lineTo(-10, 8);     // bottom left
+    ctx.closePath();
+    ctx.fillStyle = "#aaa";
+    ctx.strokeStyle = "#aaa";
+    ctx.lineWidth = 3;
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+
+    // Show distance to finish under the arrow
+    let distToFinish = Math.sqrt(dx*dx + dy*dy)*10;
+    ctx.save();
+    ctx.font = "13px monospace";
+    ctx.fillStyle = "#fff";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.globalAlpha = Math.min(1, Math.max(0, (Math.pow(Math.hypot(dx, dy),6) / 6000)))/2;
+    if (zoomout) ctx.globalAlpha = 0;
+    ctx.fillText(
+        `Dist: ${distToFinish.toFixed(2)}`,
+        indX,
+        indY + 14 * arrowScale // place under the arrow tip
+    );
+    ctx.restore();
+
+    // Only draw trail if not mobile and tracing enabled and moving fast enough
+    if (!isMobile && !zoomout && tracing && Math.abs(player.xv)+Math.abs(player.yv) > 0.01) { 
+        path.push({x: player.x, y:player.y, draw: true});
+    }
+    // On mobile, trail is always off
+
+    if (!finishedMaze) {
+        display.textContent= `${formatTime(t.toFixed(3))}`
+    } else {
+        display.textContent= `Finished! Time: ${formatTime(t.toFixed(3))}! Refresh to play again`
+    }
+
+    requestAnimationFrame(draw);
+}
+
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+let prevzoom = 0;
+let prevx = 0;
+let prevy = 0;
+
+// Keyboard ONLY for desktop devices
+if (!isMobile) {
+    window.addEventListener("keydown", (e) => {
+      keysPressed[e.key.toLowerCase()] = true;
+      if (e.key == "k") {
+        if (!zoomout) {
+            prevzoom = player.z;
+            prevx = player.x;
+            prevy = player.y;
+            zoomout = true;
+            animateZoomout();
+        } else {
+
+        zoomout = false;
+        player.z = prevzoom
+        player.x = prevx; 
+        player.y = prevy;
+      
+        }
+      } 
+    });
+
+    window.addEventListener("keyup", (e) => {
+      keysPressed[e.key.toLowerCase()] = false;
+    });
+}
+// On mobile, do not add keyboard listeners
+
+let lastTimestamp;
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+
+</script>
+</html>

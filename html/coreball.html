@@ -1,0 +1,502 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BoreCall</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    #canvasWrapper {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    #canvasWrapper {
+        z-index: 1;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: 495px;
+        height: 916px;
+        display: block;
+        position: relative;
+        z-index: 2;
+        background: none;
+        box-sizing: border-box;
+
+    }
+    #timeDisplay {
+        position: absolute;
+        left: 7px;
+        bottom: 6px;
+        color: #fff;
+        z-index: 10;
+        font-size: 13px;
+        pointer-events: none;
+    }
+    #wintext {
+        z-index: 100;
+        color: #dff;
+        font-size: 3rem;
+        position: absolute;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+        top: 55%;
+        display: none;
+    }
+    #restartbtn {
+        position: absolute;
+        right: 7px;
+        bottom: 7px;
+        width: 40px;
+        font-size: 11px;
+        height: 15px;
+        z-index: 99;
+        border: #fff 2px solid;
+        background: #811;
+        color: #fff;
+        border-radius: 5px;
+        transition: background 0.15s cubic-bezier(1, 0, 0, 1);
+        cursor: pointer;
+    }
+    #restartbtn:hover {
+        background: #a77;
+        transition: background 0.10s cubic-bezier(1, 0, 0, 1);
+    }
+</style>
+<body>
+ <div id="canvasWrapper">
+   <canvas id="gamecanvas" width="495" height="916"></canvas>
+   <div id="timeDisplay"></div>
+   <button id="restartbtn" onclick="resetProg()"><span style="position: absolute; margin-bottom: 0px; margin-top: -6px; padding: 0; margin-left: -15px;">Reset</span></button>
+ </div>
+ <div id="wintext">you won, poggies!</div>
+</body>
+<script>
+console.clear();
+// I WILL NOT USE AI ON THIS!!!! TIME TO LEARN BABYYYYY
+
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+let keysPressed = [];
+
+function playAudioo(fileName) {
+  const audio = new Audio();
+  audio.src = fileName;
+  audio.onerror = () => {
+    console.warn(`File missing or unplayable: ${fileName}`);
+  };
+  audio.onloadeddata = () => {
+    audio.currentTime = 0;
+    audio.play().catch(err => console.log("Playback blocked:", err));
+  };
+}
+
+let fps = 60;
+let paused = false;
+let fpsHist = [];
+let fpsAv = 60;
+let time = 0;
+let realtime = 0;
+let level = 1;
+let storedLevel = Number(localStorage.getItem("levelReached"));
+if (isNaN(storedLevel) || storedLevel < 1) {
+    storedLevel = 1;
+}
+level = storedLevel;
+let gameWon = false;
+const pi = Math.PI
+const tau = Math.PI * 2;
+let cwid2 = canvas.width/2;
+let chig2 = canvas.height/2;
+const yoffset = 80;
+let ballsOffscreen = false;
+let mouseDown = false;
+
+function resetProg() {
+    level = 1;
+    realtime = 0;
+    localStorage.setItem("levelReached", 1);
+    setupLevel(1);
+}
+
+function sleep(ms) {
+    return new Promise(resolve => { setTimeout(resolve, ms); });
+}
+async function waitUntil(condition) {
+    while (!condition()) { await sleep(10); }
+}
+
+const levels = [
+    {speed: 0.25, num: 4, balls: 8, reverse: false, slow: false},
+    {speed: 0.25, num: 6, balls: 10, reverse: false, slow: false},
+    {speed: 0.25, num: 2, balls: 20, reverse: false, slow: false},
+    {speed: -0.25, num: 7, balls: 12, reverse: false, slow: false},
+    {speed: 0.25, num: 12, balls: 8, reverse: false, slow: false}, // 5
+    {speed: -0.25, num: 10, balls: 10, reverse: false, slow: false},
+    {speed: 0.25*1.2, num: 12, balls: 12, reverse: false, slow: false},
+    {speed: -0.25, num: 16, balls: 3, reverse: false, slow: false},
+    {speed: -0.25, num: 0, balls: 26, reverse: false, slow: false}, 
+    {speed: 0.25, num: 12, balls: 6, reverse: false, slow: false},//10
+    {speed: 0.25*1.75, num: 10, balls: 8, reverse: false, slow: false},
+    {speed: -0.25*1.75, num: 6, balls: 12, reverse: false, slow: false},
+    {speed: 0.25*1.75, num: 12, balls: 4, reverse: false, slow: false},
+    {speed: -0.25*1.75, num: 8, balls: 8, reverse: false, slow: false},
+    {speed: 0.25*1.75, num: 8, balls: 11, reverse: false, slow: false},// 15
+    {speed: -0.25*1.75, num: 5, balls: 10, reverse: false, slow: false},
+    {speed: 0.25*1.75, num: 6, balls: 12, reverse: false, slow: false},
+    {speed: -0.25*1.75, num: 8, balls: 14, reverse: false, slow: false},
+    {speed: 0.25*1.75, num: 0, balls: 23, reverse: false, slow: false},
+    {speed: -0.25*1.75, num: 10, balls: 13, reverse: false, slow: false}, // 20
+    {speed: 0.25*1.6, num: 4, balls: 12, reverse: 3, slow: false},
+    {speed: 0.25*1.6, num: 6, balls: 10, reverse: 3, slow: false},
+    {speed: -0.25*1.6, num: 8, balls: 12, reverse: 3, slow: false},
+    {speed: 0.25*1.6, num: 7, balls: 14, reverse: 3, slow: false},
+    {speed: 0.25*1.6, num: 2, balls: 18, reverse: 3, slow: false}, // 25
+    {speed: 0.25*1.6, num: 4, balls: 18, reverse: 3, slow: false},
+    {speed: 0.25*1.6, num: 2, balls: 24, reverse: 3, slow: false},
+    {speed: 0.25*2.1, num: 4, balls: 10, reverse: 2, slow: false},
+    {speed: 0.25*2.1, num: 6, balls: 13, reverse: 2, slow: false},
+    {speed: 0.25*1.5, num: 4, balls: 20, reverse: 3, slow: false}, // 30
+    {speed: 0.25*3, num: 6, balls: 8, reverse: false, slow: [1.25,0.2,1]},
+    {speed: 0.25*2.5, num: 10, balls: 14, reverse: false, slow: [1.25,0.2,1]},
+    {speed: 0.25*2.5, num: 0, balls: 25, reverse: false, slow: [1.25,0.15,1]},
+    {speed: 0.25*3, num: 6, balls: 16, reverse: false, slow: [1.25,0.2,1]},
+    {speed: 0.25*2.6, num: 0, balls: 26, reverse: false, slow: [1.25,0.15,1]}//35
+]
+
+let rods = []
+let balls = []
+let direction = 1;
+let speedModifier = 1;
+
+function reverse() {
+    setTimeout(() => {direction= (direction == 1) ? -1 : 1}, Math.random()*100)
+}
+
+let slowLoopCancelFunc = null;
+
+function slowLoop(levelParam) {
+    if (typeof slowLoopCancelFunc === "function") {
+        slowLoopCancelFunc(); // stop any previous slowLoop
+    }
+
+    const slowList = levels[levelParam-1].slow;
+    if (!Array.isArray(slowList)) return;
+
+    let cancelled = false;
+
+    slowLoopCancelFunc = () => {
+        cancelled = true;
+    };
+
+    function doSlowCycle() {
+        if (cancelled) return;
+        speedModifier = 1; // Start off faster (normal speed)
+        slowTimeout = setTimeout(() => {
+            if (cancelled) return;
+            speedModifier = slowList[1]; // Then slow down after [0] seconds
+            slowTimeout = setTimeout(doSlowCycle, slowList[2]*1000); // Restart cycle after slow duration
+        }, slowList[0]*1000); // Wait [0] seconds before slowing
+    }
+    doSlowCycle();
+}
+
+function setupLevel(levell) {
+    if (typeof reverseInterval !== 'undefined') {
+        clearInterval(reverseInterval);
+    }
+    if (typeof slowInterval !== 'undefined') {
+        clearInterval(slowInterval);
+    }
+    if (typeof slowTimeout !== 'undefined') {
+        clearTimeout(slowTimeout);
+    }
+    if (typeof slowLoopCancelFunc === "function") {
+        slowLoopCancelFunc(); // Ensure any previous slowLoop cycle is stopped
+        slowLoopCancelFunc = null;
+    }
+    
+    balls = [];
+    time = 0;
+    rods = [];
+    speedModifier = 1; // reset speed modifier to default
+
+    for (let i = 0; i < levels[levell - 1].num; i++) {
+        rods.push({ dir: i * (tau / levels[levell - 1].num), val: 999 });
+    }
+    for (let i = 0; i < levels[levell - 1].balls; i++) {
+        balls.push({ x: 0, y: canvas.height - (313 - i * 25), value: levels[levell-1].balls - i - 1});
+    }
+    if (levels[levell-1].reverse) {
+        reverseInterval = setInterval(() => { reverse() }, levels[levell-1].reverse * 900);
+    }
+    if (Array.isArray(levels[levell-1].slow)) {
+        slowLoop(levell);
+    }
+    if (levell > storedLevel) {
+        localStorage.setItem("levelReached", levell)
+    }
+}
+
+setTimeout(() => {setupLevel(level)},10); // wait for canvas to auto resize
+
+function placeShot(dir,value) {
+    rods.push({dir: dir, val: value})
+}
+
+async function moveAllUp() {
+    let m = 0;
+    while (m<25) {
+        for (let i = 0; i< balls.length; i++) {
+            balls[i].y--;
+        }
+        m++;
+        await sleep(10)
+    }
+}
+
+function getCollision(dir,radius) {
+    let collided = false;
+    for (let i = 0; i<rods.length; i++) {
+        if (Math.hypot(getRodPos(time+dir,180).x-getRodPos(time+rods[i].dir,180).x,getRodPos(time+dir,180).y-getRodPos(time+rods[i].dir,180).y) < radius) {
+            collided = true;
+        }
+    }
+    return collided
+}
+
+let isShooting = false;
+async function shoot() {
+    let thisBall = balls[0];
+    if (balls.length > 0 && !isShooting && !paused) {
+        isShooting = true;
+        moveAllUp()
+        while(thisBall.y > chig2) {
+            thisBall.y-= (800+Math.random()*100)/fps;
+            await sleep(10)
+        }
+        if(getCollision(0-(time%tau),20)) {
+            playAudioo("../sounds/lose2.wav")
+            paused = true;
+            balls.shift();
+            setTimeout(() => {
+                setupLevel(level);
+                paused = false;
+            }, 500);
+        } else {
+            playAudioo("../sounds/hit.wav")
+            placeShot(0-(time%tau),balls[0].value+1);
+           balls.shift();
+           if (balls.length == 0) {
+            if (levels[level]) {
+                level++;
+                playAudioo("../sounds/cheer.wav")
+                paused = true;
+                setTimeout(() => {
+                    paused = false;
+                    setupLevel(level);
+                }, 500);
+            } else {
+                setTimeout(() => {
+                   playAudioo("../sounds/gasp2.wav")
+                   gameWon = true;
+                },1000/fps)
+            }
+          }
+        }
+        setTimeout(() => {isShooting = false;}, 10);
+    }
+}
+
+function getRodPos(dir, len) {
+    return {x: cwid2+Math.sin(dir)*len, y:chig2-100-yoffset+Math.cos(dir)*len}
+}
+
+function draw() {
+    if (!paused) {time += speedModifier*direction*(((levels[level-1].speed)*tau)/fps)};
+    realtime+=1/fps;
+    document.getElementById("timeDisplay").textContent = `time: ${realtime.toFixed(3)}`
+    cwid2 = canvas.width/2;
+    chig2 = canvas.height/2;
+    ctx.fillStyle = "#00000025";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    if (gameWon) {
+        document.getElementById("wintext").style.display = "block"
+        return
+    }
+
+    // draw sick bg
+    ctx.fillStyle="#1112";
+    for (y = 0; y<canvas.height; y+=30) {
+        for (let x = -100; x<canvas.width+100; x+=30) {
+            ctx.beginPath();
+            ctx.arc(x+Math.sin(y)*2,y+(realtime%0.3)*100,13,0,tau)
+            ctx.fill();
+        }
+    }
+
+
+    // center circle
+    ctx.fillStyle = "#fff";
+    ctx.moveTo(cwid2,chig2-100-yoffset)
+    ctx.arc(cwid2,chig2-100-yoffset,70,0,tau,false);
+    ctx.fill();
+
+
+    // level text
+    ctx.font = "60px monospace";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#000f";
+    const levelString = (level < 10) ? `0${level}` : `${level}`;
+    ctx.beginPath();
+    ctx.fillText(`${levelString}`,cwid2,chig2-80-yoffset);
+    ctx.fill()
+
+    // rods
+        const thisnum = levels[level-1].num;
+
+
+        // placed
+        ctx.strokeStyle = "#fff"
+        ctx.lineWidth = "5";
+        
+        for (let i = 0; i<rods.length; i++) {
+            const dir = time+rods[i].dir;
+            ctx.beginPath();
+            ctx.moveTo(getRodPos(dir,70).x,getRodPos(dir,70).y)
+            ctx.lineTo(getRodPos(dir,180).x,getRodPos(dir,180).y);
+            ctx.stroke();
+            ctx.fillStyle = "#fff";
+            ctx.moveTo(getRodPos(dir,180).x,getRodPos(dir,180).y)
+            ctx.arc(getRodPos(dir,180).x,getRodPos(dir,180).y,12,0,tau)
+            ctx.fill();
+            ctx.beginPath();
+            if (rods[i].val< 999) {
+                ctx.font = "15px monospace";
+                ctx.textAlign = "center";
+                ctx.fillStyle = "#000f";
+                ctx.fillText(`${rods[i].val}`,getRodPos(dir,180).x,getRodPos(dir,180).y+4)
+            }
+        }
+
+    // balls O_O
+        ballsOffscreen = false;
+        for (let i = 0; i<balls.length; i++){
+            ctx.fillStyle = "#fff";
+            let y = Math.min(balls[i].y,canvas.height+25);
+            ballsOffscreen = (y !== balls[i].y)
+            ctx.moveTo(balls[i].x, y);
+            ctx.arc(cwid2-balls[i].x,y,11.5,0,tau);
+            ctx.fill();
+            if (ballsOffscreen) {break}
+        }
+        ballsOffscreen = false;
+        for (let i = 0; i<balls.length; i++){
+            let y = Math.min(balls[i].y,canvas.height+25);
+            ballsOffscreen = (y !== balls[i].y)
+            ctx.font = "13px monospace";
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#000f";
+            ctx.fillText(`${balls[i].value+1}`,cwid2-balls[i].x,balls[i].y+4)
+            if (ballsOffscreen) {break}
+        }
+
+    requestAnimationFrame(draw)
+}
+
+
+const BASE_WIDTH = 495;
+const BASE_HEIGHT = 916;
+
+function resizeCanvas() {
+
+  canvas.width = BASE_WIDTH;
+  canvas.height = BASE_HEIGHT;
+
+  const wrapper = document.getElementById('canvasWrapper');
+  const ww = window.innerWidth;
+  const wh = window.innerHeight;
+
+  const scalex = ww / BASE_WIDTH;
+  const scaley = wh / BASE_HEIGHT;
+  const scale = Math.min(scalex, scaley, 1);
+
+  wrapper.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  wrapper.style.position = 'absolute';
+  wrapper.style.top = '50%';
+  wrapper.style.left = '50%';
+  wrapper.style.width = `${BASE_WIDTH}px`;
+  wrapper.style.height = `${BASE_HEIGHT}px`;
+  wrapper.style.overflow = 'hidden';
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === " ") {
+        shoot();
+    }
+    if (e.key === "\`") {
+        if (level < levels.length) {
+          level++
+          setupLevel(level);
+        }
+    }
+    
+  //keysPressed[e.key.toLowerCase()] = true;
+});
+
+canvas.addEventListener("pointerdown", (e) => {
+    mouseDown = true;
+    shoot();
+})
+
+window.addEventListener("pointerup", (e) => {
+    mouseDown = false;
+})
+
+window.addEventListener("keyup", (e) => {
+  //keysPressed[e.key.toLowerCase()] = false;
+});
+
+let lastTimestamp;
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+draw();
+</script>
+</html>

@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Langton's Ant</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+  </head>
+  <style>
+    body {
+      background-color: #345658;
+      overflow: hidden;
+      font-family: 'Courier New', Courier, monospace;
+      color: #fff
+    }
+    #gamecanvas {
+      border: #fff 10px solid;
+      border-radius: 10px;
+      width: calc(100vw - 20px);
+      height: calc(100vh - 20px);
+      background-color: hsla(238, 86%, 54%, 0.1);
+      margin-left: 0px;
+      margin-top: 0px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      display: block;
+      pointer-events: auto;
+    }
+
+    #bg {
+      width: 100vw;
+      height: 100vh;
+      opacity: 3%;
+      z-index: -1;
+    }
+
+    #display {
+      width: auto;
+      position: fixed;
+      margin-left: 10px;
+      margin-top: 8px;
+      z-index: 4;
+      font-size: 12px
+    }
+
+    #seedinput {
+      width: 100px;
+      position: fixed;
+      z-index: 5;
+      left: calc(100vw - 175px);
+      top: calc(100vh - 33px)
+    }
+    #seedtext {
+      position: fixed;
+      left: calc(100vw - 219px);
+      top: calc(100vh - 46px);
+      font-size: 15px;
+      z-index: 6;
+    }
+    #fadetoggle {
+      position: fixed;
+      z-index: 6;
+      left: calc(100vw - 32px);
+      top: calc(100vh - 71.5px);
+      width: 15px;
+      height: 15px;
+    }
+    #fadetext {
+      display: none
+    }
+    #fadespeedinput {
+      width: 50px;
+      height: 10px;
+      position: fixed;
+      z-index: 6;
+      left: calc(100vw - 90px);
+      top: calc(100vh - 69px);
+      font-size: 10px;
+    }
+    #fadespeedtext {
+      width: 100px;
+      position: fixed;
+      z-index: 5;
+      left: calc(100vw - 156px);
+      top: calc(100vh - 78px);
+      font-size: 11px;
+    }
+    #randomseedbutton {
+      width: 53px;
+      height: 17px;
+      left: calc(100vw - 65px);
+      top: calc(100vh - 31px);
+    }
+    .buttonstyle {
+      text-align: center;
+      z-index: 11;
+      font-size: 10px;
+      position: fixed;
+      background-color: #022;
+      border: #eff 2px solid;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .buttonstyle:active {
+      background-color: #3c3c3f;
+    }
+    #visitedGraph {
+      position: fixed;
+      left: 15px;
+      bottom: 15px;
+      z-index: 30;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid #fff;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    #tickspeedinput {
+      width: 25px;
+      height: 10px;
+      position: fixed;
+      z-index: 6;
+      left: calc(100vw - 45px);
+      top: calc(100vh - 86px);
+      font-size: 10px;
+    }
+    #tickspeedtext {
+      width: 120px;
+      position: fixed;
+      z-index: 5;
+      left: calc(100vw - 100px);
+      top: calc(100vh - 83px);
+      font-size: 10px;
+    }
+    #presetsbutton {
+      width: 53px;
+      height: 17px;
+      left: calc(100vw - 65px);
+      top: calc(100vh - 51px);
+    }
+    #presetnum {
+      width: 120px;
+      position: fixed;
+      z-index: 5;
+      left: calc(100vw - 0px);
+      top: calc(100vh - 63px);
+      text-align: right;
+      font-size: 13px;
+      color: #fff;
+    }
+  </style>
+  <body>
+      <div id="display"></div>
+      <p id="seedtext">Seed:</p>
+      <input id="seedinput" placeholder="Seed">
+      <input id="fadetoggle" type="checkbox">
+      <input id="fadespeedinput" type="number" value="0.999">
+      <p id="fadetext">Fade:</p>
+      <p id="fadespeedtext">Fadespeed:</p>
+      <button id="randomseedbutton" class="buttonstyle">Random</button>
+      <button id="presetsbutton" class="buttonstyle" onclick="animatePresetText()">Presets</button>
+      <p id="presetnum">#10</p>
+      <input id="tickspeedinput" type="number" value="1" min="1" step="1">
+      <span id="tickspeedtext">Overclock</span>
+    <img src="plinkk.gif" id="bg" alt="If this image didnt load its a cute cat gif" draggable="false">
+    <canvas id="gamecanvas"></canvas>
+    <canvas id="visitedGraph" width="250" height="60"></canvas>
+  </body>
+  <script>
+    // No FPS input, always use requestAnimationFrame main loop
+
+    
+    const canvas = document.getElementById("gamecanvas");
+    const ctx = canvas.getContext("2d");
+    const plink = new Image();
+    plink.src = "white.png";
+    const plinkred = new Image();
+    plinkred.src = "redplink.png";
+    const plinkghost = new Image();
+    plinkghost.src = "ghostplink.png";
+    const display = document.getElementById("display");
+    const seedinput = document.getElementById("seedinput");
+    const fadetoggle = document.getElementById("fadetoggle");
+    const fadespeedinput = document.getElementById("fadespeedinput");
+    const randomseedbutton = document.getElementById("randomseedbutton");
+
+    // Tickspeed control
+    const tickspeedinput = document.getElementById("tickspeedinput");
+    let ticksPerFrame = Math.max(1, parseInt(tickspeedinput.value, 10) || 1);
+    tickspeedinput.addEventListener('input', function() {
+      ticksPerFrame = Math.max(1, parseInt(tickspeedinput.value, 10) || 1);
+    });
+
+    // Graph canvas
+    const visitedGraph = document.getElementById("visitedGraph");
+    const graphCtx = visitedGraph.getContext("2d");
+
+    let fadespeedBlurTimeout = null;
+    function scheduleFadespeedBlur() {
+      if (fadespeedBlurTimeout) clearTimeout(fadespeedBlurTimeout);
+      fadespeedBlurTimeout = setTimeout(() => {
+        fadespeedinput.blur();
+      }, 800);
+    }
+    fadespeedinput.addEventListener('input', scheduleFadespeedBlur);
+    fadespeedinput.addEventListener('keydown', function(e) {
+      // Blur immediately on Enter
+      if (e.key === 'Enter') {
+        fadespeedinput.blur();
+      } else {
+        scheduleFadespeedBlur();
+      }
+    });
+    fadespeedinput.addEventListener('mousemove', scheduleFadespeedBlur);
+    fadespeedinput.addEventListener('focus', scheduleFadespeedBlur);
+
+    let fademode = false;
+
+    fadetoggle.addEventListener('input', function() {
+      fademode = !!fadetoggle.checked;
+      fadetoggle.blur()
+    });
+
+    fademode = !!fadetoggle.checked;
+
+    let spawnseed = {
+      seed: 0,
+      antcount: 100
+    };
+
+    function generateSeed() {
+      spawnseed.seed = Math.round(Math.random()*1000000000)
+      seedinput.value = `${spawnseed.seed}+${spawnseed.antcount}`;
+      applySeedAndAntCountFromInput();
+      randomseedbutton.blur();
+    }
+
+    randomseedbutton.addEventListener('click', generateSeed);
+
+
+    // (Display FPS)
+    let showFPS = 0;
+    let lastFPSTime = performance.now();
+    let frameCounter = 0;
+
+    let pixels = []
+
+    let zoom = 100;
+    let leftturns = 0;
+    let rightturns = 0;
+    let paused = true;
+    let mouseX, mouseY;
+
+    const stuff = ["","","","","","","","","","",""]; //12 displays
+    const keysPressed = {};
+
+    let dragging = false;
+    let dragStartMouseX = 0;
+    let dragStartMouseY = 0;
+    let dragStartCamx = 0;
+    let dragStartCamy = 0;
+
+    let spawnrand_state = spawnseed.seed >>> 0;
+    let camx=0, camy=0;
+    let gridX=0, gridY=0, ticks=0, onpixels=0, offpixels=0, visited=0;
+    let ants = [];
+    let targetAnts = spawnseed.antcount;
+    let antSpawnTicker = 0;
+
+    let lastFrameTime = performance.now();
+    let tps = 0;
+    let tps_accum = 0;
+    let tps_count = 0;
+
+    // Visited graph tracking
+    // INFINITE visitedHistory!
+    let visitedHistory = [];
+    let prevVisited = 1;
+    let lastGraphTick = 0;
+
+    // --- Buffer for multi-tick visited graph smoothing ---
+    let visitedSampleBuffer = [];
+    let visitedTickCounter = 0;
+    let visitedStartValue = 1;
+
+
+    // cool things i found **DO NOT DELETE EVER**
+
+    const seedlist = [
+      "100+100",           // recorded
+      "79141975+100",      // unrecorded
+      "78536207+100",      // unrecorded
+      "46457505+100",      // unrecorded
+      "59028955+100",      // unrecorded
+      "380099570+100",     // unrecorded
+      "375106350+100",     // unrecorded
+      "277271606+100",     // unrecorded
+      "745284025+100",     // unrecorded These two ants get in a loop xd
+      "119218640+100",     // unrecorded. The legendary double #2
+      "936941625+100",     // unrecorded. tragic loop of 2 ants getting stuck.
+      "926497772+100",     // unrecorded
+      "845590990+100",     // unrecorded. dih
+      "532345238+100",     // uncrecorded 
+      "134738381+100",      // unrecorded apple
+      "180023966+100",      // unrecorded. they keep trying to make printers in one spot but get rejected
+      "256543926+100",       //unrecorded lotta printers
+      "463385762+100",       // unrecorded another double #2
+      "536860014+100",      // unrecorded very slow
+      "259225789+100"     //unrecorded double #2
+    ];
+
+let smoothedVisitedHistory = [];
+let presetnum=-2;
+const presettext = document.getElementById("presetnum");
+
+
+function applySeedAndAntCountFromInput() {
+      let { seed, ants } = parseSeedInput(seedinput.value);
+      spawnseed.seed = seed;
+      spawnseed.antcount = ants;
+      spawnrand_state = seed >>> 0;
+      targetAnts = ants;
+      resetSimulation();
+      updateAntCount(ants);
+    }
+
+function getPresetNum(num) {
+  seedinput.value = seedlist[num-1];
+  applySeedAndAntCountFromInput();
+  presettext.textContent = `Preset: #${num}`;
+}
+
+let t2 = 0;
+getPresetNum(1);
+
+function animatePresetText() {
+  presettext.style.left = `calc(100vw - ${100+t2}px)`
+  if (t2 < 90) {
+    t2+= 4;
+    requestAnimationFrame(animatePresetText);
+  } else{
+    t2=0;
+    presetnum++;
+    getPresetNum(((presetnum+1)%seedlist.length)+1);
+  }
+}
+
+    // Smoothing parameter for EWMA
+    const SMOOTH_ALPHA = 0.2; 
+
+    // Store the smoothed values separately for clarity
+
+
+    function parseSeedInput(value) {
+      let [seedStr, antsStr] = value.split("+");
+      let seed = parseInt(seedStr.trim() || "0", 10);
+      let ants = antsStr !== undefined ? parseInt(antsStr.trim() || "0", 10) : 100;
+      if (isNaN(seed)) seed = 0;
+      if (isNaN(ants)) ants = 100;
+      return { seed, ants };
+    }
+
+    function currentSeedString() {
+      return `${seedinput.value}`;
+    }
+
+
+    function handleSeedInputChange(e) {
+      let { seed, ants } = parseSeedInput(seedinput.value);
+      if (!seedinput.value.trim()) {
+        seedinput.value = `${spawnseed.seed}+${spawnseed.antcount}`;
+        return;
+      }
+      applySeedAndAntCountFromInput();
+    }
+
+    function getSeedDisplay() {
+      return `${spawnseed.seed}+${spawnseed.antcount}`;
+    }
+
+    function spawnrand() {
+      var t = spawnrand_state += 0x6D2B79F5;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+
+    function resetSimulation() {
+      ants = [];
+      ticks = 0;
+      leftturns = 0;
+      rightturns = 0;
+      antSpawnTicker = 0;
+      onpixels = 0;
+      offpixels = 0;
+      visited = 0;
+      pixels = [{ x: 0, y: 0, v: 1, s: 1 }];
+      visitedHistory = [];
+      smoothedVisitedHistory = [];
+      prevVisited = 1;
+      lastGraphTick = 0;
+      visitedSampleBuffer = [];
+      visitedTickCounter = 0;
+      visitedStartValue = 1;
+      clearVisitedGraph();
+      seedinput.blur()
+    }
+
+    function setSpawnSeed(newSeed, newAntCount = null) {
+      if (typeof newSeed === "string") {
+        let { seed, ants } = parseSeedInput(newSeed);
+        spawnseed.seed = seed;
+        spawnseed.antcount = ants;
+        spawnrand_state = seed >>> 0;
+        targetAnts = ants;
+        resetSimulation();
+        updateAntCount(ants);
+      } else {
+        spawnseed.seed = (typeof newSeed === "number") ? newSeed : 0;
+        if (newAntCount !== null) spawnseed.antcount = newAntCount >>> 0;
+        spawnrand_state = spawnseed.seed >>> 0;
+        targetAnts = spawnseed.antcount;
+        resetSimulation();
+        updateAntCount(spawnseed.antcount);
+      }
+    }
+
+    function updateAntCount(newAntCount) {
+      spawnseed.antcount = newAntCount >>> 0;
+    }
+
+    seedinput.addEventListener("change", handleSeedInputChange);
+    seedinput.addEventListener("blur", handleSeedInputChange);
+
+    if (!seedinput.value) seedinput.value = `${spawnseed.seed}+${spawnseed.antcount}`;
+    applySeedAndAntCountFromInput();
+
+    window.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    }, {capture: true});
+
+    canvas.addEventListener('mousedown', function(e) {
+      if (e.button === 2) {
+        dragging = true;
+        const rect = canvas.getBoundingClientRect();
+        dragStartMouseX = e.clientX - rect.left;
+        dragStartMouseY = e.clientY - rect.top;
+        dragStartCamx = camx;
+        dragStartCamy = camy;
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    window.addEventListener('mousemove', function(e) {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+
+      if (dragging) {
+        const dx = mouseX - dragStartMouseX;
+        const dy = mouseY - dragStartMouseY;
+        camx = dragStartCamx - dx / (zoom*(1+20/zoom));
+        camy = dragStartCamy + dy / (zoom*(1+20/zoom));
+      }
+    });
+
+    window.addEventListener('mouseup', function(e) {
+      if (e.button === 2) {
+        dragging = false;
+        if (e.preventDefault) e.preventDefault();
+        return false;
+      }
+    });
+
+    let click = false;
+    let stop = false;
+    let stop2 = false;
+    let stepRequested = false;
+
+    // Now, only shift + left click will flip the pixel.
+    canvas.addEventListener("mousedown", (e) => {
+      // e.shiftKey is true if shift held.
+      if (e.button === 0 && e.shiftKey) {
+        if (!stop) {
+          click = true;
+          stop = true;
+        }
+      }
+    });
+
+    window.addEventListener("mouseup", (e) => {
+      if (e.button === 0) {
+        stop=false;
+      }
+    });
+
+    window.addEventListener(
+      "wheel",
+      function (e) {
+        const rect = canvas.getBoundingClientRect();
+        const mousex = e.clientX - rect.left;
+        const mousey = e.clientY - rect.top;
+        const worldX =
+          ((mousex - canvas.width / 2) / zoom) + camx * (1 + 20 / zoom);
+        const worldY =
+          ((-mousey + canvas.height / 2) / zoom) + camy * (1 + 20 / zoom);
+        let oldzoom = zoom;
+        if (e.deltaY < 0) {
+          zoom *= 1.1;
+        } else {
+          zoom /= 1.1;
+        }
+        camx =
+          (worldX - (mousex - canvas.width / 2) / zoom) /
+          (1 + 20 / zoom);
+        camy =
+          (worldY - (-mousey + canvas.height / 2) / zoom) /
+          (1 + 20 / zoom);
+
+        e.preventDefault();
+      },
+      { passive: false }
+    );
+
+    const sizeboost = 1;
+
+    function fillWhitePixel(x, y) {
+      y = 0 - y;
+      const boostedZoom = zoom * sizeboost;
+      const px = (canvas.width / 2 + (x - camx * (1 + 20 / zoom)) * zoom - boostedZoom / 2);
+      const py = ((y + camy * (1 + 20 / zoom)) * zoom + canvas.height / 2 - boostedZoom / 2);
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(px, py, (boostedZoom), (boostedZoom));
+    }
+    function fillWhitePixelAdv(x, y, s) {
+      y = 0 - y;
+      const boostedZoom = zoom * sizeboost;
+      const px = (canvas.width / 2 + (x - camx * (1 + 20 / zoom)) * zoom - boostedZoom / 2);
+      const py = ((y + camy * (1 + 20 / zoom)) * zoom + canvas.height / 2 - boostedZoom / 2);
+      const darkness = 1 - Math.max(0, Math.min(1, s !== undefined ? s : 1));
+      const val = Math.round(255 * (1 - darkness));
+      ctx.fillStyle = `rgb(${val},${val},${val})`;
+      ctx.fillRect(px, py, (boostedZoom), (boostedZoom));
+    }
+
+    function stampPixel(x, y, image) {
+      y = 0 - y;
+      const px = canvas.width / 2 + (x - camx * (1 + 20 / zoom)) * zoom - zoom / 2;
+      const py = (y + camy * (1 + 20 / zoom)) * zoom + canvas.height / 2 - zoom / 2;
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(image, px, py, zoom, zoom);
+    }
+
+    function stampPixelAdv(x, y, s, image) {
+      y = 0 - y;
+      const px = canvas.width / 2 + (x - camx * (1 + 20 / zoom)) * zoom - zoom / 2;
+      const py = (y + camy * (1 + 20 / zoom)) * zoom + canvas.height / 2 - zoom / 2;
+      ctx.save();
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(image, px, py, Math.ceil(zoom), Math.ceil(zoom));
+      const darkness = 1 - Math.max(0, Math.min(1, s !== undefined ? s : 1));
+      if (darkness > 0.01) {
+        ctx.fillStyle = `rgba(0,0,0,${darkness})`;
+        ctx.fillRect(px, py, zoom, zoom);
+      }
+      ctx.restore();
+    }
+
+    function trySpawnSeededAnt() {
+      if (ants.length >= targetAnts) return;
+      if (antSpawnTicker % 2 === 0) {
+        const tempdir =  Math.floor(spawnrand() * 4);
+        ants.push({ x: 0, y: 0, d: tempdir });
+      }
+    }
+
+    function tick() {
+      if (ants.length < targetAnts) {
+        trySpawnSeededAnt();
+      }
+      antSpawnTicker++;
+
+      for (let i = 0; i < pixels.length; i++) {
+        if (pixels[i].v) {
+          pixels[i].s = (pixels[i].s || 1) * fadespeedinput.value;;
+        } else {
+          pixels[i].s = 1;
+        }
+      }
+
+      for (let j = 0; j < ants.length; j++) {
+        let found = false;
+        for (let i = 0; i < pixels.length; i++) {
+          if (pixels[i].x === ants[j].x && pixels[i].y === ants[j].y) {
+            pixels[i].v = pixels[i].v ? 0 : 1;
+            if (fademode) {
+              pixels[i].s = 1;
+            }
+            found = true;
+            if (pixels[i].v) {
+              ants[j].d = (ants[j].d + 1) % 4;
+              rightturns++;
+            } else {
+              ants[j].d = (ants[j].d + 3) % 4;
+              leftturns++;
+            }
+            break;
+          }
+        }
+        if (!found) {
+          pixels.push({ x: ants[j].x, y: ants[j].y, v: 1, s: 1 });
+          visited++;
+          ants[j].d = (ants[j].d + 1) % 4;
+          rightturns++;
+        }
+      }
+
+      for (let i = 0; i < ants.length; i++) {
+        if (ants[i].d == 0) { ants[i].y++; }
+        if (ants[i].d == 1) { ants[i].x++; }
+        if (ants[i].d == 2) { ants[i].y--; }
+        if (ants[i].d == 3) { ants[i].x--; }
+      }
+
+      ticks++;
+    }
+
+    function updateTPS(now, frameWasPainted = true) {
+      const delta = now - lastFrameTime;
+      if (frameWasPainted) lastFrameTime = now;
+      let currentTPS = delta > 0 ? 1000 / delta : 0;
+      tps_accum += currentTPS;
+      tps_count++;
+      if (tps_count >= 15) {
+        tps = tps_accum / tps_count;
+        tps_accum = 0;
+        tps_count = 0;
+      }
+    }
+
+    // Visited graph utils
+    let heightmult = 10;
+
+    function updateVisitedGraph() {
+      heightmult = 1000 / spawnseed.antcount;
+
+      // Take sampled deltas every 5 ticks
+      if (visitedTickCounter === 0) {
+        visitedStartValue = pixels.length;
+      }
+      visitedTickCounter++;
+
+      if (visitedTickCounter === 5) {
+        let currVisited = pixels.length;
+        let vdelta = currVisited - visitedStartValue;
+        let showTps = tps > 0.01 ? tps : 1;
+        let v_per_tps = (vdelta / showTps) / (visitedTickCounter / 1);
+        if (!isFinite(v_per_tps)) v_per_tps = 0;
+
+        // Smoothing step: EWMA
+        let smooth;
+        if (smoothedVisitedHistory.length > 0) {
+          let prevSmooth = smoothedVisitedHistory[smoothedVisitedHistory.length - 1];
+          smooth = SMOOTH_ALPHA * (v_per_tps*heightmult) + (1-SMOOTH_ALPHA)*prevSmooth;
+        } else {
+          smooth = v_per_tps*heightmult;
+        }
+        visitedHistory.push(v_per_tps*heightmult);
+        smoothedVisitedHistory.push(smooth);
+
+        visitedTickCounter = 0;
+      }
+
+      // Redraw graph canvas
+      drawVisitedGraph();
+    }
+
+    function clearVisitedGraph() {
+      graphCtx.clearRect(0, 0, visitedGraph.width, visitedGraph.height);
+    }
+
+    function drawVisitedGraph() {
+      const w = visitedGraph.width;
+      const h = visitedGraph.height;
+      graphCtx.clearRect(0, 0, w, h);
+
+      // Only sample up to one point per pixel horizontally
+      const graphW = w - 38;
+      const N = smoothedVisitedHistory.length;
+      const numPoints = 500;
+
+
+      let rawSamples = [];
+      for (let i = 0; i < numPoints; ++i) {
+        if (N === 0) {
+          rawSamples.push(0);
+        } else if (i > numPoints - 10 && N > 10) {
+          const windowStart = Math.floor(N - Math.max(10, Math.floor(N * 0.02)));
+          let sum = 0, count = 0;
+          for (let k = windowStart; k < N; ++k) {
+            sum += smoothedVisitedHistory[k];
+            count++;
+          }
+          rawSamples.push(sum / (count || 1));
+        } else {
+          let index = Math.floor(i * N / numPoints);
+          rawSamples.push(smoothedVisitedHistory[index] || 0);
+        }
+      }
+
+      // Adaptive smoothing: increase window size at the right edge
+      let samples = [];
+      for (let i = 0; i < rawSamples.length; ++i) {
+        let localSmoothWindow = 12;
+        // Make smoothing window larger near the right, based on how close to the end this point is
+        if (rawSamples.length > 20 && i > rawSamples.length - 16) {
+          // smoothly ramp up window to as high as 40 at very last points
+          localSmoothWindow = Math.floor(
+            12 + 28 * ((i - (rawSamples.length - 16)) / 16)
+          );
+        }
+        let sum = 0, count = 0;
+        for (
+          let j = Math.max(0, i - localSmoothWindow);
+          j <= Math.min(rawSamples.length - 1, i + localSmoothWindow);
+          ++j
+        ) {
+          sum += rawSamples[j];
+          count++;
+        }
+        samples.push(sum / count);
+      }
+
+      let min = 0;
+      let max = 1;
+      if (samples.length > 0) {
+        min = Math.min(0, ...samples);
+        max = Math.max(1, ...samples);
+        if (max === min) max = min + 0.1;
+      }
+ 
+
+      const mult = heightmult || 1;
+
+      // No yticks or grid lines drawn
+
+      // Draw all points efficiently as a single polyline
+      graphCtx.save();
+      graphCtx.translate(35, h);
+      graphCtx.beginPath();
+      for (let i = 0; i < samples.length; ++i) {
+        let x = (Math.floor(i * graphW / Math.max(1, samples.length - 1)) * 1.2) - 38;
+        let y = (samples[i] - min) * (-(h - 22) / (max - min));
+        if (i === 0) {
+          graphCtx.moveTo(x, y);
+        } else {
+          graphCtx.lineTo(x, y);
+        }
+      }
+      graphCtx.strokeStyle = "#0ef";
+      graphCtx.lineWidth = 1.5;
+      graphCtx.shadowColor = "#0ef";
+      graphCtx.shadowBlur = 6;
+      graphCtx.stroke();
+
+      graphCtx.restore();
+
+      graphCtx.font = "bold 12px 'Courier New', monospace";
+      graphCtx.textAlign = "left";
+      graphCtx.textBaseline = "top";
+      graphCtx.fillStyle = "#fff";
+      graphCtx.fillText("Growth", 1, 0);
+      graphCtx.font = "10px 'Courier New', monospace";
+    }
+
+    // Track whether shift is down for hover render logic
+    let isShiftPressed = false;
+    window.addEventListener('keydown', function(e) {
+      keysPressed[e.key] = true;
+      if (e.key === "Shift" || e.key === "ShiftLeft" || e.key === "ShiftRight") {
+        isShiftPressed = true;
+      }
+    });
+    window.addEventListener('keyup', function(e) {
+      keysPressed[e.key] = false;
+      if (e.key === "Shift" || e.key === "ShiftLeft" || e.key === "ShiftRight") {
+        isShiftPressed = false;
+      }
+      if (e.key === "r") {
+        applySeedAndAntCountFromInput();
+      }
+    });
+
+    // --- GAMELOOP (ALWAYS USE requestAnimationFrame) ---
+    // Ticks-per-frame controlled by user, but display is always as fast as browser RAF (no FPS selector).
+    function mainLoop(now) {
+      // --- FPS Calculations and display ---
+      frameCounter++;
+      let dtFPS = now - lastFPSTime;
+      if (dtFPS > 500) {
+        showFPS = (frameCounter / (dtFPS / 1000));
+        frameCounter = 0;
+        lastFPSTime = now;
+      }
+
+      // --- Simulation ticks, not tied to display ---
+      if (!paused) {
+        for (let i = 0; i < ticksPerFrame; ++i) {
+          tick();
+          updateVisitedGraph();
+        }
+      }
+
+      draw(now, showFPS);
+
+      requestAnimationFrame(mainLoop);
+    }
+
+    function draw(now, fpsLabel) {
+      updateTPS(now);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      gridX = Math.round(-13/zoom+((mouseX - canvas.width / 2) / zoom) + camx * (1 + 20 / zoom));
+      gridY = Math.round(15/zoom-((mouseY - canvas.height / 2) / zoom) + camy * (1 + 20 / zoom));
+      if (click){
+        click=false;
+        const idx = pixels.findIndex(p => p.x === gridX && p.y === gridY);
+        if (idx !== -1) {
+          pixels[idx].v = pixels[idx].v ? 0 : 1;
+          if (fademode) pixels[idx].s = 1;
+        } else {
+          pixels.push({ x: gridX, y: gridY, v: 1, s: 1 });
+        }
+      }
+
+      if (keysPressed[' ']) {
+        if (!stop2) {
+          paused = !paused;
+          stop2=true;
+        }
+      } else {
+        stop2=false;
+      }
+
+      if (paused && keysPressed['ArrowRight']) {
+        if (!stepRequested) {
+          tick();
+          updateVisitedGraph();
+          stepRequested = true;
+        }
+      } else {
+        stepRequested = false;
+      }
+
+      if (keysPressed['w']) { camy += 0.07; }
+      if (keysPressed['s']) { camy -= 0.07; }
+      if (keysPressed['d']) { camx += 0.07; }
+      if (keysPressed['a']) { camx -= 0.07; }
+
+      const halfWidth = canvas.width / (2 * zoom);
+      const halfHeight = canvas.height / (2 * zoom);
+
+      const centerGridX = camx * (1 + 20 / zoom);
+      const centerGridY = camy * (1 + 20 / zoom);
+
+      const minGridX = Math.floor(centerGridX - halfWidth - 1);
+      const maxGridX = Math.ceil(centerGridX + halfWidth + 1);
+      const minGridY = Math.floor(centerGridY - halfHeight - 1);
+      const maxGridY = Math.ceil(centerGridY + halfHeight + 1);
+
+      let ons = 0, offs = 0;
+      for (let i = 0; i < pixels.length; i++) {
+        if (pixels[i].v) ons++;
+        else offs++;
+        if (
+          pixels[i].v &&
+          pixels[i].x >= minGridX && pixels[i].x <= maxGridX &&
+          pixels[i].y >= minGridY && pixels[i].y <= maxGridY
+        ) {
+          if (fademode) {
+            fillWhitePixelAdv(pixels[i].x, pixels[i].y, pixels[i].s);
+          } else {
+            fillWhitePixel(pixels[i].x, pixels[i].y);
+          }
+        }
+      }
+      onpixels = ons;
+      offpixels = offs;
+
+      // Ant overlay
+      for (let j = 0; j < ants.length; j++) {
+        if (
+          ants[j].x >= minGridX && ants[j].x <= maxGridX &&
+          ants[j].y >= minGridY && ants[j].y <= maxGridY
+        ) {
+          stampPixel(ants[j].x, ants[j].y, plinkred);
+        }
+      }
+
+      stuff[1] = `Hover: (${gridX},${gridY})`;
+      stuff[2] = paused ? "Paused" : "Running";
+      stuff[3] = `Ticks: ${ticks}`;
+      stuff[4] = `Left turns: ${leftturns}`;
+      stuff[5] = `Right turns: ${rightturns}`;
+      stuff[6] = `R/L: ${((rightturns+1)/(leftturns+1)).toFixed(4)}`;
+      if (ants.length < spawnseed.antcount) {
+        stuff[7] = `Ants: ${ants.length} |`;
+      } else {
+        stuff[7] = ""
+      }
+      stuff[8] = `On: ${onpixels}`;
+      stuff[9] = `Off: ${offpixels}`;
+      stuff[10] = `Off/On: ${(offpixels/onpixels).toFixed(4)}`;
+      stuff[11] = `Visited: ${pixels.length}`;
+      stuff[12] = `TPS: ${tps.toFixed(2)} (x${ticksPerFrame})`;
+
+      display.textContent=`${stuff[1]} | ${stuff[2]} | ${stuff[3]} | ${stuff[4]} | ${stuff[5]} | ${stuff[6]} | ${stuff[7]}  ${stuff[8]} | ${stuff[9]} | ${stuff[10]} | ${stuff[11]} | ${stuff[12]}`
+
+      // Only show the hover ghost if shift is held
+      if (
+        gridX >= minGridX && gridX <= maxGridX &&
+        gridY >= minGridY && gridY <= maxGridY &&
+        isShiftPressed
+      ) {
+        stampPixel(gridX,gridY, plinkghost)
+      }
+    }
+
+    // Startup main loop: use requestAnimationFrame
+    requestAnimationFrame(mainLoop);
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth - 25;
+      canvas.height = window.innerHeight - 25;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    window.setSpawnSeed = setSpawnSeed;
+  </script>
+</html>

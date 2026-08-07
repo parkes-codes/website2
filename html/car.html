@@ -1,0 +1,1049 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Car</title>
+	<link rel="icon" type="image/x-icon" href="../images/icon.ico"/>
+</head>
+<style>
+	body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    #gamecanvas {
+        border: #fff 10px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -5px;
+        margin-top: -5px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #info {
+      z-index: 2;
+      color: #fff;
+      font-size: 10px;
+      position: fixed;
+      left: 5px;
+      bottom: -5px;
+      text-align: left;
+    }
+    #carryText {
+      left: 50vw;
+      top: 50vh;
+      transform: translate(-50%, -80px);
+      color: #fff;
+      z-index: 101;
+      position: fixed;
+      text-align: center;
+      width: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+</style>
+<body>
+    <canvas id="gamecanvas"></canvas>
+    <p id="carryText"></p>
+    <p id="info"></p>
+</body>
+<script>
+
+
+console.clear();
+
+let xpos = 0,
+	ypos = -60,
+	dir = 0,
+	speed = 0,
+	camx = 0,
+	camy = 0,
+	zoom = 1;
+  n = 0;
+let money = 100;
+let displaymoney = 100;
+let displayFont = "Courier New";
+let canMove = false;
+let canCollect = true;
+
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext("2d", {alpha: false});
+const info = document.getElementById("info")
+const carryText = document.getElementById("carryText")
+const car = new Image();
+car.src = "../images/car.png";
+const floor = new Image();
+floor.src = "../images/floor.jpg";
+const buy1on = new Image();
+buy1on.src = "../images/buy1on.png";
+const buy1off = new Image();
+buy1off.src = "../images/buy1off.png";
+const zap = new Image();
+zap.src = "../images/zap.png";
+const beltimg = new Image();
+beltimg.src = "../images/belt.jpg";
+const plinktory = new Image();
+plinktory.src = "../images/plinktory.png";
+const iron = new Image();
+iron.src = "../images/iron.png"
+const box = new Image();
+box.src = "../images/box2.png";
+const boxclose = new Image();
+boxclose.src = "../images/boxclosed4.png"
+
+
+
+let tutorialText = {text: "To get started, purchase a simple iron spawner.", opacity: 0}
+
+let t2 = 0;
+let packed = false;
+
+let drawHitboxes = false;
+
+let carrying = {iron: 0}
+let boxx = {iron: 0}
+
+const buttons = [
+  {x: 850, y: -200, text: "Buy Iron Spawner", price: 100, hover: 0, maxamt: 1, opacity:1, buycount: 0, fadeAnim: false, fading: false, id: "firstIronSp"}
+]
+
+const keysPressed = {};
+
+function worldRectIsVisible(cx, cy, w, h, margin=10) {
+  const left = (cx - w/2 - camx) + canvas.width/2;
+  const right = (cx + w/2 - camx) + canvas.width/2;
+  const top = (canvas.height/2) - (cy - h/2 - camy);
+  const bottom = (canvas.height/2) - (cy + h/2 - camy);
+  const screenLeft = Math.min(left, right);
+  const screenRight = Math.max(left, right);
+  const screenTop = Math.min(top, bottom);
+  const screenBottom = Math.max(top, bottom);
+  return !(
+    screenRight < -margin ||
+    screenLeft > canvas.width + margin ||
+    screenBottom < -margin ||
+    screenTop > canvas.height + margin
+  );
+}
+
+// Minimize object creation in render loop: scratch buffer for point arrays
+const scratchrect4 = [{}, {}, {}, {}];
+
+function getRotatedRectPoints(cx, cy, w, h, angleDeg) {
+  const rad = angleDeg * Math.PI / 180;
+  const cos = Math.cos(rad), sin = Math.sin(0-rad);
+  // Mutate scratch buffer!
+  scratchrect4[0].x = cx + (-w/2)*cos - (-h/2)*sin; scratchrect4[0].y = cy + (-w/2)*sin + (-h/2)*cos;
+  scratchrect4[1].x = cx + ( w/2)*cos - (-h/2)*sin; scratchrect4[1].y = cy + ( w/2)*sin + (-h/2)*cos;
+  scratchrect4[2].x = cx + ( w/2)*cos - ( h/2)*sin; scratchrect4[2].y = cy + ( w/2)*sin + ( h/2)*cos;
+  scratchrect4[3].x = cx + (-w/2)*cos - ( h/2)*sin; scratchrect4[3].y = cy + (-w/2)*sin + ( h/2)*cos;
+  return scratchrect4;
+}
+
+// Reduce allocations for polygons in collision
+function getCarPoly(x, y, direction) {
+  return getRotatedRectPoints(x, y, 80, 50, direction+90);
+}
+
+// Fast, lightweight polygon intersection for two convex quads
+function polysIntersect(pa, pb) {
+  // No function creation in loop, inline all for perf
+  for (let ap = 0; ap < 2; ++ap) {
+    let poly = ap ? pb : pa;
+    for (let i = 0; i < 4; i++) {
+      let j = (i+1)&3;
+      let nx = poly[j].y - poly[i].y;
+      let ny = poly[i].x - poly[j].x;
+      let minA = null, maxA = null;
+      for (let q = 0; q < 4; ++q) {
+        let proj = pa[q].x * nx + pa[q].y * ny;
+        if (minA === null || proj < minA) minA = proj;
+        if (maxA === null || proj > maxA) maxA = proj;
+      }
+      let minB = null, maxB = null;
+      for (let q = 0; q < 4; ++q) {
+        let proj = pb[q].x * nx + pb[q].y * ny;
+        if (minB === null || proj < minB) minB = proj;
+        if (maxB === null || proj > maxB) maxB = proj;
+      }
+      if (maxA < minB || maxB < minA) return false;
+    }
+  }
+  return true;
+}
+
+// Drawing functions
+function drawWorldImage(
+  img,
+  worldX,
+  worldY,
+  width,
+  height,
+  rotationDeg = 0,
+  imgOffsetX = 0,
+  imgOffsetY = 0,
+  opacity = 1,
+  brightness = 100,
+  hueshift = 0,
+) {
+  if (!worldRectIsVisible(worldX, worldY, width, height)) return;
+  const screenX = (worldX - camx) + canvas.width / 2;
+  const screenY = (canvas.height / 2) - (worldY - camy);
+
+  ctx.save();
+  ctx.globalAlpha = opacity;
+  if (brightness !== 100 || hueshift !== 0) {
+    ctx.filter = `brightness(${brightness}%) hue-rotate(${hueshift}deg)`;
+  }
+  ctx.translate(screenX, screenY);
+  if (rotationDeg !== 0) ctx.rotate(rotationDeg * Math.PI / 180);
+  ctx.drawImage(
+    img,
+    imgOffsetX, imgOffsetY, img.width, img.height,
+    -width/2, -height/2, width, height
+  );
+  ctx.filter = "none";
+  ctx.restore();
+}
+
+function drawPoly(poly, color, fillAlpha = 0.5, strokeAlpha = 0.8, stroke = true) {
+  if (!drawHitboxes) return;
+  ctx.save();
+  ctx.globalAlpha = fillAlpha;
+  ctx.beginPath();
+  ctx.moveTo(poly[0].x, poly[0].y);
+  for (let i = 1; i < 4; i++) {
+    ctx.lineTo(poly[i].x, poly[i].y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+  if (stroke) {
+    ctx.globalAlpha = strokeAlpha;
+    ctx.strokeStyle = "#800";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// --- Improved text culling: take into account real text width ---
+function drawWorldText(
+  text,
+  x,
+  y,
+  color = "#fff",
+  font = "20px sans-serif",
+  /*align*/_ = "center",
+  masterOpacity = 1
+) {
+  // Only draw if (any) part of text is on screen, using text width
+  ctx.save();
+  ctx.font = font;
+
+  // Estimate font size for padding
+  let fontPx = 20;
+  let matched = font.match(/(\d+(?:\.\d+)?)px/);
+  if (matched) fontPx = parseFloat(matched[1]);
+  const margin = 180;
+  const textWidth = ctx.measureText(text).width;
+
+
+  const worldLeft = x - (textWidth/2);
+  const worldRight = x + (textWidth/2);
+
+  // Convert world left/right to screen
+  const screenLeft = (worldLeft - camx) + canvas.width / 2;
+  const screenRight = (worldRight - camx) + canvas.width / 2;
+  const screenY = (canvas.height / 2) - (y - camy);
+
+  // Perform culling so that any part of text visible will still draw:
+  if (
+    screenRight < -margin ||
+    screenLeft > canvas.width + margin ||
+    screenY < -margin ||
+    screenY > canvas.height + margin
+  ) {
+    ctx.restore();
+    return;
+  }
+
+  ctx.globalAlpha = masterOpacity;
+  ctx.fillStyle = color;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, (x - camx) + canvas.width / 2, screenY);
+  ctx.restore();
+}
+
+
+let textOpacs = [0, 0, 0,0];
+
+// --- Button/collision update for car hitbox <-> button ---
+function getButtonPoly(btn) {
+  // Use a fixed (x, y) and 0 angle, world units
+  return [
+    { x: btn.x - 35, y: btn.y - 35 },
+    { x: btn.x + 35, y: btn.y - 35 },
+    { x: btn.x + 35, y: btn.y + 35 },
+    { x: btn.x - 35, y: btn.y + 35 }
+  ];
+}
+
+// State for button brightness transitions
+let buttonAnimStates = buttons.map(() => ({
+  touching: false,
+  brightness: 100,
+  lastUpdate: performance.now(),
+  animating: false
+}));
+
+let count = 0;
+function animateMoneyLoss(amount) {
+  const frames = 10;
+  const decrement = amount / frames;
+  count=0;
+  function step() {
+    count++;
+    if (count <= frames) { displaymoney -= decrement};
+    if (count < frames+30) {
+      requestAnimationFrame(step);
+    } else {
+      displaymoney = money;
+    }
+  }
+  step();
+}
+
+let firstIron = {x: 900, y: 0, beltspeed: 100, belt: [{x: 850, y: -10}, {x: 500, y: -10}, {x: 500, y: 300}], opacity: 0, x2: 970, y2: 0, active: false}
+let firstIronPieces = []
+
+function handleButtonBuy(id) {
+  if (id=="firstIronSp") {
+    let stepsDone = 0;
+    function stepFade() {
+      stepsDone++;
+      firstIron.opacity = Math.min(firstIron.opacity + 0.01,100);
+      if ( firstIron.opacity < 1) {
+        requestAnimationFrame(stepFade);
+      } else {
+        firstIron.opacity = 1;
+      }
+    }
+    stepFade();
+  } 
+}
+
+function fadeOutButton(btn, animDur = 400) {
+  btn.fading = true;
+  const stepCount = 24;
+  let stepsDone = 0;
+  const startOpacity = btn.opacity;
+  function stepFade() {
+    stepsDone++;
+    btn.opacity = Math.max(0, startOpacity * (1 - stepsDone/stepCount));
+    if (btn.opacity > 0) {
+      requestAnimationFrame(stepFade);
+    } else {
+      btn.opacity = 0;
+
+    }
+  }
+  stepFade();
+}
+
+function tryBuyButton(btn, i) {
+  if (btn.opacity < 1) return; // Only buy if fully visible/opaque
+  btn.justBought = true;
+  animateMoneyLoss(btn.price);
+  money -= btn.price;
+
+handleButtonBuy(btn.id)
+
+  btn.buycount = (btn.buycount || 0) + 1;
+  if (!btn.fading) btn.fading = false;
+  if (btn.buycount >= btn.maxamt && !btn.fading) {
+    fadeOutButton(btn);
+  }
+}
+
+function drawText() {
+  drawWorldText("Welcome to car.html!", 0, 250, `hsla(0,0%,100%,${textOpacs[0]- firstIron.opacity*100}%)`, `22px ${displayFont}`);
+  drawWorldText(`${tutorialText.text}`, 0, 230, `hsla(0,0%,100%,${tutorialText.opacity}%)`, `22px ${displayFont}`);
+  drawWorldText(`Money: ${money}`, 0, 200, `hsla(0,0%,100%,${textOpacs[1]}%)`, `35px ${displayFont}`);
+
+
+  for (let i = 0; i < buttons.length; i++) {
+    let btn = buttons[i];
+    if (btn.opacity <= 0) continue;
+    let affordable = btn.price <= money && btn.opacity >= 1;
+    let color = affordable ? 120 : 0;
+    let masterOpac = btn.opacity;
+    drawWorldText(
+      `$${btn.price}`,
+      btn.x,
+      btn.y + 50,
+      `hsla(${color},50%,50%,${textOpacs[2]}%)`,
+      `35px ${displayFont}`,
+      "",
+      masterOpac * 1
+    );
+    if (btn.hover > 0) {
+      let texttorender =  (count > 0 && count < 40) ? "Bought"
+        : (affordable
+            ? (btn.buycount < btn.maxamt ? "Press E to Buy" : "Max Purchased")
+            : (btn.opacity < 1 ? "Unavailable" : "Too Expensive!"));
+      drawWorldText(
+        `${texttorender}`,
+        btn.x,
+        btn.y + 75,
+        `hsla(${color},50%,50%,${textOpacs[2]*btn.hover}%)`,
+        `20px ${displayFont}`,
+        "",
+        masterOpac * btn.hover
+      );
+    }
+  }
+}
+
+function drawButtons() {
+  let carPoly = getCarPoly(xpos, ypos, dir);
+  const now = performance.now();
+
+
+  for (let i = buttons.length - 1; i >= 0; i--) {
+    if (buttons[i].opacity <= 0) {
+      buttons.splice(i, 1);
+      buttonAnimStates.splice(i, 1);
+    }
+  }
+
+
+  for (let i = 0; i < buttons.length; i++) {
+    let curButton = buttons[i];
+    if (curButton.opacity <= 0) continue;
+    let buttonImg = !curButton.state ? buy1off : buy1on;
+    let buttonPoly = getButtonPoly(curButton);
+
+    if (!worldRectIsVisible(curButton.x, curButton.y, 70, 70, 100)) continue;
+
+    let touching = polysIntersect(buttonPoly, carPoly);
+
+    let animState = buttonAnimStates[i];
+    let targetBrightness = touching ? 40 : 100;
+    let wasTouching = animState.touching;
+
+    if (touching !== wasTouching) {
+      animState.animStartTime = now;
+      animState.animFrom = animState.brightness;
+      animState.animTo = targetBrightness;
+      animState.animating = true;
+      animState.touching = touching;
+    }
+
+    if (animState.animating) {
+      const t = Math.min(1, (now - animState.animStartTime) / 300);
+      animState.brightness = animState.animFrom + (animState.animTo - animState.animFrom) * t;
+      curButton.hover = touching ? t : 1 - t;
+      if (t >= 1) {
+        animState.brightness = animState.animTo;
+        animState.animating = false;
+      }
+    } else {
+      animState.brightness = targetBrightness;
+      curButton.hover = touching ? 1 : 0;
+    }
+
+    let color = (curButton.price <= money) && (curButton.opacity >= 1) ? 120 : 0;
+
+    // Instead of manual ctx drawing, call drawWorldImage
+    drawWorldImage(
+      buttonImg,
+      curButton.x,
+      curButton.y,
+      70, // width
+      70, // height
+      -90, // angle in degrees (since we used rotate(-PI/2))
+      0, // centerX (relative within image, not used in drawWorldImage)
+      0, // centerY
+      (textOpacs[2] / 100) * curButton.opacity,
+      animState.brightness, // brightness
+      color // hue rotation
+    );
+  }
+}
+
+let beltGifImg = null;
+
+function setupBeltGif() {
+  if (!beltGifImg) {
+    beltGifImg = document.createElement("img");
+    beltGifImg.src = "../images/belt.gif";
+    beltGifImg.style.display = "none";
+    document.body.appendChild(beltGifImg);
+  }
+}
+setupBeltGif();
+// --- Conveyor Belt Iron Piece Movement ---
+
+let ironPieceSpeed = 1;
+if (typeof firstIronPieces === 'undefined') window.firstIronPieces = [];
+if (typeof ironPieceSpeed === 'undefined') window.ironPieceSpeed = 2.5; // pixels per frame
+
+if (typeof firstIronBeltLengths === 'undefined') {
+  // Precompute the belt's segment lengths and total length for movement
+  window.firstIronBeltLengths = [];
+  window.firstIronBeltTotal = 0;
+  for (let i = 0; i < firstIron.belt.length - 1; i++) {
+    const p0 = firstIron.belt[i], p1 = firstIron.belt[i+1];
+    let segLen = Math.sqrt((p1.x-p0.x)**2 + (p1.y-p0.y)**2);
+    firstIronBeltLengths.push(segLen);
+    firstIronBeltTotal += segLen;
+  }
+}
+
+
+function createWorldTextElement({
+      text = "",
+      worldX = 0,
+      worldY = 0,
+      width = 120,
+      yOffset = 30,
+      container = ironContainer,
+      fontSize = 12,
+      color = "#fff",
+      zIndex = 99,
+      id = "",
+      className = "p"
+    }) {
+      const elem = document.createElement("p");
+      if (id) elem.id = id;
+      if (className) elem.className = className;
+      const screenX = (worldX - camx) + canvas.width / 2;
+      const screenY = (canvas.height / 2) - (worldY - camy);
+
+      elem.innerText = text;
+      elem.style.position = "absolute";
+      elem.style.left = `${screenX/(zoom-0.0075) - width/2}px`; 
+      elem.style.top = `${screenY/(zoom-0.0075) - (yOffset+yOffset/zoom)}px`; 
+      elem.style.width = `${width}px`;
+      elem.style.textAlign = "center";
+      elem.style.pointerEvents = "none";
+      elem.style.zIndex = zIndex;
+      elem.style.color = color;
+      elem.style.fontSize = `${fontSize}px`;
+      elem.style.transform = `scale(${1/zoom})`;
+      container.appendChild(elem);
+      return elem;
+    }
+
+
+const IRON_PIECE_SPACING = 47; // Minimum distance between iron pieces on the belt, < ironW
+function drawFactory() {
+  // --- Belt Container ---
+  let beltContainer = document.getElementById("belt-container");
+  if (!beltContainer) {
+    beltContainer = document.createElement("div");
+    beltContainer.id = "belt-container";
+    Object.assign(beltContainer.style, {
+      position: "absolute",
+      left: "0",
+      top: "0",
+      width: "100vw",
+      height: "100vh",
+      pointerEvents: "none",
+      zIndex: 50
+    });
+    canvas.parentNode.insertBefore(beltContainer, canvas.nextSibling);
+  }
+  while (beltContainer.firstChild) beltContainer.removeChild(beltContainer.firstChild);
+
+  // --- Iron Piece Container (must be after belt to be "on top") ---
+  let ironContainer = document.getElementById("iron-container");
+  if (!ironContainer) {
+    ironContainer = document.createElement("div");
+    ironContainer.id = "iron-container";
+    Object.assign(ironContainer.style, {
+      position: "absolute",
+      left: "0",
+      top: "0",
+      width: "100vw",
+      height: "100vh",
+      pointerEvents: "none",
+      zIndex: 51 // must be above belt
+    });
+    // Insert after beltContainer so it is drawn above
+    beltContainer.parentNode.insertBefore(ironContainer, beltContainer.nextSibling);
+  }
+  while (ironContainer.firstChild) ironContainer.removeChild(ironContainer.firstChild);
+
+  const beltTileLen = 60;
+  const beltTileW = 60;
+
+  // Draw conveyor belt segments (as belt.gif <img> dom nodes)
+  for (let i = 0; i < firstIron.belt.length - 1; i++) {
+    const p0 = firstIron.belt[i];
+    const p1 = firstIron.belt[i + 1];
+    const dx = p1.x - p0.x;
+    const dy = p1.y - p0.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const angleDeg = Math.atan2(dy, dx) * 180 / Math.PI;
+
+    for (let tilePos = 0; tilePos < dist - 0.1; tilePos += beltTileLen) {
+      let frac = tilePos / dist;
+      let bx = p0.x + dx * frac;
+      let by = p0.y + dy * frac;
+
+      // Project world coordinates (bx, by) to screen
+      const screenX = (bx - camx) + canvas.width / 2;
+      const screenY = canvas.height / 2 - (by - camy);
+
+      const gif = document.createElement("img");
+      gif.src = "../images/belt.gif";
+      gif.width = beltTileW;
+      gif.height = beltTileLen;
+      gif.style.position = "absolute";
+      gif.style.left = `${screenX/(zoom-0.0075) - beltTileW / 2}px`;
+      gif.style.top = `${screenY/(zoom-0.0075) - beltTileLen / 2}px`;
+      gif.style.width = `${beltTileW}px`;
+      gif.style.height = `${beltTileLen}px`;
+      gif.style.opacity = (firstIron.opacity !== undefined ? firstIron.opacity : 1);
+      gif.style.pointerEvents = "none";
+      gif.style.zIndex = 5;
+      gif.style.transform = `rotate(${0-angleDeg}deg) scale(${1/zoom})`;
+
+      beltContainer.appendChild(gif);
+    }
+  }
+
+  // Draw base factory images (still with canvas render)
+  drawWorldImage(plinktory, firstIron.x2, firstIron.y2, 190, 190, 0, 0, 0, firstIron.opacity);
+  drawWorldImage(iron, firstIron.x2, firstIron.y2, 90, 90, 0, 0, 0, firstIron.opacity);
+
+  let brighness = 0;
+  let boxdist = (Math.hypot(xpos - 0, ypos - 140))
+  let buildText2 = "";
+  if (boxdist < 90 && boxOpac > 0) {
+    if (carrying.iron > 0) {buildText2 = "Press E to Deposit "}
+    if (!packed && boxx.iron > 0) {
+      if (buildText2) {
+        buildText2 = `${buildText2} | Press Q to Pack`
+      } else {
+        buildText2 = `Press Q to Pack`
+      }
+    }
+    t2 = Math.min(t2 + 1, 30);
+    if (keysPressed['e'] && !packed) {
+      if (carrying.iron > 0) {
+        carrying.iron -= 1;
+        boxx.iron += 1;
+      }
+    }
+    // Handle packing when Q is pressed and not already packed and the box has iron
+    if (keysPressed['q'] && !packed && boxx.iron > 0) {
+      packed = true;
+      boxx.iron = 0;
+    }
+  } else {
+    t2 = Math.max(0, t2 - 1)
+  }
+
+  brighness = 70 + Math.min(t2, 30);
+  let buildText = "";
+  if (!packed && boxx.iron) { buildText = `${boxx.iron} Fe`; }
+  if (packed) { buildText = "Awaiting pickup"; buildText2 = "" }
+
+  drawWorldText(`${buildText2}`, 0, 65, `hsla(0,0%,100%,${Math.min(t2, 30) * 0.03333})`, `35px ${displayFont}}`);
+
+  // Draw either open or closed box depending on packed state
+  if (packed) {
+    drawWorldImage(boxclose, 0, 125, 90, 70, 0, 0, 0, boxOpac, brighness);
+  } else {
+    drawWorldImage(box, 0, 140, 160, 90, 0, 0, 0, boxOpac, brighness);
+  }
+
+
+  drawWorldText(`${buildText}`, 0, 80, "#fff", `15px ${displayFont}`)
+  drawWorldText(`First Iron Spawner`, 975, 100, `hsla(0,0%,100%,${firstIron.opacity*100}%)`, `45px ${displayFont}}`);
+
+
+  for (let i = firstIronPieces.length - 1; i >= 0; i--) {
+    let piece = firstIronPieces[i];
+
+    // Initialize timer if it does not exist
+    if (typeof piece.timer === 'undefined') {
+      piece.timer = 0;
+    }
+    // Timer increases every frame; fade-in for 20 frames (can adjust for speed)
+    piece.timer = Math.min(piece.timer + 1, 20);
+
+    // Collision/backed-up logic
+    let allowedMove = ironPieceSpeed;
+    // FPS normalize iron piece movement:
+    // Use global fps, default to 60 if fps 0.
+    let _fps = (typeof fps !== "undefined" && fps > 0) ? fps : 60;
+    allowedMove = ironPieceSpeed * (60 / _fps);
+    // If not the frontmost, limit d so we don't "run into" next ahead (i+1)
+    if (i < firstIronPieces.length - 1) {
+      let pieceAhead = firstIronPieces[i + 1];
+      let minD = pieceAhead.d - IRON_PIECE_SPACING;
+      if (minD < 0) minD = 0;
+      if ((piece.d + allowedMove) > minD) {
+        // Don't let current move past the back of piece ahead
+        allowedMove = Math.max(0, minD - piece.d);
+      }
+    }
+    // Cannot move beyond the end
+    if (piece.d < firstIronBeltTotal) {
+      piece.d += allowedMove;
+      if (piece.d > firstIronBeltTotal) piece.d = firstIronBeltTotal;
+    }
+  }
+
+  // Find closest iron piece to car and hueshift that one 120deg
+  let closestdist = Infinity;
+  let closestIndex = -1;
+  let ironPositions = [];
+  let closestPos = null;
+
+  // First, compute positions and track closest to car
+  for (let i = 0; i < firstIronPieces.length; i++) {
+    let piece = firstIronPieces[i];
+    let d = piece.d;
+    let seg = 0;
+    // Offset the position by 20 to the right (add 20 to d)
+    d -= 15;
+    while (seg < firstIronBeltLengths.length && d > firstIronBeltLengths[seg]) {
+      d -= firstIronBeltLengths[seg];
+      seg++;
+    }
+    let px, py;
+    if (seg >= firstIron.belt.length - 1) {
+      px = firstIron.belt[firstIron.belt.length - 1].x;
+      py = firstIron.belt[firstIron.belt.length - 1].y;
+    } else {
+      const segLen = firstIronBeltLengths[seg];
+      const p0 = firstIron.belt[seg];
+      const p1 = firstIron.belt[seg + 1];
+      let frac = segLen > 0 ? d / segLen : 0;
+      px = p0.x + (p1.x - p0.x) * frac;
+      py = p0.y + (p1.y - p0.y) * frac;
+    }
+
+    ironPositions[i] = {px, py};
+
+    // Compute distance from car center (xpos, ypos)
+    let dist = Math.sqrt((px - xpos) * (px - xpos) + (py - ypos) * (py - ypos));
+    if (dist < closestdist) {
+      closestdist = dist;
+      closestIndex = i;
+    }
+  }
+
+  // Then, render all iron pieces, hueshifting the closest
+  for (let i = 0; i < firstIronPieces.length; i++) {
+    let piece = firstIronPieces[i];
+    let {px, py} = ironPositions[i];
+
+    // Project world coordinates to screen for iron pieces
+    const ironW = 50, ironH = 50;
+    const ironScreenX = (px - camx) + canvas.width / 2;
+    const ironScreenY = (canvas.height / 2) - (py - camy);
+
+    // Fade-in: opacity is proportion of timer (0 to 1)
+    let opacity = piece.timer / 20;
+    if (opacity > 1) opacity = 1;
+
+    const ironImg = document.createElement("img");
+    ironImg.src = "../images/iron.png"; // (replace with correct iron image asset source if not "iron.png")
+    ironImg.width = ironW;
+    ironImg.height = ironH;
+    ironImg.style.position = "absolute";
+    ironImg.style.left = `${ironScreenX/(zoom-0.0075) - ironW/2}px`;
+    ironImg.style.top = `${ironScreenY/(zoom-0.0075) - ironH/2}px`;
+    ironImg.style.width = `${ironW}px`;
+    ironImg.style.height = `${ironH}px`;
+    ironImg.style.opacity = opacity;
+    ironImg.style.pointerEvents = "none";
+    ironImg.style.zIndex = 30;
+    ironImg.style.transform = `scale(${1/zoom})`;
+    if (i === closestIndex && closestdist <= 100) {
+      ironImg.style.filter = "brightness(140%)";
+      closestPos = {x: px, y: py, i: i}
+
+    } 
+    ironContainer.appendChild(ironImg);
+  }
+  if (closestPos) {
+
+    createWorldTextElement({
+      text: "Press E to Collect",
+      worldX: closestPos.x,
+      worldY: closestPos.y,
+      width: 120,
+      yOffset: 30,
+      container: ironContainer,
+      fontSize: 12,
+      color: "#fff",
+      zIndex: 99,
+      id: "collecttext",
+      className: "p"
+    });
+
+    if (keysPressed['e'] && canCollect) {
+        firstIronPieces.splice(closestPos.i, 1);
+        carrying.iron = carrying.iron + 1
+        canCollect = false;
+      }
+  }
+
+  // --- Only one carryText element (remove old before adding new) ---
+  if (carrying.iron > 0) {
+    carryText.textContent = `${carrying.iron} Fe`;
+  } else {
+    carryText.textContent = ""
+  }
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+let t = 0;
+async function spawnStuff() {
+  if (firstIron.opacity == 1) {
+    t++;
+    if (t % 20 == 0) {
+
+      let canSpawn = true;
+      if (firstIronPieces.length > 0) {
+
+        if (firstIronPieces[0].d < IRON_PIECE_SPACING) {
+          canSpawn = false;
+        }
+      }
+      if (canSpawn) {
+        firstIronPieces.unshift({d: 0});
+      }
+    }
+  }
+  await sleep(100);
+  requestAnimationFrame(spawnStuff);
+}
+
+spawnStuff();
+
+let carOpac = 0;
+let boxOpac = 0;
+// Animation sequencing is not a hotspot. Kept simple:
+async function createAnimations() {
+  canMove = false;
+  await sleep(500)
+  for (let i = 0; i < 50; i++) {
+    await sleep(10);
+    carOpac += 0.02;
+  }
+  canMove = true;
+  await sleep(500);
+  for (let i = 0; i < 50; i++) {
+    await sleep(10);
+    tutorialText.opacity += 2;
+  }
+  await sleep(500);
+  for (let i = 0; i < 50; i++) {
+    await sleep(10);
+    textOpacs[1] += 2;
+  }
+  await sleep(500);
+  for (let i = 0; i < 50; i++) {
+    await sleep(10);
+    textOpacs[2] += 2;
+  }
+  while (firstIron.opacity == 0) {
+    await sleep(50);
+  }
+   tutorialText.text = "Collect some iron"
+  while (carrying.iron <= 0) {
+    await sleep(50);
+  }
+  await sleep(500)
+  for (let i = 0; i < 50; i++) {
+    await sleep(10);
+    boxOpac += 0.02;
+    tutorialText.text = "Next, deposit your iron in the box."
+  }
+  
+  while (carrying.iron > 0) {
+    await sleep(50);
+  }
+
+
+      tutorialText.text = "Pack the box"
+
+
+
+  while (!packed) {
+    await sleep(50);
+  }
+
+  tutorialText.text = "Pickup the box and bring it to the shipping belt"
+  
+
+}
+
+createAnimations();
+
+// --- MAIN GAME LOOP ---
+// FPS smoothing will only use 30 samples for less overhead
+let lastTimestamp, fps = 0, fpsValues = [];
+
+function animate(now) {
+  // --- FPS limiting: allow user to reduce FPS for slower PCs ---
+  // (For now we run unthrottled)
+  const deltaTime = lastTimestamp ? (now - lastTimestamp) / 1000 : 0;
+  lastTimestamp = now;
+  if (deltaTime > 0) {
+    fpsValues.push(1 / deltaTime);
+    if (fpsValues.length > 30) fpsValues.shift();
+    fps = fpsValues.reduce((acc, val) => acc + val, 0) / fpsValues.length;
+  }
+  const fpsMult = (fps > 1e-2 ? (60 / fps) : 1);
+
+  // --- PHYSICS ---
+  let proposedSpeed = speed;
+  if (keysPressed["-"] && canMove) {
+    zoom = Math.min(zoom + 0.05 * fpsMult, 5);
+    resizeCanvas();
+  }
+  if (keysPressed["="] && canMove) {
+    zoom = Math.max(zoom - 0.05 * fpsMult, 0.5);
+    resizeCanvas();
+  }
+
+  if (keysPressed["w"] && canMove) {
+    proposedSpeed = Math.min(proposedSpeed + 0.3 * fpsMult, 7);
+  } else if (keysPressed["s"] && canMove) {
+    proposedSpeed = Math.max(proposedSpeed - 0.3 * fpsMult, -7);
+  } else {
+    if (proposedSpeed > 0) {
+      proposedSpeed = Math.max(proposedSpeed - 0.1 * fpsMult, 0);
+    } else if (proposedSpeed < 0) {
+      proposedSpeed = Math.min(proposedSpeed + 0.1 * fpsMult, 0);
+    }
+  }
+  speed = proposedSpeed;
+
+  let proposedDir = dir;
+  let turnPower = Math.min(0.8 * Math.abs(proposedSpeed), 2);
+  if (keysPressed["d"] && canMove) {
+    proposedDir += (proposedSpeed >= 0 ? turnPower : -turnPower) * fpsMult;
+  }
+  if (keysPressed["a"] && canMove) {
+    proposedDir -= (proposedSpeed >= 0 ? turnPower : -turnPower) * fpsMult;
+  }
+
+  let dx = Math.sin(proposedDir * Math.PI / 180) * proposedSpeed * fpsMult;
+  let dy = Math.cos(proposedDir * Math.PI / 180) * proposedSpeed * fpsMult;
+  let nextX = xpos + dx, nextY = ypos + dy;
+
+  // Since there are no walls, don't do any wall collision
+  xpos = nextX; ypos = nextY; dir = proposedDir;
+  camx = xpos;
+  camy = ypos;
+
+  // --- DRAW ALL ---
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw factory floor tiles WITH culling (only visible tiles)
+  for (let i = 0; i < 5; i++) {
+    for (let j = 0; j < 5; j++) {
+      if (worldRectIsVisible(j * 400 - 900, i * 402 - 971, 405, 405, 30)) {
+        drawWorldImage(floor, j * 400 - 900, i * 402 - 971, 405, 405, 0, 0, 0, 100, 50);
+      }
+    }
+  }
+
+  drawButtons();
+
+  // Wall drawing and hitboxes removed
+
+  // Draw car image and car hitbox
+  drawWorldImage(car, xpos, ypos, 80*1.2, 50*1.3, 270 + dir, 0, 0, carOpac);
+  drawFactory();
+  drawText();
+
+  let carPoly = getCarPoly(xpos, ypos, dir);
+  if (drawHitboxes) {
+    let carPolyScreen = carPoly.map(pt => ({
+      x: canvas.width / 2 + pt.x - camx,
+      y: canvas.height / 2 - pt.y + camy,
+    }));
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = "black";
+    ctx.beginPath();
+    ctx.moveTo(carPolyScreen[0].x, carPolyScreen[0].y);
+    for (let i = 1; i < 4; i++) {
+      ctx.lineTo(carPolyScreen[i].x, carPolyScreen[i].y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // --- Check for button purchases ---
+  for (let i = 0; i < buttons.length; i++) {
+    let btn = buttons[i];
+    if (btn.opacity < 1) continue; // Not buyable if partially faded
+    if (btn.hover == 1 && keysPressed['e'] && btn.price <= money && !(btn.justBought) && btn.buycount < btn.maxamt) {
+      tryBuyButton(btn, i);
+    } else if (!keysPressed['e']) {
+      btn.justBought = false;
+    }
+  }
+
+  info.textContent = `${canvas.width}x${canvas.height} ${fps.toFixed(2)} ${zoom}`
+
+
+  requestAnimationFrame(animate);
+}
+
+// Input event listeners (no change)
+window.addEventListener("keydown", (e) => {
+  keysPressed[e.key.toLowerCase()] = true;
+});
+window.addEventListener("keyup", (e) => {
+  keysPressed[e.key.toLowerCase()] = false;
+  if (e.key.toLowerCase() == 'e') {
+     canCollect = true;
+  }
+});
+
+// Wait for all images before starting animation 
+let imagesLoaded = 0;
+function checkAndStart() {
+  if (imagesLoaded === 9) animate();
+}
+
+const gameImages = [car, floor, buy1on, buy1off, zap, beltimg, plinktory, iron, box];
+imagesLoaded = 0;
+animate();
+// Canvas resize (no change)
+function resizeCanvas() {
+  canvas.width = (window.innerWidth * zoom) - 25;
+  canvas.height = (window.innerHeight * zoom) - 25;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+
+
+</script>
+</html>

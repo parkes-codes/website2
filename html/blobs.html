@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blobs</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        overflow: hidden;
+    }
+      #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #objSizeInput {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        z-index: 10;
+    }
+    #display {
+        position: absolute;
+        top: 7px;
+        left: 10px;
+        font-size: 15px;
+        z-index: 50;
+        color: #fff;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+ <input id="objSizeInput" type="range" min="0" max="1" step="0.001" value="0.5">
+ <p id="display">Size 0.5</p>
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+let keysPressed = [];
+let objSize = 1;
+
+// Track mouse position relative to canvas
+let mouseX = canvas.width / 2;
+let mouseY = canvas.height / 2;
+
+canvas.addEventListener('mousemove', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
+    mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
+});
+
+function div(x, y) {
+    if (Math.abs(y) < 0.00001) { return 999999 } else { return x / y }
+}
+
+let t = 0;
+
+function draw() {
+    t+=0.5
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById("display").textContent = `Size ${document.getElementById("objSizeInput").value}`;
+    objSize = document.getElementById("objSizeInput").value
+
+    // Compute center of canvas
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    for (let y = canvas.height/-2; y < canvas.height/2; y++) {
+        for (let x = canvas.width/-2; x < canvas.width/2; x++) {
+            let absx = Math.abs(x);
+            let absy = Math.abs(y);
+            let temp = Math.max(absx+Math.cos(y/20+t)*5,absy+Math.sin(x/20+t)*5)
+            temp = div(temp, div(100, ((1 - objSize) + 0.02)));
+
+            let screenX = centerX + x;
+            let screenY = centerY - y;
+            let dx = mouseX - screenX;
+            let dy = mouseY - screenY;
+            let temp2 = Math.sqrt(dx * dx + dy * dy);
+
+
+            temp = (temp - (1 - objSize)) * temp2;
+            if (temp < 10) {
+              ctx.fillStyle = `hsl(${(((Math.log(Math.log(((temp-10)/temp2)*-100)))*720)+t*-15) % 360}, 50%, 50%)`;
+              ctx.fillRect(canvas.width/2 + x, canvas.height/2 - y, 2, 2);
+            }
+        }
+    }
+
+    requestAnimationFrame(draw)
+}
+
+draw();
+
+function resizeCanvas() {
+    canvas.width = (window.innerWidth) - 25;
+    canvas.height = (window.innerHeight) - 25;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+    keysPressed[e.key.toLowerCase()] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+    keysPressed[e.key.toLowerCase()] = false;
+});
+
+
+
+
+
+
+
+</script>
+</html>

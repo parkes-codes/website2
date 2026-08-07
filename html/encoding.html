@@ -1,0 +1,905 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Encoding Things</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <meta name="format-detection" content="telephone=no">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 510px;
+            margin: 80px auto 0 auto;
+            padding: 32px;
+            background-color: #101013AA;
+            border-radius: 14px;
+            box-shadow: 0 8px 32px #1116;
+        }
+        h2 {
+            margin: 0 0 12px 0;
+            font-size: 1.18em;
+        }
+        .action-block {
+            margin-bottom: 30px;
+        }
+        label {
+            display: inline-block;
+            margin: 0 8px 0 0;
+        }
+        input, select, textarea {
+            background: #222;
+            color: #fff;
+            border: 1px solid #454545;
+            border-radius: 6px;
+            padding: 5px 8px;
+            margin: 4px 0px 10px 0px;
+            font-size: 1em;
+        }
+        input[type="text"], textarea {
+            width: calc(100% - 22px);
+        }
+        .output-block {
+            margin-top: 5px;
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 100%;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        .hide {
+            display: none !important;
+        }
+        .base-group {
+            margin-left: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        textarea {
+            min-height: 48px;
+            resize: vertical;
+        }
+        /* --- Time Display --- */
+        #current-time-encoded {
+            position: fixed;
+            top: 18px;
+            right: 24px;
+            background: #202024dd;
+            color: #fff;
+            font-size: 1.00em;
+            padding: 9px 19px;
+            border-radius: 12px;
+            z-index: 9999;
+            min-width: 64px;
+            font-family: inherit;
+            text-align: right;
+            box-shadow: 0 2px 16px #2228;
+            user-select: text;
+            opacity: 0.96;
+            letter-spacing: 1px;
+            white-space: pre;
+        }
+
+        @media(max-width: 540px) {
+            .container { padding: 10px; margin-top: 13vw; }
+            #current-time-encoded { font-size: 0.94em; top: 7px; right: 7px; border-radius: 7px; padding: 5px 8px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- TIME ENCODED FLOATING DIV -->
+    <div id="current-time-encoded"></div>
+    <div class="container">
+        <div class="action-block" id="encode-block">
+            <h2>Encode to 
+                <select id="encoder-select"></select>
+            </h2>
+            <div id="encode-inputs"></div>
+            <div id="encode-output" class="output-block">Output: </div>
+        </div>
+        <div class="action-block" id="decode-block">
+            <h2>Decode from 
+                <select id="decoder-select"></select>
+            </h2>
+            <div id="decode-inputs"></div>
+            <div id="decode-output" class="output-block">Decoded: </div>
+        </div>
+    </div>
+<script src="../js/emojis.js"></script>
+<script>
+// ------------------ GLOBAL ENCODER INFRA  -------------------
+
+const chars = [
+  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+  "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+  "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+  "u", "v", "w", "x", "y", "z", "A", "B", "C", "D",
+  "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+  "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
+  "Y", "Z", "ʞ", "Ω", "Ϟ", "☈", "ↁ", "ʖ", "µ", "☡",
+  "ϔ", "Δ", "ʎ", "Ɣ", "Ʃ", "€", "¥", "¢", "£", "Ξ",
+  "₩", "θ", "℈", "₮", "₱", "₭", "⅁", "₦", "⅋", "§",
+  "₡", "ə", "₢", "Σ", "₥", "π", "ß", "ƛ", "ζ", "β"
+];
+
+// For space, we are already using "Ξ₥"
+// Let's pick two uncommon pairs for punctuation/mark mapping:
+// We will use "℈₢", "₮₱", "₭⅁", "₦⅋", "§₡", "ə₢" etc, for up to 6 punctuation marks
+// You can expand further as needed. We'll do for common punctuation.
+
+const PUNCT_MAP = {
+    // mark: [encode, decode] mapping
+    ".": "℈₢",
+    ",": "₮₱",
+    "!": "₭⅁",
+    "?": "₦⅋",
+    ":": "§₡",
+    ";": "ə₢",
+    "-": "Σ₥",
+    "_": "βζ",     
+    "\"": "Ʃ€",    
+    "'": "¥¢",
+    "(": "£Ξ",
+    ")": "₩θ",
+    "[": "℈₮",
+    "]": "₱₭",
+    "{": "₦⅁",
+    "}": "⅋§",
+    "/": "§ə",
+    "\\": "₢Σ",
+    "@": "₥π",
+    "#": "ßƛ",
+    "$": "ζβ",
+    "%": "ʎΩ",
+    "^": "ʞ☡",
+    "&": "β₩",
+    "*": "əµ",
+    "=": "ƔϞ",
+    "+": "ϞƔ",
+    "<": "µʖ",
+    ">": "ʖµ"
+};
+// Build reverse map (sequence->punct)
+const REV_PUNCT_MAP = {};
+for (const [k, v] of Object.entries(PUNCT_MAP)) {
+    REV_PUNCT_MAP[v] = k;
+}
+
+// Utility functions for text patching
+function encodeTextWithPunctSubs(str) {
+    // Replace spaces with "Ξ₥" AND each punctuation mark with its mapped sequence
+    let out = "";
+    for (let i = 0; i < str.length; ++i) {
+        const ch = str[i];
+        if (ch === " ") out += "Ξ₥";
+        else if (PUNCT_MAP[ch]) out += PUNCT_MAP[ch];
+        else out += ch;
+    }
+    return out;
+}
+
+function decodeTextWithPunctSubs(str) {
+    // Undo the process: replace all custom sequences with their corresponding chars
+    let out = "";
+    // First, restore spaces (safe first)
+    str = str.replace(/Ξ₥/g, " ");
+    // Replace ALL 2-char sequences matching any values in REV_PUNCT_MAP with their mapped char
+    let i = 0;
+    while (i < str.length) {
+        let two = str.slice(i, i+2);
+        if (REV_PUNCT_MAP[two]) {
+            out += REV_PUNCT_MAP[two];
+            i += 2;
+        } else {
+            out += str[i];
+            i++;
+        }
+    }
+    return out;
+}
+
+const arrows = [
+'←','↑','→','↓','↔','↕','↖','↗','↘','↙','↚','↛','↜','↝','↞','↟',
+'↠','↡','↢','↣','↤','↥','↦','↧','↨','↩','↪','↫','↬','↭','↮','↯',
+'↰','↱','↲','↳','↴','↵','↶','↷','↸','↹','↺','↻','↼','↽','↾','↿',
+'⇀','⇁','⇂','⇃','⇄','⇅','⇆','⇇','⇈','⇉','⇊','⇋','⇌','⇍','⇎','⇏',
+'⇐','⇑','⇒','⇓','⇔','⇕','⇖','⇗','⇘','⇙','⇚','⇛','⇜','⇝','⇞','⇟',
+'⇠','⇡','⇢','⇣','⇤','⇥','⇦','⇧','⇨','⇩','⇪','⇫','⇬','⇭','⇮','⇯',
+'⇰','⇱','⇲','⇳','⇴','⇵','⇶','⇷','⇸','⇹','⇺','⇻','⇼','⇽','⇾','⇿'
+];
+
+const braille = Array.from(
+    { length: 0x100 },
+    (_, i) => String.fromCodePoint(0x2800 + i)
+);
+
+const brackets = [
+    '(',')','[',']','{','}'
+];
+
+const clocks = [
+    '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚', '🕛'
+];
+
+function encodeToBase(n, b, set = "nums") {
+    let charlist;
+    if (set === "nums") {
+        charlist = chars;
+    } else if (set === "arrows") {
+        charlist = arrows;
+    } else if (set === "emoji") {
+        charlist = (typeof emojiList !== 'undefined' ? emojiList : []);
+    } else if (set === "braille") {
+        charlist = braille;
+    } else if (set === "brackets") {
+        charlist = brackets;
+    } else if (set === "clocks") {
+        charlist = clocks;
+    } else {
+        charlist = chars;
+    }
+    // Allow decimals: parse n as string, handle fractions
+    let isNegative = false;
+    let numStr = String(n);
+    if (numStr.startsWith('-')) {
+        isNegative = true;
+        numStr = numStr.slice(1);
+    }
+    let [intStr, fracStr] = numStr.split('.');
+    let intNum = BigInt(intStr || "0");
+    let base = BigInt(b);
+    if (base < 2n || base > BigInt(charlist.length)) return "(base out of supported range)";
+    let encodedDigits = [];
+    // Encode integer part
+    if (intNum === 0n) {
+        encodedDigits.push(charlist[0]);
+    } else {
+        let tempIntNum = intNum;
+        while (tempIntNum > 0n) {
+            const rem = tempIntNum % base;
+            encodedDigits.push(charlist[Number(rem)]);
+            tempIntNum = tempIntNum / base;
+        }
+        encodedDigits = encodedDigits.reverse();
+    }
+    // Encode fraction part
+    let encodedFrac = '';
+    if (fracStr && !/^0*$/.test(fracStr)) {
+        // Limit fractional precision to 12 places (arbitrary)
+        let frac = "0." + fracStr;
+        let value = Number(frac);
+        if (isNaN(value)) return "(invalid decimal input)";
+        let count = 0, limit = 12;
+        encodedFrac += '.';
+        while (value > 0 && count < limit) {
+            value = value * Number(b);
+            let digit = Math.floor(value);
+            encodedFrac += charlist[digit];
+            value = value - digit;
+            count++;
+        }
+        // Optionally trim trailing zeros in encoding
+    }
+    let encoded = encodedDigits.join('') + encodedFrac;
+    return isNegative ? '-' + encoded : encoded;
+}
+
+function splitEmojiStringByList(str, emojiArr) {
+    const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const sortedEmoji = [...emojiArr].sort((a, b) => b.length - a.length);
+    let pattern = '';
+    let lengths = {};
+    for (const emoji of sortedEmoji) {
+        if (!lengths[emoji.length]) lengths[emoji.length] = [];
+        lengths[emoji.length].push(esc(emoji));
+    }
+    pattern = Object.keys(lengths)
+        .sort((a, b) => b - a)
+        .map(len => lengths[len].join('|'))
+        .join('|');
+    const re = new RegExp(pattern, "gu");
+    let out = [];
+    let idx = 0;
+    let tries = 0;
+    let cleaned = [...str].filter(c => /\S|\p{Extended_Pictographic}/u.test(c)).join('');
+    let matches = cleaned.match(re);
+    if (!matches) return [];
+    let cursor = 0;
+    while (cursor < cleaned.length && tries < 10000) {
+        let foundMatch = false;
+        for (const emoji of sortedEmoji) {
+            if (cleaned.slice(cursor, cursor + emoji.length) === emoji) {
+                out.push(emoji);
+                cursor += emoji.length;
+                foundMatch = true;
+                break;
+            }
+        }
+        if (!foundMatch) {
+            out.push(cleaned[cursor]);
+            cursor++;
+        }
+        tries++;
+    }
+    return out.filter(e => emojiArr.indexOf(e) !== -1);
+}
+
+function decodeFromBase(n, b, set = "nums") {
+    let charlist;
+    if (set === "nums") {
+        charlist = chars;
+    } else if (set === "arrows") {
+        charlist = arrows;
+    } else if (set === "emoji") {
+        charlist = (typeof emojiList !== 'undefined' ? emojiList : []);
+    } else if (set === "braille") {
+        charlist = braille;
+    } else if (set === "brackets") {
+        charlist = brackets;
+    } else if (set === "clocks") {
+        charlist = clocks;
+    } else {
+        charlist = chars;
+    }
+    const base = BigInt(b);
+    if (base < 2n || base > BigInt(charlist.length)) {
+        throw new Error("(base out of supported range)");
+    }
+    let nStr = String(n);
+    let isNegative = false;
+    if (nStr.startsWith('-')) {
+        isNegative = true;
+        nStr = nStr.slice(1);
+    }
+
+    // Handle decimals
+    let [intStr, fracStr] = nStr.split('.');
+    let intArr;
+    if (set === "emoji") {
+        if (!(Array.isArray(charlist) && charlist.length > 0)) {
+            throw new Error("emojiList missing or empty");
+        }
+        intArr = splitEmojiStringByList(intStr, charlist);
+        if (intArr.length === 0 && intStr.length !== 0) {
+            throw new Error("Invalid emoji input: can't parse as emoji using configured emoji set.");
+        }
+    } else if(set === "clocks") {
+        intArr = splitEmojiStringByList(intStr, charlist);
+        if (intArr.length === 0 && intStr.length !== 0) {
+            throw new Error("Invalid clocks input: can't parse as clocks using configured clock set.");
+        }
+    } else {
+        intArr = intStr.split("");
+    }
+
+    let output = BigInt(0);
+    let power = BigInt(1);
+    for (let i = intArr.length - 1; i >= 0; i--) {
+        let digit = charlist.indexOf(intArr[i]);
+        if (digit === -1) {
+            throw new Error("Invalid digit in input string for decoding.");
+        }
+        output += BigInt(digit) * power;
+        power *= base;
+    }
+    // Decode fraction
+    let frac = 0;
+    if (fracStr && fracStr.length > 0) {
+        let divisor = Number(b);
+        let denom = divisor;
+        for (let i = 0; i < fracStr.length; i++) {
+            let c = fracStr[i];
+            let idx = charlist.indexOf(c);
+            if (idx === -1) break;
+            frac += idx / denom;
+            denom *= divisor;
+        }
+    }
+    let result = Number(output) + frac;
+    if (isNegative) result *= -1;
+    // Return as string to preserve decimals
+    return fracStr && fracStr.length > 0 ? result.toString() : (isNegative ? output * -1n : output);
+}
+
+function encodeToEmoji(bi) {
+    if (typeof emojiList === "undefined" || !Array.isArray(emojiList) || !emojiList.length)
+        return "(emojiList not loaded)";
+    return encodeToBase(bi, emojiList.length, "emoji");
+}
+
+// --- Emoji Encrypt ---
+
+// ENCODER PATCH FOR PUNCTUATION
+function emojiEncryptBase100ToEmoji(input) {
+    // Replace all spaces and punctuation marks with their marker pairs
+    let str = typeof input === "string" ? encodeTextWithPunctSubs(input) : input;
+    try {
+        let base100Value = decodeFromBase(str, 100, "nums");
+        let base10str = encodeToBase(base100Value, 10, "nums");
+        let finalBigInt = BigInt(base10str);
+        return encodeToEmoji(finalBigInt);
+    } catch (e) {
+        return "(emoji encrypt failed: " + (e && e.message || String(e)) + ")";
+    }
+}
+
+// ==================== ENCODERS ====================
+const ENCODERS = [
+    {
+        name: "Base-N",
+        id: "baseN",
+        inputSpec: [
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 42.12 or -123", required: true },
+            { name: "Base", id: "base", type: "base", placeholder: "e.g. 16", min: 2, max: chars.length, required: true }
+        ],
+        encode: (opts) => {
+            if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input needs to be a valid number)";
+            let baseNum = Number(opts.base);
+            if (!Number.isSafeInteger(baseNum) || baseNum < 2 || baseNum > chars.length)
+                return `(base must be 2-${chars.length})`;
+            // Allow decimals (removed the restriction)
+            return encodeToBase(opts.number, baseNum, "nums");
+        }
+    },
+    {
+        name: "Morse Code",
+        id: "morse",
+        inputSpec: [
+            { name: "Text", id: "text", type: "string", placeholder: "Type text to encode", required: true }
+        ],
+        encode: (opts) => {
+            // Morse encoder does not require extra punctuation encoding, keep as is.
+            return opts.text
+                .toUpperCase()
+                .split(/(\s+)/)
+                .map(wordOrSpace => {
+                    if (/^\s+$/.test(wordOrSpace)) {
+                        return wordOrSpace.replace(/ /g, MORSE_TABLE[" "]);
+                    }
+                    return wordOrSpace
+                        .split("")
+                        .map(char => MORSE_TABLE[char] ?? "?")
+                        .join(" ");
+                })
+                .join(" ");
+        }
+    },
+    {
+        name: "Base-😀",
+        id: "emoji",
+        inputSpec: [
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45", required: true }
+        ],
+        encode: (opts) => {
+            if (typeof emojiList === "undefined" || !Array.isArray(emojiList) || !emojiList.length)
+                return "(emojiList not loaded)";
+            if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
+            // Allow decimals (removed the restriction)
+            return encodeToBase(opts.number, emojiList.length, "emoji");
+        }
+    },
+    {
+        name: "Emoji Encrypt",
+        id: "emoji-encrypt",
+        inputSpec: [
+            { name: "Text", id: "digits", type: "numberstr", placeholder: "e.g. 01020304 (grouped as 2 digits)", required: true }
+        ],
+        encode: (opts) => {
+            // Replace all spaces and punctuation with marker pairs
+            let patchedInput = typeof opts.digits === "string" ? encodeTextWithPunctSubs(opts.digits) : opts.digits;
+            return emojiEncryptBase100ToEmoji(patchedInput);
+        }
+    },
+    {
+        name: "Clock Notation",
+        id: "clocks",
+        inputSpec: [
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123", required: true }
+        ],
+        encode: (opts) => {
+            if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
+            // Allow decimals
+            return encodeToBase(opts.number, clocks.length, "clocks");
+        }
+    },
+    {
+        name: "Arrow Notation",
+        id: "arrows",
+        inputSpec: [
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45", required: true }
+        ],
+        encode: (opts) => {
+            if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
+            // Allow decimals
+            return encodeToBase(opts.number, arrows.length, "arrows");
+        }
+    },
+    {
+        name: "Braille Notation",
+        id: "braille",
+        inputSpec: [
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45", required: true }
+        ],
+        encode: (opts) => {
+            if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
+            // Allow decimals
+            return encodeToBase(opts.number, braille.length, "braille");
+        }
+    },
+    {
+        name: "Bracket Notation",
+        id: "brackets",
+        inputSpec: [
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45", required: true }
+        ],
+        encode: (opts) => {
+            if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
+            // Allow decimals
+            return encodeToBase(opts.number, brackets.length, "brackets");
+        }
+    }
+];
+
+// ==================== DECODERS ====================
+const DECODERS = [
+    {
+        name: "Base-N",
+        id: "baseN",
+        inputSpec: [
+            { name: "Input (Base-N digits)", id: "input", type: "string", placeholder: "Encoded value", required: true },
+            { name: "Base", id: "base", type: "base", placeholder: "e.g. 16", min: 2, max: chars.length, required: true }
+        ],
+        decode: (opts) => {
+            if (!opts.input) return "(no input)";
+            let baseNum = Number(opts.base);
+            if (!Number.isSafeInteger(baseNum) || baseNum < 2 || baseNum > chars.length)
+                return `(base must be 2-${chars.length})`;
+            try {
+                let bi = decodeFromBase(opts.input, baseNum, "nums");
+                return bi.toString();
+            } catch (e) {
+                return "(invalid input for base-N decode)";
+            }
+        }
+    },
+    {
+        name: "Morse Code",
+        id: "morse",
+        inputSpec: [
+            { name: "Morse Code", id: "morse", type: "string", placeholder: "Enter morse (letters separated by spaces)", required: true }
+        ],
+        decode: (opts) => {
+            let chunks = (opts.morse || "").split(" ");
+            return chunks.map(c => REVERSE_MORSE_TABLE[c] ?? "?").join("");
+        }
+    },
+    {
+        name: "Base-😀",
+        id: "emoji",
+        inputSpec: [
+            { name: "Base-😀 Goes Here", id: "emoji", type: "emoji", placeholder: "…" , required: true }
+        ],
+        decode: (opts) => {
+            if (typeof emojiList === "undefined" || !Array.isArray(emojiList) || !emojiList.length)
+                return "(emojiList not loaded)";
+            try {
+                let bi = decodeFromBase(opts.emoji, emojiList.length, "emoji");
+                return bi.toString();
+            } catch (e) {
+                return "(invalid emoji input)";
+            }
+        }
+    },
+    {
+        name: "Emoji Decrypt",
+        id: "emoji-decrypt",
+        inputSpec: [
+            { name: "Base-😀", id: "emoji", type: "emoji", placeholder: "…" , required: true }
+        ],
+        decode: (opts) => {
+            let bi = decodeFromBase(opts.emoji, emojiList.length, "emoji");
+            let patched = encodeToBase(bi,100);
+            patched = decodeTextWithPunctSubs(patched);
+            return patched.toString();
+        }
+    },
+    {
+        name: "Clock Notation",
+        id: "clocks",
+        inputSpec: [
+            { name: "Clock String", id: "input", type: "string", placeholder: "Clock emojis", required: true }
+        ],
+        decode: (opts) => {
+            try {
+                let bi = decodeFromBase(opts.input, clocks.length, "clocks");
+                return bi.toString();
+            } catch (e) {
+                return "(invalid clock input)";
+            }
+        }
+    },
+    {
+        name: "Arrow Notation",
+        id: "arrows",
+        inputSpec: [
+            { name: "Arrow String", id: "input", type: "string", placeholder: "Arrow symbols", required: true }
+        ],
+        decode: (opts) => {
+            try {
+                let bi = decodeFromBase(opts.input, arrows.length, "arrows");
+                return bi.toString();
+            } catch (e) {
+                return "(invalid arrow input)";
+            }
+        }
+    },
+    {
+        name: "Braille Notation",
+        id: "braille",
+        inputSpec: [
+            { name: "Braille String", id: "input", type: "string", placeholder: "Braille unicode", required: true }
+        ],
+        decode: (opts) => {
+            try {
+                let bi = decodeFromBase(opts.input, braille.length, "braille");
+                return bi.toString();
+            } catch (e) {
+                return "(invalid braille input)";
+            }
+        }
+    },
+    {
+        name: "Bracket Notation",
+        id: "brackets",
+        inputSpec: [
+            { name: "Bracket String", id: "input", type: "string", placeholder: "Bracket symbols", required: true }
+        ],
+        decode: (opts) => {
+            try {
+                let bi = decodeFromBase(opts.input, brackets.length, "brackets");
+                return bi.toString();
+            } catch (e) {
+                return "(invalid bracket input)";
+            }
+        }
+    }
+];
+
+const MORSE_TABLE = {
+    "A": ".-",    "B": "-...",  "C": "-.-.",  "D": "-..",
+    "E": ".",     "F": "..-.",  "G": "--.",   "H": "....",
+    "I": "..",    "J": ".---",  "K": "-.-",   "L": ".-..",
+    "M": "--",    "N": "-.",    "O": "---",   "P": ".--.",
+    "Q": "--.-",  "R": ".-.",   "S": "...",   "T": "-",
+    "U": "..-",   "V": "...-",  "W": ".--",   "X": "-..-",
+    "Y": "-.--",  "Z": "--..",
+    "0": "-----", "1": ".----", "2": "..---", "3": "...--",
+    "4": "....-", "5": ".....", "6": "-....", "7": "--...",
+    "8": "---..", "9": "----.",
+    ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.",
+    "!": "-.-.--", "/": "-..-.", "(": "-.--.", ")": "-.--.-",
+    "&": ".-...", ":": "---...", ";": "-.-.-.", "=": "-...-",
+    "+": ".-.-.", "-": "-....-", "_": "..--.-", "\"": ".-..-.",
+    "$": "...-..-", "@": ".--.-.", " ": "/"
+};
+const REVERSE_MORSE_TABLE = (() => {
+    let t = {};
+    for (const [k, v] of Object.entries(MORSE_TABLE)) t[v] = k;
+    return t;
+})();
+
+function makeInputField(spec, value, onInput) {
+    let input;
+    if (spec.type === "numberstr" || spec.type === "basestr" || spec.type === "base" || spec.type === "emoji") {
+        input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = spec.placeholder || "";
+        if (spec.type === "base") {
+            input.pattern = "\\d+";
+            input.inputMode = "numeric";
+            if ("min" in spec) input.min = spec.min;
+            if ("max" in spec) input.max = spec.max;
+        }
+    } else if (spec.type === "string") {
+        input = document.createElement("textarea");
+        input.placeholder = spec.placeholder || "";
+    } else {
+        input = document.createElement("input");
+        input.type = "text";
+    }
+    input.id = "input-" + spec.id;
+    input.value = value||"";
+    input.required = !!spec.required;
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.style.marginBottom = "8px";
+    input.addEventListener("input", onInput);
+    return input;
+}
+
+function buildInputs(container, inputSpec, inputState, onInput) {
+    container.innerHTML = "";
+    inputSpec.forEach(spec => {
+        let wrapper = document.createElement("div");
+        wrapper.className = "iwrap";
+        let label = document.createElement("label");
+        label.htmlFor = "input-" + spec.id;
+        label.textContent = spec.name + ": ";
+        wrapper.appendChild(label);
+        let inp = makeInputField(spec, inputState[spec.id]||"", (e) => {
+            inputState[spec.id] = e.target.value;
+            onInput();
+        });
+        wrapper.appendChild(inp);
+        container.appendChild(wrapper);
+    });
+}
+
+function renderOutput(block, out, prefix = "Output: ") {
+    if (typeof out === "undefined" || out === null || out === "") block.textContent = prefix;
+    else block.textContent = prefix + out;
+}
+
+function populateDropdown(drop, arr) {
+    drop.innerHTML = "";
+    arr.forEach(fn => {
+        let opt = document.createElement("option");
+        opt.value = fn.id;
+        opt.textContent = fn.name;
+        drop.appendChild(opt);
+    });
+}
+
+// ---------- APP INIT ----------
+
+window.addEventListener("DOMContentLoaded", function() {
+    const encodeDropdown = document.getElementById("encoder-select");
+    const decodeDropdown = document.getElementById("decoder-select");
+    const encodeInputs = document.getElementById("encode-inputs");
+    const decodeInputs = document.getElementById("decode-inputs");
+    const encodeOutput = document.getElementById("encode-output");
+    const decodeOutput = document.getElementById("decode-output");
+    const encodedTimeDiv = document.getElementById("current-time-encoded");
+
+    let encodeState = {};
+    let decodeState = {};
+    let curEncoderIdx = 0;
+    let curDecoderIdx = 0;
+
+    populateDropdown(encodeDropdown, ENCODERS);
+    populateDropdown(decodeDropdown, DECODERS);
+
+    function handleEncodeInputChange() {
+        const encoder = ENCODERS[curEncoderIdx];
+        let haveAll = encoder.inputSpec.every(s => !s.required || encodeState[s.id]);
+        if (haveAll) {
+            try {
+                renderOutput(encodeOutput, encoder.encode(encodeState));
+            } catch (e) {
+                renderOutput(encodeOutput, e.message || String(e));
+            }
+        } else {
+            renderOutput(encodeOutput, "");
+        }
+    }
+    function rebuildEncodeInputs() {
+        const encoder = ENCODERS[curEncoderIdx];
+        encodeState = {};
+        buildInputs(encodeInputs, encoder.inputSpec, encodeState, handleEncodeInputChange);
+        handleEncodeInputChange();
+    }
+
+    encodeDropdown.addEventListener("change", function() {
+        curEncoderIdx = encodeDropdown.selectedIndex;
+        rebuildEncodeInputs();
+    });
+    rebuildEncodeInputs();
+
+    function handleDecodeInputChange() {
+        const decoder = DECODERS[curDecoderIdx];
+        let haveAll = decoder.inputSpec.every(s => !s.required || decodeState[s.id]);
+        if (haveAll) {
+            try {
+                renderOutput(decodeOutput, decoder.decode(decodeState), "Decoded: ");
+            } catch (e) {
+                renderOutput(decodeOutput, e.message || String(e), "Decoded: ");
+            }
+        } else {
+            renderOutput(decodeOutput, "", "Decoded: ");
+        }
+    }
+    function rebuildDecodeInputs() {
+        const decoder = DECODERS[curDecoderIdx];
+        decodeState = {};
+        buildInputs(decodeInputs, decoder.inputSpec, decodeState, handleDecodeInputChange);
+        handleDecodeInputChange();
+    }
+
+    decodeDropdown.addEventListener("change", function() {
+        curDecoderIdx = decodeDropdown.selectedIndex;
+        rebuildDecodeInputs();
+    });
+    rebuildDecodeInputs();
+
+    // ====== Animated Time Encode Box (top right) =======
+    function getCurrentEncoderInfo() {
+        const encoder = ENCODERS[curEncoderIdx];
+        if (encoder.id === "baseN") {
+            let bn = 10; 
+            if (encodeState.base) {
+                let baseNum = Number(encodeState.base);
+                if (!isNaN(baseNum) && baseNum >= 2 && baseNum <= chars.length) bn = baseNum;
+            }
+            return { base: bn, set: "nums" };
+        } else if (encoder.id === "emoji") {
+            if (typeof emojiList !== "undefined" && Array.isArray(emojiList) && emojiList.length)
+                return { base: emojiList.length, set: "emoji" };
+            else
+                return { base: 10, set: "nums" };
+        } else if (encoder.id === "clocks") {
+            return { base: clocks.length, set: "clocks" };
+        } else if (encoder.id === "arrows") {
+            return { base: arrows.length, set: "arrows" };
+        } else if (encoder.id === "braille") {
+            return { base: braille.length, set: "braille" };
+        } else if (encoder.id === "brackets") {
+            return { base: brackets.length, set: "brackets" };
+        } else {
+            return { base: 10, set: "nums" };
+        }
+    }
+
+    function encodeCurrentTimeString() {
+        const now = new Date();
+        const msOfHour = now.getMinutes() * 60000 + now.getSeconds() * 1000 + now.getMilliseconds();
+        const { base, set } = getCurrentEncoderInfo();
+        try {
+            return encodeToBase(msOfHour*10, base, set);
+        } catch(e) {
+            return "(error)";
+        }
+    }
+
+    function updateTimeEncodedBox() {
+        const { base, set } = getCurrentEncoderInfo();
+        let charsetLabel =
+            set === "nums" ? "0-9a-z" :
+            set === "emoji" ? "😀" :
+            set === "clocks" ? "🕐" :
+            set === "arrows" ? "→" :
+            set === "braille" ? "⠁" :
+            set === "brackets" ? "()" :
+            set;
+        const enc = encodeCurrentTimeString();
+        encodedTimeDiv.textContent =
+            `${enc}`;
+    }
+
+    function stepTimeEncodedBox() {
+        updateTimeEncodedBox();
+        requestAnimationFrame(stepTimeEncodedBox);
+    }
+
+    if (typeof emojiList === 'undefined') {
+        let waitEmoji = setInterval(() => {
+            if (typeof emojiList !== 'undefined') {
+                clearInterval(waitEmoji);
+                stepTimeEncodedBox();
+            }
+        }, 50);
+        stepTimeEncodedBox();
+    } else {
+        stepTimeEncodedBox();
+    }
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bad Tetris</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <style>
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background: #000;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#topBar {
+    position: fixed;
+    left: calc(50% - 340px);
+    top: calc(50% - 380px);
+    width: 100vw;
+    z-index: 1005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    background: rgba(0,0,0,0.85);
+    box-sizing: border-box;
+    box-shadow: 0 1px 10px #0009;
+    margin-bottom: 0;
+}
+
+#mainArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    margin-top: 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+#column-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 30px;
+    margin-top: 45px;
+    z-index: 2;
+}
+
+canvas {
+    background: #000;
+    border: 8px solid #fff;
+    display: block;
+}
+
+#tetris {
+    margin-left: 0;
+    box-shadow: 0 0 30px #111;
+    max-width: 100vw;
+    max-height: 85vh;
+    z-index: 1;
+    position: relative;
+}
+
+.menuStyle {
+    color: #fff;
+    background: #000;
+    border: 2px solid #d0d0d0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    margin: 6px;
+    width: 120px;
+    height: 48px;
+    font-size: 17px;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s;
+}
+
+#score,
+#level,
+#highscoreDisplay {
+    height: 42px;
+    min-width: 90px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-right: 8px;
+    background: #111;
+    border-radius: 5px;
+}
+
+#topDisplay {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 15px;
+    margin-bottom: 0;
+    transform: scale(1.18);
+}
+
+#minimizeBtn {
+    background: #444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 3px 14px;
+    font-size: 17px;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 2px;
+    transition: background 0.15s;
+}
+#minimizeBtn:hover {
+    background: #222;
+}
+
+#next {
+    width: 200px;
+    min-height: 140px;
+    background: #fafafa;
+    border: 6px solid #d0d0d0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 35px;
+    margin-top: 18px;
+    margin-left: 0;
+    border-radius: 25px;
+    box-shadow: 0 2px 10px #bbb;
+    transition: box-shadow 0.15s;
+    z-index: 2;
+}
+
+#next-title {
+    font-size: 24px;
+    color: #005;
+    margin: 16px 0 8px 0;
+    font-weight: bold;
+    display: block;
+}
+
+#next-canvas {
+    width: 120px !important;
+    height: 60px !important;
+    max-width: 120px;
+    max-height: 60px;
+    margin: 0 auto 8px auto;
+    border: none;
+    transform: scale(1.0);
+    background: transparent;
+    display: block;
+}
+
+#settingsDropdownn {
+    z-index: 10;
+    position: relative;
+    width: 100%;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: center;
+}
+#settingsDropdown {
+    border: 2px solid #d0d0d0;
+    width: 160px;
+    height: 44px;
+    margin: 0 auto;
+    font-size: 18px;
+    background: #000;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    appearance: none;
+    cursor: pointer;
+    z-index: 20;
+}
+
+#settingsDropdown option {
+    color: #222;
+    background: #fafafa;
+}
+
+#settingsDropdown:focus {
+    outline: 2px solid #ff7600;
+}
+
+#howTo {
+    position: relative;
+    margin-top: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    background: #fafafa;
+    border: 7px solid #d0d0d0;
+    width: 200px;
+    height: 140px;
+    text-align: center;
+    line-height: 19px;
+    border-radius: 25px;
+    z-index: 900;
+    pointer-events: none;
+    color: #111;
+    box-shadow: 0 2px 8px #2222;
+    padding-top: 14px;
+}
+#highscoreDisplay {
+    width: 150px;
+    font-size: 1rem;
+    height: 42px;
+    color: #ffd600;
+    background: #232323;
+    border-radius: 6px;
+}
+
+.score-level-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 800px) {
+    body {
+        display: block;
+    }
+    #mainArea {
+        flex-direction: column;
+        height: unset;
+        margin-top: 64px;
+        align-items: center;
+    }
+    #tetris, #topBar, #topDisplay {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 90vw !important;
+    }
+    #column-flex {
+        flex-direction: row;
+        margin-top: 24px;
+        margin-left: 0;
+    }
+    #next, #howTo {
+        margin-top: 10px !important;
+        position: static !important;
+        right: unset;
+    }
+    #howTo {
+        margin-left: 0 !important;
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="topBar">
+        <button id="minimizeBtn" title="Minimize">_</button>
+        <div id="topDisplay" class="row-flex">
+            <div id="score" class="menuStyle"></div>
+            <div id="level" class="menuStyle"></div>
+            <div id="highscoreDisplay" class="menuStyle"></div>
+        </div>
+    </div>
+    <div id="mainArea">
+        <canvas id="tetris" width="300" height="600"></canvas>
+        <div id="column-flex">
+            <div id="settingsDropdownn">
+                <select id="settingsDropdown" class="menuStyle">
+                  <option disabled selected value="">SETTINGS</option>
+                  <option value="option1">Board Height</option>
+                  <option id="botOption" value="bot">Auto Bot: OFF</option>
+                </select>
+            </div>
+            <div id="next" class="menuStyle">
+                <div id="next-title">Next Piece</div>
+                <canvas id="next-canvas" width="120" height="60"></canvas>
+            </div>
+            <div id="howTo">
+                <div>Controls:</div>
+                <p>↑ to rotate shape</p>
+                <p>← &amp; → to move</p>
+                <p>↓ to drop shape</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- A smarter NES/StackRabbit-inspired Auto Bot Algorithm -->
+    <script>
+        // ===== Minimizer logic (unchanged) =====
+        document.getElementById('minimizeBtn').addEventListener('click', function() {
+          document.getElementById('topBar').style.display = "none";
+          var main = document.getElementById('mainArea');
+          for (let child of main.children) {
+            if (child.tagName === "CANVAS" && child.id === "tetris") {
+              child.style.display = "block";
+            } else {
+              child.style.display = "none";
+            }
+          }
+        });
+
+        const canvas = document.getElementById('tetris');
+        const ctx = canvas.getContext('2d');
+        ctx.scale(30, 30);
+        const nextCanvas = document.getElementById('next-canvas');
+        const nextCtx = nextCanvas.getContext('2d');
+        nextCtx.scale(30, 30);
+        let currentPieceId = 1;
+        let ROWS = 20, COLUMNS = 10;
+        const arena = Array.from({ length: ROWS }, () => Array(COLUMNS).fill(0));
+        const colors = ['#00FFFF', '#FFFF00', '#00FFFF', '#00FF00', '#FF0000', '#3355FF', '#ff7600'];
+        let score = 0;
+        let linesCleared = 0;
+        let level = 1;
+        let currentHighscore = localStorage.getItem('highscore');
+        if (currentHighscore == null) { currentHighscore = 0 }
+        document.getElementById('highscoreDisplay').innerText = `Hi-Score: ${currentHighscore}`;
+
+        // PIECE SHAPES: 7 NES types
+        const pieces = [
+            { shape: [[1, 1, 1, 1,]]}, // I
+            { shape: [[1, 1], [1, 1]] }, // O
+            { shape: [[0, 1, 0], [1, 1, 1]] }, // T
+            { shape: [[1, 1, 0], [0, 1, 1]] }, // S
+            { shape: [[0, 1, 1], [1, 1, 0]] }, // Z
+            { shape: [[1, 0, 0], [1, 1, 1]] }, // L
+            { shape: [[0, 0, 1], [1, 1, 1]] }  // J
+        ];
+
+        // 8-sided NES-style pseudo-random (intentionally poor)
+        function nesPseudoRandomPieceIndex() {
+            // Just Math.random() floored, no guaranteed "bag" and can repeat
+            // Emulates 8-sided "die", but 7 pieces: like NES Tetris
+            var roll = Math.floor(Math.random() * 8);
+            return roll < 7 ? roll : Math.floor(Math.random() * 7);
+        }
+
+        function gridFromArena(arena) {
+            return arena.map(row => row.map(cell => cell ? 1 : 0));
+        }
+
+        function collideGrid(grid, piece) {
+            return piece.shape.some((row, y) =>
+                row.some((value, x) => {
+                    if (!value) return false;
+                    const nx = x + piece.x;
+                    const ny = y + piece.y;
+                    if (nx < 0 || nx >= COLUMNS || ny >= grid.length) return true;
+                    if (ny < 0) return false;
+                    return grid[ny][nx] !== 0;
+                })
+            );
+        }
+
+        function countFilled(grid) {
+            return grid.reduce((n, row) => n + row.reduce((m, c) => m + (c ? 1 : 0), 0), 0);
+        }
+
+        function getHeights(grid) {
+            const heights = Array(COLUMNS).fill(0);
+            for (let x = 0; x < COLUMNS; x++) {
+                for (let y = 0; y < grid.length; y++) {
+                    if (grid[y][x]) {
+                        heights[x] = grid.length - y;
+                        break;
+                    }
+                }
+            }
+            return heights;
+        }
+
+        function getAggregateHeight(heights) {
+            return heights.reduce((a, b) => a + b, 0);
+        }
+        function getMaxHeight(heights) {
+            return Math.max(...heights);
+        }
+        function getBumpiness(heights) {
+            let bump = 0;
+            for (let i = 0; i < heights.length - 1; i++) {
+                bump += Math.abs(heights[i] - heights[i + 1]);
+            }
+            return bump;
+        }
+        function getWells(heights) {
+            let well = 0;
+            for (let x = 0; x < heights.length; x++) {
+                let left = (x === 0) ? heights[x] : heights[x - 1];
+                let right = (x === heights.length - 1) ? heights[x] : heights[x + 1];
+                let minAdj = Math.min(left, right);
+                if (heights[x] < minAdj)
+                    well += minAdj - heights[x];
+            }
+            return well;
+        }
+        function countHoles(grid) {
+            let holes = 0;
+            for (let x = 0; x < COLUMNS; x++) {
+                let blockFound = false;
+                for (let y = 0; y < grid.length; y++) {
+                    if (grid[y][x]) blockFound = true;
+                    else if (blockFound) holes++;
+                }
+            }
+            return holes;
+        }
+
+        // Simulate a piece dropped in a rotation and column, giving new board and stats
+        function simulatePlacement(grid, shape, posX) {
+            let w = shape[0].length, h = shape.length;
+            let y = 0;
+            // Find lowest valid Y
+            while (true) {
+                let collision = false;
+                for (let py = 0; py < h; py++) {
+                    for (let px = 0; px < w; px++) {
+                        if (!shape[py][px]) continue;
+                        let gridX = posX + px, gridY = y + py;
+                        if (gridX < 0 || gridX >= COLUMNS || gridY >= grid.length)
+                            collision = true;
+                        else if (gridY >= 0 && grid[gridY][gridX])
+                            collision = true;
+                    }
+                }
+                if (collision) break;
+                y++;
+            }
+            y--; // Back to legal y
+
+            if (y < 0) return null; // Spawns above screen: not valid
+            // Apply shape to a copy of grid
+            let board = grid.map(row => row.slice());
+            for (let py = 0; py < h; py++) {
+                for (let px = 0; px < w; px++) {
+                    if (shape[py][px]) {
+                        let gridX = posX + px, gridY = y + py;
+                        if (gridY < 0 || gridX < 0 || gridX >= COLUMNS || gridY >= board.length) return null;
+                        board[gridY][gridX] = 1;
+                    }
+                }
+            }
+            // Remove full lines
+            let cleared = 0;
+            for (let row = board.length - 1; row >= 0; row--) {
+                if (board[row].every(v => v)) {
+                    board.splice(row, 1);
+                    board.unshift(Array(COLUMNS).fill(0));
+                    cleared++;
+                    row++;
+                }
+            }
+
+            // Compute features
+            let heights = getHeights(board);
+            let aggHeight = getAggregateHeight(heights);
+            let maxHeight = getMaxHeight(heights);
+            let bumpiness = getBumpiness(heights);
+            let wells = getWells(heights);
+            let holes = countHoles(board);
+
+            return {
+                board,
+                cleared,
+                aggHeight,
+                maxHeight,
+                bumpiness,
+                wells,
+                holes,
+                y
+            };
+        }
+
+        // Returns all unique [rot, x] placements
+        function allPlacements(grid, pieceIndex, shape) {
+            let placements = [];
+            let usedRot = new Set();
+            for (let rot = 0; rot < 4; rot++) {
+                let key = shape.map(r => r.join("")).join("|");
+                if (usedRot.has(key)) { shape = rotate(shape); continue; } // skip dups
+                usedRot.add(key);
+                let minX = -Math.min(...shape[0].map((_, x) =>
+                    shape.some(row => row[x])
+                        ? x : Infinity).filter(Number.isFinite));
+                let maxX = COLUMNS - shape[0].length + minX;
+
+                for (let x = minX; x <= maxX; x++) {
+                    let sim = simulatePlacement(grid, shape, x);
+                    if (sim) placements.push({
+                        rot, x,
+                        y: sim.y,
+                        features: sim,
+                        shape: shape.map(row => row.slice())
+                    });
+                }
+                shape = rotate(shape);
+            }
+            return placements;
+        }
+
+        // Lookahead: For each placement for this piece, try all placements for next piece, evaluate lowest "cost"
+        function bestPlacementWithLookahead(grid, pieceIndex, pieceShape, nextPieceIndex, nextPieceShape) {
+            let firstMoves = allPlacements(grid, pieceIndex, pieceShape);
+            let bestScore = -Infinity;
+            let best = null;
+            for (let move of firstMoves) {
+                let afterBoard = move.features.board;
+                let nextMoves = allPlacements(afterBoard, nextPieceIndex, nextPieceShape);
+                let lookaheadScore = -Infinity;
+                for (let nm of nextMoves) {
+                    let s = stackRabbitHeuristic(nm.features, nm.cleared || 0);
+                    if (s > lookaheadScore) lookaheadScore = s;
+                }
+                // If no moves are valid after (rare), penalize
+                if (nextMoves.length === 0)
+                    lookaheadScore = -100000;
+
+                // Cost for first move, but given preview lookahead
+                let score = stackRabbitHeuristic(move.features, move.cleared || 0) * 0.45
+                          + lookaheadScore * 0.55;
+                if (score > bestScore) {
+                    bestScore = score;
+                    best = move;
+                }
+            }
+            return best;
+        }
+
+        // StackRabbit/Guideline-like cost function: weighted sum of heuristics
+        function stackRabbitHeuristic(features, cleared) {
+            // Lower aggregate height, holes, bumpiness, wells; reward line clears
+            // Values inspired by StackRabbit/abstruse guide, but hand-tuned for NES
+            return (
+                + cleared * 900000
+                - features.aggHeight * 1200
+                - features.maxHeight * 2200
+                - features.holes * 150000
+                - features.bumpiness * 950
+                - features.wells * 2100
+            );
+        }
+
+        // Arena helpers:
+        function gridFromArena(arena) {
+            return arena.map(row => row.map(cell => cell ? 1 : 0));
+        }
+
+        function rotate(matrix) {
+            // Classic rotate right
+            return matrix[0].map((_, i) => matrix.map(row => row[i])).reverse();
+        }
+
+        function collide(arena, player) {
+            return player.shape.some((row, y) =>
+                row.some((value, x) => {
+                    if (!value) return false;
+                    let nx = x + player.x, ny = y + player.y;
+                    if (nx < 0 || nx >= COLUMNS || ny >= arena.length) return true;
+                    if (ny < 0) return false;
+                    return arena[ny][nx] !== 0;
+                })
+            );
+        }
+
+        // BOT CHOICE: do analysis, select move
+        function computeBestMove() {
+            const grid = gridFromArena(arena);
+            const pieceIndex = player.pieceIndex;
+            const nextPieceIndex = nextPlayer.pieceIndex;
+            const pieceShape = player.shape.map(row => row.slice());
+            const nextShape = nextPlayer.shape.map(row => row.slice());
+            let best = bestPlacementWithLookahead(grid, pieceIndex, pieceShape, nextPieceIndex, nextShape);
+            if (!best) return null;
+            return {
+                rotations: best.rot,
+                x: best.x,
+                targetY: best.y,
+                shape: best.shape
+            };
+        }
+
+        // ======= UNCHANGED code below =======
+        function finalizeBotPlan(move) {
+            if (!move) return null;
+            let shape = player.shape.map(row => row.slice());
+            for (let r = 0; r < move.rotations; r++) shape = rotate(shape);
+            let x = move.x;
+            let y = 0;
+            if (!collide(arena, { shape, x, y })) {
+                while (!collide(arena, { shape, x, y: y + 1 })) y++;
+            }
+            return { rotations: move.rotations, x: move.x, y, shape };
+        }
+
+        function lockPiece() {
+            merge(arena, player);
+            clearLines();
+            player = nextPlayer;
+            nextPlayer = createPiece();
+            botPlan = null;
+            if (collide(arena, player)) {
+                currentHighscore = localStorage.getItem('highscore');
+                if (currentHighscore < score) {
+                    localStorage.setItem('highscore', score);
+                    document.getElementById('highscoreDisplay').innerText = `Hi-Score: ${score}`;
+                }
+                alert(`Game Over! Final Score: ${score}`);
+                arena.forEach(row => row.fill(0));
+                score = 0;
+                linesCleared = 0;
+                level = 1;
+            }
+        }
+
+        function hardDrop() {
+            player.y++;
+            score++;
+            if (collide(arena, player)) {
+                player.y--;
+                lockPiece();
+            }
+        }
+
+        function updateBotOptionLabel() {
+            const opt = document.getElementById('botOption');
+            if (opt) opt.textContent = botEnabled ? 'Auto Bot: ON' : 'Auto Bot: OFF';
+        }
+
+        function runBotStep() {
+            if (!botPlan) botPlan = computeBestMove();
+            if (!botPlan) {
+                hardDrop();
+                return;
+            }
+            // Apply planned moves step-by-step as before:
+            if (botPlan.rotations > 0) {
+                const rotated = rotate(player.shape);
+                if (!collide(arena, { ...player, shape: rotated })) {
+                    player.shape = rotated;
+                }
+                botPlan.rotations--;
+                return;
+            }
+            if (player.x < botPlan.x) {
+                player.x++;
+                if (collide(arena, player)) player.x--;
+                return;
+            }
+            if (player.x > botPlan.x) {
+                player.x--;
+                if (collide(arena, player)) player.x++;
+                return;
+            }
+            hardDrop();
+        }
+
+        function merge(arena, player) {
+            for (let y = 0; y < player.shape.length; y++) {
+                for (let x = 0; x < player.shape[y].length; x++) {
+                    if (player.shape[y][x]) {
+                        arena[y + player.y][x + player.x] = {
+                            colorIdx: colors.indexOf(player.color) + 1,
+                            pieceId: currentPieceId
+                        };
+                    }
+                }
+            }
+            currentPieceId++;
+        }
+
+        function clearLines() {
+            let lines = 0;
+            for (let y = arena.length - 1; y >= 0; y--) {
+                if (arena[y].every(value => value !== 0)) {
+                    arena.splice(y, 1);
+                    arena.unshift(Array(COLUMNS).fill(0));
+                    lines++;
+                    linesCleared++;
+                    y++;
+                    const scoreTable = [0, 40, 100, 300, 1200];
+                    score += scoreTable[lines] * (level);
+
+                    if (linesCleared >= (level) * 10) {
+                        level++;
+                    }
+                }
+            }
+        }
+
+        function updateBoard() {
+            document.getElementById('score').innerText = `Pts: ${score} `;
+            document.getElementById('level').innerText = `LvL: ${level}`;
+            adjustFontSize(score);
+        }
+        function adjustFontSize(score) {
+            const scoreElement = document.getElementById('score');
+            if (score < 100) {
+                scoreElement.style.fontSize = '20px';
+            } else if (score < 1000) {
+                scoreElement.style.fontSize = '15px';
+            } else if (score < 10000) {
+                scoreElement.style.fontSize = '10px';
+            } else {
+                scoreElement.style.fontSize = '7px';
+            }
+        }
+
+        // NES-style random piece generator:
+        function createPiece() {
+            const pieceIndex = nesPseudoRandomPieceIndex();
+            const piece = pieces[pieceIndex];
+            return {
+                shape: piece.shape,
+                pieceIndex,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                x: Math.floor(COLUMNS / 2) - Math.floor(piece.shape[0].length / 2),
+                y: 0
+            };
+        }
+
+        let player = createPiece();
+        let nextPlayer = createPiece();
+        let dropCounter = 0, lastTime = 0;
+        let dropInterval = 1000;
+
+        let botEnabled = false;
+        let botPlan = null;
+        let botActionTimer = 0;
+        const BOT_ACTION_DELAY = 45;
+
+        function updateNext() {
+            nextCtx.fillStyle = "#fafafa"
+            nextCtx.clearRect(-5, -5, nextCanvas.width + 5, nextCanvas.height + 5);
+            nextCtx.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
+            nextPlayer.shape.forEach((row, y) => row.forEach((value, x) => {
+                if (value) {
+                    nextCtx.fillStyle = nextPlayer.color;
+                    nextCtx.fillRect(x, y, 1, 1);
+                    nextCtx.strokeStyle = '#222';
+                    nextCtx.lineWidth = 0.05;
+                    nextCtx.strokeRect(x, y, 1, 1);
+                }
+            }));
+        }
+
+        function update(time = 0) {
+            const deltaTime = time - lastTime;
+            lastTime = time;
+            dropCounter += deltaTime;
+            updateBoard();
+            updateNext();
+            
+            dropInterval = Math.max(1000 - level * 100, 100);
+
+            if (botEnabled) {
+                if (!botPlan) botPlan = computeBestMove();
+                botActionTimer += deltaTime;
+                while (botActionTimer >= BOT_ACTION_DELAY) {
+                    botActionTimer -= BOT_ACTION_DELAY;
+                    runBotStep();
+                }
+            } else {
+                botPlan = null;
+            }
+
+            if (!botEnabled && dropCounter > dropInterval) {
+                player.y++;
+                if (collide(arena, player)) {
+                    player.y--;
+                    lockPiece();
+                }
+                dropCounter = 0;
+            } else if (botEnabled) {
+                dropCounter = 0;
+            }
+            
+            draw();
+            requestAnimationFrame(update);
+        }
+
+        function drawPieceBorder(shape, offsetX, offsetY, color='#fff') {
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 0.13;
+            for (let y = 0; y < shape.length; y++) {
+                for (let x = 0; x < shape[y].length; x++) {
+                    if (!shape[y][x]) continue;
+                    const tx = offsetX + x;
+                    const ty = offsetY + y;
+                    if (y === 0 || !shape[y - 1][x])
+                        drawLine(tx, ty, tx + 1, ty);
+                    if (y === shape.length - 1 || !shape[y + 1][x])
+                        drawLine(tx, ty + 1, tx + 1, ty + 1);
+                    if (x === 0 || !shape[y][x - 1])
+                        drawLine(tx, ty, tx, ty + 1);
+                    if (x === shape[y].length - 1 || !shape[y][x + 1])
+                        drawLine(tx + 1, ty, tx + 1, ty + 1);
+                }
+            }
+            ctx.restore();
+
+            function drawLine(x1, y1, x2, y2) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+        }
+        function draw() {
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(canvas.height / ROWS, canvas.height / ROWS);
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let y = 0; y < arena.length; y++) {
+                for (let x = 0; x < arena[y].length; x++) {
+                    let cell = arena[y][x];
+                    ctx.fillStyle = cell ? colors[cell.colorIdx - 1] : '#000';
+                    ctx.fillRect(x, y, 1, 1);
+
+                    if (!cell) {
+                        ctx.strokeStyle = '#555';
+                        ctx.lineWidth = 0.05;
+                        ctx.strokeRect(x, y, 1, 1);
+                    }
+                }
+            }
+
+            if (botEnabled && botPlan) {
+                ctx.globalAlpha = 0.28;
+                botPlan.shape.forEach((row, py) => row.forEach((value, px) => {
+                    if (value) {
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(botPlan.x + px, botPlan.y + py, 1, 1);
+                    }
+                }));
+                ctx.globalAlpha = 1;
+                drawPieceBorder(botPlan.shape, botPlan.x, botPlan.y, 'rgba(255,255,255,0.45)');
+            }
+
+            player.shape.forEach((row, py) => row.forEach((value, px) => {
+                if (value) {
+                    ctx.fillStyle = player.color;
+                    ctx.fillRect(player.x + px, player.y + py, 1, 1);
+                }
+            }));
+
+            drawPieceBorder(player.shape, player.x, player.y);
+
+            // Draw borders for all placed pieces (unchanged logic)
+            for (let colorIdx = 1; colorIdx <= colors.length; colorIdx++) {
+                let visited = Array.from({length: arena.length}, () => Array(arena[0].length).fill(false));
+                for (let y = 0; y < arena.length; y++) {
+                    for (let x = 0; x < arena[0].length; x++) {
+                        const cell = arena[y][x];
+                        if (cell && !visited[y][x]) {
+                            const {pieceId, colorIdx} = cell;
+                            let queue = [[y, x]];
+                            let shape = [];
+                            let minX = x, minY = y, maxX = x, maxY = y;
+                            while (queue.length) {
+                                let [cy, cx] = queue.pop();
+                                if (cy < 0 || cy >= arena.length || cx < 0 || cx >= arena[0].length) continue;
+                                let ccell = arena[cy][cx];
+                                if (!ccell || ccell.pieceId !== pieceId || visited[cy][cx]) continue;
+                                visited[cy][cx] = true;
+                                shape.push([cy, cx]);
+                                minX = Math.min(minX, cx); minY = Math.min(minY, cy);
+                                maxX = Math.max(maxX, cx); maxY = Math.max(maxY, cy);
+                                queue.push([cy + 1, cx], [cy - 1, cx], [cy, cx + 1], [cy, cx - 1]);
+                            }
+                            let h = maxY - minY + 1, w = maxX - minX + 1;
+                            let shapeGrid = Array.from({length: h}, () => Array(w).fill(0));
+                            for (const [sy, sx] of shape) shapeGrid[sy - minY][sx - minX] = 1;
+                            drawPieceBorder(shapeGrid, minX, minY);
+                        }
+                    }
+                }
+            }
+        }
+        document.getElementById('settingsDropdown').addEventListener('change', function() {
+            const value = this.value;
+            handleSettingsOption(value);
+            this.selectedIndex = 0;
+        });
+
+        document.addEventListener('keydown', event => {
+            if (botEnabled) return;
+            if (event.key === 'ArrowLeft' || event.key === 'a') {
+                player.x--;
+                if (collide(arena, player)) player.x++;
+            }
+            if (event.key === 'ArrowRight' || event.key === 'd') {
+                player.x++;
+                if (collide(arena, player)) player.x--;
+            }
+            if (event.key === 'ArrowDown' || event.key === 's') {
+                hardDrop();
+            }
+            if (event.key === 'ArrowUp' || event.key === 'w') {
+                const rotated = rotate(player.shape);
+                if (!collide(arena, { ...player, shape: rotated })) player.shape = rotated;
+            }
+        });
+
+        update();
+
+        function handleSettingsOption(value) {
+            if (value === 'option1') {
+                let newHeight = parseInt(prompt("Enter new board height (e.g. 20):"), 10);
+                if (!isNaN(newHeight) && newHeight > 0 && newHeight <= 100) {
+                    ROWS = newHeight;
+                    arena.length = 0;
+                    for (let i = 0; i < ROWS; i++) {
+                        arena.push(Array(COLUMNS).fill(0));
+                    }
+                    canvas.height = ROWS * 30;
+                    score = 0; linesCleared = 0; level = 1;
+                    player = createPiece();
+                    nextPlayer = createPiece();
+                    dropCounter = 0;
+                    lastTime = 0;
+                    botPlan = null;
+                    botActionTimer = 0;
+                    alert("Board height changed! Restarting...");
+                } else {
+                    alert("Invalid height!");
+                }
+            } else if (value === 'bot') {
+                botEnabled = !botEnabled;
+                botPlan = null;
+                botActionTimer = 0;
+                updateBotOptionLabel();
+            }
+        }
+    </script>
+</body>
+</html>

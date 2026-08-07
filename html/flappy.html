@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Flappy Bird</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            touch-action: manipulation;
+            overscroll-behavior-y: none;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100svh;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+            position: relative;
+        }
+        #main-container {
+            position: relative;
+            width: 100vw;
+            max-width: 100vw;
+            height: 100svh;
+            max-height: 100svh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            max-width: 98vw;
+            max-height: 64vh;
+            width: 98vw;
+            height: 64vh;
+            background: #000;
+            border: 1.5vw solid #fff;
+            box-sizing: border-box;
+            display: block;
+            margin: 0 auto;
+            border-radius: 22px;
+            touch-action: none;
+        }
+        .text {
+          display: none;
+          position: absolute;
+          font-size: clamp(32px, 7vw, 70px);
+          color: #fff;
+          font-family: Courier New, monospace;
+          text-shadow: 2px 2px 8px #000a;
+          pointer-events: none;
+          user-select: none;
+        }
+        #instr {
+            position: absolute;
+            font-size: clamp(14px, 4vw, 22px);
+            right: 7vw;
+            text-align: right;
+            width: fit-content;
+            top: 3.5vw;
+            pointer-events: none;
+        }
+        #scoreBoard {
+          display: block;
+          position: absolute;
+          left: 6vw;
+          width: fit-content;
+          top: 3vw;
+          font-size: clamp(20px, 6vw, 36px);
+          color: #cff;
+          text-align: left;
+          user-select: none;
+        }
+        #hsBoard {
+          display: block;
+          position: absolute;
+          left: 50%;
+          text-align: left;
+          font-size: clamp(12px, 4vw, 22px);
+          top: 100px;
+          user-select: none;
+        }
+        #dif-container {
+            position: absolute;
+            width: 60vw;
+            max-width: 370px;
+            left: 50%;
+            top: calc(100% - 70px);
+            transform: translateX(-50%);
+            z-index: 12;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #dif {
+            width: 100%;
+            accent-color: #aff;
+            margin-bottom: 8px;
+        }
+        #display {
+            font-size: clamp(13px, 3vw, 17px);
+            color: #fff;
+            text-align: center;
+        }
+        /* Hide up/down buttons on input[type=range] mobile */
+        input[type=range]::-webkit-outer-spin-button,
+        input[type=range]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Larger tap zone for canvas */
+        @media (hover: none) and (pointer: coarse) {
+            canvas {
+                border-width: 3vw;
+                max-width: 100vw;
+                max-height: 64vh;
+            }
+        }
+        /* Handle landscape on small screens */
+        @media (max-width: 900px), (max-height: 800px) {
+            #main-container {
+                width: 100vw;
+                max-width: 100vw;
+                height: 100svh;
+                max-height: 100svh;
+            }
+            canvas {
+                max-width: 100vw;
+                max-height: 55vw;
+                border-width: 2.5vw;
+            }
+            #dif-container { max-width: 90vw;}
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <canvas id="gameCanvas" width="1200" height="700"></canvas>
+        <div id="instr" class="text">Tap/press anywhere to start</div>
+        <div id="scoreBoard" class="text"></div>
+        <div id="hsBoard" class="text"></div>
+        <div id="dif-container">
+            <input type="range" min="0.2" max="2" id="dif" step="0.1" value="1">
+            <div id="display">Difficulty: 0.5</div>
+        </div>
+    </div>
+    <script>
+        // Responsive canvas sizing for mobile
+        function resizeCanvas() {
+            const c = document.getElementById('gameCanvas');
+            let width = window.innerWidth * 0.98;
+            let height = window.innerHeight * 0.64;
+
+            // Limit max size to maintain aspect ratio
+            if (width / 1200 > height / 700) {
+                width = (height / 700) * 1200;
+            } else {
+                height = (width / 1200) * 700;
+            }
+            c.style.width = width + 'px';
+            c.style.height = height + 'px';
+        }
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('orientationchange', resizeCanvas);
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Mobile viewport fit improvement
+        if ('visualViewport' in window) {
+            window.visualViewport.addEventListener('resize', resizeCanvas);
+        }
+
+        let birdY = 150;
+        let pipeSpeed = 10;
+        const gravity = .6;
+        let velocity = 0;
+        let dead = false;
+        let pipes = [];
+        const pipeWidth = 50;
+        const pipeGap = 100;
+        const pipeFrequency = 50;
+        let frameCounter = 0;
+        let jumpHeight = 10.5;
+        let fallSpeed = 8;
+        let isFalling = false;
+        let fallComplete = false;
+        let score = 0;
+        let lastPipeHeight = null;
+        const heightChangeLimit = 280;
+        function getCurrentDifficultyStr() {
+          return Number(document.getElementById('dif').value).toFixed(2);
+        }
+        function getHighscoresObject() {
+          let obj = {};
+          try {
+            obj = JSON.parse(localStorage.getItem('hyescores') || '{}');
+          } catch (e) {
+            obj = {};
+          }
+          return obj;
+        }
+        function saveHighscoresObject(obj) {
+          try {
+            localStorage.setItem('hyescores', JSON.stringify(obj));
+          } catch (e) { }
+        }
+        function getHighscoreForCurrentDiff() {
+          const obj = getHighscoresObject();
+          return obj[getCurrentDifficultyStr()] || 0;
+        }
+        function setHighscoreForCurrentDiff(val) {
+          const obj = getHighscoresObject();
+          obj[getCurrentDifficultyStr()] = val;
+          saveHighscoresObject(obj);
+        }
+
+        let highscore = getHighscoreForCurrentDiff();
+
+        let fps = 60; 
+        let fps2 = 60;
+        let lastTimestamp = performance.now();
+        let fpsHist = [];
+        let fpsAv = 0;
+
+        // --- Patch for mobile: prevent multiple event firings and pipe glitches ---
+
+        // Only allow one flap per animation frame for touch events
+        let lastFlapFrame = -1;
+        function addFlapListeners() {
+            document.addEventListener('keydown', keyFlap, {passive: false});
+            // Only listen to touchstart on the canvas, not the whole body!
+            // Otherwise every tap anywhere triggers, and can double-fire.
+            // This solves the "pipes shift left" bug after touches.
+            canvas.addEventListener('mousedown', pointerFlap, {passive: false});
+            canvas.addEventListener('touchstart', pointerFlap, {passive: false});
+            // --- removed: document.body.addEventListener('touchstart', pointerFlap, {passive: false}); ---
+        }
+        function removeFlapListeners() {
+            document.removeEventListener('keydown', keyFlap);
+            canvas.removeEventListener('mousedown', pointerFlap);
+            canvas.removeEventListener('touchstart', pointerFlap);
+        }
+        function keyFlap(event) {
+            // Filter out modifier keys, but any other key
+            if (
+                event.code === 'MetaLeft'  || event.code === 'MetaRight' ||
+                event.code === 'ControlLeft' || event.code === 'ControlRight' ||
+                event.code === 'AltLeft' || event.code === 'AltRight'
+            ) return;
+            flap();
+            if (event && event.preventDefault) event.preventDefault();
+        }
+        function pointerFlap(event) {
+            // Ignore subsequent touch events within the same animation frame
+            const nowFrame = performance.now();
+            if (lastFlapFrame == frameCounter) return;
+            flap();
+            lastFlapFrame = frameCounter;
+            if (event && event.preventDefault) event.preventDefault();
+        }
+        addFlapListeners();
+
+        // Difficulty slider update
+        document.getElementById('dif').addEventListener('input', function() {
+            highscore = getHighscoreForCurrentDiff();
+            updateBoard();
+        });
+
+        death("floor");
+        // Remove desktop-only transform hacks
+        document.body.style.transform = "none";
+
+        function setup() {
+            birdY = 150;
+            velocity = 0;
+            fallSpeed = 0;
+            pipes = [];
+            score = 0;
+            frameCounter = 0;
+            lastPipeHeight = null;
+            highscore = getHighscoreForCurrentDiff();
+            updateBoard();
+        }
+
+        function flap() {
+            velocity = 0 - (jumpHeight*(60/fps2));
+        }
+
+        function updateBoard() {
+            const scor = document.getElementById('scoreBoard');
+            const hs = document.getElementById('hsBoard');
+            scor.textContent = `${score}pts`
+            hs.textContent= `hs(${getCurrentDifficultyStr()}): ${highscore}`;
+        }
+
+        function createPipe() {
+            let topPipeHeight;
+            updateBoard();
+            let limit = 0;
+            do {
+                topPipeHeight = Math.random() * ((canvas.height - 50) - pipeGap - 20);
+                limit++;
+                if (limit > 100) break;
+            } while (lastPipeHeight !== null && Math.abs(topPipeHeight - lastPipeHeight) > heightChangeLimit);
+            pipes.push({
+                x: canvas.width,
+                top: topPipeHeight,
+                bottom: canvas.height - topPipeHeight - pipeGap,
+            });
+            lastPipeHeight = topPipeHeight;
+        }
+
+        function drawPipes() {
+            ctx.fillStyle = '#0fa';
+            pipes.forEach(pipe => {
+                ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
+                ctx.fillRect(pipe.x, canvas.height - pipe.bottom, pipeWidth, pipe.bottom);
+            });
+        }
+
+        let pipeSpawnCounter = 0;
+
+        function updatePipes() {
+            const effectivePipeInterval = pipeFrequency / (60 / fps2);
+
+            pipeSpawnCounter += 1;
+            if (pipeSpawnCounter >= effectivePipeInterval) {
+                createPipe();
+                pipeSpawnCounter = 0;
+            }
+
+            for (let i = pipes.length - 1; i >= 0; i--) {
+                const pipe = pipes[i];
+
+                if (pipe.x < 76 + 20 && pipe.x + pipeWidth > 75) {
+                    if (birdY < pipe.top || birdY > canvas.height - pipe.bottom - 20) {
+                        death("pipe");
+                    }
+                }
+                if (!dead) {
+                    pipe.x -= pipeSpeed*(60/fps2);
+                }
+                if (pipe.x + pipeWidth < 0) {
+                    pipes.splice(i, 1);
+                    score++;
+                    if (score > highscore) {
+                        highscore = score;
+                        setHighscoreForCurrentDiff(score);
+                    }
+                }
+            }
+        }
+
+        function death(type) {
+            if (type === "floor") {
+                birdY = canvas.height - 20;
+                isFalling = false;
+                fallComplete = true;
+                pipes = [];
+            } else if (type === "pipe") {
+                isFalling = true;
+            }
+            velocity = 0;
+            dead = true;
+        }
+
+        function fallAnimation() {
+            if (isFalling && birdY < canvas.height - 20) {
+                fallSpeed = fallSpeed + ((fallSpeed + 3) * 0.03)
+                birdY += fallSpeed;
+            } else if (birdY >= canvas.height - 20) {
+                pipes = [];
+                fallComplete = true;
+                isFalling = false;
+            }
+        }
+
+        function restartGame(event) {
+            dead = false;
+            setup();
+            removeRestartListeners();
+            // Prevent glitch on mobile: prevent default and stop propagation
+            if (event && event.preventDefault) event.preventDefault();
+            if (event && event.stopPropagation) event.stopPropagation();
+        }
+        function addRestartListeners() {
+            document.addEventListener('keydown', restartGame, {passive: false});
+            canvas.addEventListener('mousedown', restartGame, {passive: false});
+            canvas.addEventListener('touchstart', restartGame, {passive: false});
+            // --- removed: document.body.addEventListener('touchstart', restartGame, {passive: false}); ---
+        }
+        function removeRestartListeners() {
+            document.removeEventListener('keydown', restartGame);
+            canvas.removeEventListener('mousedown', restartGame);
+            canvas.removeEventListener('touchstart', restartGame);
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#000'
+            ctx.fillRect(0,0, canvas.width, canvas.height)
+            frameCounter++;
+            velocity += gravity*(Math.pow(60/fps2,2));
+            if (!dead) {
+                birdY += velocity;
+                document.getElementById('instr').style.display = 'none';
+                document.getElementById('scoreBoard').style.display = 'block'
+            } else {
+                fallAnimation();
+            }
+            if (!dead) {
+                updatePipes();
+            }
+            drawPipes();
+            ctx.fillStyle = 'yellow';
+            ctx.fillRect(75, birdY, 20, 20);
+            
+            if (birdY > canvas.height - 20) {
+                death("floor");
+            } else if (birdY < 0) {
+                birdY = 0;
+                velocity = 0;
+            }
+
+            if (fallComplete) {
+                document.getElementById('instr').style.display = 'block';
+                setTimeout(() => {
+                    setup();
+                    score = 0;
+                    updateBoard();
+                    addRestartListeners();
+                    fallComplete = false;
+                }, 0);
+            }
+            document.getElementById("display").textContent = `Difficulty: ${Number(document.getElementById("dif").value).toFixed(2)}`
+            requestAnimationFrame(gameLoop);
+        }
+        setup();
+        resizeCanvas();
+        requestAnimationFrame(gameLoop);
+
+        // Remove unsaved changes warning for mobile friendliness
+        window.addEventListener('beforeunload', function (event) {
+            // event.preventDefault(); 
+            // event.returnValue = '';
+        });
+
+        function sampleFPS() {
+            const now = performance.now();
+            const delta = now - lastTimestamp;
+            if (delta > 0 && delta < 1000) {
+                fps = 1000 / delta;
+            }
+            fpsHist.unshift(fps)
+            fpsAv = 0;
+            for (let i = 0; i<fpsHist.length; i++) {
+                fpsAv+=fpsHist[i];
+            }
+            fpsAv/=fpsHist.length
+            if (fpsHist[60]) {fpsHist.splice(60,1)}
+            lastTimestamp = now;
+            fps2=fps*(1/(document.getElementById("dif").value))
+            requestAnimationFrame(sampleFPS);
+        }
+        sampleFPS();
+
+        // Prevent iOS double tap zoom and scrolling on game
+        document.addEventListener("touchmove", function(e) {
+            if (e.target.closest("#gameCanvas")) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // iOS browser bar hiding
+        window.scrollTo(0, 1);
+    </script>
+</body>
+</html>

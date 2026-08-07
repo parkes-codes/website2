@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mp3 Combiner</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <style>
+      body {
+        background-color: #111;
+        color: #fff;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      button {
+        background-color: #022;
+        border-radius: 5px;
+        transition: background 0.15s, border-radius 1s;
+        border: #fff 2px solid;
+        color: #fff
+      }
+      button:hover {
+        background-color: #8aa;
+        border-radius: 50px;
+      }
+      /* Style the custom file button */
+      .custom-file-label {
+        display: inline-block;
+        padding: 5px 14px;
+        background: #022;
+        color: #fff;
+        border-radius: 3px;
+        border: none;
+        font-family: inherit;
+        font-size: 15px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background 0.15s, border-radius 0.15s;
+        border: #fff 2px solid;
+        height: 10px;
+        max-height: 10px;
+        width: 80px;
+      }
+      .custom-file-label:hover {
+        background: #8aa;
+        border-radius: 15px;
+      }
+      /* Hide the native file input, but leave it in flow for screen reader/keyboard */
+      .custom-file-input {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+      }
+      .file-label-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .filename {
+        margin-left: 6px;
+        color: #eee;
+        min-width: 100px;
+        font-size: 13px;
+      }
+      #pluh {
+        min-width: fit-content;
+      }
+      .plink {
+        padding: 0;
+         margin-top: -3px;
+         margin-left: -10px;
+         min-width: 100px;
+          display: block;
+      }
+    </style>
+  </head>
+  <body>
+
+  <div style="display: flex; flex-direction: row; min-width: fit-content;">
+    <p>File 1:</p>
+    <span class="file-label-wrap" style="margin-right: -100px;" id="pluh">
+
+      <label class="custom-file-label" for="file1input" style="display: flex; align-items: flex-start; height: 28px;">
+        <span class="plink">Choose file</span>
+      </label>
+      <input type="file" id="file1input" accept=".mp3,audio/mp3,audio/mpeg" class="custom-file-input">
+      <span class="filename" id="file1name"></span>
+    </span>
+    <p>File 2:</p>
+    <span class="file-label-wrap">
+      <label class="custom-file-label" for="file2input" style="display: flex; align-items: flex-start; height: 28px;">
+        <span class="plink">Choose file</span>
+      </label>
+      <input type="file" id="file2input" accept=".mp3,audio/mp3,audio/mpeg" class="custom-file-input">
+      <span class="filename" id="file2name"></span>
+    </span>
+  </div>
+  <div style="display: flex; flex-direction: row; margin-top: -5px;">
+  <input type="range" step="1" min="1" max="3" id="typeInput" value="1">
+  <div id="display">
+      File1 left side, file2 right</div>
+  </div>
+  <p style="margin-bottom: -10px"></p>
+  <button id="processbtn" style="margin-top: 0px;" onclick="process()">Combine</button>
+  <button id="download" onclick="download()">Download</button>
+
+  <script>
+
+  let file1Buffer = null;
+  let file2Buffer = null;
+  let combinedBlob = null;
+
+  const file1input = document.getElementById('file1input');
+  const file2input = document.getElementById('file2input');
+  const file1name = document.getElementById('file1name');
+  const file2name = document.getElementById('file2name');
+  const downloadBtn = document.getElementById('download');
+  const typeInput = document.getElementById('typeInput');
+
+  const names = [
+    "File1 left side, file2 right",
+    "File1 and File2 summed to mono",
+    "File1 left, file2 right DELAYED 0.1s"
+  ];
+
+  typeInput.addEventListener("input", function() {
+    document.getElementById("display").textContent = `${names[this.value-1]}`;
+  });
+
+  // Show filename or 'No file selected'
+  function updateFileLabel(input, label) {
+    if (!input.files || input.files.length === 0) {
+      label.textContent = "";
+    } else {
+      document.getElementById("pluh").style.marginRight = "10px"
+      label.textContent = input.files[0].name;
+    }
+  }
+
+  file1input.addEventListener('change', () => updateFileLabel(file1input, file1name));
+  file2input.addEventListener('change', () => updateFileLabel(file2input, file2name));
+
+  // Set default display
+  updateFileLabel(file1input, file1name);
+  updateFileLabel(file2input, file2name);
+
+  downloadBtn.disabled = true;
+
+  // Read files into AudioBuffer
+  function readFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          const decoded = await audioCtx.decodeAudioData(e.target.result.slice(0));
+          audioCtx.close();
+          resolve(decoded);
+        } catch (err) {
+          reject(err);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
+  }
+
+  // Get only *stereo* channels (no mono: upmix with zero right for mono, do not duplicate)
+  function getStereoChannelsNoMono(buffer, length) {
+    const padOrSlice = (channelData) => {
+      const array = new Float32Array(length);
+      array.set(channelData.subarray(0, Math.min(channelData.length, length)));
+      return array;
+    };
+
+    let left, right;
+    if (buffer.numberOfChannels >= 2) {
+      left = padOrSlice(buffer.getChannelData(0));
+      right = padOrSlice(buffer.getChannelData(1));
+    } else {
+      // Mono file: left=source, right=silence
+      left = padOrSlice(buffer.getChannelData(0));
+      right = new Float32Array(length); // silence
+    }
+    return [left, right];
+  }
+
+  // Convert any buffer to mono (sum channels, divide by channel count)
+  function bufferToMono(buffer, length) {
+    const mono = new Float32Array(length);
+    const numChannels = buffer.numberOfChannels;
+    for (let ch = 0; ch < numChannels; ++ch) {
+      const data = buffer.getChannelData(ch);
+      for (let i = 0; i < length; ++i) {
+        mono[i] += (data[i] || 0);
+      }
+    }
+    if (numChannels > 1) {
+      for (let i = 0; i < length; ++i) {
+        mono[i] /= numChannels;
+      }
+    }
+    return mono;
+  }
+
+  // Sum two mono arrays (with length)
+  function sumMono(a, b) {
+    const len = Math.max(a.length, b.length);
+    const sum = new Float32Array(len);
+    for (let i = 0; i < len; ++i) {
+      sum[i] = (a[i] || 0) + (b[i] || 0);
+      // Clamp to [-1, 1] to avoid clipping
+      sum[i] = Math.max(-1, Math.min(1, sum[i]));
+    }
+    return sum;
+  }
+
+  // Combine File1 and File2 per mode
+  async function process() {
+    const f1 = file1input.files[0];
+    const f2 = file2input.files[0];
+    const type = Number(typeInput.value);
+
+    if (!f1 || !f2) {
+      alert("Please select both files.");
+      return;
+    }
+
+    // Decode audio files
+    try {
+      [file1Buffer, file2Buffer] = await Promise.all([readFile(f1), readFile(f2)]);
+    } catch (e) {
+      alert("Audio decoding error: " + e.message);
+      return;
+    }
+
+    const mode1 = type === 1;
+    const mode2 = type === 2;
+    const mode3 = type === 3;
+
+    if (mode1 || mode3) {
+      // Unified processing for mode1 and mode3. Mode3 uses a delay, mode1 uses delay=0.
+      let delaySeconds = 0;
+      if (mode3) delaySeconds = 0.1;
+      const sampleRate = Math.max(file1Buffer.sampleRate, file2Buffer.sampleRate);
+      const delaySamples = Math.round(delaySeconds * sampleRate);
+
+      // Right channel will be delayed, so length is the longest signal (including delay offset)
+      const leftLen = file1Buffer.length;
+      const rightLen = file2Buffer.length + delaySamples;
+      const length = Math.max(leftLen, rightLen);
+
+      function padOrSlice(channelData, length) {
+        const result = new Float32Array(length);
+        result.set(channelData.subarray(0, Math.min(channelData.length, length)));
+        return result;
+      }
+
+      // Mono to left, and file2 to right (with delay on right)
+      const left = padOrSlice(file1Buffer.getChannelData(0), length);
+      // Delay for right: pad with zeros then set file2 starting at delay offset
+      const right = new Float32Array(length);
+      const file2Ch0 = file2Buffer.getChannelData(0);
+      for (let i = 0; i < file2Ch0.length && (i + delaySamples) < length; ++i) {
+        right[i + delaySamples] = file2Ch0[i];
+      }
+
+      const stereoBuffer = new Float32Array(length * 2);
+      for (let i = 0; i < length; ++i) {
+        stereoBuffer[2 * i] = left[i] || 0;
+        stereoBuffer[2 * i + 1] = right[i] || 0;
+      }
+      combinedBlob = encodeWAV(stereoBuffer, 2, sampleRate);
+    } else if (mode2) {
+      // Convert both to mono and add their data for type 2
+      const sampleRate = Math.max(file1Buffer.sampleRate, file2Buffer.sampleRate);
+      const length = Math.max(file1Buffer.length, file2Buffer.length);
+
+      const mono1 = bufferToMono(file1Buffer, length);
+      const mono2 = bufferToMono(file2Buffer, length);
+      const summed = sumMono(mono1, mono2);
+
+      combinedBlob = encodeWAV(summed, 1, sampleRate);
+    }
+
+    downloadBtn.disabled = false;
+    downloadBtn.textContent = "Download";
+  }
+
+  // Download logic
+  function download() {
+    if (!combinedBlob) return;
+    const url = URL.createObjectURL(combinedBlob);
+    const a = document.createElement('a');
+    let typeVal = Number(typeInput.value);
+    let fname;
+    if (typeVal === 2) fname = "combined-mono.wav";
+    else if (typeVal === 3) fname = "combined-stereo-delayed.wav";
+    else fname = "combined-stereo.wav";
+
+    a.href = url;
+    a.download = fname;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // Utility: Write 16-bit PCM WAV file from Float32Array
+  function encodeWAV(samples, numChannels, sampleRate) {
+    const bytesPerSample = 2;
+    const blockAlign = numChannels * bytesPerSample;
+    const byteRate = sampleRate * blockAlign;
+    const dataLength = samples.length * bytesPerSample;
+
+    const buffer = new ArrayBuffer(44 + dataLength);
+    const view = new DataView(buffer);
+
+    // Helper for ASCII bytes
+    function writeString(view, offset, string) {
+      for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+      }
+    }
+
+    // RIFF identifier
+    writeString(view, 0, 'RIFF');
+    view.setUint32(4, 36 + dataLength, true);
+    writeString(view, 8, 'WAVE');
+    // fmt chunk
+    writeString(view, 12, 'fmt ');
+    view.setUint32(16, 16, true); // PCM
+    view.setUint16(20, 1, true);  // PCM format
+    view.setUint16(22, numChannels, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, byteRate, true);
+    view.setUint16(32, blockAlign, true);
+    view.setUint16(34, bytesPerSample * 8, true);
+    // data chunk
+    writeString(view, 36, 'data');
+    view.setUint32(40, dataLength, true);
+
+    // Write PCM samples as signed 16-bit little endian
+    let offset = 44;
+    for (let i = 0; i < samples.length; i++, offset += 2) {
+      // Clamp to [-1,1] and scale to 16-bit signed int
+      let s = Math.max(-1, Math.min(1, samples[i]));
+      s = s < 0 ? s * 0x8000 : s * 0x7FFF;
+      view.setInt16(offset, s, true);
+    }
+
+    return new Blob([buffer], { type: "audio/wav" });
+  }
+
+  </script>
+</body>
+</html>

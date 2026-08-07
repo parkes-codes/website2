@@ -1,0 +1,511 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Particles</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px; 
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #powertext {
+        position: absolute;
+        z-index: 2;
+        left: 28px;
+        bottom: -1px;
+        width: 30px;
+        height: 12px;
+        font-size: 14px;
+        color: #fff;
+    }
+    #screensavertog {
+        position: absolute;
+        z-index: 3;
+        left: 4px;
+        bottom: 5px;
+        width: 16px;
+        height: 16px;
+        font-size: 14px;
+        color: #fff;
+    }
+    #mode, #length, #powerinput {
+        position: absolute;
+        z-index: 1;
+        left: 110px;
+        bottom: 7px;
+        width: 25px;
+        height: 12px;
+        font-size: 10px
+    }
+    #powerinput {
+        left: 69px;
+        width: 30px;
+    }
+    #length {
+        left: 147px;
+        width: 30px;
+    }
+</style>
+<body>
+ <canvas id="gamecanvas"></canvas>
+ <input id="powerinput" type="number" value="5" class="thingy">
+ <input id="screensavertog" type="checkbox" value="off">
+ <p id="powertext" class="thingy">power:</p>
+ <input id="mode" placeholder="mode" type="number" min="1" max="3">
+ <input id="length" placeholder="tl" value="10" type="number">
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+const showhide = document.getElementsByClassName("thingy");
+const playa = document.getElementById("screensavertog");
+const modeInput = document.getElementById("mode");
+const lenInput = document.getElementById("length");
+
+let mousedown = false;
+let particles = [];
+let mouseX = 0;
+let mouseY = 0;
+let screensaver = false;
+let mode = 2;
+let trailLength = 10;
+let lastTime = performance.now();
+let spawnHugePending = false; // Will signal to spawn a big particle
+
+// Helper function to spawn a particle with branching info
+function spawnParticle({x, y, color, xv, yv, size=1, depth=0, canBranch=true, mass=null}) {
+    return {
+        x,
+        y,
+        color,
+        xv,
+        yv,
+        size,
+        depth,
+        canBranch,
+        branched: false,
+        trail: [],
+        time: 0,
+        collided: false,
+        lastX: x,
+        lastY: y,
+        mass: (mass !== null) ? mass : size // Default: mass = size
+    };
+}
+
+// Improved full solid physics collision detection & response (particles never overlap)
+function resolveSolidCollision(p1, p2) {
+    let dx = p1.x - p2.x;
+    let dy = p1.y - p2.y;
+    let dist = Math.sqrt(dx * dx + dy * dy);
+    let r1 = p1.size * 3, r2 = p2.size * 3;
+    let minDist = r1 + r2;
+    if (dist < minDist && dist !== 0) {
+        // Push both particles back so they are exactly touching
+        let overlap = minDist - dist;
+        let nx = dx / dist, ny = dy / dist;
+        // Distribute push-back proportional to inverse mass (heavier moves less)
+        let m1 = (p1.mass !== undefined) ? p1.mass : 1;
+        let m2 = (p2.mass !== undefined) ? p2.mass : 1;
+        let totalMass = m1 + m2;
+        let sep1 = overlap * (m2 / totalMass);
+        let sep2 = overlap * (m1 / totalMass);
+        p1.x += nx * sep1;
+        p1.y += ny * sep1;
+        p2.x -= nx * sep2;
+        p2.y -= ny * sep2;
+
+        // 2D elastic collision response -- fully solid response
+        let tx = -ny, ty = nx;
+        // Normal velocities
+        let v1n = p1.xv * nx + p1.yv * ny;
+        let v2n = p2.xv * nx + p2.yv * ny;
+        // Tangential velocities
+        let v1t = p1.xv * tx + p1.yv * ty;
+        let v2t = p2.xv * tx + p2.yv * ty;
+
+        // Use custom masses!
+        // Final normal velocities for perfect elasticity (with mass)
+        let v1n_final = (v1n * (m1 - m2) + 2 * m2 * v2n) / (m1 + m2);
+        let v2n_final = (v2n * (m2 - m1) + 2 * m1 * v1n) / (m1 + m2);
+
+        // Go back to x/y velocity
+        // REDUCED BOUNCINESS: Dampen the normal velocities after collision
+        const bounceDamping = 0.98;
+        p1.xv = (v1n_final * nx + v1t * tx) * bounceDamping;
+        p1.yv = (v1n_final * ny + v1t * ty) * bounceDamping;
+        p2.xv = (v2n_final * nx + v2t * tx) * bounceDamping;
+        p2.yv = (v2n_final * ny + v2t * ty) * bounceDamping;
+
+        // Small fudge factor to avoid sticking
+        const minSep = 0.005;
+        if (Math.abs(p1.x - p2.x) < minSep && Math.abs(p1.y - p2.y) < minSep) {
+            p1.x += (Math.random() - 0.5) * minSep * 2;
+            p1.y += (Math.random() - 0.5) * minSep * 2;
+            p2.x -= (Math.random() - 0.5) * minSep * 2;
+            p2.y -= (Math.random() - 0.5) * minSep * 2;
+        }
+    }
+}
+
+function detectSolidCollision(p1, p2) {
+    let dx = p1.x - p2.x;
+    let dy = p1.y - p2.y;
+    let dist = Math.sqrt(dx * dx + dy * dy);
+    let r1 = p1.size * 3, r2 = p2.size * 3;
+    return dist < (r1 + r2);
+}
+
+// All particles participate in overlap resolution (no sleep check)
+function separateAllParticles(particles, passes = 6) {
+    for (let k = 0; k < passes; k++) {
+        for (let i = 0; i < particles.length; i++) {
+            let p1 = particles[i];
+            for (let j = i + 1; j < particles.length; j++) {
+                let p2 = particles[j];
+                if (detectSolidCollision(p1, p2)) {
+                    resolveSolidCollision(p1, p2);
+                }
+            }
+        }
+    }
+}
+
+function animate(now) {
+    if (typeof now !== "number") now = performance.now();
+    const delta = Math.max(1, now - lastTime);
+    lastTime = now;
+    mode = modeInput.value;
+    trailLength = (lenInput.value !== "") ? (parseFloat(lenInput.value) + 1) : 10;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // More spawn tries per frame is ok, but reject immediate collisions
+    function canSpawnParticleAt(x, y, size) {
+        for (let i = 0; i < particles.length; i++) {
+            let p = particles[i];
+            let dx = x - p.x, dy = y - p.y, s1 = size * 3, s2 = p.size * 3;
+            let dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < (s1 + s2)) return false;
+        }
+        return true;
+    }
+
+    // Mouse spawn
+    if (mousedown && !screensaver) {
+        let px = mouseX, py = mouseY, psz = 1;
+        if (canSpawnParticleAt(px, py, psz) || true) {
+            particles.push(
+                spawnParticle({
+                    x: px,
+                    y: py,
+                    color: Math.random() * 360,
+                    xv: (Math.random() - 0.5) * (powerinput.value * 1.25),
+                    yv: (Math.random() - 1) * (powerinput.value),
+                    size: psz,
+                    depth: 0,
+                    canBranch: true
+                })
+            );
+        }
+    }
+
+    // Huge particle via space (spawnHugePending flag controls it)
+    if (spawnHugePending && !screensaver) {
+        // Place huge particle at mouse position, but never overlap others if possible
+        let px = mouseX, py = mouseY, psz = 7;
+        let mass = 30;
+        if (canSpawnParticleAt(px, py, psz)) {
+            particles.push(
+                spawnParticle({
+                    x: px,
+                    y: py,
+                    color: Math.random() * 360,
+                    xv: (Math.random() - 0.5) * (powerinput.value * 0.3), // slower
+                    yv: -Math.abs((Math.random()) * (powerinput.value * 0.7)), // up punch
+                    size: psz,
+                    depth: 0,
+                    canBranch: false,
+                    mass: mass
+                })
+            );
+        }
+        spawnHugePending = false;
+    }
+
+    if (screensaver && !mousedown) {
+        for (let tryCount = 0; tryCount < 2; tryCount++) {
+            let px = Math.random() * canvas.width + 10, py = -10, psz = 1;
+            if (canSpawnParticleAt(px, py, psz)) {
+                particles.push(
+                    spawnParticle({
+                        x: px,
+                        y: py,
+                        color: Math.random() * 360,
+                        xv: (Math.random() - 0.5) * 6,
+                        yv: (Math.random() - 1) * 9,
+                        size: psz,
+                        depth: 0,
+                        canBranch: true
+                    })
+                );
+                break;
+            }
+        }
+    }
+
+    // Remove all sleep mechanics
+    for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.lastX = p.x;
+        p.lastY = p.y;
+    }
+
+    separateAllParticles(particles, 8);
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+        let p = particles[i];
+
+        p.time += delta;
+
+        ctx.beginPath();
+        // Visual: outline huge particles with white for more drama
+        if (p.mass && p.mass > 5) {
+            ctx.strokeStyle = `#fff`;
+            ctx.lineWidth = 3 * p.size + 2;
+            ctx.arc(p.x, p.y, p.size + 1, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.strokeStyle = `hsl(${p.color}, 60%, 70%)`;
+            ctx.lineWidth = 3 * p.size;
+        } else {
+            ctx.strokeStyle = `hsl(${p.color}, 30%, 80%)`;
+            ctx.lineWidth = 3 * p.size;
+        }
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.stroke();
+
+        if (p.trail.length > 1) {
+            for (let t = 1; t < p.trail.length; t++) {
+                ctx.beginPath();
+                ctx.moveTo(p.trail[t - 1].x, p.trail[t - 1].y);
+                ctx.lineTo(p.trail[t].x, p.trail[t].y);
+                ctx.lineWidth = 3 * Math.max((2 - ((t * (1.5 / p.trail.length)) ) * p.size), 0.5);
+                ctx.strokeStyle = (p.mass && p.mass > 5)
+                  ? `hsla(${p.color}, 80%, 90%, ${100 - t * (100 / trailLength)}%)`
+                  : `hsla(${p.color}, 30%, 80%, ${100 - t * (100 / trailLength)}%)`;
+                ctx.stroke();
+            }
+        }
+
+        // Branching: Only if enough space, never for huge
+        if (mode == 2 && !p.branched && p.canBranch && p.time > 1000 && p.depth < 2 && (!p.mass || p.mass <= 5)) {
+            const newParticles = [];
+            const angles = [0, Math.PI/2, Math.PI, 3*Math.PI/2];
+            const sizeNew = p.size * 0.5;
+            for (let a = 0; a < 4; a++) {
+                const angle = angles[a] + (Math.random() - 0.5) * (Math.PI / 1);
+                const speed = Math.sqrt(p.xv * p.xv + p.yv * p.yv) * (0.7 + Math.random()*0.6);
+                const xv = speed * Math.cos(angle) * 2;
+                const yv = speed * Math.sin(angle) * 1 - 2;
+
+                // Only add if no overlap at that position
+                let ok = true;
+                for (let j = 0; j < particles.length; j++) {
+                    let other = particles[j];
+                    let dx = p.x - other.x, dy = p.y - other.y;
+                    let dist = Math.sqrt(dx*dx + dy*dy);
+                    if (other !== p && dist < (sizeNew*3 + other.size*3)) {
+                        ok = false;
+                        break;
+                    }
+                }
+                if (ok) {
+                    newParticles.push(
+                        spawnParticle({
+                            x: p.x,
+                            y: p.y,
+                            color: p.color + Math.random()*40 - 20,
+                            xv: xv,
+                            yv: yv,
+                            size: sizeNew,
+                            depth: p.depth + 1,
+                            canBranch: (p.depth + 1) < 2
+                        })
+                    );
+                }
+            }
+            if(newParticles.length > 0){
+                particles.push(...newParticles);
+                p.branched = true;
+                particles.splice(i, 1);
+                continue;
+            }
+        }
+
+        if (!(mousedown && screensaver)) {
+            const fpsNorm = delta / 16.67;
+
+            if (mode == 3) {
+                // Gravity
+                p.yv += 0.1 / fpsNorm;
+
+                // Apply velocity tentatively
+                p.x += p.xv / fpsNorm;
+                p.y += p.yv / fpsNorm;
+
+                let bottomY = canvas.height - p.size * 3;
+                let leftX = p.size * 3;
+                let rightX = canvas.width - p.size * 3;
+
+                // Floor
+                if (p.y > bottomY) {
+                    p.y = bottomY;
+                    if (Math.abs(p.yv) < 0.2) {
+                        p.yv = 0;
+                    } else {
+                        p.yv *= -0.5;
+                        p.xv *= 0.75;
+                    }
+                }
+                // Left wall
+                if (p.x < leftX) {
+                    p.x = leftX;
+                    if (Math.abs(p.xv) < 0.2) {
+                        p.xv = 0;
+                    } else {
+                        p.xv *= -0.5;
+                        p.yv *= 0.75;
+                    }
+                }
+                // Right wall
+                if (p.x > rightX) {
+                    p.x = rightX;
+                    if (Math.abs(p.xv) < 0.2) {
+                        p.xv = 0;
+                    } else {
+                        p.xv *= -0.5;
+                        p.yv *= 0.75;
+                    }
+                }
+                // Air friction
+                p.xv *= Math.pow(0.985, 1 / fpsNorm);
+
+            } else {
+                // Default: air drag
+                p.x += p.xv / fpsNorm;
+                p.y += p.yv / fpsNorm;
+                p.yv += 0.1 / fpsNorm;
+                p.xv *= Math.pow(0.985, 1 / fpsNorm);
+
+                let leftX = p.size * 3;
+                let rightX = canvas.width - p.size * 3;
+                if (p.x < leftX) {
+                    p.x = leftX;
+                    if (Math.abs(p.xv) < 0.2) {
+                        p.xv = 0;
+                    } else {
+                        p.xv *= -0.5;
+                        p.yv *= 0.75;
+                    }
+                }
+                if (p.x > rightX) {
+                    p.x = rightX;
+                    if (Math.abs(p.xv) < 0.2) {
+                        p.xv = 0;
+                    } else {
+                        p.xv *= -0.5;
+                        p.yv *= 0.75;
+                    }
+                }
+            }
+
+            // Final anti-overlap check (all particles participate)
+            for (let j = 0; j < particles.length; j++) {
+                if(j === i) continue;
+                let op = particles[j];
+                if (detectSolidCollision(p, op)) {
+                    resolveSolidCollision(p, op);
+                }
+            }
+
+            // Trail
+            p.trail.unshift({x: p.x, y: p.y});
+            if (p.trail.length > trailLength) {
+                p.trail.splice(trailLength, 1);
+            }
+
+            // Remove if off bottom in default mode, or stuck outside in mode 3
+            if (mode == 3) {
+                if (p.x < -30 || p.x > canvas.width + 30) {
+                    particles.splice(i, 1);
+                }
+            } else {
+                if (p.trail[p.trail.length-1].y > canvas.height) {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+    }
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+canvas.addEventListener("mousedown", function(e)  {
+    mousedown = true;
+});
+
+canvas.addEventListener("mouseup", function(e) {
+    mousedown = false;
+});
+
+window.addEventListener("mousemove", function(e) {
+    mouseX = e.clientX / 1.02;
+    mouseY = e.clientY / 1.02;
+});
+
+// SPAWN HUGE PARTICLE ON SPACE PRESS!
+window.addEventListener("keydown", function(e) {
+    if (e.code === 'Space' && !spawnHugePending) {
+        e.preventDefault();
+        spawnHugePending = true;
+    }
+});
+
+playa.addEventListener("click", function(e) {
+    screensaver = !screensaver;
+    if (screensaver) {
+        for (let i = 0; i < showhide.length; i++) {
+            showhide[i].style.display = "none";
+        }
+    } else {
+        for (let i = 0; i < showhide.length; i++) {
+            showhide[i].style.display = "block";
+        }
+    }
+});
+</script>
+</html>

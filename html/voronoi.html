@@ -1,0 +1,319 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plinkonoi :)</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+        background-image: url(../images/plinkkstatic.png);
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: 0px;
+        margin-top: 0px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+    #polycount-label {
+        color: #fff;
+        position: absolute;
+        left: 12px;
+        top: 10px;
+        font-family: sans-serif;
+        font-size: 18px;
+        z-index: 10;
+        user-select: none;
+        letter-spacing: 0.5px;
+    }
+    #polycount-input {
+        width: 65px;
+        font-size: 17px;
+        border-radius: 4px;
+        margin-left: 8px;
+        margin-top: 8px;
+        padding: 2px 7px;
+        border: 1px solid #bbb;
+        background: #181818;
+        color: #fff;
+        outline: none;
+        box-shadow: none;
+        z-index: 11;
+    }
+</style>
+<body>
+ <div style="position:absolute;z-index:10;top:0;left:0;">
+    <input id="polycount-input" type="number" min="1" max="400" step="1" value="100" />
+ </div>
+ <canvas id="gamecanvas"></canvas>
+</body>
+<script>
+// --- Utility & Projection code as before ---
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d');
+const plink = new Image();
+plink.src = "../images/plinkkstatic.png";
+let keysPressed = [];
+
+// New variable: POLYGONAMOUNT controls the number of polygons packed into the screen
+let POLYGONAMOUNT = 100;
+
+// For normalized [-1,1] to canvas.
+function toCanvas(p) {
+    return {
+        x: canvas.width / 2 + p.x * canvas.width / 2,
+        y: canvas.height / 2 + p.y * canvas.height / 2
+    };
+}
+
+/**
+ * Universal N-sided projective stamping using triangle fan mapping.
+ * This version randomly rotates the source image on every stamp.
+ * The rotation is a true rotation (not a source-point offset).
+ */
+function stampImage(polygon, img = plink, rotationRad = 0) {
+    // `polygon` is an array of vertices [{x, y}, ...] in normalized coordinates, n >= 3
+    if (!polygon || polygon.length < 3) return;
+    const n = polygon.length;
+
+    // Destination: normalized verts to canvas pixels
+    const dest = polygon.map(p => {
+        if (Math.abs(p.x) <= 2 && Math.abs(p.y) <= 2) return toCanvas(p);
+        return p;
+    });
+
+    // Source: We'll use a regular n-gon inscribed in the source image rect (img.width, img.height)
+    const cx = img.width / 2, cy = img.height / 2;
+    const r = Math.min(img.width, img.height) / 2;
+    const src = [];
+    // Apply a rotation to all source circle coordinates
+    for (let i = 0; i < n; ++i) {
+        const a = 2 * Math.PI * i / n - Math.PI/2 + rotationRad; // rotate fan
+        src.push({
+            x: cx + r * Math.cos(a),
+            y: cy + r * Math.sin(a)
+        });
+    }
+
+    // Triangulate with a fan from source and destination polygon centroids
+    // Source centroid
+    const srcCentroid = {
+        x: src.reduce((s, p) => s + p.x, 0) / n,
+        y: src.reduce((s, p) => s + p.y, 0) / n
+    }
+    // Dest centroid
+    const destCentroid = {
+        x: dest.reduce((s, p) => s + p.x, 0) / n,
+        y: dest.reduce((s, p) => s + p.y, 0) / n
+    }
+
+    // For each triangle (fan from centroid)
+    for (let i = 0; i < n; ++i) {
+        // source triangle
+        const sx0 = srcCentroid.x, sy0 = srcCentroid.y;
+        const sx1 = src[i].x, sy1 = src[i].y;
+        const sx2 = src[(i+1)%n].x, sy2 = src[(i+1)%n].y;
+
+        // dest triangle
+        const dx0 = destCentroid.x, dy0 = destCentroid.y;
+        const dx1 = dest[i].x, dy1 = dest[i].y;
+        const dx2 = dest[(i+1)%n].x, dy2 = dest[(i+1)%n].y;
+
+        // Affine transform from source triangle to destination triangle
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(dx0, dy0);
+        ctx.lineTo(dx1, dy1);
+        ctx.lineTo(dx2, dy2);
+        ctx.closePath();
+        ctx.clip();
+
+        // This solves affine transform (sx,sy)->(dx,dy) for the triangle
+        function getAffineTransform(sx0, sy0, sx1, sy1, sx2, sy2, dx0, dy0, dx1, dy1, dx2, dy2) {
+            const denom = (sx0 * (sy1 - sy2) + sx1 * (sy2 - sy0) + sx2 * (sy0 - sy1));
+            if (denom === 0) return [1,0,0,1,0,0];
+            const a = (dx0 * (sy1 - sy2) + dx1 * (sy2 - sy0) + dx2 * (sy0 - sy1)) / denom;
+            const b = (dy0 * (sy1 - sy2) + dy1 * (sy2 - sy0) + dy2 * (sy0 - sy1)) / denom;
+            const c = (dx0 * (sx2 - sx1) + dx1 * (sx0 - sx2) + dx2 * (sx1 - sx0)) / denom;
+            const d = (dy0 * (sx2 - sx1) + dy1 * (sx0 - sx2) + dy2 * (sx1 - sx0)) / denom;
+            const e = (dx0 * (sx1 * sy2 - sx2 * sy1) + dx1 * (sx2 * sy0 - sx0 * sy2) + dx2 * (sx0 * sy1 - sx1 * sy0)) / denom;
+            const f = (dy0 * (sx1 * sy2 - sx2 * sy1) + dy1 * (sx2 * sy0 - sx0 * sy2) + dy2 * (sx0 * sy1 - sx1 * sy0)) / denom;
+            return [a, b, c, d, e, f];
+        }
+        const matrix = getAffineTransform(
+            sx0, sy0, sx1, sy1, sx2, sy2,
+            dx0, dy0, dx1, dy1, dx2, dy2
+        );
+
+        ctx.setTransform(...matrix);
+        ctx.drawImage(img, 0, 0);
+        ctx.setTransform(1,0,0,1,0,0);
+        ctx.restore();
+    }
+}
+
+// ---- VORONOI STUFF ----
+// 1. Generate N random points in normalized [-1,1]x[-1,1] space
+// 2. Compute voronoi polygons
+// 3. For each polygon, stampImage() with any number of sides
+
+// --- Fast voronoi for small N ---
+function generateRandomPoints(N) {
+    const points = [];
+    for (let i=0; i<N; ++i)
+        points.push({ x: Math.random()*2-1, y: Math.random()*2-1 });
+    return points;
+}
+
+// Helper squared distance
+function dist2(p,q) {
+    const dx = p.x - q.x, dy = p.y - q.y;
+    return dx*dx + dy*dy;
+}
+
+// Brute force: For a grid of sample points, tag the nearest site.
+// Then, for each pixel, find border edges and collect polygons.
+// --- Make the gridRes dynamic based on polygon amount for accuracy --- 
+function computeVoronoiCells(points, gridResOverride) {
+    // Dynamic grid resolution: make it fine enough for lots of polygons
+    // Target: ~150,000 grid points or more. Take sqrt, round up, clamp within 100..530 or so for speed at high N
+    let N = points.length;
+    let gridRes;
+    if (gridResOverride !== undefined) {
+        gridRes = gridResOverride;
+    } else {
+        gridRes = Math.max(100, Math.min(530, Math.ceil(Math.sqrt(N*200))));
+    }
+    const width = gridRes, height = gridRes;
+    const grid = [];
+    const ownership = [];
+    for(let y=0; y<height; ++y) {
+        for(let x=0; x<width; ++x) {
+            // Map grid (x, y) to normalized
+            const px = x/(width-1)*2-1;
+            const py = y/(height-1)*2-1;
+            let minI = 0;
+            let mind = dist2({x:px, y:py}, points[0]);
+            for(let i=1;i<points.length;++i) {
+                let d = dist2({x:px, y:py}, points[i]);
+                if (d < mind) {mind = d; minI = i;}
+            }
+            grid.push(minI);
+            ownership.push({x, y, site: minI});
+        }
+    }
+    // For each cell, extract its boundary pixels and compute its polygon in normalized space
+    let polys = [];
+    for (let i=0; i<points.length; ++i) {
+        // marching squares to follow the boundary
+        // collect all grid cells that belong to i
+        const inside = ownership.filter(c => c.site === i);
+        // convex hull of these pixels (approx)
+        if (inside.length === 0) continue;
+        // Andrew's monotone chain on screen coordinates
+        const pts = inside.map(({x, y}) => {
+            // convert grid (x,y) to normalized
+            return {
+                x: x/(width-1)*2-1,
+                y: y/(height-1)*2-1
+            };
+        });
+        // Compute convex hull
+        polys.push(convexHull(pts));
+    }
+    return polys;
+}
+
+// Andrew's monotone chain convex hull in O(n log n)
+function convexHull(points) {
+    points = points.slice().sort((a, b) => a.x === b.x ? a.y - b.y : a.x - b.x);
+    const n = points.length;
+    if (n <= 3) return points;
+    let lower = [];
+    for(let i=0; i<n; ++i) {
+        while(lower.length>=2 && cross(lower[lower.length-2], lower[lower.length-1], points[i]) <= 0)
+            lower.pop();
+        lower.push(points[i]);
+    }
+    let upper = [];
+    for(let i=n-1; i>=0; --i) {
+        while(upper.length>=2 && cross(upper[upper.length-2], upper[upper.length-1], points[i]) <= 0)
+            upper.pop();
+        upper.push(points[i]);
+    }
+    upper.pop(); lower.pop();
+    return lower.concat(upper);
+}
+function cross(o, a, b) {
+    return (a.x-o.x)*(b.y-o.y)-(a.y-o.y)*(b.x-o.x);
+}
+
+// Redraw function for voronoi
+function redrawVoronoi() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const N = POLYGONAMOUNT;
+    const pts = generateRandomPoints(N);
+    // Pick grid resolution based on polygon count for accuracy:
+    let gridRes = Math.max(100, Math.min(530, Math.ceil(Math.sqrt(N*200))));
+    // If polygon amount is low, default to 85 or so.
+    if (N <= 20) gridRes = 85;
+    const polygons = computeVoronoiCells(pts, gridRes);
+
+    for (let i=0; i<polygons.length; ++i) {
+        let poly = polygons[i];
+        // Polys might have less than 3 points. Skip tiny cells.
+        if (!poly || poly.length < 3) continue;
+        // Each cell gets a random rotation, so cat/image is sideways, upright, etc.
+        // 4 cardinal directions: 0, 90, 180, 270 deg. Or use full random if desired.
+        const rotation = Math.floor(Math.random() * 4) * (Math.PI / 2);
+        stampImage(poly, plink, rotation);
+    }
+}
+
+// Handle user input for polygon count ("Polygons into the screen")
+const polyInput = document.getElementById('polycount-input');
+if (polyInput) {
+    polyInput.value = POLYGONAMOUNT;
+    polyInput.addEventListener('input', function() {
+        let v = parseInt(this.value);
+        if (isNaN(v) || v < 1) v = 1;
+        if (v > 400) v = 400;
+        POLYGONAMOUNT = v;
+        redrawVoronoi();
+    });
+}
+
+// On image load, run voronoi and redraw on click for fun
+plink.onload = () => {
+    redrawVoronoi();
+};
+canvas.addEventListener("click", redrawVoronoi);
+
+// ---- Animation & Resize loop ----
+function resizeCanvas() {
+    canvas.width = (window.innerWidth) - 25;
+    canvas.height = (window.innerHeight) - 25;
+    if (plink.complete) redrawVoronoi();
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+    keysPressed[e.key.toLowerCase()] = true;
+});
+window.addEventListener("keyup", (e) => {
+    keysPressed[e.key.toLowerCase()] = false;
+});
+</script>
+</html>

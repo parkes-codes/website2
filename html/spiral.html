@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spiral</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+</head>
+<style>
+    body {
+        background-color: #000;
+    }
+      #gamecanvas {
+        border: #fff 5px solid;
+        border-radius: 10px;
+        width: calc(100vw - 11px);
+        height: calc(100vh - 11px);
+        margin-left: -8px;
+        margin-top: -8px;
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: none;
+    }
+</style>
+<body>
+
+ <canvas id="gamecanvas"></canvas>
+
+</body>
+<script>
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext('2d', alpha = false);
+let keysPressed = [];
+let t = 0;
+let fps = 60;
+let fpsHist = [];
+let fpsAv = 0;
+
+
+function draw() {
+    t+=(Math.PI*4)/fps // 2 rotations a second
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineCap = "round";
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "#fff";
+    ctx.beginPath();
+
+    let x = 0;
+    let y = 0;
+    let newx = 0;
+    let newy = 0;
+
+    ctx.moveTo(canvas.width / 2 + x, canvas.height / 2 - y);
+
+    let i = 0;
+
+    while (newx*2 <= canvas.width || newy*2 <= canvas.height) {
+         newx = Math.sin(i / 20+t) * i / 4;
+         newy = Math.cos(i / 20+t) * i / 4;
+        // Draw line from current point to next
+        ctx.lineTo(canvas.width / 2 + newx, canvas.height / 2 - newy);
+        x = newx;
+        y = newy;
+        i+=0.1;
+    }
+    ctx.stroke();
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+function resizeCanvas() {
+  canvas.width = (window.innerWidth) - 25;
+  canvas.height = (window.innerHeight) - 25;
+}
+
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+window.addEventListener("keydown", (e) => {
+  keysPressed[e.key.toLowerCase()] = true;
+});
+
+window.addEventListener("keyup", (e) => {
+  keysPressed[e.key.toLowerCase()] = false;
+});
+
+
+
+let lastTimestamp;
+function sampleFPS() {
+    const now = performance.now();
+    const delta = now - lastTimestamp;
+
+    if (delta > 0 && delta < 1000) {
+        fps = 1000 / delta;
+    }
+    fpsHist.unshift(fps)
+    fpsAv = 0;
+    for (let i = 0; i<fpsHist.length; i++) {
+        fpsAv+=fpsHist[i];
+    }
+    fpsAv/=fpsHist.length
+    if (fpsHist[60]) {fpsHist.splice(60,1)}
+    lastTimestamp = now;
+
+    requestAnimationFrame(sampleFPS);
+}
+sampleFPS();
+
+
+</script>
+</html>

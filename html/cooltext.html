@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cool Text</title>
+  </head>
+  <style>
+    body {
+      font-family: 'Fira Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+      background-color: #000;
+      color: #7f7
+    }
+    #custombtn {
+        position: absolute;
+        background: #020;
+        bottom: 10px;
+        color: #7f7;
+        border: 2px solid #191;
+        border-radius: 4px;
+        font-size: 10px;
+        cursor: pointer;
+        transition: 
+          transform 0.3s cubic-bezier(0.4,0,0.2,1),
+          filter 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    #custombtn:hover {
+        transform: scale(1.05);
+        filter: brightness(0.7);
+    }
+    #textDisplay{
+        width: fit-content;
+        max-width: 100vw;
+    word-break: break-all;
+    white-space: pre-wrap;
+    }
+    #speedinput {
+        position: absolute;
+        bottom: 9px;
+        left: 100px;
+        width: 30px;
+        background: #010;
+        color: #7f7;
+        border: 2px solid #191;
+        border-radius: 4px;
+        font-size: 12px;
+        outline: none;
+
+        transition:
+          transform 0.3s cubic-bezier(0.4,0,0.2,1),
+          filter 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    #speedinput:focus {
+        filter: brightness(1.3);
+        transform: scale(1.03);
+        border-color: #3f3;
+    }
+  </style>
+  <body>
+    <p id="textDisplay"></p>
+    <button id="custombtn" onclick="alertInput()">Add your own</button>
+    <input id="speedinput" placeholder="mspt" value="30">
+  </body>
+  <script>
+
+    // So instead of changeing the next letter of the string into randDig. Do that but for every *line of the textDisplay div* so its animating all lines at once. very cool. So the user will still see only one text at a time but its changing each line's next char instead of doing the current 
+
+    console.clear();
+
+    let fixedWidth = false;
+    const speedIn = document.getElementById("speedinput")
+
+    // Load custom from localStorage if set
+    let textSetRaw;
+    try {
+      const fromLS = localStorage.getItem("cooltext-custom-list");
+      if (fromLS) {
+        const arr = JSON.parse(fromLS);
+        if (Array.isArray(arr) && arr.length && arr.every(e => typeof e === "string")) {
+          textSetRaw = arr;
+        }
+      }
+    } catch(e) {}
+    if (!textSetRaw) {
+      textSetRaw = [
+        "A bumblebee (or bumble bee, bumble-bee, or humble-bee) is any of over 250 species in the genus Bombus, part of Apidae, one of the bee families.",
+        "This genus is the only extant group in the tribe Bombini, though a few extinct related genera (e.g., Calyptapis) are known from fossils.",
+        "They are found primarily in the Northern Hemisphere, although they are also found in South America, where a few lowland tropical species have been identified.",
+        "European bumblebees have also been introduced to New Zealand and Tasmania.",
+        "Female bumblebees can sting repeatedly, but generally ignore humans and other animals.",
+
+        "Most bumblebees are eusocial insects that form colonies with a single queen.",
+        "The colonies are smaller than those of honey bees, growing to as few as 50 individuals in a nest.",
+        "Cuckoo bumblebees are brood parasitic and do not make nests or form colonies; their queens aggressively invade the nests of other bumblebee species, kill the resident queens and then lay their own eggs, which are cared for by the resident workers.",
+        "Cuckoo bumblebees were previously classified as a separate genus, but are now usually treated as members of Bombus.",
+
+        "Bumblebees have round bodies covered in soft hair (long branched setae) called 'pile', making them appear and feel fuzzy.",
+        "They have aposematic (warning) coloration, often consisting of contrasting bands of colour, and different species of bumblebee in a region often resemble each other in mutually protective Müllerian mimicry.",
+        "Harmless insects such as hoverflies often derive protection from resembling bumblebees, in Batesian mimicry, and may be confused with them.",
+        "Nest-making bumblebees can be distinguished from similarly large, fuzzy cuckoo bumblebees by the form of the female hind leg.",
+        "In nesting bumblebees, it is modified to form a pollen basket, a bare shiny area surrounded by a fringe of hairs used to transport pollen, whereas in cuckoo bumblebees, the hind leg is hairy all around, and they never carry pollen.",
+
+        "Like their relatives the honeybees, bumblebees feed on nectar, using their long hairy tongues to lap up the liquid; the proboscis is folded under the head during flight.",
+        "Bumblebees gather nectar to add to the stores in the nest, and pollen to feed their young.",
+        "They forage using colour and spatial relationships to identify flowers to feed from.",
+        "Some bumblebees steal nectar, making a hole near the base of a flower to access the nectar while avoiding pollen transfer.",
+        "Bumblebees are important agricultural pollinators, so their decline in Europe, North America, and Asia is a cause for concern.",
+        "The decline has been caused by habitat loss, the mechanisation of agriculture, and pesticides."
+      ];
+    }
+
+    function getTextSet() {
+      return fixedWidth ? padToLongest(textSetRaw) : textSetRaw;
+    }
+    let textSet = getTextSet();
+
+    const display = document.getElementById("textDisplay");
+
+    let text = textSet[0];
+
+    let animFrameState = null;
+
+    function alertInput() {
+      let newList = prompt(`Enter list of sentences for your custom animation. Answer should look like this: "A bumblebee (also known as bumblebee, bumble-bee, or humble-bee)", "is any of over 250 species in the genus Bombus", "which is part of Apidae, one of the bee families."`);
+      if (newList) {
+        try {
+          let fixed = newList.trim();
+          if (!fixed.startsWith("[") && !fixed.endsWith("]")) {
+            fixed = "[" + fixed + "]";
+          }
+          let arr = JSON.parse(fixed);
+          if (Array.isArray(arr) && arr.length > 0 && arr.every(e => typeof e === "string")) {
+            // Save to localStorage and reload
+            localStorage.setItem("cooltext-custom-list", JSON.stringify(arr));
+            location.reload();
+            return;
+          } else {
+            alert("Input is not a valid list of sentences.");
+          }
+        } catch (e) {
+          alert("Could not parse your input. Please use the prompted format!");
+        }
+      }
+    }
+
+    function padToLongest(arr) {
+      const maxLen = Math.max(...arr.map(e => e.length));
+      return arr.map(e => e.padEnd(maxLen, " "));
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function randDig() {
+      return String(Math.floor(Math.random() * 10));
+    }
+
+    function displayText() {
+      if (animFrameState) {
+        // Render according to "type"
+        let out = [];
+        const { mode, arr, i, end, revealCount } = animFrameState;
+        // mode: "infect", "add", "junk", "remove", "settle"
+        if (mode === "infect") {
+          // 0..i should be random, rest as original
+          for (let j = 0; j < arr.length; j++) {
+            if (j <= i) {
+              out.push(randDig());
+            } else {
+              out.push(arr[j]);
+            }
+          }
+        } else if (mode === "add") {
+          // all chars of arr are randomized
+          for (let j = 0; j < arr.length; j++) {
+            out.push(randDig());
+          }
+        } else if (mode === "junk") {
+          // all chars as random
+          for (let j = 0; j < arr.length; j++) {
+            out.push(randDig());
+          }
+        } else if (mode === "remove") {
+          // all remaining chars as random
+          for (let j = 0; j < arr.length; j++) {
+            out.push(randDig());
+          }
+        } else if (mode === "settle") {
+          // leftmost revealCount chars as end, rest random
+          for (let j = 0; j < end.length; j++) {
+            if (j < revealCount) {
+              out.push(end[j]);
+            } else {
+              out.push(randDig());
+            }
+          }
+        } else {
+          // fallback: just show arr joined
+          out = arr.slice();
+        }
+        display.textContent = out.join('');
+      } else {
+        display.textContent = text;
+      }
+      requestAnimationFrame(displayText);
+    }
+    displayText();
+
+    // Listen for Command+R (or Ctrl+R) and clear localStorage for textSet
+    window.addEventListener('keydown', function(e) {
+      // metaKey is Command on Mac, ctrlKey is Ctrl on other platforms,
+      // we match either to support both
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'r' || e.key === 'R')) {
+        // Command+R or Ctrl+R pressed
+        // Prevent reload to guarantee clear
+        e.preventDefault();
+        localStorage.removeItem("cooltext-custom-list");
+        // Optional: set textSetRaw to default
+        textSetRaw = [
+          "A bumblebee (also known as bumblebee, bumble-bee, or humble-bee)",
+          "is any of over 250 species in the genus Bombus,",
+          "which is part of Apidae, one of the bee families.",
+          "This genus is the only extant group in the tribe Bombini,",
+          "though a few extinct related genera (e.g., Calyptapis) are known from fossils.",
+          "They are found primarily in the Northern Hemisphere,",
+          "although some species are found in South America,",
+          "including a few lowland tropical species.",
+          "European bumblebees have also been introduced to New Zealand and Tasmania.",
+          "Female bumblebees can sting repeatedly,",
+          "but generally ignore humans and other animals."
+        ];
+        // Also update textSet and force a full reload to original
+        location.reload();
+      }
+    });
+
+    // Animates from one text to the next per your requirements
+    async function animate(start, end) {
+      // 1. Initial: text = start
+      text = start;
+      animFrameState = null;
+
+      // 2. Infect increasing numbers of left chars (change digits every frame)
+      let arr = start.split('');
+      for (let i = 0; i < arr.length; i++) {
+        animFrameState = {mode: "infect", arr, i};
+        await sleep(speedIn.value);
+      }
+
+      // 3. First, adjust length to match next entry (add/remove as needed, all random for new/remaining chars)
+      // Grow if shorter
+      while (arr.length < end.length) {
+        arr.push(randDig());
+        animFrameState = {mode: "add", arr};
+        await sleep(speedIn.value);
+      }
+      // Shrink if longer
+      while (arr.length > end.length) {
+        arr.splice(Math.floor(Math.random() * arr.length), 1);
+        animFrameState = {mode: "remove", arr};
+        await sleep(speedIn.value);
+      }
+
+      // 4. Junk phase for a moment (all random, now on correct length)
+      let junkFrames = Math.round(100);
+      for (let k = 0; k < junkFrames; k++) {
+        animFrameState = {mode: "junk", arr};
+        await sleep(10);
+      }
+
+      // 5. Settle: Animate leftmost i letters as end, others random digits
+      for (let i = 1; i <= end.length; i++) {
+        animFrameState = {mode: "settle", arr, end, revealCount: i};
+        await sleep(speedIn.value);
+      }
+
+      // Make sure to set final state
+      text = end;
+      animFrameState = null;
+
+      await sleep(1000);
+    }
+
+    async function animateAll() {
+      let idx = 0;
+      while (true) {
+        textSet = getTextSet();
+        await animate(textSet[idx], textSet[(idx + 1) % textSet.length]);
+        idx = (idx + 1) % textSet.length;
+      }
+    }
+
+    // Start animation loop as usual
+    setTimeout(function() {
+      animateAll();
+    }, 1000);
+
+  </script>
+</html>
