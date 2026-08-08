@@ -934,14 +934,10 @@
 </div>
 </body>
 
-<script src="lexiconData.js"></script>
+<script src="../js/lexiconData.js"></script>
 
 <script>
-// Note: For GPU+CPU, we use a hybrid approach below with dynamic switching for tick/draw (WebGL if possible, falls back to CPU).
-
 console.clear();
-// Improved FPS calculation using a rolling window of timestamps for smoother and less blocking updates.
-// Improved FPS calculation with a fixed-size ring buffer for smoother, low-overhead updates that avoid array shifting (lag spikes).
 const FPS_BUFFER_SIZE = 120; // 2 seconds at 60 FPS
 let frameTimestamps = new Array(FPS_BUFFER_SIZE);
 let frameIndex = 0;
@@ -1017,13 +1013,11 @@ void main() {
 }
 `;
 
-// Try initializing WebGL if possible:
 let canvas = document.getElementById("gamecanvas");
 try {
     gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     if (gl) {
         webglSupported = true;
-        // Compile shaders
         function compileShader(type, src) {
             let sh = gl.createShader(type);
             gl.shaderSource(sh, src);
@@ -1048,12 +1042,10 @@ try {
         glBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, glBuffer);
 
-        // Attributes
         let loc = gl.getAttribLocation(glProgram, "a_position");
         gl.enableVertexAttribArray(loc);
         gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
 
-        // Uniforms
         glColorLoc = gl.getUniformLocation(glProgram, "u_color");
         glResolutionLoc = gl.getUniformLocation(glProgram, "u_resolution");
         glCamLoc = gl.getUniformLocation(glProgram, "u_cam");
@@ -1064,14 +1056,10 @@ try {
     gl = null;
 }
 
-// ========== END WebGL INIT ==========
-
 document.getElementById('lex').addEventListener('click', function() {
     document.getElementById('lexicon').style.display = 'block';
     document.body.style.overflow = 'hidden';
 });
-
-
 
 document.getElementById('lexicon').addEventListener('click', function() {
     document.getElementById('lexicon').style.display = 'none';
@@ -1083,14 +1071,10 @@ document.getElementById('controls').addEventListener('click', function() {
     document.body.style.overflow = 'hidden';
 });
 
-
-
 document.getElementById('controlsMenu').addEventListener('click', function() {
     document.getElementById('controlsMenu').style.display = 'none';
     document.body.style.overflow = '';
 });
-
-// --- everything else unchanged below ---
 
 const display = document.getElementById("display");
 const display2 = document.getElementById("display2")
@@ -1154,9 +1138,7 @@ let markerColors = [
 
 let colorIndex = 0;
 
-// Array to hold selected/highlighted live pixels after shift released
 let selectedLivePixels = [];
-// Clipboard for copy/paste of selections
 let copiedPixels = [];
 let pastePreviewActive = false;
 let pastePreviewOffset = {x:0, y:0};
@@ -1226,7 +1208,6 @@ function loadLexi(id) {
     if (Object.prototype.hasOwnProperty.call(patterns, id)) {
         let patternData = patterns[id];
 
-        // Detect if it's RLE: a string containing header + RLE data
         if (typeof patternData === "string") {
             let rleString = patternData;
             let lines = rleString.split(/\r?\n/);
@@ -1284,7 +1265,6 @@ function loadLexi(id) {
                 } else if (ch === "!") {
                     break;
                 }
-                // ignore whitespace, commas
             }
 
             if (pixelsList.length === 0) {
@@ -1330,28 +1310,22 @@ function settingsPrompt() {
 let camChangeX = 0;
 let camChangeY = 0;
 
-
-// --- Persistent State for Optimized Tick ---
 let prevStateHashes = new Set();
 let prevTickHashes = [];
 const MAX_STATE_HISTORY = 100; // Adjust for memory/perf balance
 
-// Simple hash for cell array, order-invariant and quick
 function hashPixArr(arr) {
-    // Use a rolling hash
     let hash = 5381;
     for (let i = 0; i < arr.length; ++i) {
-        // Simple combine on packed x/y
         let p = arr[i];
         let k = ((p.x & 0xFFFF) << 16) | (p.y & 0xFFFF);
         hash = ((hash << 5) + hash) ^ k;
     }
-    return hash >>> 0; // unsigned
+    return hash >>> 0;
 }
 
 function arraysEqualUnordered(a, b) {
     if (a.length !== b.length) return false;
-    // Pack to string and compare sets for quick test (slow only for large arrays)
     let setA = new Set(a.map(p=>((p.x&0xFFFF)<<16)|(p.y&0xFFFF)));
     let setB = new Set(b.map(p=>((p.x&0xFFFF)<<16)|(p.y&0xFFFF)));
     if (setA.size !== setB.size) return false;
@@ -1360,11 +1334,9 @@ function arraysEqualUnordered(a, b) {
 }
 
 function detectCycleOrStable(newPixels) {
-    // Only if prev hashes recorded
     const hash = hashPixArr(newPixels);
     for (let i = 0; i < prevTickHashes.length; ++i) {
         if (prevTickHashes[i].hash === hash) {
-            // Quick further test: compare full arrays
             if (arraysEqualUnordered(prevTickHashes[i].arr, newPixels)) {
                 return { period: i+1, at: prevTickHashes[i] };
             }
@@ -1373,30 +1345,19 @@ function detectCycleOrStable(newPixels) {
     return null;
 }
 
-/*
- * Ultra-optimized Game of Life tick -- X/Y packed into 32-bit ints, raw bit-math everywhere.
- * Main data: pixels: {x, y}[]
- * Algorithm: NO string objects. Use number keys, avoid object allocs, minimize JS engine overhead.
- * Now with state memory for early exit on repetition (periodicity or stability).
- */
-
 function getData() {
     livePx = pixels.length;
 }
-
-
 
 function tick() {
     if (draggingSelection) return;
 
     const N = pixels.length;
 
-    // update maxpx per tick
     livePxHist.unshift(livePx);
     if (livePxHist.length > maxPxLen) livePxHist.length = maxPxLen;
     maxPx = livePxHist.length ? Math.max(...livePxHist) : 0;
 
-    // Bit-packed liveSet for fast lookup
     const liveSet = new Set();
     for (let i = 0; i < N; ++i) {
         const x = pixels[i].x | 0, y = pixels[i].y | 0;
@@ -1404,19 +1365,15 @@ function tick() {
         liveSet.add(key);
     }
 
-    // Flat neighbor deltas
     const dx = [0, 1, 1, 1, 0, -1, -1, -1];
     const dy = [1, 1, 0, -1, -1, -1, 0, 1];
 
-    // Use Map<number, {count, isLive}> to store neighbor state
     const neighborInfo = new Map();
 
-    // Single pass over all live cells and their neighborhoods
     for (let i = 0; i < N; ++i) {
         const px = pixels[i].x | 0, py = pixels[i].y | 0;
         let selfKey = ((px & 0xFFFF) << 16) | (py & 0xFFFF);
 
-        // Mark this cell as live in neighborInfo if not already present
         let info = neighborInfo.get(selfKey);
         if (!info) {
             neighborInfo.set(selfKey, { count: 0, isLive: true });
@@ -1424,7 +1381,6 @@ function tick() {
             info.isLive = true;
         }
 
-        // For each neighbor, increment count (includes dead and live)
         for (let d = 0; d < 8; ++d) {
             const nx = px + dx[d], ny = py + dy[d];
             const nkey = ((nx & 0xFFFF) << 16) | (ny & 0xFFFF);
@@ -1440,20 +1396,16 @@ function tick() {
     const survivors = [];
     const births = [];
 
-    // Now process every entry in neighborInfo just once
     neighborInfo.forEach((val, key) => {
         const count = val.count;
         const isAlive = !!val.isLive;
         if (isAlive) {
-            // Cell survives if 2 or 3 neighbors
             if (count === 2 || count === 3) {
-                // Unpack x/y
                 let x = (key >> 16); if (x & 0x8000) x |= 0xFFFF0000;
                 let y = (key & 0xFFFF); if (y & 0x8000) y |= 0xFFFF0000;
                 survivors.push({ x, y });
             }
         } else {
-            // Dead cell births if exactly 3 neighbors
             if (count === 3) {
                 let x = (key >> 16); if (x & 0x8000) x |= 0xFFFF0000;
                 let y = (key & 0xFFFF); if (y & 0x8000) y |= 0xFFFF0000;
@@ -1492,7 +1444,6 @@ function drawPixelGL(x, y, color) {
 
 }
 
-
 function draw() {
 
     rendered = 0;
@@ -1511,7 +1462,6 @@ function draw() {
         hoverY = 1 + Math.floor((my / zoom + camy));
     }
 
-    // Enforce minimum cell size of 0.4
     let cellSize = Math.max(zoom, 0.4);
 
     function isPixelOnScreen(px, py, size = 1) {
@@ -1525,13 +1475,19 @@ function draw() {
         );
     }
 
-    // Calculate sparsity factor for pixel drawing always
-    let sparsity = Math.max(Math.ceil(0.5 / zoom), 1); // Less pixels for more zoomed out, optimises game by a lot
+    let sparsity = Math.max(Math.ceil(0.5 / zoom), 1);
     if (!sparseEnabled) {sparsity = 1;}
 
-    // Draw background/clear
+    function getShiftRectInfo() {
+        const minX = Math.min(hiliteCorner1.x, hiliteCorner2.x);
+        const maxX = Math.max(hiliteCorner1.x, hiliteCorner2.x);
+        const minY = Math.min(hiliteCorner1.y, hiliteCorner2.y);
+        const maxY = Math.max(hiliteCorner1.y, hiliteCorner2.y);
+        const area = (maxX - minX + 1) * (maxY - minY + 1);
+        return {minX, maxX, minY, maxY, area};
+    }
+
     if (webglSupported) {
-        // WebGL mode -- clear
         gl.viewport(0, 0, canvas.width, canvas.height);
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
@@ -1554,12 +1510,11 @@ function draw() {
             ctx.moveTo(0, yPixel); ctx.lineTo(canvas.width, yPixel); ctx.stroke();
         }
 
-        // Always use sparsity for GL mode
         let mainVerts = [];
         let highlights = new Set(selectedLivePixels.map(p => p.x + "," + p.y));
         for (let i = 0; i < pixels.length; i++) {
             let p = pixels[i], key = p.x + "," + p.y;
-            if (draggingSelection && highlights.has(key)) continue; // skip, will draw in drag
+            if (draggingSelection && highlights.has(key)) continue;
             if (((p.x + p.y) % sparsity) !== 0) continue;
             if (!isPixelOnScreen(p.x, p.y, cellSize)) continue;
             mainVerts.push(p.x, p.y);
@@ -1575,7 +1530,6 @@ function draw() {
             gl.drawArrays(gl.POINTS, 0, mainVerts.length / 2);
         }
 
-        // Draw selection highlights (in green pulsating)
         if (selectedLivePixels.length > 0) {
             let selVerts = [];
             for (let i = 0; i < pixels.length; i++) {
@@ -1611,7 +1565,6 @@ function draw() {
             }
         }
 
-        // Draw dragged preview and overlays using 2D context for flexibility
         if (draggingSelection && selectionOriginal.length > 0) {
             for (let i = 0; i < selectionOriginal.length; i++) {
                 let nx = selectionOriginal[i].x + dragOffset.x, ny = selectionOriginal[i].y + dragOffset.y;
@@ -1624,7 +1577,6 @@ function draw() {
                 );
             }
         }
-        // Paste preview
         if (pastePreviewActive && copiedPixels.length > 0) {
             let pasteMinX = Math.min(...copiedPixels.map(p => p.x));
             let pasteMinY = Math.min(...copiedPixels.map(p => p.y));
@@ -1644,16 +1596,61 @@ function draw() {
                 );
             }
         }
-        // Draw rectangle selection in outline
         if (shiftpressed) {
             ctx.globalAlpha = 0.15;
-            ctx.fillStyle = "yellow";
-            const minX = Math.min(hiliteCorner1.x, hiliteCorner2.x);
-            const maxX = Math.max(hiliteCorner1.x, hiliteCorner2.x);
-            const minY = Math.min(hiliteCorner1.y, hiliteCorner2.y);
-            const maxY = Math.max(hiliteCorner1.y, hiliteCorner2.y);
-            for (let hx = minX; hx <= maxX; hx++) {
-                for (let hy = minY; hy <= maxY; hy++) {
+            let {minX, maxX, minY, maxY, area} = getShiftRectInfo();
+            if (area > 50000) {
+                ctx.globalAlpha = 1
+                ;
+                ctx.save();
+                ctx.strokeStyle = "#404040";
+                ctx.lineWidth = Math.max(1, cellSize * 0.14);
+                ctx.beginPath();
+                for (let hx = minX; hx <= maxX; hx++) {
+                    if (isPixelOnScreen(hx, minY, cellSize)) {
+                        ctx.fillRect(
+                            (hx - camx) * zoom + canvas.width / 2,
+                            canvas.height / 2 - (minY - camy) * zoom,
+                            cellSize, cellSize
+                        );
+                    }
+                }
+                if (maxY !== minY) {
+                    for (let hx = minX; hx <= maxX; hx++) {
+                        if (isPixelOnScreen(hx, maxY, cellSize)) {
+                            ctx.fillRect(
+                                (hx - camx) * zoom + canvas.width / 2,
+                                canvas.height / 2 - (maxY - camy) * zoom,
+                                cellSize, cellSize
+                            );
+                        }
+                    }
+                }
+                for (let hy = minY + 1; hy < maxY; hy++) {
+                    if (isPixelOnScreen(minX, hy, cellSize)) {
+                        ctx.fillRect(
+                            (minX - camx) * zoom + canvas.width / 2,
+                            canvas.height / 2 - (hy - camy) * zoom,
+                            cellSize, cellSize
+                        );
+                    }
+                }
+                if (maxX !== minX) {
+                    for (let hy = minY + 1; hy < maxY; hy++) {
+                        if (isPixelOnScreen(maxX, hy, cellSize)) {
+                            ctx.fillRect(
+                                (maxX - camx) * zoom + canvas.width / 2,
+                                canvas.height / 2 - (hy - camy) * zoom,
+                                cellSize, cellSize
+                            );
+                        }
+                    }
+                }
+                ctx.stroke();
+                ctx.restore();
+            } else {
+                ctx.fillStyle = "#404040";
+                for (let hx = minX; hx <= maxX; hx++) for (let hy = minY; hy <= maxY; hy++) {
                     if (!isPixelOnScreen(hx, hy, cellSize)) continue;
                     ctx.fillRect(
                         (hx - camx) * zoom + canvas.width / 2,
@@ -1664,7 +1661,8 @@ function draw() {
             }
             ctx.globalAlpha = 1;
         }
-        // Draw hovered cell
+
+   
         if (isPixelOnScreen(hoverX, hoverY, cellSize)) {
             ctx.globalAlpha = 0.5; ctx.fillStyle = "#888";
             ctx.fillRect(
@@ -1675,7 +1673,6 @@ function draw() {
             ctx.globalAlpha = 1;
         }
 
-        // ---- Draw markers using ctx (2D context) ----
         if (typeof markers !== "undefined" && Array.isArray(markers)) {
             ctx.globalAlpha = 0.4;
             for (let i = 0; i < markers.length; i++) {
@@ -1694,7 +1691,6 @@ function draw() {
     } else {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // Draw grid
         ctx.strokeStyle = "#222";
         ctx.lineWidth = 1;
         let cols = Math.ceil(canvas.width / zoom) + 2;
@@ -1712,7 +1708,6 @@ function draw() {
             ctx.moveTo(0, yPixel); ctx.lineTo(canvas.width, yPixel); ctx.stroke();
         }
 
-        // Draw main live pixels and highlight, always using sparsity
         let highlights = new Set(selectedLivePixels.map(p => p.x + "," + p.y));
         for (let i = 0; i < pixels.length; i++) {
             let p = pixels[i], key = p.x + "," + p.y;
@@ -1732,7 +1727,6 @@ function draw() {
             rendered++;
         }
 
-        // draw 0,0 cell whiter
         if (isPixelOnScreen(0, 0, cellSize)) {
             ctx.fillStyle = "#fff1";
             if (zoom >= 4) {
@@ -1785,18 +1779,66 @@ function draw() {
         }
         if (shiftpressed) {
             ctx.globalAlpha = 0.15;
-            ctx.fillStyle = "#404040";
-            const minX = Math.min(hiliteCorner1.x, hiliteCorner2.x);
-            const maxX = Math.max(hiliteCorner1.x, hiliteCorner2.x);
-            const minY = Math.min(hiliteCorner1.y, hiliteCorner2.y);
-            const maxY = Math.max(hiliteCorner1.y, hiliteCorner2.y);
-            for (let hx = minX; hx <= maxX; hx++) for (let hy = minY; hy <= maxY; hy++) {
-                if (!isPixelOnScreen(hx, hy, cellSize)) continue;
-                ctx.fillRect(
-                    (hx - camx) * zoom + canvas.width / 2,
-                    canvas.height / 2 - (hy - camy) * zoom,
-                    cellSize, cellSize
-                );
+            let {minX, maxX, minY, maxY, area} = getShiftRectInfo();
+            if (area > 50000) {
+                ctx.globalAlpha = 1
+                ;
+                ctx.save();
+                ctx.strokeStyle = "#404040";
+                ctx.lineWidth = Math.max(1, cellSize * 0.14);
+                ctx.beginPath();
+                for (let hx = minX; hx <= maxX; hx++) {
+                    if (isPixelOnScreen(hx, minY, cellSize)) {
+                        ctx.fillRect(
+                            (hx - camx) * zoom + canvas.width / 2,
+                            canvas.height / 2 - (minY - camy) * zoom,
+                            cellSize, cellSize
+                        );
+                    }
+                }
+                if (maxY !== minY) {
+                    for (let hx = minX; hx <= maxX; hx++) {
+                        if (isPixelOnScreen(hx, maxY, cellSize)) {
+                            ctx.fillRect(
+                                (hx - camx) * zoom + canvas.width / 2,
+                                canvas.height / 2 - (maxY - camy) * zoom,
+                                cellSize, cellSize
+                            );
+                        }
+                    }
+                }
+                for (let hy = minY + 1; hy < maxY; hy++) {
+                    if (isPixelOnScreen(minX, hy, cellSize)) {
+                        ctx.fillRect(
+                            (minX - camx) * zoom + canvas.width / 2,
+                            canvas.height / 2 - (hy - camy) * zoom,
+                            cellSize, cellSize
+                        );
+                    }
+                }
+                if (maxX !== minX) {
+                    for (let hy = minY + 1; hy < maxY; hy++) {
+                        if (isPixelOnScreen(maxX, hy, cellSize)) {
+                            ctx.fillRect(
+                                (maxX - camx) * zoom + canvas.width / 2,
+                                canvas.height / 2 - (hy - camy) * zoom,
+                                cellSize, cellSize
+                            );
+                        }
+                    }
+                }
+                ctx.stroke();
+                ctx.restore();
+            } else {
+                ctx.fillStyle = "#404040";
+                for (let hx = minX; hx <= maxX; hx++) for (let hy = minY; hy <= maxY; hy++) {
+                    if (!isPixelOnScreen(hx, hy, cellSize)) continue;
+                    ctx.fillRect(
+                        (hx - camx) * zoom + canvas.width / 2,
+                        canvas.height / 2 - (hy - camy) * zoom,
+                        cellSize, cellSize
+                    );
+                }
             }
             ctx.globalAlpha = 1;
         }
@@ -1810,7 +1852,6 @@ function draw() {
         }
         ctx.globalAlpha = 1;
 
-        // Draw markers at 60% opacity
         if (Array.isArray(markers)) {
             ctx.save();
             ctx.globalAlpha = 0.6;
@@ -1828,12 +1869,10 @@ function draw() {
         }
     }
 
-    // UI text/logic
     if (shiftpressed) {
         hiliteCorner2 = { x: hoverX, y: hoverY };
     }
 
-    // Fast draw/erase
     if (mousedown && !draggingSelection) {
         if (isLive({ x: hoverX, y: hoverY }) && (clickedFirst == 0)) {
             let inHighlight = selectedLivePixels.find(p => p.x === hoverX && p.y === hoverY);
@@ -1846,7 +1885,6 @@ function draw() {
         }
     }
 
-    // Camera controls
     if (keysPressed["="] || keysPressed["+"]) {
         let xBefore = ((mouseX - canvas.width / 2) / zoom) + camx;
         let yBefore = (-(mouseY - canvas.height / 2) / zoom) + camy;
@@ -1900,7 +1938,6 @@ tickLoop();
 sampleFPS();
 
 function seleToMarkers() {
-    // For every selected pixel, add a marker (if not already exists at that (x, y))
     selectedLivePixels.forEach(sel => {
         if (!markers.some(m => m.x === sel.x && m.y === sel.y)) {
             markers.push({
@@ -1915,8 +1952,6 @@ function seleToMarkers() {
     animateAlert();
 }
 
-
-
 function handleWheelZoom(e) {
     let rect = canvas.getBoundingClientRect();
     let mx = e.clientX - rect.left, my = e.clientY - rect.top;
@@ -1925,25 +1960,19 @@ function handleWheelZoom(e) {
 
     const isTrackpad = Math.abs(e.deltaY) < 8;
 
-    // Compute world coordinates before zoom
     let beforeX = ((mx - canvas.width / 2) / zoom) + camx;
     let beforeY = (-(my - canvas.height / 2) / zoom) + camy;
 
-    let op = (e.deltaY < 0) ? 1 : -1; // 1=zoom in, -1=zoom out
+    let op = (e.deltaY < 0) ? 1 : -1;
     let steps = 10;
     
-    // Use fps value instead of deltatime
-    // Each step should last about 1/fps seconds (so ms: 1000/fps)
     let interval = 1000 / fps / steps;
-    // (split zoom event evenly over steps in one frame if fps is low)
 
-    // Make zoom less aggressive on trackpads
     let zoomStep = isTrackpad ? 1.005 : 1.02;
 
     let performStep = function(step) {
         if (step > steps) return;
 
-        // Camera world pos before this zoom step
         let worldXBefore = ((mx - canvas.width / 2) / zoom) + camx;
         let worldYBefore = (-(my - canvas.height / 2) / zoom) + camy;
 
@@ -1953,10 +1982,8 @@ function handleWheelZoom(e) {
             zoom /= zoomStep;
         }
 
-        // Camera world pos after this zoom step
         let worldXAfter = ((mx - canvas.width / 2) / zoom) + camx;
         let worldYAfter = (-(my - canvas.height / 2) / zoom) + camy;
-        // Adjust camx/camy to keep point under cursor stationary
         camx += (worldXBefore - worldXAfter);
         camy += (worldYBefore - worldYAfter);
 
@@ -1974,7 +2001,6 @@ function handleWheelZoom(e) {
 
 canvas.addEventListener('wheel', handleWheelZoom, {passive: false});
 
-
 function resizeCanvas() {
     canvas.width = (window.innerWidth) - 25;
     canvas.height = (window.innerHeight) - 25;
@@ -1989,7 +2015,6 @@ function exportRLE() {
         alert("No live cells to export.");
         return;
     }
-    // Find bounds
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     for (const p of pixels) {
         if (p.x < minX) minX = p.x;
@@ -1997,11 +2022,8 @@ function exportRLE() {
         if (p.y < minY) minY = p.y;
         if (p.y > maxY) maxY = p.y;
     }
-    // Build 2D array of size width x height
     let width = maxX - minX + 1;
     let height = maxY - minY + 1;
-    // Because many implementations flip Y, and input format uses Y increasing down,
-    // we will use y = 0 as the top, +y down
     let grid = [];
     for (let y = 0; y < height; y++) {
         grid[y] = [];
@@ -2010,14 +2032,12 @@ function exportRLE() {
         }
     }
     for (const p of pixels) {
-        // Flip Y to match RLE convention (Y=0 is top, increases down)
         let relX = p.x - minX;
-        let relY = (maxY - p.y); // Invert: highest y (top on screen) -> y=0 in RLE
+        let relY = (maxY - p.y);
         if (relY < 0 || relY >= height) continue;
         if (relX < 0 || relX >= width) continue;
         grid[relY][relX] = "o";
     }
-    // Build RLE
     let rleRows = [];
     for (let y = 0; y < height; y++) {
         let row = grid[y];
@@ -2036,14 +2056,10 @@ function exportRLE() {
         }
         rleRows.push(res);
     }
-    // Combine rows with "$" (end-of-row), add "!" at end
     let body = rleRows.join("$") + "!";
-    // Prepend header
     let header = `x = ${width}, y = ${height}, rule = B3/S23\n`;
     let rleString = header + body;
 
-    // Copy to clipboard
-    // Try navigator clipboard, fallback to textarea
     function copyToClipboard(txt) {
         if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(txt).then(function() {
@@ -2072,7 +2088,6 @@ function exportRLE() {
     copyToClipboard(rleString);
 }
 
-
 function importRLE() {
     paused = true;
     let rleString = prompt(
@@ -2084,7 +2099,6 @@ function importRLE() {
         return;
     }
 
-    // Parse header for width/height (x/y)
     let lines = rleString.split(/\r?\n/);
     let header = "";
     let i = 0;
@@ -2100,18 +2114,15 @@ function importRLE() {
     if (match) {
         width = parseInt(match[1], 10);
         height = parseInt(match[2], 10);
-        i++; // Move to RLE body
+        i++;
     } else {
-        i = 0; // No header
+        i = 0;
     }
 
-    // Centering offsets
     let xCenter = width ? Math.floor(width / 2) : 0;
     let yCenter = height ? Math.floor(height / 2) : 0;
 
-    // Read RLE data (all non-comment, non-header lines, concatenated)
     let rleBody = lines.slice(i).filter(l => !l.trim().startsWith("#")).join("");
-    // Strip off anything after "!" (and include up to "!")
     let exclIdx = rleBody.indexOf("!");
     if (exclIdx !== -1) rleBody = rleBody.slice(0, exclIdx + 1);
 
@@ -2126,7 +2137,6 @@ function importRLE() {
             let count = numBuffer ? parseInt(numBuffer, 10) : 1;
             for (let n = 0; n < count; n++) {
                 if (ch === "o") {
-                    // Center the pattern so that it is at (0,0)
                     pixelsList.push({
                         x: x,
                         y: 0 - (y)
@@ -2143,7 +2153,6 @@ function importRLE() {
         } else if (ch === "!") {
             break;
         }
-        // ignore whitespace and commas
     }
 
     if (pixelsList.length === 0) {
@@ -2157,13 +2166,9 @@ function importRLE() {
         y: p.y + yCenter
     }));
 
-
-
     import2btn.blur();
     resetState();
 }
-
-
 
 function importlist() {
     paused = true;
@@ -2210,7 +2215,6 @@ function exportlist() {
         navigator.clipboard.writeText(str).then(function() {
 
         }, function(err) {
-            // Fallback if writeText fails
             let textarea = document.createElement("textarea");
             textarea.value = str;
             textarea.style.position = "fixed";  
@@ -2224,7 +2228,6 @@ function exportlist() {
             document.body.removeChild(textarea);
         });
     } else {
-        // Fallback for older browsers
         let textarea = document.createElement("textarea");
         textarea.value = str;
         textarea.style.position = "fixed";  
@@ -2243,8 +2246,6 @@ function exportlist() {
     alert("Too many pixels! Use this console command instead. copy('[' + pixels.map(p => `{x:${p.x},y:${p.y}}`).join(',') + ']')")
 }
 }
-
-
 
 let inputFocus = false;
 
@@ -2280,7 +2281,6 @@ tpsInput.addEventListener("keydown", (e) => {
     }
 });
 
-
 camxin.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         camxin.blur();
@@ -2299,8 +2299,6 @@ camyin.addEventListener("keydown", (e) => {
     }
 });
 
-
-
 tptInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         tptInput.blur();
@@ -2312,7 +2310,6 @@ tptInput.addEventListener("keydown", (e) => {
         e.preventDefault();
     }
 });
-
 
 window.addEventListener("keydown", (e) => {
     cmdPressed = e.metaKey || e.ctrlKey;
@@ -2353,7 +2350,6 @@ window.addEventListener("keydown", (e) => {
     if (e.key === "j") {
         if (selectedLivePixels.length > 0) {seleToMarkers()};
     }
-
 
     if (cmdPressed && e.key.toLowerCase() === "g") {
         e.preventDefault();
@@ -2422,7 +2418,6 @@ window.addEventListener("keydown", (e) => {
         }
     }
 
-    // Flips (as before)
     if (cmdPressed && e.key.toLowerCase() === ",") {
         flipX();
         e.preventDefault(); return;
@@ -2431,7 +2426,6 @@ window.addEventListener("keydown", (e) => {
        flipY();
         e.preventDefault(); return;
     }
-    // Shift selection logic
     if (e.key === "Shift" || e.key === "ShiftRight" || e.key === "ShiftLeft" || e.shiftKey) {
         shiftpressed = true;
         if (!hiliteCorner1 || hiliteCorner1.x === -1) hiliteCorner1 = { x: hoverX, y: hoverY };
@@ -2455,10 +2449,9 @@ window.addEventListener("keydown", (e) => {
 
 window.addEventListener("keyup", (e) => {
     keysPressed[e.key.toLowerCase()] = false;
-    if (cmdPressed) {keysPressed = []} // prevents keys being stuck down if pressed alongside cmd
+    if (cmdPressed) {keysPressed = []}
     cmdPressed = e.metaKey || e.ctrlKey;
 
-    // Paste on V up
     if (e.key.toLowerCase() === "v" && pastePreviewActive) {
         if (copiedPixels.length > 0) {
             let pasteMinX = Math.min(...copiedPixels.map(p => p.x));
@@ -2545,10 +2538,8 @@ canvas.addEventListener("mousedown", (e) => {
     mouseButtonDown = e.button;
     mousedown = true;
 
-    // Prevent left click from interfering with drag-selection logic
     if (draggingSelection) {
         if (e.button === 0) {
-            // If left click during drag, cancel drag and reset state, do NOT allow stuck mode
             draggingSelection = false;
             dragStart = null;
             dragOffset = {x:0, y:0};
@@ -2582,11 +2573,7 @@ canvas.addEventListener("contextmenu", e => {
 canvas.addEventListener("mouseup", (e) => {
     mousedown = false; mouseButtonDown = null;
 
-    // Cancel any drag-selection in progress if mouseup occurs, even with left button,
-    // unless it's a normal right-button drag complete
     if (draggingSelection) {
-        // If it's a right mouseup and normal drag end logic,
-        // do as before:
         if (e.button === RIGHT_MOUSE_BUTTON) {
             if (selectedLivePixels.length > 0 && dragStart) {
                 pixels = pixels.filter(p =>
@@ -2605,7 +2592,6 @@ canvas.addEventListener("mouseup", (e) => {
                 draggingSelection = false; dragStart = null; dragOffset = {x:0, y:0}; selectionOriginal = [];
             }
         } else {
-            // For left or other mouseup, just cancel drag-selection cleanly
             draggingSelection = false;
             dragStart = null;
             dragOffset = {x:0, y:0};
@@ -2614,7 +2600,6 @@ canvas.addEventListener("mouseup", (e) => {
     }
 });
 
-// ==== ROTATE LOGIC (unchanged) ====
 function rotatePoint(px, py, ox, oy, dir) {
     let dx = px-ox, dy = py-oy, rx, ry;
     if(dir===1){rx=oy-dy;ry=ox+dx;}
@@ -2655,13 +2640,10 @@ function rotateSelection90CW(){rotateSelection(1);}
 function rotateSelection180(){rotateSelection(2);}
 function rotateSelection90CCW(){rotateSelection(3);}
 
-
-
 window.addEventListener('beforeunload', function (event) {
-    event.preventDefault(); // Standard for most browsers
-    event.returnValue = 'You have unsaved changes. Are you sure you want to leave?'; // For older browsers
+    event.preventDefault();
+    event.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
 });
-
 
 </script>
 </html>
