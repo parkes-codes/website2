@@ -44,6 +44,10 @@ export let maxPxLen = 50;
 export let markerColors;
 export let hiliteCorner1;
 export let hiliteCorner2;
+
+// --- Added exports for camxin and camyin per prompt ---
+export let camxin;
+export let camyin;
 // ---------------------------------------------------------------------
 
 export const canvas = document.getElementById("gamecanvas")
@@ -115,10 +119,11 @@ const alertMsg = document.getElementById("alerttext");
 const exportbtn = document.getElementById("export");
 const tpsInput = document.getElementById("tpsInput");
 const tptInput = document.getElementById("tptInput");
-const camxin = document.getElementById("camxin");
-const camyin = document.getElementById("camyin");
 
-
+// Export the references to camxin/camyin, not just local variable!
+camxin = document.getElementById("camxin");
+camyin = document.getElementById("camyin");
+export { camxin, camyin };
 
 let lexloaded = true;
 
