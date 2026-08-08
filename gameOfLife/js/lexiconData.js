@@ -1,4 +1,4 @@
-const patterns = {
+export const patterns = {
     "blank": [            ],
     "4gc":  [
         {x:-3,y:-5}, {x:-2,y:-5},

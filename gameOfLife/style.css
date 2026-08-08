@@ -1,0 +1,174 @@
+body {
+    background-color: #000;
+    overflow: hidden;
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+    color: #fff;
+}
+#gamecanvas {
+    border: #fff 5px solid;
+    border-radius: 10px;
+    width: calc(100vw - 11px);
+    height: calc(100vh - 11px);
+    margin-left: -8px;
+    margin-top: -8px;
+    position: relative;
+    z-index: 1;
+    display: block;
+    background: none;
+}
+#display, #display2 {
+    position: fixed;
+    left: 10px;
+    bottom: 0px;
+    text-align: left;
+    z-index: 1;
+    font-size: 10px;
+    max-width: 50%;
+    min-width: 50%;
+    z-index: 99999;
+    text-shadow: 0 0 3px #000;
+}
+#display2 {
+    bottom: 12px;
+}
+.buttons {
+    width: fit-content;
+    height: 20px;
+    border-radius: 5px;
+    z-index: 20;
+    font-size: 12px;
+    background: #fff;
+    border-color: #0ff;
+    border-width: 2px;
+    margin-left: 3px;
+    margin-right: 3px;
+    z-index: 2;
+}
+.buttons:hover {
+    background: #ccc;
+}
+#alerttext{
+    position: fixed;
+    right: 10px;
+    top: 5px; 
+    width: 120px;  
+    height: 25px;
+    font-size: 13px;
+    color: #fff;
+    opacity: 100%;
+    z-index:  4;
+    text-align: right;
+}
+#btnrow {
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    right: 65px;
+    bottom: 10px;
+}
+#btnrow2 {
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    right: 65px;
+    bottom: 34px;
+}
+#tpsInput, #tptInput {
+    position: absolute;
+    bottom: 59px;
+    right: 65px;
+    height: 15px;
+    width: 40px;
+}
+#tptInput {
+    right: 10px;
+    width: 42px
+}
+#lex {
+    width: 60px
+}
+#controls {
+    width: 60px
+}
+.bigmenu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 40px 0;
+}
+.bigmenu-inner {
+    background: #fff;
+    margin: 40px auto 40px auto;
+    margin-top: -30px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-height: 150px;
+    box-shadow: 0 0 16px rgba(0,0,0,0.23);
+    padding: 32px;
+    color: #000;
+    font-size: 12px;
+}
+
+.link {
+    transition: color 0.2s;
+    color: #2aa;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.link:hover {
+    color: #acc;
+}
+
+.header3 {
+    color: rgb(0, 164, 164);
+    font-size: 20px;
+}
+#import {
+    position: absolute;
+    right: 10px;
+    bottom: 34px
+}
+#export {
+    position: absolute;
+    right: 10px;
+    bottom: 10px
+}
+.button2 {
+   background-color: #111;
+   color: #ddd;
+   border-radius: 50px;
+   font-size: 15px;
+   width: 15px;
+   height: 15px;
+   z-index: 10;
+   transition: all 100ms;
+}
+.button2:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1)
+}
+#btnrow3 {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    left: 10px;
+    bottom: 36px;
+}
+#camxin, #camyin {
+    position: absolute;
+    width: 60px;
+    height: 10px;
+    z-index: 5;
+    transform: scale(0.5);
+    margin-left: 5px;
+    bottom: 5px;
+}
+#camyin {
+    bottom: -3px;
+}
