@@ -35,7 +35,7 @@ export let shiftpressed = false;
 export let cmdPressed = false;
 export let sparseEnabled = true;
 export let keysPressed;
-export let startingArray;
+export let startingArray; // Only declare for export, initialization moved below
 export let pixels;
 export let tps = 0;
 export let tpt = 0;
@@ -133,35 +133,36 @@ setTimeout(function() {
     }
 }, 2000);
 
-let startingArray = [];
-let pixels = [];
-let markers = [];
-let camx = 0;
-let camy = 0;
-let zoom = 10;
-let keysPressed = [];
-let sparseEnabled = true;
-let mouseX = 0;
-let mouseY = 0;
-let mousedown = 0;
-let clickedFirst = 0;
-let hoverX = 0;
-let hoverY = 0;
-let tickn = 0;
-let livePx = 0;
-let maxPx = 0;
-let cmdPressed = false;
-let shiftpressed = false;
-let hiliteCorner1 = {x: -1, y: 1};
-let hiliteCorner2 = {x: 1, y: -1};
+// Moved all initializations here instead of redeclaration:
+startingArray = [];
+pixels = [];
+markers = [];
+camx = 0;
+camy = 0;
+zoom = 10;
+keysPressed = [];
+sparseEnabled = true;
+mouseX = 0;
+mouseY = 0;
+mousedown = 0;
+clickedFirst = 0;
+hoverX = 0;
+hoverY = 0;
+tickn = 0;
+livePx = 0;
+maxPx = 0;
+cmdPressed = false;
+shiftpressed = false;
+hiliteCorner1 = {x: -1, y: 1};
+hiliteCorner2 = {x: 1, y: -1};
 let t2 = 0;
-let tpt = 0;
-let tps = 0
+tpt = 0;
+tps = 0
 
-let livePxHist = [];
-let maxPxLen = 50;
+livePxHist = [];
+maxPxLen = 50;
 
-let markerColors = [
+markerColors = [
     "faa",
     "afa",
     "aaf",
@@ -170,19 +171,19 @@ let markerColors = [
     "faf"
 ]
 
-let colorIndex = 0;
+colorIndex = 0;
 
 // Array to hold selected/highlighted live pixels after shift released
-let selectedLivePixels = [];
+selectedLivePixels = [];
 // Clipboard for copy/paste of selections
-let copiedPixels = [];
-let pastePreviewActive = false;
-let pastePreviewOffset = {x:0, y:0};
-let draggingSelection = false;
-let dragStart = null;
-let dragOffset = {x:0, y:0};
+copiedPixels = [];
+pastePreviewActive = false;
+pastePreviewOffset = {x:0, y:0};
+draggingSelection = false;
+dragStart = null;
+dragOffset = {x:0, y:0};
 let selectionOriginal = [];
-let mouseButtonDown = null;
+mouseButtonDown = null;
 const RIGHT_MOUSE_BUTTON = 2;
 
 function resetState() {
