@@ -99,14 +99,14 @@ animateHeader();
   let COUNTDOWN_END = 0 
 
 
-  function setCountdown(day, month, year) {
-    const target = new Date(year, month - 1, day, 0, 0, 0, 0);
+  function setCountdown(day, month, year, hour = 0, minute = 0) {
+    const target = new Date(year, month - 1, day, hour, minute, 0, 0);
     COUNTDOWN_END = target.getTime();
   }
 
-  setCountdown(10,8,2026)
+  // August 10, 2026 at 8:30am
+  setCountdown(10, 8, 2026, 7, 40);
 
-  // Returns [hh, mm, ss] as zero-padded strings
   function getTimeLeftParts() {
     let ms = Math.max(0, COUNTDOWN_END - Date.now());
     let sec = Math.floor(ms / 1000) % 60;
@@ -119,10 +119,8 @@ animateHeader();
     ];
   }
 
-  // Setup digit DOM
+
   const timerWrap = document.getElementById('timer-wrap');
-  // Each [digit, digit, ":", digit, digit, ":", digit, digit]
-  // We use "digit-stack" for digits, span with class "digit-sep" for :
   function makeTimerDOM() {
     timerWrap.innerHTML = '';
     const [hh, mm, ss] = getTimeLeftParts();
@@ -147,48 +145,48 @@ animateHeader();
   }
   makeTimerDOM();
 
-  // Animation function when a digit changes
+
   function transitionDigit(stackElem, newDigit) {
     const oldDigit = Array.from(stackElem.children).find(
       ch => ch.classList.contains('digit') && !ch.classList.contains('fade-out')
     );
-    // If identical, do nothing
+
     if (!oldDigit || oldDigit.textContent === newDigit) return;
 
-    // 1. Create clone node for new digit, start hidden
+
     const digitClone = document.createElement('span');
     digitClone.className = "digit";
     digitClone.textContent = newDigit;
     digitClone.style.opacity = "0";
     stackElem.appendChild(digitClone);
-    // 2. Fade out original
+
     setTimeout(() => {
       oldDigit.classList.add('fade-out');
       oldDigit.classList.remove('fade-in');
       digitClone.classList.add('fade-in');
     }, 0);
 
-    // 3. Fade in clone and then remove the faded out digit after transition
+
     digitClone.addEventListener('transitionend', function handler() {
-      // Remove old digit after fade out complete
+
       if (oldDigit && oldDigit.parentNode) {
         oldDigit.parentNode.removeChild(oldDigit);
       }
       digitClone.removeEventListener('transitionend', handler);
     });
-    // Ensure the transition triggers
+
     setTimeout(() => {
       digitClone.style.opacity = "";
     }, 20);
   }
 
-  // Main update loop
+
   let prevDigits = null;
   function updateTimer() {
     const [hh, mm, ss] = getTimeLeftParts();
     const currentDigits = [...hh, ...mm, ...ss];
     if (!prevDigits) prevDigits = currentDigits;
-    // DOM order: stack, stack, sep, stack, stack, sep, stack, stack
+
     const timerStacks = Array.from(timerWrap.querySelectorAll('.digit-stack'));
     let di = 0;
     for(let i=0; i<timerStacks.length; ++i) {
@@ -196,11 +194,10 @@ animateHeader();
         transitionDigit(timerStacks[i], currentDigits[di]);
       }
       di++;
-      // skip sep index
+
     }
     prevDigits = currentDigits;
 
-    // Stop at zero
     if (hh === "00" && mm === "00" && ss === "00") return;
     requestAnimationFrame(updateTimer);
   }
