@@ -78,15 +78,39 @@ draw()
 player.x = levels[stats.level - 1].playerStart.x
 player.y = levels[stats.level - 1].playerStart.y
 
-function tickLoop() {
-    if (stats.fps > 0) {stats.t += 1/stats.fps}
-    player.update();
-    if (player.respawn.x == levels[stats.level-1].cp[levels[stats.level-1].cp.length-1].x && player.respawn.y == levels[stats.level-1].cp[levels[stats.level-1].cp.length-1].y) {
-        draw();
-        alert("You Win, Poggies!")
-    } else {
-       requestAnimationFrame(tickLoop)
+let targetFPS = 60;
+let frameInterval = 1000 / targetFPS;
+
+// Use this variable to avoid dropping frames if we fall behind
+let lastTickTime = performance.now();
+
+function tickLoop(now = performance.now()) {
+    // Main loop runs as fast as possible, but game logic steps at fixed intervals
+    let shouldContinue = true;
+    let processed = false;
+
+    while (now - lastTickTime >= frameInterval) {
+        if (stats.fps > 0) { stats.t += 1 / stats.fps; }
+        player.update();
+
+        const level = levels[stats.level - 1];
+        const lastCp = level.cp[level.cp.length - 1];
+        if (
+            player.respawn &&
+            player.respawn.x === lastCp.x &&
+            player.respawn.y === lastCp.y
+        ) {
+            draw();
+            alert("You Win, Poggies!");
+            shouldContinue = false;
+            break;
+        }
+        lastTickTime += frameInterval;
+        processed = true;
+    }
+    if (shouldContinue) {
+        requestAnimationFrame(tickLoop);
     }
 }
 
-tickLoop()
+requestAnimationFrame(tickLoop);
