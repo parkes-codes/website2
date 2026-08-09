@@ -100,6 +100,33 @@
         box-shadow: 0 4px 26px #113388cc, 0 0 0 5px #a0a0ff22;
         z-index: 5;
       }
+      #seeProjectsBtn {
+        background: #000;
+        border: #fff 2px solid;
+        color: #fff;
+        margin: 10px auto 16px auto;
+        box-shadow: 0 0 24px #11224433;
+        max-width: 230px;
+        font-size: 1.10rem;
+        font-family: inherit;
+        padding: 12px 16px;
+        font-weight: 600;
+        display: block;
+        cursor: pointer;
+        z-index: 999 !important;
+        border-radius: 12px;
+        transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transform: scale(1);
+      }
+      #seeProjectsBtn:hover {
+        transform: scale(1.1);
+      }
+      #seeProjectsBtn.cooldown {
+        opacity: 0.6;
+        pointer-events: none;
+        cursor: wait;
+        filter: grayscale(0.4);
+      }
       #column {
         display: flex;
         flex-direction: column;
@@ -109,6 +136,14 @@
         margin: 0 auto;
         box-sizing: border-box;
         padding: 0 4vw;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.55s cubic-bezier(0.26,1.2,0.49,1);
+        will-change: opacity;
+      }
+      #column.visible {
+        opacity: 1;
+        pointer-events: auto;
       }
       .button-list {
         display: grid;
@@ -173,6 +208,19 @@
         font-size: 15px;
         text-align:center;
         position: relative;
+      }
+      #thingy {
+        margin-top: 15px;
+        background: #191b1b;
+        padding: 8px 8px 8px 8px;
+        border: #9eaeae 2px solid;
+        line-height: 0.7;
+        text-align: left;
+        font-size: 13px;
+        width: 300px;
+        align-self: center;
+        justify-self: center;
+        border-radius: 6px;
       }
       #linksRow {
         display: flex;
@@ -248,20 +296,39 @@
         outline: none; 
         border: 3px #333 solid; 
         box-shadow: 0px 0px 5px #fff;
+        opacity: 0;
+        transform: translateY(-25px);
+        transition: opacity 0.6s, transform 0.7s cubic-bezier(0.41,1.2,0.32,1);
+      }
+
+      #searchinput.visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.25s;
       }
 
       #searchinput:focus {
         outline: none !important;
         border: 3px #333 solid; 
       }
- 
- 
+
+      .button-list .linkbutton {
+        opacity: 0;
+        transform: translateY(-30px);
+        transition:
+          opacity 0.58s cubic-bezier(0.47,1.2,0.32,1),
+          transform 1s cubic-bezier(0.41,1.6,0.32,1);
+      }
+      .button-list .linkbutton.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body>
     <div id="backgroundOverlay"></div>
-    <h1 class="text" style="z-index: 50; position: relative; margin-bottom: -8px; text-align:center; font-size: 26px;" id="velkomm">¡Bienvenido a mi sitio web!</h1>
-    <h3 class="text" style="margin-bottom: 9px; text-align:center; position: relative; font-weight: 100; font-size: 13px;">↓Visita mis redes sociales↓</h3>
+    <h1 class="text" style="z-index: 50; position: relative; margin-bottom: -8px; text-align:center; font-size: 26px;" id="velkomm">Welcome to my website!</h1>
+    <h3 class="text" style="margin-bottom: 9px; text-align:center; position: relative; font-weight: 100; font-size: 13px;">↓Visit my socials↓</h3>
     <div id="linksRow">
       <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
         <div class="text linkheader">Scratch</div>
@@ -276,7 +343,7 @@
         </a>
       </div>
       <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
-        <div class="text linkheader">YouTube</div>
+        <div class="text linkheader">YouTube</div> 
         <a href="https://youtube.com/@parkes24" target="_blank" class="linkpicStyle" style="margin: 0;">
           <img src="images/youtubeprofpic.jpg" class="profilepic-link" id="ytlink" alt="My Youtube Channel Profile Picture and Link" width="100" height="100" style="width:100px;height:100px;object-fit:cover;">
         </a>
@@ -288,22 +355,22 @@
         </a>
       </div>
     </div>
-    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-top: 0px; margin-bottom: -8px;">
-     <p id="thingy" class="text">
-      Les presento una colección de scripts que he escrito.
-     </p>
-     <p style="font-size: 9px; color: #ffffffc0; margin-left: 18px;" class="text">
-         ver aug 7 2026
-     </p>
-    </div>
-    <div id="column">
+     <div id="thingy" class="text">
+      <div style="font-weight: bold; margin-bottom: -10px;">About this page:</div><br></br>
+      Projects: 56 <br></br>
+      Latest Update: Aug 9 2026 <br></br>
+      Next project: FreeCodeCamp
+     </div>
+    <!-- See all projects button -->
+    <button id="seeProjectsBtn" tabindex="0" aria-controls="column" class="text">See all projects</button>
+    <div id="column" aria-hidden="true">
       <input id="searchinput" type="text" placeholder="Search for a project" style="padding-left: 5px;">
       <div class="button-list">
         <a href="html/Amazing_Graphs_2" target="_blank" class="linkbutton"><button class="button text" id="ag2text">Amazing Graphs 2</button></a>
         <a href="html/trigslideshow" target="_blank" class="linkbutton"><button class="button text">Trigonometery Slideshow</button></a>
-        <a href="html/gol" target="_blank" class="linkbutton"><button class="button text" id="golbtn">GOL<span style="display:none;">game of life</span></button></a>
+        <a href="html/gol" target="_blank" class="linkbutton"><button class="button text" id="golbtn">Game of Life<span style="display:none;">gol conway conway's conways</span></button></a>
         <a href="html/coreball" target="_blank" class="linkbutton"><button class="button text" id="corbtn" style="color: #000; font-weight: bold; text-shadow: 0px 0px 5px #ffff;">Coreball</button></a>
-        <a href="game4/index.html" target="_blank" class="linkbutton"><button class="button text">Plinkformer<span style="display: none">platformer</span></button></a>
+        <a href="game4/" target="_blank" class="linkbutton"><button class="button text">Plinkformer<span style="display: none">platformer</span></button></a>
         <!-- <a href="html/clicker" target="_blank" class="linkbutton"><button class="button text">Bad Clicker Game</button></a> -->
         <!-- <a href="html/Listpractice" target="_blank" class="linkbutton"><button class="button text">List Learning</button></a> -->
         <a href="html/Canvaspractice" target="_blank" class="linkbutton"><button class="button text">Canvasse</button></a>
@@ -364,13 +431,13 @@
         <a href="html/game3" target="_blank" class="linkbutton"><button class="button text">Aclassio</button></a>
         <a href="html/skilltree" target="_blank" class="linkbutton"><button class="button text">Skill Tree</button></a>
         <a href="html/maze" target="_blank" class="linkbutton"><button class="button text">Maze (fun)</button></a>
-        <!-- <a href="html/tomb" target="_blank" class="linkbutton"><button class="button text">Momb of the Task (not fun) <span style="display:none">tomb mask</span></button></a> -->
+        <!-- <a href="html/tomb" target="_blank" class="linkbutton"><button class="button text">Momb of the Task <span style="display:none">tomb mask</span></button></a> -->
         <a href="html/plinkemon" target="_blank" class="linkbutton"><button class="button text">Inventory</button></a>
-
-
       </div>
     </div>
     <p class="text" style="left: 0%; text-align: center; opacity: 50%;">Warning: These links are desinged for 60fps computer devices!</p>
+
+    <div style="width:100%; height:20px; pointer-events:none; opacity:0;"></div>
   </body>
     <script>
       const bounceSound = new Audio("sounds/click.wav");
@@ -396,12 +463,92 @@
 
       const buttonss = document.getElementsByClassName("linkbutton");
       const searcher = document.getElementById("searchinput");
+      const seeProjectsBtn = document.getElementById("seeProjectsBtn");
+      const columnDiv = document.getElementById("column");
+      const buttonList = columnDiv.querySelector('.button-list');
+      const searchInput = document.getElementById("searchinput");
+
+      let projectsVisible = false;
+
+      let isProjectsBtnOnCooldown = false;
+      let cooldownTimeout = null;
+
+      function startProjectsBtnCooldown() {
+        isProjectsBtnOnCooldown = true;
+        seeProjectsBtn.classList.add('cooldown');
+        seeProjectsBtn.disabled = true;
+        cooldownTimeout = setTimeout(() => {
+          isProjectsBtnOnCooldown = false;
+          seeProjectsBtn.classList.remove('cooldown');
+          seeProjectsBtn.disabled = false;
+        }, 3000);
+      }
+
+      function toggleProjectsSection() {
+        if (isProjectsBtnOnCooldown) return; 
+        startProjectsBtnCooldown();
+
+        const links = buttonList.querySelectorAll('.linkbutton');
+        if (!projectsVisible) {
+          columnDiv.classList.add("visible");
+          columnDiv.setAttribute('aria-hidden', 'false');
+
+          setTimeout(() => {
+            searchInput.classList.add("visible");
+          }, 200);
+
+          links.forEach((el, idx) => {
+            setTimeout(() => {
+              el.classList.add("visible");
+            }, idx * 45 + 320);
+          });
+
+          setTimeout(() => {
+            searchInput.focus();
+          }, 420);
+
+          seeProjectsBtn.textContent = "Hide projects";
+          projectsVisible = true;
+        } else {
+          let total = links.length;
+          // Remove .visible from all project links, then remove .visible from search bar LAST (after links)
+          links.forEach((el, i) => {
+            setTimeout(() => {
+              el.classList.remove("visible");
+            }, (total - 1 - i) * 45 + 80);
+          });
+
+          setTimeout(() => {
+            searchInput.classList.remove("visible");
+          }, total * 45 + 120); // Wait until last link finished (plus a tiny delay)
+          
+          setTimeout(() => {
+            columnDiv.classList.remove("visible");
+            columnDiv.setAttribute('aria-hidden', 'true');
+            seeProjectsBtn.textContent = "See all projects";
+          }, total * 45 + 520);
+
+          projectsVisible = false;
+        }
+      }
+
+      seeProjectsBtn.addEventListener('click', toggleProjectsSection);
+
+      seeProjectsBtn.addEventListener("keydown", function(e) {
+        if (isProjectsBtnOnCooldown) {
+          e.preventDefault();
+          return;
+        }
+        if (e.key === "Enter" || e.keyCode === 13 || e.key === " " || e.keyCode === 32) {
+          e.preventDefault();
+          toggleProjectsSection();
+        }
+      });
 
       searcher.addEventListener("input", function(event) {
         const searchStr = searcher.value.toLowerCase();
         for (let i = 0; i < buttonss.length; i++) {
           const el = buttonss[i];
-          // get the text content of the button inside the linkbutton
           const btn = el.querySelector('button');
           const content = btn ? btn.textContent.toLowerCase() : "";
           if (content.includes(searchStr)) {
@@ -411,9 +558,8 @@
           }
         }
       });
- 
- 
-      
+
+
       let dvdAnimating = false;
       function updateProfileLinksDVD() {
         const scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft || 0;
@@ -500,8 +646,8 @@
       function randomRotate() {
         return Math.random() * 10 - 5; 
       }
-    
-      // add rotation to buttons 
+
+      // add rotation to buttons
       document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.button');
         buttons.forEach(function(btn) {
