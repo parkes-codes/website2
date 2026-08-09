@@ -571,7 +571,7 @@
       });
 
       searcher.addEventListener("input", function(event) {
-        const searchStr = searcher.value.toLowerCase();
+        const searchStr = searcher.value.toLowerCase().trim();
         for (let i = 0; i < buttonss.length; i++) {
           const el = buttonss[i];
           const content = el.textContent.toLowerCase();
