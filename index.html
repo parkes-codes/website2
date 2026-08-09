@@ -104,7 +104,7 @@
         background: #000;
         border: #fff 2px solid;
         color: #fff;
-        margin: 10px auto 16px auto;
+        margin: 10px auto 10px auto;
         box-shadow: 0 0 24px #11224433;
         max-width: 230px;
         font-size: 1.10rem;
@@ -297,13 +297,11 @@
         border: 3px #333 solid; 
         box-shadow: 0px 0px 5px #fff;
         opacity: 0;
-        transform: translateY(-25px);
         transition: opacity 0.6s, transform 0.7s cubic-bezier(0.41,1.2,0.32,1);
       }
 
       #searchinput.visible {
         opacity: 1;
-        transform: translateY(0);
         transition-delay: 0.25s;
       }
 
@@ -314,14 +312,12 @@
 
       .button-list .linkbutton {
         opacity: 0;
-        transform: translateY(-30px);
         transition:
           opacity 0.58s cubic-bezier(0.47,1.2,0.32,1),
           transform 1s cubic-bezier(0.41,1.6,0.32,1);
       }
       .button-list .linkbutton.visible {
         opacity: 1;
-        transform: translateY(0);
       }
     </style>
   </head>
@@ -361,78 +357,71 @@
       Latest Update: Aug 9 2026 <br></br>
       Next project: FreeCodeCamp
      </div>
-    <!-- See all projects button -->
     <button id="seeProjectsBtn" tabindex="0" aria-controls="column" class="text">See all projects</button>
     <div id="column" aria-hidden="true">
       <input id="searchinput" type="text" placeholder="Search for a project" style="padding-left: 5px;">
-      <div class="button-list">
-        <a href="html/Amazing_Graphs_2" target="_blank" class="linkbutton"><button class="button text" id="ag2text">Amazing Graphs 2</button></a>
-        <a href="html/trigslideshow" target="_blank" class="linkbutton"><button class="button text">Trigonometery Slideshow</button></a>
-        <a href="html/gol" target="_blank" class="linkbutton"><button class="button text" id="golbtn">Game of Life<span style="display:none;">gol conway conway's conways</span></button></a>
-        <a href="html/coreball" target="_blank" class="linkbutton"><button class="button text" id="corbtn" style="color: #000; font-weight: bold; text-shadow: 0px 0px 5px #ffff;">Coreball</button></a>
-        <a href="game4/" target="_blank" class="linkbutton"><button class="button text">Plinkformer<span style="display: none">platformer</span></button></a>
-        <!-- <a href="html/clicker" target="_blank" class="linkbutton"><button class="button text">Bad Clicker Game</button></a> -->
-        <!-- <a href="html/Listpractice" target="_blank" class="linkbutton"><button class="button text">List Learning</button></a> -->
-        <a href="html/Canvaspractice" target="_blank" class="linkbutton"><button class="button text">Canvasse</button></a>
-        <a href="html/oscilloscope" target="_blank" class="linkbutton"><button class="button text">Oscilloscope</button></a>
-        <a href="html/spectrogram" target="_blank" class="linkbutton"><button class="button text">Spectrogram</button></a>
-        <a href="html/flappy" target="_blank" class="linkbutton"><button class="button text">Flappy Bird</button></a>
-        <a href="html/2048" target="_blank" class="linkbutton"><button class="button text">2048</button></a>
-        <a href="html/tetris" target="_blank" class="linkbutton"><button class="button text">Tetris</button></a>
-        <a href="html/dvd" target="_blank" class="linkbutton"><button class="button text">DVD Sim</button></a>
-        <a href="html/game1" target="_blank" class="linkbutton"><button class="button text">Arrassio</button></a>
-        <a href="html/game2" target="_blank" class="linkbutton"><button class="button text">Jetpack Horse Ultra Pro Extreme 3D</button></a>
-        <a href="javascript:void(0);" class="linkbutton"><button class="button text" id="funbutton" onclick="movestuff()">Fun button</button></a>
-        <a href="html/sierp" target="_blank" class="linkbutton"><button class="button text">Simple Fractals</button></a>
-        <a href="html/ant" target="_blank" class="linkbutton"><button class="button text" style="color: rgb(184, 205, 252)">Langton's Ant</button></a>
-        <a href="html/mousetrails" target="_blank" class="linkbutton"><button class="button text" style="color: #eef; font-weight: bold;" >Mouse Trails</button></a>
-        <a href="html/WaterSort" target="_blank" class="linkbutton"><button class="button text">Water Sort</button></a>
-        <a href="html/texteffects" target="_blank" class="linkbutton"><button class="button text">Text Effects</button></a>
-        <a href="html/funnytext" target="_blank" class="linkbutton"><button class="button text">Funny Text</button></a>
-        <a href="html/rocketlaunch" target="_blank" class="linkbutton"><button class="button text" style="color: #fed">Rocket Launch</button></a>
-        <a href="html/car" target="_blank" class="linkbutton"><button class="button text">Car Game</button></a>
-        <a href="html/particles" target="_blank" class="linkbutton"><button class="button text" style="color: #dfd">Particles</button></a>
-        <a href="html/fourier" target="_blank" class="linkbutton">
-          <button class="button text">
-           <span class="text" style="color: #cff;">Fourier </span> <span class="text" style="color: #bcf;">Draw</span>
-          </button>
-        </a>
-        <a href="html/screensaver" target="_blank" class="linkbutton"><button class="button text">Screensaver</button></a>
-        <a href="html/blockyblast" target="_blank" class="linkbutton"><button class="button text">Blocky Blast</button></a>
-        <a href="html/encoding" target="_blank" class="linkbutton"><button class="button text">Encoders</button></a>
-        <a href="html/loudwav" target="_blank" class="linkbutton"><button class="button text">LOUD Audio</button></a>
-        <a href="html/cooltext" target="_blank" class="linkbutton"><button class="button text">Cool Text</button></a>
-        <a href="html/voronoi" target="_blank" class="linkbutton"><button class="button text">Plinkonoi <span style="display: none">voronoi vonoroi</span></button></a>
-        <a href="html/dino" target="_blank" class="linkbutton"><button class="button text">Dino Game</button></a>
-        <a href="html/emojirain" target="_blank" class="linkbutton"><button class="button text">Emoji Rain</button></a>
-        <a href="html/leftright" target="_blank" class="linkbutton"><button class="button text">MP3 Combiner</button></a>
-        <a href="html/blobs" target="_blank" class="linkbutton"><button class="button text">Blob 1</button></a>
-        <a href="html/blob2" target="_blank" class="linkbutton"><button class="button text">Blob 2</button></a>
-        <a href="html/sorting" target="_blank" class="linkbutton"><button class="button text" id="algoText">Sorting Algos</button></a>
-        <a href="html/Ovogame" target="_blank" class="linkbutton"><button class="button text">OvO Embed</button></a>
-        <!-- <a href="html/vibrate" target="_blank" class="linkbutton"><button class="button text">Vibrate</button></a> -->
-        <a href="html/brot" target="_blank" class="linkbutton"><button class="button text">Fractals Explorer</button></a>
-        <a href="html/countdown" target="_blank" class="linkbutton"><button class="button text">Countdown</button></a>
-        <a href="html/spiral" target="_blank" class="linkbutton"><button class="button text">Spiral</button></a>
-        <a href="html/news" target="_blank" class="linkbutton"><button class="button text">Antimatter News</button></a>
-        <a href="html/plinko" target="_blank" class="linkbutton"><button class="button text">Plinko</button></a>
-        <a href="html/fryer" target="_blank" class="linkbutton"><button class="button text">Image Deep Fryer</button></a>
-        <a href="html/lightning" target="_blank" class="linkbutton"><button class="button text">Mouse Lightning</button></a>
-        <a href="html/3d" target="_blank" class="linkbutton"><button class="button text">Image To Cube</button></a>
-        <a href="html/timer" target="_blank" class="linkbutton"><button class="button text">30 Minute Timer</button></a>
-        <a href="html/typing" target="_blank" class="linkbutton"><button class="button text">Typing Test</button></a>
-        <a href="html/pelle" target="_blank" class="linkbutton"><button class="button text">Scary Text</button></a>
-        <a href="html/hacking" target="_blank" class="linkbutton" id="hack-link-anchor">
-          <button class="button text" id="hacktext"><span>&nbsp;</span><span id="hacknum" style="color: #8f8">0101010010</span></button>
-        </a>
-        <a href="html/colors" target="_blank" class="linkbutton"><button class="button text">Color Creator</button></a>
-        <a href="html/plinkdefense" target="_blank" class="linkbutton"><button class="button text">Tower Defense</button></a>
-        <a href="html/flappy2" target="_blank" class="linkbutton"><button class="button text">Flappy Bird 2</button></a>
-        <a href="html/game3" target="_blank" class="linkbutton"><button class="button text">Aclassio</button></a>
-        <a href="html/skilltree" target="_blank" class="linkbutton"><button class="button text">Skill Tree</button></a>
-        <a href="html/maze" target="_blank" class="linkbutton"><button class="button text">Maze (fun)</button></a>
-        <!-- <a href="html/tomb" target="_blank" class="linkbutton"><button class="button text">Momb of the Task <span style="display:none">tomb mask</span></button></a> -->
-        <a href="html/plinkemon" target="_blank" class="linkbutton"><button class="button text">Inventory</button></a>
+      <div class="button-list" id="button-list">
+        <button class="button text linkbutton" data-url="html/Amazing_Graphs_2" id="ag2text">Amazing Graphs 2</button>
+        <button class="button text linkbutton" data-url="html/trigslideshow">Trigonometery Slideshow</button>
+        <button class="button text linkbutton" data-url="html/gol" id="golbtn">Game of Life<span style="display:none;">gol conway conway's conways</span></button>
+        <button class="button text linkbutton" data-url="html/coreball" id="corbtn" style="color: #000; font-weight: bold; text-shadow: 0px 0px 5px #ffff;">Coreball</button>
+        <button class="button text linkbutton" data-url="game4/">Plinkformer<span style="display: none">platformer</span></button>
+        <!-- <button class="button text linkbutton" data-url="html/clicker">Bad Clicker Game</button> -->
+        <!-- <button class="button text linkbutton" data-url="html/Listpractice">List Learning</button> -->
+        <button class="button text linkbutton" data-url="html/Canvaspractice">Canvasse</button>
+        <button class="button text linkbutton" data-url="html/oscilloscope">Oscilloscope</button>
+        <button class="button text linkbutton" data-url="html/spectrogram">Spectrogram</button>
+        <button class="button text linkbutton" data-url="html/flappy">Flappy Bird</button>
+        <button class="button text linkbutton" data-url="html/2048">2048</button>
+        <button class="button text linkbutton" data-url="html/tetris">Tetris</button>
+        <button class="button text linkbutton" data-url="html/dvd">DVD Sim</button>
+        <button class="button text linkbutton" data-url="html/game1">Arrassio</button>
+        <button class="button text linkbutton" data-url="html/game2">Jetpack Horse Ultra Pro Extreme 3D</button>
+        <button class="button text linkbutton" id="funbutton" onclick="movestuff()">Fun button</button>
+        <button class="button text linkbutton" data-url="html/sierp">Simple Fractals</button>
+        <button class="button text linkbutton" data-url="html/ant" style="color: rgb(184, 205, 252)">Langton's Ant</button>
+        <button class="button text linkbutton" data-url="html/mousetrails" style="color: #eef; font-weight: bold;">Mouse Trails</button>
+        <button class="button text linkbutton" data-url="html/WaterSort">Water Sort</button>
+        <button class="button text linkbutton" data-url="html/texteffects">Text Effects</button>
+        <button class="button text linkbutton" data-url="html/funnytext">Funny Text</button>
+        <button class="button text linkbutton" data-url="html/rocketlaunch" style="color: #fed">Rocket Launch</button>
+        <button class="button text linkbutton" data-url="html/car">Car Game</button>
+        <button class="button text linkbutton" data-url="html/particles" style="color: #dfd">Particles</button>
+        <button class="button text linkbutton" data-url="html/fourier"><span class="text" style="color: #cff;">Fourier </span> <span class="text" style="color: #bcf;">Draw</span></button>
+        <button class="button text linkbutton" data-url="html/screensaver">Screensaver</button>
+        <button class="button text linkbutton" data-url="html/blockyblast">Blocky Blast</button>
+        <button class="button text linkbutton" data-url="html/encoding">Encoders</button>
+        <button class="button text linkbutton" data-url="html/loudwav">LOUD Audio</button>
+        <button class="button text linkbutton" data-url="html/cooltext">Cool Text</button>
+        <button class="button text linkbutton" data-url="html/voronoi">Plinkonoi <span style="display: none">voronoi vonoroi</span></button>
+        <button class="button text linkbutton" data-url="html/dino">Dino Game</button>
+        <button class="button text linkbutton" data-url="html/emojirain">Emoji Rain</button>
+        <button class="button text linkbutton" data-url="html/leftright">MP3 Combiner</button>
+        <button class="button text linkbutton" data-url="html/blobs">Blob 1</button>
+        <button class="button text linkbutton" data-url="html/blob2">Blob 2</button>
+        <button class="button text linkbutton" data-url="html/sorting" id="algoText">Sorting Algos</button>
+        <button class="button text linkbutton" data-url="html/Ovogame">OvO Embed</button>
+        <!-- <button class="button text linkbutton" data-url="html/vibrate">Vibrate</button> -->
+        <button class="button text linkbutton" data-url="html/brot">Fractals Explorer</button>
+        <button class="button text linkbutton" data-url="html/countdown">Countdown</button>
+        <button class="button text linkbutton" data-url="html/spiral">Spiral</button>
+        <button class="button text linkbutton" data-url="html/news">Antimatter News</button>
+        <button class="button text linkbutton" data-url="html/plinko">Plinko</button>
+        <button class="button text linkbutton" data-url="html/fryer">Image Deep Fryer</button>
+        <button class="button text linkbutton" data-url="html/lightning">Mouse Lightning</button>
+        <button class="button text linkbutton" data-url="html/3d">Image To Cube</button>
+        <button class="button text linkbutton" data-url="html/timer">30 Minute Timer</button>
+        <button class="button text linkbutton" data-url="html/typing">Typing Test</button>
+        <button class="button text linkbutton" data-url="html/pelle">Scary Text</button>
+        <button class="button text linkbutton" data-url="html/hacking" id="hacktext"><span>&nbsp;</span><span id="hacknum" style="color: #8f8">0101010010</span></button>
+        <button class="button text linkbutton" data-url="html/colors">Color Creator</button>
+        <button class="button text linkbutton" data-url="html/plinkdefense">Tower Defense</button>
+        <button class="button text linkbutton" data-url="html/flappy2">Flappy Bird 2</button>
+        <button class="button text linkbutton" data-url="html/game3">Aclassio</button>
+        <button class="button text linkbutton" data-url="html/skilltree">Skill Tree</button>
+        <button class="button text linkbutton" data-url="html/maze">Maze (fun)</button>
+        <!-- <button class="button text linkbutton" data-url="html/tomb">Momb of the Task <span style="display:none">tomb mask</span></button> -->
+        <button class="button text linkbutton" data-url="html/plinkemon">Inventory</button>
       </div>
     </div>
     <p class="text" style="left: 0%; text-align: center; opacity: 50%;">Warning: These links are desinged for 60fps computer devices!</p>
@@ -461,12 +450,48 @@
         };
       });
 
+
+      function openButtonLink(e) {
+        const url = e.currentTarget.getAttribute('data-url');
+        if (
+          url && 
+          e.currentTarget.tagName === 'BUTTON' &&
+          e.currentTarget.getAttribute('type') !== 'submit' &&
+          (!e.currentTarget.hasAttribute("onclick") || e.currentTarget.id === "funbutton")
+        ) {
+          if (e.type === 'click' || e.key === "Enter" || e.key === " ") {
+            window.open(url, "_blank");
+          }
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        Array.from(document.getElementsByClassName('linkbutton')).forEach(btn => {
+          if (btn.id !== "funbutton") {
+            btn.addEventListener('click', openButtonLink);
+            btn.addEventListener('keydown', function(e) {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openButtonLink(e);
+              }
+            });
+          }
+        });
+      });
+ 
+
       const buttonss = document.getElementsByClassName("linkbutton");
       const searcher = document.getElementById("searchinput");
       const seeProjectsBtn = document.getElementById("seeProjectsBtn");
       const columnDiv = document.getElementById("column");
       const buttonList = columnDiv.querySelector('.button-list');
       const searchInput = document.getElementById("searchinput");
+
+      Array.from(buttonss).forEach(btn => {
+        btn.style.transform = "none";
+        btn.removeAttribute('data-base-transform');
+      });
+ 
 
       let projectsVisible = false;
 
@@ -511,7 +536,7 @@
           projectsVisible = true;
         } else {
           let total = links.length;
-          // Remove .visible from all project links, then remove .visible from search bar LAST (after links)
+
           links.forEach((el, i) => {
             setTimeout(() => {
               el.classList.remove("visible");
@@ -519,9 +544,9 @@
           });
 
           setTimeout(() => {
-            searchInput.classList.remove("visible");
-          }, total * 45 + 120); // Wait until last link finished (plus a tiny delay)
-          
+            searchInput.classList.remove("visible");// 
+          }, total * 45 + 120);
+
           setTimeout(() => {
             columnDiv.classList.remove("visible");
             columnDiv.setAttribute('aria-hidden', 'true');
@@ -549,8 +574,7 @@
         const searchStr = searcher.value.toLowerCase();
         for (let i = 0; i < buttonss.length; i++) {
           const el = buttonss[i];
-          const btn = el.querySelector('button');
-          const content = btn ? btn.textContent.toLowerCase() : "";
+          const content = el.textContent.toLowerCase();
           if (content.includes(searchStr)) {
             el.style.display = "";
           } else {
@@ -647,7 +671,6 @@
         return Math.random() * 10 - 5; 
       }
 
-      // add rotation to buttons
       document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.button');
         buttons.forEach(function(btn) {
