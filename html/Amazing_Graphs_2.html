@@ -1643,7 +1643,7 @@ function ZS2(x, y) {
 
             function graph136(){zoomSet(0,90); value = 0; rotatePlane(tan(X*X+Y*Y-t/2)); temp1 = X+sin(Y*(Z/5));  rotatePlane(tan(X*X+Y*Y+t/1)); value=(temp1+Y)}
 
-            function graph137(){zoomSet(0,45); rotatePlane(sin(t)/3); value=mul(tan(X),tan(Y-(t+sin(X))))-mul(tan(Y+(t-sin(X+t))),tan(X))+Y}
+            function graph137(){zoomSet(0,45); rotatePlane(sin(t)/3); value=mul(tan(X),tan(Y-(t+sin(X))))-mul(tan(Y+(t-sin(X+t))),tan(X))+Y; value*=Z/50+0.01; value+=t/2}
 
             function graph138(){zoomSet(0,45); Y/=(Z/20+0.1); value=3*sin(sin(sin(cos(cos(cos((X+t*3)-t*2)+t*1.5)-t)+t/1.5)-t/2)+t/3)-Y}
 
@@ -1657,7 +1657,9 @@ function ZS2(x, y) {
 
             function graph143(){zoomSet(0,45); rotatePlane(t/2); const temp = sin(X+sin(div(Y,X/10))); rotatePlane(t/-1);  value=t+(Z/30+0.1)*((3*sin(temp))%arcsin(abs(sin(Y))*temp));}
 
-            function graph144(){zoomSet(0,45); const temp = [sin(X+t*1.1+Y),sin(X+t*1.2+Y),sin(X-t*1.3),sin(X-t*1.4),sin(X+t*1.5+Y),sin(X+t*1.6),sin(X+t*1.7)]; value = tan(temp[+floor((sin(abs(X*Y))+1)*2.5)]*3)+t/2}
+            function graph144(){zoomSet(0,45); const temp = [sin(X+t*1.1+Y),sin(X+t*1.2+Y),sin(X-t*1.3),sin(X-t*1.4),sin(X+t*1.5+Y),sin(X+t*1.6),sin(X+t*1.7)]; value = (Z/20+0.1)*(tan(temp[+floor((sin(abs(X*Y))+1)*2.5)]*3))+t/2}
+
+            function graph145(){zoomSet(0,45); const temp = arcsin(sin(X+cos(Y))+sin(Y+t)); X*=-1; Y*=-1; const temp2 = arcsin(sin(X+cos(Y))+sin(Y+t)); X*=-1; value=temp+temp2+arcsin(sin(X+cos(Y))+sin(Y+t)); if (value==3) {value=tan(X*Y+t)}}
             
 const graphFunctions = {
   1: graph1,
@@ -1803,7 +1805,8 @@ const graphFunctions = {
   141: graph141,
   142: graph142,
   143: graph143,
-  144: graph144
+  144: graph144,
+  145: graph145
 };
 
 const advancedList = [
@@ -1995,7 +1998,8 @@ const names = {
 140: "double asin",
 141: "generic",
 142: "cells",
-143: "doublespin"
+143: "doublespin",
+144: "unfold"
 
 };
 
