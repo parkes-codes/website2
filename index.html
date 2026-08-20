@@ -628,16 +628,38 @@
 
       searcher.addEventListener("input", function(event) {
         const searchStr = searcher.value.toLowerCase().trim();
+        let prefixMatches = [];
+        let otherMatches = [];
+
         for (let i = 0; i < buttonss.length; i++) {
           const el = buttonss[i];
           const content = el.textContent.toLowerCase();
-          if (content.includes(searchStr)) {
-            el.style.display = "";
-          } else {
-            el.style.display = "none";
+          if (!searchStr || content.includes(searchStr)) {
+            if (content.startsWith(searchStr) && searchStr !== "") {
+              prefixMatches.push(el);
+            } else {
+              otherMatches.push(el);
+            }
           }
         }
+
+        for (let i = 0; i < buttonss.length; i++) {
+          buttonss[i].style.display = "none";
+        }
+
+        let shown = 0;
+        prefixMatches.forEach(el => {
+          el.style.display = "";
+          el.style.order = -1;
+          shown++;
+        });
+        otherMatches.forEach((el, idx) => {
+          el.style.display = "";
+          el.style.order = ""; 
+          shown++;
+        });
       });
+ 
 
 
       let dvdAnimating = false;
