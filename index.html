@@ -230,7 +230,8 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        width: 100%;
+        padding: 15px 15px 30px 15px;
+        width: fit-content;
         max-width: 720px;
         margin-left: auto;
         margin-right: auto;
@@ -286,6 +287,11 @@
         }
       }
 
+      #linksRow:focus {
+        box-shadow: #000 0px 0px 10px !important;
+        filter: brightness(0.7);
+      }
+
       #searchinput {
         z-index: 100;
         background-color: #ffffee !important;
@@ -328,29 +334,69 @@
     <div id="backgroundOverlay"></div>
     <h1 class="text" style="z-index: 50; position: relative; margin-bottom: -8px; text-align:center; font-size: 26px;" id="velkomm">Welcome to my website!</h1>
     <h3 class="text" style="margin-bottom: 9px; text-align:center; position: relative; font-weight: 100; font-size: 13px;">↓Visit my socials↓</h3>
-    <div id="linksRow">
+    <div id="linksRow" tabindex="0">
       <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
         <div class="text linkheader">Scratch</div>
-        <a href="https://scratch.mit.edu/users/sadie_is_awesome" target="_blank" class="linkpicStyle" style="margin: 0;">
-          <img src="images/scratch.jpg" class="profilepic-link" id="profilepicture" alt="My Scratch Profile Picture and Link" width="100" height="100" style="width:100px;height:100px;object-fit:cover;">
+        <a href="https://scratch.mit.edu/users/sadie_is_awesome" target="_blank" class="linkpicStyle" style="margin: 0;" tabindex="-1">
+          <img src="images/scratch.jpg"
+            class="profilepic-link"
+            id="profilepicture"
+            alt="My Scratch Profile Picture and Link"
+            width="100" height="100"
+            style="width:100px;height:100px;object-fit:cover;"
+            tabindex="0"
+            role="link"
+            onclick="window.open('https://scratch.mit.edu/users/sadie_is_awesome', '_blank');"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://scratch.mit.edu/users/sadie_is_awesome', '_blank');}"
+          >
         </a>
       </div>
       <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
         <div class="text linkheader">OneCompiler</div>
-        <a href="https://onecompiler.com/users/436g67qxt" target="_blank" class="linkpicStyle" style="margin: 0;">
-          <img src="images/OnecompLogo.png" class="profilepic-link" id="onecompLink" alt="My One Compiler Profile link" width="100" height="100" style="width:100px;height:100px;object-fit:cover;">
+        <a href="https://onecompiler.com/users/436g67qxt" target="_blank" class="linkpicStyle" style="margin: 0;" tabindex="-1">
+          <img src="images/OnecompLogo.png"
+            class="profilepic-link"
+            id="onecompLink"
+            alt="My One Compiler Profile link"
+            width="100" height="100"
+            style="width:100px;height:100px;object-fit:cover;"
+            tabindex="0"
+            role="link"
+            onclick="window.open('https://onecompiler.com/users/436g67qxt', '_blank');"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://onecompiler.com/users/436g67qxt', '_blank');}"
+          >
         </a>
       </div>
       <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
         <div class="text linkheader">YouTube</div> 
-        <a href="https://youtube.com/@parkes24" target="_blank" class="linkpicStyle" style="margin: 0;">
-          <img src="images/youtubeprofpic.jpg" class="profilepic-link" id="ytlink" alt="My Youtube Channel Profile Picture and Link" width="100" height="100" style="width:100px;height:100px;object-fit:cover;">
+        <a href="https://youtube.com/@parkes24" target="_blank" class="linkpicStyle" style="margin: 0;" tabindex="-1">
+          <img src="images/youtubeprofpic.jpg"
+            class="profilepic-link"
+            id="ytlink"
+            alt="My Youtube Channel Profile Picture and Link"
+            width="100" height="100"
+            style="width:100px;height:100px;object-fit:cover;"
+            tabindex="0"
+            role="link"
+            onclick="window.open('https://youtube.com/@parkes24', '_blank');"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://youtube.com/@parkes24', '_blank');}"
+          >
         </a>
       </div>
       <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
         <div class="text linkheader">Github</div>
-        <a href="https://github.com/parkes-codes" target="_blank" class="linkpicStyle" style="margin: 0;">
-          <img src="images/bigstupid.png" class="profilepic-link" id="githublink" alt="My Github Profile Picture and Link" width="100" height="100" style="width:100px;height:100px;object-fit:contain;">
+        <a href="https://github.com/parkes-codes" target="_blank" class="linkpicStyle" style="margin: 0;" tabindex="-1">
+          <img src="images/bigstupid.png"
+            class="profilepic-link"
+            id="githublink"
+            alt="My Github Profile Picture and Link"
+            width="100" height="100"
+            style="width:100px;height:100px;object-fit:contain;"
+            tabindex="0"
+            role="link"
+            onclick="window.open('https://github.com/parkes-codes', '_blank');"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://github.com/parkes-codes', '_blank');}"
+          >
         </a>
       </div>
     </div>
@@ -683,6 +729,7 @@
 
       document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.button');
+        const column = document.getElementById('column');
         buttons.forEach(function(btn) {
           btn.addEventListener('mouseenter', function() {
             let base = getBaseTransform(btn);
@@ -694,7 +741,12 @@
             let base = btn.getAttribute('data-base-transform') || "";
             btn.style.transform = base;
           });
-          btn.addEventListener('focus', function() {
+          btn.addEventListener('focus', function(e) {
+            if (column && column.getAttribute('aria-hidden') === "true") {
+              btn.blur();
+              document.getElementById("linksRow").focus();
+              return;
+            }
             const deg = randomRotate();
             let base = getBaseTransform(btn);
             btn.style.transform = (base ? base + " " : "") + `rotate(${deg}deg) scale(1.05)`;
@@ -705,6 +757,8 @@
             btn.style.transform = base;
           });
         });
+ 
+ 
 
         function adjustPfpGrid() {
           const linksRow = document.getElementById('linksRow');
@@ -722,6 +776,15 @@
         }
         adjustPfpGrid();
         window.addEventListener('resize', adjustPfpGrid);
+
+        const searchBar = document.getElementById("searchinput");
+
+        searchBar.addEventListener("focus", () => {
+          if (column && column.getAttribute('aria-hidden') === "true") {
+            searchBar.blur();
+            document.getElementById("linksRow").focus();
+          }
+        })
       });
 
       function randomDxDy() {
