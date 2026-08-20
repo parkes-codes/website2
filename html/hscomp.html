@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hammerspoon Helper Tool</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+  </head>
+    <style>
+      #output { 
+        font-size: 8px; 
+        white-space: pre-wrap;
+        word-break: break-word;
+        height: fit-content;
+        overflow: scroll;
+        overflow: auto;
+        max-height: calc(100vh - 300px);
+        width: fit-content;
+        background: #f4f4f410;
+        padding: 10px;
+        border: 1px solid #ddd1;
+        border-radius: 10px;
+      }
+      body {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color: #15151a;
+        color: #eef;
+      }
+      .buttons {
+        width: 100px;
+        color: #eff;
+        background-color: #15151a;
+        border: none;
+        border: #fff 2px solid;
+        border-radius: 5px;
+        transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1);
+      }
+      .buttons:hover {
+        filter: brightness(1.5);
+        border-width: 4px;
+        background-color: #51545480;
+        transform: scale(1.05);
+      }
+      .buttons:focus {
+        filter: brightness(1.5);
+        background-color: #51545480;
+        transform: scale(1.05);
+        border: #8cf 4px solid;
+        outline: none;
+        box-shadow: none;
+      }
+ 
+    </style>
+  <body>
+    <h1 class="title">Enter your code and it will convert into a console command.</h1>
+    <p>
+        It will also pre load it with an auto clicker, and an auto typer. See console for hotkeys.
+    </p>
+    <div style="display: flex; flex-direction: row;">
+        <textarea id="inputText" placeholder="Paste your string here..." rows="6" cols="50"></textarea>
+        <div style="display: flex; flex-direction: column; gap: 13px; margin-left: 15px; width: fit-content; min-width: none; max-width: none; margin-top: 5px;">
+            <button id="convertBtn" class="buttons">Convert</button>
+            <button id="selectAllBtn" class="buttons">Select All</button>
+            <button id="copyBtn" class="buttons">Copy Output</button>
+        </div>
+    </div>
+
+    <pre id="output">Output appears here</pre>
+</body>
+    <script>
+
+  const prependAutoTypeSettings = `-- Auto Type Settings
+newlineTyping = true
+local typingTimer = nil
+local typingText = ""
+local typingIndex = 1
+-- Toggle newline typing
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
+    newlineTyping = not newlineTyping
+    if newlineTyping then
+        hs.alert.show("Newline Typing ON")
+    else
+        hs.alert.show("Newline Typing OFF")
+    end
+end)
+-- Start typing clipboard contents
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "T", function()
+    -- Stop an existing typing sequence
+    if typingTimer then
+        typingTimer:stop()
+        typingTimer = nil
+    end
+    -- Get clipboard
+    local clipboard = hs.pasteboard.getContents()
+    if not clipboard then
+        hs.alert.show("Clipboard is empty")
+        return
+    end
+    -- Prepare the text
+    -- Trim leading whitespace/newlines for the copied text
+    clipboard = clipboard and clipboard:gsub("^%s+", "") or clipboard
+    if newlineTyping then
+        typingText = clipboard
+    else
+        -- Remove whitespace at the beginning, then turn all remaining whitespace into single spaces
+        typingText = clipboard
+            :gsub("%s+", " ")
+    end
+    typingIndex = 1
+    hs.alert.show("Typing...")
+    -- One character every 1/60 second
+    typingTimer = hs.timer.doEvery(1 / 60, function()
+        if typingIndex <= #typingText then
+            local character = typingText:sub(typingIndex, typingIndex)
+            if character == "\\n" then
+                hs.eventtap.keyStroke({}, "return")
+            else
+                hs.eventtap.keyStrokes(character)
+            end
+            typingIndex = typingIndex + 1
+        else
+            typingTimer:stop()
+            typingTimer = nil
+            hs.alert.show("Finished typing")
+        end
+    end)
+end)
+
+----------------------------------------------------------------
+-- 🧩 USER MACROS BELOW
+----------------------------------------------------------------
+`;
+
+
+  const rawAutoClickerCore = `
+----------------------------------------------------------------
+-- 🔒 ALWAYS-LOADED CORE MACROS
+----------------------------------------------------------------
+
+autoClickerTimer = autoClickerTimer
+autoClickerMode = autoClickerMode or 1
+
+local clickModes = {
+    {name = "MAX SPEED ⚡", interval = 0},
+    {name = "5 ms", interval = 0.005},
+    {name = "25 ms", interval = 0.025},
+    {name = "50 ms", interval = 0.05},
+    {name = "100ms", interval = 0.1},
+    {name = "250ms", interval = 0.25},
+    {name = "500ms", interval = 0.5},
+    {name = "1000ms", interval = 1}
+}
+
+local function startClicker()
+    local mode = clickModes[autoClickerMode]
+    hs.alert.show("Auto Clicker: " .. mode.name)
+
+    local function click()
+        local pos = hs.mouse.absolutePosition()
+        hs.eventtap.event.newMouseEvent(hs.eventtap.event.types.leftMouseDown, pos):post()
+        hs.eventtap.event.newMouseEvent(hs.eventtap.event.types.leftMouseUp, pos):post()
+    end
+
+    if mode.interval == 0 then
+        autoClickerTimer = hs.timer.doWhile(
+            function() return autoClickerTimer ~= nil end,
+            function() click() end,
+            0
+        )
+    else
+        autoClickerTimer = hs.timer.doEvery(mode.interval, click)
+    end
+end
+
+local function stopClicker()
+    if autoClickerTimer then
+        autoClickerTimer:stop()
+        autoClickerTimer = nil
+        hs.alert.show("Auto Clicker Stopped 🛑")
+    end
+end
+
+-- Toggle
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "C", function()
+    if autoClickerTimer then
+        stopClicker()
+    else
+        startClicker()
+    end
+end)
+
+-- Cycle speed
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
+    autoClickerMode = autoClickerMode + 1
+    if autoClickerMode > #clickModes then
+        autoClickerMode = 1
+    end
+
+    hs.alert.show("Mode: " .. clickModes[autoClickerMode].name)
+
+    if autoClickerTimer then
+        stopClicker()
+        startClicker()
+    end
+end)
+`;
+
+  function escapeJsForLuaBlock(str) {
+    return str
+  }
+
+  let luaString = ""
+  document.getElementById('convertBtn').addEventListener('click', () => {
+    const input = document.getElementById('inputText').value;
+    
+    // Only run escaping for the core string
+    const processedCore = escapeJsForLuaBlock(rawAutoClickerCore);
+
+    const fullCode = prependAutoTypeSettings + "\n" + input;
+
+    luaString =
+      `f = io.open(hs.configdir .. "/init.lua", "w"); f:write([[` +
+      processedCore +
+      `\n` +
+      fullCode +
+      `\n]]); f:close(); hs.reload()`;
+
+    document.getElementById('output').textContent = luaString;
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const outputText = document.getElementById('output').textContent;
+    if (!outputText) return;
+    navigator.clipboard.writeText(outputText).then(() => {
+      alert("Output copied to clipboard!");
+    }).catch(err => {
+      alert("Failed to copy: " + err);
+    });
+  });
+  
+  document.getElementById('selectAllBtn').addEventListener('click', () => {
+    const output = document.getElementById('output');
+    const range = document.createRange();
+    range.selectNodeContents(output);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+  });
+
+</script>
+</html>
