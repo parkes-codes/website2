@@ -75,7 +75,7 @@ local typingTimer = nil
 local typingText = ""
 local typingIndex = 1
 -- Toggle newline typing
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "K", function()
     newlineTyping = not newlineTyping
     if newlineTyping then
         hs.alert.show("Newline Typing ON")
