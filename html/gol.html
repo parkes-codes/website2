@@ -269,6 +269,9 @@
     <p>
         ◉ O key to toggle render optimization
     </p>
+    <p>
+        ◉ / while clicking on auto camera slider key to set to 0
+    </p>
     <h3>Highlight Hotkeys (all require Command key held)</h3>
     <p>
         ◉ RightClick on any selected cell to drag the selected and reposition it.
@@ -459,6 +462,9 @@
     <p>Wickstretcher+Eater Ship (c/5)
         <a class="link" href="#" onclick="loadLexi('wsShip')">Spawn</a>
     </p>
+    <p>Wickship 2
+        <a class="link" href="#" onclick="loadLexi('wickship2')">Spawn</a>
+    </p>
     <p>c/3 Greyship
         <a class="link" href="#" onclick="loadLexi('c3greyship')">Spawn</a>
     </p>
@@ -467,6 +473,9 @@
     </p>
     <p>c/5 Greyship
         <a class="link" href="#" onclick="loadLexi('c/5greyship')">Spawn</a>
+    </p>
+    <p>c5 Bubble Ship
+        <a class="link" href="#" onclick="loadLexi('bubship')">Spawn</a>
     </p>
     <p>Knightship
         <a class="link" href="#" onclick="loadLexi('knightship')">Spawn</a>
@@ -687,6 +696,9 @@
     <p>Puffer Train
         <a class="link" href="#" onclick="loadLexi('puffertrain')">Spawn</a>
     </p>
+    <p>Wavy Block Puffer
+        <a class="link" href="#" onclick="loadLexi('wavy')">Spawn</a>
+    </p>
 
     <h3 class="header3">Stretchers</h3>
     <p>Wickstretcher
@@ -694,6 +706,9 @@
     </p>
     <p>c/2 Wickstretcher
         <a class="link" href="#" onclick="loadLexi('c2wick')">Spawn</a>
+    </p>
+    <p>c/5 Wickstretcher
+        <a class="link" href="#" onclick="loadLexi('c5wick')">Spawn</a>
     </p>
     <p>Diagonal Wickstretcher
         <a class="link" href="#" onclick="loadLexi('diagWickstr')">Spawn</a> 
@@ -706,6 +721,12 @@
     </p>
     <p>(c124b?) Tubstretcher 2
         <a class="link" href="#" onclick="loadLexi('tubstretch2')">Spawn</a>
+    </p>
+    <p>LineStretcher
+        <a class="link" href="#" onclick="loadLexi('line2')">Spawn</a>
+    </p>
+    <p>Wide  WickStretcher (very cool)
+        <a class="link" href="#" onclick="loadLexi('widestretcher')">Spawn</a>
     </p>
 
     <h3 class="header3">Breeders</h3>
@@ -774,7 +795,7 @@
     <p>P ~15000 Glider Gun
         <a class="link" href="#" onclick="loadLexi('idk8')">Spawn</a>
     </p>
-    <p>Crystallization And Decay Based Gun (p4800 ish)
+    <p>Crystallization And Decay Based Gun (p4900 ish)
         <a class="link" href="#" onclick="loadLexi('idk9')">Spawn</a>
     </p>
     <p>Slowest Glider Gun (p103079214841)
@@ -825,6 +846,9 @@
     </p>
     <p>Double Slide Gun
         <a class="link" href="#" onclick="loadLexi('doubleslide')">Spawn</a>
+    </p>
+    <p>Slide Gun With Beehive
+        <a class="link" href="#" onclick="loadLexi('slide3')">Spawn</a>
     </p>
     <p>Space Rake Gun
         <a class="link" href="#" onclick="loadLexi('spaceRakeGun')">Spawn</a>
@@ -911,14 +935,11 @@
     <p>Lineship
         <a class="link" href="#" onclick="loadLexi('lineshipExt')">Spawn</a>
     </p>
-    <p>Linestretcher
+    <p>Linestretcher 2
         <a class="link" href="#" onclick="loadLexi('linestretcher')">Spawn</a>
     </p>
     <p>Leaf Bug 2a
         <a class="link" href="#" onclick="loadLexi('leafbug2a')">Spawn</a>
-    </p>
-    <p>Leaf Bug Small
-        <a class="link" href="#" onclick="loadLexi('lb2e2')">Spawn</a>
     </p>
     <p>Water Strider
         <a class="link" href="#" onclick="loadLexi('waterstrider')">Spawn</a>
@@ -1503,225 +1524,31 @@ function draw() {
         return {minX, maxX, minY, maxY, area};
     }
 
-    if (webglSupported) {
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.clearColor(0, 0, 0, 0);
-        gl.clear(gl.COLOR_BUFFER_BIT);
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = "#222";
-        ctx.lineWidth = 1;
-        let cols = Math.ceil(canvas.width / zoom) + 2;
-        let rows = Math.ceil(canvas.height / zoom) + 2;
-        let x0 = Math.floor(camx - canvas.width / (2 * zoom));
-        let y0 = Math.floor(camy - canvas.height / (2 * zoom));
-        for (let xx = 0; xx <= cols; xx++) {
-            ctx.beginPath();
-            let xCell = x0 + xx, xPixel = (xCell - camx) * zoom + canvas.width / 2;
-            ctx.moveTo(xPixel, 0); ctx.lineTo(xPixel, canvas.height); ctx.stroke();
-        }
-        for (let yy = 0; yy <= rows; yy++) {
-            ctx.beginPath();
-            let yCell = y0 + yy, yPixel = canvas.height / 2 - (yCell - camy) * zoom;
-            ctx.moveTo(0, yPixel); ctx.lineTo(canvas.width, yPixel); ctx.stroke();
-        }
+    ctx.fillStyle = "#202525"; // Or "black" or other preferred color
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        let mainVerts = [];
-        let highlights = new Set(selectedLivePixels.map(p => p.x + "," + p.y));
-        for (let i = 0; i < pixels.length; i++) {
-            let p = pixels[i], key = p.x + "," + p.y;
-            if (draggingSelection && highlights.has(key)) continue;
-            if (((p.x + p.y) % sparsity) !== 0) continue;
-            if (!isPixelOnScreen(p.x, p.y, cellSize)) continue;
-            mainVerts.push(p.x, p.y);
-            rendered++;
-        }
-        if (mainVerts.length > 0) {
-            gl.bindBuffer(gl.ARRAY_BUFFER, glBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(mainVerts), gl.STREAM_DRAW);
-            gl.uniform2f(glResolutionLoc, canvas.width, canvas.height);
-            gl.uniform2f(glCamLoc, camx, camy);
-            gl.uniform1f(glZoomLoc, zoom);
-            gl.uniform4f(glColorLoc, 1, 1, 1, 1);
-            gl.drawArrays(gl.POINTS, 0, mainVerts.length / 2);
-        }
-
-        if (selectedLivePixels.length > 0) {
-            let selVerts = [];
-            for (let i = 0; i < pixels.length; i++) {
-                let p = pixels[i], key = p.x + "," + p.y;
-                if (highlights.has(key)) {
-                    if (((p.x + p.y) % sparsity) === 0 && isPixelOnScreen(p.x, p.y, cellSize)) {
-                        selVerts.push(p.x, p.y);
-                        rendered++;
-                    }
-                }
-            }
-            if (selVerts.length > 0 && zoom > 0) {
-                gl.bindBuffer(gl.ARRAY_BUFFER, glBuffer);
-                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(selVerts), gl.STREAM_DRAW);
-                gl.uniform2f(glResolutionLoc, canvas.width, canvas.height);
-                gl.uniform2f(glCamLoc, camx, camy);
-                gl.uniform1f(glZoomLoc, zoom);
-                let s = (Math.sin(t2 / 10) + 1.2) * 0.25;
-                gl.uniform4f(glColorLoc, 0.2, 0.7, 0.2 + s, 1);
-                gl.drawArrays(gl.POINTS, 0, selVerts.length / 2);
-            } else if (selVerts.length > 0) {
-                let s = (Math.sin(t2 / 10) + 1.2) * 0.25;
-                ctx.fillStyle = `rgba(44,181,44,${0.7 + s})`;
-                for (let k = 0; k < selVerts.length; k += 2) {
-                    let x = selVerts[k], y = selVerts[k + 1];
-                    if (!isPixelOnScreen(x, y, cellSize)) continue;
-                    ctx.fillRect(
-                        (x - camx) * zoom + canvas.width / 2,
-                        canvas.height / 2 - (y - camy) * zoom,
-                        cellSize, cellSize
-                    );
-                }
-            }
-        }
-
-        if (draggingSelection && selectionOriginal.length > 0) {
-            for (let i = 0; i < selectionOriginal.length; i++) {
-                let nx = selectionOriginal[i].x + dragOffset.x, ny = selectionOriginal[i].y + dragOffset.y;
-                if (!isPixelOnScreen(nx, ny, cellSize)) continue;
-                ctx.fillStyle = "rgba(50,180,255,0.5)";
-                ctx.fillRect(
-                    (nx - camx) * zoom + canvas.width / 2,
-                    canvas.height / 2 - (ny - camy) * zoom,
-                    cellSize, cellSize
-                );
-            }
-        }
-        if (pastePreviewActive && copiedPixels.length > 0) {
-            let pasteMinX = Math.min(...copiedPixels.map(p => p.x));
-            let pasteMinY = Math.min(...copiedPixels.map(p => p.y));
-            let offsetX = hoverX - pasteMinX,
-                offsetY = hoverY - pasteMinY;
-            let already = new Set(pixels.map(p => `${p.x},${p.y}`));
-            for (let i = 0; i < copiedPixels.length; i++) {
-                let nx = copiedPixels[i].x + offsetX,
-                    ny = copiedPixels[i].y + offsetY;
-                if (!isPixelOnScreen(nx, ny, cellSize)) continue;
-                if (already.has(`${nx},${ny}`)) ctx.fillStyle = "rgba(240,40,40,0.4)";
-                else ctx.fillStyle = "rgba(80,180,255,0.5)";
-                ctx.fillRect(
-                    (nx - camx) * zoom + canvas.width / 2,
-                    canvas.height / 2 - (ny - camy) * zoom,
-                    cellSize, cellSize
-                );
-            }
-        }
-        if (shiftpressed) {
-            ctx.globalAlpha = 0.15;
-            let {minX, maxX, minY, maxY, area} = getShiftRectInfo();
-            if (area > 50000) {
-                ctx.globalAlpha = 1
-                ;
-                ctx.save();
-                ctx.strokeStyle = "#404040";
-                ctx.lineWidth = Math.max(1, cellSize * 0.14);
-                ctx.beginPath();
-                for (let hx = minX; hx <= maxX; hx++) {
-                    if (isPixelOnScreen(hx, minY, cellSize)) {
-                        ctx.fillRect(
-                            (hx - camx) * zoom + canvas.width / 2,
-                            canvas.height / 2 - (minY - camy) * zoom,
-                            cellSize, cellSize
-                        );
-                    }
-                }
-                if (maxY !== minY) {
-                    for (let hx = minX; hx <= maxX; hx++) {
-                        if (isPixelOnScreen(hx, maxY, cellSize)) {
-                            ctx.fillRect(
-                                (hx - camx) * zoom + canvas.width / 2,
-                                canvas.height / 2 - (maxY - camy) * zoom,
-                                cellSize, cellSize
-                            );
-                        }
-                    }
-                }
-                for (let hy = minY + 1; hy < maxY; hy++) {
-                    if (isPixelOnScreen(minX, hy, cellSize)) {
-                        ctx.fillRect(
-                            (minX - camx) * zoom + canvas.width / 2,
-                            canvas.height / 2 - (hy - camy) * zoom,
-                            cellSize, cellSize
-                        );
-                    }
-                }
-                if (maxX !== minX) {
-                    for (let hy = minY + 1; hy < maxY; hy++) {
-                        if (isPixelOnScreen(maxX, hy, cellSize)) {
-                            ctx.fillRect(
-                                (maxX - camx) * zoom + canvas.width / 2,
-                                canvas.height / 2 - (hy - camy) * zoom,
-                                cellSize, cellSize
-                            );
-                        }
-                    }
-                }
-                ctx.stroke();
-                ctx.restore();
-            } else {
-                ctx.fillStyle = "#404040";
-                for (let hx = minX; hx <= maxX; hx++) for (let hy = minY; hy <= maxY; hy++) {
-                    if (!isPixelOnScreen(hx, hy, cellSize)) continue;
-                    ctx.fillRect(
-                        (hx - camx) * zoom + canvas.width / 2,
-                        canvas.height / 2 - (hy - camy) * zoom,
-                        cellSize, cellSize
-                    );
-                }
-            }
-            ctx.globalAlpha = 1;
-        }
-
-   
-        if (isPixelOnScreen(hoverX, hoverY, cellSize)) {
-            ctx.globalAlpha = 0.5; ctx.fillStyle = "#888";
-            ctx.fillRect(
-                (hoverX - camx) * zoom + canvas.width / 2,
-                canvas.height / 2 - (hoverY - camy) * zoom,
-                cellSize, cellSize
-            );
-            ctx.globalAlpha = 1;
-        }
-
-        if (typeof markers !== "undefined" && Array.isArray(markers)) {
-            ctx.globalAlpha = 0.4;
-            for (let i = 0; i < markers.length; i++) {
-                let m = markers[i];
-                if (!isPixelOnScreen(m.x, m.y, cellSize)) continue;
-                ctx.fillStyle = m.color;
-                ctx.fillRect(
-                    (m.x - camx) * zoom + canvas.width / 2,
-                    canvas.height / 2 - (m.y - camy) * zoom,
-                    cellSize, cellSize
-                );
-            }
-            ctx.globalAlpha = 1;
-        }
-
+    if (false) {
+        
     } else {
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = "#222";
-        ctx.lineWidth = 1;
-        let cols = Math.ceil(canvas.width / zoom) + 2;
-        let rows = Math.ceil(canvas.height / zoom) + 2;
-        let x0 = Math.floor(camx - canvas.width / (2 * zoom));
-        let y0 = Math.floor(camy - canvas.height / (2 * zoom));
-        for (let xx = 0; xx <= cols; xx++) {
-            ctx.beginPath();
-            let xCell = x0 + xx, xPixel = (xCell - camx) * zoom + canvas.width / 2;
-            ctx.moveTo(xPixel, 0); ctx.lineTo(xPixel, canvas.height); ctx.stroke();
-        }
-        for (let yy = 0; yy <= rows; yy++) {
-            ctx.beginPath();
-            let yCell = y0 + yy, yPixel = canvas.height / 2 - (yCell - camy) * zoom;
-            ctx.moveTo(0, yPixel); ctx.lineTo(canvas.width, yPixel); ctx.stroke();
+        // Checkerboard/grid rendering only if zoom >=2
+        if (zoom >= 2) {
+            ctx.strokeStyle = "#667373";
+            ctx.lineWidth = zoom/20;
+            let cols = Math.ceil(canvas.width / zoom) + 2;
+            let rows = Math.ceil(canvas.height / zoom) + 2;
+            let x0 = Math.floor(camx - canvas.width / (2 * zoom));
+            let y0 = Math.floor(camy - canvas.height / (2 * zoom));
+            for (let xx = 0; xx <= cols; xx++) {
+                ctx.beginPath();
+                let xCell = x0 + xx, xPixel = (xCell - camx) * zoom + canvas.width / 2;
+                ctx.moveTo(xPixel, 0); ctx.lineTo(xPixel, canvas.height); ctx.stroke();
+            }
+            for (let yy = 0; yy <= rows; yy++) {
+                ctx.beginPath();
+                let yCell = y0 + yy, yPixel = canvas.height / 2 - (yCell - camy) * zoom;
+                ctx.moveTo(0, yPixel); ctx.lineTo(canvas.width, yPixel); ctx.stroke();
+            }
         }
 
         let highlights = new Set(selectedLivePixels.map(p => p.x + "," + p.y));
@@ -1744,7 +1571,7 @@ function draw() {
         }
 
         if (isPixelOnScreen(0, 0, cellSize)) {
-            ctx.fillStyle = "#fff1";
+            ctx.fillStyle = "#fff2";
             if (zoom >= 4) {
                 ctx.fillRect(
                     (0 - camx) * zoom + canvas.width / 2,
@@ -1797,11 +1624,10 @@ function draw() {
             ctx.globalAlpha = 0.15;
             let {minX, maxX, minY, maxY, area} = getShiftRectInfo();
             if (area > 50000) {
-                ctx.globalAlpha = 1
-                ;
+                ctx.globalAlpha = 1;
                 ctx.save();
-                ctx.strokeStyle = "#404040";
-                ctx.lineWidth = Math.max(1, cellSize * 0.14);
+                ctx.fillStyle = "#ccc";
+                ctx.lineWidth = 10;
                 ctx.beginPath();
                 for (let hx = minX; hx <= maxX; hx++) {
                     if (isPixelOnScreen(hx, minY, cellSize)) {
@@ -1846,7 +1672,7 @@ function draw() {
                 ctx.stroke();
                 ctx.restore();
             } else {
-                ctx.fillStyle = "#404040";
+                ctx.fillStyle = "#aaa";
                 for (let hx = minX; hx <= maxX; hx++) for (let hy = minY; hy <= maxY; hy++) {
                     if (!isPixelOnScreen(hx, hy, cellSize)) continue;
                     ctx.fillRect(
@@ -2301,7 +2127,7 @@ camxin.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         camxin.blur();
         inputFocus = false;
-    } else if (e.key === "/") {
+    } else if (e.key === "/" || e.key === "\\") {
         camxin.value = 0;
     }
 });
@@ -2310,7 +2136,7 @@ camyin.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         camyin.blur();
         inputFocus = false;
-    } else if (e.key === "/") {
+    } else if (e.key === "/" || e.key === "\\") {
         camyin.value = 0;
     }
 });
@@ -2451,7 +2277,7 @@ window.addEventListener("keydown", (e) => {
     else if (e.key == "r") {
         e.preventDefault();
         if (cmdPressed) { loadLexi("blank");  camx = 0; camy = 0; zoom = 10;}
-        else resetState();
+        else {resetState(); camx = 0; camy = 0;};
     } else if (e.key.toLowerCase() === "s" && cmdPressed ) {
         e.preventDefault(); saveCurrent();
     } else if (e.key === "t" && paused) {
