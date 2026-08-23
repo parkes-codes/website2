@@ -54,7 +54,11 @@
   <body>
     <h1 class="title">Enter your code and it will convert into a console command.</h1>
     <p>
-        It will also pre load it with an auto clicker, and an auto typer. See console for hotkeys.
+        It will also pre load it with many useful macros. See console for hotkeys.<br></br>
+        Leave the input blank and click convert to get just the base macros.
+    </p>
+    <p>
+      All you have to do is copy the ouput, paste it into hammerspoon console, and it will give you all the macros!
     </p>
     <div style="display: flex; flex-direction: row;">
         <textarea id="inputText" placeholder="Paste your string here..." rows="6" cols="50"></textarea>
@@ -69,61 +73,206 @@
 </body>
     <script>
 
-  const prependAutoTypeSettings = `-- Auto Type Settings
+// 530, 262
+// 630, 655
+  const prependAutoTypeSettings = `-- =========================================================
+-- AUTO TYPE
+-- =========================================================
+
 newlineTyping = true
+
 local typingTimer = nil
 local typingText = ""
 local typingIndex = 1
+
 -- Toggle newline typing
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "K", function()
+
     newlineTyping = not newlineTyping
+
     if newlineTyping then
         hs.alert.show("Newline Typing ON")
     else
         hs.alert.show("Newline Typing OFF")
     end
+
 end)
+
+
 -- Start typing clipboard contents
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "T", function()
-    -- Stop an existing typing sequence
+
     if typingTimer then
         typingTimer:stop()
         typingTimer = nil
     end
-    -- Get clipboard
+
     local clipboard = hs.pasteboard.getContents()
+
     if not clipboard then
         hs.alert.show("Clipboard is empty")
         return
     end
-    -- Prepare the text
-    -- Trim leading whitespace/newlines for the copied text
-    clipboard = clipboard and clipboard:gsub("^%s+", "") or clipboard
+
+    clipboard = clipboard:gsub("^%s+", "")
+
     if newlineTyping then
         typingText = clipboard
     else
-        -- Remove whitespace at the beginning, then turn all remaining whitespace into single spaces
-        typingText = clipboard
-            :gsub("%s+", " ")
+        typingText = clipboard:gsub("%s+", " ")
     end
+
     typingIndex = 1
+
     hs.alert.show("Typing...")
-    -- One character every 1/60 second
-    typingTimer = hs.timer.doEvery(1 / 60, function()
+
+    typingTimer = hs.timer.doEvery(1 / 999, function()
+
         if typingIndex <= #typingText then
+
             local character = typingText:sub(typingIndex, typingIndex)
+
             if character == "\\n" then
                 hs.eventtap.keyStroke({}, "return")
             else
                 hs.eventtap.keyStrokes(character)
             end
+
             typingIndex = typingIndex + 1
+
         else
+
             typingTimer:stop()
             typingTimer = nil
+
             hs.alert.show("Finished typing")
+
         end
+
     end)
+
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "G", function()
+
+    if typingTimer then
+        typingTimer:stop()
+        typingTimer = nil
+    end
+
+
+    hs.alert.show("start")
+
+    hs.mouse.setAbsolutePosition({
+        x = 539,
+        y = 413
+    })
+
+    -- Wait 1 second
+    hs.timer.doAfter(0.001, function()
+
+        -- Mouse DOWN
+        hs.alert.show("click")
+        hs.eventtap.event.newMouseEvent(
+            hs.eventtap.event.types.leftMouseDown,
+            {x = 539, y = 413}
+        ):post()
+
+        hs.timer.doAfter(0.001, function()
+
+            -- Move
+            hs.alert.show("move")
+
+            hs.eventtap.event.newMouseEvent(
+                hs.eventtap.event.types.leftMouseDragged,
+                {x = 630, y = 867}
+            ):post()
+
+            hs.mouse.setAbsolutePosition({
+                x = 630,
+                y = 867
+            })
+
+            -- Wait 1 second
+            hs.timer.doAfter(0.001, function()
+
+                -- RELEASE
+                hs.eventtap.event.newMouseEvent(
+                    hs.eventtap.event.types.leftMouseUp,
+                    {x = 630, y = 655}
+                ):post()
+
+                hs.alert.show("release")
+
+                -- Wait 1 second after release
+                hs.timer.doAfter(0.001, function()
+
+                    -- COPY WITH COMMAND+C
+                    hs.alert.show("copy")
+
+                    hs.eventtap.keyStroke({"cmd"}, "c")
+
+                    -- Wait 1 second for clipboard
+                    hs.timer.doAfter(0.001, function()
+
+                        local clipboard = hs.pasteboard.getContents()
+
+                        if not clipboard then
+                            hs.alert.show("Clipboard is empty")
+                            return
+                        end
+
+                        clipboard = clipboard:gsub("^%s+", "")
+
+                        if newlineTyping then
+                            typingText = clipboard
+                        else
+                            typingText = clipboard:gsub("%s+", " ")
+                        end
+
+                        typingIndex = 1
+
+                        -- TYPE
+                        hs.alert.show("type")
+
+                        typingTimer = hs.timer.doEvery(1 / 999, function()
+
+                            if typingIndex <= #typingText then
+
+                                local character =
+                                    typingText:sub(typingIndex, typingIndex)
+
+                                if character == "\\n" then
+                                    hs.eventtap.keyStroke({}, "return")
+                                else
+                                    hs.eventtap.keyStrokes(character)
+                                end
+
+                                typingIndex = typingIndex + 1
+
+                            else
+
+                                typingTimer:stop()
+                                typingTimer = nil
+
+                            end
+
+                        end)
+
+                        hs.alert.show("finished")
+
+                    end)
+
+                end)
+
+            end)
+
+        end)
+
+    end)
+
 end)
 
 ----------------------------------------------------------------
@@ -202,6 +351,13 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
         stopClicker()
         startClicker()
     end
+end)
+
+
+-- Mouse pos log macro
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "M", function()
+    local pos = hs.mouse.absolutePosition()
+    hs.alert.show("Mouse: X=" .. math.floor(pos.x) .. " Y=" .. math.floor(pos.y))
 end)
 `;
 
