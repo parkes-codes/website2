@@ -1,35 +1,9 @@
 const patterns = {
-    "blank": [            ],
-    "4gc":  [
-        {x:-3,y:-5}, {x:-2,y:-5},
-        {x:-1,y:-5}, {x:0,y:-5},
-        {x:-5,y:-3}, {x:-4,y:-3},
-        {x:-3,y:-3}, {x:-2,y:-3},
-        {x:-1,y:-3}, {x:0,y:-3},
-        {x:1,y:-3},  {x:2,y:-3},
-        {x:-7,y:-1}, {x:-6,y:-1},
-        {x:-5,y:-1}, {x:-4,y:-1},
-        {x:-3,y:-1}, {x:-2,y:-1},
-        {x:-1,y:-1}, {x:0,y:-1},
-        {x:1,y:-1},  {x:2,y:-1},
-        {x:3,y:-1},  {x:4,y:-1},
-        {x:2,y:1},   {x:1,y:1},
-        {x:0,y:1},   {x:-1,y:1},
-        {x:-2,y:1},  {x:-3,y:1},
-        {x:-4,y:1},  {x:-5,y:1},
-        {x:-3,y:3},  {x:-2,y:3},
-        {x:-1,y:3},  {x:0,y:3}],
-    "gliderGun1": [
-        {x:14,y:-5},
-        {x:12,y:-4}, {x:14,y:-4}, {x:2,y:-3}, {x:3,y:-3}, {x:10,y:-3},
-        {x:11,y:-3}, {x:24,y:-3}, {x:25,y:-3}, {x:1,y:-2}, {x:5,y:-2},
-        {x:10,y:-2}, {x:11,y:-2}, {x:24,y:-2}, {x:25,y:-2},
-        {x:-10,y:-1}, {x:-9,y:-1}, {x:0,y:-1}, {x:6,y:-1}, {x:10,y:-1},
-        {x:11,y:-1}, {x:-10,y:0}, {x:-9,y:0}, {x:0,y:0}, {x:4,y:0},
-        {x:6,y:0}, {x:7,y:0}, {x:12,y:0}, {x:14,y:0}, {x:0,y:1},
-        {x:6,y:1}, {x:14,y:1}, {x:1,y:2}, {x:5,y:2}, {x:2,y:3},
-        {x:3,y:3}
-    ],
+"blank": [            ],
+"4gc": `x = 12, y = 9, rule = B3/S23 
+4b4o4b$12b$2b8o2b$12b$12o$12b$2b8o2b$12b$4b4o4b!`,
+"gliderGun1": `x = 36, y = 9, rule = B3/S23
+12b2o22b$11bo3bo20b$10bo5bo7bo11b$2o8bo3bob2o4bobo11b$2o8bo5bo3b2o14b$11bo3bo4b2o12b2o$12b2o6b2o12b2o$22bobo11b$24bo11b!`,
     "acorn":
     [{x:-3,y:1},{x:-2,y:1},{x:-2,y:3},{x:0,y:2},{x:1,y:1},{x:2,y:1},{x:3,y:1}],
     "15cycle":
@@ -660,7 +634,6 @@ x = 74, y = 124, rule = B3/S23
 15b2o$14bo2bo$15bobo$5b2o5bo3bo$5b2o4bobo$11bo2bo$12b2o4$19b2o$19b2o10$15bo$14bobo$14b2o3$32bo$31bobo$32b2o$9b2o$8bo2bo$9b2o3$43b2o$29b2o12b2o$29b2o2$b2o$b2o22b2o10b2o$25b2o9bo2bo$36bo2bo$38bo12b2o$37bo13b2o$24bob2o4bo$29b2o$9b2o12bo3bobo$9b2o12b2o2b3o4bo$25bo3
 bobobo$26bobo2bobo$27bo4bo$32bo$39b3o$38bo2bo$31b2o5b2obo11b2o$31b2o20b4o$4b2o51bo$4b2o47b3obob2o$44bob3o4bo3bo3bo$47b2o4bo4bo2bo$2o37b3o15bo3bo$2o52b2o4bo$25b2o32bo$25b2o29b3o2$19b2o$19b2o3$15b2o$15b2o16b2o$33b2o3$5b2o$5b2o5$28b2o$28b2o3$24b2o$24b2o$49b2o$49b2
 o2$43b2o$21b2o20b2o$21b2o2$39b2o$39b2o16b2o$57b2o3$29b2o20b3o$29b2o$49b2o$49bo4bo$49bo15b2o$41bo8bo2bo11b2o$41b2o9bo$41bobo$44b4o$45b5o$45bo2b2o4bo$53b3o$52b2o2bo$52b2ob2o$55b3o$53bob2o12bo$45b2o5bo2bo14b2o$45b2o8bo11b2o$52bobo13bobo$53bo14b2o$68bo$54bo11bobo$54bo11bo2bo$54bo13b2o$69bo$71b3o!`,
-
         "zigzag-wickstretch": `#C zigzag c/2 orthogonal wickstretcher: Jason Summers, 14 Feb 2006
 x = 331, y = 1070, rule = B3/S23
 44bo13bo$43b3o11b3o$42boobo5bo4boobo$42b3o5b3o3b3o$43boo5boboo3boo$73bo13bo$72b3o11b3o$72boboo4bo5boboo$53bo19b3o3b3o5b3o$51boo4b3o13boo3boobo5boo$57bobbo$54bobbo$49bo7bo$48bo3boo4bobo17bo$48bo29b3o5b3o$49bo29bo5bobbo$59b3o3b3o11bobbo5bo$42bo9bo5bobb
@@ -773,7 +746,6 @@ b3o$107bo23boo32bo$106bo19bo3bo8bo3bo13bo8bo13bo3bo5bo6bo16boo$125b3o10bobobobo1
 04bobbo18boo4boobboboo3boo21bo30boo12boobbobbo$107bo26boobboobbobbo19bo16b5o24boo5bo$103bo3bo7b3o17bobo4bobbo18bo16boob3o27bo3bo$107bo9bo25boo18bo18b5o31bo$104bobo9bo18bobboo22bo20boo30bobo$135bo4boo19bo22bo$135bo3bobbo17bo$135b3obo19bo$136boob3oboo1
 3bo$137b3o17bo8bo32boo$138bo17bo8bobo31bobo$156boo7bobbo30bo$166boo$156boo$156bo$157bo$158bo$130b3o26bo$132bo27bo$131bo29bo$162bo$163bo$149bo14bo$150boo13bo$149boo6bo8bo17boo$156bobo8bo16bobo$155bobbo7boo16bo$156boo$166boo$167bo$166bo$165bo$145b3o16b
 o$147bo15bo$146bo15bo$161bo$160bo$159bo$158bo$157bo$156bo$156boo!`,
-
 "13engcorder": `#N 13-engine Cordership
 #O Dean Hickerson
 #C The first c/12 diagonal spaceship to be found
@@ -794,15 +766,6 @@ obo91b$2b2obo91b$2b2o93b$3b3o91b$4bo55bo36b$5bo2bo52bo35b$2bo6bo50bo
 36b$2bo6bo87b$2bo4b3o87b5$41b3o7bobo43b$44b3o5bo44b$7b2o35b3o50b$7b2o
 36bo51b4$34bo62b$34bo62b$34bo62b$15b2o18b2o60b$15b2o18b3o59b$35b2o60b
 5$34bo62b$23b2o10bo61b$23b2o9bo!`,
-
-
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-
 "spaceshipgun1": `#C p416 2c/5 spaceship gun: Dave Greene, 11 Apr 2003
 #C 64 p416 guns driving 60 Herschel-based glider inserters
 #C to produce four construction salvos totalling 63 gliders.
@@ -1087,15 +1050,7 @@ oo$179boo599bobo17b3o12bo3bo26bo38boo3boo13bo29bo3bo$144bobbo618b3o12bo19boo8bob
 54bo5bo22boo$933boo20boobbo23boo$928boo3boo13boo9bo$844boo82boo17bobbo$826bo17boo101bobobo23boo5b3o$811boo12bobo16boo102bob3o22boo5boo$810b3o13bo18bo81boo12boo7b3o12bo19boo$809boboo23boo6bobo81bo5boo5bo22bobo4boo11b3o$808bobo25boo5boobo78b3o6boo6b3o2
 0bo5bo11bobo$808bobbo113bo18bo27b3o8boo$809boo5bo157bo$815bobo26boo$814booboobboo21boo$815boo3bobo$809boo3bobobb3o5bo$809boo9boo4bo$809boo15b3o15boo$810bo32bobbo$809bobo5boo25bobo$808boobo5boo23boobo$828bo13b3o$821boo4bobo12boo$809boo11bo5bo$809boo8b
 3o$819bo!`,
-
-
-
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-
 "3engCorder_gun": `#N 3-engine Cordership rake
 #O Jason Summers
 #C A period 240 c/2 orthogonal 3-engine Cordership rake created on Jan
@@ -1143,15 +1098,7 @@ obo231b$189bo8b4o3b4o18bo233b$189bo3bo3b2ob2o4b2o253b$189b4o5b2o30b5o226b$222b2o
 24bo226b$225b6obo3bo224b$190bo2bo31bo5bo3b3o223b$189bo35bo5bo5bo223b$189bo3bo32bo3bo3b2obo223b$189b4o13b4o18bo5b3o224b$206bo3bo16b2o232b$206bo19b4o231b$207bo2bo14b2ob2o231b$226b2o11b3o219b$239bo221b$240bo220b$208b2o251b$207b2ob2o8bo240b$208b4o3bo4bob
 o238b$209b2o3bo5bo2bo237b$213bo2bo6bo237b$209b2o3bo5bo2bo237b$208b4o3bo4bobo238b$207b2ob2o8bo8b3o229b$192b4o5b2o5b2o19bo6bo224b$192bo3bo3b2ob2o25bo3bo3bo222b$192bo8b4o28bo227b$193bo2bo5b2o29bo4bo222b$224b3o6b5o223b$224bo236b$195b2o7bo20bo235b$194bobo
 3b2o7b5o247b$194bo18bo247b$194b3o13b3o6b3o239b$205b2o4bo7bo241b$205b2o13bo240b3$192b4o265b$192bo3bo13bo2bo247b$192bo16bo251b$193bo2bo12bo3bo247b$209b4o!`,
-
-
-
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-
 "vacuumGun": `#N Vacuum (gun)
 #O Dieter Leithner
 #C A true period 46 double-barreled gun found on February 21, 1997.
@@ -1163,15 +1110,6 @@ $16b2o31b$16bo32b$44b2o3b$16bo27b2o3b$16b2o31b$2o13bob2o13bo3bo12b$2o
 2o3b5$37b2o10b$37bobo7b2o$39bo7b2o$37b3o9b$22bobo24b$21b3o25b$21b3o25b
 $21bo15b3o9b$25bobo11bo9b$21b2o4bo9bobo9b$16b2o4bo3b2o9b2o10b$15bobo6b
 o24b$15bo33b$14b2o!`,
-
-
-
-
-
-
-
-
-
 "slideGun": `#N Slide gun
 #O Jason Summers
 #C A diagonal slide gun constructed on September 3, 1999
@@ -1183,12 +1121,6 @@ o12b$46b3o22b3o5bobo27b$48bo15bo5bobo6b2o28b$47bo14b2o6bo38b$63b2o4b2o38b$55bo53
 $8bo8bo2bo10b3o4bobo27b2o26bo2bo9b$33bo3b3o28bo2bo24b2o11b$32bo4b2o70b$40b2o26bo2bo12bo24b$27bo11b3o25bo2bo11b2o25b$28bo38bobo12b3o24b$28bo39bo11b3o26b$24bo2bo11b2o39b2o27b$6bo5b2o9bo15b2o27b2o39b$4bo3bo3b3o
 10bo42b2o16b2o9bo11b$8bo5b2obo11bo55b4o7bobo10b$3bo5bo4bo2bo10b2o50bobo2bo2b3o5b2obo9b$3b2o9b2obo9b2o4b2o2b2o40bo2bo2b2o9b2ob2o3b2o3b$12b3o11b3o4b2o2b2o31b2o6b2o9bo6b2obo4b2o3b$12b2o13b2o4b2o35b2o4b2o3bo8bo5bo
 bo10b$28b2o48b2o10bo6bo11b$29bo49bo2bo26b$80bobo!`,
-
-
-
-
-
-
 "sideCarGun": `#N Sidecar gun
 #O Jason Summers
 #C A true period 60 sidecar gun that was created on March 7, 2000.
@@ -1208,17 +1140,6 @@ bo3bo182b$27b3o183b$27b3o5bo177b$35bobo4bo170b$24bo10b2o4bobo169b$23bobo16b2o169
 33b$66bo3bo5b3o3bo9bo5bo114b$20bo29bo16b3o12b2o129b$19b3o5b2o20b3o29bobo8b2obob2o114b$18b5o4b2o20b3o161b$17b2o3b2o40bo148b$35b2o3b2o5b2o3b2o9b2o26b2o120b$31b2o3b5o6b2o3b2o9bobo25bobo119b$22b2o6b2o4b2ob2o51bo120b$24bo7bo3b2ob2o38bo12b2o119b$21bo15b3o1
 2b2o25bo11b3o119b$21bo2bo27bobo23bobo10b2o120b$20b2ob2o29b2o21b2ob2o12bo118b$21b2o30b2o21bo5bo130b$53b2o11bo12bo133b$35b3o11b3o13b3o8b2o3b2o130b$19b2o3b2o9b3o26b5o24bo119b$19b2o3b2o8bo3bo24bobobobo22b3o118b$20b5o8bo5bo23b2o3b2o8bo12b5o117b$21bobo10bo
 3bo39bo11b2o3b2o116b$35b3o11b2o3b2o21bo13b5o117b$21b3o42bo24bo3bo117b$50bo3bo10bobo24bobo118b$51b3o11bobo11b2o12bo119b$51b3o12bo12b2o132b$66b2o145b$66b2o24b2o119b$22b2o42b2o24b2o119b$22b2o189b$51b2o160b$36b2o13b2o160b$36b2o!`,
-
-
-
-
-
-
-
-
-
-
-
 "pseudo14GG": `#Cpseudo p14 gun
 #CKarel Suhajda,Feb 2004
 #C
@@ -1304,16 +1225,6 @@ bobo3bo22boo18bobobbob4ob3o17boobobo3bo178boo$96bo5bobooboboo3boo14bo18bobbobbo4
 obo3boobbo60bobo4bobobobobo3boobbo$94bobboobobo5bo4bobbobo59bobboobobo5bo4bobbobo174bo$94bobo3boboo3boobobbobooboo9boo47bobo3boboo3boobobbobooboo9boo160bobo$95bob4o7bobbobobo3bo5boobboo48bob4o7bobbobobo3bo5boobboo161boo$97bo3boobboobo4boob3o5bobo54bo
 3boobboobo4boob3o5bobo169bo$97boboo7bobbobobo3bo5bo55boboo7bobbobobo3bo5bo171bo$98boboboo3boobobbobooboo62boboboo3boobobbobooboo175b3o$100bobo5bo4bobbobo8boo55bobo5bo4bobbobo8boo$100bobo3bobobo3boobbo8bo56bobo3bobobo3boobbo8bo172bo$101bo3bobobb4obboo
 10b3o54bo3bobobb4obboo10b3o167bobo$105bobobo3bobo14bo58bobobo3bobo14bo168boo$106booboo3boo74booboo3boo!`,
-
-
-
-
-
-
-
-
-
-
 "p20GG": `#N p20 glider gun
 #O Matthias Merzenich, Noam Elkies
 x = 78, y = 42, rule = B3/S23
@@ -1337,17 +1248,6 @@ obo$3bob2ob2o2b2obo6bobo8bo2bo15b4ob2obo2b3o3bobo2bo2bo$2obo2bobo2b2obobo4b
 obo7bo2b2o2bo13bo2bo4bobo3b3o2bobo2b2o$bobobo2bo2bo2bobobobo10bo2b2o2bo14bo
 bo4bo2bo2bo4b2o$o2bo2bobo3b3o2bob2ob4o7b4o17bo6b2o$2o2bobo2b3o3bobo4bo2bo5b
 obo2bobo$5b2o4bo2bo2bo4bobo6b2o4b2o$15b2o6bo!`,
-
-
-
-
-
-
-
-
-
-
-
 "spaceRakeGun": `#C p90 gun for p20 space rake
 #C The gun fires a p20 rake every 90 generations. (The smallest period
 #C for a p20 rake gun is 86). The rake gun is a stationary breeder.
@@ -1374,14 +1274,6 @@ bo7b3o22b2ob2o3bo3bo$21b3o13b2o11b4o43b2o5b4o32b4o8bo34b2o5b4o32b4o8bo34b2o5b4o$
 o6b2o12b2o31b2o5bo19bo122b3o$2o3b2o27bo3bo4b2o12b2o26bo4b2o4bo4bo14b4o$o5bo26bo5bo3b2o39b2o11bo12bo4b2obobo3b2o$23b2o8bo3bob2o4bobo36bobo10bo3bo3bob2o5b3obo2bo2b2o110bo$bo3bo2b2o13b2o8bo5bo7bo51bobo2bob4o5b2obobo116bo$2b3o4b2o23bo3bo65b2o2b2o6b4o115b
 3o$8bo26b2o80bo2$231bo$92b2o138bo$91b2o137b3o$93bo3bobo$5bo46bo44b2o$3b2ob2o44b2o44bo$51bobo$2bo5bo$100bo$2b2obob2o90b2o$99bobo$33bo76bo$31b4o6b2o2b2o62bobo$25b2o3bobob2o5b4obo2bobo46bo8b2o3bo9b2o$25b2o2bo2bob3o5b2obo3bo3bo44b4o5b2o3bo9b2o$30bobob2o4
 bo12bo5b2o27b2o9b4o4b2o3bo$31b4o14bo4bo4b2o27b2o9bo2bo6bobo$33bo19bo39bo5b4o7bo$5b2o42bo3bo39bo4b4o$5b2o42bobo46bo3b!`,
-
-
-
-
-
-
-
-
 "diagWickstr": `#N p6 diagonal wickstretcher 1
 #O Paul Tooke, Jason Summers and Matthias Merzenich 
 #C The first known p6 diagonal wickstretcher; partially constructed in September 2004 and finished in January 2013
@@ -1400,14 +1292,6 @@ obo2b2o2bobobo5b4o11b4o$26bo6bobo4bo4bo9bo2bobo$25b2ob2o10bo3bobo7bobo
 o$17bo4bo8b4o7bobo$18b4o10b2o6bo$40bob2o$24b4o3bob3o4bobo$23b6o2b6o3bo
 $24b4o4b4o4bo$19b2o$18b4o$17bo2bobo$16bobo2b2o$15bobo$14b2o$14b3o$15bo
 bo$16b2o!`,
-
-
-
-
-
-
-
-
 "hansLeoHassler": `#N P156 Hans Leo hassler
 #O Noam Elkies
 #C A period 156 traffic light hassler. The first period 156 oscillator
@@ -1420,12 +1304,6 @@ x = 33, y = 40, rule = b3/s23
 5b2o13b$7bo3b3o6bo12b$3bo3bo2b5o2bo15b$4o3bo2b5o2bo3bo11b$5bo6bo4bo3b
 4o8b$19bo13b$10b2o21b$5b2obo4bob2o16b$5bo10bo16b$6b2o6b2o17b$3b3o2b6o
 2b3o14b$3bo2bo8bo2bo14b$4b2o10b2o!`,
-
-
-
-
-
-
 "wrGlider": `#C p103079214841 (prime: 4^13*1536-263) oscillator/gun --
 #C  p1536 base loop, 13 quadruplers, and a 263-step glider advancer.
 #C  Based on previous p97307852711 and p97307852687 oscillators;
@@ -1458,15 +1336,6 @@ b2o$26b2o23bobo54bo11b2o$50bo2bo$8b2o41b2o183b2o$8b2o56bo67b2o100bo$62b2o2bobo65
 0b2o155b2o14b2o$60b2o156bo22b2o$215b3o23bo$12b2o3b2obo194bo23bobo$13bo3b2ob3o35b2o109b2o2b2ob2o61b2o$10b3o10bo34b2o94b2o13bobo2bobo$10bo6b2ob3o130bobo16b2o3bo7bo$18bobo132bo19bob2o6b3o$18bobo131b2o16bo2bobo6bo38bo$19bo149bobobobo6b2o37b3o$170b2ob2o49
 bo$202bo20b2o$200b3o16b2o$199bo19bo$186b2o11b2o20bo$186b2o32b2o6$155b2o60b2o$155b2o60b2o17b2o$161b2o73b2o$161b2o$180b2o$176b2o2bo2b2o52b2o$159b2o16bo3bob2o52bo$159b2o5b2o9bobobo42b2o12b3o$166b2o10b2obob2o22b2o16bo14bo$181bo2bo4b2o16bo14b3o$181b2o6b2o
 17b3o11bo$210bo!`,
-
-
-
-
-
-
-
-
-
 "6engcordgun": `#C p784 six-engine Cordership gun: Dave Greene, 2 May 2003
 #C Herschel-based insertion of 37 gliders into three salvos
 x = 1285, y = 1065, rule = B3/S23
@@ -1734,16 +1603,6 @@ obo5boo6bo5boo14boo$450boo71boo15bobo$451bo89boo$448b3o94boo$448bo32bo62bobo$480
 o$488boobboo44bo$492boo$519boo5boo$519boo5bo32boo$524bobo32boo$524boo$520boo$520bobo$521bo$525bo$524b3o$486boo35b3obo49bo$482boobboo3boo31bo3bo47bobo$481bobo6bobo32bo3bo47bo$482bo7bo35bob3o$489boo36b3o$477b3o4boobbo39bo$477b3o4bo3bo13b3o11bo50boo3boo
 $477b3o5b3o14bo11b3o50boo3boo$474b3o6bobo4boo5boo4bo9bo$474b3o6boo6bo5boo14boo$474b3o14bobo65boboo$492boo63b3oboo$496boo58bo11boo$495bobo59b3oboo5bo$492boobbo62bobobbo4b3o$523bo39boo6bo$491bo3bo25b3o$490bo4bo24bo$489bobobo14bo11boo$488bobobo5boo7bobo
 $486bo4bo6boo7bobo$486bo3bo17bo$$488boo$511booboo$511booboo$511booboo$517bobo$514boo$515bo3bo$515bo$518boo$519bo$514bo4bo$514bo3bo9bo$516boo9bobo$528bo4$518boo3boo$518boo3boo3$510boboo$508b3oboo$507bo11boo$508b3oboo5bo$510bobobbo4b3o$514boo6bo!`,
-
-
-
-
-
-
-
-
-
-
 "shipgunidk": `#N P690 60P5H2V0 gun
 #O Jason Summers
 #C A gun that creates copies of 60P5H2V0 via glider synthesis. Created
@@ -1887,16 +1746,6 @@ b$113bo4b2o3bo9b2o618b2o6bo2bo15b2o33bob2o10b2o40b$120bobo630b2o6b2ob2o14b2o34bo
 obo21b3o629bo3bo60bo61b$70bo3bo12b3o653bo5bo121b$68bobo3bobo666bo5bo121b$87b3o656bo124b$84b5obo653bo3bo122b$68b2o13bo6b2o3b2o648b3o123b$68b2o12bo3bob3o4b2o649bo124b$83bobo2b2o781b$113b2o694b2o60b$113b2o630b2o62b2o60b$745b2o124b$34bobo14b2obo5bo3bo806
 b$29bo4bo2bo12bobobo4bo5bo9b2o794b$30b2o5b2o11bo4bo9bo9b2o794b$25b2o8bo3b2o9bobobo5bo3b2o805b$25b2o10b2o12b2obo6b3o807b$34bo2bo833b$34bobo24b3o807b$60bo3b2o805b$48b2o15bo9b2o794b$48b2o9bo5bo9b2o794b$60bo3bo806b$41bo829b$40b3o828b$39b5o827b$38bobobobo
 826b$38b2o3b2o826b3$41bo829b$40bobo828b$40bobo828b$41bo829b$40b2o829b$40b2o829b$40b2o!`,
-
-
-
-
-
-
-
-
-
-
 "c/5tubstretcher": `#N c/5 diagonal tubstretcher
 #O Matthias Merzenich
 #C A c/5 diagonal wickstretcher
@@ -1913,13 +1762,6 @@ $40bob5o8b$41bo13b3$38b3o14b$38bo16b$36b2o17b$30b2o4bo18b$30b3o3bo18b$
 4bo2bobo3b$7bo25b2o2b5o8bobo2b$2b2obobo29bo2b2o9bobob$2o5bo29b2o2bo10b
 obo$2o4b2o31bob2o10bob$2b4o33b2o14b2$42bo12b$41bobo11b$42bobo10b$43bob
 o9b$44bobo8b$45bo!`,
-
-
-
-
-
-
-
 "c/5greyship": `#N c/5 greyship
 #O Hartmut Holzwart
 #C A c/5 orthogonal greyship discovered in March 2010
@@ -1967,15 +1809,6 @@ o50b$85bo6bo5b2obo9b2o9b2o9bob2o11bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o51b$85bo3
 o3bo11bobo74b$87b2o9b2o9bob2o11bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o75b$88bo8bobo10bobo21bobo8bobo12bo12bob2o4bo3bo11bobo86b$86b2o9bob2o11bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o87b$85bobo10bobo21bobo8bobo12bo12bob2o4bo3bo11bobo98b$85bob2o11bo11bo8bob2o
 9b2o11b2o9b2obo7bo6bo5b5o99b$86bobo21bobo8bobo12bo12bob2o4bo3bo11bobo110b$88bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o111b$98bobo8bobo12bo12bob2o4bo3bo11bobo122b$88bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o123b$86bobo8bobo12bo12bob2o4bo3bo11bobo134b$85bob2o9b2o11b
 2o9b2obo7bo6bo5b5o135b$85bobo12bo12bob2o4bo3bo11bobo146b$86b2o11b2o9b2obo7bo6bo5b5o147b$88bo12bob2o4bo3bo11bobo158b$87b2o9b2obo7bo6bo5b5o159b$89bob2o4bo3bo11bobo170b$86b2obo7bo6bo5b5o171b$85bo3bo11bobo182b$85bo6bo5b5o183b$89bobo194b$86b5o!`,
-
-
-
-
-
-
-
-
-
 "c/4greyship": `#C sample c/4 greyship
 #C Hartmut Holzwart, February-March 2006
 x = 177, y = 183, rule = B3/S23
@@ -1999,13 +1832,6 @@ o16bo16bo27bobo$30bo3bobo10bo3bobo10bo3bobo10bo3bobo10bo3bobo10bo3bobo$28bo2bo13
 bob2o13bob2o13bob2o13bob2o13bob2o$28bob2o13bob2o13bob2o13bob2o13bob2o13bob2o$28bob2o13bob2o13bob2o13bob2o13bob2o13bob2o$27b2o2bo12b2o2bo12b2o2bo12b2o2bo12b2o2bo12b2o2bo$28bo16bo16bo16bo16bo16bo$28bo3b2o11bo3b2o11bo3b2o11bo3b2o11bo3b2o11bo3b2o$32b2o15
 b2o15b2o15b2o15b2o15b2o$33bo2bo13bo2bo13bo2bo13bo2bo13bo2bo13bo2bo2$33bob2o13bob2o13bob2o13bob2o13bob2o13bob2o$33bo3bo12bo3bo12bo3bo12bo3bo12bo3bo12bo3bo$33b3o14b3o14b3o14b3o14b3o14b3o$34b2obo13b2obo13b2obo13b2obo13b2obo13b2obo2$36bo16bo16bo16bo16bo1
 6bo$36bo16bo16bo16bo16bo16bo$34b2o15b2o15b2o15b2o15b2o15b2o$35bobo14bobo14bobo14bobo14bobo14bobo$36bo16bo16bo16bo16bo16bo!`,
-
-
-
-
-
-
-
 "slowpuffer1": `#N Slow puffer 1
 #O David Bell
 #C An orthogonal period 744 c/2 puffer that outputs a single blinker once every 744 generations.
@@ -2020,8 +1846,6 @@ x = 82, y = 73, rule = 23/3
 51b$24bo57b$24bo5bo40b6o5b$24b6o41bo5bo4b$45b2o24bo10b$44b4o24bo4bo4b$
 43b2ob2o26b2o6b$44b2o36b3$53b4o25b$52b6o24b$51b2ob4o24b$52b2o9b2o17b$
 62b2ob3o14b$63b5o14b$64b3o15b$77b4ob$76b6o$75b2ob4o$76b2o!`,
-
-
 "slowpuffer2": `#N Slow puffer 2
 #O David Bell
 #C An orthogonal period 240 c/2 puffer that moves fast but creates relatively little debris.
@@ -2029,14 +1853,6 @@ x = 22, y = 21, rule = 23/3
 3bo9b2o7b$bo3bo6b2ob3o4b$o12b5o4b$o4bo8b3o5b$5o17b3$20bob$b2o10b2obo2b
 obo$2ob3o6bobob4obo$b4o3b3obo9b$2b2o8bobob4obo$13b2obo2bobo$5b2o13bob$
 3bo4bo13b$2bo19b$2bo5bo13b$2b6o6b3o5b$13b5o4b$12b2ob3o4b$13b2o!`,
-
-
-
-
-
-
-
-
 "spiralGrowth1": `#C Spiral growth in Conway's Life using single-channel Snark recipe.
 #C Dave Greene, 21 June 2017, based on research and search utilities
 #C   by Simon Ekstrom and Adam P. Goucher.  Period is 262144 ticks.
@@ -2272,16 +2088,6 @@ b2o28bo$823bo78bo40bo60bobo$824b2o77bo37b3o62bo50b2o$823b2o26b3o78bobo5bo115bobo
 6bobo$927bo8b2o$926b2o$926bobo3$939bo$939b3o$942bo6bo$941b2o4b2o$948b2o$910bo$908bobo$909b2o3$951b2o$944b2o5bobo$944b2o7bo11b2o$953b2o11b2o$965bo$940bo$939bobob2o$939bobobobo$936b2obobobobo2bo$936bo2bo2b2ob4o$938b2o4bo$944bobo$945b2o5$943bo$941b3o$940bo$940b2o5
 $942b3o$939bo4bo$930b2o7bo3bo$929bobo$929bo7b2o2bo$928b2o7bo$937bobo$941b2o$937bo5bo$937bo3bobo$934bo4bobobob2o$934b4ob2o2bo2bo$938bo4b2o$936bobo$936b2o5$939bo$939b3o$942bo$941b2o7$951b2o$944b2o5bobo$944b2o7bo$953b2o2$940bo$939bobob2o$939bobobobo$936b2obobobobo
 2bo$936bo2bo2b2ob4o$938b2o4bo$944bobo$945b2o5$943bo$941b3o$940bo$940b2o125$1029b2o$1029b2o!`,
-
-
-
-
-
-
-
-
-
-
 "sawtooth3": `#C Moving sawtooth with repeating minimum population of 1239
 #C David Bell, 10 July 2005
 x = 128, y = 173, rule = B3/S23
@@ -2296,14 +2102,6 @@ o3bobobo11bobobo3bobbo$17booboo11bo9bo54boboboboo5boobobobo$18bobo10b4o7b4o50bo3
 bo17b3obobob3o58b5obob5o$9bobbobo51booboo36bobo$10bo24boo3boo24booboo36b3o$35boo3boo62bobo3bobo$22boo11bobobobo$17boo4boo9booboboboo59boob3ob3oboo$17boo3boo10booboboboo59bo11bo$17boo3bo14bobo61bobbo7bobbo$33bo9bo57bo4bo3bo4bo$34bo7bo63bo3bo$100b6o5b6o$99boo7bo7
 boo$107bobo$84bo9bo12b3o$82b4o7b4o$78booboo3bo5bo3booboo19bo$78boobbo3bo5bo3bobboo18b4o$77bobbo7bobo7bobbo12bo3bo3booboo$85bobbobobbo19b4o5bobboo$66booboo13b3obobob3o17bo3bo7bobbo$66booboo42bobobbo$86boo3boo14b3o7bo$86boo3boo12boo$86bobobobo12bo4bo$85booboboboo
 11bo4bo$85booboboboo12bo3bo$88bobo17bo$84bo9bo$85bo7bo$$40bobo$41boo51bo$41bo50boo$93boo4$66booboo$66booboo17$66booboo$66booboo5$54bo$55boo$54boo23bobo$79boo$80bo8$66booboo$66booboo!`,
-
-
-
-
-
-
-
-
 "puffBreeder": `#N Pufferfish breeder
 #O Ivan Fomichev
 #C MMS breeder based on the pufferfish, a semi-natural puffer.
@@ -2340,20 +2138,9 @@ $308b2o5bo2bo$207b2obo96b4o8bo$206bo3bo3b2o91b2ob2o3bo3bo$215b2o92b2o5b4o$205bo8
 $274bo2bo7b3o2$275b2o$288b2o$279b4o4b4o15b2o$278bo3bo4b2ob2o10b4ob2o7bo$282bo6b2o11b6o6bo3bo$278bo2bo21b4o12bo$297b2o15bo4bo$294b3ob2o15b5o$294b5o5bo24b2o$295b3o5b3o21b2ob2o$302bo2bo21b4o$302bo3bo12b2o7b2o$303b4o12b2o7bo$303bo2b2ob3o5bo8bo3bo$307b3o5b2o8bo5bo$3
 07b3o6b3o6bo5bo$307b2o8bobo6b6o$306b2o4$324b2o$320b4ob2o$298bo21b6o$299b2o20b4o$298b2o3$321b2o$320b4o$320b2ob2o$279b4o7bo6bo24b2o$278b6o7b2o4bo$278b4ob2o5b2o26bo$282b2o32bo$312bo3bo2b2o$293b2o13bo2b3obo5bo$292b4o11bob5o2bobo2b2o$292b2ob2o9b2ob2o5bo3b2o$294b2o11
 bo2bo7b3o2$308b2o$321b2o$312b4o4b4o$311bo3bo4b2ob2o$315bo6b2o$311bo2bo!`,
-
-
-
-
-
-
 "puffertrain": `
 x = 5, y = 18, rule = B3/S23
 3bo$4bo$o3bo$b4o4$o$boo$bbo$bbo$bo3$3bo$4bo$o3bo$b4o!`,
-
-
-
-
-
 "pinwheelsynth": `x = 509, y = 478, rule = B3/S23
 488bo20b$488bobo18b$488b2o19b$509b$509b$476bo4bo27b$474b2o3b2o28b$475b2o3b2o27b$509b$509b$509b$509b$509b$509b$509b$464bobo42b$464b2o43b$465bo43b$509b$509b$509b$72bobo434b$73b2o434b$73bo379bo55b$451b2o10bobo43b$452b2o9b2o44b$464bo44b$509b$509b$509b$509b$509b$509
 b$509b$509b$509b$509b$509b$509b$509b$449bo59b$447b2o60b$448b2o59b$509b$445bo63b$438bo4b2o64b$438bobo3b2o63b$438b2o69b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$423bo85b$422bo86b$422b3o84b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$
@@ -2373,16 +2160,12 @@ bo189b2o163b$158b2o184bobo162b$159b2o176b3o4bo164b$158bo178bo171b$152b2o184bo170
 o85b$108bo400b$108b2o399b$107bobo399b$509b$420bo88b$419b2o88b$419bobo87b$440b2o67b$440bobo66b$440bo68b$509b$509b$509b$440b3o66b$89b2o349bo68b$88bobo350bo17bo49b$90bo367b2o49b$458bobo48b$509b$451b3o55b$451bo57b$452bo56b$509b$445b3o61b$445bo63b$446bo62b$78bo372b2
 o56b$78b2o370b2o57b$77bobo372bo56b$509b$509b$509b$509b$509b$509b$509b$464bo44b$463b2o44b$463bobo43b$509b$509b$466b2o41b$465b2o42b$467bo41b$509b$509b$478bo30b$477b2o30b$477bobo4b2o23b$483b2o24b$485bo4bo18b$489b2o18b$489bobo17b$509b$509b$484b2o23b$483b2o24b$485bo
 23b$509b$509b$509b$509b$509b$488b2o19b$487b2o20b$489bo19b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$259bo249b$247b3o8b3o248b$246bo2bo8bob2o247b$249bo9b3o247b$245bo3bo9b2o248b$249bo259b$246bobo260b!`,
-
-
 "spiral3": `#N Popover
 #O Robert Wainwright
 #C A period 32 oscillator that works by hassling a pi-heptomino.
 x = 32, y = 32, rule = B3/S23
 21bo10b$20bobo9b2$13b2o3bo3b2o8b$13b2o2bo5bo8b$18bobo11b$20b2o10b$14b2o16b$3b2o8bo2bo15b$bobo9bobo4bo11b$o5bo7bo5bo11b$bo3b2o2b3o8bo11b2$3bobo16b2o3b2o3b$4bo12bo3bo2bo2b2o3b$8bo7b3o3bobo7b$7bobo6bobo4bo8b$3b2o2bo2bo16bo4b$3b2o3b2o16bobo3b2$11bo8b3o2b2o3bob$11bo
 13bo5bo$11bo5b2o9bobob$16bobo8b2o3b$16b3o13b$10b2o20b$11bobo18b$8bo5bo2b2o13b$8b2o3bo3b2o13b2$9bobo20b$10bo!`,
-
-
 "lightspOsc": `#N Light speed oscillator 1 modified
 #O Josh Ball original
 #C A period 5 extensible oscillator extended by parkes-codes.
@@ -2393,7 +2176,6 @@ o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3obo7bo4b3o3bob2o$2b3o2bo3bo2b2ob
 b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o4bobob4obo3b2obobo2bo$3bo2bo3b2o4bobobo2bob5o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3ob2ob2o7b2o3bob2o2b$4bobobo3bob4ob2obobo113bo3bob4o2b3obo4b$2bo3bo
 bo3bob2o6bob113o2bob2obo2bo2bo3bo4b$3bobo3bo6b6obo4bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo6b2o15b2o3b$bobobob2o2b5o5bobobo107b4o22b$obo3bo2b2o4bob2o2bo2b2o107bo2bo22b$bo5bobo2bo3b2obobo137b$8bo2b2
 o7bo138b!`,
-
 "snail":  `
 #O Tim Coe
 #C The first c/5 orthogonal spaceship to be discovered. Has period 5. Found in January 1996.
@@ -2403,7 +2185,6 @@ bo36b$bo36b$o37b$b3o17b3o3b3o8b$b2obo9bo3bobo6b3o8b$2bo11b2obo7bo4b4o
 ob7o20b2$9bob7o20b$3b2obo5bo5bo17bob$3bo2bob3o3b2o9bo8b2obo$6bo6bo3bob
 o3b2obo5b2o4b$2bo11b2obo7bo4b4o4b$b2obo9bo3bobo6b3o8b$b3o17b3o3b3o8b$o
 37b$bo36b$bo!`,
-
 "slide-breeder": `#C Breeder using slide-gun technology (Slide-o-04b-060 and 
 #C  Slide-o-04f-060) from Jason Summers' slide-gun collection.
 #C Makoto Kohno, 22 Dec 2002.
@@ -2671,7 +2452,6 @@ bobboo8boo$1329bo44boobboo11boo4boo$1319bo5bo4bo40boo10bo7boo4boo$1328b3o39b3o10
 319bo8bo46bobbo6bobo$1318b3o7boo17b3o25b4o4boo3bo9boo$1317b5o5bobo16boobo24b4o5boo3bo9boo$1316bobobobo22boobbo3bo20bo8boo3bo$1316boo3boo22b4o4boo30bobo$1347bobo3boo31bo$1348boo25bobo$1321boo17bo6boo26boo$1321boo16bobo5b3o6boo13bo4bo$1323bo14bo3boo12b
 obo11boo$1321b3o14bo3boo14bo11bobo$1319bo18bo3boo3b3o8boo$1319b5o5boo8bobo5b3o$1320boo6bobo9bo5bo3bo33boo$1328bo16bo5bo25boboo3b3o$1327boo17bo3bo22bobbo3bo5boobo5boo$1318boo3boo22b3o22boobbo4bo4bobbo5boo$1319b5o37boo8boo5b4o4boobo$1319booboo37boo7b3o
 7bo3b3o$1319booboo47boo11boo$1320b3o49boo$1373bo5$1321boo25boo$1321boo25boo!`,
-
 "dartgun": `#N p448dartgun
 #O Michael Simkin
 #C A p448 gun that fires c/3 "dart" spaceships.
@@ -2965,11 +2745,9 @@ o$95bobo$96bo4b2o$84b2o15bobo$83bobo17bo1912b2o$83bo19b2o8b2o1901b2o4b2o$82b2o27
 o$101b2o4bobo$101bo6b2o2b2o$99bobo10b2o$99b2o3$82b2o29b2o$82b2o15b2o6b2o4b2o$99bobo5b2o$101bo$101b2o4$82b2o24b2o$82bo24bobo$80bobo24bo$80b2o24b2o4$97b2obo$97bob2o2$90b2o$90b2o7$80b2o$81bo$81bobo$82b2o3$87b2o$86b2o$80b2o6bo$81bo$68b2o11bobo$69bo12b2o1
 2b2o$69bobo24bobo$70b2o2b2o$74b2o21b2o$92b2o$92b3o$95bo$75b2o$69b2o4b2o13bobo3bo$69b2o20b2o$91b2ob2o$93bo4$70b2o$69bobo$69bo$68b2o!
 `,
-
 "diagPuff": `x = 30, y = 36, rule = B3/S23
 10b3o17b$10bo19b$11bo18b$13b2o15b$14bo15b$30b$11bo18b$8b4obo16b$8bo4bo16b$9bo4b2o14b$11bo2b3o13b$15b2o13b$12b2ob2o13b$12b2ob5o10b$10b2o3b2o13b$9b2o4bo5bo8b$10b2ob3o4bobo7b$7b5ob2o6bo8b$6b2o3bob2o15b$8bob2o18b$11bo18b$23bo6b$11bo10bobo3bob$4bo5b3o9bobo2bobo$3b2o
 5bo12bo4bob$3bobo7b2o15b$8b3o3b2o14b$bo4b5o2bo16b$2o3b3o22b$obo3bo23b$30b$3b2o25b$2b3o25b$30b$b2o27b$bo28b!`,
-
 "puff3": `#N c/3 puffer #1
 #O David Bell
 #C The first c/3 orthogonal puffer, discovered in April 1996
@@ -2978,7 +2756,6 @@ x = 87, y = 38, rule = B3/S23
 3bob2o2b3o$20b2o2b2ob5obo2bo13bo2bob5ob2o2b2o$19bo2bo5bob2obo2b2ob2obobob2ob2o2bob2obo5bo2bo$24b2o6b4ob3o7b3ob4o6b2o$28bo4bo7bobobo7bo4bo$40b2obob2o$40b2o3b2o$5bob2o32b2ob2o32b2obo$b3ob2obob2o63b2obob2ob3o$o6b2o2b4o24b2obobob2o24b4o2b2o6bo$b2o3bo3bo4
 bo23bo2bobo2bo23bo4bo3bo3b2o$13b3o5b2o15bobobobobobo15b2o5b3o$19bob2o16bobo3bobo16b2obo$16bob2o3b2o5b2o23b2o5b2o3b2obo$15b2ob2obobo5b2o9bo5bo9b2o5bobob2ob2o$15b2obo4bob2o2b2ob2obo6bobo6bob2ob2o2b2obo4bob2o$19b2obo2bob3o2bo2b2o4b2ob2o4b2o2bo2b3obo2bob
 2o$25bo4bobo3b2o2bo5bo2b2o3bobo4bo$26bob2o2b3o2bo11bo2b3o2b2obo$32b2obobo2bo5bo2bobob2o$33bobobob9obobobo!`,
-
 "c3greyship": `#N c/3 greyship
 #O Hartmut Holzwart
 #C A c/3 orthogonal greyship using several methods of stabilization,
@@ -2996,7 +2773,6 @@ b269ob2o2b2o$8b4o4bo274b2o$10bobo5b270o$10bobo2b4o272b2o$9bo5bo3b266ob2o2b2o$9b2
 3bo5bo129bo4b2o$80b2o5b3o4b127o3b3ob2o$80b3o7bo3bo5bo123b2o$88b2o5b3o4b117obo$88b3o7bo3bo5bo110bo$96b2o5b3o4b105obo2bo$96b3o7bo3bo5bo99bobo$104b2o5b3o4b96o5bo$104b3o7bo3bo5bo90bo$112b2o5b3o4b87o$112b3o7bo3bo5bo79b2obo$120b2o5b3o4b78o3bo$120b3o7bo3bo5
 bo64bo4b2o$128b2o5b3o4b62o3b3ob2o$128b3o7bo3bo5bo58b2o$136b2o5b3o4b52obo$136b3o7bo3bo5bo45bo$144b2o5b3o4b40obo2bo$144b3o7bo3bo5bo34bobo$152b2o5b3o4b31o5bo$152b3o7bo3bo5bo25bo$160b2o5b3o4b22o$160b3o7bo3bo5bo14b2obo$168b2o5b3o4b13o3bo$168b3o7bo3bo5bo4b
 2o$176b2o5b3o4b3ob2o$176b3o7bo3b2o$184b2o$184b3o!`,
-
 "c2wick": `#N c/2 wickstretcher
 #C A c/2 orthogonal wickstretcher that stretches a period 6 wick
 x = 43, y = 61, rule = b3/s23
@@ -3012,7 +2788,6 @@ b2o8b5o15b5o3b$b6obobo4bobob3o3b3o5bo2bo3bo2b$o4bo4bob2obobobo2b2ob3o
 14bo7b2obob2o2bo3bo2bo2b2o$15b3o8bobo7b2o5b$5o12bo25b$o4b2obo34b$o5bob
 o34b$bo4bo36b$3bob3o35b$5b3o35b2$3b2o38b$b2o40b$bo2bo38b$bo41b$2b2o39b
 $7bo35b$4bo38b$5b2o36b2$6obo35b$o6bo35b$o6bo35b$bo41b$3bo!`,
-
 "paulcordrake": `#C p240 c/2 orthogonal rake for Paul Tooke's 3-engine Cordership
 #C Jason Summers, 19 January 2004
 x = 461, y = 424, rule = B3/S23
@@ -3051,7 +2826,6 @@ $205boo5boob3o9boo$190bobbo5boo3booboo18bobo$189bo8b4o3b4o18bo$189bo3bo3booboo4b
 5b6obo3bo$190bobbo31bo5bo3b3o$189bo35bo5bo5bo$189bo3bo32bo3bo3boobo$189b4o13b4o18bo5b3o$206bo3bo16boo$206bo19b4o$207bobbo14booboo$226boo11b3o$239bo$240bo$208boo$207booboo8bo$208b4o3bo4bobo$209boo3bo5bobbo$213bobbo6bo$209boo3bo5bobbo$208b4o3bo4bobo$20
 7booboo8bo8b3o$192b4o5boo5boo19bo6bo$192bo3bo3booboo25bo3bo3bo$192bo8b4o28bo$193bobbo5boo29bo4bo$224b3o6b5o$224bo$195boo7bo20bo$194bobo3boo7b5o$194bo18bo$194b3o13b3o6b3o$205boo4bo7bo$205boo13bo3$192b4o$192bo3bo13bobbo$192bo16bo$193bobbo12bo3bo$209b4o
 !`,
-
 "bobsled": `#C revised switch-engine 'bobsled run' using boats as catalysts
 #C David Bell, 2 July 2005
 x = 216, y = 232, rule = B3/S23
@@ -3066,7 +2840,6 @@ o5boo$32bobobobo10bobo25b3o7bo46boo$33b5o9bo3bo24bo4bo9bo41bobo$34b3o10bo8boo17b
 1bo4bo9bo49bobo$35boo40b3o7bo54bo$35boo50bobbo$53boo3boo$53boo3boo53bo$112bobo$55b3o54boo$55b3o92boo$56bo92bobo$150bo3$121bo$120bobo$55boo63boo$55boo101boo$157bobo$158bo3$129bo$128bobo$128boo$150bo4bo10boo$149b4o3bo8bobo$148bo6bo10bo$149boo$150boobo$
 137bo14bo$136bobo$136boo$174boo$173bobo$174bo3$145bo$144bobo11boo$144boo10boobbo$161bo3bo16boo$155bo5bo3bo15bobo$156bobboo3bobo15bo$157b3o5bo$165bo$153bo$152bobo$152boo$190boo$189bobo$190bo3$161bo$160bobo$160boo$198boo$197bobo$198bo3$169bo$168bobo$16
 8boo$206boo$205bobo$206bo3$177bo$176bobo$176boo$214boo$213bobo$214bo3$185bo$184bobo$184boo6$193bo$192bobo$192boo5$212boo$212bo$213b3o$215bo!`,
-
 "blockstacker": `#N Blockstacker
 #O Jason Summers
 #C A pattern that creates an infinite row of blocks. Created on August 28, 1999.
@@ -3168,7 +2941,6 @@ o196bo2bo77b$245bobo5bo196b2o79b$245bo285b$244b2o16b2o3b2o262b$265bo265b$262bo5b
 62b3o57b2o15b3o189b$262b2o57b2o6b3o199b$256b2o65bo5bo9bobo189b$256b2o72bo7b5o188b$278b2o57b2o3b2o187b$270b2o5bobo57b2o3b2o187b$271b2o6bo251b$270bo260b$337b2o192b$326bo8b2obo192b$325b3o7bo195b$324b2ob2o202b$263bo59b3ob3o6b3obo190b$253b2o3b2o3b2o58b3ob
 3o10bo190b$262bobo58b3ob3o10bo190b$254bo3bo64b3ob3o201b$255b3o12bo53b2ob2o202b$255b3o11b3o53b3o203b$268bobobo53bo204b$268bobobo62b2o3b2o189b$258bo10b3o65b3o191b$257b3o10bo65bo3bo190b$256bo3bo76bobo191b$258bo79bo192b$255bo5bo8bo260b$255bo5bo7b3o259b$2
 56bo3bo7bobobo258b$257b3o8bobobo64b2o192b$269b3o65b2o192b$270bo260b7$258b2o271b$258b2o!`,
-
 "bdaypuff": `
 #O Unknown
 #C http://conwaylife.com/wiki/Birthday_puffer
@@ -3196,8 +2968,6 @@ b2o26bo3bo12bobo16b$179b2o66bo3b2o27bobo14bobo15b$179b2o64b2o6bo27bo15bobo13bob$
 11b5o$259b2o35b3o10bob4o$259b2o47bo6b$309b2o4b$315b$312b3o$315b$315b$315b$315b$315b$315b$255bo59b$254bobo58b$254b2o59b$224b2o89b$224b2o8bo80b$193b2o33bo4bobo11bo24bo42b$192bobo33bo4bobo10bobo22bobo41b$192b2o34bo5bo11b2o24b2o41b$315b$230b3o82b$315b$21
 1b2o102b$211b2o102b$283b2o30b$253bo15b2o12b2o30b$203b2o47bobo14b2o44b$203b2o47b2o61b$315b$265b2o48b$265b2o48b$270b2o2b2o39b$274b3o3b2obo7b2o22b$269bo10bo3b2o5b2o22b$276bobo2bo4b2o27b$269bo2bob4o6bo30b$263b2o5b3ob3o38b$263b2o50b$315b$315b$315b$315b$31
 5b$315b$271b2o16bo25b$271b2o13b5o24b$286b3ob2o23b$281b2o4b4o3bo20b$280b2o7bob3obo19b$281b3o4b2ob3ob2o18b$281b3o5b2ob4o19b$291bo23b!`,
-
-
 "billiardTables": `#C A "billiard table" oscillator is defined as any oscillator in
 #C  which the rotor is enclosed within the stator. This definition
 #C  is not exact, because the meaning of "enclosed" is not entirely
@@ -3256,8 +3026,6 @@ boo22bo$28bobobo20bobboob3obbo14b3o7b3o25bo5bo12bobobo18boob3obbo84boo7boo16b5o$
 obbo7bo14bo4bobo4bo25boo4boo8boobo6bo14boobo3b3obo82boo7boo10boobo5boboboo$26bo5boboboboo13boobo7boboo8boobo5bo5boboo23bo5bo11bobo5bo12bobo3bobobbo79boobo5boobo13bobo7bobo$27b5obbobo19bo7bobbo8bobo13bobo22bo5bo12boboo3boo12bobobboob3o80boboo5boboo12b
 obboo5boobbo$32bobobo16b3o7bobo13b3o7b3o25boo4boo12bo16boobobo4bo81boo7boo17boobbobo4boo$27b5obboboboo13bobb3o4boboo15bo5bo49b7o10bobobobobobb4o76bo8bo20bo3b5o$27bo6boboobo16bobb3oboobbo11boobo5boboo25boo4boo19bo10bobbo4boboobbo77bo8bo19bo7bo$28bobb3
 o23boo3bo3boo11boobob3oboboo26bo5bo15boo14boboboobo82boo7boo20b7o$27boobbo23bobobbobo20bo3bo29bo5bo16boo15boobobbo84boobo5boobo$55boobbooboo20bobo30boo4boo36boo85boboo5boboo18b3o$83booboo190bobbo$278boo!`,
-
-
 "bargeExt": `#N Barge (extended)
 #O Hartmut Holzwart and David Bell
 #C A period 3 c/3 orthogonal spaceship.
@@ -3274,7 +3042,6 @@ bobo3bo3bo21b$22bob2o3bobo3b2obo3bob2o3bobo3b2obo3bob2o3bobo3b2obo22b$21b2o6bobo
 3bo3bobo3bo3bobo3bo3bobo3bo3bo21b$22bob2o3bobo3b2obo3bob2o3bobo3b2obo3bob2o3bobo3b2obo22b$21b2o6bobo6b2ob2o6bobo6b2ob2o6bobo6b2o21b$24b2obobobobob2o7b2obobobobob2o7b2obobobobob2o24b2$23bo13bo5bo13bo5bo13bo23b$22bobo11bobo3bobo11bobo3bobo11bobo22b$21b
 o4b3o3b3o4bobo4b3o3b3o4bobo4b3o3b3o4bo21b$21bo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bo21b$25bobobobobobo9bobobobobobo9bobobobobobo25b$21b2o4bobobobo4b2ob2o4bobobobo4b2ob2o4bobobobo4b2o21b$23bo2b2obobob2o2bo5bo2b2obobob2o2bo5bo2b2obobob2o2bo23b$
 21bo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bo21b$22bob2o3bobo3b2obo3bob2o3bobo3b2obo3bob2o3bobo3b2obo22b$21b2o6bobo6b2ob2o6bobo6b2ob2o6bobo6b2o21b$24b2obobobobob2o7b2obobobobob2o7b2obobobobob2o!`,
-
 "barge2ext": `#N Barge 2 (extended)
 #O Hartmut Holzwart
 #C A c/2 period 2 orthogonal spaceship.
@@ -3290,7 +3057,6 @@ obobo9bobobobo9bobobobo33b$26b3o3bo2bobo2bo3bo3bo2bobo2bo3bo3bo2bobo2bo3b3o26b$2
 o2bobo2bo32b$29b2o2bo2bo2bo2b2ob2o2bo2bo2bo2b2ob2o2bo2bo2bo2b2o29b$33bobobobo9bobobobo9bobobobo33b$26b3o3bo2bobo2bo3bo3bo2bobo2bo3bo3bo2bobo2bo3b3o26b$26bo17bo15bo17bo26b$34b2ob2o11b2ob2o11b2ob2o34b$25b2o51b2o25b$32b9o7b9o7b9o32b$30b2obo5bob2o3b2obo5
 bob2o3b2obo5bob2o30b$30bo11bo3bo11bo3bo11bo30b$32bo2bobo2bo7bo2bobo2bo7bo2bobo2bo32b$29b2o2bo2bo2bo2b2ob2o2bo2bo2bo2b2ob2o2bo2bo2bo2b2o29b$33bobobobo9bobobobo9bobobobo33b$26b3o3bo2bobo2bo3bo3bo2bobo2bo3bo3bo2bobo2bo3b3o26b$26bo17bo15bo17bo26b$34b2ob2
 o11b2ob2o11b2ob2o34b$25b2o51b2o25b!`,
-
 "advancer": `#C p30 glider advancer #6, advances gliders by 60 generations.
 #C The device uses six copies of David Bell's p30 in-line NOT gate.
 #C Speed of information transmission within the device: 13/36 = 0.361c
@@ -3309,7 +3075,6 @@ oo12boo$84b3o11b3o$75boo9boobo9boo3boo14boo$75bo5bo4bobbo10boo18boo$
 7bob3o5b5o$108b3o19bobo$106boo3boo11bo$121boboo5b3o$121boo3$116boo3boo
 8bo$116boo3boo7bobo$117b5o$118bobo$$118b3o8bo$109boo17b3o$109boo16b5o$
 126boo3boo3$119boo$119boo7b3o$128b3o3$129boo$129boo!`,
-
 "gliderDetecter": // p1 pseudo-heisenburp
 `
 x = 2826, y = 2487, rule = B3/S23
@@ -3448,7 +3213,6 @@ bo44bo2bo$2561b2o4b2o44b2o4b2o$2561bo2bo54bobo$2563b2o56bo$2554b2o65b2o$2554b2o2
 543bo$2542b2o6$2549bo$2549b3o$2552bo$2551b2o28b2o$2581bo$2579bobo$2575b2o2b2o$2575b2o4$2574b2o4b2o$2574b2o4b2o5$2547b2o35bo$2546bobo33b3o$2546bo34bo$2545b2o34b2o$2549b2o$2549b2o3bo$2553bobo6b2o$2554bobo5b2o$2556bo$2556b2o$2548b2o$2549bo$2549bobo$2550
 b2o2b2o$2554b2o32b2o$2588b2o4$2583b2o$2583b2o$2587b2o$2587b2o3$2548b2o31b2o$2547bobo16b2o13b2o$2547bo18bobo$2546b2o20bo$2562b2o4b2o$2562bo2bo$2564b2o$2555b2o$2555b2o7$2545b2o$2546bo$2546bobo$2547b2o$2563bo$2561b3o$2560bo$2560b2o3$2534b2o$2534b2o7$256
 7b2o$2567b2o4$2562b2o$2562b2o$2524b2o40b2o$2524b2o40b2o3$2560b2o$2545b2o13b2o$2545bobo$2547bo$2547b2o!`,
-
 "lwssBreed": `#C This is, to my knowledge, the first LWSS breeder created.
 #C Lucas Brown, 24 January 2008, 4:21 PM PST
 x = 1640, y = 619, rule = B3/S23
@@ -3603,7 +3367,6 @@ ob2o4b3o7bo134bo5bo2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o3b2o21bo4
 2b6o$155bo5bo129b4o140bobo2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o3b2o21bo4b3o2b2o379b6o27bo89b2o5bo6b2o148b4o293b3o83bo5bo4bob2o6bo$161bo129bo144b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o20bobo4b2o2b2o379bo5bo129b4o416b2
 o119bo4bo7b2o$155bo4bo333bo4b2o4b2o17b2o386bo129bo415b4ob2o112bo4bo10bo2bo$157b2o339b2o6b2o8bobo387bo4bo546b6o115b2o12bobo$499bobo3bobo8bo2bo4b2o382b2o549b4o$423b4o72bobo3bobobo3b2o4b2o4b2o$422bo3bo82b3o4bo7b2o$412b5o9bo80bo3bo4bob7o$411bo4bo5bo2bo74
 b4o4b4o9bobo$416bo82b6o7b2ob6o$411bo3bo83b4ob2o4b3o7bo$380b6o27bo89b2o5bo6b2o$379bo5bo129b4o$385bo129bo$379bo4bo$381b2o!`,
-
 "cs-lwss-fr": `#C eight p384 c/12 forward rakes playing Freeze Tag with an LWSS
 #C to produce a p384 spaceship: David Bell, 5 June 2005
 #C (adapted from a previous version from 29 February 2004)
@@ -3679,7 +3442,6 @@ oo50boo5b3o27boo$410bob5o23bobbo58bo28boo$416bo23b3o18boo40boo$385bo25boo47bobo4
 97boo5bo74bo4bo3bobo45boo11bobo$400bo4bo73bo4boo3bo47boo10bobo$402bobo74bo6bo49bo13bo$480b3obobbobo$484b5o56boo$489bo54bobbo$463bo81boo$463bo$463bo$467bo$463b3obbo$462bo4bo$462bo3bo$463b3o11bobbo$439b3o35bobbo$482bo$443boo17bobo12b4obo21boo$445bo10b3
 o3bobo12boobobo22boo$439b4obo11bo5bobo39bo$439b5o18bobo$463boo$456bobbo$439bobo14boboo$439bobo14bobbo$440bo15bobo25boo9bo$439bobo14b3o25boo8b3o$440boo51bobobo$440bo52bobobo$494b3o$495bo$$500bo$455bo44bo$453booboo$453b3oboo$454b5o$444boo9b3o$444boo10b
 o7$452boo$452boo!`,
-
 "lineshipExt": `#C  Optimized version of Jason Summers' p96 c/12 diagonal lineship. Extended by me
 #C A p768 version was also constructed.  David Bell, 24 June 2005
 x = 823, y = 798, rule = B3/S23
@@ -3776,7 +3538,6 @@ bobo57bo12b3o45b$696b3o2bo3bo67b2o2bo45b$697bob5o70b3o46b$703bo71bo47b$698b2o123
 o3bo21b2o100b$659b2obobo7bo5bobo14bobo22bobo100b$659bo2b2ob2o2b2ob2o5bo91b2o50b$659bo5bobo5bo4bobo90b2o50b$660b2o2bo8bo5b2o142b$664bo2b3o2bo6bo143b$664b3o156b$637bobo183b$637bobobo7bo173b$636bo2b2obo4b3o173b$637b2o3bobob2obo44bo128b$637b2o3b2ob5o10b3
 o29b2ob2o126b$641bob2o3b2o10bobo29b3ob2o125b$640bobo16b2ob2o15b2o12b5o125b$659b2o18b2o13b3o126b$695bo127b$823b$662bo160b$662bo160b$823b$656b3o164b$655bo3bo27b2o134b$654bo4bo27b2o134b$644b2obo5bo3b2o3bo160b$640bo3b6o11bo161b$639bo5bo4bo2b2o6b3o159b$63
 9bo11bo171b$640bo9bo172b$645bo177b$645bo2bo174b$647bo175b$823b$823b$647b2o174b$647b2o174b!`,
-
 "7engCSgun": `#C p726 V-gun for seven-engine-in-a-row Cordership: a 21-glider salvo
 #C  meets a 27-glider salvo, following a recipe posted on 7 May 2003.
 #C The p726 Herschel factories are made from matched pairs of stable
@@ -4114,7 +3875,6 @@ bo1028b$1295b2o35bo992b$1290b2o2bo35b2o993b$1290bo3bo36b2o992b$1277b2o12b3o1031b
 1271bo1053b$1271b3o20bobo1028b$1294b2o1029b$1112bo182bo1029b$1113bo1211b$1111b3o16bo1194b$1128bobo1194b$1129b2o1194b$2325b$2325b$2325b$1276bo1048b$1274b2o1049b$1096bo178b2o1048b$1097bo170bobo1054b$1095b3o170b2o1055b$1269bo1055b$2325b$1118bo1206b$1116
 bobo1206b$1117b2o1206b$2325b$2325b$2325b$1247bo1077b$1245b2o1078b$1246b2o1077b$2325b$1111bo1213b$1112b2o1211b$1111b2o1212b$2325b$2325b$2325b$2325b$2325b$1249bo1075b$1249bobo1073b$1243bo5b2o1074b$1242bo1082b$1242b3o1080b$2325b$2325b$1116bobo1206b$1117
 b2o1206b$1117bo1207b!`,
-
 "crystal": `#C High-period oscillator built by David Dauthier, showing
 #C  a common crystal forming on a glider stream. Several adjustable
 #C  high-period guns have been constructed that make use of two
@@ -4140,7 +3900,6 @@ o3bo2bobo58b2o3b2o17b5o24b5o17b2o3b2o58bobo2bo3bob2o2b2o$10b2o3bo5bo63b2o3b2o16b
 bo14b2o74b2o$16b2o4bo68b2o7bo7bob2o28b2obo7bo7b2o68bo4b2o$5b2o6b2o6b5ob2o62b2o6b3o7bo32bo7b3o6b2o62b2ob5o6b2o6b2o$5b2o5b3o5bo2b2o4bo57b3o8b5o46b5o8b3o57bo4b2o2bo5b3o5b2o$13b2o5b2o8bo8b2o56b2o3b2o44b2o3b2o56b2o8bo8b2o5b2o$16b2o4bo7bo8b2o57b5o3b2o3b2o2
 6b2o3b2o3b5o57b2o8bo7bo4b2o$16b2o12bo67bo3bo3bo5bo26bo5bo3bo3bo67bo12b2o$29bo69bobo48bobo69bo$27b2o58b2o3b2o6bo6bo3bo28bo3bo6bo6b2o3b2o58b2o$108b3o30b3o$88bo3bo66bo3bo$89b3o8b2o48b2o8b3o$89b3o8b2o48b2o8b3o4$108b2o32b2o$90b2o16b2o32b2o16b2o$90b2o68b2o
 !`,
-
 "forwardMWSSrake": `#C A c/3 period 90 forward MWSS rake, shooting a period 90 MWSS stream
 #C which travels ahead of the puffer. This works by taking a forward
 #C period 90 LWSS rake, and converting each of the LWSS's into MWSS's
@@ -4208,7 +3967,6 @@ obo2bo$130b3o57bo7bo4bo13b7o3b3o2b3o$130bo2bo13bo36b2o4bo3b4o2bob2o22bobob3o$130
 o4bobo4bo$56b2o4b2o14b2o101bobobobobobo8bo$55bo2bobo3bo13b2o119b2o$62b3o2b3o129bobo$64b3obobo$64bo4bo13b3o102b2o$65b2o18bo102bobo$54bob2o26bo103bo$53b2ob2ob2o69b3o$52bo2bobo2bo68bo2bo44b2o$53bo5b2o4b2o65bo43b2o$62b2ob2o65bo45bo$62b2o3bo38b2o21bobo$62
 b2o41bobo57b3o$107bo57bo$166bo$155bo$154b2o$154bobo2$64bob2o22b2obo34b3o6bo5b2o$63b2ob2ob2o16b2ob2ob2o15b2ob3o14bo4b2o6bobo$62bo2bobo2bo16bo2bobo2bo14b2o4b2o11bo6b2o5bo$63bo5b2o4b2o4b2o4b2o5bo14bo2bobo3bo$72b2ob2o4b2ob2o30b3o2b3o8b2o$72b2o3bo2bo3b2o3
 2b3obobo6b2o$72b2o10b2o32bo4bo9bo$119b2o2$119b2o$118bo2bo$118bo2bo$117b2obo$118bobob2o$115b2obobo$115b2obobobo$116bobobo2bo$117bo2bo3b2o$116b5o2b3o$117b3obob2o$121bo$121bo!`,
-
 "gliderloop": `#N p63 glider loop
 #O Mike Playle
 #C A period-63 oscillator based on a stable reflector
@@ -4223,7 +3981,6 @@ obo$43bo2$29b2o$30bo8bo$30bobo5b2o$31b2o$45bo$46bo$44b3o4$41b2o$41bo$
 2o3$11b2o$12bo10b2o$9b3o10b2o$9bo14bo5$53bobo$53b2o$40bo13bo$40b3o$43b
 o$42b2o4$38b3o$38bo$39bo$52b2o$45b2o5bobo$45bo8bo$54b2o2$41bo$40bobob
 2o$40bobobobo$37b2obobo3bo2bo$37bo2bo2b2ob4o$39b2o4bo$45bobo$46b2o!`,
-
 "gunstar": `#N Gunstar
 #O David Buckingham
 #C A four-barreled true period 144 glider gun found in 1990.
@@ -4239,7 +3996,6 @@ o60bo26bobo12b2o18b$17bo131b$18bo2bo90bo3b2o31b$13bo2bobo91bobo3b2o31b$12bo3b3ob
 2o44b$39b2o2bo2bobo10b2o2b2o2b2o34b3o43b$5bo18b2o19b3o15b2o84b$3ob2o2b2o10b4o4b2o15b2o102b$4o4b2o10b3ob2o2b2o74b2o43b$4b2o19bo25bo52b2o43b$50bobo7b2o87b$49b2o9b2o87b$52b2o95b2$55b2o20bo71b$47b3o6bo8b2o8b3o71b$51b3obo9b2o7bo74b$46bo2bob3o20b2o73b2$47b
 3o57b2o40b$107b2o40b$92bo56b$93bo55b$91b3o12bob2o39b$106bobo40b$56b2o25b2o22bo41b$56bo2bo23b2o22b2o40b$95bo11b2o40b$56bo2bo37b3obo5b2o40b$55bo2bo39bob3o46b$55bobo37b3obo2bo46b$56bo37bo2bo3bo47b$68bobo25b2o51b$56b2o11b2o78b$56b2o4b2o5bo15b2o11bo50b$61
 bobo21bo10bobo50b$61bo24b3o8b2o50b$60b2o26bo60b2$107b2o40b$101b2o4b2o40b$101b2o46b2$106b2obo39b$107bobo39b$108bo40b$107b2o40b$107b2o40b$107b2o!`,
-
 "leafbug2a": `#N leafbug2a.rle
 #C https://conwaylife.com/wiki/Leaf_bug_2
 #C https://www.conwaylife.com/patterns/leafbug2a.rle
@@ -4650,7 +4406,6 @@ o160bo$7434bo157bo99bo$7433b3o155bo100b3o$7432b3obo$7431b2o2b3o249b2o$7432b2obo2
 o$7443b2o172bo61b2o$7443b2o234b2o2$7500bobo$7500b2o$7501bo40b2o36b2o$7542b2o36b2o16$7553bo$7534b2o16bo35b2o$7534b2o16b3o33b2o3$7380b2o102b2o89bo62b2o102b2o$7380b2o102b2o90bo61b2o102b2o$7574b3o2$7443b2o234b2o$7443b2o234b2o4$7542b2o36b2o$7542b2o36b2o12
 $7607bo$7606bo$7526b3o77b3o$7526bo2bo$7525bo3bo$7521bo4bo2b2o62b3o$7522bo5bo$7520b3o3b2o$7525b3o8b2o48b2o8bo$7484b2o39b3o8b2o48b2o3bo2b2ob2o39b2o$7484b2o104bo5bo41b2o$7590b3o2$7443b2o234b2o$7443b2o92bo141b2o$7538bo$7536b3o3$7538b2o44b2o$7538b2o44b2o7
 $7534b2o52b2o$7534b2o52b2o12$7484b2o152b2o36bobo$7484b2o152b2o37b2o$7677bo2$7679b2o$7679b2o5$7542bobo$7542b2o$7543bo3$7584bobo$7585b2o$7585bo$7534b2o52b2o$7534b2o52b2o!`,
-
 "waterstrider": `#N waterstrider.rle
 #O FWKnightship, 2025
 #C https://conwaylife.com/wiki/Water_strider
@@ -5276,7 +5031,6 @@ obo10959bo157bobo$1442b3o155b2o10960b3o155b2o$1241b2o133b2o152b2o69bo63b2o10694b
 26b2o52b2o138b2o10924b2o52b2o138b2o3$1281bo11119bo$1281bobo11117bobo$1281b2o11118b2o7$1241b2o133b2o40b2o68b2o40b2o133b2o10694b2o133b2o40b2o68b2o40b2o133b2o$1241b2o133b2o40b2o68b2o40b2o133b2o10694b2o133b2o40b2o68b2o40b2o133b2o4$1439bobo11117bobo$1439b
 2o11118b2o$1440bo11119bo3$1471bobo11117bobo$1472b2o11118b2o$1472bo11119bo6$1426b2o52b2o11064b2o52b2o$1426b2o52b2o11064b2o52b2o12$1241b2o286bo135b2o10694b2o286bo135b2o$1241b2o422b2o10694b2o422b2o!
 `,
-
 "solifuge": `#N solifuge.rle
 #O Nico Brown, 2025
 #C https://conwaylife.com/wiki/Solifuge
@@ -5300,7 +5054,6 @@ $167bobo$168bo2$102b3o$104bo$103bo3$158b2o$158b2o2$165bo$165b2o2bo$161bo5bo2bo$9
 4b2o5b2o$153bo$138bo11bobo$138bo12bo$140bo$139bo$139bo$92b2o28b2o$91bobo28b2o$93bo2$110b2o$110b2o4$93b2o$92bo2bo$92bobo$93bo$104b3o$104bo2bo$104b2ob2o$91bo17bo$90b2o11b3o2bo$89bobo10bo$103b3o$77b2o25bo$77b2o11bo2b2o$90bo2$65b2o$65b2o14bo13b2o$81bo12b
 obo$48b2o31bo11b3o$34bo12b2o45b2o$22b2o10b2o13bo19bo$18b2obob2o9bobo32bo5b2o$16bo19b2o31bo4bo2bo$21b2o10bo2bo38b2o3bo$14b2o16b2obo40bob3o$18bo14b2o42bo$13bo2bo58b2o3bo$14bobo58b2o$15bo59bo2b2o$22bo$20b4o57bo$19b2o3bo57bo$18bo3b2o55bo2bo$19b4o57b2o$20
 bo59bo3$8bo$6b2ob2o$9b2o$5bo3b2o$5bo2bo$6b2o2$2o2$8bobo$8b2o$8b2o!`,
-
 "spiralGrowth2":  `#N smallerspiralgrowth.rle
 #O Dave Greene, 2017
 #C https://conwaylife.com/wiki/Spiral_growth
@@ -5386,7 +5139,6 @@ bo57bo$369b2o60bob2o27bobo$369bo60b2o2bo27b2o$432b2o29bo$428b4o$427bo3bo$427b2o2
 $423b2o$425b4o$425bo3bo$428b2o3$425bo$424b2o27b3o$424bobo28bo$454bo$438b2o$431b2o5bobo$431b2o7bo$440b2o2$427bo$426bobob2o4b2o$426bobobobo4bo$423b2obobobobo2bo$423bo2bo2b2ob5o$415bo9b2o4bo$416b2o13bob2o$415b2o13b2o2bo$432b2o$428b4o$427bo3bo$427b2o7$41
 7b2o$416bobo5b2o$416bo7b2o$415b2o2$429bo$419b2o4b2obobo$419bo4bobobobo$421bo2bobobobob2o$420b5ob2o2bo2bo$425bo4b2o$422b2obo$422bo2b2o$423b2o$425b4o$425bo3bo$428b2o7$438b2o$431b2o5bobo$431b2o7bo$440b2o2$427bo$426bobob2o$426bobobobo$425b2obobobo2bo$426
 bo2b2ob4o$426bo4bo$427b3obo2b2o$429b2o3b2o17$435b2o$435b2o!`,
-
 "c/3synth": `x = 228, y = 130, rule = B3/S23
 214bobo11b$106bo107b2o12b$104bobo97bobo8bo12b$105b2o97b2o22b$205bo22b$100bo127b$98bobo127b$99b2o17bo94bo14b$116bobo92b2o15b$117b2o93b2o14b$228b$228b$97bo130b$95bobo130b$90bo5b2o130b$91b2o135b$90b2o136b$184bo43b$182b2o44b$183b2o43b$228b$91bo136b$89bob
 o115bobo18b$90b2o115b2o19b$183bo24bo19b$119bo61b2o45b$120bo61b2o44b$118b3o53bo53b$174bobo51b$174b2o52b$120bo107b$121b2o105b$120b2o106b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$49bo100bo77b$21
@@ -5394,7 +5146,6 @@ bo26bo96bo3b2o77b$22bo25b3o94b2o2bobo6b2o68b$20b3o121bobo11bobo67b$43bobo112bo69
 85bo142b$30b2o51bobo142b$29bo2bo49bo2bo67b3o72b$30bobo120bo74b$31bo51b3o53b2o13bo73b$84b2o52bobo87b$83bo56bo18b2o67b$29b2o53b2o73bobo22bo43b$29b2o16b2o33bobo74bo23b2o43b$47bobo33bo99bobo42b$47bo180b$228b$bo226b$b2o225b$obo45bo179b$47b2o72bo106b$47bob
 o71b2o105b$116bo3bobo105b$116b2o110b$115bobo110b$228b$11bo216b$11b2o215b$10bobo25b2o144b2o42b$37b2o145bobo41b$39bo144bo43b$228b$228b$228b$228b$228b$228b$228b$228b$228b$209b3o16b$209bo18b$210bo17b$228b$213bo14b$212b2o14b$212bobo13b$228b$228b$228b$228b
 $87b3o138b$89bo138b$88bo139b$228b$228b$228b$228b$228b$228b$226b2o$225b2ob$227bo!`,
-
 "tetheredrake": `x = 71, y = 60, rule = B3/S23
 60bo2$58b3obo$57bob2o$57b2obo$55bob3o2$57bo$28bobo22bo$27bo24bobo$28b
 o2bo20b2o$30b3o23b2o$56bobo$51b2o5bo$51b2o5b2o5$52b2o3b2o$37b2o12b2ob
@@ -5407,7 +5158,6 @@ o3bo10b2obo16b2o$b3o6bo7bo3bo11b3o15b2obo$3obo13bo3bo2b2o24bo2b3o$bo3b
 o7bo5b3o3b2o23bobobo9bo$2bo3bo4b2ob2o33bobobo9bobo3b2o$3bob3o2bo4bo14b
 o16b3o2bo7bobo3bo2b2o$4b3o22bobo16bob2o7bobobobo$5bo8bo15bo18b2o9bo$50b
 o$9bo2bo$11b2o51b3o$64b3o$64b3o$61b3o$61b3o$61b3o!`,
-
 "knightship": `#N Sir Robin
 #O Adam P. Goucher, Tom Rokicki; 2018
 #C The first elementary knightship to be found in Conway's Game of Life.
@@ -5423,7 +5173,6 @@ o$22b2o3bo$21bo$21b2obo$20bo$19b5o$19bo4bo$18b3ob3o$18bob5o$18bo$20bo$
 16bo4b4o$20b4ob2o$17b3o4bo$24bobo$28bo$24bo2b2o$25b3o$22b2o$21b3o5bo$
 24b2o2bobo$21bo2b3obobo$22b2obo2bo$24bobo2b2o$26b2o$22b3o4bo$22b3o4bo$
 23b2o3b3o$24b2ob2o$25b2o$25bo2$24b2o$26bo!`,
-
 "truep14": `x = 72, y = 60, rule = B3/S23
 38b2o3bo2bo2bo$38bo2b3o2b6o4b2o$39b2o3b2o6bo3bo$26b2o5bo2bo5b2o2b2o2b
 2obo3bo2b2o$26bo6b7o3bo2bobo2bob4obo2bo$4b2o21bo12b3o4b2o2bo4bob2o$4b
@@ -5447,7 +5196,6 @@ o3b2o4bobo2bobo3bo6bo$11b2o6b2o3b2o12bobo3bo3bobob2obob11o$10bo8b2ob3o
 ob2o5bo2bo$40b2o3bob3o5b2o2b2o$14b3o7bo21b2o8bo$15bo7bobo28bo$13b2o9b
 o29b2o$13b2o4$14b2o$14bobo$15b2o2$12b2o$13bo$10b3o$10bo!
 `,
-
 "growingPiwaveship":`
 #C https://conwaylife.com/wiki/3c/14_pi_wave
 #C https://www.conwaylife.com/patterns/growing3c14piwaveship.rle
@@ -6355,7 +6103,6 @@ o2bo70bo2bo4b2o5bo20bo$2092b2o4bo5bo3bo68bo2bobo2bo2bo2b4o62bobo5b6o$2091bo4bobo
 o76b4o14b2ob3o$2085b6ob2o4b2o75bo4bobo2bo2bo2bo3bo78bo15b5o$2084b2o5b2o5bo2bo72b5obobo2bo2bo2b4o96b3o$2083b2o4b2o4bo3bo73bo8bo2bo118b4o$2084b2o4b4obo3bo2bo70b6obobo120b6o$2100bobo67bobo7bobo119b2ob4o$2084b2o4b5o74b6ob2o4b2o119b2o$2083b2o4b2o8b3o66b2o
 5b2o5bo2bo$2084b2o5b2obo4b2o66b2o4b2o4bo3bo$2085b6obobo4b3o66b2o4b4obo3bo2bo$2086bobo19bo75bobo$2089b6o5bobo2b2obo59b2o4b5o$2089bo9bo2bo2bo61b2o4b2o8b3o$2091b2o6bo5bo62b2o5b2obo4b2o$2091b4o4bo3bo65b6obobo4b3o$2094bo5bo3b3o63bobo19bo$2101b2o70b6o5bobo
 2b2obo$2104b5obo62bo9bo2bo2bo$2105bo4bo64b2o6bo5bo$2106b2o67b4o4bo3bo$2107bo2bo67bo5bo3b3o$2108bobo74b2o$2188b5obo$2189bo4bo$2190b2o$2191bo2bo$2192bobo!`,
-
 "linestretcher": `
 #O Lineship except I removed the part where it deletes the end of the line
 x = 659, y = 653, rule = B3/S23
@@ -6437,13 +6184,11 @@ bo285b2o34bobob3o12bo253b$43bobo16b2o323b2obo2bo265b$43b4o344bobo265b$46bo12b2o3
 o3bo284b$23bo2bo305b3o21bo4bo8bob3o2bo281b$23bo2bo304bobobo20bo4bo8b2obo285b$25b3o302b3ob3o12bo5b2obobo11bo4bo18b2o261b$24bobo321bobo3bobo15bo4bo17bobo261b$24bo26b2o279bob3o13b2o3bo16bo24bo261b$26bo24b2o279b5o9bo3bo21bo3bo282b$20b3o4b2o303b2o2b2o11bo
 2b2o19b3o283b$19bob2o6bo304bob2o14bo306b$5bob2ob2o7bob2o5b2o306b2o9bo2b2o307b$4b5o2b2o7b3obo3bo303bobo2bo11bo27b2o280b$4bo2b3obo8b2o5bo303bobo2bo40b2o8bobo269b$10bo12bo2b2o304bo56bo269b$23b2obo3b2o354bob2o269b$25bo361bo5b2o264b$392b3o264b$347b2o43b3o
 264b$11b2o377bob2o265b$11b2o334b2o41bobo266b$391bo267b$22bo325bobo308b$22bo326bo309b$23bo313b2o10bo309b$337b2o320b$22b2o635b$20bo2bobo633b$20bo4bo633b$20bo638b$21b3o635b$659b$345b2o312b$345b2o312b!`,
-
 "hwssgun": `x = 25, y = 44, rule = B3/S23
 10b3o$13bo$9bo3bo$8bobo2bo$6bo2bobo$6bo3bo$6bo16b2o$7b3o13bo$21bobo$2o
 2bo16b2o$o2b2o$b5o8bo$13bob2o$13bobo$b5o8bo$o2b2o$2o2bo4$6b2o$7bo$7bo
 bo$8b2o$4b2o$5bo$5bobo$6b2o2$9b2o$9b2o5$4bo2bobo$2b2obob3o$3bo6bo$2b2o
 5bo$15b2o$3bo5b2o3bobo$2bo6bo5bo$3b3obob2o$3bobo2bo!`,
-
 "3c7grow":  `#N 3c7growingspaceship.rle
 #C https://conwaylife.com/wiki/3c/7_orthogonal
 #C https://www.conwaylife.com/patterns/3c7growingspaceship.rle
@@ -6511,7 +6256,6 @@ b3o8bob3o4bobo2bo9b2o$44bobo17b3o11b2obob2o15bo11bo2bo6bo3b3o4bobo4bo9bo3bo2b2o6
 bo17b4o13b2ob2o8bo6b2obo8bob2o$48b2ob5o7b3o9bob4o7b2o2b3o2bo11bobo7bo3b2o12bo18bo5bo4bobobo3b3obo7b5o$47bo2b3ob2o7b2o14bo6b4obo5bo9bo15bobo6bo2b2o3bo17b4obo5bo10b3ob2o2b2ob2o$50b3o2bob3obo11b2o2bobo6bobo4b2obo10bo14bo2bo4bo2bo6bo10b2o11bob3o5b2o3bobo
 4b2o3bo$49bobo3bo3b2o3bo3bob2o5b3obo11b3o26bo3b3o4bobo4bo9bo3bo2b2o6b2o4b3ob4o3b2o2b5o$55bo3bo4b2ob2o2b3o4b2ob2o39bo9bo3bo3bo11bob2o5bo4b3o13bobob2obo$56bobo6bo2bo2bo2bobo5bo40bo9bo3b2obo8bob2o8bo3bo4b3o10bo$64bo4b2o8b3o42bo3bobo2b2o3b2o12bobo6bob2o2
 b2o2bo$80b2o44b2ob2o8b2ob5o2bo2bo3b2o10bobo$130b2ob3o3b5o4bo5bob2o11bo$140b4o2bobo4bo3bo$144b2o8bo2bo$154bobo!`,
-
 "flyingwing": `#N Flying wing
 #O knightlife
 #C https://conwaylife.com/wiki/Flying_wing
@@ -6525,7 +6269,6 @@ o4bob2o45b2obo4bob2ob2obo4bob2o$31bo4bo3bo2bobo2bo3bo4bo43bo4bo3bo2bobo2bo3bo4bo
 b2o53b2o4bo2bo34bo$8bobo35bo65bo35bobo$8b2o32bo3bo65bo3bo32b2o$42bo3bo65bo3bo$37bo8bo65bo8bo$37bobo3bobo67bobo3bobo$6bo30b2o81b2o30bo$6bobo141bobo$6b2o143b2o2$35bo87bo$35bobo83bobo$4bo30b2o85b2o30bo$4bobo145bobo$4b2o147b2o2$33bo91bo$33bobo87bobo$2bo3
 0b2o89b2o30bo$2bobo149bobo$2b2o151b2o2$31bo95bo$31bobo91bobo$o30b2o93b2o30bo$obo153bobo$2o155b2o2$29bo99bo$29bobo95bobo$29b2o97b2o$3o153b3o$obo153bobo$3o153b3o$27bo103bo$6b2o19bobo99bobo19b2o$8bo18b2o101b2o18bo$6b3o141b3o$5bob2o141b2obo$4bobo145bobo$
 4bobo18bo107bo18bobo$25bobo103bobo$9b2o14b2o105b2o14b2o$8bo2bo135bo2bo$9b2o137b2o2$23bo111bo$12b2o9bobo107bobo9b2o$11bo2bo8b2o109b2o8bo2bo$12b2o131b2o3$21bo115bo$21bobo111bobo$17b2o2b2o113b2o2b2o$17b2o121b2o!`,
-
 "slowsilver": `x = 39023, y = 39084, rule = B3/S23
 38689b2o$38689b2o49$38674b2o$38674b2o7bo$38682bobo4bo$38681bo2bo3bobo$38666bo15b2o4bo2bo$38665bobo21b2o28bo$38664bo2bo49b3o$38665b2o26bo22bo$38681bo11b3o20b2o$38679b3o14bo$38663bo14bo16b2o$38663b3o12b2o$38666bo$38665b2o3$38666b2o$38666b2o17b2o$38685b
 2o6$38682b2o32b2o$38682bo20b2o11b2o$38683b3o18bo$38685bo15b3o$38679b2o20bo$38679bo49b2o$38680b3o47bo$38682bo5bo14b2o22b3o$38687bobo13b2o22bo$38686bo2bo$38687b2o3$38688b2o46b2o$38688bo42b2o3b2o$38669b2o15bobo42b2o$38669b2o15b2o2$38730b2o12b2o$38731bo5
@@ -6825,7 +6568,6 @@ bo5b3o5b3o$309b2o47b2o11b2o9bobo8bo3bo$358b2o23bo8b2o3b2o$387b2o$295b2o89bo2bo5b
 2bobo19b2o4b2o44b2o4b2o$307b2o11bo2bo19bobo55bobo$321b2o22bo57bo$336b2o7b2o56b2o$336b2o14bo5b2o33b2o$351bobo5bo34bo$322b2o26bo2bo2b3o32b3o$306b2o13bo2bo26b2o3bo34bo4b2o$306bobo13bobo71b2o$308bo14bo$308b2o$326b2o$327bo$327bobo$328b2o62b2o$392bobo$394b
 o$394b2o$390b2o$346b2o42bobo$346bo44bo$344bobo3b2o$344b2o4b2o12$326b2o15b2o$325bobo15b2o$325bo$324b2o2$364bo$346bo16bobo$346b2o15bo2bo$345bobo16b2o3$350b2o$350bo12b2o$335b2o11bobo12bo10b2o$335b2o11b2o11bobo10b2o$357b2o2b2o$357b2o2$337b2o$337bo2bo$337
 bo2bo15b2o$337b2ob2o14b2o4b2o$338b2ob2o19b2o$337b2o3b2o$337bo2b3o$337bo$338bobo$339bo$361b2o$361bobo$363bo$363b2o!`,
-
 "sawtooth177": `x = 68, y = 76, rule = B3/S23
 59b2o$59b2o3$56b2o$56b2o8b2o$7b2o57bo$7b2o50b2o6bo$59b2o5b2o2$10b2o54b
 2o$2o8b2o55bo$bo61bo$o6b2o53bo3bo$2o5b2o55b2o2$2o$o$4bo43b3o$bo3bo41b
@@ -6836,7 +6578,6 @@ o$34bobo$29bo3bo3bo$27b2o5b3o$28b2o2b2o3b2o11$7b4o24b2o$5b2o4b2o22b2o
 $5b2o5bo$7b2obobo$12bo9bo4bo$8bo3bo7b2ob4ob2o$8bo4bo8bo4bo$10b3o3bo$10b
 2o4bo$16b2o$18bo$18b3o3$21bo$20bob5o$19b2o5bo$19b2o3bo2bo$27bo$21b2ob
 o2bo$24bo2bo$25b2o$25b2o!`,
-
 "quadpush": `x = 416, y = 413, rule = B3/S23
 #O David Greene
 151b2o263b$151b2o16b2o245b$169b2o245b$416b$416b$416b$161b2o253b$150b3o8b2o253b$131b2o16b2ob2o262b$113b2o16b2o16b2ob2o262b$113b2o34b5o15b3o244b$148b2o3b2o6bo6bo3bo243b$160b3o4bo5bo95b2o145b$111bo47bo3bo3b2obob2o77b2o15bo2bo144b$112bo8b2o27b2o6bob3obo8
@@ -6881,7 +6622,6 @@ $416b$416b$265bobo35bo112b$265b2o35b3o111b$266bo35b3o111b$280bo135b$279bo136b$27
 b$280b3o133b$416b$416b$280b3o133b$416b$280bobo133b$281bo134b$416b$257bo23bo134b$257bobo21bo134b$242b2o13b2o6b2o149b$242b3o20bobo148b$241bob2o15b2o6bo147b$241b3o8bo6bobo3bo2bo7b2o138b$242bo9bobo4bobo6bo7b2o138b$252b2o11bobo148b$265b2o149b$416b$259bo15
 6b$259bo156b$258bobo155b$259bo156b$259bo156b$259bo156b$259bo156b$258bobo155b$259bo156b$259bo156b$416b$416b$416b$245b3o168b$245bobo168b$245b3o168b$245b3o168b$245b3o168b$245b3o168b$217bo27bobo168b$216bobo26b3o168b$216bobo197b$217bo198b$416b$212b2o7b2o1
 93b$211bo2bo5bo2bo192b$212b2o7b2o193b$416b$217bo198b$216bobo197b$216bobo197b$217bo198b!`,
-
 "doubleslide": `x = 355, y = 340, rule = B3/S23
 #O David Greene Book
 38b2o$38b2o2$24b2o$24b2o5$24b3o11b3o$24b3o10bo3bo$23bo3bo8bo5bo$36b2obob2o42b2o$22b2o3b2o56b2o2$39bo59b2o12b2o$38bobo44bo13b2o12b2o$38bobo43bobo$22b3o14b2o42bo3bo39b2o$26b2o13bo41b5o9bo29b2o$26b2o12b3o39b2o3b2o9bo$27b2o10bo3bo39b5o10bo14bo13bo$25bobo
@@ -6919,7 +6659,6 @@ b4o10b2o33bo$202b2o31bo4b4o$202bobo35bo25b2o$192bo73b2o$191b3o60b2o$190bo3bo59b2
 10b2o5b2o5b3o3b2o$203bo5bo17b2o3bo5bo9bo3bo41bo$206bo20b2o2b2obo3bo8bo4bobo18b3o3b2o14b2o$203b2o3b2o22bo5bo16b2o15bo2b2o2bobo12b2o$233bo3bo17b2o14b6o3bo21bobo$235b2o18b2o15bo2b2o26b2o$207bo44bobo5b2o11b2obo26bo$207bo44bo7bobo11b3o$191b2o15bo53bo$191b
 2o69b2o2$205b2o$205b2o100bo$179b2o127bo$170bo8bobo124b3o$169bobo2b2o6bo7b2o$169bobobo2bo2bo2bo7b2o$170bo3b2o6bo136bobo$179bobo138b2o$179b2o139bo$167b2o3b2o$167b2o3b2o144b2o$168b5o145b2o$169bobo2$169b3o129bo$300b2o$299b2o4b2o2b2o$298b3o4b2o2b2o$299b2o
 4b2o$289bo10b2o$170b2o116b3o10bo$170b2o116b3o2$286b2o3b2o$286b2o3b2o3$289bo$288bobo$287b2o$287b2o$287b3o$288bobo$289b2o!`,
-
 "lwsscr": `x = 178, y = 141, rule = B3/S23
 #O David Greene Book
 36bo$35b4o2bo6bobo$36b4obo9bo$33b2o3b3o6bo2bo$32b2o2bo9b3o$32b2obo$24b2o8bo$24b2o2$58bo$57bobo2$56bo2bo$56b2o$16b2o38bo$16b2o4$58b2o$57bo$58b2o$8b2o$8b2o$45b3o$45bobo$45bobo$41b2o4bo17bobo6bobo$41b2o3b3o16bobo9bo$42bo23bo6bo2bo$2o41b4o25b3o$2o8bo33b2
@@ -6928,7 +6667,6 @@ o$9bobo33bo2$8bo2bo32bo$8b2o34bobo37bo$8bo35b4o35bobo$45b3o$45bo12bo23bo2bo$49b2
 8bo14bo2bo$50b3o10b2o28b2o13b2o3$96bobo$96b4o$96b2o2bo$99b3o15bo$55b2o40b3o16bobo$55b2o48bo9b2ob2o$94bo9bo3bo6b2ob2o$30b2o61b2o13bo9b3o$29b2ob2o59bobo9bo8bo3b3o$30b4o73bo5bo4b3o$31b2o35b2o42bo5b2o$67b2o48b3o$69bo47b2o$116b2o$138bo$138b2o$119b2o15b5o$
 119b2o20bo$135bo5b2o$127bobo8b2ob3o$127bobo3b2o2b2obobo$128bo5b2o2bo2bo11b3o$138b2o6bo$134bob2o6b3o5b2o$119b3o12bo10bo4b4o$119bo2b2o21b2ob3ob2o$100b2o18b3o23bobo$99b2o20bo55bo$101bo75bo$168bo8bo$168bobo$167bo3bo2b3o$169b5obo$169bo$136b2o18b2o15b2o$13
 6b2o18b2o2$147b2o$147b2o7bobo$147bo5bo4bo$152bobo4bo$151bo6bo$128b2o22b4o2bo$128b2o26bo9bo$164b4o$163bob5o$155bo6b2o6bo2b3o$152bo4bo5b3obo3bo$152bo5bo5b2o2bobo$152bo$154bo2bo$154b3o4b2o$161b2o$160b2o$160b2o6b2o$160b3o5b2o$160bo$159bo$158bo$157b3o!`,
-
 "backwardcr": `x = 167, y = 137, rule = B3/S23
 #O David Greene Book
 35bo$33b2o2b2obo6b2ob2o$35b5obo8b2o$34b2o4bo5bobob2o$32bobo11bobo$46b2o$24b2o6b3o$24b2o33b3o$59b3o2$58b2obo$57bo3bo$57b3o2$16b2o32bo$16b2o31b3o$48b2ob2o$48bobob2o$47b3o2b3o$46bo6bo$46bob5o7bo$45b2ob4o8bo$8b2o36bo13bo$8b2o37bo11b3o2$58bob2o$59bo$49bo2
@@ -6937,12 +6675,10 @@ o$23b2o4$34b3o$34b3o$54b2o30bobo$33b2obo17b2o30bo2bo2bo7bobo$32bo3bo49bob2obobo5
 o$37bo49bo8b2o$81bo2b2o$82b4o6bo$92b3o$91bo3bo$92bo2bo10b2ob2o$92bo2bo13b2o$93b2o10bobob2o$105bobo$105b2o2$123b3o$116bo$114b3o5b2o$69b2o44bo4b4o$69bobo43b2ob3ob2o$69bo46bobo4$141bo$140bobo$139bo3bo$119b2o19bobo$120b2o5bo13bo$119b3o3bo$120bo3bo3bo9b4o
 $121b7o9bo4bo$5bo115bo2b3o13bo22b3o$3b2o118bo12bo2bo3bo19bobo$4b2o95b2o18b2o14bob3obo19b3o$101bobo18bo2bo12bob3o5b2o$101bo21b2o21b2o2bo$146b2ob2o11b2o$146bo14b2ob2o$148b2o10b2o2b2o$119b2o27bo11b2o3b2o$108bo10b2o39b2o2b2o$108b4o50bobo$110b2o$106bob2o$
 104b2ob2o$104bo2b2o37b3o$105b2o40bob3o$146b2ob2o$146b2ob2o$148bo2$159b2o$159b2o7$151b2o$151b2o!`,
-
 "megaOWSS": `x = 21, y = 28, rule = B3/S23
 14b2o$10b4ob2o$10b6o$11b4o3$5b14o$4bo13bo$18bo$4bo12bo$2b2o$o18bo$20bo
 $o19bo$b20o4$5b14o$4bo13bo$18bo$4bo12bo$6b2o2$14b2o$10b4ob2o$10b6o$11b
 4o!`,
-
 "ajss": `x = 127, y = 69, rule = B3/S23
 #O David Greene Book
 10b2o$8bo4bo$14bo$8bo5bo$9b6o5$78b6o$77bo5bo$83bo$77bo4bo$79b2o$2b2o
@@ -6952,7 +6688,6 @@ $o19bo$b20o4$5b14o$4bo13bo$18bo$4bo12bo$6b2o2$14b2o$10b4ob2o$10b6o$11b
 bo67b5o$44b2o2bob2o$120b2o$118bo4bo$124bo$118bo5bo$119b6o8$98b2o$b6o
 89bo4bo$o5bo82b2o11bo$6bo81b4o4bo5bo$o4bo82b2ob2o4b6o$2b2o86b2o$79b2o$
 77bo4bo$83bo$77bo5bo$78b6o5$9b6o$8bo5bo$14bo$8bo4bo$10b2o!`,
-
 "bhpuff": `x = 48, y = 22, rule = B3/S23
 #O David Greene Book
 44bo$42bo3bo$47bo$16bo2b3o20bo4bo$13b2o2bob2obo20b5o$9bob4o3b3ob2o13b
@@ -6961,18 +6696,15 @@ bo67b5o$44b2o2bob2o$120b2o$118bo4bo$124bo$118bo5bo$119b6o8$98b2o$b6o
 6bo5b2o9b3o2bo3bo$bo5bo2bo3b5o3bo2bob3ob2o7b3o$7bo6bo4bo2bo2b2o4bo10bo
 $6bo4bo4b4obo3bo5b4o7bo$8b5obo2bobob4o6b2o2b5obo$9bob4o3b3ob2o13b2o$
 13b2o2bob2obo20b5o$16bo2b3o20bo4bo$47bo$42bo3bo$44bo!`,
-
 "biggerbiblock": `x = 18, y = 55, rule = B3/S23
 10bobo5b$10bo2bo4b$13b2o3b$15bo2b$13b4ob$5bo6bo4bo$5bob2o5bo2bo$8bo5bo2bo$8bo7bob$10bob4o2b$10bo3bo3b$b6o6bo4b$o5bo2b5o4b$6bo11b$o4bo3b5o4b$2b2o9bo4b$7bo2bo3bo3b$10bob4o2b$6bobo7bob$8bo5bo2bo$6b3o5bo2bo$12bo4bo$13b4ob$15bo2b$13b2o3b$10bo2bo4b$10bobo
 5b$18b$10bobo5b$10bo2bo4b$13b2o3b$15bo2b$13b4ob$12bo4bo$6b3o5bo2bo$8bo5bo2bo$6bobo7bob$10bob4o2b$7bo2bo3bo3b$2b2o9bo4b$o4bo3b5o4b$6bo11b$o5bo2b5o4b$b6o6bo4b$10bo3bo3b$10bob4o2b$8bo7bob$8bo5bo2bo$5bob2o5bo2bo$5bo6bo4bo$13b4ob$15bo2b$13b2o3b$10bo2bo4b
 $10bobo5b!`,
-
 "bbbcol": `x = 118, y = 55, rule = B3/S23
 10bobo92bobo10b$10bo2bo90bo2bo10b$13b2o88b2o13b$15bo86bo15b$13b4o84b4o13b$5bo6bo4bo82bo4bo6bo5b$5bob2o5bo2bo82bo2bo5b2obo5b$8bo5bo2bo82bo2bo5bo8b$8bo7bo84bo7bo8b$10bob4o86b4obo10b$10bo3bo88bo3bo10b$b6o6bo90bo6b6ob$o5bo2b5o90b5o2bo5bo$6bo104bo6b$o4bo
 3b5o90b5o3bo4bo$2b2o9bo90bo9b2o2b$7bo2bo3bo88bo3bo2bo7b$10bob4o86b4obo10b$6bobo7bo84bo7bobo6b$8bo5bo2bo82bo2bo5bo8b$6b3o5bo2bo82bo2bo5b3o6b$12bo4bo82bo4bo12b$13b4o84b4o13b$15bo86bo15b$13b2o88b2o13b$10bo2bo90bo2bo10b$10bobo92bobo10b$118b$10bobo92bobo
 10b$10bo2bo90bo2bo10b$13b2o88b2o13b$15bo86bo15b$13b4o84b4o13b$12bo4bo82bo4bo12b$6b3o5bo2bo82bo2bo5b3o6b$8bo5bo2bo82bo2bo5bo8b$6bobo7bo84bo7bobo6b$10bob4o86b4obo10b$7bo2bo3bo88bo3bo2bo7b$2b2o9bo90bo9b2o2b$o4bo3b5o90b5o3bo4bo$6bo104bo6b$o5bo2b5o90b5o2
 bo5bo$b6o6bo90bo6b6ob$10bo3bo88bo3bo10b$10bob4o86b4obo10b$8bo7bo84bo7bo8b$8bo5bo2bo82bo2bo5bo8b$5bob2o5bo2bo82bo2bo5b2obo5b$5bo6bo4bo82bo4bo6bo5b$13b4o84b4o13b$15bo86bo15b$13b2o88b2o13b$10bo2bo90bo2bo10b$10bobo92bobo10b!`,
-
 "bigagun": `#N p144bigagun.rle
 #C https://conwaylife.com/wiki/Big_A
 #C https://www.conwaylife.com/patterns/p144bigagun.rle
@@ -7034,11 +6766,9 @@ b2obo43b2o$272bo70bo2bo48b2o8b3o32bo2bo15b2o$267b3ob2o4b2o65b2o59bo36b2o10b3o2b2
 b3o4b2o27b2o$331bo9b2o26bobo49bob3o3bo27b3o20b2o$332bo9bo23b2ob3o48bo3bo5b3o23bobo2bo2b2o10b2o2b2o2b2o$330bo2bo7bobo21bo2b2o49bo3bo8bo23b2o2b2o2b2o10bobo2bo2b2o$320b2o8bobo7b2obo22b2o50b3obo37b2o15b3o$320b2o36b2o24b2o33b3o56b2o$335b2o21b2o24b2o34bo14
 b2o$335b2o4b2o92b2o$341b2o100b2o18b2o$442bo2bo11b2o4b2o$443b2o12bobo12bo$448bo8bo13b5o$447b3o20bo3b3o$446b5o20b2o5bo$472b4o$473b2o2bo$331b2o142b2o$330bo2bo113b5o$330bo2bo114b3o$331bobo7b2o106bo$335b2o4b2o110b2o$335b2o4b2o109bo2bo$341bo111b2o$340bobo9
 2b2o24b2o$340bob2o91b2o24b2o3$341b2o$341b2o!`,
-
 "47p72": `x = 14, y = 30, rule = B3/S23
 #O Parkes-Codes
 b2o11b$b2o11b$14b$14b$2obo10b$bobo10b$2bo11b$b2o4b2o5b$b2o4b2o5b$b2o7bobob$10bo2bo$10bo2bo$11b2ob$14b$14b$14b$14b$14b$14b$14b$b2o11b$b2o4b2o5b$7b2o5b$14b$ob2o10b$obo11b$bo12b$b2o11b$b2o11b$b2o11b!`,
-
 "infinitecorderships": `
 x = 960, y = 981, rule = B3/S23
 490b2o$490bobo$492bo4b2o$488b4ob2o2bo2bo$488bo2bobobobob2o$491bobobobo$492b2obobo$496bo2$482b2o$483bo7b2o$483bobo5b2o$484b2o6$511bo$494b2o15b3o$494bo19bo$495b3o15bobo$497bo15bobo$514bo5$529b2o$529b2o4$509b2o$508bobo$508bo$507b2o7b2o$516b2o2$524b2obo$
@@ -7182,7 +6912,6 @@ bobobo$151b2o3b2o17bo$174b2o$139b2o33bobo$139b2o13bo32bobo$153bobo31b2o$153bobo3
 182bobo25b2o$182bo27b2o3$199b2o8b2o$200b2o7b2obo$199bo12bo27b2o$212bo27b2o$209bo2bo$210b2o2$192bo$192b2o14b2o$180bobo8bobo14bobo$180bo3bo23bo$170b2o12bo10b2o$170b2o8bo4bo7bo2bo24b2o$184bo7bo28bobo$180bo3bo7bo18bo4b2o4b3o$180bobo9bo17bobob2o2bo4b3o$19
 3bo2bo12bo3bob3o4b3o$195b2o12bo3bob2o4bobo6b2o$209bo3b2o6b2o7bobo$210bobo19bo$211bo20b2o6$448bo$446b3o$445bo$445b2o3$439bo$438bobo$431b2ob2o3bo$429bo2bob2o$429b2o$442b2o$434bo2bo4b2o$434b4o$431bo$431b5o11bo$435bo7b2obobo$433bo8bobobobo$433b2o4bo2bobo
 bobob2o$439b4ob2o2bo2bo$443bo4b2o$441bobo$441b2o!`,
-
 "loafergun": `
 x = 226, y = 195, rule = B3/S23
 174b2o5bo20bo23b$174b2o5b3o18bobo21b$184bo5b2o11bobo7bo12b$183b2o5b2o11bo2bo6b2o11b$203bobo2b2o4b2o10b$202bobo3b2o4b3o7b2o$202bo5b2o4b2o8b2o$213b2o11b$213bo12b$127b2o54b2o3b2o11bo24b$126bo2bo44bo11bo13bo25b$126bo46b3o7bo5bo10b3o23b$126bo45b5o7b2ob2o3
@@ -7205,7 +6934,6 @@ o29b2o85b$11b2o48bo2bo36bobo4bo25b2o4b2o84b$61bob2o36bo18b3o11b2o4b3o83b$29b2o3b
 4bo23b2o12b2o9bo4bo2bo4bo126b$33b4o20bo19bo10b2o6b2o128b$33b2o21b3o167b$55bo3bo166b$16b3o8b2o28bo10b3o155b$15b2ob2o6bobo25bo5bo6b2ob2o154b$15b2ob2o8bo25bo5bo6b2ob2o12bo141b$15b5o35bo3bo7b5o11b2o141b$14b2o3b2o35b3o7b2o3b2o10bobo140b$226b$96b2o128b$20b
 o75bobo127b$19bob2o9b3o51bo4b2o6bo7b2o117b$19bo11bo3bo49bobo2bo2bo2bo2bo7b2o117b$30bo5bo48b2obob3o6bo126b$19b2obo43b2o5b2o10b2ob2o6bobo127b$17bo2bo8bo7bo29bo5b2o10b2obo7b2o128b$17bobo9bo7bo19b2o5b3o18bobo138b$57b2o5bo21bo139b$30bo5bo189b$31bo3bo190b$
 32b3o191b$18b3o205b$17bo3bo204b$16bo5bo203b$17bo3bo204b$18b3o205b$18b3o205b$226b$226b$226b$19b2o205b$19b2o205b!`,
-
 "b29g": `
 x = 623, y = 516, rule = B3/S23
 498bo11b2o111b$497bobo10b2o111b$489bo3b2o2bobo123b$488bobo2bo2b2ob2o122b$488bobo3bobo126b$489bob4o2bob2o80bo11b2o28b$491bo3bobob2o79bobo10b2o28b$490bo3bobo75bo3b2o2bobo40b$489bo3bobo75bobo2bo2b2ob2o39b$489b2o3bo62b2o12b
@@ -7360,7 +7088,6 @@ bo2bobo2bobo36b2o79bo44b$14b2o44bo242bo2bobobobob2o15bo2bobobobob2o48b2obobo22b2
 b2o21bo4b2o46bo2bobobobob2o15bo2bobobobob2o21b2o4b2o3bo7b2obobo32b2obobo110b$42bo3bobo6bo2bo70bobo3bo90bobo3bo72bobo25bobo52b4ob2o2bo2bo15b4ob2o2bo2bo9b2o11bo2b2o3b2o7bobobobo31bobobobo110b$29b2o12bo3bobo6bo2bo65b2obobo3bo87b2obobo3bo73b2o26b2o57bo4b
 2o21bo4b2o12bo13bobob2o2b3obo2bobobobob2o25bo2bobobobob2o107b$28bobo13bo3bobob2o4bo66b2obo2b4obo85b2obo2b4obo156bobo25bobo15b3o11bo3bo2bo2bo2bob4ob2o2bo2bo25b4ob2o2bo2bo107b$28bo13bob4o2bob2o8bo66bobo3bobo6b2o80bobo3bobo6b2o147b2o26b2o16bo14b2ob2obo3
 b2o6bo4b2o31bo4b2o109b$27b2o12bobo3bobo75b2ob2o2bo2bobo6b2o76b2ob2o2bo2bobo6b2o213bo10bobo35bobo115b$41bobo2bo2b2ob2o72bobo2b2o3bo86bobo2b2o3bo233b2o36b2o116b$42bo3b2o2bobo61b2o10bobo82b2o10bobo397b$50bobo10b2o49b2o11bo83b2o11bo398b$51bo11b2o558b!`,
-
 "sslinepuff": `
 x = 32, y = 156, rule = B3/S23
 18bo$18b4o$5bobo12b2o$5bo2bo14bo$8b2o10b4o$10bo13bo$8b4o8bo2b3o$7bo4bo
@@ -7392,7 +7119,6 @@ o7bobo$8b2o8bo$10bo7b4o$8b4o8b2o$7bo4bo10bo$9bo2bo7b4o$9bo2bo11bo$11bo
 2o11bo$7b3o9bobo$22bo$6bobo10bobo$8bo12bo$5bo3bo9bo$5bob4o8b3o$11bo6b
 2o2bo$9bo2bo5bob3o$9bo2bo10bo$7bo4bo9b3o$8b4o8bo2b3o$10bo13bo$8b2o10b
 4o$5bo2bo14bo$5bobo12b2o$18b4o$18bo!`,
-
 "unstablepuff": `
 x = 17, y = 99, rule = B3/S23
 obo$o2bo5bo$3b2o4b4o$5bo5b2o$3b4o7bo$2bo4bo3b4o$4bo2bo7bo$4bo2bo3bo2b
@@ -7410,7 +7136,6 @@ obob2o$5bobo2b2o$4b2o5b2o$2bo2bo5b3o$4bo5b3o$bo2bo5bo$bobo8bo$10bobo$
 2b3o8bo$3b2o5bobo$2b3o7bo$10bo$bobo6b3o$3bo5b2o2bo$o3bo4bob3o$ob4o8bo$
 6bo6b3o$4bo2bo3bo2b3o$4bo2bo7bo$2bo4bo3b4o$3b4o7bo$5bo5b2o$3b2o4b4o$o
 2bo5bo$obo!`,
-
 "htrackpuff": `
 x = 247, y = 1330, rule = B3/S23
 163b3o11b3o67b$162bo2bo10bo2bo67b$165bo4b3o6bo67b$165bo4bo2bo5bo67b$162bobo5bob2o2bobo68b$247b$247b$247b$172bo74b$172bo5b3o66b$177bo2bo66b$180bo66b$176bo3bo66b$168b2o6bo3bo66b$168b2o2b3o5bo66b$171bo2bo2bobo67b$172b2o73
@@ -7480,7 +7205,6 @@ bo3bo180b$53bo8bo184b$49b2obo3b3o4bobo62b2o117b$48bo3b4o72bobo116b$34bo13b3ob4o2
 bo188b$14bobo18b2obob2o15bo79b2o108b$34b5ob2o95bo109b$29b2o2bo4bobo6b2o69b2o15bobo109b$28bobo3b3o2b2o4b2o2bo68b2o15b2o110b$30bo4b2o2bo4bo5bo196b$37b2o4bo2bob2o98bo98b$44b2o101bo99b$43bobo101b3o97b$46bo200b$43bo203b$44bobo200b$45bo201b$247b$247b$247b$
 117b2o128b$116bobo128b$116bo130b$115b2o130b$247b$247b$247b$247b$81b3o163b$83bo163b$82bo25b2o137b$109bo137b$109bobo135b$110b2o135b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$128b2o117b$128bobo116b$130bo116b$130b2o115b$247b$247b$247b$247b$1
 06b3o138b$108bo138b$107bo29b2o108b$137bo109b$118b2o15bobo109b$118b2o15b2o110b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$117b2o7b3o118b$116bobo8bo119b$116bo8b3o119b$115b2o130b!`,
-
 "noengRake": `
 x = 531, y = 201, rule = B3/S23
 392bo$390b2obo$388b3o$387bo2bo$386bo$387bo2bo2bo$388b4obo$390bob3o$381bobo8b3o$378bo4bo7b2o$377b3o4bo6bo2b2obo$376bobo12bo2b3o$375b2o2b2o4bo6b2obo$376b2o2b5o4$342b2o32b2o2b5o$341b3o31b2o2b2o4bo$307bobo15b2o12bo36bobo$307bobo2bo11b3o11b2obo35b3o4bo$30
@@ -7507,7 +7231,6 @@ b3o8bo$133b2o36bob3o12b2o28bo213bo$132bo2bo33b4obo15bo$132bobo33bo2bo2bo42bo$133
 b2o207b3obo$231bo213b2obo$218b2o10b2ob2o213b2o$100b2obo113bob3o9bo3bo195b2obo13b2o$99bob2obo45b2o64bo3b3o11bo195bo2b3o9b3o$99bo3bo45b3o65bobo10bo199bo2b2obo9bo$99bob2o44bo70bo9bo201b2o$100b2obo42b2obo77b2ob3o198b3o$103bobo39b2o79b2o201bob3o$103bobo40
 b2ob3o75b2obo196b4obo$147bo80bo197bo2bo2bo$149bo80b3o192bo$153bo77b2o193bo2bo$150bo3bo272b3o$149b2ob2o275b2obo$150bo37b3o240bo$151b2ob2o31bo2bob2o$187b3o$188b5o$190b2o$189bobo$190bo$188bo$185b4o2bo$184b2ob2o2bo$185b2o2b2o3$191b3o$185b3ob6o$185bo2b3ob
 3o$185b2o3bo$189bo$187b3o2b3o$192bo!`,
-
 "allosci1": `
 x = 3555, y = 866, rule = B3/S23
 3552bobo$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b
@@ -8758,7 +8481,6 @@ ob8ob2o12bobob2obo23bob2obobo15bo2b2o2bob2o26b4o30b2o5b2o34b2o2b2o8bobobobo3bo3b
 2bobobo19bobobo2bobo15bo4bobo29bo32b2o7b2o35bobo10bo3bobobo5bo39bob2obo71bo73bobobobo167b3o6bo176b2o3bobo32bobo14bobo294b2o841bo2bo18bo2bo138bobo529bo3bo357b2ob2ob2o73b2o3b6o3b2o241b$168b2o3b2o37bobob2obo2b2o19b2o2bob2obobo14b5obo62bo9bo35bobo15bo6bo
 bob2o364b6o183bo32b2obobo10bobob2o293b2o842b2o20b2o140bo527b3o5b3o435bobo10bobo241b$212b2o5bo27bo5b2o19bo34b2o74bo17b4ob2obob2o363bo226b2o10b2o1833bo9bo436b6o2b6o242b$219b2o25b2o23b3o35bo31b2ob2o63bobo36b5o2b5o319bob2o2521bo2bo247b$271bo38b3o29bobo60
 b3obobo34b3o2b2o2b2o2b3o316b2ob2o2518b3o4b3o244b$312bo27bobobobo57bo3bobo34bo7b2o7bo2838bo8bo244b$340b2o3b2o57b2o2bo36bobobob2o2b2obobobo3092b$407b2o37b2ob2o6b2ob2o3093b$448bo3b4o3bo3095b$448bobobo2bobobo3095b$447b2ob2o4b2ob2o3094b!`,
-
 "allosci2": `x = 3217, y = 649, rule = B3/S23
 2b2obo6b2obo24b2o13bo57b2ob2o2b2o53bob2o6b2obo57b2o29b2o69bob2o6bob2o4b2o112bo40b2obo6b2obo18bo140b2obo6b2obo23bo53b2o84b2obo6bob2o24b2o24bo106b2o4b2obo4b2o4b2o29b2o8b2o114b2o8b2o4b2obo23b2o4b2o52b2o4b2o42bo3bo19b2o4b2
 obo6b2obo33b2o3b2o58b2o57b2o4b2obo6bob2o17bo139b2o4b2obo6b2obo71b2o18bo65b2o4bob2o6b2obo103bo53b2o4b2obo6b2obo32b2o129b2o4b2obo6bob2o23bo135b2obo10b2o4bob2o159b2obo6b2obo4b2o4b2o23bo141b2o4b2o4b2obo6b2obo4b2o48b2o11bo15bo85b2obo6bob2o6b2obo6b2obo9b2o
@@ -9547,7 +9269,6 @@ o136b2o226bo138b2o3bo6b2o13b2o15bo112b$2b2o12b2o13bo2bo12bo2bo300bobobobo12bo2bo
 o3b2obo7bo493bo3bo504b2o2bo5bo3bo8bo501b2o10b2o2bo17bo52bo5b3ob2o9b2o66b$30b2o6bobo10b4ob3o1446bo6bobo492bo3bo508bobobobobobobo508b2o11bo2bo57b2o18b2obo78b$31bo8bo14bo3bo1445b2o6bo493bo3bo509b2ob2obobob2o522bobo17bo38bobo19b2o79b$28b3o9b2o11bobo2b2o1
 947bo3bo515bobo525b2o17b2o26b2o10bo2bo99b$28bo24b2o1952bo3bo515bobo543b2o13b2o12b2o10bo2b2o17b2o79b$2008bobo517bo526b2o17b3obo9b2o25bo19b2obo78b$2009bo1045bobo17b2o39b2o16b3ob2o9b2o66b$3041b2o11bo2bo18bo57b5o10b2o66b$3041b2o10b2o2bo76bo2bo79b$3056bo7
 9bo80b$3054b2o161b!`,
-
 "congaline": `x = 221, y = 256, rule = B3/S23
 91bo73b2o$89b3o72bobo$88bo69b2o4bo$88b2o66bo2bo2b2ob4o$156b2obobobobo2bo$84bo74bobobobo$74bo8bobo73bobob2o$74bo3bo3bo2bo74bo$70b2ob2ob3o4b2o12b2o5b2o$69bo5bo21b2o5b2o48bo18b2o$70bo4bo76b3o9b2o7bo$66bo4bo3b
 o75bo12b2o5bobo$65bobo82bobo18b2o$64bo2bo2b5o22b2o5b2o44bobo$65b2o2b2o25b2obo3bob2o44bo$67b3o28b2o3b2o$67bobo29b2ob2o$68bo31bobo$65b3o6bo24b2ob2o$65bo8bobo58b2o24b2o$74b2o59b2o25bo$79b2o15bobo5bobo52b3o$79b2o16b2o5b2o53bo24b2o$76bo107bo$76b5o14b4o56b
@@ -9578,7 +9299,6 @@ b2o24bo49bo2bo5b2o5bo$69bo68b3o49bo9bobob2obo$69b2o66bo53bo8bo4bobo$137b2o49b3o7
 $59b2o18bobo4bo4bo4b2o3bob2obo34bo5bobo5b3obob3o2b2obo3bobo23bo4b2obo$58bobo5b2o12bo5b2ob2obobo3bob2o2bo22b2o18bobo4bo4bo4b2o3bob2obo26bo5bo$58bo7b2o9b3o10bobo3b2o6bo21bobo5b2o12bo5b2ob2ob4o2b2ob2obo26bob6o$57b2o18bo12bobobo4b2obob2o20bo8bo9b3o10bobo
 bob2o4bobo25bobo3bo$89b2obob4obo2bobo20b2o18bo12bobobo2bob4ob2o24bo2bo$71bo21bo4bo2bo2bo52b2obob4obo2bobo26b2o$67b2obobo21b3o5b2o35bo21bo4bo2bo2bo$66bobobobo23b2o37b2obobo21b3o5b2o$63bo2bobobobob2o58bobobobo23b2o$63b4ob2o2bo2bo55bo2bo3bobob2o$67bo4b2
 o57b4ob2o2bo2bo$65bobo67bo4b2o$65b2o66bobo$133b2o!`,
-
 "diagfuse": `x = 127, y = 133, rule = B3/S23
 56b2o$52b4ob2o$25b3o24b6o$53b4o$25bo37b4o$62bo3bo$57b2o7bo$46bo9b4o2bo
 2bo$28b3o13b2o9bo3b2o$45b2o9b4o2bo2bo$28b6o8bo2bo4b2o5b2o7bo$33b3o6bob
@@ -9606,7 +9326,6 @@ o4bobo$27b3o7bo3bo39bobo$27b3o11bo3bo38bo$26bob2o11bo3bo38bo$26b3o12bo
 8$71bo$70bobo$69bo3bo$70bob2o$72bo$60b2o4b2o$60b3o2bo2bo6bobo$60b3o2bo
 2bo5bo$60b3o4b2o5bo3bo$59bob2o3b3o5bo3bo$59b3o4b3o5bo$60bo4b2ob2o4bo2b
 o$66b3o5b3o$67bo2$64bobobobo$63bo7bo$63bo7bo$63bo2bobo2bo$63b3o3b3o!`,
-
 "elbow1": `x = 263, y = 178, rule = B3/S23
 103b2o158b$104bo158b$104bobo156b$105b2o7bo148b$113b2o148b$112b2o149b$113b2o148b$100b2o37b3o121b$100bobo38bo121b$47b2o53bo38bo121b$47bo52b3o10b2o25bo122b$45bobo64b2o149b$32b2o11b2o66b2o9bo15bo122b$31bo2b2o78bo7b2o17bo121
 b$30b6o64b3o20b2o16bo8bo112b$15b2o15b4o47bo18bo36b3o8b2o62b2o47b$o13bo2bo36b3o26b2o15bobo112bo47b$2o11b2o2bo35bo4bo41b2o63b2o48bobo11bo33b$14bo2bo34bo5bo106bo50b2o10b2o33b$15bo9bo6b4o17bo109bobo61b3obo31b$26b2o2b6o18b2o97b2o8b2o61b2o35b$15bo9b2o4bo2b
@@ -9621,7 +9340,6 @@ b$30b6o64b3o20b2o16bo8bo112b$15b2o15b4o47bo18bo36b3o8b2o62b2o47b$o13bo2bo36b3o26
 9b2o211b2o19b$244bo18b$263b$263b$263b$77bo185b$77b2o184b$132bo7bo122b$133bo6b2o121b$131b3o129b$263b$117bo145b$118b2o143b$117b2o69bo74b$188b2o73b$263b$122bo140b$123b2o138b$122b2o139b$263b$263b$263b$263b$263b$263b$263b$263b$210b3o50b$212bo50b$211bo51b$
 155bo107b$156bo106b$154b3o106b$263b$140bo122b$141b2o120b$140b2o121b$263b$263b$145bo117b$146b2o115b$145b2o116b$263b$263b$263b$263b$263b$263b$263b$263b$263b$263b$263b$178bo84b$179bo83b$177b3o83b$187b3o73b$163bo25bo73b$164b2o22bo74b$163b2o98b$263b$263b$
 168bo94b$169b2o92b$168b2o93b$263b$263b$263b$263b$263b$263b$263b$263b$263b$263b$186bo76b$186bo2bo73b$186bo2b2o72b!`,
-
 "elbow2": `x = 187, y = 206, rule = B3/S23
 141b2o44b$141bo45b$159b2o26b$128b2o29bo27b$128bo58b$173b2o12b$173bo13b$187b$187b$139b2o3b2o41b$142bo44b$139bo5bo10b2o3b2o24b$95b2o43b2ob2o12b5o25b$95bo31b3o11bobo14b3o26b$126bo3bo11bo16bo27b$82b2o41bo5bo10bo27b2obob2o10
 b$82bo42bo5bo55b$128bo41bo5bo10b$126bo3bo56b$127b3o41b2ob2o11b$128bo44bo13b$82bo55bobo19bo26b$82bo13bo41b2o21b2o24b$81bobo11b3o27b3o11bo3b3o14b2o25b$80b2ob2o9b5o26b3o14bo3bo40b$79bo5bo7b2o3b2o24bo3bo12bo5bo39b$82bo11b5o33bobo6b2obob2o39b$79b2o3b2o8bo
@@ -9640,7 +9358,6 @@ bo8b2o27bo36b5o66b2obob2o$9bo8b2o13b2o7b3o26b2o89b2obob2o18b$14b2obo2bob2o15bob2
 4b$bo185b$bobo8b2o26b2o145b$2b2o8bo5bo21bo9bo136b$9b2o6b5ob2o24bo137b$8b3o5bo2b2o4bo23b3o135b$9b2o5b2o8bo29bo130b$12b2o4bo7bo29bobo128b$12bo13bo29b2o129b$25bo8b2o26bo124b$23b2o9bobo23b2o125b$36bo24b2o14bo109b$36b2o37b3o109b$74bo112b$74b2o111b$32bo154
 b$32bobo152b$32b2o153b$187b$187b$187b$69b2o3b2o111b$47bo21bobobobo111b$46bo23b5o112b$46b3o22b3o113b$53bo18bo114b$53bobo131b$53b2o132b$187b$58b2o127b$58bo128b$187b$72b2o113b$72bo114b$187b$187b$187b$22b2o163b$22bo164b$32bo154b$30b2o155b$31b2o154b$187b$
 187b$187b$187b$187b$187b$187b$187b$187b$187b$17bo169b$16bo170b$16b3o168b$23bo163b$23bobo161b$23b2o162b$187b$187b$187b$187b$187b$12b2o173b$12bo174b!`,
-
 "racetrack": `x = 571, y = 383, rule = B3/S23
 490b2o12b2o2bo4b2o$490b2o12bob2o6b2o2bo$505bo6bo6bo3bo$505b3o4bo11bo12b2o$520b2o2bo12b2o$505b3o4bo9b2o$505bo6bo3bo3b3o$490b2o12bob2o5b2o$490b2o12b2o2bo4bo2bo3b3o$513bo8b2o$520b2o2bo12b2o$514b2o8bo12b2o$478bo40bo3bo$474b
 2o2bo39bo$466b2o5bo5bo13b2o$466b2o4b2o2bobo14b2o$473b2o3bo$474b3o24bo$487b2o3b2o7bobo$474b3o9bo2bobo2bo6b2o$473b2o3bo6bo9bo$355b2o5b2o102b2o4b2o2bobo5b2o9b2o$355b2o5b2o102b2o5bo5bo5bo9bo$474b2o2bo7bo2bobo2bo$478bo8b2o3b2o2$496b3o$496bo$490bo6bo$489bo
@@ -9672,7 +9389,6 @@ o76b3o3b2o228bo7bo$19b2obo2b2o3bo2bo90b2o5bobo$2o12b3o2b2o2bo2bo3b3o90bo2b2o5bo2
 $55b3o$57bo11b2o$56bo12bo$70b3o$72bo2$39b2obo$20b2o12b3o2b2o2bo$20b2o13b2o6bo434b2o$36b3o3b2o3b3o3bo423bobo$37bo3bo3b5o2bobo12b2o410bo$44b2o3b2o3bo12b2o$37bo3bo3b2o3bo2bo$36b3o3b2o2bo3b3o$20b2o13b2o6bo$20b2o12b3o2b2o2bo2bo3b3o$39b2obo2b2o3bo2bo$44b2o
 3b2o3bo12b2o417b2o$45b5o2bobo12b2o417b2o$47b3o3bo$476b2o$464b2ob2o7bo$463bo3bobo4bobo$463b3obo6b2o$466b2o$467b2o$483bo$444bo37bo2bo$443b2o36b5o10b2o$429b2o11b3obo33b2ob3o10b2o$429b2o10b2o19b2o17bob2o$442b2o11b2o7bo17b2o$443bo10bobo4b2o2bo$456bo5bo2bo
 16b2o$443bo19bobo15bob2o$442b2o19b2o15b2ob3o10b2o$429b2o10b2o38b5o10b2o$429b2o11b3obo16b2o17bo2bo$443b2o18bobo17bo$444bo17bo2bo$461b2o2bo$464bo9b2o$462b2o10bobo$476bo$476b2o!`,
-
 "fermatprimes": `x = 838, y = 736, rule = B3/S23
 46b3o12b3o$46bo2bo10bo2bo$46bo16bo$46bo3bo8bo3bo$46bo6b4o6bo$47bobobo2b2o2bobobo$51bo6bo$51bo6bo$50bob2o2b2obo$50bo3b2o3bo$51bo6bo$51b2o4b2o$54b2o$49bo3bo2bo3bo$53bo2bo$50b4o2b4o$52b2o2b2o$53b4o$52bo4bo2$52bob2obo$51bo6
 bo$51bo6bo$53b4o$49b2obob2obob2o$48bo2b2ob2ob2o2bo$47b2o2b8o2b2o$47bo3bo2b2o2bo3bo$46b2o5bo2bo5b2o$46b2o3b3o2b3o3b2o$47bo2b2obo2bob2o2bo$48b2obob4obob2o$53bo2bo$48bo12bo82b3o15b3o$48bo4bo2bo4bo81bo3bo13bo3bo$50b2o6b2o82b2o4bo11bo4b2o$44bo5b3o4b3o81bo
@@ -9776,11 +9492,9 @@ obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo2
 bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3b
 o3bo3bo3bo2bo3b5o3bo2bob3ob2o7b3o$27b2o15b3o729bo6bo4bo2bo2b2o4bo10bo$28bo15b3o728bo4bo4b4obo3bo5b4o7bo$27b3o15bo719bo11b5obo2bobob4o6b2o2b5obo$26bo3b3o11b2o717bo6bo7bob4o3b3ob2o13b2o$31b2o12b2o723bo11b2o2bob2obo20b5o$31b2o730bo6bo2b3o9bo2b3o20bo4bo$
 28bo735b6o3b3o40bo$28bo744b2o3b2o31bo3bo$28bo747b2ob2o32bo$774b6o$772bo3b3o$776bo$772bo3bo$773b4o!`,
-
 "gepuff": `x = 39, y = 39, rule = B3/S23
 b4o34b$o3bo12bo2bo18b$4bo16bo17b$o2bo13bo3bo17b$18b4o17b$39b$39b$14bobo22b$8b3ob2o3bo21b$5b2o4b4obob2o19b$3b2o5b5o4bo19b$3b2o4bo5bo3bo19b$3b5o8b3o20b$5b2o9bo22b$39b$10b2o5bo2bo18b$9b4o8bo17b$9b2ob2o3bo3bo17b$11b2o5b4o13b2o2b$bo24b4o4b4ob$b2o22bo3bo4b
 2ob2o$obo26bo6b2ob$25bo2bo10b$39b$6bo16b2o14b$6b2o15b2o8b2o4b$5bobo14bo3bo5bo2bo3b$23bo3bo4bo2b2o2b$23bo4bo2bo2b2o3b$11bo13bobo3b4o4b$11b2o26b$10bobo26b$35b2o2b$34b4ob$34b2ob2o$19b2o15b2ob$17b2ob2o17b$17b4o18b$18b2o19b!`,
-
 "hbreeder": `x = 647, y = 262, rule = B3/S23
 183b6o4b4o$182bo5bo3b6o$188bo3b4ob2o$182bo4bo8b2o$169b5o10b2o$157bo10bo4bo$155bo3bo13bo33b2o$160bo7bo3bo30b4ob2o6b2o$133b5o17bo4bo9bo32b6o5b2ob2o$132bo4bo18b5o43b4o6b4o$137bo47b2o16bo11b2o$132bo3bo48b2o9bo6bo$134bo61bo$
 167bo7b4o17bo6b2o7b3o$145b2o21bo6b5o20b2ob2o5bo3b2o$133b2o5b2o3b2o20bo10bobo9b2o9bob5o2bobo2b2o$133b2o5b2o31b2o4b2o9b2o10bo2b3obo5bo$172bo2b2o29bo3bo2b2o$130b2o40b2obo2bo31bo$128bo4bo34b2o4b2o2bo33bo$117b3o14bo32b3o6b3o3bobo$116b5o7bo5bo34bo6b2o4b2o3
@@ -9816,7 +9530,6 @@ o8b3o$337bo8b2o5bo2bo4bo227bo27b3o5b2o8bo$350b2obobo33b2o198b2o16b2o$350b2obo3bo
 b3ob2o19b2o7bo4bo$349b2o18bo4bo7b2o$361b4o10bo$360b6o3bo5bo$360b4ob2o3b6o$364b2o$327b2o$328b2o47b3o14b6o$327bo48b5o12bo5bo$376b3ob2o17bo$379b2o12bo4bo$395b2o3$363bo$361bo3bo52b2o$366bo49b2ob2o$361bo4bo49b4o$362b5o50b2o2$400bo$399bobo9b2o3bo$385b2o6b4
 ob2obo7b3o4b2o$385b2o5bo4b2obo7bo2bo5b2o$361b2o28bo7bobo6bo7b2o$358b4o30bobo4bobo6b2o$358b2obo3bo35b2o$330b2o8b3o14bob3o4bo13b2o9b2obo6bo$330b2o28bo6bo12b2o10bo5b3o$367bo30b2o18b2o$351b2o10b4o28b3o11b2o5b2ob2o$328b4o18bo2bo51b4ob2o4b4o$327b6o17bobo52
 b6o6b2o$327b4ob2o17bo54b4o$331b2o2$370b6o$337b6o26bo5bo$336bo5bo32bo$342bo26bo4bo$336bo4bo29b2o$338b2o!`,
-
 "hpuffer": `x = 1330, y = 247, rule = B3/S23
 735b5o$734bo4bo$739bo$734bo3bo$736bo9$69b5o$68bo4bo$73bo$68bo3bo$70bo2$788b3o$787b5o$787b3ob2o$719bo70b2o$720bo$716bo4bo$719b3o$716b2o4bo44bo63b2o$718bo3bo43b3o58b4ob2o6b2o$65bo652bo47bo2bo57b6o5b2ob2o$66bo652b3o46b2o58b4o6b4o$64b3o702b5o15b2o36bo11b
 2o$771bobo15b2o8b3o25bo$122b3o645bo37bo$66bo54b5o642bobo36bobo7bo9b2o7b3o$65bobo53b3ob2o638bobobob2o5b2o27bobo10b2o2b2ob2o5bo3b2o$64b2ob2o55b2o639bo3bob2o5b5o11b2o12bo7b2o2b3o2bob5o2bobo2b2o$64b2ob2o696b2obo11b2obo10b2o20b2o8bo2b3obo5bo$63bo3bo711bo2
@@ -9859,7 +9572,6 @@ bob2ob2o11bo11b2o105b2o3b2o51b4o$337b2o4bo25b6o12b4o6b4o103bo2b2o35bo18b2ob2o$29
 3o202b5o15b2o36bo11b2o$291bo152b3o46b2o58b4o6b4o$290bo152bo47bo2bo57b6o5b2ob2o$443bo3bo43b3o58b4ob2o6b2o$441b2o4bo44bo63b2o$444b3o$441bo4bo$445bo$444bo70b2o$512b3ob2o$512b5o$513b3o2$295bo$293bo3bo$298bo$293bo4bo$294b5o9$461bo$459bo3bo$464bo$459bo4bo$
 460b5o!
 `,
-
 "trafhassle": `x = 1043, y = 759, rule = B3/S23
 45b2o439b2o132bo23bo$45b2o269bo16bo153bo131bob3o17b3obo141bo168b2o4b2o52b2o4b2o$51b2ob2o260b3o12b3o153bobo134bo2b2o7b2o2bo146bobo166bobo2bobo52bobo2bobo$55bo113b2o9b2o137bo10bo154b2obobo128b2o3bo2b2o7b2o2bo3b2o140bobo169bo2bo56bo2bo$50bo2b2o115bo9bob
 o129b2o4b2o10b2o4b2o146bo2bo2bo127bo4bo17bo4bo141bo33bo134b2o2b2o54b2o2b2o$40b2o2b3o4b3o116bobo8b2o130bo22bo147b2o4bob2o125b4o19b4o175bobo132b3o2b3o52b3o2b3o$5b2o5b2obo24b2o2bobo4b3o89b2obo4b2o3b2o13b2o100b2obo5bob2o27bobo18bobo69b2o3b2o4b2obo60b2obo
@@ -10051,7 +9763,6 @@ o5bobo3bobo95bobobobo3bo5bo30bobo3bobo95bob2o6b2obo25bo17bo$2b2obo6b2obo12bo4b3o
 b4o102bo3bo5bo22b3o21b3o124bo2bo13bo2bo$35bo21bo108b2o3bo5bo24bo19bo128b3o13b3o$31b5o21b5o105bo2b2o4b2o20bo3bo19bo3bo$31bo4b2o4b3o3b3o4b2o4bo104bo5b2obo21bobo2bo19bo2bobo122bob2o13b2obo$32b2o2bo5bobo3bobo5bo2b2o105b2o4bob2o19bo2bobo23bobo2bo120b2obo1
 3bob2o$34bobo5b3o3b3o5bobo136bo3bo10b2ob2o10bo3bo$34bobob2o13b2obobo136bo15bobo15bo$35b2obo15bob2o138b3o10bobobobo10b3o$38bo15bo154b2o3b2o$38b2o3b2o3b2o3b2o$42bo2bobo2bo$43b2o3b2o!
 `,
-
 "tubstretch2": `
 x = 346, y = 313, rule = B3/S23
 126b2o$126bo2b3o$127bob3o13$120b2o$119bobo$121bo12$98bo$98b2o$97bobo$104b2o$105b2o$104bo3$19b2o133bo$19b2o131bobo$44b2o107b2o$44b2o5$90b2o$19b3o67bobo$18bo3bo21b3o44bo$17bo5bo19bo3bo$8b2o7b2obob2o$8b2o32bo5bo$42b2o3b2o$20bo$8bo10bobo$7b3o9bobo23bo$6b
@@ -10081,7 +9792,6 @@ b2o4b2o11b2o2b2o20b2o6b2o7b2o30bo2bo6bobo$118b2o4b2o8b2o2bo2b2o19bobo6b2o7bobo24
 b3o$156b2obo47b2o$159bo$159bo37bo$156bo2bo20b2o14b2o$130b2o9b2o14b2o20bobo14bobo8bobo$130bobo9b2o37bo23bo3bo$125b2o4b3o7bo6bo44b2o10bo12b2o$121b4o2bo4b3o12bobo17b2o24bo2bo7bo4bo8b2o$121b3ob2o4b3o12bo3b2o3b2o9bobo28bo7bo$130bobo13bo3b2o3b2o8b3o4b2o4bo
 18bo7bo3bo$130b2o14bo3b2o12b3o4bo2b2obobo17bo9bobo$147bobo15b3o4b3obo3bo12bo2bo$148bo9b2o6bobo4b2obo3bo12b2o$157bobo7b2o6b2o3bo$157bo19bobo$156b2o20bo!
 `,
-
 // peak naming ikr
 "quart": `x = 108, y = 60, rule = B3/S23
 2bo$b3o5b3o12bo5bo$2obo4bo2bo5b3o3b3o3b3o$3o4b3obo4bo2bo3bob2ob2obo$3o2bo6bo3bo2bo4b3ob3o$b2o5bo4bo4b4o2b3o2b2o$7bo6bobobob2o2b3o$14bobob2o2bo2b2o39b3o$12b2o3bo2b2o2b3o5b3o24b3o4bo2bo$15b2o4b3o3b2o2bo2bo7b3o3b3o7bo2bo4bo$12b5o2b2o8bo5bo5bo2bo2bo2bo10
@@ -10093,7 +9803,6 @@ $11bobo22b2o22b3o3bob9ob6obobo5bob4o3bobo$35bo2bo22b2o4bo17bo3bo2bob2o6b2o$31b3o
 9bo31bo2bobo4b2o2bo8b3o3b2o5b2o$29b2o30b2obo2bo2bo2b2o8bobob4o$30bo3bo29bo2b2o2bo6b2o3bo2b2o3bo$33b3o28bob2ob2o6b6o6bob2o$33bob2o26b2o2bobo7b4obob5ob2obo$34b3o25bo2b3obobo12bo4b2o2bo$34b3o25b2o4b2ob3o7b3o3bo4b2o$34b2o28b2o2bobo3bo12bo$64bob2o2bob2o16
 b2o$65b2obobobo$68bobobo$63b3o3bobo$63bo2bob2o$64bobobobo$65bo3b2o!
 `,
-
 "rakebr": `x = 398, y = 405, rule = B3/S23
 81b2o5b4o$79b2ob2o3bo3bo$79b4o8bo$80b2o5bo2bo2$75b2o9bo$73b5o8b3o$73b2o4bo5bo3bo$73b2o5b5o4bo$75b2o4b4obob2o$78b3ob2o3bo$84bobo2$64bo$62b2o24b4o$63b2o22bo3bo$70b4o17bo$69bo3bo13bo2bo$49bo23bo$47b2o20bo2bo$48b2o14b2o$63b4o$53bo9b2ob2o$53bo11b2o$49bo2b
 2o4bobo$49bo7bo2b2o$49bo2b2o4bobo$53bo11b2o$19bo20b2o11bo9b2ob2o$17b2o20b4o20b4o$18b2o19b2ob2o20b2o$30b3ob2o5b2o$29b2o5bo$28bo7b2o$29b2o5bo$30b3ob2o5b2o$39b2ob2o$39b4o$40b2o$20bo2bo$24bo$20bo3bo$10b2o9b4o$9b2o5b3o$5b3o6b2ob2o$9b2o5b3o$10b2o9b4o$20bo3
@@ -10127,7 +9836,6 @@ $317bo9bo8b2ob2o45bo6bobo$325bobo4bo3b4o27bo17bo2bo6bo$324bo2bo5bo3b2o26bobo16b2
 333bo11b4o$331b2o11bo3bo19bo2bo$348bo23bo$344bo2bo12bo7bo3bo$358b3o3bo4b4o$334b3o21b2o5b2o$334bo22bo6b3o$335bo22b2o5b2o$358b3o3bo4b4o$360bo7bo3bo$349b3obo18bo$349b2o17bo2bo2$377b2o$375b2ob2o$364b3o8b4o16b2o$364bo11b2o15b2ob2o$365bo27b4o$394b2o2$382b2
 o$376b3o3b2o9bo$376b3o14b2o$375bo3bo12bob2o$375b4o13bobo$376b3o13b2o3$384bo2bo$388bo6b2o$384bo3bo4b2ob2o$385b4o4b4o$394b2o!
 `,
-
 "shtshow": `x = 1326, y = 912, rule = B3/S23
 694b3o81b3o83b3o265bo$694bo82bo2b5o75b5o2bo263b3o$689b3o3bo80bo3bobob2o73b2obobo3bo148b3o106b3o4b2o$689bo7b2o77bo6bo77bo6bo147bo2b5o101bo2b3o2bob2o$684b3o3bo7bo79bo6bobo69bobo6bo148bo3bobob2o99bo3bobo2bobo$684bo7b2o13bo67bobo6b2ob2o67b2ob2o6bobo145bo
 6bo101bo4bobobobob2o$679b3o3bo7bo8b2o3bobo64b2obob2o3b2obobo65bobob2o3b2obob2o146bo6bobo99bo4bobo3b2o$679bo7b2o9b5ob2o4b2o61bobobob2o6bob2o6b3o9b3o9b3o9b3o9b3o6b2obo6b2obobobo142bobo6b2ob2o95bobo4bo3bob3o$674b3o3bo7bo8bo4bob2ob5o60b2o3bo2bo3b2obo3bo4
@@ -10655,7 +10363,6 @@ o$678bo4bobo2b2o4b2o7bobo7b2o4b2o2bobo4bo$678bo3b2o2bob2ob2ob2ob5obobob5ob2ob2ob
 o13b33o13bo$673b4o12bo29bo12b4o$672bo4bo12b29o12bo4bo$672bo2bo15bo25bo15bo2bo$672bo2bo16b25o16bo2bo$673bo19bo21bo19bo$674b4obo14b21o14bob4o$675bo3bo15bo17bo15bo3bo$676bo19b17o19bo$676bobo18bo13bo18bobo$698b13o$675b3o21bo9bo21b3o$675b2o23b9o23b2o$675b
 3o26bo26b3o$701b3ob3o$676bobo23bo3bo23bobo$676bo24bobobobo24bo$675bo3bo21bobobobo21bo3bo$674b4obo20bo7bo20bob4o$673bo26bo7bo26bo$672bo2bo24bo2bobo2bo24bo2bo$672bo2bo24b3o3b3o24bo2bo$672bo4bo53bo4bo$673b4o55b4o$674bo59bo$675b2o55b2o$676bo2bo49bo2bo$67
 7bobo49bobo!`,
-
 "halfFiller": `x = 65, y = 80, rule = B3/S23
 31b2ob2o29b$30bobobobo28b$30bobobobo28b$28b2obo2bob2o27b$27bobo4bo30b$26bo3bobobob2o27b$26b3obobobo2bo27b$29bo2bo2b2o28b$26b2o37b$25bo2b3o3b3o28b$25bobo9bobo25b$26bobob2ob2obob2o25b$28bob2ob2obo28b$28bobo3bobo28b$29bo5bo29b$65b$27b11o27b$27bo2bobobo2
 bo27b$65b$24b2o6bo6b2o24b$24bobo3b5o3bobo24b$22bobob3o7b3obobo22b$21bobobobo9bobobobo21b$21bobobobob2o3b2obobobobo21b$22bo3bob2obobob2obo3bo22b$30b2ob2o30b$10b2o8bo10bobo10bo8b2o10b$9b2o3bo4b2o7b4ob4o7b2o4bo3b2o9b$8b2o2b2o4bo3b3o3bo7bo3b3o3bo4b2o2b2o
@@ -10664,7 +10371,6 @@ bo27b$65b$24b2o6bo6b2o24b$24bobo3b5o3bobo24b$22bobob3o7b3obobo22b$21bobobobo9bob
 1o3b21o10b$9bo21bobo21bo9b$8bo3b20ob20o3bo8b$5bobo2bo2bo37bo2bo2bobo5b$4bo2bobo4b37o4bobo2bo4b$3b2o10bo33bo10b2o3b$2bo13b33o13bo2b$b4o12bo29bo12b4ob$o4bo12b29o12bo4bo$o2bo15bo25bo15bo2bo$o2bo16b25o16bo2bo$bo19bo21bo19bob$2b4obo14b21o14bob4o2b$3bo3bo1
 5bo17bo15bo3bo3b$4bo19b17o19bo4b$4bobo18bo13bo18bobo4b$26b13o26b$3b3o21bo9bo21b3o3b$3b2o23b9o23b2o3b$3b3o26bo26b3o3b$29b3ob3o29b$4bobo23bo3bo23bobo4b$4bo24bobobobo24bo4b$3bo3bo21bobobobo21bo3bo3b$2b4obo20bo7bo20bob4o2b$bo26bo7bo26bob$o2bo24bo2bobo2bo
 24bo2bo$o2bo24b3o3b3o24bo2bo$o4bo53bo4bo$b4o55b4ob$2bo59bo2b$3b2o55b2o3b$4bo2bo49bo2bo4b$5bobo49bobo5b!`,
-
 "spaceshipRake": `#C p240 c/2 forward rake for a 2c/5 spaceship.
 #C This is the first rake in which the output travels in the
 #C same direction as the rake, but at a slower speed.
@@ -10787,8 +10493,6 @@ o186b2o3bo5bo2bo10bo66b$800bo2bo165bo5b2o105bo11bo188b4o3bo4bobo78b$963b2o5b2ob3
 82bo8b4o24bo3bo67b$947b4o5b2o30b5o275bo2bo5b2o29bo4bo62b$988bo4bo101b2o211b5o63b$979b2o7bo105b2ob2o173bo9b2o14b3o75b$953b2o24bobo7bo3bo101b4o5b2o164b3o8b5o12bo77b$951bo4b3o3b2o15bo11bo104b2o5b2ob4o159bo3bo5bo4b2o13bo76b$949b2o4b5o6b2o136b6o159bo4b5o5
 b2o90b$949bo6b2obo4b3o138b4o160b2obob4o4b2o92b$949bo9b2o4bo8b2o295bo3b2ob3o12b3o80b$950bo2bo5b2o13bobo295bobo18bo82b$952bo6b2o13bo319bo81b$1376b$948bo2bo315b4o105b$947bo319bo3bo13bo2bo87b$947bo3bo315bo16bo91b$947b4o13b4o300bo2bo12bo3bo87b$964bo3bo315
 b4o88b$964bo411b$965bo2bo407b!`,
-
-
 "brokenlines": `x = 227, y = 118, rule = B3/S23
 141b3o3b3o$141bo2bobo2bo$141bo7bo$141bo7bo$142bobobobo2$145bo$144b3o$143b2ob2o$144b3o$144b3o$144b3o$136b3o5bobo5bo$136bo2bo4bobo4b3o$136bo8bo5bob2o$
 136bo3bo11b3o$136bo3bo11b3o$136bo15b3o$137bobo12b2o5$146bo$147b2o$87bo2bo55b2o$85b6o$81b2obo8bo$77b2obobobob8o2bo$75b3ob2o3bobo7b3o$74bo6bo2bo3b2ob3o$35bo2bo36b4o3bob4o5bob2o$33b6o37bo5bo5bo5bobo$29b2obo8bo32bo3bo4bob2o2bo4b2o$25b2o3bobob8o2bo29b4o2b
@@ -10807,7 +10511,6 @@ ob2o14b2ob2ob3o2bo3bobob2o2bo2b2o31bo2bo3bobo98bo5bo$10b2o2bobo7bo2b2o3bob2obo4b
 2bobo3bobo5bo7bobob2obo89b4o$8bo3b2o3bob2o2b2o2b2o34b2o17b3obo4bo$10bo4b2o5bobob2o2bo50bo4b5o$9b5o2bob4obo3bob2o44bobo3bob2o$8bo4bo2bobo3bo3b2o41bo5bo2bob2obob2o2b2o$9b3o6bobo3bo3b3o37bobo7bobo2bo3bo2bo$11b2obobobob8o2bo36bo3bo3bo6b2o4b2o$15b2obo8bo4
 0bobo5bobo3bo5bo$19b6o44bo8b2obo2bobo2bo$21bo2bo42b3o9bobobo2bob2o$62b2ob7ob2o4bobobob2obo$62bo3bobobo3bo5bo2bo2bobo$63b4o3b4o9b2o2bo$65bo5bo$58b2o5bo5bo5b2o$58bo2b2ob2o5b2ob2o2bo$59bobob4obob4obobo$58b2o2bo4b3o4bo2b2o$60bobo11bobo$60bo2bo9bo2bo$61b2
 o11b2o!`,
-
 "tmachine": `#N Turing machine
 #O Paul Rendell
 #C A pattern capable of turing-complete computation. Created in April 
@@ -11217,7 +10920,6 @@ o8b3o796b$883bo2bo7bobo17bo799b$415b3o449b4o11bo11b2o18b2o798b$415bo451bo3bo10bo
 16b4o3b2obobo4bo3b2o134b2o331b2o2bo3bo799b$415b4o14bo3b2o466b2o4b3o800b$415bo2bo8b2o5bobo3b2o437bo7bo19bo806b$415b4o16bo4bobo434bobo5b4o825b$410b2o4b4o22bo432b2o8b2o2bo2b2o820b$409bobo7bo22b2o431b2o11b2o2b2o820b$409bo465b2o7bo10b2o817b$408b2o161bo299
 b2o4bobo4bo10b3o816b$570b3o297bobo6bo4bo10b2o13bo803b$569b5o296bo21b2o7b2o5b2ob2o801b$568b2o3b2o294b2o21b2o7bobo810b$903bo3bo5bo800b$903b2o809b$572bo334b2obob2o800b$572bo1141b2$568b2o1144b$569bo1144b$566b3o1145b$566bo1147b$907b2o805b$908bo805b$905b3o
 806b$905bo!`,
-
 "logt2": `x = 290, y = 218, rule = B3/S23
 156bo$155bobo$155b2obo7b2o$140b2o13b2ob2o6bobo$139bobo13b2obob3o6bo$125bo12b3o14bobo2bo2bo2bo2bo7b2o$125b4o8b3o16bo4b2o6bo8bo$126b4o8b3o25bobo$115bo10bo2bo9bobo24b2o$115b2o9b4o10b2o$125b4o8bo$125bo12bo$136b3o2$101bo$100
 b4o$83b2o14b2obo$83bo2bo11b3obobo3b2o$87bo11b2obo6bo$74bo12bo12b4o$74b2o11bo7bo5bo$42bo40bo2bo9bo$42bo40b2o9b3o13b2o$44bo5bo59bobo$43bo6bobo58b3o$42bo3bo2bo62b2o$43bo2bobob2o57b2o$48bob2o57b3o$62b2o7b2o$62bo9bo$72bobo5bo29bo$73b2o3bobo29b2o$77bobo9b3
@@ -11235,31 +10937,26 @@ $223b4o34b2o10bo4b2o3b2o$222b4o31b2obo2bob2o4b3o$212b3o7bo2bo27bo3bo4bo2bo4bo9b3
 b2o$247bo5bo13b3o2$191bo55b2o3b2o$192bo42b2o$190b3o43bo4$266bo$266bo$265bobo$264b2ob2o$233b2o3b2o23bo5bo$174b2o58b5o27bo$174bobo58b3o25b2o3b2o$174bo61bo15bo$251b3o$250b5o$249b2o3b2o$250b5o$250bo3bo$252bo$265bo$265b2o$233b3o$253bo$233bobo16b2o$171b2o5
 9b5o$172bo23b2o33b2o3b2o$197bo33b2o3b2o$197bobo6bo$198b2o4bobo$202b2o10b2o3b2o$187b2o13b2o11b2o3bo$187b2o13b2o10bo7b2o$187b2o15bobo15b3o6bo4b2o$188bo17bo15b2o6b2o4bo$187bobo30bo16b3o$186b2obo29b2o18bo3$187bo$187b2o$204b2o$204bobo$204bo$215bo$213b4o$2
 03bobo6bobob2o9b2o$176bo26bo3bo3bo2bob3o9bo$173b4o30bo4bobob2o$172b4o7bo4b2o18bo4b4o$172bo2bo7b2o3bobo16bo7bo$172b4o6bobo4b3o11bo3bo$167b2o4b4o13b3o10bobo$166bobo7bo12b3o$166bo21bobo$165b2o21b2o!`,
-
 "mosq1": `x = 1794, y = 411, rule = B3/S23
 1660b4o$1659bo3bo$1663bo$1662bo29$1790b4o$1789bo3bo$1793bo$1792bo3$1790b
 o$1791bo$1791bo$1790b2o$1789bo4$1790b4o$1789bo3bo$1793bo$1792bo282$107b
 ob3o$108b4o$107bo$112bo31$94bob3o$95b4o$94bo$99bo13$98bo$99bo$94bo4bo
 $95b5o6$201b6o$133b5o64b3o$132bo4bo67bo$137bo$136bo3$b5o$o4bo$5bo$4bo
 7$183bo$178bo$179b4o$178bob3o!`,
-
 "mosq5": `x = 2754, y = 650, rule = B3/S23
 2622bo$2623bo$2619bo3bo$2620b4o29$2752bo$2753bo$2749bo3bo$2750b4o4$2749bo$2750b2o$2751bo$2751bo$2750bo3$2752bo$2753bo$2749bo3bo$2750b4o345$175bo$173bo2b2o$173b3o$174bo40$3bo$4bo$o3bo$b4o140$793bo$792b2o$791bobo17$824b3
 o34$305b5o$304bo4bo$309bo$308bo10$280bo$281bo$277bo3bo$278b4o!`,
-
 "teeth": `x = 472, y = 127, rule = B3/S23
 466b3o$467bo2bo$471bo$468bobo22$438bo$438b2o$438bo2bo2$439bobo$440bo5$
 241b2o$240bo$240bo$236b4o8$252b2o$253bo$253b2o$253bo2$250b3o45$3b3o$b
 o2bo$o$bobo$264b3o$265bo2bo$269bo$266bobo14$239b2o$241bo$241bo$242b4o
 $33bo$32b2o$30bo2bo2$30bobo$31bo!`,
-
 "catacryst": `x = 2555, y = 1772, rule = B3/S23
 2350bo$2350bo$2348b2o$2347bo$2347bo$2347bo$2347bo6$2377bo$2376b2o$2374b
 o2bo2$2374bobo$2375bo133$2552b2o$2553b2o$2553bo29$2538bo$2537bobo$2539b
 o$2540bo1489$1201bo$1201bo$1202b2o$1204bo$1204bo$1204bo$1204bo17$1180b
 2o$1182bo$1182bo$1183b4o50$3bo$2b2o$o2bo2$obo$bo11$30bo$30bo$28b2o$27b
 o$27bo$27bo$27bo!`,
-
 "telegraph": `x = 10432, y = 2413, rule = B3/S23
 2137b2o$2136bo3bo5bo$2117bo17bo5bo3bobo$2117b3o5b2o8bo3bob2o2bobo249b2o$2120bo4b2o8bo5bo4bo246b2obo$2119b2o15bo3bo252b2o2bo2bo$2137b2o259bobo$2143b2o3b2o249bo$2143bo5bo288bo$2398b2o4b2o31bobo$2144bo3bo249b2o2bob2o30b
 o3b2o6b2o$2119b2o3b2o19b3o254bo22b2o9bo3bob2o4bobo$2119b2o3b2o299b2o9bo3bob3o4b3o$2120b5o312bobob2o2bo4b3o$2121bobo277b2o3b2o30bo4b2o4b3o$2402b5o41bobo$2121b3o279b3o42b2o$2404bo$2143bo291bo$2143bobo289bobo$2143b2o290b2o2$2125bo22bo274b2o$2126bo20b3o2
@@ -12772,7 +12469,6 @@ bo3b2o$8053bo2bo$8054bob2obob2o$8058bo2b2o$1637b2o6419b4o$1637b2o2$8057b2o3b2o$1
 71bo3bo175bo3bo235bo3bo55bo3bo115bo3bo55bo3bo355bo3bo115bo3bo295bo3bo115bo3bo55bo3bo355bo3bo115bo3bo715bo3bo115bo3bo55bo3bo55bo3bo295bo3bo115bo3bo55bo3bo715bo3bo55bo3bo55bo3bo55bo3bo355bo3bo115bo3bo355bo3bo55bo3bo55bo3bo475bo3bo295bo3bo115bo3bo71b2ob
 2o$1607bo3b2o70b4o176b4o236b4o56b4o116b4o56b4o356b4o116b4o296b4o116b4o56b4o356b4o116b4o716b4o116b4o56b4o56b4o296b4o116b4o56b4o716b4o56b4o56b4o56b4o356b4o116b4o356b4o56b4o56b4o476b4o296b4o116b4o72bobo$1596b2o9bo3b2o6447bo$1596b2o9bo3b2o6447bo$1608bobo
 $1609bo6418b2o9b2o$8028bobo7bobo$8031bo8bo5bo$1612bo6415bo2bo13bobo11b2o$1610b2ob2o6416bo13b2obo10b2o$8021b2o5bobo14b2ob2o3b2o$1609bo5bo6404bobo5b2o15b2obo4b2o$8020bo24bobo$1609b2obob2o6403b2o25bo9$1611b2o$1611b2o!`,
-
 "crawler1": `
 #O https://conwaylife.com/forums/viewtopic.php?&p=213923#p213923
 x = 2303, y = 1557, rule = B3/S23
@@ -12892,7 +12588,6 @@ $78b3o$97b2o17bo3bo$84b2o10b2o19b2o$71b2o10b2obo10bob2o16bo$71b2o9b4o13b2o17bo$8
 2b2o$47b2o12bobo22bo2bo27b4o3b5o$62bo22b2o31b3o3b3o$50bo34bo5bo$35b2o12bobo32b2obob3o$35b2o12bobo33bobo$50bo34b3o$38bo69b2o$23b2o12bobo69b2o$23b2o12bobo68bo9b2o11b3o$38bo78b2obo13bo$26bo90b2obo2bo7b2obo$11b2o12bobo89bo5bo8b2o$11b2o12bobo90bo3bo$26bo9
 3bo5b2o$14bo111b2o$13bobo105bo4b2obo$13bobo115b2o$14bo90bo12b3o7b4o$18b3o84b2o23bo$18bo85bobo$bo17bo96bo$obo113b2o$116b3o$103bo15bo$102bobobo8b2o2b2o$102bo3bo7b2o$18bo84b4o7b3o$18b2o84bo$20bo79bo$17b2obo25b2o50bo$17b3o26bobo49b2o$46bo$12b2o$11bo74b2o
 $12b3o71b2o$13bo3b2o82b3o6b3o$15bo2bo94bo$16b2o92b2obo$75b2o34b2o$89b3o4b2ob2o$72bo4bo17bo3bobo3b2o$72bo3bo18bo3b2o4b2o$72bo3bo17b2obo7b2obo$74b2o19bobobo10b2o$74bo21b3o8b4o$109bo5$97b3o$96bo2bo$95bo2bo$96b2o$92bo$91b2o$91bo4bobo$92bo3bob2o$98bo!`,
-
 "crawler2": `
 #O https://conwaylife.com/forums/viewtopic.php?&p=213923#p213923
 x = 487, y = 488, rule = B3/S23
@@ -12928,7 +12623,6 @@ o113bo13bo$195b3o$194bo2bo$193bo2bo$195b2obobo$193bob2o4bo$195b2o3bo$194bobob2o2
 4b2o3$142b2o$71b2o69b2o$70bobo$72bo$130b2o$130b2o3$118b2o$118b2o3$106b2o$67b3o36b2o$69bo$68bo$94b2o$94b2o3$82b2o$82b2o4$64b3o$63bo3bo$68bo$66b2o12bo$62bobo13b2o2$67bo11b2o$66b3o8bobo$63bobo2bo4b6o$62bob2o7bo$62bob2o7bo3b2o$49b2o12bo11bo2bo$49b2o26b2o
 2$68bo$67b4o$53bo10b2o2bobobo$53bo8bobo2b2o4b2o$38b3o12bo6b2o4b2o2bobo$37bo3bo20bobobo2b2o$36bo27b4o$36bo3b2o24bo$37bob3o$38bo2bo$30b2o8bo$30b2o$29bo2bo14bo$29bo2bo14bo$14b3o12bobo13bo12bobo$30bo26b2ob2o$24bo19b2o11b2o2b2o$10bo12bo2bo20b2o7b3o$10bo13
 b3o20b2o7bobo$9bobo12b2o3b2o24b5o$10bo19bo24bo3b2o$10bo6bo10b2o25bobob2o$16b4o36b2ob2o$13b2o2bobobo36bo$11bobo2b2o4b2o$9b2o4b2o2bobo$11bobobo2b2o$3b2o8b4o$b2obo10bo$b2o$7bo$2o2bob2o$3bo2bo$bobo$2bo!`,
-
 "wsShip": `
 #O https://conwaylife.com/forums/viewtopic.php?t=2031
 x = 51, y = 210, rule = B3/S23
@@ -12944,12 +12638,10 @@ b2o3b2o22b$21bob2ob2obo21b$20b2ob2ob2ob2o20b$20b2ob2ob2ob2o20b$20b2obo3bob2o20b$
 2ob2o23b$51b$23bo3bo23b$24bobo24b$22bobobobo22b$23b2ob2o23b$23b2ob2o23b$51b$24bobo24b$24bobo24b$22bo5bo22b$23b2ob2o23b$23b2ob2o23b$51b$23bo3bo23b$24bobo24b$22bobobobo22b$23b2ob2o23b$23b2ob2o23b$51b$24bobo24b$24bobo24b$22bo5bo22b$23b2ob2o23b$24bobo24b
 $22b2o3b2o22b$20bo3bobo3bo20b$19b2o3bobo3b2o19b$19b2ob2o3b2ob2o19b$51b$21bobo3bobo21b$20bo3bobo3bo20b$24bobo24b$19b2o3bobo3b2o19b$17b2obobobobobobob2o17b$24bobo24b$23b2ob2o23b$24bobo24b$21b2obobob2o21b$21b2obobob2o21b$22bobobobo22b$23b2ob2o23b$24bobo
 24b$51b$51b$51b$23b5o23b$23bobobo23b$23b2ob2o23b$23b2ob2o23b$51b$20b3o5b3o20b$22bo5bo22b$19bo3bo3bo3bo19b$19bo4bobo4bo19b$19bo11bo19b$19b5o3b5o19b!`,
-
 "2drags":  `
 #O https://conwaylife.com/forums/viewtopic.php?t=2031
 x = 54, y = 36, rule = B3/S23
 40b3o4b3o4b$40b3o4b3o4b$54b$54b$54b$39b5o2b5o3b$43bo2bo7b$5bo6bo28bo2b2o2bo5b$4bobo4bobo26b2o6b2o4b$4bobo4bobo25bo10bo3b$5bo6bo25bo12bo2b$54b$4b3o4b3o22b3o12b3o$4b4o2b4o11b6o6b3o10b3ob$7bo2bo13bo6bo7bo10bo3b$4b3ob2ob3o9bo8bo6b3o6b3o3b$4b2o6b2o10bo2b2o2bo10bo4bo6b$3b2o8b2o25bo8bo4b$20b3o10b3o3bo2bo4bo2bo3b$2bo12bo3bo3bo8bo3bobo2bo6bo2bo2b$o2bo10bo2bo2bo14bo8b2o8b$o2bo10bo2bo4b2o8b2o4bo2bobo2bobo2bo2b$44b2o8b$3b3o6b3o24b3o6b3o3b$3bo10bo25bo8bo4b$5bo6bo27bo8bo4b$3b3o6b3o23bo3bo4bo3bo2b$38bo3bo4bo3bo2b$6bob2obo25bo2bo2bo2bo2bo2bob$7bo2bo43b$3bob2ob2ob2obo39b$3b3o6b3o39b$54b$3bobo6bobo39b$3bobo6bobo39b$b3ob3o2b3ob3o37b!`,
-
 "p6ships": `
 #O https://conwaylife.com/forums/viewtopic.php?t=2031
 x = 261, y = 269, rule = B3/S23
@@ -13010,12 +12702,10 @@ $7bo5bo21b2o10bo17bo5bo5bo17bo2bo3bo2bo24bo24b2o7b2o19b2o2b2o3bo23bobo2bo20bobo2
 2obo2b2o20b2obob3o7b$214b2o3bobo2bobo19bo8bo5b$215bobobobobo23b3o5bo5b$213b5obobob5o19bobo5bo5b$213b3o3bobob2ob2o18b2o4b2o7b$214bo7bo23b2o5bo7b$218bo7b2o18b2o5b2o6b$219b4o27bob3o6b$217b2o4bo26b2obo7b$216bo2bobo2bo22bobo11b$215b2ob3obobo21b3obo2bo7b$2
 15b2o3bo2bo22bo2bo4bo6b$215b4o6bo20bo2b2ob2o7b$214bob3o3bo2b3o19bo5bo7b$213bo2bo2b2o24b4o4bob2o4b$214bo2bo2b2o3b3o17b4o3bob3o4b$216b2ob2o3b3o17bo4b4o8b$216bo4b2obo21b2o13b$214bob2obobobob2o18b2o3bo2bo7b$213bo2bo3b4o2bo23b2obobo5b$214bo5b4obo27b2o6b$2
 20b3obo21b2o3b2o8b$220b2o24b3o3bo8b$247bo2b2ob2o6b$247b3obo9b$246bo2bobob2o6b$245bo3bobo2bo6b$245bo3bobo9b$246b5o4b2o4b$249bo3bobo5b$247b2o4b2o6b$247b2o4bo7b$246b2o13b$253b2o6b!`,
-
 "tiniest2":  `
 #O  DivusIulius » July 22nd, 2013, 6:24 pm
 x = 5, y = 3, rule = B3/S23
 b4o$b2obo$2o2bo!`,
-
 "coeshipGun": `
 #O https://conwaylife.com/forums/viewtopic.php?f=2&t=1643&p=218635#p218635
 x = 4604, y = 5379, rule = B3/S23
@@ -13738,8 +13428,6 @@ o11bo1374b6ob2o156b2o$544b2o10bobo4b2o1604b2o$552b2o2b2o6bo1603bo2bo$526b2o24b2o
 bobo1349b2o16bobob2o509b3o$522bo7bo4bo11bo2bo9b2o1366b2o$522b3o5b3ob2o12b2obob2o1362b2o11b2o$525bo6bo2bo3bo10b3obo5b2o1355bo12bo3b3o$524bobo7b2o2b2o10bo2b2o6bo1356bo10b2ob3obo2b2o$524b2o8bo4bo11b3o5bo1359bobo7bo3b3o3b2o$544bo7b3o4b2o1359b2o12bo509bo7
 bo$524b2o17b3o8b2o1376b2o508bob2o5b2obo$524bo17bo11bo1376bobo6b2o500bo3b2ob2o3bo$526bo16b2o10b3o1375b2o5bo502bo3bobo3bo$525b2o30bo1375b3o5b3o500b3o3b3o$1923b2o4bo3b2o8bo$531b2o1390bo2bobobo$531bo1393b2ob2obo$532bo20b2o1376bo$533bobo9bo7b2o1376b2o$534
 b2o8bo$544bo2bo$545b5o4b2o$545b2obobo3bo$548bobo4b3o$537b2o4bo13bo1886b2o5b2o$537bo2bobobo1899b2o5b2o$539b2ob2obo$545bo$545b2o!`,
-
-
 "idkgun": `x = 2879, y = 2871, rule = B3/S23
 2710b2o5b2o$2709bo2bobobo2bo$2709b2o3bobob2o$2696b2o18bobo$2697bo15b4obo$2697bobo18b3o$2595b2o101b2o18b2o$2595b2o109b2o10bobo$2705bo2bo10bob3o$2706b2o3$2596bo5bo$2595b3o3b3o$2594bo2b2ob2o2bo104b2o$2594bo3bobo3bo104bo$
 2596bobobobo107b3o$2680bo4b2o13b2o3b2o5bo$2593b2ob2o3b2ob2o74b2o3b3o2bo11bobo$2595bo7bo73bo2b2o5bo2bo8bo7bo$2677b3o2bob2o2bob2o8b2o3b2o10bo$2682bobo5bo3bo21bobo$2679b3o2bo4bo4bo21bobo$2679bo4b2o4b2obob2obo16b2ob2o$2696bobo$2698b2o2$2590b2o15b2o$2590b
@@ -14368,7 +14056,6 @@ o7bo$16b2o7bo64b2o39b2o14bo4bo9bo$16bobo5b2o64bobo54bobobo4bo5bo$13b2obobo23bo40
 $13b3o5bobo12b2o38bo2bo8b2o75b2o15b2o$13b3o6bo12bo2bo37b3o10bo$14b2o11bo8b2o24bo16b10o11b2ob2o$15bo10bobo33b3o13bo2b6o2b3o9bobo$13bobobo8bobo36bo12b2o2b4o2bo2bo9bobo$13b2obobo8bo36b2o10b2o11b2o11bo68bo5bo$16bobo38b2o18bo92b3o3b3o$16b2o39bo19bob2o88b2
 ob2ob2ob2o$55bobo17bobob2o87b3o7b3o$55b2o18b2o$51bo15b2o101bo7bo$50bobo13bo2bo$50bobo14b2o$51bo$126b4o$126bo3bo40bo$126bo43b3o$64b2o61bo2bo38bo2bo$65bo103bobobo$62b3o105b3o$48b2o12bo6bo3bo97bo5b2o$47bo2bo17b2o3b2o102b2o$48b2o18b2o3b2o$59b2o7bo5bo$59b
 obo$52b2o7bo$51bo2bo6b2o$52b2o5$48b2o6b2o$46bo4bo2bo4bo$46bo4bo2bo4bo$46bo4bo2bo4bo$48b2o6b2o4$2o$o$b3o$3bo$b2o$bo4b2o$2bo3b2o$b2o!`,
-
 "fastloafgun": `x = 207, y = 246, rule = B3/S23
 146bobo58b$146bo3bo56b$150bo7bo48b$136b2o8bo4bo4b4o47b$88b2o34bo11b2o12bo4bobob2o46b$88bobo2bo30b3o19bo3bo3bo2bob3o8b2o35b$89b6o32bo18bobo6bobob2o9b2o35b$50bo41bob2o30b2o28b4o47b$49bobo39b2o11b2o21b3o28bo48b$48bo3bo38b2
 o11b2o22bobo76b$48bo3bo31bo6b2o34bo3bo75b$48bo3bo8bo4bo16bobo6b2obo31b5o75b$48bo3bo6b2ob4ob2o13bo3bo39b2o3b2o74b$11b2o28bo6bo3bo8bo4bo15bo3bo11b2o27b5o75b$11bobo25b3o6bo3bo29bo3bo11b2o28b3o76b$12bo25bo10bobo30bo3bo42bo49b2o26b$7bo8bo21b2o10bo22b2o7bo
@@ -14408,7 +14095,6 @@ o16b2obo2bo2bo2bo10bo2bo13b2o91b$57b2o15b2o2b2o6bo9b2o10b2o3bo7b3o83b$10b2o71bob
 2o23b2o15bo2bo9bo64b$9bo3bo16bo87b3o8bobo9bobo63b$9bo3bo14b5obo84bo22b2o63b$9b2ob2o15b3o3bo5b2o18b3o55bo87b$34bo6b2o75b3o7b2o6b2o69b$2bo47b2o9bobo62bo4bo2bo4bo67b$bobo20b3o15bo7b2o9bobo54b3o5bo4bo2bo4bo67b$b2o8b2o10bo3bo13bobo35bo38b3o5bo4bo2bo4bo67b
 $9bo4bo8bo3bo8b2o2bo2bo3b2o12b3o14b2o10b2o36b2o6b2o69b$8bo6bo8b3o9b2obo8bo29bobo9b2o26b3o86b$7bo8bo23b2o3b3o25b2o12b2o6bo3b2o18bo87b$7bo8bo28bo15b3o7bo3bo10b3o5bo3bobo18bo87b$7bo8bo45bo7bo5bo10b2o6b5o18b3o86b$8bo6bo53bo2bo3bo13b2o4b3o108b$9bo4bo9b3o4
 9bo13b2o115b$11b2o10bo3bo39bo3bo3bo131b$23bo3bo38bob2o3b2o132b$24b3o39bo140b$65b2o140b!`,
-
 "ggCam": `x = 7114, y = 3634, rule = B3/S23
 6687bo$6687b2o$6685bo3bo$6685bo2bo$6683b2o3bo14bo2bo$6683b3o21bo$6703bo3bo$6680b2o22b4o$6680b2o$6723b4o$6722bo3bo$6668b2o56bo$6668b2o13b2o37bo2bo15bo2bo$6684b2o59bo$6683bo57bo3bo$6742b4o$6649bo28b3o$6648bobo16bo12bo80
 b4o$6647bo7b2o9b3o10bo80bo3bo$6650bo4b2o8b2ob2o94bo$6649bobo14bob3o89bo2bo15bo2bo$6650bo14bobobo113bo$6643b2o23bo110bo3bo$6643b2o9b2o9b2o13bo99b4o$6680b2o$6651b2obobo22bobo117b4o$6631b2o18b2o2bobo140bo3bo$6631b2o24bo17b2o125bo$6666bo7bobo121bo2bo15bo
@@ -15180,7 +14866,6 @@ o$2419b2o21bobo3b2o$2419b2o26b3o$2434b3o5b2ob5o$2445bo$2380b2o62bo$2379bo2bo$237
 64b2o23b2o2bo36b3o$2364b2o24b3o36b2ob2o$2430bob3o$2429bobobo$2352b2o29b2o47bo$2352b2o26b2ob2o44b2o$2367b3o10b2o3bo$2356bo22bo3b2o$2354b2ob2o21b2ob2o$2354b2ob2o21b2o$2354bo2b2o3bo67bo$2355b2o4b2ob2o65b2o2$2361bo3bo$2362b2o$2344b2o16bo$2332b3o8b2o18bo$
 2333b2o9bob2o15bo$2330b2obo12b2o13bo3b3o3b3o$2325bo16b6o12b3ob4o3b4o$2342bo2bo14b2o2b3o4bo3bo$2324b2o16b3o18b4o3b4o2bo$2325bobo35bo6b2o3bo$2324bobo34bo3bo4bo2b2o$2325bo36b4o3b5o$2332b2o29b3o3b3o$2329b2ob2o$2329b2o3bo$2328bo3b2o$2329b2ob2o$2329b2o3$23
 17b3o$2317bo2bo$2316bo4bo$2318bobo$2315bob3o$2316b2o4$2318bo$2317bo2bo$2318b2o!`,
-
 "c4s": `x = 1095, y = 585, rule = B3/S23
 163bo$161b2o$163bo$165bobo$164bo2bo83bo$30bo133bo2bo81b2o$28bo2b2o131bobo25bobo56bo$26b3o137bo25bo3bo48bo3b2o$25bobo136b2o26bo4b2o12b2o30bo2b2obobo$25bob2o135b2o28bo3bo2b2o7b3o5bobo4b2o14b3o6b2o$obobo3bobobo11bo4bo110b
 obobo3bobobo15bob2o23b2o3bo10bo6bo7bo2bo10bobo7b2o$23b2o142b2o43bo5bo2b3o5bo10bob2o9bo$4bo7bo127bo7bo42b4o18b2o5bo5bo2bo9bo4bo8bo$22bo4b2o138b2obo18b2obo2bo16b3o10b2o11b2o11bo$obobo7bo13bo113bobobo3bobobo14b2obo18b4o2bo13bo2b2o4b2o29b2o$23b3o143bo8bo
@@ -15298,7 +14983,6 @@ o21bo$23bo4bo11bo2b2o74bo2b2o20bo2b2o16bo$22b2o19b2o72b3o22b3o20b2o3bo29bo21bobo
 8bo3b2o3bo5bobo11bo3b2o3bo5bob2obo61b3o13b2o24bo2b2o20bo2b2o$24bo17bo2bo15bo6b2obob2obo13bo6b2obobo21bo24bo17b3o14bo24bo3bo3b3o14bo3bo3b3o$22b3o16b2o4bo17b2o9bo17b2o26bobo22bobo34b2o23bobo4bo3b2o12bobo4bo3b2o$25bo14bo6bo74bo2bo21bo2bo30bo2b2o30bo10bo
 13bo$21bo4b2o12b2o4bo75bo2bo21bo2bo13b3o12b2o3bo32bo4bob2obo14bo4bobo$46bo76bobo22bobo16bobo11bo37b2obobo19b2obob2obo$22b2o18b3o76bo24bo16bo2bobo83bo$23bo4bo12bo4b2o71b2o23b2o16bo3bo$24bob2o12b3o78bo24bo16bo$24bobo14b2o121b2o$25b3o137b3o$27bo2b2o133b
 3o$29bo!`,
-
 "bsgun": `x = 385, y = 292, rule = B3/S23
 186b2o5b2o$186b2o5b2o$182bo15bo$181bobo13bobo$181b2o15b2o7$186bo7bo$185bobo5bobo$107b2o79bo3bo$107b2o76bo2bo3bo2bo$107b2o77bobo3bobo$107bo80b2ob2o$106bobo76b2ob2ob2ob2o$107bobob3o48bo22b2o2bobo2b2o$108bob4o43bo4b3o21b3o
 3b3o$109bo43b4obo6bo21bo5bo$153b3obobo4b2o$105b2o51bobo$106bo52bo7b2o35b2o$106bobo14b2o33b2o7b2o17b2o10bo5b2o$107b2o13bo2bo32b2o26b2o9b3o$114b3o6b2o33b2o36bo3bo$112b2ob2o79b2ob2o$114bo$126b2o49bo19b3o$126bo50b3o17b3o$127b3o50bo$129bo49b2o$184bo$184bo
@@ -15337,7 +15021,6 @@ o21bo$143b2o23b2o16b4o4b3o21bob2ob2obo69bo3bo25bobo13b7ob2o$148b2o17bobo17b2o5bo
 2o73bo2bobo2bo$143b3o71bo2bo3bo2bo$144bobo71b2o5b2o109b2o18b2o$145b2o190bo7b2o10bo$337bobo5b2o10bobo$289b2o15b2o30b2o18b2o$289bobo13bobo15b3o3b3o31bo$290bo15bo16b3o3b3o30bobo$294b2o5b2o19bob2o3b2obo29bobo$213b2o15b2o62b2o5b2o19bob2o3b2obo30bo$213bobo
 13bobo91b2o5b2o$214bo15bo93bo5bo$218b2o5b2o121b2o$218b2o5b2o121bo$349b3o$325b2ob2o6b2o13bo$324bo5bo5b2o$322b5ob2ob2o$321b2ob3ob2ob2o36b2o$321b3o6bo10b2o26b2o$322bobo16b2o17b2o$323b2o35b2o$368b3o$363b2o3b2obo2b2o$363bo6b2o2b2o$364b3o3b2o$366bo$335bo5b
 o$334b3o3b3o$333bo2b2ob2o2bo$333b3o5b3o10$329b2o15b2o$329bobo13bobo$330bo15bo$334b2o5b2o$334b2o5b2o!`,
-
 "soligun": `
 #O  Entity Valkyrie » December 9th, 2025, 7:01 am
 x = 2624, y = 1729, rule = B3/S23
@@ -15775,7 +15458,6 @@ ob2o10bo2bobo5b2o10b2o$2310b2o30b2o124bo19b2o13bo7b2o3b2o22bo$2337bo131bo2bo24bo
 o21b2o$2331b2o152b3o9b2o5bo21bo$2487bo5b3o8bo22b3o$2485b2o13bobo26bo9b2o$2485bo14b3o35bo2bo$2487bo50bo2bo$2486b2o7b2o34b2o6b2o$2495b2o33bobo$2530bo$2527b2obo7b2o$2526bobob2o6b2o$2513b4o9bobo$2512bo4bo6bobob3o2bo8b2o$2510b3o4b2o4bobo2b2ob3o7bo2bo$2509
 bo6bobo4bo6bo6b3o2bobo$2510bob2obo8b3o2bob5o4b3ob2o$2510bo2bobo2bo8bobobo3bo7bo$2513bob2obo7bo2bobob2o4bobobo$2510bobo6bo6b2o2b2ob2o5b2ob2o$2510b2o4b3o$2511bo4bo$2512b4o5$2622b2o$2603b2o18bo$2603b2o15b3o$2620bo$2621b2o$2600b2o14b2o4bo$2600bobob2o10b2
 o3bo$2598bobob2obo15b2o$2598b2o!`,
-
 "idk3": `
 #O by dvgrn » January 19th, 2026, 4:33 pm
 x = 3916, y = 3318, rule = B3/S23
@@ -16553,7 +16235,6 @@ b2o9b2o3bo5b3o4bo4bo2515bo2b2o2bo3b3o5bo3b2o9b2o3bo2bo$633b3o6b6o4b2obo5bo4bo2bo
 232b2o8bo5bo2bo7bo6b2o$3232bo2bob4o2bo5bobo6bobo6bo$3233b6o2b2o4b2obo7bobo6bobo$3237bo2bo6b3o9bo8b2o$3235bo3bob2o4b2o24bo$3234bobo3bo2bo28bobo$3234bo2bo4bobo27bobo$3238b3obo2bo27bo$3234bo2bo2b2o2b2o$3235bo$3236bo43b2o$3233b2obo22b2o19bo$3233b2o24bo18
 bobo$3249b3o8b3o15b2o$3234bo9bo6bo11bo$3233bobo7bobo4bo6b2o3bo$3233b2o8b3o7b2obobo2bo$3242bobo8b2o3bobo3b2o$3243bo12bob2o3bobo$3234b2o6bo10b4o6bo$3233bobo17bo3b3o2b2o7b2o8bo$3233bo12bo2b2o2b2obo2bo11b2o6b3o$3232b2o12b4obobo3b2o19bo$3239bo2bo8b2o2b2o4
 bo15bobo$3237b3o2b3o3b3o5bo4bo15b2o$3238b2o2b2o3bo2bo4bo5b3o6b4o3b2o3b2o$3239bo2bo5b2o5b2o2b2o2b2obobobo2bobob4obo$3237bobo2bobo14b2o2b3o2bo6bo4bobo$3237b2o4b2o26b2o!`,
-
 "idk4": `
 #O Entity Valkyrie February 22nd, 2026, 3:04 am
 x = 183, y = 187, rule = B3/S23
@@ -16576,7 +16257,6 @@ o19b2o3bo11b3o6bo23b2o9b2o3bobo8bo2bo$72b2o5b3o15b2o4bobo19b7ob2o16b2o13bo3bo8b2
 25b2o$56bo2bobo3bo4b3o39b3o15bo3bo$56b2o3b3obo4bo2bobo13b2o22bo9bo6bo3bo11bo4b2o$60bo9bo4bo12bo2bo30bobo6bobo12bo4b2o$60b3ob2o5b3obo11b2o34bo8bo12b3o33b2o$64bo21b3o5bo18bo24b2o39bo2bo$60b4o22bo2bo3bobo16b3o9b4o9bobo37b2ob2o$59bo27b3o3b2o17b3o8b2obo10
 bo3bo3b3o19bo6b3obobo$60b6o56bo5bo9b4o4bo16b2obob2o4bobo5bo$66bo20b3o3b2o29b2obobo16bo16bob2obob3obobob5o$62b3ob2o11bobo4bo2bo3bobo16bobo10bob2o17bo23bobobob2o$62bo19bo3b3o5bo18bo24b4o4bo17b2ob2obobobo4b2o$58b2o3b3obo10bo2bo5b2o33b2o13bo3bo3b3o16bo3b
 ob2o2bo5bo$58bo2bobo3bo9bobobo6bo2bo29bob3o11bobo22bobo3bo5b2o2bo$60b2obob2o10bo2bo8b2o30b2ob3o11b2o22b2o3b2o9b2o$63bobo12b2o46bo18b3o$63bobo80bo$64bo81bo!`,
-
 "idk5": `
 #O  Chris C
 x = 1220, y = 1034, rule = B3/S23
@@ -16776,7 +16456,6 @@ b2o91b2o$159b3o134b2o590b2o$161bo119b2o620b2o$282bo620bo121b2o$186bo66b2o24b3o62
 o126bo$200bobo72bo634bo$202bo72bobo630bobo102bo$265bo10b2o630b2o10bo92b3o$231b2o30b3o654b3o30b2o61bo$231b2o29bo660bo29b2o60b2o$262b2o658b2o$163b2o82b2o48b2o588b2o48b2o$163b2o83bo48b2o588b2o48bo$248bob2o682b2obo$249bo2bo680bo2bo$250b2o682b2o$254b2o2b2
 o659b2o$253b3o2b3o658b2o92bo21bo$254b2obo3bo750b3ob3obo8bo$257b5obo747bo8b2o2b2o2bo7bo$257bo5bo746bob2o10b2o9b2o$178b2o77bo2b2obo10bo3b2o626b2o3bo97b2ob2o2bobo$178b2o78bo4bo9bobo3bo626bo3bobo97b2o7bo8bo4bo$262b2o8bobo3bo628bo3bobo106b2o3bo2bo$258b3ob
 o5b2obobo3bo630bo3bobob2o98bobo5bo5bo$258bo9b2obo2b4obo626bob4o2bob2o98bobo$259b2o11bobo3bobo6b2o608b2o6bobo3bobo103bo$268b2ob2o2bo2bobo6b2o608b2o6bobo2bo2b2ob2o$269bobo2b2o3bo626bo3b2o2bobo$257b2o10bobo642bobo10b2o91b2o$257b2o11bo644bo11b2o91b2o!`,
-
 "lobgun": `
 #O Entity valkrie again... June 7th, 2026, 1:07 pm
 x = 1055, y = 1068, rule = B3/S23
@@ -17175,7 +16854,6 @@ obo5bobo41b2o15bo22b2o6bo$54bobo5bobo12b2o27bo12bo4bo22bo2b2o$63bo12bo2bo24bobo1
 bo13b2ob2ob3ob2o$117b2o3bo2bo19b3o5b3o14b2ob2ob5o$123b2o22bob3obo18bo5bo$148b5o20b2ob2o$149b3o2$121b3o$120b5o47bo5bo$119bob3obo45b2o5b2o$117b3o5b3o17b2o23bob2o3b2obo$108b2o6bo3bo3bo3bo16b2o23bob2o3b2obo$108bobo4bob4obob3obo42b3o3b3o$101b2o7bo5bo4b3o3
 bo43b3o3b3o$100bo2bo6bob2o3b3obobobo$101b2o6b2obobo4bo2bo2b2o23bo$109bo2bobo5bo2bobo24bo$97b2o8bob2o3bobo4b2o2bo24bo$96bo2bo2bo4b3o2b2obobo7b2o$96bobo2b2o9bobo2bo48b2o15b2o$95b2ob5ob6ob2ob3o25bo23bobo13bobo$97bo7bo3bobobo28bobo22bo15bo$97bobo5bobobob
 o2bo26bobo27b2o5b2o$96b2ob2o5b2ob2o2b2o28bo27b2o5b2o!`,
-
 "crabsynth": `
 x = 2667, y = 2745, rule = B3/S23
 2o$2o$6b3o$6bo$7bo4$22b3o$22bo$23bo17$38b3o$38bo$39bo10$49b3o$49bo$50bo15$80bo$79b2o$68bo10bobo$67b2o$67bobo8$88bo$87b2o$87bobo9$83b3o$83bo$84bo15$99bo$98b2o$98bobo3$101b3o$101bo$102bo13b3o$116bo$117bo$105bo$104b2o$10
@@ -17203,7 +16881,6 @@ bo$2241b2o$2241bobo10$2265b3o$2265bo$2266bo14$2273b3o$2273bo$2274bo4$2279b3o7b3o
 325bo$2324b2o$2324bobo3$2396b3o$2328bo67bo$2327b2o68bo$2327bobo3bo$2332b2o$2332bobo$2351b3o$2351bo$2352bo59b3o$2412bo$2413bo3$2417bo$2416b2o$2416bobo6$2416bo$2415b2o$2415bobo7$2418b3o$2418bo$2419bo4$2433b3o$2433bo$2434bo5$2447bo$2446b2o5b3o$2446bobo4
 bo$2454bo10$2465b3o$2465bo$2466bo20$2486b3o3b3o$2486bo5bo$2487bo5bo7$2501bo$2500b2o$2500bobo17$2514b3o$2514bo$2515bo15$2533b3o$2533bo$2534bo8$2545b3o$2545bo$2546bo5$2562bo$2561b2o9bo$2561bobo7b2o$2571bobo4$2571b3o$2571bo$2572bo5$2573bo$2572b2o$2572bo
 bo8$2586bo$2585b2o$2585bobo2$2590bo$2589b2o$2589bobo78$2665bo$2664b2o$2664bobo9$2660b3o$2660bo$2661bo12$2658bo$2657b2o$2657bobo$2664bo$2663b2o$2663bobo!`,
-
 "idk6": `
 #O by codeholic » March 1st, 2026, 6:13 pm
 x = 2433, y = 1156, rule = B3/S23
@@ -17560,8 +17237,6 @@ o7bo11b2o23b2o11bo18bo7b2o$1845b2o2bo6b2obo17bo12bo39bo30bob2o6bo2b2o$1845bo2b2o
 o2b2o2bo4bo$1846b5o12b2o3b2o2b3o3bobo4b2o2bo41bo2b2o4bobo3b3o3bo3bo13b5o$1845bo2b2o22bo2b4obobo4b2o43b2o4bobob4o2bo4b3o15b2o2bo$1845b2o2bo24bo5bob5o47b5obo5bo24bo2b2o$1873b2o2b3obo4bo47bo4bob3o2b2o$1853b2o3bo18bo3bob2o51b2obo3bo18bo3b2o$1854bo2bobo21
 b2ob2o49b2ob2o21bobo2bo$1851b3o3bob2ob2o4b2o81b2o4b2ob2obo3b3o$1851bo2b3o4bobo4bo83bo4bobo4b3o2bo$1854bo2b4o2bobo3b3o77b3o3bobo2b4o2bo$1855b2o4bobob4o2bo77bo2b4obobo4b2o$1857b5obo5bo81bo5bob5o$1857bo4bob3o2b2o79b2o2b3obo4bo$1859b2obo3bo87bo3bob2o$185
 8b2ob2o95b2ob2o!`,
-
-
 "idk7": `
 x = 199, y = 198, rule = B3/S23
 148bo$68bo11b2o70b2o$67bobo10b2o69bo2bo12b2o$59bo3b2o2bobo76bo4bo2b2o11b2o$50b2o6bobo2bo2b2ob2o72bo3bo3bo2bo$50b2o6bobo3bobo74b7o5bo$59bob4o2bob2o69bo$61bo3bobob2o70b7o5bo$60bo3bobo3b2o71bo3bo3bo2bo$59bo3bobo5b2o73bo4bo
@@ -17586,7 +17261,6 @@ bo4bo$56b2o6bo3bo3bo5bo3bo2b2obo39b2o3bo5bobobo$54bo2bob5o5bo11bo3b2ob2o15bo24b3
 b2o28bo5bo$22bobo32b3obo3bo12b2o14bo34bo3bo31b2o$22bobo33b2o2bobo99b2o$23bo142bo$148b2o$148b2o$162b2o$134b2o26b2o16b2o$124b2o6b2ob2o12b2o29b2o$124b2o6bo2bo13b2o$132bo2bo$133b2o2$120b2o11b2o$120b2o10bo2bo$101b2o29bo2bo13b2o$101b2o29b2ob2o12b2o$134b2o$
 112b3o7b2o$100b2o9bo4bo4bo2bo23b2o$100b2o8bo5bo4bo2bo23b2o12b2o5b2o$111bo8bo3bo37bob2ob2obo$112b2o8b2o39bobobobo$163bobobobo$112b2o8b2o38bo7bo$111bo8bo$100b2o8bo5bo8b2o$100b2o9bo4bo9bo$112b3o7bo39bo2bobo2bo$122bo2bo33b2o4bobo4b2o$101b2o55bo15bo$101b2
 o55b2obobo5bobob2o$162b2o5b2o!`,
-
 "idk8": `x = 450, y = 397, rule = B3/S23
 137bo2b2o308b$115b2o20b4obo307b$114bo2bo2b2o20bo307b$114bob2o3bo13b7ob2o305b$113b2obo4bob2o9bo6bobo2bo303b$113bo4bob2o2bo9b2o2b2obo3b2o303b$114b2o2bo3b2o14b2ob2o307b$115bo4b2o328b$113bo3b3obo3b2o323b$113b4o4bobo2bo4b2o3
 17b$120b2ob2o5bo2bo316b$113b2o8bo7bobo316b$113bo2bo3b2o2bo4b2obo5b2o310b$114b6o2b2o5b3o6b2o310b$121bo7b2o319b$116bo5b2o326b$115bobo2b2o2bo29bo295b$115b2obo4bobo28b3o293b$116b2ob3obo2bo30bo68b2o2bo219b$116b2o3b2o2b2o29bobo66bob4o20b2o197b$116bo39bobo6
@@ -17654,8 +17328,6 @@ o3b2o67b$42bo4bo5bo7bo285b3o4bobo4b2o7bo2bo3b4o2bo66b$42b2o3bo2bobo4bo2bobo5b2o2
 bobo20bobo69b$42bo2b2o2b2o2bo9b2o2b2obo3b2o278b3o21b2o70b$42b2obo4bob2o9bo6bobo2bo279bo16b2o76b$43bobo4bo13b7ob2o273bobo21bo2bo75b$43bo2bo2b2o20bo276bo8b2o10bo2bobo75b$44b2o20b4obo284bobo14bo76b$66bo2b2o287bo10bob2o77b$370bo79b$450b$364b2o8b2o74b$344
 b2ob2o7bo7bobo8bo74b$344bo12b2o8bo3bobo4b2o70b$345b2o2bo4b2obo7b2obobob3o2bobo70b$346b3o5b2obo6bo3bobo6bo72b$346b3o5b2obo6b4obobob4ob4o68b$345b2o2bo15bo2b2obobo2bobo2bo68b$344bo19b3o6bo2b2o72b$344b2ob2o16b2o2bo3bo3bobo70b$362b2o3b2o4bo2b2o2b2o68b$352
 b2o3bo2bo2bo2bobob2ob2o3b3obo67b$353bo2bob5o4bo2bo3bob2o4bo67b$350b3o3b2ob3o8bobobo2bob3o68b$350bo20b2ob2o2b2o70b!`,
-
-
 "spidergun": `x = 15426, y = 15955, rule = B3/S23
 1949b2o6b2o$1947bo4bo2bo4bo$1947bo4bo2bo4bo$1947bo4bo2bo4bo$1949b2o6b2o5$1935b2o5b2o15b2o4b2o$1935b2o5b2o15b2o4b2o4$1964b2o$1960b2o2b2o$1936bo5bo16bobo11b2o$1935b3o3b3o15bo12bobo$1934b2o2bobo2b2o5b2o6b2o12bo$1934bo3
 bobo3bo5b2o19b2o$1934bob2o3b2obo$1934b2o7b2o4$1966b2o4b2o$1966bobo2bobo$1968bo2bo$1941b3o24b2obo$1941b3o27b2o$1940bo3bo4b5o17bo$1939bo5bo2bob3obo7bo6bobo$1940b2ob2o4bo3bo5b4o6b2o$1950b3o5b4o$1940b2ob2o6bo6bo2bo$1939bo5bo12b4o18b2o$1935b2o3bo3bo14b4o1
@@ -20395,8 +20067,6 @@ o31b3o22bobo2bob2ob2obo2bobo$78bo11bo26b3o4bobo4b3o$77b3o5b2o4bo31bo3bo$59b2o15b
 o$45b3o25b2o13bo9b2o$45b3o25b2o$45b3o22b2o6b2o$45bobo14b2o5b3o5bo2bo$45b3o14b2o6b2o6b2o$73b2o$73b2o53bo5bo$127b3o3b3o$126b2ob2ob2ob2o$73bobo3bobo43b3o7b3o$60b2o2bobo8bo3bo13bo$53b2o4b3obo3bo3bo11bo9b4o11bo3bo3bo3bo6bo7bo$53b2o3b2o6bo3bo3bo5bo3bo2b2o5
 b4o10bo2bobobobo2bo$59bob5o5bo11bo2bo2bo4bo2bo14b2ob2o$60b3o12bo3bo7b2o5b4o$73bobo3bobo11b4o4b2o6bo2b2ob2o2bo$60b3o30bo7bobo4bobo7bobo$59bob5o21b3o13bo5b2ob2ob2ob2o$53b2o3b2o6bo13b2o5b3o13b2o4b2o2bobo2b2o$53b2o4b3obo3bo12b2o29bobobobo$60b2o2bobo45bo3
 bo$127b2o5b2o$85b2o3b2o35b2o5b2o$86b5o$87b3o18b2o$88bo19bo$98bo7bobo$93bo4b4o4b2o$93bo5b4o$99bo2bo$99b4o$98b4o$98bo!`,
-
-
 "smallweek": `x = 294, y = 292, rule = B3/S23
 126b2o5b2o$125bobo5bobo$96b8o18bo2bo9bo2bo$28b2o4b2o60bob4obo17bob4o7b4obo$28bobo2bobo39b2o19b8o17b2ob3o7b3ob2o9bo$30bo2bo41bo49b2o7b2o11b3o44b2o4b2o$29b2o2b2o42bo2b2o30b2o11b3o5b3o10bo47bobo2bobo$28b3o2b3o37b4obo2bo27b
 2o2bo13b3ob3o13bo48bo2bo$30bo2bo38bo3bob2obob2o24bob2o16bobo12bo2bo47bo4bo77b2o4b2o$25bo46b2o4bo2bo2bo23bo17bo2bobo2bo8bo51b6o77bobo2bobo$25bo25bo23b4ob2obo19bobo2bo16bo2bo3bo2bo6bo3bo49b4o80bo2bo$52bo3bo15b4o6bo19bo2bo3bob2o13b2o5b2o9bo134b2o2b2o$25
@@ -20449,8 +20119,7 @@ bobo3bo$26bo9b2o6b2o17bo4b2ob2o12b2o8b2o8bobo16b2o8b2o2bo6b2o2bo54bo2bo2bo2b2o57
 3bo3b2o$29bobo2bobo67bobo2bobo61b2o2bo4b3o18bob2ob4o8bo3bo21b2obob3o$29b2o4b2o67b2o4b2o62b3o6bo18bo2bo2bo4b2o31bo4b3o$174b3o25b2obob2obo3bo6b3o22bo3bo14bo18bobo$173b2o2bo27bo2bob4o33b3o15b3o16bo3bo$172bo32b2o2bo21b2o35bo19bo$172b2ob2o34bo9b3o8b2o13b3
 o15b3o16bo4bo$210b2o17bobo14bo3bo14bo22bo$180bo2bob2obo2bo28bo3bo6bo8b2o4bo4b3o30bo3bo$180b4ob2ob4o28bo3bo15b2o4b2obob3o30bobo$180bo2bob2obo2bo56bo3b2o20bo$221b3o49b3o$228b2o42b5o$226bo4bo39b2o3b2o$226bo4bo31bobo$226bo4bo31bo3bo$227bo2bo22b2o12bo$225
 bobo2bobo20b2o8bo4bo4b3o$225b2o4b2o34bo5b3o$263bo3bo$263bobo!`,
-
-"idk8": `x = 1609, y = 973, rule = B3/S23
+"idk15": `x = 1609, y = 973, rule = B3/S23
 37b2o$37bo$35bobo$35b2o$10b2o$10b2o2$43bo$43b3o$46bo14bo$45b2o12b3o$58bo$58b2o3$57b2o$38b2o17b2o$38b2o2$2o$2o3$41b2o$21b2o19bo$21bobo15b3o$23bo15bo$23b2o19b2o$45bo$42b3o$42bo6$35b2o$36bo$36bobo15b2o$37b2o15b2o12$55b2o$
 55bobo$57bo$57b2o9$45b2o$45b2o6$56b2o$28b2o5b2o19bo$29bo6bo17bobo$26b3o7bobo15b2o$26bo10b2o4bo$42bobo$42bobo$43bo10b2o$54bobo$56bo$56b2o$41b2o$42bo$39b3o$39bo295$1471b2o$1471b2o9$1456b2o$1456b2o2$1520b2o3b2o$1520b2o2bob3o$1524bo4bo$1520b4ob2o2bo$1417
 bo102bo2bobobob2o$1415b3o105bobobobo$1414bo109b2obobo$1414b2o112bo$1476b2o$1476bo37b2o$1477b3o35bo7b2o$1479bo35bobo5b2o$1383b2o131b2o$1384bo$1384bobo$1385b2o2b2o37bo$1389b2o35b3o15bo9bo$1425bo18b3o5b3o$1412b2o11b2o20bo3bo$1412b2o32b2o3b2o73b2o$1526bo
@@ -20500,7 +20169,6 @@ $1219b2o52b2o23b2o20bo44bo2bo$1134b2o52b2o124b2o4b2o44b2o4b2o$1133bobo16b2o34b2o
 bo64b2o182bobo$871bo2b2ob4o175b2o72b2o$871bo4bo180bo$872b3obo2b2o176bobo$874b2o3b2o177b2o2b2o37bo$1062b2o35b3o15bo9bo$1098bo18b3o5b3o$1085b2o11b2o20bo3bo$1085b2o6b2o24b2o3b2o184b2o$1092b3ob2o212b2o$1091b2o3b2o24bo$1090bo2bobo25bobo$1089b2o2b3o25bobo2
 0b2o$1090b2obobo26bo21b2o$1091bo$1101bo$1056b2o44bo7b2o$1055bobo16b2o24b3o7b2o$1055bo18bobo45b2o$1054b2o20bo44bo2bo$1070b2o4b2o44b2o4b2o$1070bobo55bobo$1072bo57bo$1063b2o7b2o56b2o$1063b2o20b2o33b2o$1086bo34bo$1083b3o32b3o$1083bo34bo11$1074bo$1072b3o$
 1071bo$1071b2o10$1051b2o$1051b2o9$1066b2o$1066b2o!`,
-
 "idk9": `
 #O by parrot » January 22nd, 2026, 12:16 am
 x = 73, y = 68, rule = B3/S23
@@ -20512,7 +20180,6 @@ o2bo10b2o3bo$46b2o12bo2bobo$58bo4bobo$42bo15b5obo$41bobo18bo$41bobo14b
 2o$50bobo11bo$50bobo10bobo$51bo12bo$69b2o$69bobo$56b2o13bo$55bo2bo12b
 2o$56b2o!
 `,
-
 "idk10": `
 #O by B468S02357 » January 19th, 2026, 9:28 pm
 x = 65, y = 76, rule = B3/S23
@@ -20526,7 +20193,6 @@ o$44b3o13b2o$61bo$3b2o56bob2o$4bo48b2o4b3o2bo$2bo50b2o3bo3b2o$2b5o14b
 o17b3o$9b3o21bo$9bo22b2o7$42b2o$35b2o5bobo$35b2o7bo$44b2o2$31bo$30bob
 ob2o$30bobobobo$27b2obobobobo2bo$27bo2bo2b2ob4o$29b2o4bo$35bobo$36b2o
 !`,
-
 "slide3": `
 #O by Wngks Life » August 12th, 2026, 9:47 pm
 x = 971, y = 985, rule = B3/S23
@@ -20610,14 +20276,10 @@ obo45bo10b2o12bo2bo3bo3bo2bo18b2obobobo7bobo27b2o$809b2o7b2o44bo11b2o13b3o7b3o22
 b2o5bo35b3o24b2obo5bob2o21bo2bob3o5b2o16b3o3bobo$829bo33bo3bo28bobo14b3o14b5o21bo2bo2b3o$827b3o33bobo29b2ob2o12bo3bo11bo31bo$864b2ob2o43bo3bo8bo2bo2bo25bobo$824bo88b3o8bob2o3bo24b3o3bo$825b2o97b2o2b3o30bo$824b2o40bo60bo21b2o4b2o5bo$867b2o59bo20b2o4b2
 o$866b2o59b2o16bo9bo$913b3o28bobo8b2ob2o$912bo3bo28bo10bob2o$912bo3bo39bo3bo3b2o$913b3o34b2o8bo3b2o$950b2o7b2o17$874bo$868bo3bobo$866bobo4b2o$867b2o20$878bobo$874bo4b2o$875bo3bo$873b3o5$879bo$877bobo$878b2o2$885bo$886b2o$885b2o$892bo$890bobo4bo$891b2
 o5b2o$897b2o13$902bo$903bo2bobo$901b3o3b2o$907bo2$904bo$905b2o$904b2o11$917bobo7bo$918b2o8bo$918bo7b3o3$931bo$929bobo$930b2o4bo$937b2o$936b2o2$934bo$932bobo$933b2o10$947b2o$946bo2bo$947b2o!`,
-
-
 "line2": `x = 58, y = 50, rule = B3/S23
 6b2o50b$5bobo50b$7bo50b$4bo53b$3bo54b$obobobo2b5o44b$2obo2bob7o43b$3b2o10b2o41b$3b2ob3o2b2ob3o41b$5b2o2bobo3bobo40b$10b2o3b3o2b2o36b$7b5o3bo2b3ob2o34b$8b2o3bob4obo3bo2b2o29b$12bo11bo3b2o28b$20bo3bo2b2o29b$17b2obob3ob3o29b$21b5o32b$17b2o5bo3bo29b$25bo2bo
 bo27b$24b4o4bo25b$28bo3b2o24b$22b2o4bo5bo23b$32bo2bo22b$30b3obo23b$34bo23b$29b4obo23b$30b3ob2o22b$30b3ob2o22b$31b2o3bo21b$37bo2b3o15b$36b4o2bo15b$35bo3bo18b$35b3o3bo16b$37b4o3b2o12b$40bo4b2o11b$36bo3bo3bo13b$36bo4b2o5bo9b$37bobob2o5b2o8b$47bobo8b$43b2o1
 3b$43b2ob2ob2obo5b$45b3ob5o4b$46bobo4bo4b$45b2o2b3o6b$46bo3bo5bob$45bobo2b2o4b2o$55bobo$49bo3bo4b$54bo3b$51bo2bo3b!`,
-
-
 "widestretcher": `x = 247, y = 107, rule = B3/S23
 65bo3b3o5b3o3bo48b3o13b3o12bo3b3o5b3o3bo65b$62b2ob5ob2o3b2ob5ob2o43bo3bo11bo3bo9b2ob5ob2o3b2ob5ob2o62b$60bob2obo5bobobobo5bob2obo41bo15bo11bob2obo5bobobobo5bob2obo60b$59bo3bobo3b5ob5o3bobo3bo37b2obobo10b2obobo8bo3bobo3b
 5ob5o3bobo3bo59b$63b3o5b2o3b2o5b3o41b2o14b2o16b3o5b2o3b2o5b3o63b$60bo2bob3o13b3obo4bo36bo15bo12bo4bob3o13b3obo2bo60b$62bo23bo3b2o31bo4bo10bo4bo10b2o3bo23bo62b$88bo2b3o28bobo3bo9bobo3bo8b3o2bo88b$92b2ob2o25bob2o12bob2o8b2ob2o92b$95bo26b3o13b3o10bo95b$
@@ -20645,8 +20307,6 @@ ob2o7b3o2bo3b2obobobobobobobobobobobobobobobobob2o3bo2b3o7b2ob2o2b2obo6bo3bo10bo
 bo2bobo6bob2o7bob3o2bo51b$55bo15bo4b2o2b2o2b2o2b2o7b2o2b2ob2o35b2ob2o2b2o7b2o2b2o2b2o2b2o4bo15bo55b$52bo2b2o2bo10b2o22b2o55b2o22b2o10bo2b2o2bo52b$55bobobo34bo57bo34bobobo55b$53b2o40bo55bo40b2o53b$94b2o55b2o94b$51b3o139b3o51b$50b2o2bo137bo2b2o50b$15bo
 5b2o5b2o5bo13bo4bo137bo4bo13bo5b2o5b2o5bo15b$13bo2b2ob2o2bo3bo2b2ob2o2bo10b3o145b3o10bo2b2ob2o2bo3bo2b2ob2o2bo13b$11b3o4bobo3bobo3bobo4b3o7b2o149b2o7b3o4bobo3bobo3bobo4b3o11b$11b2o2bo2b3ob2o3b2ob3o2bo2b2o6b2o151b2o6b2o2bo2b3ob2o3b2ob3o2bo2b2o11b$11b3
 o2b3o4bo3bo4b3o2b3o2b3obo153bob3o2b3o2b3o4bo3bo4b3o2b3o11b$12bobo2bo15bo2bobo3b2o159b2o3bobo2bo15bo2bobo12b$13bo23bo171bo23bo13b!`,
-
-
 "bubship": `x = 196, y = 217, rule = B3/S23
 97bo98b$94b4o98b$94b3o99b$93bo102b$90b2ob2o101b$89b3obo102b$86bob2o2b3o101b$85bo3bo4bo2b2o97b$79bobo2bo3bo7bo99b$79bo3b2ob2o108b$79bobob2o111b$82bo113b$196b$83bob2o109b$83bo2bo109b$80b2obo112b$79b3obobo110b$80b2ob2o111b
 $86bo109b$84bobo109b$84bo111b$39bo47bo108b$15bo22b2o3bo41b3o108b$13b4o19bo5bo3bo39bo109b$13b2obo19bobo3bo4bo38bo109b$7b2ob2obo3bo17bo6b4obo37bobo108b$7b3ob2o4b2o6bo6b7o2bo4b3obobo31bo111b$7bo3b2o11b2o5bob2o3bo2b2o7bobo25b3ob2o3bo108b$9b3o4b3o4b2obo2b
@@ -20681,14 +20341,11 @@ obo62b2obo118b$o3b3obo70bo116b$4bobobobo185b$bo3b2obo68bo2bo115b$2b3obobo68b2obo
 70bobo112b$8b2o14b3ob2o47b4o2bo112b$8bo10b2obo54b4o3bo2bo108b$8b2o8b2o7bo3bo45bo6b2obo108b$8bobo5b3o2b2o5bo3bo45b4o114b$9b3o4b3o4b2obo2bob2o19bo26bobo4bo109b$7bo3b2o11b2o5bob2o3bo2b2o7bobo25b3ob2o3bo108b$7b3ob2o4b2o6bo6b7o2bo4b3obobo31bo111b$7b2ob2ob
 o3bo17bo6b4obo37bobo108b$13b2obo19bobo3bo4bo38bo109b$13b4o19bo5bo3bo39bo109b$15bo22b2o3bo41b3o108b$39bo47bo108b$84bo111b$84bobo109b$86bo109b$80b2ob2o111b$79b3obobo110b$80b2obo112b$83bo2bo109b$83bob2o109b$196b$82bo113b$79bobob2o111b$79bo3b2ob2o108b$79
 bobo2bo3bo7bo99b$85bo3bo4bo2b2o97b$86bob2o2b3o101b$89b3obo102b$90b2ob2o101b$93bo102b$94b3o99b$94b4o98b$97bo98b!`,
-
 "wickship2": `x = 37, y = 65, rule = B3/S23
 7bo6bo7bo6bo7b$6b3o4b3o5b3o4b3o6b$bo3b2obo4bob2o3b2obo4bob2o3bob$3o2b3o8bo3bo8b3o2b3o$ob2ob3o3bobo2bo3bo2bobo3b3ob2obo$b3ob3o2bobobob2ob2obobobo2b3ob3ob$b2o2b3o2bo15bo2b3o2b2ob$5b3o9bobo9b3o5b$5b3o2bo6bobo6bo2b3o5b$5b3o2bobo2bo5bo2bobo2b3o5b$6b2o8b2ob2o
 8b2o6b$16b2ob2o16b$37b$9b2ob2o2bo3bo2b2ob2o9b$8bo3b2o2bo3bo2b2o3bo8b$8b2o2b2obo5bob2o2b2o8b$8b3o4b2o3b2o4b3o8b$9bo4b2o5b2o4bo9b$10bo15bo10b$16bo3bo16b$14b3o3b3o14b$13bo3bobo3bo13b$15b3ob3o15b$14bobobobobo14b$15b2obob2o15b$16b5o16b$12b2o9b2o12b$13bo3bobo
 3bo13b$10b2obobobobobobob2o10b$10b5o7b5o10b$10b6obobob6o10b$13b2o2bobo2b2o13b$10b2o5bobo5b2o10b$9bobo3bobobobo3bobo9b$8bobo6bobo6bobo8b$8bo5bob2ob2obo5bo8b$9bo8bo8bo9b$12b3o7b3o12b$14bo7bo14b$15bo5bo15b$14bobo3bobo14b$13b2o2bobo2b2o13b$12bo3bo3bo3bo12b$
 12bobob5obobo12b$13bo3b3o3bo13b$18bo18b$17bobo17b$15b2o3b2o15b$15bobobobo15b$16b2ob2o16b$17bobo17b$37b$37b$37b$16b5o16b$16bobobo16b$16b2ob2o16b$16b2ob2o16b$37b$13b3o5b3o13b$15bo5bo15b$12bo3bo3bo3bo12b$12bo4bobo4bo12b$12bo11bo12b$12b5o3b5o12b!`,
-
-
 "c5wick": `x = 156, y = 21, rule = B3/S23
 25bo88bo14bo26b$5b2o7bobo8b3o44b2o4bo12b2ob2o9b2o4bo3bo2b4o6bo5b4o3bobo4bo4b2ob$2o2bo2bo3bo2b2obob2o7bo36bobo3b4o2bobobo13bo12bo2bo3bo2bo3bo5bo2b2obo6b2obo3b3obobob$o2bob2o2b3o5b2obo2b5o2b2o21b3o11bo3bo3bo3bo2b2o9bo3b3o3
 bo4bo3b3o7bo2b2obob2o4b2o4bo3bob3o2b2ob$bobo3b2o3b4o4bobo5b2obo22b2ob3o7bo2bob3o4bo2b2o2b3obo6b3o2bo3bo2bo3b2o3bo2bo3b2o2bob6o6b2ob3o5bob$2obob2o2b3o4b4obob2obo3bo6b2ob3ob4o5bo4b2o4b3o4b2obobob3obo7bo2b3o5bo2bo3b2o7b2o4bob2o6b2o4b2o7b2o2b2o2b$bo4bobo
@@ -20697,9 +20354,1401 @@ obob2o2b3ob2o9b2o3b2o5b2o9bo3b2o9b4ob$3b5o8bo6bobobo7b2o5bo3b3o7b2o3b5o15b4o6bo2
 3o2bo2b2o4b2obo2bo3bob2obo3bobo3bo6bob2o2bo5bobo12bo8bo6bobo5bo6b3o2b3ob2obo2b2ob2o8b3obobo2b3o3b3o2bo$bo4bobo4b2o6bobobobob3o12b5o5bob2o7b2o4bo4bo4bo4b3o3bobo6bo2bo7b3o2b2o3bo13bob3o4b2o2b2ob2o2b$2obob2o2b3o4b4obob2obo3bo6b2ob3ob4o5bo4b2o4b3o4b2obob
 ob3obo7bo2b3o5bo2bo3b2o7b2o4bob2o6b2o4b2o7b2o2b2o2b$bobo3b2o3b4o4bobo5b2obo22b2ob3o7bo2bob3o4bo2b2o2b3obo6b3o2bo3bo2bo3b2o3bo2bo3b2o2bob6o6b2ob3o5bob$o2bob2o2b3o5b2obo2b5o2b2o21b3o11bo3bo3bo3bo2b2o9bo3b3o3bo4bo3b3o7bo2b2obob2o4b2o4bo3bob3o2b2ob$2o2bo
 2bo3bo2b2obob2o7bo36bobo3b4o2bobobo13bo12bo2bo3bo2bo3bo5bo2b2obo6b2obo3b3obobob$5b2o7bobo8b3o44b2o4bo12b2ob2o9b2o4bo3bo2b4o6bo5b4o3bobo4bo4b2ob$25bo88bo14bo26b!`,
-
 "wavy": `x = 21, y = 58, rule = B3/S23
 13bobo5b$13bo2bo4b$16b2o3b$18bo2b$16b4ob$8bo6bo4bo$8bob2o5bo2bo$11bo5bo2bo$11bo7bob$13bob4o2b$13bo3bo3b$4b6o6bo4b$3bo5bo2b5o4b$9bo11b$3bo4bo3b5o4b$5b2o9bo4b$10bo2bo3bo3b$7bobo3bob4o2b$6bo4bo7bob$6bo4bo5bo2bo$6b2o2b2o5bo2b
 o$8b2o5bo4bo$16b4ob$18bo2b$16b2o3b$13bo2bo4b$13bobo5b$21b$21b$21b$21b$10bobo8b$10bo2bo7b$13b2o6b$15bo5b$13b4o4b$5b2o5bo4bo3b$3b2o2b2o5bo2bo3b$3bo4bo5bo2bo3b$3bo4bo7bo4b$4bobo3bob4o5b$7bo2bo3bo6b$2b2o9bo7b$o4bo3b5o7b$6bo14b$o5bo2b5o7b$b6o6bo7b$10bo3bo
-6b$10bob4o5b$8bo7bo4b$8bo5bo2bo3b$5bob2o5bo2bo3b$5bo6bo4bo3b$13b4o4b$15bo5b$13b2o6b$10bo2bo7b$10bobo8b!`
+6b$10bob4o5b$8bo7bo4b$8bo5bo2bo3b$5bob2o5bo2bo3b$5bo6bo4bo3b$13b4o4b$15bo5b$13b2o6b$10bo2bo7b$10bobo8b!`,
+"qbstretch": `
+#O by amling » August 27th, 2023, 6:24 pm
+x = 159, y = 4597, rule = B3/S23
+51bo5bo101b$50b3o3b3o100b$50bob2o2bob2o99b$51b3o5bo99b$51b3o4b3o98b$51b2o3bo102b$56bo4bo97b$56bo102b$58b2obo97b$58bo100b$159b$64bo94b$58b3o2b3o93b$63bob2o92b$58bo5b3o92b$23b3o11b3o18b3o3b2o93b$23bo2bo10bo2bo16bo2b2o97b
+$23bo6b3o4bo19b2o100b$23bo5bo2bo4bo12b3o4bo2b2o5bo91b$24bobo2bo3bo4bobo8bo2bo8bo4b3o90b$30b4o18bo12b2obo90b$32bo15bo3bo5b3o4b3o91b$52bo5bobo4b3o91b$38bo10bobo6bo3bo3b2o91b$24bo12b3o21b2o96b$23b3o11bob2o20bo97b$22b2obo12b3o118b$22b3o13b2o119b$22b3o33b
+2o99b$23b2o6b3o23bo2b2o97b$29b2ob2o24b3obo96b$63bo95b$60bobo96b$32b3o25bobo96b$32b3o23bo2bobo95b$32b2o24b3o2b2o94b$30b4o26b3ob2o93b$31b2o28b2obo94b$61b3o95b$159b$159b$159b$159b$159b$159b$159b$40bo118b$39b3o117b$38b2obo117b$30bo7b3o118b$28b2o8b3o13b2o
+103b$29b2o8b2o13b2o103b$159b$159b$64b3o92b$64bo94b$67bo91b$64bo2bo91b$159b$65b2o92b$159b$159b$159b$159b$54b3o102b$54bo104b$55bo3b3o97b$59bo2bo96b$59bo99b$59bo3bo95b$59bo99b$60bobo96b$159b$159b$44b3o112b$44bo114b$45bo113b$159b$159b$20bo138b$18b2o139b$
+19b2o138b$159b$159b$34b3o122b$34bo124b$35bo123b$159b$159b$159b$159b$159b$159b$159b$24b3o132b$24bo134b$25bo133b$159b$159b$159b$159b$159b$159b$159b$14b3o142b$14bo144b$15bo143b$159b$159b$10bo148b$8b2o149b$9b2o148b$159b$159b$4b3o152b$4bo154b$5bo153b$159b
+$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159
+b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$15
+9b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159
+b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$159b$29bo13bo115b$28b3o11b3o114b$27b2obo5bo4b2obo114b$27b3o5b3o3b3o115b$3b2o23b2o5bob2o3b2o115b$3b2o55b3o3b3o90b$60bo2bo2bo2bo89b$60bo5bo2bo89b$38bo21bo3bo2bo91b$36b2o4b3o15bo7b3o88b$28b3o11bo2
+bo15bobo3bob2o88b$27bo2bo8bo2bo22b3o91b$30bo11bo24bo2bo88b$26bo3bo4bob2o4bobo21b3o89b$30bo4b2o31b2o89b$27bobo129b$69bo3b3o83b$39b2o28bo3bo2bo82b$41bo26bo4bo85b$39b2o27bo4bo85b$67b2ob2o2bobo82b$37bo29bo2b2o87b$36b2o23bo4b4o89b$35b2o2bobo18b3o4b5o4b3o8
+0b$3b2o31bo2b3o18bob2o5bo2bo2bo2bo80b$3b2o31bo3b2o19b3o5bo2bo5bo80b$37bobo21b3o5bo2bobo3bo80b$37b3o21b2o7b2o6bo80b$75bobo81b$159b$159b$69bo89b$44b3o21bobo88b$43bo2bo21bobo88b$46bo112b$42bo3bo112b$46bo112b$43bobo113b$159b$67bo91b$67b2o90b$68b2o3bo85b$
+68b5obo84b$65bob2obo3bo84b$3b2o60b3o2bo2bo85b$3b2o61bo3b2o87b$159b$30bo37b2o5b2o82b$29bo38b2o6b2o81b$29b3o37b2o4b3o81b$70bo5b2o81b$74bo2bo81b$75b2o82b$159b$159b$159b$159b$159b$159b$159b$159b$159b$71bo87b$64b2o4b2o87b$3b2o59b2o4bobo86b$3b2o154b$159b$1
+59b$159b$159b$70bo88b$69b3o87b$61bo6b2obo87b$60b2o6b3o88b$60bobo5b3o88b$69b2o88b$159b$20bo138b$19bo139b$19b3o137b$159b$159b$51bo107b$50b2o107b$3b2o45bobo106b$3b2o154b$159b$159b$159b$159b$159b$159b$41bo117b$40b2o117b$40bobo116b$159b$159b$159b$159b$159
+b$159b$159b$31bo127b$30b2o127b$3b2o25bobo126b$3b2o154b$159b$10bo148b$9bo149b$9b3o147b$159b$159b$21bo137b$20b2o137b$20bobo136b$159b$159b$159b$159b$159b$159b$159b$11bo147b$10b2o147b$3b2o5bobo146b$3b2o154b$159b$159b$27b3o3b3o123b$27bo2bo2bo2bo122b$27bo5
+bo2bo122b$27bo3bo2bo124b$4b2o21bo7b3o121b$3bo2bo21bobo3bob2o121b$3bo2bo25b3o124b$4b2o28bo2bo121b$34b3o122b$35b2o122b$159b$36bo3b3o116b$36bo3bo2bo115b$35bo4bo118b$35bo4bo118b$34b2ob2o2bobo115b$3b2o29bo2b2o120b$3b2o23bo4b4o122b$27b3o4b5o4b3o113b$27bob2
+o5bo2bo2bo2bo113b$28b3o5bo2bo5bo113b$28b3o5bo2bobo3bo113b$28b2o7b2o6bo113b$42bobo114b$4b2o153b$3bo2bo152b$3bo2bo29bo122b$4b2o29bobo121b$35bobo121b$159b$159b$159b$159b$159b$34bo124b$34b2o123b$3b2o30b2o3bo118b$3b2o30b5obo117b$32bob2obo3bo117b$32b3o2bo2
+bo118b$33bo3b2o120b$159b$35b2o5b2o115b$35b2o6b2o114b$4b2o30b2o4b3o114b$3bo2bo30bo5b2o114b$3bo2bo34bo2bo114b$4b2o36b2o115b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o33bo120b$31b2o4b2o120b$31b2o4bobo119b$159b$159b$159b$159b$4b2o153b$3bo2bo30
+bo121b$3bo2bo29b3o120b$4b2o22bo6b2obo120b$27b2o6b3o121b$27bobo5b3o121b$36b2o121b$159b$159b$159b$159b$159b$3b2o154b$3b2o13bo140b$17b2o140b$17bobo139b$159b$159b$159b$159b$4b2o20b3o3b3o124b$3bo2bo18bo2bo2bo2bo124b$3bo2bo21bo6bo123b$4b5o15bo3bo2bo2b2o123
+b$6b3o19bo6bo123b$7bobo15bobo4b6o121b$32b2o2b2o121b$35b2o122b$35bo123b$35b2o122b$33bob2o122b$34b2o3b3o117b$3b2o33bo2bo117b$3b2o29b2o5bo117b$33bo3bo3bo117b$36bo3bo118b$33b4o122b$27bo5bo2b3o120b$26b3o13b3o114b$25b2obo13bo2bo113b$4b2o19b3o7bo2bo3bo116b$
+3bobo19b3o6b3o5bo3bo112b$3b2o21b2o6bo4bo2bo116b$36b3o4bobo113b$159b$159b$159b$35bo123b$35bo123b$159b$159b$159b$3b2o154b$3b2o154b$159b$33b2o124b$33bo4bo120b$36b2obo119b$40bo118b$38bo120b$4b2o24b2obob2o122b$3bobo25b4o2bo121b$3b2o27b2o3bo4bo116b$34b3o5b
+o116b$34bo6bobo115b$36bo122b$35b2o6b2o114b$42b2o115b$42bo116b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$36b2o121b$30b2o3b2o122b$4b2o24b2o5bo121b$3bobo153b$3b2o154b$159b$159b$36bo122b$35b3o121b$35bob2o120b$26b2o8b3o120b$25b2o9b3o120b$27bo8b
+2o121b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$16b2o141b$15b2o142b$4b2o11bo141b$3bobo153b$3b2o154b$159b$159b$159b$159b$159b$6b2o151b$5b2o152b$7bo151b$159b$3b2o154b$3b2o154b$159b$159b$159b$2b3o154b$2b3o154b$bo3bo153b$o5bo152b$bo3bo153b$2b3o154b$159
+b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$b2o156b$159b$159b$159b$159b$2o3b2o152b$b5o153b$b2ob2o153b$b2ob2o153b$2b3o154b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$3bo155b$2b3o154b$b5o153b
+$obobobo152b$2o3b2o152b$159b$159b$3bo155b$2bobo154b$2bobo154b$3bo155b$3b2o154b$3b2o154b$3b2o154b$159b$159b$159b$2b3o154b$2b3o154b$bo3bo153b$o5bo152b$bo3bo153b$2b3o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$b2o1
+56b$159b$159b$159b$159b$2o3b2o152b$b5o153b$b2ob2o153b$b2ob2o153b$2b3o154b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$3bo155b$2b3o154b$b5o153b$obobobo152b$2o3b2o152b$159b$159b$3bo155b$2bobo154b$2bobo154b$3bo155b$3b2o154b$
+3b2o154b$3b2o154b$159b$159b$159b$2b3o154b$2b3o154b$bo3bo153b$o5bo152b$bo3bo153b$2b3o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$b2o156b$159b$159b$159b$159b$2o3b2o152b$b5o153b$b2ob2o153b$b2ob2o153b$2b3o154b$159b$
+159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$159b$159b$159b$3bo155b$2b3o154b$b5o153b$obobobo152b$2o3b2o152b$159b$159b$3bo155b$2bobo154b$2bobo154b$3bo155b$3b2o154b$3b2o154b$3b2o154b$159b$159b$159b$2b3o154b$2b3o154b$bo3bo153b$o5bo152b$bo3bo153b
+$2b3o154b$159b$159b$159b$159b$159b$159b$159b$159b$159b$3b2o154b$3b2o154b$159b$159b$159b$b2o156b$159b$58b3o3b3o92b$58bo2bo2bo2bo91b$58bo5bo2bo91b$2o3b2o51bo3bo2bo93b$b5o52bo7b3o90b$b2ob2o53bobo3bob2o90b$b2ob2o57b3o93b$2b3o60bo2bo90b$65b3o91b$66b2o91b$
+159b$67bo3b3o85b$67bo3bo2bo84b$3b2o61bo4bo87b$3b2o61bo4bo87b$27bo13bo23b2ob2o2bobo84b$26b3o11b3o22bo2b2o89b$25b2obo5bo4b2obo16bo4b4o91b$25b3o5b3o3b3o16b3o4b5o4b3o82b$26b2o4bo2b2o3b2o16bob2o5bo2bo2bo2bo82b$32b3o24b3o5bo2bo5bo82b$3bo55b3o5bo2bobo3bo82b
+$2b3o54b2o4b2o2bo6bo82b$b5o57b2o8bobo83b$obobobo26bo6b3o26bo89b$2o3b2o19b3o4bo6bo2bo25bo89b$25bo2bo4bo6bo24bobo91b$28bo5bobo3bo25bobo90b$3bo20bo3bo5bobo4bobo115b$2bobo23bo5b3o122b$2bobo20bobo37bo93b$3bo61b3o91b$3b2o30bo28bo6bo87b$3b2o28b2ob2o26b2ob3o
+2bo86b$3b2o29bo3bo25b2o6bo86b$35b3o26bobo2bo2bo86b$36bo28b2o92b$66b4ob2o86b$2b3o63bo90b$2b3o66b2o2b2o82b$bo3bo65b3o2bo82b$o5bo65bobobo82b$bo3bo67b3o83b$2b3o69bo84b$159b$159b$159b$42b3o114b$41bo2bo114b$44bo114b$40bo3bo114b$44bo114b$41bobo115b$3b2o154b
+$3b2o57b2o95b$62b2o7bo87b$30bo39b2o87b$29bo40bobo86b$b2o26b3o127b$159b$159b$159b$159b$2o3b2o152b$b5o153b$b2ob2o55bo6bo90b$b2ob2o54b2o5b3o89b$2b3o55bobo3b2obo89b$66b3o90b$66b3o90b$67b2o90b$159b$159b$3b2o154b$3b2o154b$51bo107b$50b2o107b$50bobo106b$159b
+$159b$159b$3bo155b$2b3o154b$b5o153b$obobobo152b$2o3b2o34bo117b$20bo19b2o117b$19bo20bobo116b$3bo15b3o137b$2bobo154b$2bobo154b$3bo155b$3b2o154b$3b2o154b$3b2o154b$31bo127b$30b2o127b$30bobo126b$2b3o154b$2b3o154b$bo3bo153b$o5bo152b$bo3bo51bo5bo95b$2b3o51b
+3o3b3o94b$55b2obo2b2o2bo93b$21bo33b3o3b4o94b$20b2o33b3o5bo2bo92b$20bobo33b2o5bo2bo92b$63bo2bo92b$63bob2o92b$65bo93b$63bo2bo92b$63bobo93b$3b2o7b2o50b2o4bo88b$3b2o6bo2bo54b3o87b$11bo2bo49b2o2b2obo87b$12b2o50b2o2b3o88b$64bo3b3o88b$b2o60b2ob3o90b$67bo91b
+$56b3o3bo10bo85b$56bo2bo2bo4bo4b3o84b$56bo8b3o4bob2o83b$2o3b2o49bo3bo12b3o83b$b5o50bo16b3o83b$b2ob2o51bobo13b2o84b$b2ob2o153b$2b3o58b2o94b$159b$65b3o91b$67bo91b$65bo2bo90b$159b$3b2o7b2o50bo2bo91b$3b2o6bo2bo49b2o93b$11bo2bo51b2ob2o88b$12b2o53bobo89b$6
+7bo91b$159b$159b$159b$3bo155b$2b3o154b$b5o153b$obobobo152b$2o3b2o152b$159b$159b$3bo155b$2bobo55b2o97b$2bobo55b2o97b$3bo155b$3b2o154b$3b2o7b2o145b$3b2o6bo2bo51b3o3bo86b$11bo2bo57bo86b$12b2o50bo3bo2b2o86b$68bo90b$2b3o59b2ob2o90b$2b3o62bo91b$bo3bo153b$o
+5bo152b$bo3bo153b$2b3o154b$62b2o95b$62bobo94b$62bo96b$159b$65b3o91b$60b2o2bo2bo91b$60b2o5bo91b$63bo3bo91b$67bo91b$3b2o7b2o50bobo92b$3b2o6bo2bo37b2o105b$11bo2bo37bobo104b$12b2o38bo106b$159b$b2o156b$159b$159b$159b$159b$2o3b2o152b$b5o36b2o115b$b2ob2o36b
+obo114b$b2ob2o36bo116b$2b3o154b$159b$159b$159b$159b$159b$3b2o7b2o145b$3b2o6bo2bo17b2o125b$11bo2bo17bobo124b$12b2o18bo126b$159b$159b$159b$159b$3bo155b$2b3o154b$b5o153b$obobobo15b2o135b$2o3b2o15bobo134b$22bo136b$159b$3bo155b$2bobo154b$2bobo66bo5bo81b$3
+bo66b3o3b3o80b$3b2o65bob2o2bob2o79b$3b2o7b2o57b3o5bo79b$3b2o6bobo57b3o4b3o78b$11b2o58b2o3bo82b$76bo4bo77b$76bo82b$2b3o73b2obo77b$2b3o73bo80b$bo3bo153b$o5bo77bo74b$bo3bo72b3o2b3o73b$2b3o78bob2o72b$78bo5b3o72b$43b3o11b3o18b3o3b2o73b$43bo2bo10bo2bo16bo2
+b2o77b$43bo6b3o4bo19b2o80b$43bo5bo2bo4bo12b3o4bo2b2o5bo71b$44bobo2bo3bo4bobo8bo2bo8bo4b3o70b$50b4o18bo12b2obo70b$52bo15bo3bo5b3o4b3o71b$72bo5bobo4b3o71b$3b2o7b2o44bo10bobo6bo3bo3b2o71b$3b2o6bobo30bo12b3o21b2o76b$11b2o30b3o11bob2o20bo77b$42b2obo12b3o9
+8b$42b3o13b2o99b$b2o39b3o114b$43b2o7b2o105b$50bob2o105b$51bo107b$159b$2o3b2o152b$b5o153b$b2ob2o153b$b2ob2o46bo24b2o80b$2b3o46b3o23b2o2b2o76b$50bobob2o25b3o75b$49b3ob2obo24b3o75b$49b3obo2bo102b$53bo20b2obob3o77b$51bo22bo4bobo77b$3b2o7b2o38bob2o19bo5bo
+77b$3b2o6bobo38b2o24b3o4b3o71b$11b2o65bobo5bo72b$60bo19bo5b3o70b$59b3o17b2o5b3o70b$58b2obo24bobo70b$58b3o25b2o71b$58b3o98b$3bo55b2o98b$2b3o154b$b5o153b$obobobo152b$2o3b2o152b$159b$159b$3bo155b$2bobo74b3o77b$2bobo69b2o3bo79b$3bo70b2o4bo78b$3b2o154b$3b
+2o7b2o145b$3b2o6bobo31bo113b$11b2o30b2o114b$44b2o33b3o77b$79bo2bo76b$2b3o74bo79b$2b3o64b3o7bo3bo75b$bo3bo63bo9bo79b$o5bo63bo9bobo76b$bo3bo153b$2b3o154b$159b$159b$159b$159b$159b$59b3o97b$59bo99b$60bo98b$159b$3b2o7b2o145b$3b2o6bobo145b$11b2o146b$159b$1
+59b$b2o156b$49b3o107b$49bo109b$50bo108b$159b$2o3b2o152b$b5o29bo123b$b2ob2o27b2o124b$b2ob2o28b2o123b$2b3o154b$159b$39b3o117b$39bo119b$40bo118b$159b$3b2o7b2o145b$3b2o6bobo145b$11b2o146b$159b$159b$159b$29b3o127b$29bo129b$3bo26bo128b$2b3o154b$b5o153b$obo
+bobo152b$2o3b2o152b$159b$159b$3bo24bo130b$2bobo19b4obo129b$2bobo17b3ob2obo129b$3bo18b2o4bo130b$3b2o13b3obo136b$3b2o7b2o5bob3o135b$3b2o6bobo6bo2b2o134b$11b2o146b$159b$159b$2b3o154b$2b3o154b$bo3bo153b$o5bo152b$bo3bo153b$2b3o154b$159b$159b$159b$159b$159
+b$159b$159b$159b$159b$3b2o7b2o9b2o134b$3b2o6bobo9b2o134b$11b2o146b$159b$159b$b2o156b$159b$159b$159b$159b$2o3b2o152b$b5o153b$b2ob2o153b$b2ob2o153b$2b3o154b$159b$65b3o3b3o85b$64bo2bo2bo2bo85b$67bo6bo84b$63bo3bo2bo2b2o84b$3b2o7b2o9b2o42bo6bo84b$3b2o6bob
+o9b2o39bobo4b6o82b$11b2o58b2o2b2o82b$74b2o83b$74bo84b$74b2o83b$72bob2o83b$73b2o3b3o78b$3bo73bo2bo78b$2b3o68b2o5bo78b$b5o66bo3bo3bo78b$obobobo68bo3bo79b$2o3b2o65b4o83b$66bo5bo2b3o81b$65b3o13b3o75b$3bo60b2obo8bo4bo2bo74b$2bobo59b3o8b2o4bo77b$2bobo59b3o
+5bo8bo3bo73b$3bo61b2o3b2o2b2o5bo77b$3b2o69b2o6bobo74b$3b2o7b2o9b2o46b2o4bo81b$3b2o6bobo9b2o48bobobo81b$11b2o59b2obob2o80b$73bobob2o80b$74bo2b2o80b$2b3o69b2obo81b$2b3o71bo82b$bo3bo153b$o5bo152b$bo3bo153b$2b3o154b$159b$159b$159b$159b$159b$73b3o83b$74b2
+o83b$70b2obo85b$70b7o82b$3b2o7b2o9b2o44bo2b4o4bo78b$3b2o6bobo9b2o45b2obo3bobob2o76b$11b2o58b3o85b$71b3o2b2obo79b$75b2o2bo79b$b2o71bobob2o79b$74bobo3bo78b$75b4ob3o76b$78b2obo2bo74b$82b2o75b$2o3b2o152b$b5o153b$b2ob2o153b$b2ob2o153b$2b3o154b$159b$73b2o8
+4b$72b2o85b$74bo84b$69b2o88b$3b2o7b2o9b2o44b2o88b$3b2o6bobo9b2o50bo83b$11b2o61b3o82b$74bob2o81b$75b3o81b$75b3o81b$63b2o10b2o82b$62b2o95b$3bo60bo94b$2b3o154b$b5o153b$obobobo152b$2o3b2o152b$159b$159b$3bo155b$2bobo48b2o104b$2bobo47b2o105b$3bo50bo104b$3b
+2o154b$3b2o7b2o9b2o134b$3b2o6bobo9b2o134b$11b2o146b$159b$159b$2b3o154b$2b3o38b2o114b$bo3bo36b2o115b$o5bo37bo114b$bo3bo153b$2b3o154b$159b$159b$159b$159b$159b$33b2o124b$32b2o125b$34bo124b$159b$3b2o7b2o9b2o134b$3b2o6bobo9b2o134b$11b2o146b$159b$159b$b2o1
+56b$23b2o24bo13bo95b$22b2o24b3o11b3o94b$24bo22b2obo5bo4b2obo94b$47b3o5b3o3b3o95b$2o3b2o41b2o5bob2o3b2o95b$b5o74b3o3b3o70b$b2ob2o74bo2bo2bo2bo69b$b2ob2o74bo5bo2bo69b$2b3o53bo21bo3bo2bo71b$56b2o4b3o15bo7b3o68b$48b3o11bo2bo15bobo3bob2o68b$16bo30bo2bo8bo
+2bo22b3o71b$15b4o31bo11bo24bo2bo68b$14b2obobo26bo3bo4bob2o4bobo21b3o69b$3b2o8b3obo2bo2b2o25bo4b2o31b2o69b$3b2o4bo4b2obobo3b2o22bobo109b$7b2o6b4o38b2o30bo3b3o63b$16bo40b2o30bo3bo2bo62b$55bo2bo29bo4bo65b$55bo32bo4bo65b$55bo2bo28b2ob2o2bobo62b$56b2o29bo
+2b2o67b$3bo77bo4b4o69b$2b3o75b3o4b5o4b3o60b$b5o74bob2o5bo2bo2bo2bo60b$obobobo74b3o5bo2bo5bo60b$2o3b2o74b3o5bo2bobo3bo60b$81b2o7b2o6bo60b$95bobo61b$3bo155b$2bobo154b$2bobo7bobo74bo69b$3bo6bo3bo40bo8b3o21b4o67b$3b2o5bo43bo8bo2bo22bo2bo66b$3b2o4bo4bo8b2
+o29b3o9bo24b2o66b$3b2o5bo12b2o37bo3bo92b$10bo3bo51bo22bo69b$12bobo48bobo23b4o66b$91b3o65b$2b3o85b2o2bo64b$2b3o87bobo64b$bo3bo86b2o65b$o5bo152b$bo3bo153b$2b3o154b$159b$159b$159b$159b$159b$159b$12b2o145b$12bo2bo143b$4b5o7bo67b2o73b$3bo5bo6bo6b2o59b2o73
+b$3bo3b2o7bo6b2o134b$4bo7bo2bo143b$12b2o145b$96bo62b$b2o88bob3obo61b$91b3obobo61b$91b4obo62b$45bo43b2ob2o65b$44bo46bo67b$2o3b2o37b3o44bo67b$b5o153b$b2ob2o153b$b2ob2o80bo72b$2b3o80b2o72b$85bobo71b$90bo68b$16bo72b3o67b$15b4o69b2obo67b$14b2obobo68b3o68b
+$3b2o8b3obo2bo2b2o59bobob3o68b$3b2o9b2obobo3b2o60bo3b2o68b$15b4o140b$16bo59bo82b$75b2o82b$75bobo81b$159b$159b$3bo155b$2b3o154b$b5o153b$obobobo152b$2o3b2o152b$66bo92b$65b2o92b$3bo61bobo91b$2bobo154b$2bobo7bobo144b$3bo6bo3bo20bo123b$3b2o5bo23bo124b$3b2
+o4bo4bo8b2o9b3o122b$3b2o5bo12b2o134b$10bo3bo144b$12bobo41bo102b$55b2o102b$2b3o50bobo101b$2b3o154b$bo3bo153b$o5bo152b$bo3bo153b$2b3o154b$159b$159b$46bo112b$45b2o112b$45bobo111b$159b$12b2o145b$12bo2bo143b$4b5o7bo142b$3bo5bo6bo6b2o134b$3bo3b2o7bo6b2o134
+b$4bo7bo2bo143b$12b2o22bo122b$35b2o122b$b2o32bobo121b$159b$159b$25bo133b$24bo134b$2o3b2o17b3o132b$b5o153b$b2ob2o153b$b2ob2o20bo132b$2b3o20b2o20b3o3b3o103b$25bobo19bo2bo2bo2bo102b$47bo5bo2bo102b$16bo30bo3bo2bo104b$15b4o28bo7b3o101b$14b2obobo28bobo3bob
+2o101b$3b2o8b3obo2bo2b2o27b3o104b$3b2o9b2obobo3b2o29bo2bo101b$15b4o35b3o102b$16bo38b2o102b$159b$56bo3b3o96b$56bo3bo2bo95b$55bo4bo98b$3bo20b2o29bo4bo98b$2b3o18bo2bo27b2ob2o2bobo95b$b5o17bo2bo27bo2b2o100b$obobobo17b2o22bo4b4o102b$2o3b2o40b3o4b5o4b3o93b
+$47bob2o5bo2bo2bo2bo93b$48b3o5bo2bo5bo93b$3bo44b3o5bo2bobo3bo93b$2bobo43b2o7b2o6bo93b$2bobo7bobo47bobo94b$3bo6bo3bo144b$3b2o5bo148b$3b2o4bo4bo8b2o31bo102b$3b2o5bo12b2o30b4o100b$10bo3bo41bo2bo99b$12bobo43b2o99b$159b$2b3o51bo102b$2b3o51b4o99b$bo3bo52b3
+o98b$o5bo17b2o31b2o2bo97b$bo3bo17bo2bo32bobo97b$2b3o18bo2bo32b2o98b$24b2o133b$159b$159b$159b$159b$159b$12b2o145b$12bo2bo143b$4b5o7bo142b$3bo5bo6bo6b2o134b$3bo3b2o7bo6b2o134b$4bo7bo2bo35b2o106b$12b2o37b2o106b$159b$b2o156b$159b$63bo95b$24b2o32bob3obo94
+b$23bo2bo31b3obobo94b$2o3b2o16bo2bo31b4obo95b$b5o18b2o30b2ob2o98b$b2ob2o52bo100b$b2ob2o52bo100b$2b3o154b$159b$53bo105b$16bo35b2o105b$15b4o33bobo104b$14b2obobo37bo101b$3b2o8b3obo2bo2b2o31b3o100b$3b2o9b2obobo3b2o30b2obo100b$15b4o36b3o101b$16bo34bobob3o
+101b$52bo3b2o101b$159b$43bo115b$42b2o115b$3bo20b2o16bobo114b$2b3o18bo2bo132b$b5o17bo2bo132b$obobobo17b2o133b$2o3b2o152b$159b$159b$3bo155b$2bobo28bo125b$2bobo7bobo17b2o125b$3bo6bo3bo17bobo11b3o3b3o104b$3b2o5bo34bo2bo2bo2bo104b$3b2o4bo4bo8b2o23bo6bo103
+b$3b2o5bo12b2o19bo3bo2bo2b2o103b$10bo3bo33bo6bo103b$12bobo30bobo4b6o101b$52b2o2b2o101b$2b3o50b2o102b$2b3o50bo103b$bo3bo49b2o102b$o5bo17b2o27bob2o102b$bo3bo17bobo28b2o3b3o97b$2b3o18b2o33bo2bo97b$54b2o5bo97b$53bo3bo3bo97b$56bo3bo98b$53b4o102b$47bo5bo2b
+3o100b$46b3o13b3o94b$12b2o31b2obo13bo2bo93b$12bo2bo29b3o7bo2bo3bo96b$4b5o7bo28b3o6b3o5bo3bo92b$3bo5bo6bo6b2o21b2o6bo4bo2bo96b$3bo3b2o7bo6b2o31b3o4bobo93b$4bo7bo2bo143b$12b2o145b$159b$b2o51b2o103b$53bo2bo102b$54b3obo100b$24b2o31b2o100b$23bobo30b3o100b
+$2o3b2o16b2o31bo102b$b5o48b2o2bo100b$b2ob2o49b2o2b2o98b$b2ob2o54bo98b$2b3o52b2obo98b$58b2o99b$159b$16bo142b$15b4o140b$14b2obobo139b$3b2o8b3obo2bo2b2o134b$3b2o9b2obobo3b2o134b$15b4o140b$16bo142b$159b$159b$159b$50b2o107b$3bo20b2o24b2o107b$2b3o18bobo133
+b$b5o17b2o134b$obobobo54bo97b$2o3b2o53b3o96b$61bobo95b$60b2obo95b$3bo57b2o96b$2bobo56bo97b$2bobo7bobo144b$3bo6bo3bo144b$3b2o5bo148b$3b2o4bo4bo8b2o134b$3b2o5bo12b2o26b2o106b$10bo3bo35b2o107b$12bobo37bo3bo102b$55b3o101b$2b3o50bob2o100b$2b3o51b3o100b$bo
+3bo50b3o100b$o5bo17b2o26bo3b2o101b$bo3bo17bobo26bo106b$2b3o18b2o134b$41b2o116b$40b2o117b$42bo116b$159b$159b$159b$12b2o145b$12bo2bo143b$4b5o7bo142b$3bo5bo6bo6b2o134b$3bo3b2o7bo6b2o6b2o126b$4bo7bo2bo14b2o127b$12b2o18bo126b$159b$b2o156b$159b$24b3o132b$2
+4bobo132b$23bo2bo132b$2o3b2o16b3o133b$b5o17b3o133b$b2ob2o16bobo134b$b2ob2o15bo2bo134b$2b3o16bo2bo134b$22b2o135b$159b$16bo142b$15b4o140b$14b2obobo139b$3b2o8b3obo2bo2b2o134b$3b2o9b2obobo3b2o134b$15b4o140b$16bo142b$159b$159b$159b$159b$3bo19bo135b$2b3o17
+b3o134b$b5o15b5o133b$obobobo13bobobobo132b$2o3b2o13b2o3b2o132b$159b$159b$3bo19bo135b$2bobo17bobo134b$2bobo7bobo7bobo134b$3bo6bo3bo8bo135b$3b2o5bo12b2o134b$3b2o4bo4bo8b2o134b$3b2o5bo12b2o134b$10bo3bo144b$12bobo144b$159b$2b3o17b3o134b$2b3o17b3o134b$bo3
+bo15bo3bo133b$o5bo13bo5bo132b$bo3bo15bo3bo133b$2b3o17b3o134b$159b$159b$159b$159b$159b$159b$12b2o145b$12bo2bo143b$4b5o7bo142b$3bo5bo6bo6b2o134b$3bo3b2o7bo6b2o134b$4bo7bo2bo143b$12b2o145b$159b$b2o18b2o136b$159b$159b$159b$159b$2o3b2o13b2o3b2o132b$b5o15b
+5o133b$b2ob2o15b2ob2o133b$b2ob2o15b2ob2o133b$2b3o17b3o134b$159b$159b$16bo142b$15b4o140b$14b2obobo139b$3b2o8b3obo2bo2b2o134b$3b2o9b2obobo3b2o134b$15b4o140b$16bo142b$159b$159b$159b$159b$3bo19bo135b$2b3o17b3o134b$b5o15b5o133b$obobobo13bobobobo132b$2o3b2
+o13b2o3b2o132b$159b$159b$3bo19bo135b$2bobo17bobo134b$2bobo7bobo7bobo134b$3bo6bo3bo8bo135b$3b2o5bo12b2o134b$3b2o4bo4bo8b2o134b$3b2o5bo12b2o134b$10bo3bo144b$12bobo144b$159b$2b3o17b3o134b$2b3o17b3o134b$bo3bo15bo3bo133b$o5bo13bo5bo132b$bo3bo15bo3bo133b$2
+b3o17b3o134b$159b$159b$159b$159b$159b$159b$12b2o145b$12bo2bo143b$4b5o7bo142b$3bo5bo6bo6b2o134b$3bo3b2o7bo6b2o134b$4bo7bo2bo143b$12b2o145b$159b$b2o18b2o136b$159b$159b$159b$159b$2o3b2o13b2o3b2o132b$b5o15b5o133b$b2ob2o15b2ob2o133b$b2ob2o15b2ob2o133b$2b3
+o17b3o134b$159b$159b$16bo142b$15b4o140b$14b2obobo139b$3b2o8b3obo2bo2b2o134b$3b2o9b2obobo3b2o134b$15b4o140b$16bo142b$159b$159b$159b$159b$3bo19bo135b$2b3o17b3o134b$b5o15b5o133b$obobobo13bobobobo132b$2o3b2o13b2o3b2o132b$159b$159b$3bo19bo135b$2bobo17bobo
+134b$2bobo7bobo7bobo134b$3bo6bo3bo8bo135b$3b2o5bo12b2o134b$3b2o4bo4bo8b2o134b$3b2o5bo12b2o134b$10bo3bo144b$12bobo144b$159b$2b3o17b3o134b$2b3o17b3o134b$bo3bo15bo3bo133b$o5bo13bo5bo132b$bo3bo15bo3bo133b$2b3o17b3o134b$159b$159b$159b$159b$159b$159b$12b2o
+145b$12bo2bo143b$4b5o7bo142b$3bo5bo6bo6b2o134b$3bo3b2o7bo6b2o134b$4bo7bo2bo143b$12b2o145b$159b$b2o18b2o136b$159b$78b3o3b3o72b$78bo2bo2bo2bo71b$78bo5bo2bo71b$2o3b2o13b2o3b2o51bo3bo2bo73b$b5o15b5o52bo7b3o70b$b2ob2o15b2ob2o53bobo3bob2o70b$b2ob2o15b2ob2o
+57b3o73b$2b3o17b3o60bo2bo70b$85b3o71b$86b2o71b$16bo142b$15b4o68bo3b3o65b$14b2obobo67bo3bo2bo64b$3b2o8b3obo2bo2b2o61bo4bo67b$3b2o9b2obobo3b2o61bo4bo67b$15b4o28bo13bo23b2ob2o2bobo64b$16bo29b3o11b3o22bo2b2o69b$45b2obo5bo4b2obo16bo4b4o71b$45b3o5b3o3b3o16
+b3o4b5o4b3o62b$46b2o4bo2b2o3b2o16bob2o5bo2bo2bo2bo62b$52b3o24b3o5bo2bo5bo62b$3bo19bo55b3o5bo2bobo3bo62b$2b3o17b3o54b2o4b2o2bo6bo62b$b5o15b5o57b2o8bobo63b$obobobo13bobobobo26bo6b3o26bo69b$2o3b2o13b2o3b2o19b3o4bo6bo2bo25bo69b$45bo2bo4bo6bo24bobo71b$48b
+o5bobo3bo25bobo70b$3bo19bo20bo3bo5bobo4bobo95b$2bobo17bobo23bo5b3o102b$2bobo7bobo7bobo20bobo37bo73b$3bo6bo3bo8bo61b3o71b$3b2o5bo12b2o30bo28bo6bo67b$3b2o4bo4bo8b2o28b2ob2o26b2ob3o2bo66b$3b2o5bo12b2o29bo3bo25b2o6bo66b$10bo3bo40b3o26bobo2bo2bo66b$12bobo
+41bo28b2o72b$86b4ob2o66b$2b3o17b3o63bo70b$2b3o17b3o66b2o2b2o62b$bo3bo15bo3bo65b3o2bo62b$o5bo13bo5bo65bobobo62b$bo3bo15bo3bo67b3o63b$2b3o17b3o69bo64b$159b$159b$159b$62b3o94b$61bo2bo94b$64bo94b$12b2o46bo3bo94b$12bo2bo48bo94b$4b5o7bo44bobo95b$3bo5bo6bo6
+b2o134b$3bo3b2o7bo6b2o57b2o75b$4bo7bo2bo66b2o7bo67b$12b2o36bo39b2o67b$49bo40bobo66b$b2o18b2o26b3o107b$159b$159b$159b$159b$2o3b2o13b2o3b2o132b$b5o15b5o133b$b2ob2o15b2ob2o55bo6bo70b$b2ob2o15b2ob2o54b2o5b3o69b$2b3o17b3o55bobo3b2obo69b$86b3o70b$86b3o70b$
+16bo70b2o70b$15b4o140b$14b2obobo139b$3b2o8b3obo2bo2b2o134b$3b2o9b2obobo3b2o134b$15b4o52bo87b$16bo53b2o87b$70bobo86b$159b$159b$159b$3bo19bo135b$2b3o17b3o134b$b5o15b5o133b$obobobo13bobobobo132b$2o3b2o13b2o3b2o34bo97b$40bo19b2o97b$39bo20bobo96b$3bo19bo1
+5b3o117b$2bobo17bobo134b$2bobo7bobo7bobo134b$3bo6bo3bo8bo135b$3b2o5bo12b2o134b$3b2o4bo4bo8b2o134b$3b2o5bo12b2o134b$10bo3bo36bo107b$12bobo35b2o107b$50bobo106b$2b3o17b3o134b$2b3o17b3o134b$bo3bo15bo3bo133b$o5bo13bo5bo132b$bo3bo15bo3bo51bo5bo75b$2b3o17b3
+o51b3o3b3o74b$75b2obo2b2o2bo73b$41bo33b3o3b4o74b$40b2o33b3o5bo2bo72b$40bobo33b2o5bo2bo72b$83bo2bo72b$83bob2o72b$12b2o71bo73b$12bo2bo67bo2bo72b$4b5o7bo66bobo73b$3bo5bo6bo6b2o7b2o50b2o4bo68b$3bo3b2o7bo6b2o6bo2bo54b3o67b$4bo7bo2bo15bo2bo49b2o2b2obo67b$1
+2b2o18b2o50b2o2b3o68b$84bo3b3o68b$b2o18b2o60b2ob3o70b$87bo71b$76b3o3bo10bo65b$76bo2bo2bo4bo4b3o64b$76bo8b3o4bob2o63b$2o3b2o13b2o3b2o49bo3bo12b3o63b$b5o15b5o50bo16b3o63b$b2ob2o15b2ob2o51bobo13b2o64b$b2ob2o15b2ob2o133b$2b3o17b3o58b2o74b$159b$85b3o71b$1
+6bo70bo71b$15b4o66bo2bo70b$14b2obobo139b$3b2o8b3obo2bo2b2o7b2o50bo2bo71b$3b2o9b2obobo3b2o6bo2bo49b2o73b$15b4o12bo2bo51b2ob2o68b$16bo15b2o53bobo69b$87bo71b$159b$159b$159b$3bo19bo135b$2b3o17b3o134b$b5o15b5o133b$obobobo13bobobobo132b$2o3b2o13b2o3b2o132b
+$159b$159b$3bo19bo135b$2bobo17bobo55b2o77b$2bobo7bobo7bobo55b2o77b$3bo6bo3bo8bo135b$3b2o5bo12b2o134b$3b2o4bo4bo8b2o7b2o125b$3b2o5bo12b2o6bo2bo51b3o3bo66b$10bo3bo16bo2bo57bo66b$12bobo17b2o50bo3bo2b2o66b$88bo70b$2b3o17b3o59b2ob2o70b$2b3o17b3o62bo71b$bo
+3bo15bo3bo133b$o5bo13bo5bo132b$bo3bo15bo3bo133b$2b3o17b3o134b$82b2o75b$82bobo74b$82bo76b$159b$85b3o71b$80b2o2bo2bo71b$12b2o66b2o5bo71b$12bo2bo67bo3bo71b$4b5o7bo70bo71b$3bo5bo6bo6b2o7b2o50bobo72b$3bo3b2o7bo6b2o6bo2bo37b2o85b$4bo7bo2bo15bo2bo37bobo84b$
+12b2o18b2o38bo86b$159b$b2o18b2o136b$159b$159b$159b$159b$2o3b2o13b2o3b2o132b$b5o15b5o36b2o95b$b2ob2o15b2ob2o36bobo94b$b2ob2o15b2ob2o36bo96b$2b3o17b3o134b$159b$159b$16bo142b$15b4o140b$14b2obobo139b$3b2o8b3obo2bo2b2o7b2o125b$3b2o9b2obobo3b2o6bo2bo17b2o1
+05b$15b4o12bo2bo17bobo104b$16bo15b2o18bo106b$159b$159b$159b$159b$3bo19bo135b$2b3o17b3o134b$b5o15b5o133b$obobobo13bobobobo15b2o115b$2o3b2o13b2o3b2o15bobo114b$42bo116b$159b$3bo19bo135b$2bobo17bobo134b$2bobo7bobo7bobo66bo5bo61b$3bo6bo3bo8bo66b3o3b3o60b$
+3b2o5bo12b2o65bob2o2bob2o59b$3b2o4bo4bo8b2o7b2o57b3o5bo59b$3b2o5bo12b2o6bobo57b3o4b3o58b$10bo3bo16b2o58b2o3bo62b$12bobo81bo4bo57b$96bo62b$2b3o17b3o73b2obo57b$2b3o17b3o73bo60b$bo3bo15bo3bo133b$o5bo13bo5bo77bo54b$bo3bo15bo3bo72b3o2b3o53b$2b3o17b3o78bob
+2o52b$98bo5b3o52b$63b3o11b3o18b3o3b2o53b$63bo2bo10bo2bo16bo2b2o57b$63bo6b3o4bo19b2o60b$63bo5bo2bo4bo12b3o4bo2b2o5bo51b$64bobo2bo3bo4bobo8bo2bo8bo4b3o50b$12b2o56b4o18bo12b2obo50b$12bo2bo56bo15bo3bo5b3o4b3o51b$4b5o7bo75bo5bobo4b3o51b$3bo5bo6bo6b2o7b2o4
+4bo10bobo6bo3bo3b2o51b$3bo3b2o7bo6b2o6bobo30bo12b3o21b2o56b$4bo7bo2bo15b2o30b3o11bob2o20bo57b$12b2o48b2obo12b3o78b$62b3o13b2o79b$b2o18b2o39b3o94b$63b2o7b2o85b$70bob2o85b$71bo87b$159b$2o3b2o13b2o3b2o132b$b5o15b5o133b$b2ob2o15b2ob2o133b$b2ob2o15b2ob2o4
+6bo24b2o60b$2b3o17b3o46b3o23b2o2b2o56b$70bobob2o25b3o55b$69b3ob2obo24b3o55b$16bo52b3obo2bo82b$15b4o54bo20b2obob3o57b$14b2obobo51bo22bo4bobo57b$3b2o8b3obo2bo2b2o7b2o38bob2o19bo5bo57b$3b2o9b2obobo3b2o6bobo38b2o24b3o4b3o51b$15b4o12b2o65bobo5bo52b$16bo63
+bo19bo5b3o50b$79b3o17b2o5b3o50b$78b2obo24bobo50b$78b3o25b2o51b$78b3o78b$3bo19bo55b2o78b$2b3o17b3o134b$b5o15b5o133b$obobobo13bobobobo132b$2o3b2o13b2o3b2o132b$159b$159b$3bo19bo135b$2bobo17bobo74b3o57b$2bobo7bobo7bobo69b2o3bo59b$3bo6bo3bo8bo70b2o4bo58b$
+3b2o5bo12b2o134b$3b2o4bo4bo8b2o7b2o125b$3b2o5bo12b2o6bobo31bo93b$10bo3bo16b2o30b2o94b$12bobo49b2o33b3o57b$99bo2bo56b$2b3o17b3o74bo59b$2b3o17b3o64b3o7bo3bo55b$bo3bo15bo3bo63bo9bo59b$o5bo13bo5bo63bo9bobo56b$bo3bo15bo3bo133b$2b3o17b3o134b$159b$159b$159b
+$159b$159b$79b3o77b$12b2o65bo79b$12bo2bo64bo78b$4b5o7bo142b$3bo5bo6bo6b2o7b2o125b$3bo3b2o7bo6b2o6bobo125b$4bo7bo2bo15b2o126b$12b2o145b$159b$b2o18b2o136b$69b3o87b$69bo89b$70bo88b$159b$2o3b2o13b2o3b2o132b$b5o15b5o29bo103b$b2ob2o15b2ob2o27b2o104b$b2ob2o
+15b2ob2o28b2o103b$2b3o17b3o134b$159b$59b3o97b$16bo42bo99b$15b4o41bo98b$14b2obobo139b$3b2o8b3obo2bo2b2o7b2o125b$3b2o9b2obobo3b2o6bobo125b$15b4o12b2o126b$16bo142b$159b$159b$49b3o107b$49bo109b$3bo19bo26bo108b$2b3o17b3o134b$b5o15b5o133b$obobobo13bobobobo
+132b$2o3b2o13b2o3b2o132b$159b$159b$3bo19bo24bo110b$2bobo17bobo19b4obo109b$2bobo7bobo7bobo17b3ob2obo109b$3bo6bo3bo8bo18b2o4bo110b$3b2o5bo12b2o13b3obo116b$3b2o4bo4bo8b2o7b2o5bob3o115b$3b2o5bo12b2o6bobo6bo2b2o114b$10bo3bo16b2o126b$12bobo144b$159b$2b3o17
+b3o134b$2b3o17b3o134b$bo3bo15bo3bo133b$o5bo13bo5bo132b$bo3bo15bo3bo133b$2b3o17b3o134b$159b$159b$159b$159b$159b$159b$12b2o145b$12bo2bo143b$4b5o7bo142b$3bo5bo6bo6b2o7b2o9b2o114b$3bo3b2o7bo6b2o6bobo9b2o114b$4bo7bo2bo15b2o126b$12b2o145b$159b$b2o18b2o136b
+$159b$159b$159b$159b$2o3b2o13b2o3b2o132b$b5o15b5o133b$b2ob2o15b2ob2o133b$b2ob2o15b2ob2o133b$2b3o17b3o134b$159b$85b3o3b3o65b$16bo67bo2bo2bo2bo65b$15b4o68bo6bo64b$14b2obobo63bo3bo2bo2b2o64b$3b2o8b3obo2bo2b2o7b2o9b2o42bo6bo64b$3b2o9b2obobo3b2o6bobo9b2o3
+9bobo4b6o62b$15b4o12b2o58b2o2b2o62b$16bo77b2o63b$94bo64b$94b2o63b$92bob2o63b$93b2o3b3o58b$3bo19bo73bo2bo58b$2b3o17b3o68b2o5bo58b$b5o15b5o66bo3bo3bo58b$obobobo13bobobobo68bo3bo59b$2o3b2o13b2o3b2o65b4o63b$86bo5bo2b3o61b$85b3o13b3o55b$3bo19bo60b2obo8bo4
+bo2bo54b$2bobo17bobo59b3o8b2o4bo57b$2bobo7bobo7bobo59b3o5bo8bo3bo53b$3bo6bo3bo8bo61b2o3b2o2b2o5bo57b$3b2o5bo12b2o69b2o6bobo54b$3b2o4bo4bo8b2o7b2o9b2o46b2o4bo61b$3b2o5bo12b2o6bobo9b2o48bobobo61b$10bo3bo16b2o59b2obob2o60b$12bobo78bobob2o60b$94bo2b2o60b
+$2b3o17b3o69b2obo61b$2b3o17b3o71bo62b$bo3bo15bo3bo133b$o5bo13bo5bo132b$bo3bo15bo3bo133b$2b3o17b3o134b$159b$159b$159b$159b$159b$93b3o63b$12b2o80b2o63b$12bo2bo74b2obo65b$4b5o7bo73b7o62b$3bo5bo6bo6b2o7b2o9b2o44bo2b4o4bo58b$3bo3b2o7bo6b2o6bobo9b2o45b2obo
+3bobob2o56b$4bo7bo2bo15b2o58b3o65b$12b2o77b3o2b2obo59b$95b2o2bo59b$b2o18b2o71bobob2o59b$94bobo3bo58b$95b4ob3o56b$98b2obo2bo54b$102b2o55b$2o3b2o13b2o3b2o132b$b5o15b5o133b$b2ob2o15b2ob2o133b$b2ob2o15b2ob2o133b$2b3o17b3o134b$159b$93b2o64b$16bo75b2o65b$1
+5b4o75bo64b$14b2obobo69b2o68b$3b2o8b3obo2bo2b2o7b2o9b2o44b2o68b$3b2o9b2obobo3b2o6bobo9b2o50bo63b$15b4o12b2o61b3o62b$16bo77bob2o61b$95b3o61b$95b3o61b$83b2o10b2o62b$82b2o75b$3bo19bo60bo74b$2b3o17b3o134b$b5o15b5o133b$obobobo13bobobobo132b$2o3b2o13b2o3b2
+o132b$159b$159b$3bo19bo135b$2bobo17bobo48b2o84b$2bobo7bobo7bobo47b2o85b$3bo6bo3bo8bo50bo84b$3b2o5bo12b2o134b$3b2o4bo4bo8b2o7b2o9b2o114b$3b2o5bo12b2o6bobo9b2o114b$10bo3bo16b2o126b$12bobo144b$159b$2b3o17b3o134b$2b3o17b3o38b2o94b$bo3bo15bo3bo36b2o95b$o5
+bo13bo5bo37bo94b$bo3bo15bo3bo133b$2b3o17b3o134b$159b$159b$159b$159b$159b$53b2o104b$12b2o38b2o105b$12bo2bo38bo104b$4b5o7bo142b$3bo5bo6bo6b2o7b2o9b2o114b$3bo3b2o7bo6b2o6bobo9b2o114b$4bo7bo2bo15b2o126b$12b2o145b$159b$b2o18b2o136b$43b2o24bo13bo75b$42b2o2
+4b3o11b3o74b$44bo22b2obo5bo4b2obo74b$67b3o5b3o3b3o75b$2o3b2o13b2o3b2o41b2o5bob2o3b2o75b$b5o15b5o74b3o3b3o50b$b2ob2o15b2ob2o74bo2bo2bo2bo49b$b2ob2o15b2ob2o74bo5bo2bo49b$2b3o17b3o53bo21bo3bo2bo51b$76b2o4b3o15bo7b3o48b$68b3o11bo2bo15bobo3bob2o48b$16bo19
+bo30bo2bo8bo2bo22b3o51b$15b4o16b4o31bo11bo24bo2bo48b$14b2obobo14b2obobo26bo3bo4bob2o4bobo21b3o49b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o25bo4b2o31b2o49b$3b2o9b2obobo3b2o4bo4b2obobo3b2o22bobo89b$15b4o8b2o6b4o38b2o30bo3b3o43b$16bo19bo40b2o30bo3bo2bo42b$75bo2bo
+29bo4bo45b$75bo32bo4bo45b$75bo2bo28b2ob2o2bobo42b$76b2o29bo2b2o47b$3bo19bo77bo4b4o49b$2b3o17b3o75b3o4b5o4b3o40b$b5o15b5o74bob2o5bo2bo2bo2bo40b$obobobo13bobobobo74b3o5bo2bo5bo40b$2o3b2o13b2o3b2o74b3o5bo2bobo3bo40b$101b2o7b2o6bo40b$115bobo41b$3bo19bo13
+5b$2bobo17bobo134b$2bobo7bobo7bobo7bobo74bo49b$3bo6bo3bo8bo6bo3bo40bo8b3o21b4o47b$3b2o5bo12b2o5bo43bo8bo2bo22bo2bo46b$3b2o4bo4bo8b2o4bo4bo8b2o29b3o9bo24b2o46b$3b2o5bo12b2o5bo12b2o37bo3bo72b$10bo3bo15bo3bo51bo22bo49b$12bobo17bobo48bobo23b4o46b$111b3o4
+5b$2b3o17b3o85b2o2bo44b$2b3o17b3o87bobo44b$bo3bo15bo3bo86b2o45b$o5bo13bo5bo132b$bo3bo15bo3bo133b$2b3o17b3o134b$159b$159b$159b$159b$159b$159b$12b2o18b2o125b$12bo2bo16bo2bo123b$4b5o7bo7b5o7bo67b2o53b$3bo5bo6bo6bo5bo6bo6b2o59b2o53b$3bo3b2o7bo6bo3b2o7bo6
+b2o114b$4bo7bo2bo8bo7bo2bo123b$12b2o18b2o125b$116bo42b$b2o18b2o88bob3obo41b$111b3obobo41b$111b4obo42b$65bo43b2ob2o45b$64bo46bo47b$2o3b2o13b2o3b2o37b3o44bo47b$b5o15b5o133b$b2ob2o15b2ob2o133b$b2ob2o15b2ob2o80bo52b$2b3o17b3o80b2o52b$105bobo51b$110bo48b$
+16bo19bo72b3o47b$15b4o16b4o69b2obo47b$14b2obobo14b2obobo68b3o48b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o59bobob3o48b$3b2o9b2obobo3b2o9b2obobo3b2o60bo3b2o48b$15b4o16b4o120b$16bo19bo59bo62b$95b2o62b$95bobo61b$159b$159b$3bo19bo135b$2b3o17b3o134b$b5o15b5o133b$obo
+bobo13bobobobo132b$2o3b2o13b2o3b2o132b$86bo72b$85b2o72b$3bo19bo61bobo71b$2bobo17bobo134b$2bobo7bobo7bobo7bobo124b$3bo6bo3bo8bo6bo3bo20bo103b$3b2o5bo12b2o5bo23bo104b$3b2o4bo4bo8b2o4bo4bo8b2o9b3o102b$3b2o5bo12b2o5bo12b2o114b$10bo3bo15bo3bo124b$12bobo17
+bobo41bo82b$75b2o82b$2b3o17b3o50bobo81b$2b3o17b3o134b$bo3bo15bo3bo133b$o5bo13bo5bo132b$bo3bo15bo3bo133b$2b3o17b3o134b$159b$159b$66bo92b$65b2o92b$65bobo91b$159b$12b2o18b2o125b$12bo2bo16bo2bo123b$4b5o7bo7b5o7bo122b$3bo5bo6bo6bo5bo6bo6b2o114b$3bo3b2o7bo
+6bo3b2o7bo6b2o114b$4bo7bo2bo8bo7bo2bo123b$12b2o18b2o22bo102b$55b2o102b$b2o18b2o32bobo101b$159b$159b$45bo113b$44bo114b$2o3b2o13b2o3b2o17b3o112b$b5o15b5o133b$b2ob2o15b2ob2o133b$b2ob2o15b2ob2o20bo112b$2b3o17b3o20b2o20b3o3b3o83b$45bobo19bo2bo2bo2bo82b$67
+bo5bo2bo82b$16bo19bo30bo3bo2bo84b$15b4o16b4o28bo7b3o81b$14b2obobo14b2obobo28bobo3bob2o81b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o27b3o84b$3b2o9b2obobo3b2o9b2obobo3b2o29bo2bo81b$15b4o16b4o35b3o82b$16bo19bo38b2o82b$159b$76bo3b3o76b$76bo3bo2bo75b$75bo4bo78b$3bo1
+9bo20b2o29bo4bo78b$2b3o17b3o18bo2bo27b2ob2o2bobo75b$b5o15b5o17bo2bo27bo2b2o80b$obobobo13bobobobo17b2o22bo4b4o82b$2o3b2o13b2o3b2o40b3o4b5o4b3o73b$67bob2o5bo2bo2bo2bo73b$68b3o5bo2bo5bo73b$3bo19bo44b3o5bo2bobo3bo73b$2bobo17bobo43b2o7b2o6bo73b$2bobo7bobo
+7bobo7bobo47bobo74b$3bo6bo3bo8bo6bo3bo124b$3b2o5bo12b2o5bo128b$3b2o4bo4bo8b2o4bo4bo8b2o31bo82b$3b2o5bo12b2o5bo12b2o30b4o80b$10bo3bo15bo3bo41bo2bo79b$12bobo17bobo43b2o79b$159b$2b3o17b3o51bo82b$2b3o17b3o51b4o79b$bo3bo15bo3bo52b3o78b$o5bo13bo5bo17b2o31b
+2o2bo77b$bo3bo15bo3bo17bo2bo32bobo77b$2b3o17b3o18bo2bo32b2o78b$44b2o113b$159b$159b$159b$159b$159b$12b2o18b2o125b$12bo2bo16bo2bo123b$4b5o7bo7b5o7bo122b$3bo5bo6bo6bo5bo6bo6b2o114b$3bo3b2o7bo6bo3b2o7bo6b2o114b$4bo7bo2bo8bo7bo2bo35b2o86b$12b2o18b2o37b2o8
+6b$159b$b2o18b2o136b$159b$83bo75b$44b2o32bob3obo74b$43bo2bo31b3obobo74b$2o3b2o13b2o3b2o16bo2bo31b4obo75b$b5o15b5o18b2o30b2ob2o78b$b2ob2o15b2ob2o52bo80b$b2ob2o15b2ob2o52bo80b$2b3o17b3o134b$159b$73bo85b$16bo19bo35b2o85b$15b4o16b4o33bobo84b$14b2obobo14b
+2obobo37bo81b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o31b3o80b$3b2o9b2obobo3b2o9b2obobo3b2o30b2obo80b$15b4o16b4o36b3o81b$16bo19bo34bobob3o81b$72bo3b2o81b$159b$63bo95b$62b2o95b$3bo19bo20b2o16bobo94b$2b3o17b3o18bo2bo112b$b5o15b5o17bo2bo112b$obobobo13bobobobo17b2
+o113b$2o3b2o13b2o3b2o132b$159b$159b$3bo19bo135b$2bobo17bobo28bo105b$2bobo7bobo7bobo7bobo17b2o105b$3bo6bo3bo8bo6bo3bo17bobo11b3o3b3o84b$3b2o5bo12b2o5bo34bo2bo2bo2bo84b$3b2o4bo4bo8b2o4bo4bo8b2o23bo6bo83b$3b2o5bo12b2o5bo12b2o19bo3bo2bo2b2o83b$10bo3bo15b
+o3bo33bo6bo83b$12bobo17bobo30bobo4b6o81b$72b2o2b2o81b$2b3o17b3o50b2o82b$2b3o17b3o50bo83b$bo3bo15bo3bo49b2o82b$o5bo13bo5bo17b2o27bob2o82b$bo3bo15bo3bo17bobo28b2o3b3o77b$2b3o17b3o18b2o33bo2bo77b$74b2o5bo77b$73bo3bo3bo77b$76bo3bo78b$73b4o82b$67bo5bo2b3o
+80b$66b3o13b3o74b$12b2o18b2o31b2obo13bo2bo73b$12bo2bo16bo2bo29b3o7bo2bo3bo76b$4b5o7bo7b5o7bo28b3o6b3o5bo3bo72b$3bo5bo6bo6bo5bo6bo6b2o21b2o6bo4bo2bo76b$3bo3b2o7bo6bo3b2o7bo6b2o31b3o4bobo73b$4bo7bo2bo8bo7bo2bo123b$12b2o18b2o125b$159b$b2o18b2o51b2o83b$7
+3bo2bo82b$74b3obo80b$44b2o31b2o80b$43bobo30b3o80b$2o3b2o13b2o3b2o16b2o31bo82b$b5o15b5o48b2o2bo80b$b2ob2o15b2ob2o49b2o2b2o78b$b2ob2o15b2ob2o54bo78b$2b3o17b3o52b2obo78b$78b2o79b$159b$16bo19bo122b$15b4o16b4o120b$14b2obobo14b2obobo119b$3b2o8b3obo2bo2b2o8
+b3obo2bo2b2o114b$3b2o9b2obobo3b2o9b2obobo3b2o114b$15b4o16b4o120b$16bo19bo122b$159b$159b$159b$70b2o87b$3bo19bo20b2o24b2o87b$2b3o17b3o18bobo113b$b5o15b5o17b2o114b$obobobo13bobobobo54bo77b$2o3b2o13b2o3b2o53b3o76b$81bobo75b$80b2obo75b$3bo19bo57b2o76b$2bo
+bo17bobo56bo77b$2bobo7bobo7bobo7bobo124b$3bo6bo3bo8bo6bo3bo124b$3b2o5bo12b2o5bo128b$3b2o4bo4bo8b2o4bo4bo8b2o114b$3b2o5bo12b2o5bo12b2o26b2o86b$10bo3bo15bo3bo35b2o87b$12bobo17bobo37bo3bo82b$75b3o81b$2b3o17b3o50bob2o80b$2b3o17b3o51b3o80b$bo3bo15bo3bo50b
+3o80b$o5bo13bo5bo17b2o26bo3b2o81b$bo3bo15bo3bo17bobo26bo86b$2b3o17b3o18b2o114b$61b2o96b$60b2o97b$62bo96b$159b$159b$159b$12b2o18b2o125b$12bo2bo16bo2bo123b$4b5o7bo7b5o7bo122b$3bo5bo6bo6bo5bo6bo6b2o114b$3bo3b2o7bo6bo3b2o7bo6b2o6b2o106b$4bo7bo2bo8bo7bo2b
+o14b2o107b$12b2o18b2o18bo106b$159b$b2o18b2o136b$159b$44b3o112b$44bobo112b$43bo2bo112b$2o3b2o13b2o3b2o16b3o113b$b5o15b5o17b3o113b$b2ob2o15b2ob2o16bobo114b$b2ob2o15b2ob2o15bo2bo114b$2b3o17b3o16bo2bo114b$42b2o115b$159b$16bo19bo122b$15b4o16b4o120b$14b2ob
+obo14b2obobo119b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o114b$3b2o9b2obobo3b2o9b2obobo3b2o114b$15b4o16b4o120b$16bo19bo122b$159b$159b$159b$159b$3bo19bo19bo115b$2b3o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo112b$2o3b2o13b2o3b2o13b2o3b2o112b$159
+b$159b$3bo19bo19bo115b$2bobo17bobo17bobo114b$2bobo7bobo7bobo7bobo7bobo114b$3bo6bo3bo8bo6bo3bo8bo115b$3b2o5bo12b2o5bo12b2o114b$3b2o4bo4bo8b2o4bo4bo8b2o114b$3b2o5bo12b2o5bo12b2o114b$10bo3bo15bo3bo124b$12bobo17bobo124b$159b$2b3o17b3o17b3o114b$2b3o17b3o1
+7b3o114b$bo3bo15bo3bo15bo3bo113b$o5bo13bo5bo13bo5bo112b$bo3bo15bo3bo15bo3bo113b$2b3o17b3o17b3o114b$159b$159b$159b$159b$159b$159b$12b2o18b2o125b$12bo2bo16bo2bo123b$4b5o7bo7b5o7bo122b$3bo5bo6bo6bo5bo6bo6b2o114b$3bo3b2o7bo6bo3b2o7bo6b2o114b$4bo7bo2bo8bo
+7bo2bo123b$12b2o18b2o125b$159b$b2o18b2o18b2o116b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o112b$b5o15b5o15b5o113b$b2ob2o15b2ob2o15b2ob2o113b$b2ob2o15b2ob2o15b2ob2o113b$2b3o17b3o17b3o114b$159b$159b$16bo19bo122b$15b4o16b4o120b$14b2obobo14b2obobo119b$
+3b2o8b3obo2bo2b2o8b3obo2bo2b2o114b$3b2o9b2obobo3b2o9b2obobo3b2o114b$15b4o16b4o120b$16bo19bo122b$159b$159b$159b$159b$3bo19bo19bo115b$2b3o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo112b$2o3b2o13b2o3b2o13b2o3b2o112b$159b$159b$3bo19bo19b
+o115b$2bobo17bobo17bobo114b$2bobo7bobo7bobo7bobo7bobo114b$3bo6bo3bo8bo6bo3bo8bo115b$3b2o5bo12b2o5bo12b2o114b$3b2o4bo4bo8b2o4bo4bo8b2o114b$3b2o5bo12b2o5bo12b2o114b$10bo3bo15bo3bo124b$12bobo17bobo124b$159b$2b3o17b3o17b3o114b$2b3o17b3o17b3o114b$bo3bo15b
+o3bo15bo3bo113b$o5bo13bo5bo13bo5bo112b$bo3bo15bo3bo15bo3bo113b$2b3o17b3o17b3o114b$159b$159b$159b$159b$159b$159b$12b2o18b2o125b$12bo2bo16bo2bo123b$4b5o7bo7b5o7bo122b$3bo5bo6bo6bo5bo6bo6b2o114b$3bo3b2o7bo6bo3b2o7bo6b2o114b$4bo7bo2bo8bo7bo2bo123b$12b2o1
+8b2o125b$159b$b2o18b2o18b2o116b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o112b$b5o15b5o15b5o113b$b2ob2o15b2ob2o15b2ob2o113b$b2ob2o15b2ob2o15b2ob2o113b$2b3o17b3o17b3o114b$159b$159b$16bo19bo122b$15b4o16b4o120b$14b2obobo14b2obobo119b$3b2o8b3obo2bo2b2o
+8b3obo2bo2b2o114b$3b2o9b2obobo3b2o9b2obobo3b2o114b$15b4o16b4o120b$16bo19bo122b$159b$159b$159b$159b$3bo19bo19bo115b$2b3o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo112b$2o3b2o13b2o3b2o13b2o3b2o112b$159b$159b$3bo19bo19bo115b$2bobo17bobo
+17bobo114b$2bobo7bobo7bobo7bobo7bobo114b$3bo6bo3bo8bo6bo3bo8bo115b$3b2o5bo12b2o5bo12b2o114b$3b2o4bo4bo8b2o4bo4bo8b2o114b$3b2o5bo12b2o5bo12b2o114b$10bo3bo15bo3bo124b$12bobo17bobo124b$159b$2b3o17b3o17b3o114b$2b3o17b3o17b3o114b$bo3bo15bo3bo15bo3bo113b$o
+5bo13bo5bo13bo5bo112b$bo3bo15bo3bo15bo3bo113b$2b3o17b3o17b3o114b$159b$159b$159b$159b$159b$159b$12b2o18b2o125b$12bo2bo16bo2bo123b$4b5o7bo7b5o7bo122b$3bo5bo6bo6bo5bo6bo6b2o114b$3bo3b2o7bo6bo3b2o7bo6b2o114b$4bo7bo2bo8bo7bo2bo123b$12b2o18b2o125b$159b$b2o
+18b2o18b2o116b$159b$98b3o3b3o52b$98bo2bo2bo2bo51b$98bo5bo2bo51b$2o3b2o13b2o3b2o13b2o3b2o51bo3bo2bo53b$b5o15b5o15b5o52bo7b3o50b$b2ob2o15b2ob2o15b2ob2o53bobo3bob2o50b$b2ob2o15b2ob2o15b2ob2o57b3o53b$2b3o17b3o17b3o60bo2bo50b$105b3o51b$106b2o51b$16bo19bo1
+22b$15b4o16b4o68bo3b3o45b$14b2obobo14b2obobo67bo3bo2bo44b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o61bo4bo47b$3b2o9b2obobo3b2o9b2obobo3b2o61bo4bo47b$15b4o16b4o28bo13bo23b2ob2o2bobo44b$16bo19bo29b3o11b3o22bo2b2o49b$65b2obo5bo4b2obo16bo4b4o51b$65b3o5b3o3b3o16b3o4
+b5o4b3o42b$66b2o4bo2b2o3b2o16bob2o5bo2bo2bo2bo42b$72b3o24b3o5bo2bo5bo42b$3bo19bo19bo55b3o5bo2bobo3bo42b$2b3o17b3o17b3o54b2o4b2o2bo6bo42b$b5o15b5o15b5o57b2o8bobo43b$obobobo13bobobobo13bobobobo26bo6b3o26bo49b$2o3b2o13b2o3b2o13b2o3b2o19b3o4bo6bo2bo25bo4
+9b$65bo2bo4bo6bo24bobo51b$68bo5bobo3bo25bobo50b$3bo19bo19bo20bo3bo5bobo4bobo75b$2bobo17bobo17bobo23bo5b3o82b$2bobo7bobo7bobo7bobo7bobo20bobo37bo53b$3bo6bo3bo8bo6bo3bo8bo61b3o51b$3b2o5bo12b2o5bo12b2o30bo28bo6bo47b$3b2o4bo4bo8b2o4bo4bo8b2o28b2ob2o26b2o
+b3o2bo46b$3b2o5bo12b2o5bo12b2o29bo3bo25b2o6bo46b$10bo3bo15bo3bo40b3o26bobo2bo2bo46b$12bobo17bobo41bo28b2o52b$106b4ob2o46b$2b3o17b3o17b3o63bo50b$2b3o17b3o17b3o66b2o2b2o42b$bo3bo15bo3bo15bo3bo65b3o2bo42b$o5bo13bo5bo13bo5bo65bobobo42b$bo3bo15bo3bo15bo3b
+o67b3o43b$2b3o17b3o17b3o69bo44b$159b$159b$159b$82b3o74b$81bo2bo74b$84bo74b$12b2o18b2o46bo3bo74b$12bo2bo16bo2bo48bo74b$4b5o7bo7b5o7bo44bobo75b$3bo5bo6bo6bo5bo6bo6b2o114b$3bo3b2o7bo6bo3b2o7bo6b2o57b2o55b$4bo7bo2bo8bo7bo2bo66b2o7bo47b$12b2o18b2o36bo39b2
+o47b$69bo40bobo46b$b2o18b2o18b2o26b3o87b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o112b$b5o15b5o15b5o113b$b2ob2o15b2ob2o15b2ob2o55bo6bo50b$b2ob2o15b2ob2o15b2ob2o54b2o5b3o49b$2b3o17b3o17b3o55bobo3b2obo49b$106b3o50b$106b3o50b$16bo19bo70b2o50b$15b4o16
+b4o120b$14b2obobo14b2obobo119b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o114b$3b2o9b2obobo3b2o9b2obobo3b2o114b$15b4o16b4o52bo67b$16bo19bo53b2o67b$90bobo66b$159b$159b$159b$3bo19bo19bo115b$2b3o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo112b$2o3b2o
+13b2o3b2o13b2o3b2o34bo77b$60bo19b2o77b$59bo20bobo76b$3bo19bo19bo15b3o97b$2bobo17bobo17bobo114b$2bobo7bobo7bobo7bobo7bobo114b$3bo6bo3bo8bo6bo3bo8bo115b$3b2o5bo12b2o5bo12b2o114b$3b2o4bo4bo8b2o4bo4bo8b2o114b$3b2o5bo12b2o5bo12b2o114b$10bo3bo15bo3bo36bo87
+b$12bobo17bobo35b2o87b$70bobo86b$2b3o17b3o17b3o114b$2b3o17b3o17b3o114b$bo3bo15bo3bo15bo3bo113b$o5bo13bo5bo13bo5bo112b$bo3bo15bo3bo15bo3bo51bo5bo55b$2b3o17b3o17b3o51b3o3b3o54b$95b2obo2b2o2bo53b$61bo33b3o3b4o54b$60b2o33b3o5bo2bo52b$60bobo33b2o5bo2bo52b
+$103bo2bo52b$103bob2o52b$12b2o18b2o71bo53b$12bo2bo16bo2bo67bo2bo52b$4b5o7bo7b5o7bo66bobo53b$3bo5bo6bo6bo5bo6bo6b2o7b2o50b2o4bo48b$3bo3b2o7bo6bo3b2o7bo6b2o6bo2bo54b3o47b$4bo7bo2bo8bo7bo2bo15bo2bo49b2o2b2obo47b$12b2o18b2o18b2o50b2o2b3o48b$104bo3b3o48b$
+b2o18b2o18b2o60b2ob3o50b$107bo51b$96b3o3bo10bo45b$96bo2bo2bo4bo4b3o44b$96bo8b3o4bob2o43b$2o3b2o13b2o3b2o13b2o3b2o49bo3bo12b3o43b$b5o15b5o15b5o50bo16b3o43b$b2ob2o15b2ob2o15b2ob2o51bobo13b2o44b$b2ob2o15b2ob2o15b2ob2o113b$2b3o17b3o17b3o58b2o54b$159b$105
+b3o51b$16bo19bo70bo51b$15b4o16b4o66bo2bo50b$14b2obobo14b2obobo119b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o50bo2bo51b$3b2o9b2obobo3b2o9b2obobo3b2o6bo2bo49b2o53b$15b4o16b4o12bo2bo51b2ob2o48b$16bo19bo15b2o53bobo49b$107bo51b$159b$159b$159b$3bo19bo19bo115b$2b3
+o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo112b$2o3b2o13b2o3b2o13b2o3b2o112b$159b$159b$3bo19bo19bo115b$2bobo17bobo17bobo55b2o57b$2bobo7bobo7bobo7bobo7bobo55b2o57b$3bo6bo3bo8bo6bo3bo8bo115b$3b2o5bo12b2o5bo12b2o114b$3b2o4bo4bo8b2o4bo4
+bo8b2o7b2o105b$3b2o5bo12b2o5bo12b2o6bo2bo51b3o3bo46b$10bo3bo15bo3bo16bo2bo57bo46b$12bobo17bobo17b2o50bo3bo2b2o46b$108bo50b$2b3o17b3o17b3o59b2ob2o50b$2b3o17b3o17b3o62bo51b$bo3bo15bo3bo15bo3bo113b$o5bo13bo5bo13bo5bo112b$bo3bo15bo3bo15bo3bo113b$2b3o17b3
+o17b3o114b$102b2o55b$102bobo54b$102bo56b$159b$105b3o51b$100b2o2bo2bo51b$12b2o18b2o66b2o5bo51b$12bo2bo16bo2bo67bo3bo51b$4b5o7bo7b5o7bo70bo51b$3bo5bo6bo6bo5bo6bo6b2o7b2o50bobo52b$3bo3b2o7bo6bo3b2o7bo6b2o6bo2bo37b2o65b$4bo7bo2bo8bo7bo2bo15bo2bo37bobo64b
+$12b2o18b2o18b2o38bo66b$159b$b2o18b2o18b2o116b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o112b$b5o15b5o15b5o36b2o75b$b2ob2o15b2ob2o15b2ob2o36bobo74b$b2ob2o15b2ob2o15b2ob2o36bo76b$2b3o17b3o17b3o114b$159b$159b$16bo19bo122b$15b4o16b4o120b$14b2obobo14b2
+obobo119b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o105b$3b2o9b2obobo3b2o9b2obobo3b2o6bo2bo17b2o85b$15b4o16b4o12bo2bo17bobo84b$16bo19bo15b2o18bo86b$159b$159b$159b$159b$3bo19bo19bo115b$2b3o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo15b2o95b$2
+o3b2o13b2o3b2o13b2o3b2o15bobo94b$62bo96b$159b$3bo19bo19bo115b$2bobo17bobo17bobo114b$2bobo7bobo7bobo7bobo7bobo66bo5bo41b$3bo6bo3bo8bo6bo3bo8bo66b3o3b3o40b$3b2o5bo12b2o5bo12b2o65bob2o2bob2o39b$3b2o4bo4bo8b2o4bo4bo8b2o7b2o57b3o5bo39b$3b2o5bo12b2o5bo12b2
+o6bobo57b3o4b3o38b$10bo3bo15bo3bo16b2o58b2o3bo42b$12bobo17bobo81bo4bo37b$116bo42b$2b3o17b3o17b3o73b2obo37b$2b3o17b3o17b3o73bo40b$bo3bo15bo3bo15bo3bo113b$o5bo13bo5bo13bo5bo77bo34b$bo3bo15bo3bo15bo3bo72b3o2b3o33b$2b3o17b3o17b3o78bob2o32b$118bo5b3o32b$8
+3b3o11b3o18b3o3b2o33b$83bo2bo10bo2bo16bo2b2o37b$83bo6b3o4bo19b2o40b$83bo5bo2bo4bo12b3o4bo2b2o5bo31b$84bobo2bo3bo4bobo8bo2bo8bo4b3o30b$12b2o18b2o56b4o18bo12b2obo30b$12bo2bo16bo2bo56bo15bo3bo5b3o4b3o31b$4b5o7bo7b5o7bo75bo5bobo4b3o31b$3bo5bo6bo6bo5bo6bo
+6b2o7b2o44bo10bobo6bo3bo3b2o31b$3bo3b2o7bo6bo3b2o7bo6b2o6bobo30bo12b3o21b2o36b$4bo7bo2bo8bo7bo2bo15b2o30b3o11bob2o20bo37b$12b2o18b2o48b2obo12b3o58b$82b3o13b2o59b$b2o18b2o18b2o39b3o74b$83b2o7b2o65b$90bob2o65b$91bo67b$159b$2o3b2o13b2o3b2o13b2o3b2o112b$
+b5o15b5o15b5o113b$b2ob2o15b2ob2o15b2ob2o113b$b2ob2o15b2ob2o15b2ob2o46bo24b2o40b$2b3o17b3o17b3o46b3o23b2o2b2o36b$90bobob2o25b3o35b$89b3ob2obo24b3o35b$16bo19bo52b3obo2bo62b$15b4o16b4o54bo20b2obob3o37b$14b2obobo14b2obobo51bo22bo4bobo37b$3b2o8b3obo2bo2b2
+o8b3obo2bo2b2o7b2o38bob2o19bo5bo37b$3b2o9b2obobo3b2o9b2obobo3b2o6bobo38b2o24b3o4b3o31b$15b4o16b4o12b2o65bobo5bo32b$16bo19bo63bo19bo5b3o30b$99b3o17b2o5b3o30b$98b2obo24bobo30b$98b3o25b2o31b$98b3o58b$3bo19bo19bo55b2o58b$2b3o17b3o17b3o114b$b5o15b5o15b5o1
+13b$obobobo13bobobobo13bobobobo112b$2o3b2o13b2o3b2o13b2o3b2o112b$159b$159b$3bo19bo19bo115b$2bobo17bobo17bobo74b3o37b$2bobo7bobo7bobo7bobo7bobo69b2o3bo39b$3bo6bo3bo8bo6bo3bo8bo70b2o4bo38b$3b2o5bo12b2o5bo12b2o114b$3b2o4bo4bo8b2o4bo4bo8b2o7b2o105b$3b2o5
+bo12b2o5bo12b2o6bobo31bo73b$10bo3bo15bo3bo16b2o30b2o74b$12bobo17bobo49b2o33b3o37b$119bo2bo36b$2b3o17b3o17b3o74bo39b$2b3o17b3o17b3o64b3o7bo3bo35b$bo3bo15bo3bo15bo3bo63bo9bo39b$o5bo13bo5bo13bo5bo63bo9bobo36b$bo3bo15bo3bo15bo3bo113b$2b3o17b3o17b3o114b$1
+59b$159b$159b$159b$159b$99b3o57b$12b2o18b2o65bo59b$12bo2bo16bo2bo64bo58b$4b5o7bo7b5o7bo122b$3bo5bo6bo6bo5bo6bo6b2o7b2o105b$3bo3b2o7bo6bo3b2o7bo6b2o6bobo105b$4bo7bo2bo8bo7bo2bo15b2o106b$12b2o18b2o125b$159b$b2o18b2o18b2o116b$89b3o67b$89bo69b$90bo68b$15
+9b$2o3b2o13b2o3b2o13b2o3b2o112b$b5o15b5o15b5o29bo83b$b2ob2o15b2ob2o15b2ob2o27b2o84b$b2ob2o15b2ob2o15b2ob2o28b2o83b$2b3o17b3o17b3o114b$159b$79b3o77b$16bo19bo42bo79b$15b4o16b4o41bo78b$14b2obobo14b2obobo119b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o105b$3b2o9b
+2obobo3b2o9b2obobo3b2o6bobo105b$15b4o16b4o12b2o106b$16bo19bo122b$159b$159b$69b3o87b$69bo89b$3bo19bo19bo26bo88b$2b3o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo112b$2o3b2o13b2o3b2o13b2o3b2o112b$159b$159b$3bo19bo19bo24bo90b$2bobo17bobo1
+7bobo19b4obo89b$2bobo7bobo7bobo7bobo7bobo17b3ob2obo89b$3bo6bo3bo8bo6bo3bo8bo18b2o4bo90b$3b2o5bo12b2o5bo12b2o13b3obo96b$3b2o4bo4bo8b2o4bo4bo8b2o7b2o5bob3o95b$3b2o5bo12b2o5bo12b2o6bobo6bo2b2o94b$10bo3bo15bo3bo16b2o106b$12bobo17bobo124b$159b$2b3o17b3o17
+b3o114b$2b3o17b3o17b3o114b$bo3bo15bo3bo15bo3bo113b$o5bo13bo5bo13bo5bo112b$bo3bo15bo3bo15bo3bo113b$2b3o17b3o17b3o114b$159b$159b$159b$159b$159b$159b$12b2o18b2o125b$12bo2bo16bo2bo123b$4b5o7bo7b5o7bo122b$3bo5bo6bo6bo5bo6bo6b2o7b2o9b2o94b$3bo3b2o7bo6bo3b2
+o7bo6b2o6bobo9b2o94b$4bo7bo2bo8bo7bo2bo15b2o106b$12b2o18b2o125b$159b$b2o18b2o18b2o116b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o112b$b5o15b5o15b5o113b$b2ob2o15b2ob2o15b2ob2o113b$b2ob2o15b2ob2o15b2ob2o113b$2b3o17b3o17b3o114b$159b$105b3o3b3o45b$16bo
+19bo67bo2bo2bo2bo45b$15b4o16b4o68bo6bo44b$14b2obobo14b2obobo63bo3bo2bo2b2o44b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o9b2o42bo6bo44b$3b2o9b2obobo3b2o9b2obobo3b2o6bobo9b2o39bobo4b6o42b$15b4o16b4o12b2o58b2o2b2o42b$16bo19bo77b2o43b$114bo44b$114b2o43b$112bob2o
+43b$113b2o3b3o38b$3bo19bo19bo73bo2bo38b$2b3o17b3o17b3o68b2o5bo38b$b5o15b5o15b5o66bo3bo3bo38b$obobobo13bobobobo13bobobobo68bo3bo39b$2o3b2o13b2o3b2o13b2o3b2o65b4o43b$106bo5bo2b3o41b$105b3o13b3o35b$3bo19bo19bo60b2obo8bo4bo2bo34b$2bobo17bobo17bobo59b3o8b
+2o4bo37b$2bobo7bobo7bobo7bobo7bobo59b3o5bo8bo3bo33b$3bo6bo3bo8bo6bo3bo8bo61b2o3b2o2b2o5bo37b$3b2o5bo12b2o5bo12b2o69b2o6bobo34b$3b2o4bo4bo8b2o4bo4bo8b2o7b2o9b2o46b2o4bo41b$3b2o5bo12b2o5bo12b2o6bobo9b2o48bobobo41b$10bo3bo15bo3bo16b2o59b2obob2o40b$12bob
+o17bobo78bobob2o40b$114bo2b2o40b$2b3o17b3o17b3o69b2obo41b$2b3o17b3o17b3o71bo42b$bo3bo15bo3bo15bo3bo113b$o5bo13bo5bo13bo5bo112b$bo3bo15bo3bo15bo3bo113b$2b3o17b3o17b3o114b$159b$159b$159b$159b$159b$113b3o43b$12b2o18b2o80b2o43b$12bo2bo16bo2bo74b2obo45b$4
+b5o7bo7b5o7bo73b7o42b$3bo5bo6bo6bo5bo6bo6b2o7b2o9b2o44bo2b4o4bo38b$3bo3b2o7bo6bo3b2o7bo6b2o6bobo9b2o45b2obo3bobob2o36b$4bo7bo2bo8bo7bo2bo15b2o58b3o45b$12b2o18b2o77b3o2b2obo39b$115b2o2bo39b$b2o18b2o18b2o71bobob2o39b$114bobo3bo38b$115b4ob3o36b$118b2obo
+2bo34b$122b2o35b$2o3b2o13b2o3b2o13b2o3b2o112b$b5o15b5o15b5o113b$b2ob2o15b2ob2o15b2ob2o113b$b2ob2o15b2ob2o15b2ob2o113b$2b3o17b3o17b3o114b$159b$113b2o44b$16bo19bo75b2o45b$15b4o16b4o75bo44b$14b2obobo14b2obobo69b2o48b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o9b
+2o44b2o48b$3b2o9b2obobo3b2o9b2obobo3b2o6bobo9b2o50bo43b$15b4o16b4o12b2o61b3o42b$16bo19bo77bob2o41b$115b3o41b$115b3o41b$103b2o10b2o42b$102b2o55b$3bo19bo19bo60bo54b$2b3o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo112b$2o3b2o13b2o3b2o13b
+2o3b2o112b$159b$159b$3bo19bo19bo115b$2bobo17bobo17bobo48b2o64b$2bobo7bobo7bobo7bobo7bobo47b2o65b$3bo6bo3bo8bo6bo3bo8bo50bo64b$3b2o5bo12b2o5bo12b2o114b$3b2o4bo4bo8b2o4bo4bo8b2o7b2o9b2o94b$3b2o5bo12b2o5bo12b2o6bobo9b2o94b$10bo3bo15bo3bo16b2o106b$12bobo
+17bobo124b$159b$2b3o17b3o17b3o114b$2b3o17b3o17b3o38b2o74b$bo3bo15bo3bo15bo3bo36b2o75b$o5bo13bo5bo13bo5bo37bo74b$bo3bo15bo3bo15bo3bo113b$2b3o17b3o17b3o114b$159b$159b$159b$159b$159b$73b2o84b$12b2o18b2o38b2o85b$12bo2bo16bo2bo38bo84b$4b5o7bo7b5o7bo122b$3
+bo5bo6bo6bo5bo6bo6b2o7b2o9b2o94b$3bo3b2o7bo6bo3b2o7bo6b2o6bobo9b2o94b$4bo7bo2bo8bo7bo2bo15b2o106b$12b2o18b2o125b$159b$b2o18b2o18b2o116b$63b2o24bo13bo55b$62b2o24b3o11b3o54b$64bo22b2obo5bo4b2obo54b$87b3o5b3o3b3o55b$2o3b2o13b2o3b2o13b2o3b2o41b2o5bob2o3b
+2o55b$b5o15b5o15b5o74b3o3b3o30b$b2ob2o15b2ob2o15b2ob2o74bo2bo2bo2bo29b$b2ob2o15b2ob2o15b2ob2o74bo5bo2bo29b$2b3o17b3o17b3o53bo21bo3bo2bo31b$96b2o4b3o15bo7b3o28b$88b3o11bo2bo15bobo3bob2o28b$16bo19bo19bo30bo2bo8bo2bo22b3o31b$15b4o16b4o16b4o31bo11bo24bo2
+bo28b$14b2obobo14b2obobo14b2obobo26bo3bo4bob2o4bobo21b3o29b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o25bo4b2o31b2o29b$3b2o9b2obobo3b2o9b2obobo3b2o4bo4b2obobo3b2o22bobo69b$15b4o16b4o8b2o6b4o38b2o30bo3b3o23b$16bo19bo19bo40b2o30bo3bo2bo22b$95bo2bo29bo
+4bo25b$95bo32bo4bo25b$95bo2bo28b2ob2o2bobo22b$96b2o29bo2b2o27b$3bo19bo19bo77bo4b4o29b$2b3o17b3o17b3o75b3o4b5o4b3o20b$b5o15b5o15b5o74bob2o5bo2bo2bo2bo20b$obobobo13bobobobo13bobobobo74b3o5bo2bo5bo20b$2o3b2o13b2o3b2o13b2o3b2o74b3o5bo2bobo3bo20b$121b2o7b
+2o6bo20b$135bobo21b$3bo19bo19bo115b$2bobo17bobo17bobo114b$2bobo7bobo7bobo7bobo7bobo7bobo74bo29b$3bo6bo3bo8bo6bo3bo8bo6bo3bo40bo8b3o21b4o27b$3b2o5bo12b2o5bo12b2o5bo43bo8bo2bo22bo2bo26b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o29b3o9bo24b2o26b$3b2o5bo12b2o5bo
+12b2o5bo12b2o37bo3bo52b$10bo3bo15bo3bo15bo3bo51bo22bo29b$12bobo17bobo17bobo48bobo23b4o26b$131b3o25b$2b3o17b3o17b3o85b2o2bo24b$2b3o17b3o17b3o87bobo24b$bo3bo15bo3bo15bo3bo86b2o25b$o5bo13bo5bo13bo5bo112b$bo3bo15bo3bo15bo3bo113b$2b3o17b3o17b3o114b$159b$1
+59b$159b$159b$159b$159b$12b2o18b2o18b2o105b$12bo2bo16bo2bo16bo2bo103b$4b5o7bo7b5o7bo7b5o7bo67b2o33b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o59b2o33b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o94b$4bo7bo2bo8bo7bo2bo8bo7bo2bo103b$12b2o18b2o18b2o105b$136bo22b$b2o18b2o18b
+2o88bob3obo21b$131b3obobo21b$131b4obo22b$85bo43b2ob2o25b$84bo46bo27b$2o3b2o13b2o3b2o13b2o3b2o37b3o44bo27b$b5o15b5o15b5o113b$b2ob2o15b2ob2o15b2ob2o113b$b2ob2o15b2ob2o15b2ob2o80bo32b$2b3o17b3o17b3o80b2o32b$125bobo31b$130bo28b$16bo19bo19bo72b3o27b$15b4o
+16b4o16b4o69b2obo27b$14b2obobo14b2obobo14b2obobo68b3o28b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o59bobob3o28b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o60bo3b2o28b$15b4o16b4o16b4o100b$16bo19bo19bo59bo42b$115b2o42b$115bobo41b$159b$159b$3bo19bo19bo115
+b$2b3o17b3o17b3o114b$b5o15b5o15b5o113b$obobobo13bobobobo13bobobobo112b$2o3b2o13b2o3b2o13b2o3b2o112b$106bo52b$105b2o52b$3bo19bo19bo61bobo51b$2bobo17bobo17bobo114b$2bobo7bobo7bobo7bobo7bobo7bobo104b$3bo6bo3bo8bo6bo3bo8bo6bo3bo20bo83b$3b2o5bo12b2o5bo12b
+2o5bo23bo84b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o9b3o82b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$10bo3bo15bo3bo15bo3bo104b$12bobo17bobo17bobo41bo62b$95b2o62b$2b3o17b3o17b3o50bobo61b$2b3o17b3o17b3o114b$bo3bo15bo3bo15bo3bo113b$o5bo13bo5bo13bo5bo112b$bo3bo15bo3bo
+15bo3bo113b$2b3o17b3o17b3o114b$159b$159b$86bo72b$85b2o72b$85bobo71b$159b$12b2o18b2o18b2o105b$12bo2bo16bo2bo16bo2bo103b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o94b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o94b$4bo7bo2bo8bo7bo2bo8bo7bo2bo103b$
+12b2o18b2o18b2o22bo82b$75b2o82b$b2o18b2o18b2o32bobo81b$159b$159b$65bo93b$64bo94b$2o3b2o13b2o3b2o13b2o3b2o17b3o92b$b5o15b5o15b5o113b$b2ob2o15b2ob2o15b2ob2o113b$b2ob2o15b2ob2o15b2ob2o20bo92b$2b3o17b3o17b3o20b2o20b3o3b3o63b$65bobo19bo2bo2bo2bo62b$87bo5b
+o2bo62b$16bo19bo19bo30bo3bo2bo64b$15b4o16b4o16b4o28bo7b3o61b$14b2obobo14b2obobo14b2obobo28bobo3bob2o61b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o27b3o64b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o29bo2bo61b$15b4o16b4o16b4o35b3o62b$16bo19bo19bo38b2o62
+b$159b$96bo3b3o56b$96bo3bo2bo55b$95bo4bo58b$3bo19bo19bo20b2o29bo4bo58b$2b3o17b3o17b3o18bo2bo27b2ob2o2bobo55b$b5o15b5o15b5o17bo2bo27bo2b2o60b$obobobo13bobobobo13bobobobo17b2o22bo4b4o62b$2o3b2o13b2o3b2o13b2o3b2o40b3o4b5o4b3o53b$87bob2o5bo2bo2bo2bo53b$8
+8b3o5bo2bo5bo53b$3bo19bo19bo44b3o5bo2bobo3bo53b$2bobo17bobo17bobo43b2o7b2o6bo53b$2bobo7bobo7bobo7bobo7bobo7bobo47bobo54b$3bo6bo3bo8bo6bo3bo8bo6bo3bo104b$3b2o5bo12b2o5bo12b2o5bo108b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o31bo62b$3b2o5bo12b2o5bo12b2o5bo12b2
+o30b4o60b$10bo3bo15bo3bo15bo3bo41bo2bo59b$12bobo17bobo17bobo43b2o59b$159b$2b3o17b3o17b3o51bo62b$2b3o17b3o17b3o51b4o59b$bo3bo15bo3bo15bo3bo52b3o58b$o5bo13bo5bo13bo5bo17b2o31b2o2bo57b$bo3bo15bo3bo15bo3bo17bo2bo32bobo57b$2b3o17b3o17b3o18bo2bo32b2o58b$64
+b2o93b$159b$159b$159b$159b$159b$12b2o18b2o18b2o105b$12bo2bo16bo2bo16bo2bo103b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o94b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o94b$4bo7bo2bo8bo7bo2bo8bo7bo2bo35b2o66b$12b2o18b2o18b2o37b2o66b$159b$b2o18b2o
+18b2o116b$159b$103bo55b$64b2o32bob3obo54b$63bo2bo31b3obobo54b$2o3b2o13b2o3b2o13b2o3b2o16bo2bo31b4obo55b$b5o15b5o15b5o18b2o30b2ob2o58b$b2ob2o15b2ob2o15b2ob2o52bo60b$b2ob2o15b2ob2o15b2ob2o52bo60b$2b3o17b3o17b3o114b$159b$93bo65b$16bo19bo19bo35b2o65b$15b
+4o16b4o16b4o33bobo64b$14b2obobo14b2obobo14b2obobo37bo61b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o31b3o60b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o30b2obo60b$15b4o16b4o16b4o36b3o61b$16bo19bo19bo34bobob3o61b$92bo3b2o61b$159b$83bo75b$82b2o75b$3bo19bo
+19bo20b2o16bobo74b$2b3o17b3o17b3o18bo2bo92b$b5o15b5o15b5o17bo2bo92b$obobobo13bobobobo13bobobobo17b2o93b$2o3b2o13b2o3b2o13b2o3b2o112b$159b$159b$3bo19bo19bo115b$2bobo17bobo17bobo28bo85b$2bobo7bobo7bobo7bobo7bobo7bobo17b2o85b$3bo6bo3bo8bo6bo3bo8bo6bo3bo
+17bobo11b3o3b3o64b$3b2o5bo12b2o5bo12b2o5bo34bo2bo2bo2bo64b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o23bo6bo63b$3b2o5bo12b2o5bo12b2o5bo12b2o19bo3bo2bo2b2o63b$10bo3bo15bo3bo15bo3bo33bo6bo63b$12bobo17bobo17bobo30bobo4b6o61b$92b2o2b2o61b$2b3o17b3o17b3o50b2o62b$
+2b3o17b3o17b3o50bo63b$bo3bo15bo3bo15bo3bo49b2o62b$o5bo13bo5bo13bo5bo17b2o27bob2o62b$bo3bo15bo3bo15bo3bo17bobo28b2o3b3o57b$2b3o17b3o17b3o18b2o33bo2bo57b$94b2o5bo57b$93bo3bo3bo57b$96bo3bo58b$93b4o62b$87bo5bo2b3o60b$86b3o13b3o54b$12b2o18b2o18b2o31b2obo1
+3bo2bo53b$12bo2bo16bo2bo16bo2bo29b3o7bo2bo3bo56b$4b5o7bo7b5o7bo7b5o7bo28b3o6b3o5bo3bo52b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o21b2o6bo4bo2bo56b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o31b3o4bobo53b$4bo7bo2bo8bo7bo2bo8bo7bo2bo103b$12b2o18b2o18b2o105b$159b$b2o18b2
+o18b2o51b2o63b$93bo2bo62b$94b3obo60b$64b2o31b2o60b$63bobo30b3o60b$2o3b2o13b2o3b2o13b2o3b2o16b2o31bo62b$b5o15b5o15b5o48b2o2bo60b$b2ob2o15b2ob2o15b2ob2o49b2o2b2o58b$b2ob2o15b2ob2o15b2ob2o54bo58b$2b3o17b3o17b3o52b2obo58b$98b2o59b$159b$16bo19bo19bo102b$1
+5b4o16b4o16b4o100b$14b2obobo14b2obobo14b2obobo99b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o94b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o94b$15b4o16b4o16b4o100b$16bo19bo19bo102b$159b$159b$159b$90b2o67b$3bo19bo19bo20b2o24b2o67b$2b3o17b3o17b3o18bobo93b
+$b5o15b5o15b5o17b2o94b$obobobo13bobobobo13bobobobo54bo57b$2o3b2o13b2o3b2o13b2o3b2o53b3o56b$101bobo55b$100b2obo55b$3bo19bo19bo57b2o56b$2bobo17bobo17bobo56bo57b$2bobo7bobo7bobo7bobo7bobo7bobo104b$3bo6bo3bo8bo6bo3bo8bo6bo3bo104b$3b2o5bo12b2o5bo12b2o5bo1
+08b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o94b$3b2o5bo12b2o5bo12b2o5bo12b2o26b2o66b$10bo3bo15bo3bo15bo3bo35b2o67b$12bobo17bobo17bobo37bo3bo62b$95b3o61b$2b3o17b3o17b3o50bob2o60b$2b3o17b3o17b3o51b3o60b$bo3bo15bo3bo15bo3bo50b3o60b$o5bo13bo5bo13bo5bo17b2o26bo
+3b2o61b$bo3bo15bo3bo15bo3bo17bobo26bo66b$2b3o17b3o17b3o18b2o94b$81b2o76b$80b2o77b$82bo76b$159b$159b$159b$12b2o18b2o18b2o105b$12bo2bo16bo2bo16bo2bo103b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o94b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o6b2o
+86b$4bo7bo2bo8bo7bo2bo8bo7bo2bo14b2o87b$12b2o18b2o18b2o18bo86b$159b$b2o18b2o18b2o116b$159b$64b3o92b$64bobo92b$63bo2bo92b$2o3b2o13b2o3b2o13b2o3b2o16b3o93b$b5o15b5o15b5o17b3o93b$b2ob2o15b2ob2o15b2ob2o16bobo94b$b2ob2o15b2ob2o15b2ob2o15bo2bo94b$2b3o17b3o
+17b3o16bo2bo94b$62b2o95b$159b$16bo19bo19bo102b$15b4o16b4o16b4o100b$14b2obobo14b2obobo14b2obobo99b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o94b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o94b$15b4o16b4o16b4o100b$16bo19bo19bo102b$159b$159b$159b$159b$3bo1
+9bo19bo19bo95b$2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobobo13bobobobo13bobobobo13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$159b$159b$3bo19bo19bo19bo95b$2bobo17bobo17bobo17bobo94b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo94b$3bo6bo3bo8bo6bo3b
+o8bo6bo3bo8bo95b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o94b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$10bo3bo15bo3bo15bo3bo104b$12bobo17bobo17bobo104b$159b$2b3o17b3o17b3o17b3o94b$2b3o17b3o17b3o17b3o94b$bo3bo15bo3bo15bo3bo15bo3bo93b$o
+5bo13bo5bo13bo5bo13bo5bo92b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$159b$159b$159b$159b$12b2o18b2o18b2o105b$12bo2bo16bo2bo16bo2bo103b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o94b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b
+2o94b$4bo7bo2bo8bo7bo2bo8bo7bo2bo103b$12b2o18b2o18b2o105b$159b$b2o18b2o18b2o18b2o96b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$b5o15b5o15b5o15b5o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$2b3o17b3o17b3o17b3
+o94b$159b$159b$16bo19bo19bo102b$15b4o16b4o16b4o100b$14b2obobo14b2obobo14b2obobo99b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o94b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o94b$15b4o16b4o16b4o100b$16bo19bo19bo102b$159b$159b$159b$159b$3bo19bo19bo19bo95b$
+2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobobo13bobobobo13bobobobo13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$159b$159b$3bo19bo19bo19bo95b$2bobo17bobo17bobo17bobo94b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo94b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo95
+b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o94b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$10bo3bo15bo3bo15bo3bo104b$12bobo17bobo17bobo104b$159b$2b3o17b3o17b3o17b3o94b$2b3o17b3o17b3o17b3o94b$bo3bo15bo3bo15bo3bo15bo3bo93b$o5bo13bo5bo13bo5
+bo13bo5bo92b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$159b$159b$159b$159b$12b2o18b2o18b2o105b$12bo2bo16bo2bo16bo2bo103b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o94b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o94b$4bo7bo2bo
+8bo7bo2bo8bo7bo2bo103b$12b2o18b2o18b2o105b$159b$b2o18b2o18b2o18b2o96b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$b5o15b5o15b5o15b5o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$2b3o17b3o17b3o17b3o94b$159b$159b$
+16bo19bo19bo102b$15b4o16b4o16b4o100b$14b2obobo14b2obobo14b2obobo99b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o94b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o94b$15b4o16b4o16b4o100b$16bo19bo19bo102b$159b$159b$159b$159b$3bo19bo19bo19bo95b$2b3o17b3o17b3o1
+7b3o94b$b5o15b5o15b5o15b5o93b$obobobo13bobobobo13bobobobo13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$159b$159b$3bo19bo19bo19bo95b$2bobo17bobo17bobo17bobo94b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo94b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo95b$3b2o5bo12b2o5
+bo12b2o5bo12b2o94b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o94b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$10bo3bo15bo3bo15bo3bo104b$12bobo17bobo17bobo104b$159b$2b3o17b3o17b3o17b3o94b$2b3o17b3o17b3o17b3o94b$bo3bo15bo3bo15bo3bo15bo3bo93b$o5bo13bo5bo13bo5bo13bo5bo92b$bo
+3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$159b$159b$159b$159b$12b2o18b2o18b2o105b$12bo2bo16bo2bo16bo2bo103b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o94b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o94b$4bo7bo2bo8bo7bo2bo8bo7bo
+2bo103b$12b2o18b2o18b2o105b$159b$b2o18b2o18b2o18b2o96b$159b$118b3o3b3o32b$118bo2bo2bo2bo31b$118bo5bo2bo31b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o51bo3bo2bo33b$b5o15b5o15b5o15b5o52bo7b3o30b$b2ob2o15b2ob2o15b2ob2o15b2ob2o53bobo3bob2o30b$b2ob2o15b2ob2o15b2ob
+2o15b2ob2o57b3o33b$2b3o17b3o17b3o17b3o60bo2bo30b$125b3o31b$126b2o31b$16bo19bo19bo102b$15b4o16b4o16b4o68bo3b3o25b$14b2obobo14b2obobo14b2obobo67bo3bo2bo24b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o61bo4bo27b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o61
+bo4bo27b$15b4o16b4o16b4o28bo13bo23b2ob2o2bobo24b$16bo19bo19bo29b3o11b3o22bo2b2o29b$85b2obo5bo4b2obo16bo4b4o31b$85b3o5b3o3b3o16b3o4b5o4b3o22b$86b2o4bo2b2o3b2o16bob2o5bo2bo2bo2bo22b$92b3o24b3o5bo2bo5bo22b$3bo19bo19bo19bo55b3o5bo2bobo3bo22b$2b3o17b3o17b
+3o17b3o54b2o4b2o2bo6bo22b$b5o15b5o15b5o15b5o57b2o8bobo23b$obobobo13bobobobo13bobobobo13bobobobo26bo6b3o26bo29b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o19b3o4bo6bo2bo25bo29b$85bo2bo4bo6bo24bobo31b$88bo5bobo3bo25bobo30b$3bo19bo19bo19bo20bo3bo5bobo4bobo55b$2bo
+bo17bobo17bobo17bobo23bo5b3o62b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo20bobo37bo33b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo61b3o31b$3b2o5bo12b2o5bo12b2o5bo12b2o30bo28bo6bo27b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o28b2ob2o26b2ob3o2bo26b$3b2o5bo12b2o5bo12b2o5bo12b2o29
+bo3bo25b2o6bo26b$10bo3bo15bo3bo15bo3bo40b3o26bobo2bo2bo26b$12bobo17bobo17bobo41bo28b2o32b$126b4ob2o26b$2b3o17b3o17b3o17b3o63bo30b$2b3o17b3o17b3o17b3o66b2o2b2o22b$bo3bo15bo3bo15bo3bo15bo3bo65b3o2bo22b$o5bo13bo5bo13bo5bo13bo5bo65bobobo22b$bo3bo15bo3bo1
+5bo3bo15bo3bo67b3o23b$2b3o17b3o17b3o17b3o69bo24b$159b$159b$159b$102b3o54b$101bo2bo54b$104bo54b$12b2o18b2o18b2o46bo3bo54b$12bo2bo16bo2bo16bo2bo48bo54b$4b5o7bo7b5o7bo7b5o7bo44bobo55b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o94b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o
+57b2o35b$4bo7bo2bo8bo7bo2bo8bo7bo2bo66b2o7bo27b$12b2o18b2o18b2o36bo39b2o27b$89bo40bobo26b$b2o18b2o18b2o18b2o26b3o67b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$b5o15b5o15b5o15b5o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o55bo6bo30b$b2ob2o15b2ob2
+o15b2ob2o15b2ob2o54b2o5b3o29b$2b3o17b3o17b3o17b3o55bobo3b2obo29b$126b3o30b$126b3o30b$16bo19bo19bo70b2o30b$15b4o16b4o16b4o100b$14b2obobo14b2obobo14b2obobo99b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o94b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o94b$15
+b4o16b4o16b4o52bo47b$16bo19bo19bo53b2o47b$110bobo46b$159b$159b$159b$3bo19bo19bo19bo95b$2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobobo13bobobobo13bobobobo13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o34bo57b$80bo19b2o57b$79bo20bobo56b$3bo19bo19
+bo19bo15b3o77b$2bobo17bobo17bobo17bobo94b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo94b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo95b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o94b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$10bo3bo15bo3bo15bo3bo36bo67b$12bo
+bo17bobo17bobo35b2o67b$90bobo66b$2b3o17b3o17b3o17b3o94b$2b3o17b3o17b3o17b3o94b$bo3bo15bo3bo15bo3bo15bo3bo93b$o5bo13bo5bo13bo5bo13bo5bo92b$bo3bo15bo3bo15bo3bo15bo3bo51bo5bo35b$2b3o17b3o17b3o17b3o51b3o3b3o34b$115b2obo2b2o2bo33b$81bo33b3o3b4o34b$80b2o33
+b3o5bo2bo32b$80bobo33b2o5bo2bo32b$123bo2bo32b$123bob2o32b$12b2o18b2o18b2o71bo33b$12bo2bo16bo2bo16bo2bo67bo2bo32b$4b5o7bo7b5o7bo7b5o7bo66bobo33b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o7b2o50b2o4bo28b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o6bo2bo54b3o27b$4bo7bo2bo8
+bo7bo2bo8bo7bo2bo15bo2bo49b2o2b2obo27b$12b2o18b2o18b2o18b2o50b2o2b3o28b$124bo3b3o28b$b2o18b2o18b2o18b2o60b2ob3o30b$127bo31b$116b3o3bo10bo25b$116bo2bo2bo4bo4b3o24b$116bo8b3o4bob2o23b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o49bo3bo12b3o23b$b5o15b5o15b5o15b5o5
+0bo16b3o23b$b2ob2o15b2ob2o15b2ob2o15b2ob2o51bobo13b2o24b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$2b3o17b3o17b3o17b3o58b2o34b$159b$125b3o31b$16bo19bo19bo70bo31b$15b4o16b4o16b4o66bo2bo30b$14b2obobo14b2obobo14b2obobo99b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo
+2b2o7b2o50bo2bo31b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o6bo2bo49b2o33b$15b4o16b4o16b4o12bo2bo51b2ob2o28b$16bo19bo19bo15b2o53bobo29b$127bo31b$159b$159b$159b$3bo19bo19bo19bo95b$2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobobo13bobobobo13bobobobo
+13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$159b$159b$3bo19bo19bo19bo95b$2bobo17bobo17bobo17bobo55b2o37b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo55b2o37b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo95b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4
+bo8b2o7b2o85b$3b2o5bo12b2o5bo12b2o5bo12b2o6bo2bo51b3o3bo26b$10bo3bo15bo3bo15bo3bo16bo2bo57bo26b$12bobo17bobo17bobo17b2o50bo3bo2b2o26b$128bo30b$2b3o17b3o17b3o17b3o59b2ob2o30b$2b3o17b3o17b3o17b3o62bo31b$bo3bo15bo3bo15bo3bo15bo3bo93b$o5bo13bo5bo13bo5bo1
+3bo5bo92b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$122b2o35b$122bobo34b$122bo36b$159b$125b3o31b$120b2o2bo2bo31b$12b2o18b2o18b2o66b2o5bo31b$12bo2bo16bo2bo16bo2bo67bo3bo31b$4b5o7bo7b5o7bo7b5o7bo70bo31b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o7b2o50b
+obo32b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o6bo2bo37b2o45b$4bo7bo2bo8bo7bo2bo8bo7bo2bo15bo2bo37bobo44b$12b2o18b2o18b2o18b2o38bo46b$159b$b2o18b2o18b2o18b2o96b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$b5o15b5o15b5o15b5o36b2o55b$b2ob2o15b2o
+b2o15b2ob2o15b2ob2o36bobo54b$b2ob2o15b2ob2o15b2ob2o15b2ob2o36bo56b$2b3o17b3o17b3o17b3o94b$159b$159b$16bo19bo19bo102b$15b4o16b4o16b4o100b$14b2obobo14b2obobo14b2obobo99b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o85b$3b2o9b2obobo3b2o9b2obobo3b2o9b2
+obobo3b2o6bo2bo17b2o65b$15b4o16b4o16b4o12bo2bo17bobo64b$16bo19bo19bo15b2o18bo66b$159b$159b$159b$159b$3bo19bo19bo19bo95b$2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobobo13bobobobo13bobobobo13bobobobo15b2o75b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o15bobo
+74b$82bo76b$159b$3bo19bo19bo19bo95b$2bobo17bobo17bobo17bobo94b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo66bo5bo21b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo66b3o3b3o20b$3b2o5bo12b2o5bo12b2o5bo12b2o65bob2o2bob2o19b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o7b2o57b3o5bo19b$3b2
+o5bo12b2o5bo12b2o5bo12b2o6bobo57b3o4b3o18b$10bo3bo15bo3bo15bo3bo16b2o58b2o3bo22b$12bobo17bobo17bobo81bo4bo17b$136bo22b$2b3o17b3o17b3o17b3o73b2obo17b$2b3o17b3o17b3o17b3o73bo20b$bo3bo15bo3bo15bo3bo15bo3bo93b$o5bo13bo5bo13bo5bo13bo5bo77bo14b$bo3bo15bo3b
+o15bo3bo15bo3bo72b3o2b3o13b$2b3o17b3o17b3o17b3o78bob2o12b$138bo5b3o12b$103b3o11b3o18b3o3b2o13b$103bo2bo10bo2bo16bo2b2o17b$103bo6b3o4bo19b2o20b$103bo5bo2bo4bo12b3o4bo2b2o5bo11b$104bobo2bo3bo4bobo8bo2bo8bo4b3o10b$12b2o18b2o18b2o56b4o18bo12b2obo10b$12bo
+2bo16bo2bo16bo2bo56bo15bo3bo5b3o4b3o11b$4b5o7bo7b5o7bo7b5o7bo75bo5bobo4b3o11b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o7b2o44bo10bobo6bo3bo3b2o11b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o6bobo30bo12b3o21b2o16b$4bo7bo2bo8bo7bo2bo8bo7bo2bo15b2o30b3o11bob2o20bo17b$12b2
+o18b2o18b2o48b2obo12b3o38b$102b3o13b2o39b$b2o18b2o18b2o18b2o39b3o54b$103b2o7b2o45b$110bob2o45b$111bo47b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$b5o15b5o15b5o15b5o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o46bo24b2o20b$2b3o1
+7b3o17b3o17b3o46b3o23b2o2b2o16b$110bobob2o25b3o15b$109b3ob2obo24b3o15b$16bo19bo19bo52b3obo2bo42b$15b4o16b4o16b4o54bo20b2obob3o17b$14b2obobo14b2obobo14b2obobo51bo22bo4bobo17b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o38bob2o19bo5bo17b$3b2o9b2obob
+o3b2o9b2obobo3b2o9b2obobo3b2o6bobo38b2o24b3o4b3o11b$15b4o16b4o16b4o12b2o65bobo5bo12b$16bo19bo19bo63bo19bo5b3o10b$119b3o17b2o5b3o10b$118b2obo24bobo10b$118b3o25b2o11b$118b3o38b$3bo19bo19bo19bo55b2o38b$2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobob
+o13bobobobo13bobobobo13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$159b$159b$3bo19bo19bo19bo95b$2bobo17bobo17bobo17bobo74b3o17b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo69b2o3bo19b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo70b2o4bo18b$3b2o5bo12b2o5bo12b2o5bo12b2o
+94b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o7b2o85b$3b2o5bo12b2o5bo12b2o5bo12b2o6bobo31bo53b$10bo3bo15bo3bo15bo3bo16b2o30b2o54b$12bobo17bobo17bobo49b2o33b3o17b$139bo2bo16b$2b3o17b3o17b3o17b3o74bo19b$2b3o17b3o17b3o17b3o64b3o7bo3bo15b$bo3bo15bo3bo15bo3bo15bo
+3bo63bo9bo19b$o5bo13bo5bo13bo5bo13bo5bo63bo9bobo16b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$159b$159b$159b$119b3o37b$12b2o18b2o18b2o65bo39b$12bo2bo16bo2bo16bo2bo64bo38b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o7
+b2o85b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o6bobo85b$4bo7bo2bo8bo7bo2bo8bo7bo2bo15b2o86b$12b2o18b2o18b2o105b$159b$b2o18b2o18b2o18b2o96b$109b3o47b$109bo49b$110bo48b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$b5o15b5o15b5o15b5o29bo63b$b2ob2o15b2ob2o15b2ob2
+o15b2ob2o27b2o64b$b2ob2o15b2ob2o15b2ob2o15b2ob2o28b2o63b$2b3o17b3o17b3o17b3o94b$159b$99b3o57b$16bo19bo19bo42bo59b$15b4o16b4o16b4o41bo58b$14b2obobo14b2obobo14b2obobo99b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o85b$3b2o9b2obobo3b2o9b2obobo3b2o9b2
+obobo3b2o6bobo85b$15b4o16b4o16b4o12b2o86b$16bo19bo19bo102b$159b$159b$89b3o67b$89bo69b$3bo19bo19bo19bo26bo68b$2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobobo13bobobobo13bobobobo13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$159b$159b$3bo19bo1
+9bo19bo24bo70b$2bobo17bobo17bobo17bobo19b4obo69b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo17b3ob2obo69b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo18b2o4bo70b$3b2o5bo12b2o5bo12b2o5bo12b2o13b3obo76b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o7b2o5bob3o75b$3b2o5bo12b2o5bo12b2o5bo
+12b2o6bobo6bo2b2o74b$10bo3bo15bo3bo15bo3bo16b2o86b$12bobo17bobo17bobo104b$159b$2b3o17b3o17b3o17b3o94b$2b3o17b3o17b3o17b3o94b$bo3bo15bo3bo15bo3bo15bo3bo93b$o5bo13bo5bo13bo5bo13bo5bo92b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$159
+b$159b$159b$159b$12b2o18b2o18b2o105b$12bo2bo16bo2bo16bo2bo103b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o7b2o9b2o74b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o6bobo9b2o74b$4bo7bo2bo8bo7bo2bo8bo7bo2bo15b2o86b$12b2o18b2o18b2o105b$159b$b2o18b2o18
+b2o18b2o96b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$b5o15b5o15b5o15b5o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$2b3o17b3o17b3o17b3o94b$159b$125b3o3b3o25b$16bo19bo19bo67bo2bo2bo2bo25b$15b4o16b4o16b4o68bo6
+bo24b$14b2obobo14b2obobo14b2obobo63bo3bo2bo2b2o24b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o7b2o9b2o42bo6bo24b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o6bobo9b2o39bobo4b6o22b$15b4o16b4o16b4o12b2o58b2o2b2o22b$16bo19bo19bo77b2o23b$134bo24b$134b2o23b$1
+32bob2o23b$133b2o3b3o18b$3bo19bo19bo19bo73bo2bo18b$2b3o17b3o17b3o17b3o68b2o5bo18b$b5o15b5o15b5o15b5o66bo3bo3bo18b$obobobo13bobobobo13bobobobo13bobobobo68bo3bo19b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o65b4o23b$126bo5bo2b3o21b$125b3o13b3o15b$3bo19bo19bo19bo
+60b2obo8bo4bo2bo14b$2bobo17bobo17bobo17bobo59b3o8b2o4bo17b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo59b3o5bo8bo3bo13b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo61b2o3b2o2b2o5bo17b$3b2o5bo12b2o5bo12b2o5bo12b2o69b2o6bobo14b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o7b2o9b2o46b2
+o4bo21b$3b2o5bo12b2o5bo12b2o5bo12b2o6bobo9b2o48bobobo21b$10bo3bo15bo3bo15bo3bo16b2o59b2obob2o20b$12bobo17bobo17bobo78bobob2o20b$134bo2b2o20b$2b3o17b3o17b3o17b3o69b2obo21b$2b3o17b3o17b3o17b3o71bo22b$bo3bo15bo3bo15bo3bo15bo3bo93b$o5bo13bo5bo13bo5bo13bo
+5bo92b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$159b$159b$159b$133b3o23b$12b2o18b2o18b2o80b2o23b$12bo2bo16bo2bo16bo2bo74b2obo25b$4b5o7bo7b5o7bo7b5o7bo73b7o22b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o7b2o9b2o44bo2b4o4bo18b$3bo3b2o7bo6bo3b
+2o7bo6bo3b2o7bo6b2o6bobo9b2o45b2obo3bobob2o16b$4bo7bo2bo8bo7bo2bo8bo7bo2bo15b2o58b3o25b$12b2o18b2o18b2o77b3o2b2obo19b$135b2o2bo19b$b2o18b2o18b2o18b2o71bobob2o19b$134bobo3bo18b$135b4ob3o16b$138b2obo2bo14b$142b2o15b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b
+$b5o15b5o15b5o15b5o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$2b3o17b3o17b3o17b3o94b$159b$133b2o24b$16bo19bo19bo75b2o25b$15b4o16b4o16b4o75bo24b$14b2obobo14b2obobo14b2obobo69b2o28b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b
+2o7b2o9b2o44b2o28b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o6bobo9b2o50bo23b$15b4o16b4o16b4o12b2o61b3o22b$16bo19bo19bo77bob2o21b$135b3o21b$135b3o21b$123b2o10b2o22b$122b2o35b$3bo19bo19bo19bo60bo34b$2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobobo13
+bobobobo13bobobobo13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$159b$159b$3bo19bo19bo19bo95b$2bobo17bobo17bobo17bobo48b2o44b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo47b2o45b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo50bo44b$3b2o5bo12b2o5bo12b2o5bo12b2o94b$3b2o4b
+o4bo8b2o4bo4bo8b2o4bo4bo8b2o7b2o9b2o74b$3b2o5bo12b2o5bo12b2o5bo12b2o6bobo9b2o74b$10bo3bo15bo3bo15bo3bo16b2o86b$12bobo17bobo17bobo104b$159b$2b3o17b3o17b3o17b3o94b$2b3o17b3o17b3o17b3o38b2o54b$bo3bo15bo3bo15bo3bo15bo3bo36b2o55b$o5bo13bo5bo13bo5bo13bo5bo
+37bo54b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$159b$159b$159b$93b2o64b$12b2o18b2o18b2o38b2o65b$12bo2bo16bo2bo16bo2bo38bo64b$4b5o7bo7b5o7bo7b5o7bo102b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o7b2o9b2o74b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2
+o6bobo9b2o74b$4bo7bo2bo8bo7bo2bo8bo7bo2bo15b2o86b$12b2o18b2o18b2o105b$159b$b2o18b2o18b2o18b2o96b$83b2o24bo13bo35b$82b2o24b3o11b3o34b$84bo22b2obo5bo4b2obo34b$107b3o5b3o3b3o35b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o41b2o5bob2o3b2o35b$b5o15b5o15b5o15b5o74b3o
+3b3o10b$b2ob2o15b2ob2o15b2ob2o15b2ob2o74bo2bo2bo2bo9b$b2ob2o15b2ob2o15b2ob2o15b2ob2o74bo5bo2bo9b$2b3o17b3o17b3o17b3o53bo21bo3bo2bo11b$116b2o4b3o15bo7b3o8b$108b3o11bo2bo15bobo3bob2o8b$16bo19bo19bo19bo30bo2bo8bo2bo22b3o11b$15b4o16b4o16b4o16b4o31bo11bo2
+4bo2bo8b$14b2obobo14b2obobo14b2obobo14b2obobo26bo3bo4bob2o4bobo21b3o9b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o25bo4b2o31b2o9b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o4bo4b2obobo3b2o22bobo49b$15b4o16b4o16b4o8b2o6b4o38b2o30bo3b3o3b$16b
+o19bo19bo19bo40b2o30bo3bo2bo2b$115bo2bo29bo4bo5b$115bo32bo4bo5b$115bo2bo28b2ob2o2bobo2b$116b2o29bo2b2o7b$3bo19bo19bo19bo77bo4b4o9b$2b3o17b3o17b3o17b3o75b3o4b5o4b3o$b5o15b5o15b5o15b5o74bob2o5bo2bo2bo2bo$obobobo13bobobobo13bobobobo13bobobobo74b3o5bo2bo
+5bo$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o74b3o5bo2bobo3bo$141b2o7b2o6bo$155bobob$3bo19bo19bo19bo95b$2bobo17bobo17bobo17bobo94b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo74bo9b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3bo40bo8b3o21b4o7b$3b2o5bo12b2o5bo12b2o5bo12b2o
+5bo43bo8bo2bo22bo2bo6b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o29b3o9bo24b2o6b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o37bo3bo32b$10bo3bo15bo3bo15bo3bo15bo3bo51bo22bo9b$12bobo17bobo17bobo17bobo48bobo23b4o6b$151b3o5b$2b3o17b3o17b3o17b3o85b2o2bo4b$2b3o
+17b3o17b3o17b3o87bobo4b$bo3bo15bo3bo15bo3bo15bo3bo86b2o5b$o5bo13bo5bo13bo5bo13bo5bo92b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$159b$159b$159b$159b$12b2o18b2o18b2o18b2o85b$12bo2bo16bo2bo16bo2bo16bo2bo83b$4b5o7bo7b5o7bo7b5o7bo7b5
+o7bo67b2o13b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o59b2o13b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o74b$4bo7bo2bo8bo7bo2bo8bo7bo2bo8bo7bo2bo83b$12b2o18b2o18b2o18b2o85b$156bo2b$b2o18b2o18b2o18b2o88bob3obob$151b3obobob$151b4obo2b$105bo43b2ob2o5b$
+104bo46bo7b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o37b3o44bo7b$b5o15b5o15b5o15b5o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o80bo12b$2b3o17b3o17b3o17b3o80b2o12b$145bobo11b$150bo8b$16bo19bo19bo19bo72b3o7b$15b4o16b4o16b4o16b4o69b2obo7
+b$14b2obobo14b2obobo14b2obobo14b2obobo68b3o8b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o59bobob3o8b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o60bo3b2o8b$15b4o16b4o16b4o16b4o80b$16bo19bo19bo19bo59bo22b$135b2o22b$135bobo21b$159b
+$159b$3bo19bo19bo19bo95b$2b3o17b3o17b3o17b3o94b$b5o15b5o15b5o15b5o93b$obobobo13bobobobo13bobobobo13bobobobo92b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$126bo32b$125b2o32b$3bo19bo19bo19bo61bobo31b$2bobo17bobo17bobo17bobo94b$2bobo7bobo7bobo7bobo7bobo7bobo7
+bobo7bobo84b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3bo20bo63b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo23bo64b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o9b3o62b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o74b$10bo3bo15bo3bo15bo3bo15bo3bo84b$12bobo17bobo17bobo17bobo41bo42
+b$115b2o42b$2b3o17b3o17b3o17b3o50bobo41b$2b3o17b3o17b3o17b3o94b$bo3bo15bo3bo15bo3bo15bo3bo93b$o5bo13bo5bo13bo5bo13bo5bo92b$bo3bo15bo3bo15bo3bo15bo3bo93b$2b3o17b3o17b3o17b3o94b$159b$159b$106bo52b$105b2o52b$105bobo51b$159b$12b2o18b2o18b2o18b2o85b$12bo2
+bo16bo2bo16bo2bo16bo2bo83b$4b5o7bo7b5o7bo7b5o7bo7b5o7bo82b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o74b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o74b$4bo7bo2bo8bo7bo2bo8bo7bo2bo8bo7bo2bo83b$12b2o18b2o18b2o18b2o22bo62b$95b2o62b$b2o18b2o18b2o18b2o32bo
+bo61b$159b$159b$85bo73b$84bo74b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o17b3o72b$b5o15b5o15b5o15b5o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o93b$b2ob2o15b2ob2o15b2ob2o15b2ob2o20bo72b$2b3o17b3o17b3o17b3o20b2o20b3o3b3o43b$85bobo19bo2bo2bo2bo42b$107bo5bo2bo42b$16bo19b
+o19bo19bo30bo3bo2bo44b$15b4o16b4o16b4o16b4o28bo7b3o41b$14b2obobo14b2obobo14b2obobo14b2obobo28bobo3bob2o41b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o27b3o44b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o29bo2bo41b$15b4o16b4o16b4o
+16b4o35b3o42b$16bo19bo19bo19bo38b2o42b$159b$116bo3b3o36b$116bo3bo2bo35b$115bo4bo38b$3bo19bo19bo19bo20b2o29bo4bo38b$2b3o17b3o17b3o17b3o18bo2bo27b2ob2o2bobo35b$b5o15b5o15b5o15b5o17bo2bo27bo2b2o40b$obobobo13bobobobo13bobobobo13bobobobo17b2o22bo4b4o42b$2
+o3b2o13b2o3b2o13b2o3b2o13b2o3b2o40b3o4b5o4b3o33b$107bob2o5bo2bo2bo2bo33b$108b3o5bo2bo5bo33b$3bo19bo19bo19bo44b3o5bo2bobo3bo33b$2bobo17bobo17bobo17bobo43b2o7b2o6bo33b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo47bobo34b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3
+bo84b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo88b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o31bo42b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o30b4o40b$10bo3bo15bo3bo15bo3bo15bo3bo41bo2bo39b$12bobo17bobo17bobo17bobo43b2o39b$159b$2b3o17b3o17b3o17b3o51bo42b$2b3o17b3
+o17b3o17b3o51b4o39b$bo3bo15bo3bo15bo3bo15bo3bo52b3o38b$o5bo13bo5bo13bo5bo13bo5bo17b2o31b2o2bo37b$bo3bo15bo3bo15bo3bo15bo3bo17bo2bo32bobo37b$2b3o17b3o17b3o17b3o18bo2bo32b2o38b$84b2o73b$159b$159b$159b$159b$159b$12b2o18b2o18b2o18b2o85b$12bo2bo16bo2bo16b
+o2bo16bo2bo83b$4b5o7bo7b5o7bo7b5o7bo7b5o7bo82b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o74b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o74b$4bo7bo2bo8bo7bo2bo8bo7bo2bo8bo7bo2bo35b2o46b$12b2o18b2o18b2o18b2o37b2o46b$159b$b2o18b2o18b2o18b2o96b$159b$123bo
+35b$84b2o32bob3obo34b$83bo2bo31b3obobo34b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o16bo2bo31b4obo35b$b5o15b5o15b5o15b5o18b2o30b2ob2o38b$b2ob2o15b2ob2o15b2ob2o15b2ob2o52bo40b$b2ob2o15b2ob2o15b2ob2o15b2ob2o52bo40b$2b3o17b3o17b3o17b3o94b$159b$113bo45b$16bo19bo1
+9bo19bo35b2o45b$15b4o16b4o16b4o16b4o33bobo44b$14b2obobo14b2obobo14b2obobo14b2obobo37bo41b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o31b3o40b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o30b2obo40b$15b4o16b4o16b4o16b4o36b3o41b$16b
+o19bo19bo19bo34bobob3o41b$112bo3b2o41b$159b$103bo55b$102b2o55b$3bo19bo19bo19bo20b2o16bobo54b$2b3o17b3o17b3o17b3o18bo2bo72b$b5o15b5o15b5o15b5o17bo2bo72b$obobobo13bobobobo13bobobobo13bobobobo17b2o73b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o92b$159b$159b$3bo19
+bo19bo19bo95b$2bobo17bobo17bobo17bobo28bo65b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo17b2o65b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3bo17bobo11b3o3b3o44b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo34bo2bo2bo2bo44b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o23bo6bo43
+b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o19bo3bo2bo2b2o43b$10bo3bo15bo3bo15bo3bo15bo3bo33bo6bo43b$12bobo17bobo17bobo17bobo30bobo4b6o41b$112b2o2b2o41b$2b3o17b3o17b3o17b3o50b2o42b$2b3o17b3o17b3o17b3o50bo43b$bo3bo15bo3bo15bo3bo15bo3bo49b2o42b$o5bo13bo5bo13
+bo5bo13bo5bo17b2o27bob2o42b$bo3bo15bo3bo15bo3bo15bo3bo17bobo28b2o3b3o37b$2b3o17b3o17b3o17b3o18b2o33bo2bo37b$114b2o5bo37b$113bo3bo3bo37b$116bo3bo38b$113b4o42b$107bo5bo2b3o40b$106b3o13b3o34b$12b2o18b2o18b2o18b2o31b2obo13bo2bo33b$12bo2bo16bo2bo16bo2bo16
+bo2bo29b3o7bo2bo3bo36b$4b5o7bo7b5o7bo7b5o7bo7b5o7bo28b3o6b3o5bo3bo32b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o21b2o6bo4bo2bo36b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o31b3o4bobo33b$4bo7bo2bo8bo7bo2bo8bo7bo2bo8bo7bo2bo83b$12b2o18b2o18b2o18b2o85b$
+159b$b2o18b2o18b2o18b2o51b2o43b$113bo2bo42b$114b3obo40b$84b2o31b2o40b$83bobo30b3o40b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o16b2o31bo42b$b5o15b5o15b5o15b5o48b2o2bo40b$b2ob2o15b2ob2o15b2ob2o15b2ob2o49b2o2b2o38b$b2ob2o15b2ob2o15b2ob2o15b2ob2o54bo38b$2b3o17b3
+o17b3o17b3o52b2obo38b$118b2o39b$159b$16bo19bo19bo19bo82b$15b4o16b4o16b4o16b4o80b$14b2obobo14b2obobo14b2obobo14b2obobo79b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o74b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o74b$15b4o16b4o16b
+4o16b4o80b$16bo19bo19bo19bo82b$159b$159b$159b$110b2o47b$3bo19bo19bo19bo20b2o24b2o47b$2b3o17b3o17b3o17b3o18bobo73b$b5o15b5o15b5o15b5o17b2o74b$obobobo13bobobobo13bobobobo13bobobobo54bo37b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o53b3o36b$121bobo35b$120b2obo35b
+$3bo19bo19bo19bo57b2o36b$2bobo17bobo17bobo17bobo56bo37b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo84b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3bo84b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo88b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o74b$3b2o5bo12b2o5bo12b2o5bo12b2
+o5bo12b2o26b2o46b$10bo3bo15bo3bo15bo3bo15bo3bo35b2o47b$12bobo17bobo17bobo17bobo37bo3bo42b$115b3o41b$2b3o17b3o17b3o17b3o50bob2o40b$2b3o17b3o17b3o17b3o51b3o40b$bo3bo15bo3bo15bo3bo15bo3bo50b3o40b$o5bo13bo5bo13bo5bo13bo5bo17b2o26bo3b2o41b$bo3bo15bo3bo15b
+o3bo15bo3bo17bobo26bo46b$2b3o17b3o17b3o17b3o18b2o74b$101b2o56b$100b2o57b$102bo56b$159b$159b$159b$12b2o18b2o18b2o18b2o85b$12bo2bo16bo2bo16bo2bo16bo2bo83b$4b5o7bo7b5o7bo7b5o7bo7b5o7bo82b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6bo5bo6bo6b2o74b$3bo3b2o7bo6bo3b2o7bo6
+bo3b2o7bo6bo3b2o7bo6b2o6b2o66b$4bo7bo2bo8bo7bo2bo8bo7bo2bo8bo7bo2bo14b2o67b$12b2o18b2o18b2o18b2o18bo66b$159b$b2o18b2o18b2o18b2o96b$159b$84b3o72b$84bobo72b$83bo2bo72b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o16b3o73b$b5o15b5o15b5o15b5o17b3o73b$b2ob2o15b2ob2o1
+5b2ob2o15b2ob2o16bobo74b$b2ob2o15b2ob2o15b2ob2o15b2ob2o15bo2bo74b$2b3o17b3o17b3o17b3o16bo2bo74b$82b2o75b$159b$16bo19bo19bo19bo82b$15b4o16b4o16b4o16b4o80b$14b2obobo14b2obobo14b2obobo14b2obobo79b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o
+74b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o74b$15b4o16b4o16b4o16b4o80b$16bo19bo19bo19bo82b$159b$159b$159b$159b$3bo19bo19bo19bo19bo75b$2b3o17b3o17b3o17b3o17b3o74b$b5o15b5o15b5o15b5o15b5o73b$obobobo13bobobobo13bobobobo13bobobobo13bobobobo7
+2b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o72b$159b$159b$3bo19bo19bo19bo19bo75b$2bobo17bobo17bobo17bobo17bobo74b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo74b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3bo8bo75b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o74b$3b2
+o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o74b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o74b$10bo3bo15bo3bo15bo3bo15bo3bo84b$12bobo17bobo17bobo17bobo84b$159b$2b3o17b3o17b3o17b3o17b3o74b$2b3o17b3o17b3o17b3o17b3o74b$bo3bo15bo3bo15bo3bo15bo3bo15bo3bo73b$o5bo13b
+o5bo13bo5bo13bo5bo13bo5bo72b$bo3bo15bo3bo15bo3bo15bo3bo15bo3bo73b$2b3o17b3o17b3o17b3o17b3o74b$159b$159b$159b$159b$159b$159b$12b2o18b2o18b2o18b2o85b$12bo2bo16bo2bo16bo2bo16bo2bo83b$4b5o7bo7b5o7bo7b5o7bo7b5o7bo82b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6bo5bo6bo6b
+2o74b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o74b$4bo7bo2bo8bo7bo2bo8bo7bo2bo8bo7bo2bo83b$12b2o18b2o18b2o18b2o85b$159b$b2o18b2o18b2o18b2o18b2o76b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o72b$b5o15b5o15b5o15b5o15b5o73b$b2ob2o1
+5b2ob2o15b2ob2o15b2ob2o15b2ob2o73b$b2ob2o15b2ob2o15b2ob2o15b2ob2o15b2ob2o73b$2b3o17b3o17b3o17b3o17b3o74b$159b$159b$16bo19bo19bo19bo82b$15b4o16b4o16b4o16b4o80b$14b2obobo14b2obobo14b2obobo14b2obobo79b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2b
+o2b2o74b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o74b$15b4o16b4o16b4o16b4o80b$16bo19bo19bo19bo82b$159b$159b$159b$159b$3bo19bo19bo19bo19bo75b$2b3o17b3o17b3o17b3o17b3o74b$b5o15b5o15b5o15b5o15b5o73b$obobobo13bobobobo13bobobobo13bobobobo13bobo
+bobo72b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o72b$159b$159b$3bo19bo19bo19bo19bo75b$2bobo17bobo17bobo17bobo17bobo74b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo74b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3bo8bo75b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o74
+b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o74b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o74b$10bo3bo15bo3bo15bo3bo15bo3bo84b$12bobo17bobo17bobo17bobo84b$159b$2b3o17b3o17b3o17b3o17b3o74b$2b3o17b3o17b3o17b3o17b3o74b$bo3bo15bo3bo15bo3bo15bo3bo15bo3bo73b$o5
+bo13bo5bo13bo5bo13bo5bo13bo5bo72b$bo3bo15bo3bo15bo3bo15bo3bo15bo3bo73b$2b3o17b3o17b3o17b3o17b3o74b$159b$159b$159b$159b$159b$159b$12b2o18b2o18b2o18b2o85b$12bo2bo16bo2bo16bo2bo16bo2bo83b$4b5o7bo7b5o7bo7b5o7bo7b5o7bo82b$3bo5bo6bo6bo5bo6bo6bo5bo6bo6bo5bo
+6bo6b2o74b$3bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6bo3b2o7bo6b2o74b$4bo7bo2bo8bo7bo2bo8bo7bo2bo8bo7bo2bo83b$12b2o18b2o18b2o18b2o85b$159b$b2o18b2o18b2o18b2o18b2o76b$159b$159b$159b$159b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o72b$b5o15b5o15b5o15b5o15b5o73b$b2
+ob2o15b2ob2o15b2ob2o15b2ob2o15b2ob2o73b$b2ob2o15b2ob2o15b2ob2o15b2ob2o15b2ob2o73b$2b3o17b3o17b3o17b3o17b3o74b$159b$159b$16bo19bo19bo19bo82b$15b4o16b4o16b4o16b4o80b$14b2obobo14b2obobo14b2obobo14b2obobo79b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3
+obo2bo2b2o74b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o74b$15b4o16b4o16b4o16b4o80b$16bo19bo19bo19bo82b$159b$159b$159b$159b$3bo19bo19bo19bo19bo75b$2b3o17b3o17b3o17b3o17b3o74b$b5o15b5o15b5o15b5o15b5o73b$obobobo13bobobobo13bobobobo13bobobobo1
+3bobobobo72b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o72b$159b$159b$3bo19bo19bo19bo19bo75b$2bobo17bobo17bobo17bobo17bobo74b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo74b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3bo8bo75b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12
+b2o74b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o74b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o74b$10bo3bo15bo3bo15bo3bo15bo3bo84b$12bobo17bobo17bobo17bobo84b!`,
+"greystretch": `
+#O by amling
+x = 179, y = 197, rule = B3/S23
+18b3o5b3o5b3o5b3o9b3o5b3o9b3o5b3o9b3o5b3o9b3o5b3o9b3o5b3o5b3o5b3o18b$17bo2bo5bo2bo3bo2bo5bo2bo7bo2bo5bo2bo7bo2bo5bo2bo7bo2bo5bo2bo7bo2bo5bo2bo7bo2bo5bo2bo3bo2bo5bo2bo17b$10b3o3bobo9bobobobo9bobo5bobo9bobo5bobo9bobo5bobo
+9bobo5bobo9bobo5bobo9bobobobo9bobo3b3o10b$10bo2bo2bo3bo5bo3bobo3bo5bo3bo5bo3bo5bo3bo5bo3bo5bo3bo5bo3bo5bo3bo5bo3bo5bo3bo5bo3bo5bo3bobo3bo5bo3bo2bo2bo10b$11b2obobob3o5b3obobob3o5b3ob2o3b2ob3o5b3ob2o3b2ob3o5b3ob2o3b2ob3o5b3ob2o3b2ob3o5b3ob2o3b2ob3o5b3o
+bobob3o5b3obobob2o11b$12bobobobobo5bobobobobobo5bobobo2bo2bobobo5bobobo2bo2bobobo5bobobo2bo2bobobo5bobobo2bo2bobobo5bobobo2bo2bobobo5bobobobobobo5bobobobobo12b$6b3o5bobobob2o3b2obobobobob2o3b2obobobobobobob2o3b2obobobobobobob2o3b2obobobobobobob2o3b2o
+bobobobobobob2o3b2obobobobobobob2o3b2obobobobob2o3b2obobobo5b3o6b$6bobo5bobobo3bobo3bobobobo3bobo3bobobobobobo3bobo3bobobobobobo3bobo3bobobobobobo3bobo3bobobobobobo3bobo3bobobobobobo3bobo3bobobobo3bobo3bobobo5bobo6b$6bobo5bobobob2o3b2obobobobob2o3b2o
+bobobobobobob2o3b2obobobobobobob2o3b2obobobobobobob2o3b2obobobobobobob2o3b2obobobobobobob2o3b2obobobobob2o3b2obobobo5bobo6b$7b3o2bobobobo2bo3bo2bobobobo2bo3bo2bobobobobobo2bo3bo2bobobobobobo2bo3bo2bobobobobobo2bo3bo2bobobobobobo2bo3bo2bobobobobobo2bo
+3bo2bobobobo2bo3bo2bobobobo2b3o7b$7b3o3b2obob2o7b2obobob2o7b2obobobobob2o7b2obobobobob2o7b2obobobobob2o7b2obobobobob2o7b2obobobobob2o7b2obobob2o7b2obob2o3b3o7b$7bo4bobobobo3bobo3bobobobo3bobo3bobobobobobo3bobo3bobobobobobo3bobo3bobobobobobo3bobo3bobo
+bobobobo3bobo3bobobobobobo3bobo3bobobobo3bobo3bobobobo4bo7b$11b2obobo2bobo3bobo2bobo2bobo3bobo2bobobobo2bobo3bobo2bobobobo2bobo3bobo2bobobobo2bobo3bobo2bobobobo2bobo3bobo2bobobobo2bobo3bobo2bobo2bobo3bobo2bobob2o11b$11b2obobo13bobo13bobobobo13bobobob
+o13bobobobo13bobobobo13bobobobo13bobo13bobob2o11b$14bobo12b2ob2o12bobobobo13bobobobo13bobobobo13bobobobo13bobobobo12b2ob2o12bobo14b$13b2o30b2obobob2o11b2obobob2o11b2obobob2o11b2obobob2o11b2obobob2o30b2o13b$13bo2b2o11b2ob2o8bobo3bobo3bobo5bobo3bobo3bo
+bo5bobo3bobo3bobo5bobo3bobo3bobo5bobo3bobo3bobo8b2ob2o11b2o2bo13b$11b2o2b3o23b2o2b2obobob2o2b2o3b2o2b2obobob2o2b2o3b2o2b2obobob2o2b2o3b2o2b2obobob2o2b2o3b2o2b2obobob2o2b2o23b3o2b2o11b$14bobo19bo3b2o3b2obobob2o3b2ob2o3b2obobob2o3b2ob2o3b2obobob2o3b2ob
+2o3b2obobob2o3b2ob2o3b2obobob2o3b2o3bo19bobo14b$10bo5bo18b3o2bo2b3o2bobo2b3o2bobo2b3o2bobo2b3o2bobo2b3o2bobo2b3o2bobo2b3o2bobo2b3o2bobo2b3o2bobo2b3o2bo2b3o18bo5bo10b$10bo3bo19b2ob2obobob2o7b2obobobobob2o7b2obobobobob2o7b2obobobobob2o7b2obobobobob2o7b
+2obobob2ob2o19bo3bo10b$10bo27bobobob2o7b2obobobobob2o7b2obobobobob2o7b2obobobobob2o7b2obobobobob2o7b2obobobo27bo10b$11bo25b2obobo13bobobobo13bobobobo13bobobobo13bobobobo13bobob2o25bo11b$12bo2b3o20bobob2o2bobobobo2b2obobob2o2bobobobo2b2obobob2o2bobobo
+bo2b2obobob2o2bobobobo2b2obobob2o2bobobobo2b2obobo20b3o2bo12b$11bo3b3o16b3obobobo3b2o3b2o3bobobobo3b2o3b2o3bobobobo3b2o3b2o3bobobobo3b2o3b2o3bobobobo3b2o3b2o3bobobob3o16b3o3bo11b$15bo2bo15bo3bobob2o2bo5bo2b2obobob2o2bo5bo2b2obobob2o2bo5bo2b2obobob2o2
+bo5bo2b2obobob2o2bo5bo2b2obobo3bo15bo2bo15b$15bo17bo6bo3bo9bo3bobo3bo9bo3bobo3bo9bo3bobo3bo9bo3bobo3bo9bo3bo6bo17bo15b$16bo12bo3b2o4b2obobob7obobobobobobob7obobobobobobob7obobobobobobob7obobobobobobob7obobob2o4b2o3bo12bo16b$15bobo9b2ob2o2b2o4bobob4o3
+b4obobobobob4o3b4obobobobob4o3b4obobobobob4o3b4obobobobob4o3b4obobo4b2o2b2ob2o9bobo15b$27b2ob2o4b3obobobo9bobobobobobo9bobobobobobo9bobobobobobo9bobobobobobo9bobobob3o4b2ob2o27b$28bo11bo2bo3b5o3bo2bobo2bo3b5o3bo2bobo2bo3b5o3bo2bobo2bo3b5o3bo2bobo2bo3
+b5o3bo2bo11bo28b$27b3o7b2obob2o2b2o3b2o2b2obobob2o2b2o3b2o2b2obobob2o2b2o3b2o2b2obobob2o2b2o3b2o2b2obobob2o2b2o3b2o2b2obob2o7b3o27b$28b2o5b2obobobo13bobobobo13bobobobo13bobobobo13bobobobo13bobobob2o5b2o28b$38bobobo13bobobobo13bobobobo13bobobobo13bobo
+bobo13bobobo38b$38bobo2bob2o5b2obo2bobo2bob2o5b2obo2bobo2bob2o5b2obo2bobo2bob2o5b2obo2bobo2bob2o5b2obo2bobo38b$30b3o3bobobo3b2ob2ob2ob2o3bobo3b2ob2ob2ob2o3bobo3b2ob2ob2ob2o3bobo3b2ob2ob2ob2o3bobo3b2ob2ob2ob2o3bobobo3b3o30b$29bo2b3obobobob2obo7bob2obo
+bob2obo7bob2obobob2obo7bob2obobob2obo7bob2obobob2obo7bob2obobobob3o2bo29b$32bobobobobobo2bo7bo2bobobobo2bo7bo2bobobobo2bo7bo2bobobobo2bo7bo2bobobobo2bo7bo2bobobobobobo32b$32bobobobobobob5ob5obobobobob5ob5obobobobob5ob5obobobobob5ob5obobobobob5ob5obob
+obobobobo32b$29b2obobobobobobo13bobobobo13bobobobo13bobobobo13bobobobo13bobobobobobob2o29b$28bobobobobobobobobob7obobobobobobob7obobobobobobob7obobobobobobob7obobobobobobob7obobobobobobobobobo28b$27b2obobobobobobobobo9bobobobobobo9bobobobobobo9bobobo
+bobobo9bobobobobobo9bobobobobobobobob2o27b$30bobobobobobobob2o2bobo2b2obobobobob2o2bobo2b2obobobobob2o2bobo2b2obobobobob2o2bobo2b2obobobobob2o2bobo2b2obobobobobobobo30b$26bo3bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobo3bo26b$24b2ob2obobobobobobobobob2o3b2obobobobobobob2o3b2obobobobobobob2o3b2obobobobobobob2o3b2obobobobobobob2o3b2obobobobobobobobob2ob2o24b$24b2ob2obobobobobobobobobo5bobobobobobobobo5bobobobobobobobo5bobob
+obobobobobo5bobobobobobobobo5bobobobobobobobobob2ob2o24b$25bo4bobobobobobobobobo2bo2bobobobobobobobo2bo2bobobobobobobobo2bo2bobobobobobobobo2bo2bobobobobobobobo2bo2bobobobobobobobobo4bo25b$25b2o3bobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo3b2o25b$30bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo30b$29b2obobobobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o29b$30bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo30b$31b2obobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o31b$32bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo32b$32bobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo32b$31b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o31b$34bobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobo34b$33b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o33b$34bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobo34b$34bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo34b$33b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobob2o33b$36bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo36b$36bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobo36b$36bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo36b$34bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo34b$3
+5b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o35b$38bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo38b$38bobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo38b$35b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o35b$38bobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobo38b$37b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o37b$38bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobo38b$16b3o18b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o18b3o16b$15bo2bo18b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobob2o18bo2bo15b$14bobo23bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo23bobo14b$14bo3bo21bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo
+bobobobo21bo3bo14b$13b2ob3o21bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo21b3ob2o13b$14bobobo20b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo
+b2o20bobobo14b$13b2obob2o20bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo20b2obob2o13b$16bob2o21b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o21
+b2obo16b$15bobo24bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo24bobo15b$13bobo26bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo26bobo13b$13bo5b3o19b2o
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o19b3o5bo13b$13bo5b3o22bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo22b3o5bo13b$16b3o24b2obobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o24b3o16b$16bo2bo24bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo24bo2bo16b$44bobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobo44b$15bo2bob2o21b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o21b2obo2bo15b$13b2ob3ob2o4bo7b2o10bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobo10b2o7bo4b2ob3ob2o13b$12b2ob2ob2obo2b2ob2o6b2o6b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o6b2o6b2ob2o2bob2ob2ob2o12b$11bob2o4b3o2b2ob2o3b2ob2ob3ob3obobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobob3ob3ob2ob2o3b2ob2o2b3o4b2obo11b$20b2o5bo3b3obo3b2o5bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo5b2o3bob3o3bo5b2o20b$11b2o14b3o2bo9bo2b2obobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o2bo9bo2b3o14b2o11b$29bo9b2o5bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo5b2o9bo29b$15b3o5bo4bobo5bo3bobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo3bo5bobo4bo5b3o15b$14bo2bo4b3ob7o6bob2obo3bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo3bob2obo6b7ob3o4bo2bo14b$13bob2o4bo7b2o7bo7bobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo7bo7b2o7bo4b2obo13b$13bobo4b5o13bo4bo2bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo2bo4bo13b5o4bobo13b$12b2o5bobo3bo2bo8bo3bo4bobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo4bo3bo8bo2bo3bobo5b2o12b$13bo4bo18bobo5b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o5bobo18bo4bo13b$12bo5bo2bo15bo2bo5bobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo5bo2bo15bo2bo5bo12b$12bo5b3ob2o13bob2o3bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo3b2obo13b2ob3o5bo12b$8bo5b2o8bo11b2o
+bobo2bo3bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo3bo2bobob2o11bo8b2o5bo8b$7b3o3b3o6bo13b2obobo4bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo4bobob2o13bo6b3o3b3o7b$6
+bo3bo2b2o7bo11bo10b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o10bo11bo7b2o2bo3bo6b$6b2ob2o10b6o6b5ob2o7bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo7b2ob5o6b6o10b2ob
+2o6b$14bo4b2o5bo6bo14bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo14bo6bo5b2o4bo14b$5b5o4bo4b3ob2ob2o8b2o7b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o7b2o8b2ob2ob3o4
+bo4b5o5b$5bobobobo6b2o4bo10bobo7b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o7bobo10bo4b2o6bobobobo5b$9bobo7b2o10b3o2b3o9bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo
+9b3o2b3o10b2o7bobo9b$11bo7b2obobo14bo8bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo8bo14bobob2o7bo11b$20bobobobo5bo2b2o2bo5b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+2o5bo2b2o2bo5bobobobo20b$8b2o2bo10b2obo6b2obo2bo5b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o5bo2bob2o6bob2o10bo2b2o8b$7b2o9bobo3bo9bo4bo8bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobo8bo4bo9bo3bobo9b2o7b$6bo3bo10bob2o10bob2obo7bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo7bob2obo10b2obo10bo3bo6b$5b3obo12b2obo19b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobob2o19bob2o12bob3o5b$7bo11bobo3bo9bob2obo4b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o4bob2obo9bo3bobo11bo7b$7bo5bo7bobob2o7bobo11bobobobobobobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobo11bobo7b2obobo7bo5bo7b$7bobo2bobo11bo7b3o11bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo11b3o7bo11bobo2bobo7b$7b2o2bo3bo5bo2b4o5bo4bo6b2obobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobob2o6bo4bo5b4o2bo5bo3bo2b2o7b$6b3o2b2obo6b2obo3bo3bo2bo9b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o9bo2bo3bo3bob2o6bob2o2b3o6b$5b2o5b2o7b2o2bo2bo4bo5bo8bobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo8bo5bo4bo2bo2b2o7b2o5b2o5b$5bo6b2o8b4o3bo3bo4b2o8bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo8b2o4bo3bo3b4o8b2o6bo5b$5bo7bo8b3o3bo5bobo2
+bo5b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o5bo2bobo5bo3b3o8bo7bo5b$22bo3b2o6bobo8b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o8bobo6b2o3bo22b$4bo2bo13b6o10
+bo10bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo10bo10b6o13bo2bo4b$4b4o12bo27bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo27bo12b4o4b$4bo4bo9b2o13b3o8b2obobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o8b3o13b2o9bo4bo4b$5b2o3bo9bo24b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o24bo9bo3b2o5b$5b2o2bo10bo12bob2ob2o8bobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobo8b2ob2obo12bo10bo2b2o5b$5b2obo12bobo8b2obo3bo8bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo8bo3bob2o8bobo12bob2o5b$5b3o15bo7bo5bobo5b2obobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o5bobo5bo7bo15b3o5b$5b3o13bo10bo4bo7b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o7bo4bo10bo13b3o5b$bo2bo2bo13bob2o8b3o12bobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo12b3o8b2obo13bo2bo2bob$3o3bo15b4o9bob2o9bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo9b2obo9b4o15bo3b3o$bo24bo10b3o5b2obobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o5b3o10bo24bob$4bo17b2ob3o11b2o4b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o4b2o11b3ob2o17bo4b$2bo19b2ob2o12b2o7bobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobo7b2o12b2ob2o19bo2b$b3o17bo3b2o21bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo21b2o3bo17b3ob$20bob2o21b2obobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobob2o21b2obo20b$3b4o16bo2bo9b3o6b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o6b3o9bo2bo16b4o3b$2b2obob2o9b3o6bo7bobobo8bobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobo8bobobo7bo6b3o9b2obob2o2b$7b2o15b2obo6b2o12bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo12b2o6bob2o15b2o7b$2obo2bo2bo14bo2bo17b2obobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobob2o17bo2bo14bo2bo2bob2o$3b2ob2obo13bobobo9bo7b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o7bo9bobobo13bob2ob2o3b$4b4o11b2ob2obo9b3o10bobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobo10b3o9bob2ob2o11b4o4b$4b3o12b2obo2b2o6b2obo11bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo11bob2o6b2o2bob2o12b3o4b$4b2o25b2obo2b2o6b2obobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobob2o6b2o2bob2o25b2o4b$21bo12b2o2bo6b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o6bo2b2o12bo21b$21bo4bo3bo3b2o12bobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobo12b2o3bo3bo4bo21b$22b3o5b2ob7o8bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo8b7ob2o5b3o22b$36b4o5b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo
+bobobobobob2o5b4o36b$22bo14b2o6b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o6b2o14bo22b$20b2obo24bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo24bob2o20b$23bo2b3o19bob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo19b3o2bo23b$19bo3bo2bo2bo15b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o15bo2bo2bo3bo19b$19bo2b2o21b2obobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o21b2o2bo19b$20bob2o3bo20bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo20bo3b2obo20b$19bo4bo3b2o18bobobobobobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobo18b2o3bo4bo19b$20bo4b2o18b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o18b2o4bo20b$22b3obo18b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobob2o18bob3o22b$19bo3bo5bo18bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo18bo5bo3bo19b$23bo4bo19bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo19bo4bo23b$23bo21b2obobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o21bo23b$21b2o22b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o22b2o21b$20bo4bo22bobobobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobo22bo4bo20b$20bo3bo23bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo23bo3bo20b$22bo2bo19b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+2o19bo2bo22b$22b2ob2o18b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o18b2ob2o22b$22bob3o21bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo21b3obo22b$19bobo3bo22bobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo22bo3bobo19b$20b2obo21b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o21bob2o20b$22bo22b2obobobobobobobobobobobobobobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobob2o22bo22b$23b2o23bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo23b2o23b$22bo3bo21bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo21bo3b
+o22b$22bo3b2o17b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o17b2o3bo22b$20bobo5bo16b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o16bo5bobo20b$19b4o4bo20bobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo20bo4b4o19b$18bo2b2obo23bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo23bob2o2bo18b$22b2obo19b2obobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobob2o19bob2o22b$22b4o19b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o19b4o22b$26b2o20bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo
+bobo20b2o26b$23b2o23bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo23b2o23b$28bo16b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o16bo28b$25b2ob2o15b2obobobobobobobobobobo
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o15b2ob2o25b$28b2o18bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo18b2o28b$28bo19bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobobo19bo28b$45b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$45b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$48bobobobobobobobobobobobobobob
+obobobobobobobobobobobobobobobobobobobobobobobobobobobo48b$48bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo48b$45b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$45b2o
+bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$48bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo48b$48bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
+obobobobobobobobo48b$45b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$45b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$49bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo
+3bo3bo3bo3bo3bo3bo3bo3bo3bo49b!`,
+"chiken": `
+#O by amling » October 6th, 2023, 4:45 pm
+x = 309, y = 539, rule = B3/S23
+2bo$b3o5b3o12bo5bo$2obo4bo2bo5b3o3b3o3b3o$3o4b3obo4bo2bo3bob2ob2obo$3o2bo6bo3bo2bo4b3ob3o$b2o5bo4bo4b4o2b3o2b2o$7bo6bobobob2o2b3o$14bobob2o2bo2b2o39b3o$12b2o3bo2b2o2b3o5b3o24b3o4bo2bo$15b2o4b3o3b2o2bo2bo7b3o3b3o7bo2bo4b
+o$12b5o2b2o8bo5bo5bo2bo2bo2bo10bo4bo$12bo6b2obo5b3o2b2o6bo3bo4bo6bo3bo5bobo$11b2o5b2o5b2o3b2ob6ob2obo7bo4bo4bo$12bo2b4obo2bob2o2b4o2bo2b2o2bo4bo2b2o2b2obo3bob2o6b3o$13bo3bo6b2o5bo5b2o2bob2o2bo2b2o2b2obo3b2o2bo4bo2bo$13b2o2bo9bob2o6b5ob3o2bo4b2o2bo4bo
+10bo$8bo3b2ob2o19bob2o2bobo2bo8bo2b4o2bo7bo$7b3o4bo20bo5bo2b2ob2o2b2o5b2o3b2ob3obobo$7bob2o25bo2b2o4b2o4bo6bo2b2o4b2o$8b3o23b2o3bo2bob2obo2bo4bo4bo$8b6o20b4obobo5bob2o4b3o7b2o2bo$8b3obob2o14bo6bobo3bobobo9bo6bo25bo$11bo4bo12b3o3b3obo2bo4b2ob2o5b6o6bo
+19b3o$10bo17bo2b2o4b3o4bo3b5ob3o2bobo2bob3o3b3o3b3o7b2obo$10bo4b2o10b3o8b2o3b2o4b2o2b2obo4b2o9bo2bobo2bo7b3o$10bo17bo13b3o14bob2o8bo3bobo4bo6b2o$10bo17b3ob3o7b2o10bobo2bob2o5b6obobob4o$10bo20bo21bo6b3o5bo6bobobo3b2ob2o$11bobo17bo7bo20b3o5b9ob6obobo41
+b3o$28b2obo6b3o20b2o22bo3bo10b3o19bo5bo2bo$31bo3bob2o2bo26b17ob4o10bo2bo6bo10b3o7bo3b3o$32bobobo2bobo25bo23bo7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$31bo4b4ob2o25b24o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$33b2o58bo2bobob2o9bo3bo3bo4b3o4bo3bo$31bobo2bob2o28b29o2b2
+ob3o2b5obo2bo2bo5bo5bo4bobo$31bo2bob2o2b3o24bo28bob2o5bo2bo3b2o17bo$36b3o29b27o3b2o4b2o11b3o5b2o3bo$37b2o55bo23b2o$68b25o5bo$67bo64b3o$68b24o11b3o19bo5bo2bo$92bo10bo2bo6bo10b3o7bo3b3o$68b24ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$67bo25b2o6b4ob2o3bo2b2o3
+bo2b2ob4obo3bo3bo$68b24o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$92b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o7bob2o5bo2bo3b2o17bo$67bo24b6o3b2o4b2o11b3o5b2o3bo$68b24o5bo23b2o$92b4o5bo$68b24o43b3o$67bo24b3o11b3o19bo5bo2bo$68b24o3bo10bo2bo6bo10b3o7bo3b3o$92b3ob2o7
+bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$67bo24b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$92b3o7bob2o5bo2bo3b2o17bo$68b24o3b6o3b2o4b2o11b3o5b2o3bo$67bo24b3o5bo23b2o$68b24o3b4o5bo$92b3o
+43b3o$68b24o3b3o11b3o19bo5bo2bo$67bo24b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$92b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$67bo24b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o
+7bob2o5bo2bo3b2o17bo$92b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o5bo23b2o$67bo24b3o3b4o5bo$68b24o3b3o43b3o$92b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3bo10bo2bo6bo10b3o7bo3b3o$67bo24b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4
+obo3bo3bo$92b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$67bo24b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b6o3b2o4b2o11b3o5b2o3bo$92b3o3b3o5bo23b2o$68b24o3b3o3b4o5bo$67bo24b3o3b3o43b3o$68b24o3b3o3b3o11b3o19bo5bo2bo$9
+2b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$67bo24b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$92b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o7bob2o5bo2bo3
+b2o17bo$67bo24b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o5bo23b2o$92b3o3b3o3b4o5bo$68b24o3b3o3b3o43b3o$67bo24b3o3b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$92b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o4b2o6b4o
+b2o3bo2b2o3bo2b2ob4obo3bo3bo$67bo24b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$92b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$67bo24b3o3b3o3b3o5bo23b2o$68b24o3b3o3b3o3b4o5bo$92b
+3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o11b3o19bo5bo2bo$67bo24b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$92b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$67bo
+24b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$92b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o3b3o5bo23b2o$67bo24b3o3b3o3b3o3b4o5bo$68b24o3b3o3b3o3b3o43b3o$92b3o3b3o3b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3b3o3b
+3o3bo10bo2bo6bo10b3o7bo3b3o$67bo24b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$92b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$67bo24b3o
+3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$92b3o3b3o3b3o3b3o5bo23b2o$68b24o3b3o3b3o3b3o3b4o5bo$67bo24b3o3b3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$92b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3o
+3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$67bo24b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$92b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$
+67bo24b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o3b3o3b3o5bo23b2o$92b3o3b3o3b3o3b3o3b4o5bo$68b24o3b3o3b3o3b3o3b3o43b3o$67bo24b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$92b3o3b3o3b3o3b3o3b3ob2o7bo3bo5
+b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$67bo24b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$92b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o
+3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$67bo24b3o3b3o3b3o3b3o3b3o5bo23b2o$68b24o3b3o3b3o3b3o3b3o3b4o5bo$92b3o3b3o3b3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$67bo24b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3o3b3o3b3o3b3ob2o
+7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$92b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$67bo24b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o
+17bo$92b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o3b3o3b3o3b3o5bo23b2o$67bo24b3o3b3o3b3o3b3o3b3o3b4o5bo$68b24o3b3o3b3o3b3o3b3o3b3o43b3o$92b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$67bo24
+b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$92b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$67bo24b3o3b
+3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$92b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b4o5bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$92b3o3b3o3b
+3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$92b3o3b3o3b3o3b3o
+3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$92b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o
+43b3o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$92b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$67bo24b
+3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$67bo24b3o3b3o3b3o3b3o3b
+3o3b3o3b3o5bo23b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b
+3ob2o2bo2bo3bo3bo2bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o7bob2o5bo2bo3b2o17bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2b
+o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o
+9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$68
+b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3
+ob2o2bo2bo3bo3bo2bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o3b3o3
+b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$67bo24b3o3b3o3b3
+o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3
+bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b
+2o4b2o11b3o5b2o3bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3
+b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3
+o4bo3bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3
+o5bo23b2o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$67bo24b3o3b3o3b3o3
+b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b
+3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$68b24o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b4o5bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+b2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5
+obo2bo2bo5bo5bo4bobo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b4o5bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7
+bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob
+3o2b5obo2bo2bo5bo5bo4bobo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3
+o3b3o3b3o3b3o3b3o3b4o5bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo105bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o71bo5bo12b3o5b3o$68b24o3b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo69b3o3b3o3b3o5bo2bo4bob2o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo72bob2ob2obo3bo2bo4bob3o4b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3
+o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo73b3ob3o4bo2bo3bo6bo2b3o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo70b2o2b3o2b4o4bo4bo5b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo81b3o2b2o
+bobobo6bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo40b3o39b2o2bo2b2obobo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o50bo2bo4b3o24b3o5b3o2b2o2bo3b2o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo74b
+o4bo2bo7b3o3b3o7bo2bo2b2o3b3o4b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o38bo4bo10bo2bo2bo2bo5bo5bo8b2o2b5o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo35bobo5bo3bo6bo4bo3bo6b2o2b3o5bob2o6bo$68b24o3b3o3b3o3b3o3b3o3
+b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o37bo4bo4bo7bob2ob6ob2o3b2o5b2o5b2o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo24b3o6b2obo3bob2o2b2o2bo4bo2b2o2bo2b4o2b2obo2bob4o2bo$68b24o3b3o3b3o3b3o3b3
+o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo27bo2bo4bo2b2o3bob2o2b2o2bo2b2obo2b2o5bo5b2o6bo3bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo27bo10bo4bo2b2o4bo2b3ob5o6b2obo9bo2b2o$68b24o3b3o3b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo24bo7bo2b4o2bo8bo2bobo2b2obo19b2ob2o3bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo32bobob3ob2o3b2o5b2o2b2ob2o2bo5bo20bo4b3o$68b24o3b3o3b3o3b3o3b3o3b3o3
+b3o3b3o3b3o3b3o3b3o3b3o3b6o3b2o4b2o11b3o5b2o3bo37b2o4b2o2bo6bo4b2o4b2o2bo25b2obo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o56bo4bo4bo2bob2obo2bo3b2o23b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo68bo2b2o7b3o4b2obo5bobob
+4o20b6o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o43b3o11bo25bo6bo9bobobo3bobo6bo14b2obob3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o11b3o19bo5bo2bo10b3o19bo6b6o5b2ob2o4bo2bob3o3b3o12bo4bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3bo10bo2bo6bo10b3o7bo3b3o4bob2o7b3o3b3o3b3obo2bobo2b3ob5o3bo4b3o4b2o2bo17bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o7bo3bo5b3o4b3ob2o2bo2bo3bo3bo2bo4b3o7bo2bobo2bo9b2o4bob2o2b2o4b2o3b2o8b3o10b2o4bo$67bo24b3o3b3o3b3o3b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o6b4ob2o3bo2b2o3bo2b2ob4obo3bo3bo7b2o6bo4bobo3bo8b2obo14b3o13bo17bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo2bobob2o9bo3bo3bo4b3o4bo3bo15b4obobob6o5b2obo2bobo10b2o7b3ob3o17bo$92b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b3o3b3o3b8o2b2ob3o2b5obo2bo2bo5bo5bo4bobo7b2ob2o3bobobo6bo5b3o6bo21bo20bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o7bob2o5bo2bo3b2o17bo14bobob6ob9obo3b3o20bo7bo17bobo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b6o3b2o4b2o11b3o5b2o3bo13bo3bo17bo4b2o20b3o6bob2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o5bo23b2o24b4ob17o26bo2b2obo3bo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b4o5bo43bo49bobo2bobobo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b
+3o3b3o3b3o3b3o53b24o25b2ob4o4bo$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o48bo25bo32b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3bo47b26o28b2obo2bobo$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3ob2o43bo52b3o2b2obo
+2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4b2o43b28o29b3o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o4bo39bo29bo28b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b5o39b30o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o6bo35bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b7o35b32o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o8bo11bo7bo11bo33bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b9o10b3o5b3o10b34o$92b3o3b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o10bo8bob2o3b2obo8bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b11o9b3o3b3o9b36o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o12bo7b2o5b2o7bo37bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b13o23b38o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o14bo2bo13bo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b18o13b43o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o17bo13bo42bo$68b24o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b16o4b3o3b3o4b41o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o15bo4bo2bobo2bo4bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b14o5bo3bobo3bo5b39o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b
+3o3b3o3b3o21bobobobo46bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b13o8bo5bo8b38o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o13bo7b2o3b2o7bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b13ob2o6b2ob2o6b2ob38o$67bo24b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o14b2o6b2ob2o6b2o39bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b13o4bo3bo5bo3bo4b38o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o13b5o13b5o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b13o6bo9bo6b38o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o13b7o9b7o38bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b13o7bo7bo7b38o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o13b9ob3ob9o$68b24o3b3o
+3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b13o5bo3b2ob2o3bo5b38o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o13b5o2b2o5b2o2b5o38bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b13o3b2o2bo2bobo2bo2b2o3b38o$92b3o3b3o3b3o3b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o13b2o5bo7bo5b2o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b13o2b3o2bo3bo3bo2b3o2b38o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o13b3o2bobo7bobo2b3o38bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3
+o3b3o3b3o3b3o3b3o3b13o5b4ob3ob4o5b38o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o14bo3b4ob3ob4o3bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b15o5bo7bo5b40o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o15bo4b3o3b3o4
+bo40bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b17o4b2o3b2o4b42o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o18bo11bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b19o11b44o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3
+b3o3b3o3b3o3b3o19bo9bo44bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b17o2bo9bo2b42o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o16bob3o7b3obo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b14o6bo7bo6b39o$67bo24b3o3b3o3
+b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o14bo7b5o7bo39bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b14o7b7o7b39o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o15bo2bob2ob3ob2obo2bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3
+b3o3b3o3b16obobobo5bobobob41o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o17bobo9bobo42bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b17o2bob3ob3obo2b42o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o17bo6bo6bo$68b24o3
+b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3
+o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3
+b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3
+o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67b
+o24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74
+bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3
+b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3
+o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3
+b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3
+o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b
+3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3
+o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3
+b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3
+o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3
+b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo2
+4b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3bo2bo2bo5b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o2b4o4bo3b2o5b3o3b
+3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o2b3o5b2o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o4bob2o2b2ob2ob2o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b2o2bo9b3ob3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3ob3o9bo2bo4b3o3b3o3b3o3b3o74bo$
+68b24o3b3o3b3o3b3o3b3o3b3o2b2o3bob2o4bo4b4o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b2o5bo5b2obo7b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o2b3o2bo3bo4b8o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b2o2bo2bo6b2obo6b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o
+3b3o3b3o2b3o2b2obobobo3b6o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b2o4b2o2bo2bo3bo6b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o2b2o2b3ob4o4b6o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b2obo9bo10b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o4bo8b2o5b4
+o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3bobobo2b3o3b2o4bo4b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o4bob2ob2ob2o6b4o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o6bob2o5bo5b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o4b2o9b2ob6o3b3o3b3o3b3o3b74o$9
+2b3o3b3o3b3o3b3o3b3o3bo14b2o7b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3ob2o15b6o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o4bobo11b3o6b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b2o4b2o9bo3b6o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o6b2o10b3o6b3o3b3o3b3o
+3b3o$68b24o3b3o3b3o3b3o3b3o7b2o10b2o3b6o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o4bo10bo2b3o6b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b4obo9b2o4b6o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3bobo3b2o13b3o6b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3bo5bo5b6o3
+b6o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o4b9o5bo5b3o6b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o2bob2o10bo2bo3b4o3b6o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3bo6bob5o2bo2b4o4b3o6b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o4bo4b2o3bobobo4b4o3b6o3b3o3b3o3b3o3b74o$67bo24b3o3b
+3o3b3o3b4o4b3o2bobob6o4b3o6b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o2b3o2bobobobo9b4o3b6o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3bo3bo6bo2b9o4b3o6b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3obo6bo14b4o3b6o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3bo7b15o4b3o6b3o3b3o3b3o3b3o74bo
+$68b24o3b3o3b3o3b3o7bo15b4o3b6o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b4o2b17o4b3o6b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o5bo17b4o3b6o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b23o4b3o6b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o23b4o3b6o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b23o
+4b3o6b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o2bo2bo2bo2bo2bo2bo2bo2bo2bo3bob2obo3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3bo21b2o2b2ob2ob2ob2obo3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o39b3o3b3o3b3o3b74o$92b3o3b3o3b3o45b3o3b3o3b3o$68b24o3b3o3b3o3b3o39b3o3b3o3b3o3b74o$
+67bo24b3o3b3o3b3o3bob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2obo3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3bobo3bobo3bobo3bobo3bobo3bobo3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3
+b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o
+3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b
+3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
+3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$70bo2bo2bo2bo2bo2bo2bo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo$91b2o
+b2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2o!
+`,
+"idk193": `
+#O by dvgrn » May 24th, 2019, 2:36 pm
+x = 4367, y = 4162, rule = B3/S23
+2682b2o$2681b4o$2680b2ob2o7b2o$2680b2o2b2o5bob5o$2679b3o10b2o4b2o$2679b3o4b3o3bo$2679b3o4b3o3bo$2679b3o10b2o4b2o$2680b2o2b2o5bob5o$2660b4o7bo8b2ob2o7b2o$2660bo3bo6bo9b4o16b4o7bo$2659bo12bo2bo6b2o17bo3bo6bo$2637b4o7bo1
+0bo3b2o5b3ob2obo22bo12bo2bo$2637bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$2636bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$2636bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$2636bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$2636bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$
+2636bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$2636bo12bo2bo48b4o7bo$2616b4o7bo9bo3bo6bo$2616bo3bo6bo9b4o7bo$2615bo12bo2bo$2615bo3b2o5b3ob2obo$2615bo6b2o6b2ob2o21b2o$2615bo6b2o6b2ob2o21b2o$2615bo3b2o5b3ob2obo$2615bo12bo2bo77b4o7bo$2616bo3bo6bo81bo3bo6bo$2616b4
+o7bo80bo12bo2bo$2708bo3b2o5b3ob2obo$2708bo6b2o6b2ob2o$2643b2o6b2o55bo6b2o6b2ob2o$2643b2o6b2o55bo3b2o5b3ob2obo$2708bo12bo2bo$2709bo3bo6bo$2709b4o7bo5$2632b4o7bo$2632bo3bo6bo$2631bo12bo2bo$2631bo3b2o5b3ob2obo$2631bo6b2o6b2ob2o$2631bo6b2o6b2ob2o$2631bo3
+b2o5b3ob2obo$2631bo12bo2bo$2632bo3bo6bo$2632b4o7bo3$2569b4o7bo$2569bo3bo6bo$2568bo12bo2bo$2568bo3b2o5b3ob2obo$2568bo6b2o6b2ob2o$2568bo6b2o6b2ob2o$2568bo3b2o5b3ob2obo$2568bo12bo2bo$2549b2o18bo3bo6bo$2548b2ob2o5b3o8b4o7bo9b2o$2548bo2b2o10bo25b2ob2o5b3o
+$2526b2o20b4o6b2o3b3o23bo2b2o10bo$2525b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o$2525bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo$2525b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo$2525b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o$2525b2o4b2o3b2o2bobo5b2ob2o5b
+3o28bo2b2o10bo$2525b4o6b2o3b3o6b2o38b2ob2o5b3o$2525bo2b2o10bo28bo20b2o$2505b2o18b2ob2o5b3o31b2o$2504b2ob2o5b3o9b2o40bobo$2504bo2b2o10bo32bo$2504b4o6b2o3b3o29b3o$2504b2o4b2o3b2o2bobo28b2o2bo19b2o$2504b2o4b2o3b2o2bobo30b3o19b2o$2504b4o6b2o3b3o$2504bo2b
+2o10bo78b2o$2504b2ob2o5b3o33bo46b2ob2o5b3o$2505b2o42b2o46bo2b2o10bo$2550bo46b4o6b2o3b3o$2548b3o6bo39b2o4b2o3b2o2bobo$2548bo3b2o3bo3b2o6b2o26b2o4b2o3b2o2bobo$2549bo3bo7b2o6b2o26b4o6b2o3b3o$2550b3o44bo2b2o10bo$2597b2ob2o5b3o$2598b2o5$2521b2o$2520b2ob2o
+5b3o$2520bo2b2o10bo$2520b4o6b2o3b3o$2520b2o4b2o3b2o2bobo$2520b2o4b2o3b2o2bobo$2520b4o6b2o3b3o94b4o7bo$2462b4o7bo46bo2b2o10bo96bo3bo6bo$2462bo3bo6bo46b2ob2o5b3o98bo12bo2bo$2461bo12bo2bo43b2o108bo3b2o5b3ob2obo$2461bo3b2o5b3ob2obo151bo6b2o6b2ob2o$2461bo
+6b2o6b2ob2o150bo6b2o6b2ob2o$2461bo6b2o6b2ob2o150bo3b2o5b3ob2obo$2461bo3b2o5b3ob2obo151bo12bo2bo$2461bo12bo2bo154bo3bo6bo$2442b2o18bo3bo6bo158b4o7bo$2441b2ob2o5b3o8b4o7bo9b2o$2441bo2b2o10bo25b2ob2o5b3o$2419b2o20b4o6b2o3b3o23bo2b2o10bo$2418b2ob2o5b3o10
+b2o4b2o3b2o2bobo23b4o6b2o3b3o201bo$2418bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo202b2o5b4o7bo$2418b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo201b2o6bo3bo6bo$2418b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o208bo12bo2bo$2418b2o4b2o3b2o2bobo5b2ob2o5b3o28b
+o2b2o10bo210bo3b2o5b3ob2obo$2418b4o6b2o3b3o6b2o38b2ob2o5b3o213bo6b2o6b2ob2o$2418bo2b2o10bo49b2o223bo6b2o6b2ob2o$2398b2o18b2ob2o5b3o277bo3b2o5b3ob2obo$2397b2ob2o5b3o9b2o195b4o7bo80bo12bo2bo$2397bo2b2o10bo203bo3bo6bo81bo3bo6bo$2397b4o6b2o3b3o200bo12bo2
+bo77b4o7bo$2397b2o4b2o3b2o2bobo200bo3b2o5b3ob2obo$2397b2o4b2o3b2o2bobo200bo6b2o6b2ob2o$2397b4o6b2o3b3o200bo6b2o6b2ob2o$2397bo2b2o10bo78b2o122bo3b2o5b3ob2obo$2397b2ob2o5b3o80b2ob2o5b3o112bo12bo2bo$2398b2o90bo2b2o10bo110bo3bo6bo9b4o7bo$2484bo5b4o6b2o3b
+3o108b4o7bo9bo3bo6bo$2483b3o4b2o4b2o3b2o2bobo128bo12bo2bo48b4o7bo$2482b5o3b2o4b2o3b2o2bobo128bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$2481b2o3b2o2b4o6b2o3b3o128bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$2482b5o3bo2b2o10bo130bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$24
+83b3o4b2ob2o5b3o133bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$2484bo6b2o143bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$2637bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$2637b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo$2659bo12bo2bo25bo3bo6bo$2660bo3bo6bo29b4o7bo$241
+4b2o244b4o7bo$2413b2ob2o5b3o$2413bo2b2o10bo262b4o7bo$2413b4o6b2o3b3o260bo3bo6bo$2413b2o4b2o3b2o2bobo259bo12bo2bo$2413b2o4b2o3b2o2bobo259bo3b2o5b3ob2obo$2413b4o6b2o3b3o259bo6b2o6b2ob2o$2413bo2b2o10bo261bo6b2o6b2ob2o$2413b2ob2o5b3o264bo3b2o5b3ob2obo$24
+14b2o274bo12bo2bo$2691bo3bo6bo$2521b2o168b4o7bo$2520b2ob2o5b3o$2520bo2b2o10bo$2520b4o6b2o3b3o$2520b2o4b2o3b2o2bobo$2520b2o4b2o3b2o2bobo$2520b4o6b2o3b3o$2520bo2b2o10bo$2520b2ob2o5b3o$2521b2o5$2598b2o$2597b2ob2o5b3o$2597bo2b2o10bo$2513b2o6b2o74b4o6b2o3
+b3o$2513b2o6b2o74b2o4b2o3b2o2bobo$2597b2o4b2o3b2o2bobo$2597b4o6b2o3b3o$2505b2o90bo2b2o10bo$2504b2ob2o5b3o80b2ob2o5b3o$2504bo2b2o10bo78b2o$2504b4o6b2o3b3o$2504b2o4b2o3b2o2bobo$2504b2o4b2o3b2o2bobo$2504b4o6b2o3b3o$2504bo2b2o10bo$2504b2ob2o5b3o9b2o$2505
+b2o18b2ob2o5b3o$2525bo2b2o10bo49b2o$2525b4o6b2o3b3o6b2o38b2ob2o5b3o$2525b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo$2525b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o$2525b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo$2525bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bo
+bo$2525b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o$2526b2o20b4o6b2o3b3o23bo2b2o10bo$2548bo2b2o10bo25b2ob2o5b3o$2548b2ob2o5b3o29b2o$2549b2o2$2580b2o$2579b2ob2o5b3o$2579bo2b2o10bo$2579b4o6b2o3b3o$2414b2o163b2o4b2o3b2o2bobo$2413b2ob2o5b3o153b2o4b2o3b2o2bo
+bo$2413bo2b2o10bo150b4o6b2o3b3o$2413b4o6b2o3b3o148bo2b2o10bo$2413b2o4b2o3b2o2bobo148b2ob2o5b3o$2413b2o4b2o3b2o2bobo149b2o$2413b4o6b2o3b3o$2413bo2b2o10bo$2413b2ob2o5b3o$2414b2o5$2491b2o$2490b2ob2o5b3o$2490bo2b2o10bo$2421b2o6b2o59b4o6b2o3b3o$2421b2o6b2
+o59b2o4b2o3b2o2bobo$2490b2o4b2o3b2o2bobo$2490b4o6b2o3b3o$2398b2o90bo2b2o10bo$2397b2ob2o5b3o80b2ob2o5b3o$2397bo2b2o10bo78b2o$2397b4o6b2o3b3o$2397b2o4b2o3b2o2bobo19b2o$2397b2o4b2o3b2o2bobo19b2o$2397b4o6b2o3b3o$2397bo2b2o10bo$2397b2ob2o5b3o9b2o$2398b2o1
+8b2ob2o5b3o$2418bo2b2o10bo49b2o$2418b4o6b2o3b3o6b2o38b2ob2o5b3o$2418b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo$2418b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o$2418b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo$2418bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo$2
+418b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o$2419b2o20b4o6b2o3b3o23bo2b2o10bo$2441bo2b2o10bo25b2ob2o5b3o$2441b2ob2o5b3o29b2o$2442b2o50$2502b2o$2501bo2bo6bo$2504bo6b2ob3o$2501b3o2b2o7b3o$2508bo4b2o3bo$2508bo4b2o3bo$2501b3o2b2o7b3o$2504bo6b2ob3o$2501bo
+2bo6bo$2502b2o2$2425bo$2423b2o$2424b2o8$2465bobo$2465b2o$2466bo11$2431bo$2430bo$2430b3o24$2270bo$2261b2o7b5o$2261b3o4bobo3bo$2260b3o3b3o3b3o$2262b3o2b2o$2268bo$2251b2o16b3o$2251b2o17b2o7$2243b2o$2243b2o$2251b4obo$2250bo4b2o6bob3o3bo$2249b2obo3bo5bobo
+bo3bobo$2251bob3o5b2ob7obo$2262bo3b2ob3o$2263b3o$2264bo$2268b2o7bob2o$2267bo2bo6bob3o$2270bo4bobo4bo$2267bo3bobo6b2o$2269b2o2bo2bo3bo$2270bo3b2obo$2276bobo$2276bobo21bo$2291b2o7b5o$2291b3o4bobo3bo$2290b3o3b3o3b3o$2292b3o2b2o$2279b3o16bo$2278bo3bo16b3
+o$2278b2o20b2o$2278b5o$2279b2o$2278b3o$2279b2o3$2283b3o$2283bo2bo$2279bo3bo3bo$2277bobo5bo2bo4bob3o3bo$2278b2o8bo3bobobo3bobo$2287bo3b2ob7obo$2292bo3b2ob3o$2293b3o$2294bo4$2293b2o$2293b2o69$2234b2o$2233bobo$2235bo2$2414bo410b2o$2413b2o410bobo6b2o2bo$
+2222b3o188bobo408bo2b2o5b2obo2bo$2224bo600b2o3bo4bo4bo$2223bo601bo5bo4bo2bobo$2825bo5bo4bo2bobo$2407b2o416b2o3bo4bo4bo$2406b2o416bo2b2o5b2obo2bo$2408bo395b2o19bobo6b2o2bo$2803bo2bo6bo11b2o18b2o$2806bo6b2ob3o25bo2bo6bo$2781b2o20b3o2b2o7b3o27bo6b2ob3o$
+2780bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o$2783bo6b2ob3o14bo4b2o3bo30bo4b2o3bo$2780b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo$2787bo4b2o3bo8bo6b2ob3o25b3o2b2o7b3o$2787bo4b2o3bo5bo2bo6bo33bo6b2ob3o$2780b3o2b2o7b3o7b2o38bo2bo6bo$2783bo6b2ob3o49b2o$2760b2o18bo2bo6bo$
+2224b2o533bo2bo6bo11b2o$2223bobo15b2o519bo6b2ob3o$2225bo16b2o515b3o2b2o7b3o$2241bo524bo4b2o3bo7b2o$2766bo4b2o3bo7b2o$2422b2o335b3o2b2o7b3o$2422bobo337bo6b2ob3o78b2o$2422bo336bo2bo6bo82bo2bo6bo$2232b2o526b2o93bo6b2ob3o$2233b2o617b3o2b2o7b3o$2232bo626b
+o4b2o3bo$2771b2o6b2o78bo4b2o3bo$2417b2o352b2o6b2o71b3o2b2o7b3o$2417bobo435bo6b2ob3o$2417bo434bo2bo6bo$2853b2o5$2773b2o$2772bo2bo6bo$2775bo6b2ob3o$2772b3o2b2o7b3o$2779bo4b2o3bo$2779bo4b2o3bo$2428b2o38b2o302b3o2b2o7b3o$2427b2o38b2o306bo6b2ob3o$2429bo39
+bo302bo2bo6bo$2773b2o$2175b3o$2177bo$2176bo3$2242b3o$2244bo$2243bo224bo$2218b2o247b2o$2217bobo247bobo$2219bo38$2776b2o$2775bo2bo6bo$2778bo6b2ob3o$2775b3o2b2o7b3o$2782bo4b2o3bo$2751b2o29bo4b2o3bo$2750bo2bo6bo14b3o2b2o7b3o$2753bo6b2ob3o12bo6b2ob3o$2750
+b3o2b2o7b3o8bo2bo6bo$2757bo4b2o3bo8b2o$2757bo4b2o3bo$2750b3o2b2o7b3o$2753bo6b2ob3o$2750bo2bo6bo$2751b2o100b2o$2852bo2bo6bo$2855bo6b2ob3o$2827b2o23b3o2b2o7b3o$2827b2o30bo4b2o3bo$2859bo4b2o3bo$2852b3o2b2o7b3o$2817b3o35bo6b2ob3o$2817bobob2o29bo2bo6bo$28
+17bobo2bo30b2o$2822b3o$2823b2o7b2o$2823bo8b2o2$2781b2o$2780b4o$2779b2ob2o7b2o$2779b2o2b2o5bob5o48b2o$2778b3o10b2o4b2o5b2o38bo2bo6bo$2778b3o4b3o3bo11bo2bo6bo33bo6b2ob3o$2778b3o4b3o3bo14bo6b2ob3o25b3o2b2o7b3o$2778b3o10b2o4b2o4b3o2b2o7b3o31bo4b2o3bo$277
+9b2o2b2o5bob5o13bo4b2o3bo30bo4b2o3bo$2779b2ob2o7b2o17bo4b2o3bo23b3o2b2o7b3o$2780b4o19b3o2b2o7b3o27bo6b2ob3o$2781b2o23bo6b2ob3o25bo2bo6bo$2803bo2bo6bo31b2o$2804b2o14$2263b2o$2263bobo6b2o2bo$2262bo2b2o5b2obo2bo$2263b2o3bo4bo4bo$2263bo5bo4bo2bobo$2263bo
+5bo4bo2bobo$2263b2o3bo4bo4bo$2262bo2b2o5b2obo2bo$2263bobo6b2o2bo$2243b2o18b2o$2242b2ob2o5b3o$2242bo2b2o10bo$2242b4o6b2o3b3o$2242b2o4b2o3b2o2bobo$2242b2o4b2o3b2o2bobo$2242b4o6b2o3b3o$2242bo2b2o10bo$2222b2o18b2ob2o5b3o$2222bobo6b2o2bo7b2o18b2o$2221bo2b
+2o5b2obo2bo25bobo6b2o2bo$2199b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo$2199bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo$2198bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4bo2bobo$2199b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo$2199bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo$
+2199bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo$2199b2o3bo4bo4bo7b2o39bobo6b2o2bo$2198bo2b2o5b2obo2bo48b2o$2178b2o19bobo6b2o2bo$2178bobo6b2o2bo7b2o$2177bo2b2o5b2obo2bo$2107b2o69b2o3bo4bo4bo$2106bobo69bo5bo4bo2bobo28b2o$2108bo69bo5bo4bo2bobo28b2o68b3o$
+2178b2o3bo4bo4bo98bo2bo$2177bo2b2o5b2obo2bo77b2o22bo$2178bobo6b2o2bo79bobo6b2o2bo10bo$2178b2o90bo2b2o5b2obo2bo5bobo$2271b2o3bo4bo4bo$2271bo5bo4bo2bobo$2210b2o6b2o51bo5bo4bo2bobo$2210b2o6b2o51b2o3bo4bo4bo$2270bo2b2o5b2obo2bo$2271bobo6b2o2bo$2271b2o$21
+99b2o$2199b2o2$2125b2o$2124bobo67b2o$2126bo67bobo6b2o2bo$2193bo2b2o5b2obo2bo$2194b2o3bo4bo4bo$2194bo5bo4bo2bobo$2194bo5bo4bo2bobo$2194b2o3bo4bo4bo$2193bo2b2o5b2obo2bo$2194bobo6b2o2bo$2194b2o6$2561bo7bob2o$2560b3o5bo6bo$2559bo4bo2b2o3bo2bo$2558b3o4bob
+o5b2o$2558b3o4bobo5b2o$2559bo4bo2b2o3bo2bo$2537bo2bo19b3o5bo6bo$2536bo24bo7bob2o5bo2bo$2548b2ob2o24bo$2514bo2bo21b3o5bo3b4o34b2ob2o$2513bo24bo2b3o3bo3b4o25b3o5bo3b4o$2525b2ob2o4bo3bo3bobo2b2o30bo2b3o3bo3b4o$2516b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b
+2o$2515bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o$2511bo3bo3bobo2b2o13b3o5bo3b4o24bo2b3o3bo3b4o$2511bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4o$2515bo2b3o3bo3b4o4bo52b2ob2o$2493bo2bo19b3o5bo3b4o5bo2bo36bo$2492bo32b2ob2o48bo2bo$2090b2o412b2ob2o4bo$2089bobo403
+b3o5bo3b4o3bo2bo$2091bo402bo2b3o3bo3b4o$2490bo3bo3bobo2b2o$2490bo3bo3bobo2b2o245bo$2494bo2b3o3bo3b4o75bo2bo159b2o$2078b3o414b3o5bo3b4o74bo163bobo$2080bo423b2ob2o88b2ob2o$2079bo412bo95b3o5bo3b4o$2493bo2bo90bo2b3o3bo3b4o$2583bo3bo3bobo2b2o145b2o409b4o7
+bo$2504b2o6b2o69bo3bo3bobo2b2o144b2o410bo3bo6bo$2504b2o6b2o73bo2b3o3bo3b4o140bo408bo12bo2bo$2588b3o5bo3b4o549bo3b2o5b3ob2obo$2597b2ob2o551bo6b2o6b2ob2o$2585bo567bo6b2o6b2ob2o$2586bo2bo563bo3b2o5b3ob2obo$3153bo12bo2bo$3134b2o18bo3bo6bo$2506bo2bo623b2o
+b2o5b3o8b4o7bo9b2o$2505bo627bo2b2o10bo25b2ob2o5b3o$2517b2ob2o589b2o20b4o6b2o3b3o23bo2b2o10bo$2252bobo253b3o5bo3b4o586b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o$2253b2o252bo2b3o3bo3b4o586bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo$2080b2o112b2o57bo24
+9bo3bo3bobo2b2o592b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo$2079bobo15b2o95bobo6b2o2bo295bo3bo3bobo2b2o592b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o$2081bo16b2o93bo2b2o5b2obo2bo297bo2b3o3bo3b4o586b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo$2097bo96b2o3bo4b
+o4bo298b3o5bo3b4o586b4o6b2o3b3o6b2o38b2ob2o5b3o$2194bo5bo4bo2bobo306b2ob2o588bo2b2o10bo49b2o$2194bo5bo4bo2bobo294bo252b2o330b2o18b2ob2o5b3o$2194b2o3bo4bo4bo296bo2bo248bobo328b2ob2o5b3o9b2o$2193bo2b2o5b2obo2bo548bo330bo2b2o10bo$2088b2o104bobo6b2o2bo88
+1b4o6b2o3b3o$2089b2o103b2o893b2o4b2o3b2o2bobo7b2o$2088bo1000b2o4b2o3b2o2bobo7b2o$3089b4o6b2o3b3o$2753b2o334bo2b2o10bo78b2o$2753bobo333b2ob2o5b3o80b2ob2o5b3o$2271b2o78bo401bo336b2o90bo2b2o10bo$2271bobo6b2o2bo65b3o829b4o6b2o3b3o$2270bo2b2o5b2obo2bo63bo
+b2o828b2o4b2o3b2o2bobo$2271b2o3bo4bo4bo64b3o747b2o6b2o71b2o4b2o3b2o2bobo$2271bo5bo4bo2bobo63b2o748b2o6b2o71b4o6b2o3b3o$2271bo5bo4bo2bobo894bo2b2o10bo$2271b2o3bo4bo4bo895b2ob2o5b3o$2178b2o90bo2b2o5b2obo2bo896b2o$2178bobo6b2o2bo79bobo6b2o2bo$2177bo2b2o
+5b2obo2bo77b2o$2178b2o3bo4bo4bo$2178bo5bo4bo2bobo$2178bo5bo4bo2bobo569b2o38b2o297b2o$2178b2o3bo4bo4bo569b2o38b2o297b2ob2o5b3o$2177bo2b2o5b2obo2bo571bo39bo296bo2b2o10bo$2178bobo6b2o2bo7b2o901b4o6b2o3b3o$2031b3o144b2o19bobo6b2o2bo889b2o4b2o3b2o2bobo$20
+33bo164bo2b2o5b2obo2bo48b2o837b2o4b2o3b2o2bobo$2032bo166b2o3bo4bo4bo7b2o39bobo6b2o2bo825b4o6b2o3b3o$2199bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo823bo2b2o10bo$2199bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo823b2ob2o5b3o$2098b3o98b2o3bo4bo4bo7b2o3bo4
+bo4bo25bo5bo4bo2bobo823b2o$2100bo97bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4bo2bobo$2099bo99bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo525bo$2074b2o123b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo524b2o$2073bobo145bo2b2o5b2obo2bo25bobo6b2o2bo526bobo$2075bo146bobo6b2o2b
+o27b2o$2222b2o2$2253b2o$2253bobo6b2o2bo$2252bo2b2o5b2obo2bo$2253b2o3bo4bo4bo$2253bo5bo4bo2bobo$2253bo5bo4bo2bobo$2253b2o3bo4bo4bo$2252bo2b2o5b2obo2bo$2253bobo6b2o2bo$2253b2o$2509bo2bo$2508bo$2520b2ob2o$2511b3o5bo3b4o$2510bo2b3o3bo3b4o$2506bo3bo3bobo2
+b2o$2506bo3bo3bobo2b2o$2510bo2b3o3bo3b4o$2511b3o5bo3b4o$2520b2ob2o$2508bo$2509bo2bo3$2586bo2bo$2585bo$2597b2ob2o$2588b3o5bo3b4o$2548b2o10b2o25bo2b3o3bo3b4o$2547b3ob2o7b2o21bo3bo3bobo2b2o$2546b2o3b2o30bo3bo3bobo2b2o$2545bo2bobo36bo2b3o3bo3b4o$2496b2o4
+6b2o2b3o37b3o5bo3b4o$2495bo2bo6bo39b2obobo46b2ob2o$2498bo6b2ob3o35bo38bo$2495b3o2b2o7b3o44bo29bo2bo$2502bo4b2o3bo44bo7b2o$2502bo4b2o3bo42b3o7b2o$2495b3o2b2o7b3o$2498bo6b2ob3o3bo2bo$2495bo2bo6bo7bo$2496b2o27b2ob2o48bo2bo524b2o$2516b3o5bo3b4o5bo2bo36bo
+527b2ob2o5b3o$2515bo2b3o3bo3b4o4bo52b2ob2o511bo2b2o10bo$2511bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4o509b4o6b2o3b3o$2511bo3bo3bobo2b2o13b3o5bo3b4o24bo2b3o3bo3b4o509b2o4b2o3b2o2bobo$2515bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o491b2o22b2o4b2o3b2o2bobo$2516
+b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b2o490b2ob2o5b3o12b4o6b2o3b3o$2525b2ob2o4bo3bo3bobo2b2o30bo2b3o3bo3b4o484bo2b2o10bo9bo2b2o10bo$1825b2o686bo24bo2b3o3bo3b4o25b3o5bo3b4o484b4o6b2o3b3o7b2ob2o5b3o$1825bobo6b2o2bo675bo2bo21b3o5bo3b4o34b2ob2o486b2o4b2
+o3b2o2bobo8b2o$1824bo2b2o5b2obo2bo707b2ob2o24bo502b2o4b2o3b2o2bobo$1825b2o3bo4bo4bo695bo41bo2bo498b4o6b2o3b3o$1825bo5bo4bo2bobo695bo2bo29bo509bo2b2o10bo$1825bo5bo4bo2bobo726b2obo508b2ob2o5b3o$1825b2o3bo4bo4bo727b2obo5b3ob2o498b2o100b2o$1824bo2b2o5b2o
+bo2bo728b2o3bo4b2o2b2o377bobo217b2ob2o5b3o$1804b2o19bobo6b2o2bo734b2o5bo4bo377b2o217bo2b2o10bo$1803bo2bo6bo11b2o18b2o726b2o5bo4bo377bo193b2o23b4o6b2o3b3o$1806bo6b2ob3o25bo2bo6bo714b2o3bo4b2o2b2o572b2o23b2o4b2o3b2o2bobo$1781b2o20b3o2b2o7b3o27bo6b2ob3o
+708b2obo5b3ob2o599b2o4b2o3b2o2bobo$1780bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o707b2obo576b2o32b4o6b2o3b3o$1783bo6b2ob3o14bo4b2o3bo30bo4b2o3bo708bo575b2ob3o30bo2b2o10bo$1780b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo1284b2obobo30b2ob2o5b3o$1787bo4b2o3bo8bo6b2ob3o25b3
+o2b2o7b3o1289bob2o29b2o$1787bo4b2o3bo5bo2bo6bo33bo6b2ob3o$1780b3o2b2o7b3o7b2o38bo2bo6bo1299bo7b2o$1783bo6b2ob3o49b2o1315b2o$1760b2o18bo2bo6bo$1759bo2bo6bo11b2o$1762bo6b2ob3o$1759b3o2b2o7b3o1337bo7bob2o$1766bo4b2o3bo1335b3o5bo6bo47b2o$1766bo4b2o3bo133
+4bo4bo2b2o3bo2bo6b2o38b2ob2o5b3o$1759b3o2b2o7b3o750b2o582b3o4bobo5b2o6b2ob2o5b3o28bo2b2o10bo$1762bo6b2ob3o78b2o670bobo582b3o4bobo5b2o6bo2b2o10bo25b4o6b2o3b3o$1759bo2bo6bo82bo2bo6bo636b2o26bo583bo4bo2b2o3bo2bo5b4o6b2o3b3o23b2o4b2o3b2o2bobo$1760b2o93bo
+6b2ob3o631bobo6b2o2bo27b2o570b3o5bo6bo5b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo$1852b3o2b2o7b3o629bo2b2o5b2obo2bo25bobo6b2o2bo559bo7bob2o8b2o4b2o3b2o2bobo23b4o6b2o3b3o$1859bo4b2o3bo606b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo577b4o6b2o3b3o23bo2b2o10bo$1770b2o6b2o
+79bo4b2o3bo606bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo577bo2b2o10bo25b2ob2o5b3o$1770b2o6b2o72b3o2b2o7b3o606bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4bo2bobo576b2ob2o5b3o29b2o$1855bo6b2ob3o608b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo577b2o$1852bo2bo6bo613bo5
+bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo$1853b2o621bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo$2476b2o3bo4bo4bo7b2o39bobo6b2o2bo$2475bo2b2o5b2obo2bo48b2o$2455b2o19bobo6b2o2bo$2455bobo6b2o2bo7b2o$1773b2o679bo2b2o5b2obo2bo$1772bo2bo6bo672b2o3bo4bo4bo$17
+75bo6b2ob3o667bo5bo4bo2bobo25b2o20b2o$1772b3o2b2o7b3o666bo5bo4bo2bobo25b2o20b2o$1779bo4b2o3bo665b2o3bo4bo4bo$1779bo4b2o3bo664bo2b2o5b2obo2bo77b2o$1772b3o2b2o7b3o666bobo6b2o2bo79bobo6b2o2bo$1775bo6b2ob3o667b2o90bo2b2o5b2obo2bo$1772bo2bo6bo718b2o45b2o3
+bo4bo4bo$1773b2o726b2o45bo5bo4bo2bobo$2494b3o9b2o6b2o32bo5bo4bo2bobo$2506b2o6b2o32b2o3bo4bo4bo$2492b2obob2o48bo2b2o5b2obo2bo$2497b2o49bobo6b2o2bo$2497b2o49b2o$2493bob3o$2496bobo$2493b2o3b2o$2493bob2o3bo$2491b2obo3b2o$2456bo7bob2o24bob2o$2455b3o5bo6bo
+21b3o2bo$2454bo4bo2b2o3bo2bo21bo2bo$2453b3o4bobo5b2o23bo$2453b3o4bobo5b2o$2454bo4bo2b2o3bo2bo$2455b3o5bo6bo$2456bo7bob2o33bo$2502b2o$2501b2o3$1963b2o$1962bobo$1964bo15$1981b2o$1980bobo$1982bo7$1776b2o$1775bo2bo6bo$1778bo6b2ob3o$1775b3o2b2o7b3o$1782bo
+4b2o3bo$1751b2o29bo4b2o3bo$1750bo2bo6bo14b3o2b2o7b3o$1753bo6b2ob3o12bo6b2ob3o$1750b3o2b2o7b3o8bo2bo6bo$1757bo4b2o3bo8b2o$1757bo4b2o3bo$1750b3o2b2o7b3o$1753bo6b2ob3o$1750bo2bo6bo$1751b2o100b2o$1852bo2bo6bo$1855bo6b2ob3o$1826b2o24b3o2b2o7b3o$1816bo9b2o
+31bo4b2o3bo$1814b2obo41bo4b2o3bo143bo$1813bo3bo34b3o2b2o7b3o144bobo$1813bo2b2o37bo6b2ob3o145b2o929bo2bo$1813b2ob2o34bo2bo6bo1080bo41bo2bo$1815b2o3bo32b2o1100b2ob2o24bo$1821b2o1123b3o5bo3b4o34b2ob2o$1820b2o9b2o1091bo20bo2b3o3bo3b4o25b3o5bo3b4o$1831b2o
+113b2o974b2obo15bo3bo3bobo2b2o30bo2b3o3bo3b4o$1945bobo974b2obo5b3ob2o4bo3bo3bobo2b2o26bo3bo3bobo2b2o$1781b2o164bo975b2o3bo4b2o2b2o6bo2b3o3bo3b4o20bo3bo3bobo2b2o$1780b4o1143b2o5bo4bo6b3o5bo3b4o5b2o17bo2b3o3bo3b4o$1779b2ob2o7b2o1134b2o5bo4bo15b2ob2o6bo
+bo18b3o5bo3b4o$1779b2o2b2o5bob5o48b2o600b2o474b2o3bo4b2o2b2o4bo24bo27b2ob2o$1778b3o10b2o4b2o5b2o38bo2bo6bo79b3o510b2o473b2obo5b3ob2o7bo2bo36bo$1778b3o4b3o3bo11bo2bo6bo33bo6b2ob3o76bo611b2o372b2obo59bo2bo$1778b3o4b3o3bo14bo6b2ob3o25b3o2b2o7b3o74bo612b
+obo6b2o2bo362bo$1778b3o10b2o4b2o4b3o2b2o7b3o31bo4b2o3bo685bo2b2o5b2obo2bo381b3o$1779b2o2b2o5bob5o13bo4b2o3bo30bo4b2o3bo596b2o6b2o80b2o3bo4bo4bo515b2o$1779b2ob2o7b2o17bo4b2o3bo23b3o2b2o7b3o597b2o6b2o80bo5bo4bo2bobo379bo3bo20b2o107b2o$1780b4o19b3o2b2o7
+b3o27bo6b2ob3o688bo5bo4bo2bobo379bo3bo20b2o109bo$1781b2o23bo6b2ob3o25bo2bo6bo693b2o3bo4bo4bo384bo44bo2bo$1803bo2bo6bo31b2o608b2o90bo2b2o5b2obo2bo381bo2bo43bo$1804b2o648bo2bo6bo83bobo6b2o2bo386bo55b2ob2o$2457bo6b2ob3o78b2o396bobo46b3o5bo3b4o$2454b3o2b
+2o7b3o474b2ob2o44bo2b3o3bo3b4o$2461bo4b2o3bo473bo2bo41bo3bo3bobo2b2o$2461bo4b2o3bo470bo3b3o7b2o6b2o24bo3bo3bobo2b2o$2454b3o2b2o7b3o471b2o3b2o7b2o6b2o28bo2b3o3bo3b4o$2457bo6b2ob3o472b2o3b2o46b3o5bo3b4o$2454bo2bo6bo12bo413bo2bo52b2o55b2ob2o$2455b2o18b2
+obo411bo57b2o42bo$1936b2o537b2obo5b3ob2o50b2o360b2ob2o40bobo43bo2bo$1935bobo15b2o521b2o3bo4b2o2b2o7b2o39bobo6b2o2bo339b3o5bo3b4o37b2obo$1937bo16b2o524b2o5bo4bo6bobo6b2o2bo26bo2b2o5b2obo2bo336bo2b3o3bo3b4o36bo2bo$1953bo526b2o5bo4bo5bo2b2o5b2obo2bo25b2
+o3bo4bo4bo332bo3bo3bobo2b2o13bo2bo25b3o$2476b2o3bo4b2o2b2o7b2o3bo4bo4bo25bo5bo4bo2bobo331bo3bo3bobo2b2o12bo590bo$2475b2obo5b3ob2o9bo5bo4bo2bobo24bo5bo4bo2bobo335bo2b3o3bo3b4o18b2ob2o162b2o409bobo5bo$2475b2obo20bo5bo4bo2bobo24b2o3bo4bo4bo337b3o5bo3b4o
+9b3o5bo3b4o160bobo407b2obo3bo2bo2bo$2477bo21b2o3bo4bo4bo24bo2b2o5b2obo2bo346b2ob2o10bo2b3o3bo3b4o160bo411bo3bo3bobob2o$1944b2o552bo2b2o5b2obo2bo25bobo6b2o2bo336bo22bo3bo3bobo2b2o581bo7b2ob2o$1945b2o552bobo6b2o2bo27b2o349bo2bo18bo3bo3bobo2b2o581bo7b2o
+b2o$1944bo554b2o416bo2b3o3bo3b4o572bo3bo3bobob2o$2918b3o5bo3b4o570b2obo3bo2bo2bo$2927b2ob2o157b2o414bobo5bo$2915bo173bobo392b3o19bo$2916bo2bo169bo394b3o4b3ob2o28b3o$3482bo7b3o4bobo25b3o4b3ob2o$3461b3o24b2obo4bo2bo23bo7b3o4bobo$3461b3o4b3ob2o14b2obo4b
+o2bo29b2obo4bo2bo$3459bo7b3o4bobo5bo7b3o4bobo29b2obo4bo2bo$3465b2obo4bo2bo7b3o4b3ob2o26bo7b3o4bobo$3465b2obo4bo2bo7b3o38b3o4b3ob2o$3459bo7b3o4bobo48b3o$3461b3o4b3ob2o$3461b3o$3440b3o$2060b2o1378b3o4b3ob2o$2060bobo6b2o2bo1026b2o38b2o296bo7b3o4bobo$205
+9bo2b2o5b2obo2bo1023b2o38b2o303b2obo4bo2bo8b2o$2060b2o3bo4bo4bo1025bo39bo302b2obo4bo2bo8b2o$2060bo5bo4bo2bobo1361bo7b3o4bobo$1887b3o170bo5bo4bo2bobo1363b3o4b3ob2o$1889bo170b2o3bo4bo4bo1364b3o90b3o$1888bo170bo2b2o5b2obo2bo1457b3o4b3ob2o$2060bobo6b2o2b
+o1457bo7b3o4bobo$2040b2o18b2o1475b2obo4bo2bo$1954b3o82b2ob2o5b3o1399b2o6b2o76b2obo4bo2bo$1956bo82bo2b2o10bo1396b2o6b2o70bo7b3o4bobo$1955bo83b4o6b2o3b3o1083bo392b3o4b3ob2o$1930b2o107b2o4b2o3b2o2bobo1082b2o392b3o$1929bobo107b2o4b2o3b2o2bobo1082bobo$193
+1bo107b4o6b2o3b3o$2039bo2b2o10bo$2019b2o18b2ob2o5b3o$2019bobo6b2o2bo7b2o18b2o$2018bo2b2o5b2obo2bo25bobo6b2o2bo$1996b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo1377b3o$1996bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo1377b3o4b3ob2o$1995bo2b2o5b2obo2bo7bo5bo4bo2bobo24
+bo5bo4bo2bobo1374bo7b3o4bobo$1996b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo1380b2obo4bo2bo$1996bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo1381b2obo4bo2bo$1996bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo1375bo7b3o4bobo$1996b2o3bo4bo4bo7b2o39bobo6b2o2bo137
+9b3o4b3ob2o$1995bo2b2o5b2obo2bo48b2o1391b3o$1975b2o19bobo6b2o2bo$1975bobo6b2o2bo7b2o$1974bo2b2o5b2obo2bo$1975b2o3bo4bo4bo$1975bo5bo4bo2bobo$1975bo5bo4bo2bobo$1975b2o3bo4bo4bo$1974bo2b2o5b2obo2bo77b2o$1975bobo6b2o2bo79bobo6b2o2bo831bo2bo$1975b2o90bo2b
+2o5b2obo2bo828bo$2068b2o3bo4bo4bo840b2ob2o$2068bo5bo4bo2bobo830b3o5bo3b4o$2068bo5bo4bo2bobo829bo2b3o3bo3b4o$2068b2o3bo4bo4bo826bo3bo3bobo2b2o$2067bo2b2o5b2obo2bo826bo3bo3bobo2b2o$2068bobo6b2o2bo832bo2b3o3bo3b4o$2068b2o845b3o5bo3b4o$2924b2ob2o$2912bo$
+2913bo2bo2$1991b2o$1991bobo6b2o2bo988bo2bo$1990bo2b2o5b2obo2bo985bo$1991b2o3bo4bo4bo997b2ob2o$1991bo5bo4bo2bobo987b3o5bo3b4o$1991bo5bo4bo2bobo900b2o6b2o76bo2b3o3bo3b4o$1991b2o3bo4bo4bo901b2o6b2o72bo3bo3bobo2b2o$1990bo2b2o5b2obo2bo983bo3bo3bobo2b2o$19
+91bobo6b2o2bo895bo2bo90bo2b3o3bo3b4o$1991b2o906bo95b3o5bo3b4o$2911b2ob2o88b2ob2o$2902b3o5bo3b4o74bo$2901bo2b3o3bo3b4o75bo2bo$2897bo3bo3bobo2b2o$2897bo3bo3bobo2b2o$2901bo2b3o3bo3b4o$2902b3o5bo3b4o3bo2bo$2911b2ob2o4bo$2899bo32b2ob2o48bo2bo$2900bo2bo19b
+3o5bo3b4o5bo2bo36bo$2922bo2b3o3bo3b4o4bo52b2ob2o$2918bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4o$2918bo3bo3bobo2b2o13b3o5bo3b4o24bo2b3o3bo3b4o$2922bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o$2923b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b2o$2932b2ob2o4bo3bo3bobo2
+b2o30bo2b3o3bo3b4o$2920bo24bo2b3o3bo3b4o25b3o5bo3b4o$2921bo2bo21b3o5bo3b4o34b2ob2o$2955b2ob2o24bo$2943bo24bo7bob2o5bo2bo467b3o$2944bo2bo19b3o5bo6bo473b3o4b3ob2o$2966bo4bo2b2o3bo2bo310bo160bo7b3o4bobo$2965b3o4bobo5b2o312b2o164b2obo4bo2bo$2965b3o4bobo5
+b2o311b2o165b2obo4bo2bo$2035bo930bo4bo2b2o3bo2bo448b3o20bo7b3o4bobo$2035b2o930b3o5bo6bo448b3o4b3ob2o12b3o4b3ob2o$2034bobo931bo7bob2o449bo7b3o4bobo9b3o$3435b2obo4bo2bo$3435b2obo4bo2bo$3429bo7b3o4bobo$2598bo832b3o4b3ob2o$2597bobo5bo825b3o$2596b2obo3bo2
+bo2bo$2598bo3bo3bobob2o921b3o$2588b2o11bo7b2ob2o919b3o4b3ob2o$2591bo9bo7b2ob2o893b2o22bo7b3o4bobo$2575b4o8bo10bo3bo3bobob2o895b2o28b2obo4bo2bo$2573b2o2bo8bo9b2obo3bo2bo2bo927b2obo4bo2bo$2581b2o3bo3bo6bobo5bo925bo7b3o4bobo$2582b2o2bo3bo7bo934b3o4b3ob2
+o$2580b4o913b2o3bo30b3o$2583bo913b2ob2ob2o$2581b2o10bo903bo7bo$2592bobo5bo895b2o6bo7b2o$2591b2obo3bo2bo2bo892b2o2b2o9b2o$2593bo3bo3bobob2o890b2o2b2o$2596bo7b2ob2o$2596bo7b2ob2o852b2o$1991b2o600bo3bo3bobob2o854bobo6b2o2bo$1991bobo6b2o2bo586b2obo3bo2bo
+2bo855bo2b2o5b2obo2bo$1990bo2b2o5b2obo2bo585bobo5bo860b2o3bo4bo4bo48b3o$1991b2o3bo4bo4bo586bo867bo5bo4bo2bobo6b3o38b3o4b3ob2o$1991bo5bo4bo2bobo1453bo5bo4bo2bobo6b3o4b3ob2o26bo7b3o4bobo$1991bo5bo4bo2bobo1453b2o3bo4bo4bo5bo7b3o4bobo29b2obo4bo2bo$1991b2
+o3bo4bo4bo1453bo2b2o5b2obo2bo11b2obo4bo2bo29b2obo4bo2bo$1990bo2b2o5b2obo2bo1454bobo6b2o2bo13b2obo4bo2bo23bo7b3o4bobo$1991bobo6b2o2bo1456b2o19bo7b3o4bobo25b3o4b3ob2o$1991b2o1491b3o4b3ob2o28b3o$3484b3o2$2006b2o$2006b2o$2068b2o$2068bobo6b2o2bo$2067bo2b2
+o5b2obo2bo$2017b2o6b2o41b2o3bo4bo4bo$2017b2o6b2o41bo5bo4bo2bobo$2068bo5bo4bo2bobo$2068b2o3bo4bo4bo$1975b2o90bo2b2o5b2obo2bo$1975bobo6b2o2bo79bobo6b2o2bo526b3o$1974bo2b2o5b2obo2bo77b2o538b3o4b3ob2o$1975b2o3bo4bo4bo615bo7b3o4bobo$1975bo5bo4bo2bobo16b2o
+20b2o580b2obo4bo2bo$1975bo5bo4bo2bobo16b2o20b2o580b2obo4bo2bo$1975b2o3bo4bo4bo615bo7b3o4bobo$1974bo2b2o5b2obo2bo617b3o4b3ob2o$1975bobo6b2o2bo7b2o610b3o$1975b2o19bobo6b2o2bo578bo7bob2o$1995bo2b2o5b2obo2bo48b2o525b3o5bo6bo26bo7bob2o$1996b2o3bo4bo4bo7b2
+o39bobo6b2o2bo512bo4bo2b2o3bo2bo25b3o5bo6bo$1996bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo489bo7bob2o8b3o4bobo5b2o25bo4bo2b2o3bo2bo$1996bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo313b3o172b3o5bo6bo5b3o4bobo5b2o24b3o4bobo5b2o$1996b2o3bo4bo4bo7b2o3bo4b
+o4bo25bo5bo4bo2bobo311bo2bo171bo4bo2b2o3bo2bo6bo4bo2b2o3bo2bo23b3o4bobo5b2o$1995bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4bo2bobo314bo170b3o4bobo5b2o8b3o5bo6bo24bo4bo2b2o3bo2bo$1609b2o385bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo315bo170b3o4bobo5b2o9bo7bob2o
+28b3o5bo6bo$1609bobo6b2o2bo373b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo312bobo172bo4bo2b2o3bo2bo49bo7bob2o$1608bo2b2o5b2obo2bo393bo2b2o5b2obo2bo25bobo6b2o2bo490b3o5bo6bo$1609b2o3bo4bo4bo394bobo6b2o2bo27b2o503bo7bob2o$1609bo5bo4bo2bobo393b2o523bo7bob2o$1609b
+o5bo4bo2bobo917b3o5bo6bo$1609b2o3bo4bo4bo425b2o490bo4bo2b2o3bo2bo$1608bo2b2o5b2obo2bo425bobo6b2o2bo477b3o4bobo5b2o$1588b2o19bobo6b2o2bo426bo2b2o5b2obo2bo475b3o4bobo5b2o$1587bo2bo6bo11b2o18b2o419b2o3bo4bo4bo476bo4bo2b2o3bo2bo$1590bo6b2ob3o25bo2bo6bo41
+1bo5bo4bo2bobo476b3o5bo6bo$1565b2o20b3o2b2o7b3o27bo6b2ob3o406bo5bo4bo2bobo477bo7bob2o81bo7bob2o$1564bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o192b2o211b2o3bo4bo4bo570b3o5bo6bo$1567bo6b2ob3o14bo4b2o3bo30bo4b2o3bo190bobo210bo2b2o5b2obo2bo569bo4bo2b2o3bo2bo$1564b
+3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo192bo211bobo6b2o2bo570b3o4bobo5b2o$1571bo4b2o3bo8bo6b2ob3o25b3o2b2o7b3o405b2o499b2o81b3o4bobo5b2o$1571bo4b2o3bo5bo2bo6bo33bo6b2ob3o907b2o82bo4bo2b2o3bo2bo$1564b3o2b2o7b3o7b2o38bo2bo6bo997b3o5bo6bo$1567bo6b2ob3o49b2o10
+06bo7bob2o$1544b2o18bo2bo6bo$1543bo2bo6bo11b2o$1546bo6b2ob3o$1543b3o2b2o7b3o$1550bo4b2o3bo20b2o20b2o$1550bo4b2o3bo20b2o20b2o$1543b3o2b2o7b3o997bo7bob2o$1546bo6b2ob3o78b2o917b3o5bo6bo$1543bo2bo6bo82bo2bo6bo366bo541bo4bo2b2o3bo2bo$1544b2o93bo6b2ob3o361
+bobo538b3o4bobo5b2o$1636b3o2b2o7b3o360b2o539b3o4bobo5b2o$1643bo4b2o3bo901bo4bo2b2o3bo2bo$1590b2o6b2o43bo4b2o3bo902b3o5bo6bo$1590b2o6b2o36b3o2b2o7b3o904bo7bob2o$1639bo6b2ob3o$1636bo2bo6bo$1637b2o$1579b2o$1579b2o3$1557b2o$1556bo2bo6bo$1559bo6b2ob3o$155
+6b3o2b2o7b3o$1563bo4b2o3bo$1563bo4b2o3bo$1556b3o2b2o7b3o$1559bo6b2ob3o230b2o$1556bo2bo6bo234bobo$1557b2o244bo$3276b3o$3276b3o4b3ob2o28b3o$3253b2o19bo7b3o4bobo25b3o4b3ob2o$1790b3o1460bobo6b2o2bo13b2obo4bo2bo23bo7b3o4bobo$1792bo1459bo2b2o5b2obo2bo11b2o
+bo4bo2bo29b2obo4bo2bo$1791bo1461b2o3bo4bo4bo5bo7b3o4bobo29b2obo4bo2bo$3253bo5bo4bo2bobo6b3o4b3ob2o8b3o15bo7b3o4bobo$3253bo5bo4bo2bobo6b3o20bo17b3o4b3ob2o$3253b2o3bo4bo4bo29bo18b3o$3252bo2b2o5b2obo2bo$1598bo1654bobo6b2o2bo$1599bo1653b2o$1597b3o$3275b3
+o$3299b2o$3277bobo19b2o$3276bo3bo$3280bo$3276bo48b3o$3275b2o48b3o4b3ob2o$3274bo3b2o43bo7b3o4bobo$1792b2o1480b2ob3o49b2obo4bo2bo$1791bobo15b2o1461bo13b2o6b2o33b2obo4bo2bo$1793bo16b2o1459bo6b3o5b2o6b2o27bo7b3o4bobo$1809bo1462bo52b3o4b3ob2o$2592b3o730b3
+o$2594bo683b3o149b2o$2593bo629b3o50b2ob2o149bobo$3223b3o4b3ob2o39bo3b2o149bo$1800b2o1419bo7b3o4bobo36bo2bo$1801b2o1424b2obo4bo2bo36bobo$1800bo1426b2obo4bo2bo36b3o$3221bo7b3o4bobo9b3o$2560bo7bob2o651b3o4b3ob2o12b3o4b3ob2o164b2o410b2o$2559b3o5bo6bo648b
+3o20bo7b3o4bobo161bobo408b2ob2o5b3o$2558bo4bo2b2o3bo2bo677b2obo4bo2bo161bo410bo2b2o10bo$2557b3o4bobo5b2o678b2obo4bo2bo572b4o6b2o3b3o$2557b3o4bobo5b2o672bo7b3o4bobo572b2o4b2o3b2o2bobo$2558bo4bo2b2o3bo2bo673b3o4b3ob2o575b2o4b2o3b2o2bobo$2559b3o5bo6bo67
+3b3o585b4o6b2o3b3o$2560bo7bob2o1264bo2b2o10bo$3816b2o18b2ob2o5b3o$3816bobo6b2o2bo7b2o18b2o$3815bo2b2o5b2obo2bo25bobo6b2o2bo$2580b2o1211b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo$2580b2o1211bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo$3792bo2b2o5b2obo2bo7bo5bo4bo2
+bobo24bo5bo4bo2bobo$2637bo7bob2o787b2o38b2o315b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo$1560b2o1074b3o5bo6bo783b2o38b2o316bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo$1559bo2bo6bo1021b2o6b2o34bo4bo2b2o3bo2bo785bo39bo315bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o
+5b2obo2bo$1562bo6b2ob3o1016b2o6b2o33b3o4bobo5b2o1142b2o3bo4bo4bo7b2o39bobo6b2o2bo$1559b3o2b2o7b3o167b3o888b3o4bobo5b2o1141bo2b2o5b2obo2bo48b2o$1566bo4b2o3bo168bo889bo4bo2b2o3bo2bo1120b2o19bobo6b2o2bo$1535b2o29bo4b2o3bo167bo799b2o90b3o5bo6bo1120bobo6b
+2o2bo7b2o$1534bo2bo6bo14b3o2b2o7b3o968bobo6b2o2bo79bo7bob2o1122bo2b2o5b2obo2bo$1537bo6b2ob3o12bo6b2ob3o968bo2b2o5b2obo2bo1212b2o3bo4bo4bo$1534b3o2b2o7b3o8bo2bo6bo240b3o731b2o3bo4bo4bo1212bo5bo4bo2bobo7b2o$1541bo4b2o3bo8b2o250bo731bo5bo4bo2bobo21b2o20
+b2o1166bo5bo4bo2bobo7b2o$1541bo4b2o3bo259bo732bo5bo4bo2bobo21b2o20b2o870bo295b2o3bo4bo4bo$1534b3o2b2o7b3o235b2o756b2o3bo4bo4bo915b2o294bo2b2o5b2obo2bo77b2o$1537bo6b2ob3o235bobo755bo2b2o5b2obo2bo915bobo294bobo6b2o2bo79bobo6b2o2bo$1534bo2bo6bo242bo756b
+obo6b2o2bo1214b2o90bo2b2o5b2obo2bo$1535b2o100b2o905b2o19bo7bob2o1288b2o3bo4bo4bo$1636bo2bo6bo917b3o5bo6bo1285bo5bo4bo2bobo$1639bo6b2ob3o911bo4bo2b2o3bo2bo49bo7bob2o1142b2o6b2o72bo5bo4bo2bobo$1542b2o6b2o84b3o2b2o7b3o909b3o4bobo5b2o9bo7bob2o28b3o5bo6bo
+1139b2o6b2o72b2o3bo4bo4bo$1542b2o6b2o91bo4b2o3bo908b3o4bobo5b2o8b3o5bo6bo24bo4bo2b2o3bo2bo1220bo2b2o5b2obo2bo$1643bo4b2o3bo909bo4bo2b2o3bo2bo6bo4bo2b2o3bo2bo23b3o4bobo5b2o1222bobo6b2o2bo$1636b3o2b2o7b3o911b3o5bo6bo5b3o4bobo5b2o24b3o4bobo5b2o1222b2o$1
+639bo6b2ob3o913bo7bob2o8b3o4bobo5b2o25bo4bo2b2o3bo2bo$1636bo2bo6bo939bo4bo2b2o3bo2bo25b3o5bo6bo$1637b2o948b3o5bo6bo26bo7bob2o$2588bo7bob2o$3785b2o$2617b2o1166bobo6b2o2bo$2616bo2bo6bo1157bo2b2o5b2obo2bo$1565b2o1052bo6b2ob3o1153b2o3bo4bo4bo$1564b4o1048
+b3o2b2o7b3o1152bo5bo4bo2bobo$1563b2ob2o7b2o1046bo4b2o3bo1151bo5bo4bo2bobo$1563b2o2b2o5bob5o48b2o992bo4b2o3bo1151b2o3bo4bo4bo$1562b3o10b2o4b2o5b2o38bo2bo6bo962bobo12b3o2b2o7b3o1151bo2b2o5b2obo2bo$1562b3o4b3o3bo11bo2bo6bo33bo6b2ob3o957b2o16bo6b2ob3o115
+3bobo6b2o2bo$1562b3o4b3o3bo14bo6b2ob3o25b3o2b2o7b3o957bo13bo2bo6bo1158b2o$1562b3o10b2o4b2o4b3o2b2o7b3o31bo4b2o3bo971b2o$1563b2o2b2o5bob5o13bo4b2o3bo30bo4b2o3bo$1563b2ob2o7b2o17bo4b2o3bo23b3o2b2o7b3o$1564b4o19b3o2b2o7b3o27bo6b2ob3o$1565b2o23bo6b2ob3o2
+5bo2bo6bo$1587bo2bo6bo31b2o$1588b2o$3245b3o$3245b3o4b3ob2o$3243bo7b3o4bobo$3249b2obo4bo2bo$3249b2obo4bo2bo$3243bo7b3o4bobo$3245b3o4b3ob2o$2547b2o696b3o$2546b2ob2o5b3o29b2o$2546bo2b2o10bo25b2ob2o5b3o$2524b2o20b4o6b2o3b3o23bo2b2o10bo$2523b2ob2o5b3o10b2
+o4b2o3b2o2bobo23b4o6b2o3b3o$2523bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo$2523b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo$2523b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o720b3o$2523b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo722b3o4b3ob2o$2523b4o6b2o3b3o6b2
+o38b2ob2o5b3o638b2o6b2o75bo7b3o4bobo$2523bo2b2o10bo49b2o648b2o6b2o81b2obo4bo2bo$2503b2o18b2ob2o5b3o793b2obo4bo2bo$2502b2ob2o5b3o9b2o797bo7b3o4bobo$2502bo2b2o10bo807b3o4b3ob2o$2502b4o6b2o3b3o712b3o90b3o$2502b2o4b2o3b2o2bobo16b2o20b2o672b3o4b3ob2o$2502
+b2o4b2o3b2o2bobo16b2o20b2o670bo7b3o4bobo$2502b4o6b2o3b3o716b2obo4bo2bo$2502bo2b2o10bo78b2o638b2obo4bo2bo$2502b2ob2o5b3o80b2ob2o5b3o622bo7b3o4bobo$2503b2o90bo2b2o10bo621b3o4b3ob2o$2595b4o6b2o3b3o619b3o$2595b2o4b2o3b2o2bobo640b3o$1893b4o7bo640b2o6b2o40
+b2o4b2o3b2o2bobo640b3o4b3ob2o$1893bo3bo6bo640b2o6b2o40b4o6b2o3b3o638bo7b3o4bobo48b3o$1892bo12bo2bo686bo2b2o10bo646b2obo4bo2bo7b3o38b3o4b3ob2o$1892bo3b2o5b3ob2obo684b2ob2o5b3o649b2obo4bo2bo7b3o4b3ob2o26bo7b3o4bobo$1892bo6b2o6b2ob2o684b2o653bo7b3o4bobo
+5bo7b3o4bobo29b2obo4bo2bo$1892bo6b2o6b2ob2o622b2o717b3o4b3ob2o14b2obo4bo2bo29b2obo4bo2bo$1892bo3b2o5b3ob2obo623b2o717b3o24b2obo4bo2bo23bo7b3o4bobo$1892bo12bo2bo1365bo7b3o4bobo25b3o4b3ob2o$1874b2o17bo3bo6bo1371b3o4b3ob2o28b3o$1873b4o16b4o7bo1371b3o19b
+o$1872b2ob2o7b2o617b3o791bobo5bo$1872b2o2b2o5bob5o613b3o4b3ob2o780b2obo3bo2bo2bo478b2o$1871b3o10b2o4b2o609bo7b3o4bobo779bo3bo3bobob2o476bobo6b2o2bo$1871b3o4b3o3bo622b2obo4bo2bo782bo7b2ob2o473bo2b2o5b2obo2bo$1871b3o4b3o3bo622b2obo4bo2bo782bo7b2ob2o474
+b2o3bo4bo4bo$1871b3o10b2o4b2o609bo7b3o4bobo779bo3bo3bobob2o476bo5bo4bo2bobo$1872b2o2b2o5bob5o613b3o4b3ob2o780b2obo3bo2bo2bo453b2o23bo5bo4bo2bobo$1852b4o7bo8b2ob2o7b2o617b3o791bobo5bo457bobo6b2o2bo11b2o3bo4bo4bo$1852bo3bo6bo9b4o16b4o7bo1393bo463bo2b2o
+5b2obo2bo8bo2b2o5b2obo2bo$1851bo12bo2bo6b2o17bo3bo6bo1858b2o3bo4bo4bo9bobo6b2o2bo$1829b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo1854bo5bo4bo2bobo8b2o$1829bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo1852bo5bo4bo2bobo$1828bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o1851
+b2o3bo4bo4bo$1828bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o1731bo118bo2b2o5b2obo2bo$1828bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo1730bobo119bobo6b2o2bo$1828bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo1733b2o119b2o100b2o$1828bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo19
+60bobo6b2o2bo$1828bo12bo2bo48b4o7bo1959bo2b2o5b2obo2bo$1808b4o7bo9bo3bo6bo1998b2o24b2o3bo4bo4bo$1808bo3bo6bo9b4o7bo1998b2o24bo5bo4bo2bobo$1807bo12bo2bo2041bo5bo4bo2bobo$1807bo3b2o5b3ob2obo2004bo34b2o3bo4bo4bo$1807bo6b2o6b2ob2o27b2o1973bob2o31bo2b2o5b
+2obo2bo$1807bo6b2o6b2ob2o27b2o1972b2obob2o30bobo6b2o2bo$1807bo3b2o5b3ob2obo2006bo32b2o$1807bo12bo2bo77b4o7bo1921bobo$1808bo3bo6bo81bo3bo6bo1931b2o$1808b4o7bo80bo12bo2bo1918b2o7b2o$1900bo3b2o5b3ob2obo$1900bo6b2o6b2ob2o1872bo2bo$1841b2o6b2o49bo6b2o6b2o
+b2o644bo1226bo$1841b2o6b2o49bo3b2o5b3ob2obo643bobo1238b2ob2o$1900bo12bo2bo646b2o1229b3o5bo3b4o47b2o$1901bo3bo6bo1880bo2b3o3bo3b4o6b2o39bobo6b2o2bo$1901b4o7bo1876bo3bo3bobo2b2o12bobo6b2o2bo26bo2b2o5b2obo2bo$1830b2o1957bo3bo3bobo2b2o11bo2b2o5b2obo2bo25
+b2o3bo4bo4bo$1830b2o1961bo2b3o3bo3b4o6b2o3bo4bo4bo25bo5bo4bo2bobo$3794b3o5bo3b4o6bo5bo4bo2bobo24bo5bo4bo2bobo$3803b2ob2o8bo5bo4bo2bobo24b2o3bo4bo4bo$1824b4o7bo1955bo24b2o3bo4bo4bo24bo2b2o5b2obo2bo$1824bo3bo6bo1956bo2bo19bo2b2o5b2obo2bo25bobo6b2o2bo$1
+823bo12bo2bo1976bobo6b2o2bo27b2o$1823bo3b2o5b3ob2obo1974b2o$1823bo6b2o6b2ob2o$1823bo6b2o6b2ob2o$1823bo3b2o5b3ob2obo$1823bo12bo2bo$1824bo3bo6bo$1824b4o7bo21$2486b2o$2486b2o$2596b2o$1693b2o900b2ob2o5b3o$1692bobo900bo2b2o10bo$1694bo900b4o6b2o3b3o$2595b2
+o4b2o3b2o2bobo$2595b2o4b2o3b2o2bobo$2595b4o6b2o3b3o$2503b2o90bo2b2o10bo$2503bobo6b2o2bo78b2ob2o5b3o$2502bo2b2o5b2obo2bo77b2o$2503b2o3bo4bo4bo$2503bo5bo4bo2bobo$2503bo5bo4bo2bobo$2503b2o3bo4bo4bo$2502bo2b2o5b2obo2bo$2503bobo6b2o2bo7b2o$2503b2o18bo2bo6
+bo$2526bo6b2ob3o49b2o$2523b3o2b2o7b3o7b2o38b2ob2o5b3o$2530bo4b2o3bo5b2ob2o5b3o28bo2b2o10bo$2530bo4b2o3bo5bo2b2o10bo25b4o6b2o3b3o$2523b3o2b2o7b3o6b4o6b2o3b3o23b2o4b2o3b2o2bobo$2526bo6b2ob3o7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo$2523bo2bo6bo12b2o4b2o3b2o2
+bobo23b4o6b2o3b3o$1884bo639b2o20b4o6b2o3b3o23bo2b2o10bo$1885b2o659bo2b2o10bo25b2ob2o5b3o$1824b4o7bo48b2o660b2ob2o5b3o29b2o$1824bo3bo6bo711b2o$1823bo12bo2bo$1823bo3b2o5b3ob2obo$1823bo6b2o6b2ob2o$1823bo6b2o6b2ob2o$1823bo3b2o5b3ob2obo$1823bo12bo2bo$1824
+bo3bo6bo$1824b4o7bo$1658b2o$1657bobo$1659bo2$1901b4o7bo$1901bo3bo6bo$1646b3o251bo12bo2bo$1648bo251bo3b2o5b3ob2obo$1647bo252bo6b2o6b2ob2o$1900bo6b2o6b2ob2o$1900bo3b2o5b3ob2obo$1808b4o7bo80bo12bo2bo$1808bo3bo6bo81bo3bo6bo$1807bo12bo2bo77b4o7bo$1807bo3b
+2o5b3ob2obo$1807bo6b2o6b2ob2o$1807bo6b2o6b2ob2o$1807bo3b2o5b3ob2obo$1807bo12bo2bo$1808bo3bo6bo9b4o7bo$1808b4o7bo9bo3bo6bo1784b2o$1828bo12bo2bo48b4o7bo1719b2ob2o5b3o29b2o$1828bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo1719bo2b2o10bo25b2ob2o5b3o$1828bo6b2o6b2ob2o
+4bo3bo6bo28bo12bo2bo1715b4o6b2o3b3o23bo2b2o10bo$1648b2o178bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo1693bo7bob2o8b2o4b2o3b2o2bobo23b4o6b2o3b3o$1647bobo15b2o161bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o1691b3o5bo6bo5b2o4b2o3b2o2bobo23b2o4b2o3b2o2bob
+o$1649bo16b2o160bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o1690bo4bo2b2o3bo2bo5b4o6b2o3b3o23b2o4b2o3b2o2bobo$1665bo163bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo1690b3o4bobo5b2o6bo2b2o10bo25b4o6b2o3b3o$1829b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo1692b3o4bobo5b2o6b
+2ob2o5b3o9b2o17bo2b2o10bo$1851bo12bo2bo25bo3bo6bo1697bo4bo2b2o3bo2bo6b2o20b2o16b2ob2o5b3o$1852bo3bo6bo29b4o7bo1698b3o5bo6bo27bo19b2o$1852b4o7bo1740bo7bob2o$1656b2o$1657b2o224b4o7bo$1656bo226bo3bo6bo1731bo$1882bo12bo2bo1725b2ob2o20b2o$1882bo3b2o5b3ob2
+obo1724b2obo20b2o110b2o$1882bo6b2o6b2ob2o1724bo134bobo$1882bo6b2o6b2ob2o1727bo44b2o85bo$1882bo3b2o5b3ob2obo1725bo2bo43b2ob2o5b3o$1882bo12bo2bo1728bo45bo2b2o10bo$1883bo3bo6bo1731bo46b4o6b2o3b3o$1883b4o7bo1727b2o3bo45b2o4b2o3b2o2bobo$3622bo4bo8b2o6b2o2
+7b2o4b2o3b2o2bobo$3621b2o3bo9b2o6b2o27b4o6b2o3b3o$3623bo49bo2b2o10bo$3623bob2o46b2ob2o5b3o$3572b2o51bob2o45b2o$3571b2ob2o5b3o41bo2bo$3571bo2b2o10bo38bobo$3571b4o6b2o3b3o36b3o144b2o38b2o$3571b2o4b2o3b2o2bobo182b2o38b2o$3571b2o4b2o3b2o2bobo8b2o174bo39b
+o$3571b4o6b2o3b3o7b2ob2o5b3o$1599b3o1969bo2b2o10bo9bo2b2o10bo$1601bo1969b2ob2o5b3o12b4o6b2o3b3o$1600bo1971b2o22b2o4b2o3b2o2bobo$3596b2o4b2o3b2o2bobo$3596b4o6b2o3b3o$1666b3o1927bo2b2o10bo$1668bo1927b2ob2o5b3o$1667bo1929b2o213bo$1642b2o2167b2o$1641bobo
+2167bobo$1643bo15$2604b2o$2604bobo$2604bo14$2646bo$2644b2obo$2644b2obo5b3ob2o$2645b2o3bo4b2o2b2o$2649b2o5bo4bo$2649b2o5bo4bo$2645b2o3bo4b2o2b2o$2644b2obo5b3ob2o$2644b2obo$2646bo3$2641bo$2639b2obo$2639b2obo5b3ob2o$2640b2o3bo4b2o2b2o938b2o$2644b2o5bo4b
+o936b2ob2o5b3o$2644b2o5bo4bo936bo2b2o10bo600b2o$2640b2o3bo4b2o2b2o937b4o6b2o3b3o597b2ob2o5b3o$2639b2obo5b3ob2o939b2o4b2o3b2o2bobo597bo2b2o10bo$2639b2obo950b2o4b2o3b2o2bobo597b4o6b2o3b3o$2641bo951b4o6b2o3b3o597b2o4b2o3b2o2bobo$3593bo2b2o10bo599b2o4b2o
+3b2o2bobo$3593b2ob2o5b3o602b4o6b2o3b3o$3594b2o612bo2b2o10bo$4208b2ob2o5b3o$4209b2o3$3674b2o$3673b2ob2o5b3o$3673bo2b2o10bo600b2o$3588b2o6b2o75b4o6b2o3b3o597b2ob2o5b3o$3588b2o6b2o75b2o4b2o3b2o2bobo597bo2b2o10bo$3673b2o4b2o3b2o2bobo597b4o6b2o3b3o$3673b4
+o6b2o3b3o597b2o4b2o3b2o2bobo$3581b2o90bo2b2o10bo599b2o4b2o3b2o2bobo$3580b2ob2o5b3o80b2ob2o5b3o602b4o6b2o3b3o$3580bo2b2o10bo78b2o520b2o90bo2b2o10bo$3580b4o6b2o3b3o597b2ob2o5b3o80b2ob2o5b3o$3580b2o4b2o3b2o2bobo597bo2b2o10bo78b2o$3580b2o4b2o3b2o2bobo597
+b4o6b2o3b3o$1397b3o2180b4o6b2o3b3o597b2o4b2o3b2o2bobo$1397b3o4b3ob2o2170bo2b2o10bo599b2o4b2o3b2o2bobo$1395bo7b3o4bobo2167b2ob2o5b3o9b2o591b4o6b2o3b3o$1401b2obo4bo2bo2168b2o18b2ob2o5b3o581bo2b2o10bo$1401b2obo4bo2bo2188bo2b2o10bo49b2o527b2ob2o5b3o9b2o$
+1395bo7b3o4bobo2188b4o6b2o3b3o6b2o38b2ob2o5b3o518b2o18b2ob2o5b3o$1397b3o4b3ob2o2191b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo535bo2b2o10bo49b2o$1397b3o2201b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o533b4o6b2o3b3o6b2o38b2ob2o5b3o$1377bo7bob2o2212b4o6b2o3b3o
+5b4o6b2o3b3o23b2o4b2o3b2o2bobo533b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo$1376b3o5bo6bo26bo7bob2o2171bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo533b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o$1375bo4bo2b2o3bo2bo25b3o5bo6bo2168b2ob2o5b3o10b2o4b2o3b2o2bob
+o23b4o6b2o3b3o533b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo$1354bo7bob2o8b3o4bobo5b2o25bo4bo2b2o3bo2bo2169b2o20b4o6b2o3b3o23bo2b2o10bo535bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo$1353b3o5bo6bo5b3o4bobo5b2o24b3o4bobo5b2o2192bo2b2o10bo25b2ob2o5b3o53
+8b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o$1352bo4bo2b2o3bo2bo6bo4bo2b2o3bo2bo23b3o4bobo5b2o2192b2ob2o5b3o8b4o7bo9b2o549b2o20b4o6b2o3b3o23bo2b2o10bo$1351b3o4bobo5b2o8b3o5bo6bo24bo4bo2b2o3bo2bo2192b2o18bo3bo6bo582bo2b2o10bo25b2ob2o5b3o$1351b3o4bobo5b2
+o9bo7bob2o28b3o5bo6bo2211bo12bo2bo578b2ob2o5b3o8b4o7bo9b2o$1352bo4bo2b2o3bo2bo49bo7bob2o2214bo3b2o5b3ob2obo577b2o18bo3bo6bo$1353b3o5bo6bo2275bo6b2o6b2ob2o595bo12bo2bo$1354bo7bob2o2278bo6b2o6b2ob2o312bo231bo50bo3b2o5b3ob2obo$1333bo7bob2o2299bo3b2o5b3o
+b2obo311bobo229b2obo49bo6b2o6b2ob2o$1332b3o5bo6bo2296bo12bo2bo314b2o229b2obo5b3ob2o38bo6b2o6b2ob2o$1331bo4bo2b2o3bo2bo2297bo3bo6bo550b2o3bo4b2o2b2o36bo3b2o5b3ob2obo$1330b3o4bobo5b2o29b2o2267b4o7bo554b2o5bo4bo35bo12bo2bo$1330b3o4bobo5b2o29b2o2833b2o5b
+o4bo36bo3bo6bo$1331bo4bo2b2o3bo2bo2859b2o3bo4b2o2b2o37b4o7bo$1332b3o5bo6bo2858b2obo5b3ob2o$1333bo7bob2o81bo7bob2o2749bo18b2obo$1425b3o5bo6bo2745bobo5bo13bo19bo$1424bo4bo2b2o3bo2bo2744b2obo3bo2bo2bo28bobo5bo$1423b3o4bobo5b2o2724bo22bo3bo3bobob2o25b2ob
+o3bo2bo2bo$1363b2o6b2o50b3o4bobo5b2o2723bobo5bo18bo7b2ob2o25bo3bo3bobob2o$1363b2o6b2o51bo4bo2b2o3bo2bo2721b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o$1425b3o5bo6bo2723bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$1426bo7bob2o2729bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bob
+ob2o$4167bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$1352b2o2810bo3bo3bobob2o9bo39bobo5bo$1352b2o2808b2obo3bo2bo2bo52bo$4143bo19bobo5bo$4142bobo5bo13bo$4141b2obo3bo2bo2bo$1346bo7bob2o2785bo3bo3bobob2o$1345b3o5bo6bo2785bo7b2ob2o13b2o20b2o$1344bo4bo2b2o3bo2bo278
+5bo7b2ob2o13b2o20b2o125b2o$1343b3o4bobo5b2o2783bo3bo3bobob2o163b4o$1343b3o4bobo5b2o2781b2obo3bo2bo2bo81bo82b2ob2o7b2o$1344bo4bo2b2o3bo2bo2781bobo5bo84bobo5bo75b2o2b2o5bob5o$1345b3o5bo6bo2782bo90b2obo3bo2bo2bo70b3o10b2o4b2o$1346bo7bob2o2878bo3bo3bobob
+2o68b3o4b3o3bo$4239bo7b2ob2o66b3o4b3o3bo$4181b2o6b2o48bo7b2ob2o66b3o10b2o4b2o$4181b2o6b2o45bo3bo3bobob2o69b2o2b2o5bob5o$4234b2obo3bo2bo2bo51b4o7bo8b2ob2o7b2o$4235bobo5bo55bo3bo6bo9b4o16b4o7bo$4236bo61bo12bo2bo6b2o17bo3bo6bo$4170b2o104b4o7bo10bo3b2o5b
+3ob2obo22bo12bo2bo$4170b2o104bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$4275bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$4275bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$4159bo115bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$4158bobo5bo108bo6b2o6b2ob2o4bo3bo6bo
+28bo12bo2bo$4157b2obo3bo2bo2bo104bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$4159bo3bo3bobob2o102bo12bo2bo48b4o7bo$1644bo2517bo7b2ob2o80b4o7bo9bo3bo6bo$1643bo2518bo7b2ob2o80bo3bo6bo9b4o7bo$1643b3o2513bo3bo3bobob2o81bo12bo2bo$4157b2obo3bo2bo2bo83bo3b2o5b3ob2obo$
+4158bobo5bo87bo6b2o6b2ob2o21b2o20b2o$4159bo94bo6b2o6b2ob2o21b2o20b2o$4254bo3b2o5b3ob2obo$4254bo12bo2bo77b4o7bo$4255bo3bo6bo81bo3bo6bo$4255b4o7bo80bo12bo2bo$4347bo3b2o5b3ob2obo$4347bo6b2o6b2ob2o$4304b2o6b2o33bo6b2o6b2ob2o$4304b2o6b2o33bo3b2o5b3ob2obo$
+4347bo12bo2bo$4348bo3bo6bo$4348b4o7bo$4293b2o$4293b2o3$4271b4o7bo$4271bo3bo6bo$4270bo12bo2bo$4270bo3b2o5b3ob2obo$4270bo6b2o6b2ob2o$4270bo6b2o6b2ob2o$4270bo3b2o5b3ob2obo$4270bo12bo2bo$4271bo3bo6bo$4271b4o7bo3$4206bo$1408bo2798bo$1406bobo2796b3o$1349bo
+7bob2o46b2o$1348b3o5bo6bo2943bo$1347bo4bo2b2o3bo2bo2944b2o$1346b3o4bobo5b2o2944b2o$1346b3o4bobo5b2o$1324bo7bob2o11bo4bo2b2o3bo2bo150b2o$1323b3o5bo6bo9b3o5bo6bo149bobo$1322bo4bo2b2o3bo2bo10bo7bob2o154bo$1321b3o4bobo5b2o$1321b3o4bobo5b2o$1322bo4bo2b2o3
+bo2bo$1323b3o5bo6bo163b3o$1324bo7bob2o168bo$1503bo$1426bo7bob2o$1425b3o5bo6bo$1424bo4bo2b2o3bo2bo$1423b3o4bobo5b2o$1423b3o4bobo5b2o2719bo$1424bo4bo2b2o3bo2bo2717bobo5bo$1425b3o5bo6bo2716b2obo3bo2bo2bo$1426bo7bob2o2721bo3bo3bobob2o$4162bo7b2ob2o$4135b
+o26bo7b2ob2o$4134bobo5bo16bo3bo3bobob2o$4133b2obo3bo2bo2bo10b2obo3bo2bo2bo$4135bo3bo3bobob2o9bobo5bo$4138bo7b2ob2o8bo$1353b2o2783bo7b2ob2o$1352bo2bo6bo141b2o2629bo3bo3bobob2o$1355bo6b2ob3o135bobo15b2o2610b2obo3bo2bo2bo$1352b3o2b2o7b3o49bo7bob2o75bo16
+b2o2610bobo5bo$1359bo4b2o3bo7bo7bob2o28b3o5bo6bo88bo2613bo100bo$1359bo4b2o3bo6b3o5bo6bo24bo4bo2b2o3bo2bo2802bobo5bo$1352b3o2b2o7b3o6bo4bo2b2o3bo2bo23b3o4bobo5b2o2527bo7bob2o263b2obo3bo2bo2bo$1355bo6b2ob3o6b3o4bobo5b2o24b3o4bobo5b2o2526b3o5bo6bo26bo7b
+ob2o129b2o93bo3bo3bobob2o$1352bo2bo6bo11b3o4bobo5b2o25bo4bo2b2o3bo2bo2502b2o20bo4bo2b2o3bo2bo25b3o5bo6bo126b2o96bo7b2ob2o$1353b2o20bo4bo2b2o3bo2bo25b3o5bo6bo79b2o2420bo2bo6bo11b3o4bobo5b2o25bo4bo2b2o3bo2bo224bo7b2ob2o$1376b3o5bo6bo26bo7bob2o83b2o2422
+bo6b2ob3o6b3o4bobo5b2o24b3o4bobo5b2o222bo3bo3bobob2o$1377bo7bob2o123bo2421b3o2b2o7b3o6bo4bo2b2o3bo2bo23b3o4bobo5b2o220b2obo3bo2bo2bo$3941bo4b2o3bo6b3o5bo6bo5b2o17bo4bo2b2o3bo2bo220bobo5bo$3941bo4b2o3bo7bo7bob2o9b2o17b3o5bo6bo221bo$3934b3o2b2o7b3o28bo
+20bo7bob2o$3937bo6b2ob3o321b4o7bo$3934bo2bo6bo326bo3bo6bo$3935b2o21bo311bo12bo2bo$3958bo311bo3b2o5b3ob2obo$3957b3o204bo105bo6b2o6b2ob2o$3981b2o180bobo5bo98bo6b2o6b2ob2o$3959b3o19b2o179b2obo3bo2bo2bo52bo41bo3b2o5b3ob2obo$3959b3o202bo3bo3bobob2o9bo39bo
+bo5bo34bo12bo2bo$3959b3o205bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo31bo3bo6bo$3960b2o46bo7bob2o147bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o29b4o7bo$3957b2obo46b3o5bo6bo141bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$3957b2ob2o44bo4bo2b2o3bo2bo139b2obo3bo2bo2bo14bo7
+b2ob2o28bo7b2ob2o$3957bo47b3o4bobo5b2o86b2o38b2o13bobo5bo18bo7b2ob2o25bo3bo3bobob2o$3954b2o2bo2bo6b2o6b2o27b3o4bobo5b2o85b2o38b2o15bo22bo3bo3bobob2o25b2obo3bo2bo2bo$3953bo7bo6b2o6b2o28bo4bo2b2o3bo2bo86bo39bo35b2obo3bo2bo2bo28bobo5bo112b4o7bo$3954b2o2
+bo2bo45b3o5bo6bo163bobo5bo33bo119bo3bo6bo$1455b3o2550bo7bob2o167bo159bo12bo2bo$1457bo2503bo302b2o81bo3b2o5b3ob2obo$1456bo2449bo7bob2o40b2ob2o301b2o81bo6b2o6b2ob2o$3905b3o5bo6bo37b2obo385bo6b2o6b2ob2o$3904bo4bo2b2o3bo2bo36bo2bo386bo3b2o5b3ob2obo$1522b
+3o2378b3o4bobo5b2o37b3o295b4o7bo80bo12bo2bo$1524bo2378b3o4bobo5b2o38bo296bo3bo6bo81bo3bo6bo$1523bo2380bo4bo2b2o3bo2bo10bo7bob2o205bo105bo12bo2bo77b4o7bo$1498b2o2405b3o5bo6bo9b3o5bo6bo201b2o105bo3b2o5b3ob2obo$1497bobo2406bo7bob2o11bo4bo2b2o3bo2bo201bo
+bo104bo6b2o6b2ob2o$1499bo2428b3o4bobo5b2o309bo6b2o6b2ob2o$3928b3o4bobo5b2o309bo3b2o5b3ob2obo$3929bo4bo2b2o3bo2bo308bo12bo2bo$3930b3o5bo6bo309bo3bo6bo9b4o7bo$3931bo7bob2o312b4o7bo9bo3bo6bo$4275bo12bo2bo48b4o7bo$4275bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$427
+5bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$4275bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$4275bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$4275bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$4276bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$4276b4o7bo10bo3b2o5b3ob2obo22bo
+12bo2bo$4298bo12bo2bo25bo3bo6bo$4299bo3bo6bo29b4o7bo$4299b4o7bo2$4330b4o7bo$4330bo3bo6bo$4329bo12bo2bo$4329bo3b2o5b3ob2obo$4329bo6b2o6b2ob2o$4329bo6b2o6b2ob2o$4329bo3b2o5b3ob2obo$4329bo12bo2bo$4330bo3bo6bo$4330b4o7bo27$1580bo2bo$1579bo$1591b2ob2o2332
+bo7bob2o$1582b3o5bo3b4o2329b3o5bo6bo$1581bo2b3o3bo3b4o2328bo4bo2b2o3bo2bo$1577bo3bo3bobo2b2o2333b3o4bobo5b2o$1577bo3bo3bobo2b2o2333b3o4bobo5b2o$1581bo2b3o3bo3b4o2328bo4bo2b2o3bo2bo$1582b3o5bo3b4o2329b3o5bo6bo$1591b2ob2o2332bo7bob2o$1579bo$1563bo7bob2
+o5bo2bo$1562b3o5bo6bo$1561bo4bo2b2o3bo2bo$1560b3o4bobo5b2o$1560b3o4bobo5b2o$1561bo4bo2b2o3bo2bo2430bo7bob2o$1539bo2bo19b3o5bo6bo2429b3o5bo6bo$1538bo24bo7bob2o5bo2bo2336b2o6b2o76bo4bo2b2o3bo2bo245bo7bob2o$1550b2ob2o24bo2340b2o6b2o75b3o4bobo5b2o245b3o5
+bo6bo$1516bo2bo21b3o5bo3b4o34b2ob2o2409b3o4bobo5b2o244bo4bo2b2o3bo2bo$1515bo24bo2b3o3bo3b4o25b3o5bo3b4o2408bo4bo2b2o3bo2bo242b3o4bobo5b2o$1527b2ob2o4bo3bo3bobo2b2o30bo2b3o3bo3b4o2409b3o5bo6bo242b3o4bobo5b2o$1518b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b
+2o2323bo7bob2o81bo7bob2o246bo4bo2b2o3bo2bo$1517bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o2322b3o5bo6bo337b3o5bo6bo$1513bo3bo3bobo2b2o13b3o5bo3b4o24bo2b3o3bo3b4o2315bo4bo2b2o3bo2bo338bo7bob2o$1513bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4o2314b3o4bobo5b2o$151
+7bo2b3o3bo3b4o4bo52b2ob2o2316b3o4bobo5b2o$1495bo2bo19b3o5bo3b4o5bo2bo36bo2333bo4bo2b2o3bo2bo$1494bo32b2ob2o48bo2bo2330b3o5bo6bo$1506b2ob2o4bo2399bo7bob2o$1497b3o5bo3b4o3bo2bo2416bo7bob2o$1496bo2b3o3bo3b4o2422b3o5bo6bo$1492bo3bo3bobo2b2o2427bo4bo2b2o3
+bo2bo49bo7bob2o$1492bo3bo3bobo2b2o2426b3o4bobo5b2o9bo7bob2o28b3o5bo6bo$1496bo2b3o3bo3b4o75bo2bo2341b3o4bobo5b2o8b3o5bo6bo24bo4bo2b2o3bo2bo$1497b3o5bo3b4o74bo2346bo4bo2b2o3bo2bo6bo4bo2b2o3bo2bo23b3o4bobo5b2o$1506b2ob2o88b2ob2o2331b3o5bo6bo5b3o4bobo5b2
+o24b3o4bobo5b2o$1494bo95b3o5bo3b4o2330bo7bob2o8b3o4bobo5b2o25bo4bo2b2o3bo2bo$1495bo2bo81b3o6bo2b3o3bo3b4o2351bo4bo2b2o3bo2bo25b3o5bo6bo$1579bo2bo2bo3bo3bobo2b2o2358b3o5bo6bo26bo7bob2o$1572b2o10bo4bo3bobo2b2o2359bo7bob2o$1572b2o4bo5b2o3bo2b3o3bo3b4o23
+73b3o$1579bo4bo5b3o5bo3b4o2373b3o4b3ob2o$1581bo17b2ob2o2373bo7b3o4bobo$1587bo2395b2obo4bo2bo$1588bo2bo2391b2obo4bo2bo$1574b2o2401bo7b3o4bobo$1573bobo2403b3o4b3ob2o$1511bo2bo58bo2bo2402b3o$1510bo62bo2bo$1522b2ob2o47bobo$1513b3o5bo3b4o46bo$1512bo2b3o3b
+o3b4o$1508bo3bo3bobo2b2o$1508bo3bo3bobo2b2o$1512bo2b3o3bo3b4o$1513b3o5bo3b4o$1522b2ob2o$1510bo$1511bo2bo14$4323b2o$4322bo2bo6bo$4325bo6b2ob3o$4322b3o2b2o7b3o$4329bo4b2o3bo$4329bo4b2o3bo$4322b3o2b2o7b3o$4325bo6b2ob3o$4322bo2bo6bo$4323b2o2$4292b2o$4291
+bo2bo6bo31b2o$4294bo6b2ob3o25bo2bo6bo$4269b2o20b3o2b2o7b3o27bo6b2ob3o$4268bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o$4271bo6b2ob3o14bo4b2o3bo30bo4b2o3bo$4268b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo$4275bo4b2o3bo8bo6b2ob3o25b3o2b2o7b3o$4275bo4b2o3bo5bo2bo6bo33bo6b2ob
+3o$4268b3o2b2o7b3o7b2o38bo2bo6bo$4271bo6b2ob3o49b2o$4248b2o18bo2bo6bo$4247bo2bo6bo11b2o$4250bo6b2ob3o$4247b3o2b2o7b3o$4254bo4b2o3bo$4254bo4b2o3bo$4247b3o2b2o7b3o$4250bo6b2ob3o78b2o$4247bo2bo6bo82bo2bo6bo$4248b2o93bo6b2ob3o$4340b3o2b2o7b3o$1511bo2bo28
+32bo4b2o3bo$1510bo2836bo4b2o3bo$1522b2ob2o2813b3o2b2o7b3o$1513b3o5bo3b4o2814bo6b2ob3o$1512bo2b3o3bo3b4o2811bo2bo6bo$1508bo3bo3bobo2b2o2818b2o$1508bo3bo3bobo2b2o$1512bo2b3o3bo3b4o2654b2o$1513b3o5bo3b4o2653b4o38b2o$1522b2ob2o2654b2ob2o7b2o28b4o$1510bo2
+649b2o19b2o2b2o5bob5o23b2ob2o7b2o28b2o$1511bo2bo2644b4o17b3o10b2o4b2o21b2o2b2o5bob5o23bo2bo6bo$4158b2ob2o7b2o8b3o4b3o3bo27b3o10b2o4b2o24bo6b2ob3o$4158b2o2b2o5bob5o4b3o4b3o3bo27b3o4b3o3bo28b3o2b2o7b3o$1588bo2bo2565b3o10b2o4b2o2b3o10b2o4b2o20b3o4b3o3bo
+35bo4b2o3bo$1587bo2569b3o4b3o3bo10b2o2b2o5bob5o22b3o10b2o4b2o28bo4b2o3bo$1370b2o227b2ob2o2553b3o4b3o3bo10b2ob2o7b2o27b2o2b2o5bob5o23b3o2b2o7b3o$1369bobo218b3o5bo3b4o2551b3o10b2o4b2o4b4o36b2ob2o7b2o30bo6b2ob3o$1371bo144b2o6b2o63bo2b3o3bo3b4o2533b2o17b
+2o2b2o5bob5o7b2o38b4o36bo2bo6bo$1516b2o6b2o59bo3bo3bobo2b2o2538b4o16b2ob2o7b2o52b2o38b2o$1585bo3bo3bobo2b2o2537b2ob2o7b2o8b4o$1495bo2bo90bo2b3o3bo3b4o2531b2o2b2o5bob5o5b2o$1494bo95b3o5bo3b4o2530b3o10b2o4b2o$1506b2ob2o88b2ob2o2532b3o4b3o3bo$1497b3o5bo
+3b4o74bo2548b3o4b3o3bo$1496bo2b3o3bo3b4o75bo2bo2544b3o10b2o4b2o75b2o$1492bo3bo3bobo2b2o22b2o2606b2o2b2o5bob5o76b4o$1492bo3bo3bobo2b2o22b2o2606b2ob2o7b2o79b2ob2o7b2o$1496bo2b3o3bo3b4o2625b4o88b2o2b2o5bob5o$1497b3o5bo3b4o3bo2bo2619b2o88b3o10b2o4b2o$150
+6b2ob2o4bo2713b3o4b3o3bo$1494bo32b2ob2o48bo2bo2645b3o4b3o3bo$1495bo2bo19b3o5bo3b4o5bo2bo36bo2649b3o10b2o4b2o$1517bo2b3o3bo3b4o4bo52b2ob2o2634b2o2b2o5bob5o$1513bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4o2632b2ob2o7b2o$1513bo3bo3bobo2b2o13b3o5bo3b4o24bo2b3o3bo3
+b4o2633b4o$1517bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o2640b2o$1518b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b2o2720b2o$1527b2ob2o4bo3bo3bobo2b2o30bo2b3o3bo3b4o2713bobo$1515bo24bo2b3o3bo3b4o25b3o5bo3b4o2557b2o156bo$1360b2o154bo2bo21b3o5bo3b4o34b2ob2o2
+558b4o$1359bobo15b2o171b2ob2o24bo2573b2ob2o7b2o$1361bo16b2o158bo41bo2bo2569b2o2b2o5bob5o$1377bo161bo2bo27bo2bo2578b3o10b2o4b2o$1569bo2582b3o4b3o3bo$1581b2ob2o2566b3o4b3o3bo$1572b3o5bo3b4o2564b3o10b2o4b2o$1571bo2b3o3bo3b4o2565b2o2b2o5bob5o$1368b2o197b
+o3bo3bobo2b2o2571b2ob2o7b2o$1369b2o196bo3bo3bobo2b2o2572b4o56b3o$1368bo202bo2b3o3bo3b4o2567b2o59bo$1572b3o5bo3b4o2627bo$1581b2ob2o$1569bo$1570bo2bo14$4264b2o$4263bo2bo6bo$1311b3o2952bo6b2ob3o$1313bo2949b3o2b2o7b3o$1312bo2957bo4b2o3bo$4270bo4b2o3bo$42
+63b3o2b2o7b3o$1378b3o2885bo6b2ob3o$1380bo2882bo2bo6bo$1133bo245bo2884b2o$1131b2obo219b2o$1131b2obo5b3ob2o207bobo$1132b2o3bo4b2o2b2o207bo2920b2o$1136b2o5bo4bo3127b2o$1136b2o5bo4bo3192b2o$1132b2o3bo4b2o2b2o3192bo2bo6bo$1131b2obo5b3ob2o3197bo6b2ob3o$111
+2bo18b2obo3152b2o6b2o43b3o2b2o7b3o$1111bobo5bo13bo19bo3133b2o6b2o50bo4b2o3bo$1110b2obo3bo2bo2bo28bobo5bo3186bo4b2o3bo$1089bo22bo3bo3bobob2o25b2obo3bo2bo2bo3175b3o2b2o7b3o$1088bobo5bo18bo7b2ob2o25bo3bo3bobob2o3081b2o93bo6b2ob3o$1087b2obo3bo2bo2bo14bo7
+b2ob2o28bo7b2ob2o3078bo2bo6bo82bo2bo6bo$1089bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o3081bo6b2ob3o78b2o$1092bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o3080b3o2b2o7b3o$1092bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo3089bo4b2o3bo13b2o20b2o$1089bo3bo3bobob2o9bo39bobo5bo
+3093bo4b2o3bo13b2o20b2o$1087b2obo3bo2bo2bo52bo3093b3o2b2o7b3o$1068bo19bobo5bo3153bo6b2ob3o$1067bobo5bo13bo3065b2o90bo2bo6bo11b2o$1066b2obo3bo2bo2bo3074b4o90b2o18bo2bo6bo$1068bo3bo3bobob2o3071b2ob2o7b2o104bo6b2ob3o49b2o$1071bo7b2ob2o13b2o20b2o3032b2o2
+b2o5bob5o97b3o2b2o7b3o7b2o38bo2bo6bo$1071bo7b2ob2o13b2o20b2o3031b3o10b2o4b2o102bo4b2o3bo5bo2bo6bo33bo6b2ob3o$1068bo3bo3bobob2o3070b3o4b3o3bo109bo4b2o3bo8bo6b2ob3o25b3o2b2o7b3o$1066b2obo3bo2bo2bo81bo2990b3o4b3o3bo102b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo$
+1067bobo5bo84bobo5bo2983b3o10b2o4b2o98bo6b2ob3o14bo4b2o3bo30bo4b2o3bo$1068bo90b2obo3bo2bo2bo2980b2o2b2o5bob5o97bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o$1161bo3bo3bobob2o2978b2ob2o7b2o102b2o20b3o2b2o7b3o27bo6b2ob3o$1164bo7b2ob2o2977b4o136bo6b2ob3o25bo2bo6bo$1
+106b2o6b2o48bo7b2ob2o2978b2o134bo2bo6bo11b2o18b2o$1106b2o6b2o45bo3bo3bobob2o3117b2o19bobo6b2o2bo$1159b2obo3bo2bo2bo2987b2o150bo2b2o5b2obo2bo$1160bobo5bo2991b2o70b2o79b2o3bo4bo4bo$1161bo3069b4o78bo5bo4bo2bobo$1095b2o3133b2ob2o7b2o69bo5bo4bo2bobo$1095b
+2o3133b2o2b2o5bob5o65b2o3bo4bo4bo$4171b2o6b2o48b3o10b2o4b2o62bo2b2o5b2obo2bo$4171b2o6b2o48b3o4b3o3bo70bobo6b2o2bo$1081bo3147b3o4b3o3bo70b2o$1080bobo5bo3050b2o88b3o10b2o4b2o$1079b2obo3bo2bo2bo3045b4o88b2o2b2o5bob5o$1081bo3bo3bobob2o3042b2ob2o7b2o79b2o
+b2o7b2o$1084bo7b2ob2o359bo2680b2o2b2o5bob5o76b4o$1084bo7b2ob2o359bobo2677b3o10b2o4b2o75b2o$1081bo3bo3bobob2o361b2o2678b3o4b3o3bo34b2o$1079b2obo3bo2bo2bo3043b3o4b3o3bo34b2o$1080bobo5bo3047b3o10b2o4b2o$1081bo3055b2o2b2o5bob5o5b2o$4137b2ob2o7b2o8b4o$413
+8b4o16b2ob2o7b2o52b2o$4139b2o17b2o2b2o5bob5o7b2o38b4o$4157b3o10b2o4b2o4b4o36b2ob2o7b2o$4157b3o4b3o3bo10b2ob2o7b2o27b2o2b2o5bob5o$4157b3o4b3o3bo10b2o2b2o5bob5o22b3o10b2o4b2o$4157b3o10b2o4b2o2b3o10b2o4b2o20b3o4b3o3bo$4158b2o2b2o5bob5o4b3o4b3o3bo27b3o4b
+3o3bo$4158b2ob2o7b2o8b3o4b3o3bo27b3o10b2o4b2o$4159b4o17b3o10b2o4b2o21b2o2b2o5bob5o$4160b2o19b2o2b2o5bob5o4bo2bo15b2ob2o7b2o$4181b2ob2o7b2o7bo20b4o$4182b4o28b2ob2o5b2o$4183b2o20b3o5bo3b4o$4204bo2b3o3bo3b4o$4200bo3bo3bobo2b2o$4200bo3bo3bobo2b2o$4204bo2
+b3o3bo3b4o$4205b3o5bo3b4o$4214b2ob2o$4202bo$4203bo2bo6$1131bo$1132bo$1130b3o19$1084bo$1083bobo5bo$1082b2obo3bo2bo2bo$1084bo3bo3bobob2o$1087bo7b2ob2o$1059bo27bo7b2ob2o$1058bobo5bo17bo3bo3bobob2o$1057b2obo3bo2bo2bo11b2obo3bo2bo2bo$1059bo3bo3bobob2o10bo
+bo5bo$1062bo7b2ob2o9bo$1062bo7b2ob2o$1059bo3bo3bobob2o$1057b2obo3bo2bo2bo$1058bobo5bo$1059bo101bo$1160bobo5bo$1159b2obo3bo2bo2bo$1066b2o93bo3bo3bobob2o$1066b2o96bo7b2ob2o$1164bo7b2ob2o$1161bo3bo3bobob2o$1159b2obo3bo2bo2bo$1160bobo5bo$1161bo6$1088b2o$
+1087b2ob2o5b3o$1087bo2b2o10bo50bo$1087b4o6b2o3b3o7bo39bobo5bo$1087b2o4b2o3b2o2bobo6bobo5bo31b2obo3bo2bo2bo$1087b2o4b2o3b2o2bobo5b2obo3bo2bo2bo29bo3bo3bobob2o$1087b4o6b2o3b3o7bo3bo3bobob2o30bo7b2ob2o$1087bo2b2o10bo12bo7b2ob2o28bo7b2ob2o$1087b2ob2o5b3o
+15bo7b2ob2o25bo3bo3bobob2o$1088b2o22bo3bo3bobob2o25b2obo3bo2bo2bo$1110b2obo3bo2bo2bo28bobo5bo$1111bobo5bo33bo$1112bo40$1226b2o$1225bobo$1227bo22$1216b2o$1215bobo15b2o$1217bo16b2o$1233bo5$1224b2o$1225b2o$1224bo20$1167b3o$1169bo$1168bo3$1234b3o$1236bo$
+1235bo$1210b2o$1209bobo$1211bo12$1324bo$1323bobo5bo$1322b2obo3bo2bo2bo$1324bo3bo3bobob2o$1327bo7b2ob2o$1327bo7b2ob2o$1324bo3bo3bobob2o$1322b2obo3bo2bo2bo$1323bobo5bo$1304bo19bo$1302b2obo$1302b2obo5b3ob2o$1303b2o3bo4b2o2b2o$1307b2o5bo4bo$1307b2o5bo4bo
+$1303b2o3bo4b2o2b2o$1302b2obo5b3ob2o$1283bo18b2obo$1282bobo5bo13bo19bo$1281b2obo3bo2bo2bo28bobo5bo$1260bo22bo3bo3bobob2o25b2obo3bo2bo2bo$1259bobo5bo18bo7b2ob2o25bo3bo3bobob2o$1258b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o$1260bo3bo3bobob2o9bo3bo3bobob2o30b
+o7b2ob2o$1263bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o$1263bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$1260bo3bo3bobob2o9bo39bobo5bo$1258b2obo3bo2bo2bo52bo$1239bo19bobo5bo$1238bobo5bo13bo$1237b2obo3bo2bo2bo$1239bo3bo3bobob2o$1242bo7b2ob2o14b2o$1242bo7b2ob2o14b2o
+$1239bo3bo3bobob2o$1237b2obo3bo2bo2bo81bo$1238bobo5bo84bobo5bo$1239bo90b2obo3bo2bo2bo$1332bo3bo3bobob2o$1335bo7b2ob2o$1256b2o6b2o69bo7b2ob2o$1256b2o6b2o66bo3bo3bobob2o$1330b2obo3bo2bo2bo$1331bobo5bo$1332bo5$1255bo$1254bobo5bo$1253b2obo3bo2bo2bo$1255b
+o3bo3bobob2o$1258bo7b2ob2o$1258bo7b2ob2o$1255bo3bo3bobob2o$1253b2obo3bo2bo2bo$1254bobo5bo$1255bo49$1255bo$1254bobo5bo$1253b2obo3bo2bo2bo$1255bo3bo3bobob2o$1258bo7b2ob2o$1258bo7b2ob2o43bo$1255bo3bo3bobob2o44bobo$1253b2obo3bo2bo2bo46bobo$1254bobo5bo47b
+o3bo$1255bo54bo$1309b2o$1308b3o$1308b3o2$1332bo$1331bobo5bo$1330b2obo3bo2bo2bo$1312b2o18bo3bo3bobob2o$1312b2o21bo7b2ob2o$1335bo7b2ob2o$1318bo13bo3bo3bobob2o$1239bo77bo12b2obo3bo2bo2bo$1238bobo5bo70bo13bobo5bo$1237b2obo3bo2bo2bo67bo13bo$1239bo3bo3bobo
+b2o66b2ob2o$1242bo7b2ob2o65b3o$1242bo7b2ob2o66bo$1239bo3bo3bobob2o$1237b2obo3bo2bo2bo$1238bobo5bo13bo$1239bo19bobo5bo$1258b2obo3bo2bo2bo52bo$1260bo3bo3bobob2o9bo39bobo5bo$1263bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$1263bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob
+2o$1260bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$1258b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o$1259bobo5bo18bo7b2ob2o25bo3bo3bobob2o$1260bo22bo3bo3bobob2o25b2obo3bo2bo2bo$1281b2obo3bo2bo2bo28bobo5bo$1282bobo5bo33bo$1283bo2$1314bo$1313bobo5bo$1312b2obo3bo2bo2
+bo$1314bo3bo3bobob2o$1317bo7b2ob2o$1317bo7b2ob2o$1314bo3bo3bobob2o$1312b2obo3bo2bo2bo$1313bobo5bo$1314bo29$1072b2o$1071bobo15b2o$1073bo16b2o$1089bo5$1080b2o$1081b2o$1080bo20$1023b3o$1025bo$1024bo3$1090b3o$1092bo$1091bo$1066b2o$1065bobo$1067bo122$1026
+bo$1024b2o$1025b2o76$928b2o90b3o$927bobo90bo$929bo91bo6$936b2o$937b2o$936bo20$879b3o$881bo$880bo3$946b3o$948bo$947bo$922b2o$921bobo130b2o$923bo129b2ob2o5b3o$1053bo2b2o10bo$1053b4o6b2o3b3o$1053b2o4b2o3b2o2bobo$1053b2o4b2o3b2o2bobo$1053b4o6b2o3b3o$1053
+bo2b2o10bo$1053b2ob2o5b3o$1033b4o7bo9b2o$1033bo3bo6bo$1032bo12bo2bo$1032bo3b2o5b3ob2obo$1032bo6b2o6b2ob2o$1032bo6b2o6b2ob2o$1032bo3b2o5b3ob2obo$1032bo12bo2bo$1013b2o18bo3bo6bo$1012b2ob2o5b3o8b4o7bo9b2o$1012bo2b2o10bo25b2ob2o5b3o$990b2o20b4o6b2o3b3o23
+bo2b2o10bo$989b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o$989bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo$989b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo$989b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o$989b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo$989b4o6b2o3b3
+o6b2o38b2ob2o5b3o$989bo2b2o10bo49b2o$969b2o18b2ob2o5b3o$968b2ob2o5b3o9b2o$968bo2b2o10bo$968b4o6b2o3b3o$968b2o4b2o3b2o2bobo$968b2o4b2o3b2o2bobo$968b4o6b2o3b3o$968bo2b2o10bo78b2o$968b2ob2o5b3o80b2ob2o5b3o$969b2o90bo2b2o10bo$1061b4o6b2o3b3o$1061b2o4b2o3
+b2o2bobo$977b2o6b2o74b2o4b2o3b2o2bobo$977b2o6b2o74b4o6b2o3b3o$1061bo2b2o10bo74b3o$1061b2ob2o5b3o77b3o4b3ob2o$1062b2o85bo7b3o4bobo$1155b2obo4bo2bo$1155b2obo4bo2bo$1149bo7b3o4bobo$1151b3o4b3ob2o$985b2o164b3o$984b2ob2o5b3o$984bo2b2o10bo$984b4o6b2o3b3o$9
+84b2o4b2o3b2o2bobo118b3o$984b2o4b2o3b2o2bobo118b3o4b3ob2o28b3o$984b4o6b2o3b3o116bo7b3o4bobo25b3o4b3ob2o$984bo2b2o10bo97b3o24b2obo4bo2bo23bo7b3o4bobo$984b2ob2o5b3o100b3o4b3ob2o14b2obo4bo2bo29b2obo4bo2bo$985b2o108bo7b3o4bobo5bo7b3o4bobo29b2obo4bo2bo$11
+01b2obo4bo2bo7b3o4b3ob2o26bo7b3o4bobo$1101b2obo4bo2bo7b3o38b3o4b3ob2o$1095bo7b3o4bobo48b3o$1097b3o4b3ob2o$1097b3o$1076b3o$1076b3o4b3ob2o$1074bo7b3o4bobo$1080b2obo4bo2bo12b2o$1080b2obo4bo2bo12b2o$1074bo7b3o4bobo$1076b3o4b3ob2o$1076b3o90b3o$1169b3o4b3o
+b2o$1167bo7b3o4bobo$1173b2obo4bo2bo$1091b2o6b2o72b2obo4bo2bo$1091b2o6b2o66bo7b3o4bobo$1169b3o4b3ob2o$1169b3o7$1092b3o$1092b3o4b3ob2o$1090bo7b3o4bobo$1096b2obo4bo2bo$1096b2obo4bo2bo$1090bo7b3o4bobo$1092b3o4b3ob2o$1092b3o15$985b2o$984b2ob2o5b3o$984bo2b
+2o10bo$984b4o6b2o3b3o$984b2o4b2o3b2o2bobo$984b2o4b2o3b2o2bobo$984b4o6b2o3b3o$984bo2b2o10bo$984b2ob2o5b3o$985b2o5$1062b2o$1061b2ob2o5b3o$1014b3o44bo2b2o10bo$1013bo3bo7b2o6b2o26b4o6b2o3b3o$1012bo3b2o3bo3b2o6b2o26b2o4b2o3b2o2bobo$1012b3o6bo39b2o4b2o3b2o
+2bobo$1014bo46b4o6b2o3b3o$969b2o42b2o46bo2b2o10bo$968b2ob2o5b3o33bo46b2ob2o5b3o$968bo2b2o10bo78b2o$968b4o6b2o3b3o$968b2o4b2o3b2o2bobo30b3o19b2o$968b2o4b2o3b2o2bobo28b2o2bo19b2o$968b4o6b2o3b3o29b3o$968bo2b2o10bo32bo$968b2ob2o5b3o9b2o40bobo$969b2o18b2o
+b2o5b3o31b2o$989bo2b2o10bo28bo20b2o$989b4o6b2o3b3o6b2o38b2ob2o5b3o$989b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo$989b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o$989b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo$989bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo21b
+3o$989b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o21b3o4b3ob2o$990b2o20b4o6b2o3b3o23bo2b2o10bo21bo7b3o4bobo$1012bo2b2o10bo25b2ob2o5b3o30b2obo4bo2bo$1012b2ob2o5b3o29b2o40b2obo4bo2bo$1013b2o75bo7b3o4bobo$1092b3o4b3ob2o$1044b2o46b3o$1043b2ob2o5b3o$1043bo2b
+2o10bo$1043b4o6b2o3b3o$1043b2o4b2o3b2o2bobo$1043b2o4b2o3b2o2bobo$1043b4o6b2o3b3o$1043bo2b2o10bo110b3o$1043b2ob2o5b3o113b3o4b3ob2o$1044b2o101b2o18bo7b3o4bobo$1147b2o24b2obo4bo2bo$1173b2obo4bo2bo$1160bo6bo7b3o4bobo$1159b3o7b3o4b3ob2o$1076b3o80bo2b2o5b3
+o$1076b3o4b3ob2o65b3o3bo2bo$1074bo7b3o4bobo61bo4bobo$1080b2obo4bo2bo61bo8bo$1080b2obo4bo2bo61b2o5b2o$1074bo7b3o4bobo68bo$1076b3o4b3ob2o66bo$1076b3o79bo$1097b3o$1097b3o4b3ob2o$1095bo7b3o4bobo48b3o$1101b2obo4bo2bo7b3o38b3o4b3ob2o$1101b2obo4bo2bo7b3o4b3
+ob2o26bo7b3o4bobo$1095bo7b3o4bobo5bo7b3o4bobo29b2obo4bo2bo$1097b3o4b3ob2o14b2obo4bo2bo29b2obo4bo2bo$1097b3o24b2obo4bo2bo23bo7b3o4bobo$1118bo7b3o4bobo25b3o4b3ob2o$1120b3o4b3ob2o28b3o$1120b3o19bo$1141bobo5bo$1140b2obo3bo2bo2bo$1142bo3bo3bobob2o$1145bo7
+b2ob2o$1145bo7b2ob2o$1142bo3bo3bobob2o$1140b2obo3bo2bo2bo$614bo526bobo5bo$613bobo5bo520bo$612b2obo3bo2bo2bo535b3o$614bo3bo3bobob2o533b3o4b3ob2o$617bo7b2ob2o529bo7b3o4bobo$617bo7b2ob2o535b2obo4bo2bo$614bo3bo3bobob2o537b2obo4bo2bo$612b2obo3bo2bo2bo533b
+o7b3o4bobo$613bobo5bo539b3o4b3ob2o$592b3o19bo546b3o$592b3o4b3ob2o28b3o$590bo7b3o4bobo25b3o4b3ob2o138b2o$569b3o24b2obo4bo2bo23bo7b3o4bobo134bobo$569b3o4b3ob2o14b2obo4bo2bo29b2obo4bo2bo136bo$567bo7b3o4bobo5bo7b3o4bobo29b2obo4bo2bo$573b2obo4bo2bo7b3o4b3
+ob2o26bo7b3o4bobo$573b2obo4bo2bo7b3o38b3o4b3ob2o$567bo7b3o4bobo48b3o$569b3o4b3ob2o$569b3o220b2o$548b3o242b2o$548b3o4b3ob2o231bo$546bo7b3o4bobo$552b2obo4bo2bo$552b2obo4bo2bo$546bo7b3o4bobo$548b3o4b3ob2o$548b3o90b3o$641b3o4b3ob2o$639bo7b3o4bobo$645b2ob
+o4bo2bo$645b2obo4bo2bo$639bo7b3o4bobo$641b3o4b3ob2o$641b3o7$561b3o171b3o$561b3o4b3ob2o163bo$559bo7b3o4bobo159bo$565b2obo4bo2bo$565b2obo4bo2bo48bo$559bo7b3o4bobo48b2o175b3o$561b3o4b3ob2o50bobo177bo$561b3o239bo$778b2o$777bobo$779bo48$564b3o$564b3o4b3ob
+2o$562bo7b3o4bobo$568b2obo4bo2bo$568b2obo4bo2bo$539b3o20bo7b3o4bobo$539b3o4b3ob2o12b3o4b3ob2o$537bo7b3o4bobo9b3o$543b2obo4bo2bo$543b2obo4bo2bo$537bo7b3o4bobo$539b3o4b3ob2o15b2o$539b3o25b2o2$641b3o$641b3o4b3ob2o$578b2o6b2o51bo7b3o4bobo$578b2o6b2o57b2o
+bo4bo2bo$645b2obo4bo2bo$639bo7b3o4bobo$641b3o4b3ob2o$641b3o3$591b2o$591b2o3$569b2o$569bobo6b2o2bo$568bo2b2o5b2obo2bo$569b2o3bo4bo4bo48b3o$569bo5bo4bo2bobo6b3o38b3o4b3ob2o$569bo5bo4bo2bobo6b3o4b3ob2o26bo7b3o4bobo$569b2o3bo4bo4bo5bo7b3o4bobo29b2obo4bo2
+bo$568bo2b2o5b2obo2bo11b2obo4bo2bo29b2obo4bo2bo$569bobo6b2o2bo13b2obo4bo2bo23bo7b3o4bobo$569b2o19bo7b3o4bobo25b3o4b3ob2o$592b3o4b3ob2o28b3o$592b3o48$721bo86bo2bo$719b2o86bo$720b2o97b2ob2o$810b3o5bo3b4o$650bo158bo2b3o3bo3b4o$651bo153bo3bo3bobo2b2o$649
+b3o153bo3bo3bobo2b2o$809bo2b3o3bo3b4o$810b3o5bo3b4o$819b2ob2o$807bo$791bo7bob2o5bo2bo$790b3o5bo6bo$789bo4bo2b2o3bo2bo$788b3o4bobo5b2o$788b3o4bobo5b2o$789bo4bo2b2o3bo2bo$767bo2bo19b3o5bo6bo$766bo24bo7bob2o5bo2bo$778b2ob2o24bo$744bo2bo21b3o5bo3b4o34b2o
+b2o$743bo24bo2b3o3bo3b4o25b3o5bo3b4o$755b2ob2o4bo3bo3bobo2b2o30bo2b3o3bo3b4o$746b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b2o$745bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o$741bo3bo3bobo2b2o13b3o5bo3b4o24bo2b3o3bo3b4o$741bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4
+o$745bo2b3o3bo3b4o4bo52b2ob2o$723bo2bo19b3o5bo3b4o5bo2bo36bo$722bo32b2ob2o48bo2bo$734b2ob2o4bo$725b3o5bo3b4o3bo2bo$724bo2b3o3bo3b4o$720bo3bo3bobo2b2o32b2o20b2o$720bo3bo3bobo2b2o32b2o20b2o$724bo2b3o3bo3b4o75bo2bo$725b3o5bo3b4o74bo$734b2ob2o88b2ob2o$72
+2bo95b3o5bo3b4o$723bo2bo44b2o44bo2b3o3bo3b4o$765bo5b2o40bo3bo3bobo2b2o$764bobo9b2o6b2o27bo3bo3bobo2b2o$763bo3bo8b2o6b2o31bo2b3o3bo3b4o$763b2ob2o50b3o5bo3b4o$763b2ob2o59b2ob2o$764bobo48bo$765bo50bo2bo2$764bo2bobo$739bo2bo19b3o2bo2bo$738bo23bo2b3obo$75
+0b2ob2o6b2ob2o$741b3o5bo3b4o4b2obo$740bo2b3o3bo3b4o6bo$736bo3bo3bobo2b2o$736bo3bo3bobo2b2o$740bo2b3o3bo3b4o$741b3o5bo3b4o12bobo$750b2ob2o15b2o$738bo31bo$739bo2bo5$640b2o$639bobo$641bo28$591b3o$593bo$592bo3$658b3o$660bo$659bo$634b2o$633bobo$635bo2$739
+bo2bo$738bo$750b2ob2o$741b3o5bo3b4o$740bo2b3o3bo3b4o$736bo3bo3bobo2b2o$736bo3bo3bobo2b2o$740bo2b3o3bo3b4o$741b3o5bo3b4o$750b2ob2o$738bo$739bo2bo3$816bo2bo$815bo$827b2ob2o$818b3o5bo3b4o$728b2o6b2o79bo2b3o3bo3b4o$728b2o6b2o75bo3bo3bobo2b2o$813bo3bo3bob
+o2b2o$723bo2bo90bo2b3o3bo3b4o$722bo95b3o5bo3b4o$734b2ob2o88b2ob2o$725b3o5bo3b4o74bo$724bo2b3o3bo3b4o75bo2bo$720bo3bo3bobo2b2o$720bo3bo3bobo2b2o$724bo2b3o3bo3b4o$725b3o5bo3b4o3bo2bo$734b2ob2o4bo$722bo32b2ob2o48bo2bo$723bo2bo19b3o5bo3b4o5bo2bo36bo$745b
+o2b3o3bo3b4o4bo52b2ob2o$741bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4o$741bo3bo3bobo2b2o13b3o5bo3b4o24bo2b3o3bo3b4o$745bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o$746b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b2o$755b2ob2o4bo3bo3bobo2b2o30bo2b3o3bo3b4o$743bo24bo2b
+3o3bo3b4o25b3o5bo3b4o$744bo2bo21b3o5bo3b4o34b2ob2o$778b2ob2o24bo$766bo41bo2bo$767bo2bo27bo2bo$797bo$809b2ob2o$800b3o5bo3b4o$799bo2b3o3bo3b4o$795bo3bo3bobo2b2o$795bo3bo3bobo2b2o$799bo2b3o3bo3b4o$800b3o5bo3b4o$809b2ob2o$797bo$798bo2bo38$388bo$386b2obo$
+386b2obo5b3ob2o$387b2o3bo4b2o2b2o$391b2o5bo4bo$391b2o5bo4bo$387b2o3bo4b2o2b2o$386b2obo5b3ob2o$367bo18b2obo$366bobo5bo13bo19bo$365b2obo3bo2bo2bo28bobo5bo$344bo22bo3bo3bobob2o25b2obo3bo2bo2bo$343bobo5bo18bo7b2ob2o25bo3bo3bobob2o$342b2obo3bo2bo2bo14bo7b
+2ob2o28bo7b2ob2o$344bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$347bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o$347bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$344bo3bo3bobob2o9bo39bobo5bo$342b2obo3bo2bo2bo52bo$323bo19bobo5bo$322bobo5bo13bo$321b2obo3bo2bo2bo$323bo3bo3bob
+ob2o$326bo7b2ob2o25b2o$326bo7b2ob2o25b2o$323bo3bo3bobob2o$321b2obo3bo2bo2bo81bo$322bobo5bo84bobo5bo$323bo90b2obo3bo2bo2bo$416bo3bo3bobob2o$419bo7b2ob2o$351b2o6b2o58bo7b2ob2o$351b2o6b2o55bo3bo3bobob2o$414b2obo3bo2bo2bo$415bobo5bo$416bo$340b2o$340b2o3$
+336bo$335bobo5bo$334b2obo3bo2bo2bo$336bo3bo3bobob2o$339bo7b2ob2o$339bo7b2ob2o$336bo3bo3bobob2o$334b2obo3bo2bo2bo$335bobo5bo$336bo20$628bo$628bobo$628b2o27$339bo$338bobo5bo$337b2obo3bo2bo2bo$339bo3bo3bobob2o$342bo7b2ob2o46bo$314bo27bo7b2ob2o47bo$313bo
+bo5bo17bo3bo3bobob2o47b3o$312b2obo3bo2bo2bo11b2obo3bo2bo2bo$314bo3bo3bobob2o10bobo5bo149b2o$317bo7b2ob2o9bo155bobo$317bo7b2ob2o167bo$314bo3bo3bobob2o$312b2obo3bo2bo2bo$313bobo5bo$314bo101bo$415bobo5bo$414b2obo3bo2bo2bo$416bo3bo3bobob2o$419bo7b2ob2o$4
+19bo7b2ob2o$416bo3bo3bobob2o$414b2obo3bo2bo2bo$415bobo5bo$416bo6$343b2o$342b2ob2o5b3o$342bo2b2o10bo50bo$342b4o6b2o3b3o7bo39bobo5bo$342b2o4b2o3b2o2bobo6bobo5bo31b2obo3bo2bo2bo$342b2o4b2o3b2o2bobo5b2obo3bo2bo2bo29bo3bo3bobob2o$342b4o6b2o3b3o7bo3bo3bobo
+b2o30bo7b2ob2o$342bo2b2o10bo12bo7b2ob2o28bo7b2ob2o$342b2ob2o5b3o15bo7b2ob2o25bo3bo3bobob2o$343b2o22bo3bo3bobob2o25b2obo3bo2bo2bo27b3o$365b2obo3bo2bo2bo28bobo5bo33bo$366bobo5bo33bo39bo$367bo2$514b3o$516bo$515bo$490b2o$489bobo$491bo159$496bo2bo$495bo$5
+07b2ob2o$498b3o5bo3b4o$497bo2b3o3bo3b4o$493bo3bo3bobo2b2o$493bo3bo3bobo2b2o$497bo2b3o3bo3b4o$498b3o5bo3b4o$507b2ob2o$495bo$479bo7bob2o5bo2bo$478b3o5bo6bo$477bo4bo2b2o3bo2bo$476b3o4bobo5b2o$476b3o4bobo5b2o$477bo4bo2b2o3bo2bo$455bo2bo19b3o5bo6bo$454bo2
+4bo7bob2o5bo2bo$466b2ob2o24bo$432bo2bo21b3o5bo3b4o34b2ob2o$431bo24bo2b3o3bo3b4o25b3o5bo3b4o$443b2ob2o4bo3bo3bobo2b2o30bo2b3o3bo3b4o$434b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b2o$433bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o$429bo3bo3bobo2b2o13b3o5bo3
+b4o24bo2b3o3bo3b4o$429bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4o$433bo2b3o3bo3b4o4bo52b2ob2o$411bo2bo19b3o5bo3b4o5bo2bo36bo$410bo32b2ob2o48bo2bo$422b2ob2o4bo$413b3o5bo3b4o3bo2bo$412bo2b3o3bo3b4o$408bo3bo3bobo2b2o$408bo3bo3bobo2b2o$412bo2b3o3bo3b4o75bo2bo$413
+b3o5bo3b4o74bo$422b2ob2o88b2ob2o$410bo95b3o5bo3b4o$411bo2bo90bo2b3o3bo3b4o$501bo3bo3bobo2b2o$501bo3bo3bobo2b2o$505bo2b3o3bo3b4o$506b3o5bo3b4o$515b2ob2o$503bo$504bo2bo3$427bo2bo$426bo$438b2ob2o$429b3o5bo3b4o$428bo2b3o3bo3b4o$424bo3bo3bobo2b2o$424bo3bo
+3bobo2b2o$428bo2b3o3bo3b4o$429b3o5bo3b4o$438b2ob2o$426bo$427bo2bo8$482bo$482b2o$481bobo$303b3o$305bo$304bo3$370b3o$372bo$371bo$346b2o$345bobo$347bo26$427bo2bo$426bo$438b2ob2o$429b3o5bo3b4o$428bo2b3o3bo3b4o$424bo3bo3bobo2b2o$424bo3bo3bobo2b2o$428bo2b3
+o3bo3b4o$429b3o5bo3b4o$438b2ob2o$426bo$427bo2bo2$437b2o$437b2o65bo2bo$503bo$515b2ob2o$506b3o5bo3b4o$448b2o6b2o47bo2b3o3bo3b4o$448b2o6b2o43bo3bo3bobo2b2o$501bo3bo3bobo2b2o$411bo2bo90bo2b3o3bo3b4o$410bo95b3o5bo3b4o$422b2ob2o88b2ob2o$413b3o5bo3b4o74bo$4
+12bo2b3o3bo3b4o75bo2bo$408bo3bo3bobo2b2o16b2o20b2o$408bo3bo3bobo2b2o16b2o20b2o$412bo2b3o3bo3b4o$413b3o5bo3b4o3bo2bo$422b2ob2o4bo$410bo32b2ob2o48bo2bo$411bo2bo19b3o5bo3b4o5bo2bo36bo$433bo2b3o3bo3b4o4bo52b2ob2o$429bo3bo3bobo2b2o22b2ob2o27b3o5bo3b4o$429
+bo3bo3bobo2b2o13b3o5bo3b4o24bo2b3o3bo3b4o$433bo2b3o3bo3b4o6bo2b3o3bo3b4o20bo3bo3bobo2b2o$434b3o5bo3b4o2bo3bo3bobo2b2o26bo3bo3bobo2b2o$443b2ob2o4bo3bo3bobo2b2o30bo2b3o3bo3b4o$431bo24bo2b3o3bo3b4o25b3o5bo3b4o$432bo2bo21b3o5bo3b4o34b2ob2o$466b2ob2o24bo$
+454bo41bo2bo$455bo2bo27bo2bo$485bo$497b2ob2o$488b3o5bo3b4o$487bo2b3o3bo3b4o$483bo3bo3bobo2b2o$483bo3bo3bobo2b2o$487bo2b3o3bo3b4o$488b3o5bo3b4o$497b2ob2o$485bo$486bo2bo5$121b2o$121bobo6b2o2bo$120bo2b2o5b2obo2bo$121b2o3bo4bo4bo$121bo5bo4bo2bobo$121bo5b
+o4bo2bobo$121b2o3bo4bo4bo$120bo2b2o5b2obo2bo$100b2o19bobo6b2o2bo$99bo2bo6bo11b2o18b2o$102bo6b2ob3o25bo2bo6bo$77b2o20b3o2b2o7b3o27bo6b2ob3o$76bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o$79bo6b2ob3o14bo4b2o3bo30bo4b2o3bo$76b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo$83bo4
+b2o3bo8bo6b2ob3o25b3o2b2o7b3o$83bo4b2o3bo5bo2bo6bo33bo6b2ob3o$76b3o2b2o7b3o7b2o38bo2bo6bo$79bo6b2ob3o49b2o$56b2o18bo2bo6bo$55bo2bo6bo11b2o$58bo6b2ob3o$55b3o2b2o7b3o356bo$62bo4b2o3bo22b2o20b2o309bobo$62bo4b2o3bo22b2o20b2o309b2o$55b3o2b2o7b3o$58bo6b2ob
+3o78b2o$55bo2bo6bo82bo2bo6bo$56b2o93bo6b2ob3o$148b3o2b2o7b3o$155bo4b2o3bo$104b2o6b2o41bo4b2o3bo$104b2o6b2o34b3o2b2o7b3o$151bo6b2ob3o$148bo2bo6bo$149b2o$93b2o$93b2o3$69b2o$68bo2bo6bo$71bo6b2ob3o$68b3o2b2o7b3o$75bo4b2o3bo$75bo4b2o3bo$68b3o2b2o7b3o$71bo
+6b2ob3o$68bo2bo6bo$69b2o6$107bo$108bo$106b3o41$72b2o$71bo2bo6bo$74bo6b2ob3o$71b3o2b2o7b3o$78bo4b2o3bo$47b2o29bo4b2o3bo$46bo2bo6bo14b3o2b2o7b3o$49bo6b2ob3o12bo6b2ob3o$46b3o2b2o7b3o8bo2bo6bo$53bo4b2o3bo8b2o$53bo4b2o3bo$46b3o2b2o7b3o$49bo6b2ob3o$46bo2bo
+6bo$47b2o100b2o$148bo2bo6bo$151bo6b2ob3o$56b2o6b2o82b3o2b2o7b3o$56b2o6b2o89bo4b2o3bo$155bo4b2o3bo$148b3o2b2o7b3o$151bo6b2ob3o$148bo2bo6bo$149b2o5$77b2o$76b4o$75b2ob2o7b2o$75b2o2b2o5bob5o48b2o$74b3o10b2o4b2o5b2o38bo2bo6bo$74b3o4b3o3bo11bo2bo6bo33bo6b2
+ob3o$74b3o4b3o3bo14bo6b2ob3o25b3o2b2o7b3o$74b3o10b2o4b2o4b3o2b2o7b3o31bo4b2o3bo$75b2o2b2o5bob5o13bo4b2o3bo30bo4b2o3bo$75b2ob2o7b2o17bo4b2o3bo23b3o2b2o7b3o$76b4o19b3o2b2o7b3o27bo6b2ob3o$77b2o23bo6b2ob3o25bo2bo6bo$99bo2bo6bo31b2o$100b2o6$159b3o$161bo$1
+60bo3$226b3o$228bo$227bo$202b2o$201bobo$203bo82$147b4o7bo$147bo3bo6bo29b4o7bo$146bo12bo2bo25bo3bo6bo$124b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo$124bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$123bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$123bo3b2o5b3ob2obo4bo3b2o
+5b3ob2obo22bo6b2o6b2ob2o$123bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$123bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$123bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$123bo12bo2bo48b4o7bo$124bo3bo6bo$124b4o7bo3$134b2o$134b2o2$196b4o7bo$196bo3bo6bo$195bo12bo2bo$195bo3b2o5b3ob
+2obo$195bo6b2o6b2ob2o$121b2o6b2o64bo6b2o6b2ob2o$121b2o6b2o64bo3b2o5b3ob2obo$195bo12bo2bo$196bo3bo6bo$95b4o7bo89b4o7bo$95bo3bo6bo$94bo12bo2bo$94bo3b2o5b3ob2obo$94bo6b2o6b2ob2o$94bo6b2o6b2ob2o5b4o7bo$94bo3b2o5b3ob2obo6bo3bo6bo$94bo12bo2bo7bo12bo2bo$95b
+o3bo6bo11bo3b2o5b3ob2obo$95b4o7bo11bo6b2o6b2ob2o$118bo6b2o6b2ob2o$118bo3b2o5b3ob2obo$118bo12bo2bo$53b4o7bo54bo3bo6bo$53bo3bo6bo29b4o7bo13b4o7bo$52bo12bo2bo25bo3bo6bo$30b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo$30bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$29bo
+12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$29bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$29bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$29bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$29bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$29bo12bo2bo48b4o7bo$30bo3bo6bo$30b4o7bo6$102b4o7bo
+$102bo3bo6bo$101bo12bo2bo$101bo3b2o5b3ob2obo$101bo6b2o6b2ob2o$9b2o6b2o82bo6b2o6b2ob2o$9b2o6b2o82bo3b2o5b3ob2obo$101bo12bo2bo$102bo3bo6bo$b4o7bo89b4o7bo$bo3bo6bo$o12bo2bo$o3b2o5b3ob2obo$o6b2o6b2ob2o$o6b2o6b2ob2o5b4o7bo$o3b2o5b3ob2obo6bo3bo6bo$o12bo2bo
+7bo12bo2bo$bo3bo6bo11bo3b2o5b3ob2obo$b4o7bo11bo6b2o6b2ob2o$24bo6b2o6b2ob2o$24bo3b2o5b3ob2obo$24bo12bo2bo$25bo3bo6bo$25b4o7bo9$119b4o7bo$119bo3bo6bo$118bo12bo2bo$118bo3b2o5b3ob2obo$118bo6b2o6b2ob2o$118bo6b2o6b2ob2o$118bo3b2o5b3ob2obo$118bo12bo2bo$119b
+o3bo6bo$119b4o7bo5$196b4o7bo$196bo3bo6bo$195bo12bo2bo$177b2o16bo3b2o5b3ob2obo$177b2o16bo6b2o6b2ob2o$195bo6b2o6b2ob2o$195bo3b2o5b3ob2obo$103b4o7bo80bo12bo2bo$103bo3bo6bo81bo3bo6bo$102bo12bo2bo71b2o4b4o7bo$102bo3b2o5b3ob2obo68bo2bo$102bo6b2o6b2ob2o67b2
+ob2o$102bo6b2o6b2ob2o69bo$102bo3b2o5b3ob2obo$63bo38bo12bo2bo68bo$63b2o38bo3bo6bo9b4o7bo51bo$62bobo38b4o7bo9bo3bo6bo$123bo12bo2bo48b4o7bo$123bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$123bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$123bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2
+obo$123bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$123bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$124bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$124b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo$146bo12bo2bo6b2o17bo3bo6bo$25b4o7bo110bo3bo6bo9b4o16b4o7bo$25bo3bo6bo110
+b4o7bo8b2ob2o7b2o$24bo12bo2bo126b2o2b2o5bob5o$24bo3b2o5b3ob2obo123b3o10b2o4b2o$24bo6b2o6b2ob2o122b3o4b3o3bo$24bo6b2o6b2ob2o122b3o4b3o3bo$24bo3b2o5b3ob2obo123b3o10b2o4b2o$24bo12bo2bo126b2o2b2o5bob5o$25bo3bo6bo130b2ob2o7b2o$25b4o7bo131b4o$169b2o2$46b2o
+$46b2o$102b4o7bo$102bo3bo6bo$101bo12bo2bo$57b2o6b2o34bo3b2o5b3ob2obo$57b2o6b2o34bo6b2o6b2ob2o$101bo6b2o6b2ob2o$101bo3b2o5b3ob2obo$9b4o7bo80bo12bo2bo$9bo3bo6bo81bo3bo6bo$8bo12bo2bo77b4o7bo$8bo3b2o5b3ob2obo$8bo6b2o6b2ob2o20b2o20b2o$8bo6b2o6b2ob2o20b2o2
+0b2o$8bo3b2o5b3ob2obo$8bo12bo2bo$9bo3bo6bo9b4o7bo$9b4o7bo9bo3bo6bo$29bo12bo2bo48b4o7bo$29bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$29bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$29bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$29bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$
+29bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$30bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$30b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo$52bo12bo2bo6b2o17bo3bo6bo$53bo3bo6bo9b4o16b4o7bo$53b4o7bo8b2ob2o7b2o$73b2o2b2o5bob5o$72b3o10b2o4b2o$72b3o4b3o3bo$72b3o4b3o3bo$72b
+3o10b2o4b2o$73b2o2b2o5bob5o$73b2ob2o7b2o$74b4o$75b2o!`,
+"c10ship": `x = 18, y = 10, rule = B3/S23
+2bo15b$bobo5bo8b$2obo3bo2bo2bo4b$2bo3bo3bobob2o2b$5bo7b2ob2o$5bo7b2ob2o$2bo3bo3bobob2o2b$2obo3bo2bo2bo4b$bobo5bo8b$2bo15b!`,
+"lshipsmall": `x = 659, y = 653, rule = B3/S23
+617bo41b$618bob2obobo33b$612b3o3b4o3bo33b$618bo2b2ob2o33b$617bo41b$615b3o41b$615b3o17b2o22b$635b2o22b$659b$659b$659b$659b$659b$659b$643b2o14b$643b2o14b$631b4o24b$635bo23b$617bob2ob2o7bo4bo22b$616b5o2b2o7b2obo23b$616bo2b
+3obo10bo24b$622bo36b$659b$659b$606bo3b2o2b2obo41b$606bo3b2o4bob2o39b$606bo3b2o2b2ob2o40b$610b2o47b$608bo2bo47b$608bobo48b$609bo49b$659b$659b$659b$659b$659b$659b$659b$659b$612b2ob2o42b$613bobo43b$600bo12b2o44b$599b3o10b2obo43b$598b2ob2o12b2o4bo37b$599
+b3o10b2ob2o4bo37b$600bo58b$600bobo20b2o34b$600b4o19b2o34b$603bo55b$659b$599b2ob2o55b$598bo5bo54b$599bo3bo55b$592b3o5bo58b$591bo3bo63b$590bo4bo29b2o32b$589bo3bo30bo2bo31b$589bo2bob3o27bo2bo31b$589bo7bo26bo2bo31b$591bo3bobo27b2o32b$570bo20bo3bob2o60b$5
+69b3o21b3ob2o31bo28b$568b2ob2o58bo27b$567b2obobo58bo27b$566b3o2b3o85b$567bo6bo41bo42b$568b5obo40bo43b$569b4ob2o39b3o41b$574bo84b$573bo12b2o71b$586b2o71b$659b$659b$571bo87b$569b2obo15b2obob2o64b$587b2obo3bo64b$572bo15bobobobo64b$569bo2bo16bo69b$570bo8
+8b$659b$575b2o82b$568b3o5b2o81b$575b2o82b$575bo11b4o68b$586bob2o69b$586bobo70b$659b$581bo77b$579bo2b2o75b$574b2o3bo2b4o73b$574b2o3bob2obo74b$582b2obo73b$582bo76b$580bo4bo73b$580b3o76b$580b2ob3o73b$528bo54b3o73b$527bob2o51bobo15bo58b$531bo50b2o15bo59b
+$525bo3bo2bo66b3o57b$441bo81bo9bo11b3o111b$441bo7bo73bo4b2o2b2o125b$441bo5b3o82b2o46bo78b$440b2o3bobo77bo5bo31b3o8bo5bo78b$446bo2bo76bo4b3o28bo3bo6bo7bo77b$445bo2b2o77bo4b2o12b3o5b2o7b2o9b4o2b2o77b$460b2o67b4o12b2ob2o4b2o9b2ob2o9b3o77b$460b2o82bobob2
+o17b2o11bobo76b$544bo3bo32bo77b$545bo2bo32bo77b$518bo26b3o111b$518bo140b$518bo8bo14bo116b$525bobo13bobo18b2o12bo82b$468b2o49b3o2bo3bo12bo2bo17b2o12b2o81b$468b2o50bob5o15b2o31bobo81b$449b2o3b2o70bo132b$443bo3b4o3bobo64b2o15b2o119b$443bob2o2bo2bo3bo81b
+2o119b$443bob2o4bo3b2o202b$447bo3bo207b$452bo78bo127b$501b3o26bobo126b$522b3o5bobo126b$433b3o6bo62b2o15b3o6bo127b$434b2o3b2obo64bo12bo4b2o132b$414bo18b2o5bobo58b4obo13bobo3bo132b$412b2ob2o21b3obo58b5o13b2o3b3o132b$412b2ob2o24b2o76b2o3bo134b$412b2o108
+bo21bo39bo74b$414b2obo68bo14bobo14bo3bo21b2o37bo75b$415bo2bo63b2obobo7bo5bobo14bobo22bobo37b3o73b$415bo2bo63bo2b2ob2o2b2ob2o5bo156b$416b2o64bo5bobo5bo4bobo155b$483b2o2bo8bo5b2o155b$487bo2b3o2bo6bo156b$487b3o169b$414bo45bobo109bo86b$413bobo44bobobo7bo
+97b2o87b$413bobo43bo2b2obo4b3o98b2o86b$414bo45b2o3bobob2obo44bo141b$460b2o3b2ob5o10b3o29b2ob2o139b$464bob2o3b2o10bobo29b3ob2o138b$463bobo16b2ob2o15b2o12b5o138b$482b2o18b2o13b3o139b$422bo21bobo71bo140b$421bobo21b2o212b$421bobo21bo39bo173b$399b2ob2o18b
+o62bo173b$399b2o30bo227b$399b2obobo28bo45b3o177b$402bobo25bo3bo43bo3bo27b2o147b$403b2o27b4o41bo4bo27b2o147b$433bo33b2obo5bo3b2o3bo173b$391bobo36bob2o29bo3b6o11bo174b$377bobo7bo2bo2bo36bob2o28bo5bo4bo2b2o6b3o172b$376b2ob2o5bobob2obo36bobo29bo11bo184b$
+377bob2o6bo42b2o31bo9bo185b$381bo11b3o72bo190b$380bo13b2o72bo2bo187b$380bo12b2o75bo188b$568bo90b$567bo91b$470b2o95b3o89b$470b2o187b$659b$659b$401b3o255b$399b2o2bo255b$398bo3bo153bo102b$393bo5bo2bo151b2o103b$392bobo4bobo153b2o102b$382b2o17bo257b$382b2
+o18bo256b$402bobo254b$402b2o255b$659b$476bobo180b$477b2o180b$477bo181b$390b2o267b$390b2o267b$659b$659b$659b$659b$659b$659b$659b$659b$659b$659b$659b$552bo106b$551bo107b$551b3o105b$659b$659b$659b$659b$659b$540bo118b$538b2o119b$489b2o48b2o118b$479bo3b2o
+4b3o167b$479bob2o2bo6bo166b$479bo2b5o2b4o166b$483b3o3b3o167b$482b3o174b$482b2o17b2o5bobo148b$482bo18b2o6b2o148b$509bo149b$659b$659b$659b$659b$659b$509b2o148b$359b5o7bo137b2o148b$357b2o5b2o4bobo115bo8b2o2bo157b$357bo7bo4bo116bo2bo5b3o2b2o156b$357b2o7b
+o3bo2bo107b3o2bo3bo6b2o2b3o155b$359b2o6bo3b3o107b3o2bo4bo5b2o2b2o156b$362bo122bo3b2o168b$362bo4bo13b2o106b2o168b$363b2obo14b2o103b2o48bo122b$482bobo50bo123b$473bob3o4bobo50b3o121b$471b2obo4bo5bo173b$473b2o4bo2bo2bo173b$479bo2bo2bo173b$478bo4bo175b$37
+8bo3bo6b2o67bo15bo2bo181b$376bo2bob3o5b2o66bobo15b2o47bo134b$379bobobo72b2ob2o61b2o135b$367bobo7bo79bo2bo62b2o134b$361b2o4b3obob2ob2o81b3o197b$361b2o6bo2b2o3bobo3bo75bobo197b$377bobo80b2o197b$365b2o93b2o60bo136b$353b3o8b4o136b3o14bo137b$351b7o5b2o2bo
+138bo14b3o135b$350b9o3bob3o69bo68bo153b$349bo7b3o3b2obo68b2o20b3o199b$298bo51b3o6bo74b5o18b2o200b$351b2o80bo24bo2bo197b$302bo51bo77b2o5bo12b2o5bobo197b$355bo75b3ob2o8bobo3b3o205b$294b3obo57bo75bobob2o2b2o3bob6ob2o203b$294b3obo134bo2bo2b2o5bobo4bo2bo2
+02b$295bo8b2o106b3o20b2o11bo2bobo205b$296bo3b3ob2o105bo25b2obo8b3obo205b$297bo6bo105bo4b2o23bo13bobo2bo3bo195b$298bobobobo104bo3bo15b3o27bo2bo196b$299bo15b2o92bo2bo4bo4b2o36bo198b$315b2o92bo3bo3bo4b3obo232b$361b2o47b2obob3o54b3o184b$346bo14b2o50bo60b
+o45bo138b$346bo67b4o40b2o13bo45bo139b$345bobo68b2o11bob2o25b2o59b3o137b$346b2o2bo78bo2bo35b2o189b$345bo5bo77b3o36bob3o186b$323b2o20bo5bo116b2o2bo186b$323b2o20bo4bo118b3o187b$305b3o41bo19b2o99bo188b$303bo3b2o37b3o20b2o137bo150b$297b3o3bobo2b2o156b2o38
+b2o151b$302bo5bo157b2o39b2o150b$303bo2b2o36b2ob2o310b$303bo45bo309b$288bo55b2o72b2o239b$287bobo56b3o69b2o86bo152b$505bo153b$287bo2bo3bob3o206b3o151b$289bo4bo41bo322b$290bob2obobo38bo7bo314b$268b3o20b2o3bo39bo5b3o314b$269bo22bo42b2o3bobo316b$269bo2bo6
+8bo2bo81b2o231b$269bo2bo67bo2b2o81b2o231b$270bobo39bo346b$312bo346b$314bo5bo338b$313bo6bobo336b$312bo3bo2bo339b$269bo43bo2bobob2o337b$268bobo47bob2o37bo299b$269bo62b2o25bobo297b$269bo62b2o25b2o298b$504bo154b$342bo160bo155b$299bo32bo10bo88b3o68b3o153b
+$300bo29bobo3b2o4bo89bobo224b$277bo20b3o28bo5b3o94bobo14b2o208b$276bobo51bob3o3bo93bo4b2o9bo2bo207b$276bobo52bo5bo93b3o3b2o10b3o16bo190b$255b2o7b2o11bo55b2o2bo99bo12b2o15b3o189b$255b3o6b3o2b2o50b2o3bo8bo97b4o13bo15b2ob2o21bo166b$255b2obobo26bo31b3o4b
+2o106b2o12bob2o15b3o20b2o167b$258b2o26b2o26b3obo8b2o105bo13b4o16bo15b2o5b2o166b$237bo48bobo29bobo2b5o9bo110bobobo15bobo13b3o172b$286b2o31bo3b3o10b2o97bo13b2ob2o3b2o9b4o12b3o172b$233bo7bo44b2o145bobo12bo3bo4b2o12bo12bo174b$233bo8bo2b3o85bo2bo95b4o13b3
+o33bo4bo168b$232bo4b2o3bo2b3o37bo47bo2bo95b3o15bo16b2ob2o17bo169b$233bobo6bo2b2o2bo34b3o46b3o98bo31bo5bo16b3o167b$233bob2o10bobo33bob2o180bo3bo187b$247b3o70b2o100bo26b2o17bo15bo174b$238bo44b2o35b2o8b2o86b2obobo7bo13bobo36bobo52bo119b$329b3o86bo2b2ob2
+o2b2ob2o12bobo17b2o17b2o52b3o118b$329b3o86bo5bobo5bo32b2o70b2o2bo117b$330bobo86b2o2bo8bo11b4o88b2o2b2o117b$330bobo71b3o16bo2b3o2bo13bo91b2o120b$330b3o70bo2bo16b3o15b2o95b5o116b$253b3o146bo4bo33b2o99b2o115b$252b2o2b2o144bo2b3o132bo2bo115b$252b2o2b2o14
+4bo5bo132b2o12b2o102b$253bob2o146b7o24bo120b2o102b$253b2o88bo65bo23bobo223b$245b2o6b2o88bobo63bo23bobo223b$237b2o8b3o8bobo82b2o62b2o25bo17b3o204b$237b2o5b3ob2o8b2o194bo33bo50b3o117b$259bo193bo33bo51bobo117b$331bo50b2o21bo81b3o49bo119b$332bo49b3o19b3o
+132bo2bo20b2o94b$330b3o49b2obo17bo3b2o131bobo20b2o94b$386bo17b2ob2o132b3o115b$378bo3b2o3bo16b2ob2o134b2o114b$245b2o141bo5bo6b2o134b3o4b2o113b$245b2o138bobo5bo4b3o75bo66b2o114b$359bo25bo6b3o3b2o2b2o70b2o148bo34b$308bo49bob2o18bo4bobo5b2o3bobob2o71b2o5
+4b3o89b3o33b$308bo53bo31b2o2bo131bo2bo88bobobo32b$308bo47bo3bo2bo20b4o7b2ob2o129bo4bo86b3ob3o12bo18b$311b2o41bo9bo11b3o5b2o10b3o130bo2b3o104bobo17b$311b2o12b2o27bo4b2o2b2o109bo54bo5bo87bob3o13b2o16b$306bo3b3o11b2o37b2o55b3o50bo56b7o86b5o9bo3bo17b$307
+b3o15bo30bo5bo59bo50b3o60bo86b2o2b2o11bo2b2o14b$308bo15b3o30bo4b3o56bo114bo36bo51bob2o14bo15b$307b2o15b3o31bo4b2o12b3o25b2o9bo51bo65b2o36bobo52b2o9bo2b2o16b$307b3o16bo33b4o12b2ob2o24b2o8bo2bo49bobo100bo3bo13b3o31bobo2bo11bo7b2o9b$309bo14bo2bo47bobob2
+o33bo4bo48b2o101bo3bo8bo37bobo2bo20b2o9b$307bo16b3o48bo3bo34bo5bo150bobob3o4b2ob3o35bo35b$309bo15bo50bo2bo33b2ob2o93bo60b2obo2bo5bob2o71b$307b3o66b3o37b2obo90b2o64bobo8bo71b$342bo72b2o2bo89b5o62b2o11bo2bo5b2o59b$340bobo72b4o89bo80b3o6b2o38b2o19b$341b
+2o70b3obo89b2o5bo6b2o136b$413b2o91b3ob2o8bo2bo114b2o19b$507bobob2o2b2o4b2o133bo2b$322bobo183bo2bo2b2o83bo39bobo9bo3bobob$322bo2bo39b2o143b2o86b2o40bo10b5ob2o$322bo2bo39b2o145b2obo82bobob2o24b2o10b2ob2o7bo4bob$322bo3bo145bo42bo83b3ob2ob2o8b3o9b3ob2o8b
+2o9b2obo2b$323bobo145bo126bo3b2o2b2o23bo2bo8b2o10bo3b$324bo38bo107b3o55b2o67bo3bo11bo5bo11b3ob5obobo3bo10b$364bo163bo2bo66bo2bo12b7o13bo3bo2b3o4bo10b$309b3o6bo43b3o164b2o47b2o13b2o4bo16bo17bo2b2o2bo2bo14b$308bo4bo3bobo258b2o13b2o21bo3bo14b2o3b3obo14b
+$308bo4b2o3bo11bo42b2o208b2o30bo18b2o6b3o14b$308bo6bo13bob2o40b2o207bob2o30bo16b2o24b$309b3obo2bobo14bo126bo105bo15bo8b3o23bo4bo10b2obo22b$313b5o9bo3bo2bo123b2o78bo26b3o15bo2bo5b2o23bo4bo12bo23b$318bo6bo9bo11b3o109b2o79bo23b2ob2o17bo29b2obobo37b$287b
+o7bo29bo4b2o2b2o201bo25b2o3bo15b2o29bobo41b$286b3o5bobo37b2o228bobobobo12bo32bo42b$285b2ob4o2bo2bo29bo5bo173b3o28bo26b2obo2bo87b$286b3o2bo36bo4b3o122bo47bo3bo28b2o27b2obo87b$287bo2b2o2bo34bo4b2o12b3o5b2o99bo48bo3bo32bo25b2o88b$291b2obobo34b4o12b2ob2o
+4b2o99b3o46bo3bo31bobo114b$295bo10b2o38bobob2o189bo3bo13b3o48bo48b$306b2o38bo3bo101bo54b2ob2o29bo3bo8bo54bobo5bo41b$347bo2bo9b2o90bobo53bo2bo29bobob3o4b2ob3o57b2ob2o8b2o29b$347b3o10b2o90b2o31bo23bobo30b2obo2bo5bob2o51b3o2bo3b2o8b2o29b$307b3o45b2o3bo1
+23b3o23b2o34bobo8bo57b2ob2o39b$307b3o44b4ob2o122b2ob2o19bo3bo34b2o11bo2bo52b4o40b$313b3o39bobo2bo123b3o14bo4bobobobo46b3o97b$311bo3bo58bo110bo14b3o4bo151b$309b2obob2o43bob2o9bobo110bobo11bo3bo155b$166bobo122bo17bo32bo18bo11b2o110b4o9b2o2b3o154b$152bo
+bo7bo2bo2bo121b4o6b2o8b2o24b2o3b3o144bo10bo3bo25bobo104b2o21b$151b2ob2o5bobob2obo120bo4bo4b3ob2o31b2o3bo2bo4b3o147bo2bo27b2o104b2o21b$152bob2o6bo125b2o10b2ob3o4bo12b2o16b3obo2b2ob2o131b2ob2o11bobo27bo128b$156bo11b3o118bobob2o4b3ob2o3b4o11b3o15b2o2bo2
+b2o2bo130bo5bo169b$155bo13b2o119b3o6b2o7b2o2bo10b2obo15b2o6b2o132bo3bo170b$155bo12b2o7b2o112bo15bo4bo14bo12bo3bo111bo28bo173b$177b2o127b2obob2o6bo3b2o3bo126bo166b3o34b$305b4o20bo11bo53bo59b3o42bob2o44b2o70b4ob2o32b$305b4o17bobo11bo2bo52bo102b5o44b2o5
+9bo5bobo4b2o2bo32b$308b2o16bo13b4o50b3o102b4o94bo11b2o4b2o7b3o32b$294b2o13b2o10bo4bobo12bo254bobo9b2obo7bobo37b$178b2o114b2o12bo191b3o92bo3bo10b3o46b$177bo2bo144b4o171b3o92bo3bo10b2o47b$177bo2bo4b2o117b3o18b2o117bo56bo93bobob3o5b4o48b$175bob4o4b2o255
+b2o45b2o105b2obo2bo5b2o49b$174bo2bo124bo4bo135b2o44b2o65b2o42bobo5bo50b$174bobo125bo17b3o233b2o42b2o57b$157b2o9bo3b2o132b2o11bo2bo250b3o83b$157b2o8bo135b2ob2o10bo4bo249b3o14b2o67b$169b2o2bo131bo12bo2b3o118bo129bo3bo7bobo4b2o66b$162bo6b4o145bo5bo11b2o
+103bo131b2ob3o5bo2bo2b3o66b$160b3o156b7o10b2o103b3o129b2o4bo4bobob6o65b$159bo3bo161bo171b2o77bo2bo9bo2b2o65b$144b2ob2o10bo2bo162bo110bo60b2o78b2o11b3o66b$144b2o13bo2bo160b2o111bobo152bo67b$144b2obobo10b2o274b2o107bo2bo110b$134bo12bobo394bo114b$132b2o
+b2o11b2o394bo3bo110b$132b2ob2o185bo21b2o198b4o111b$132b2o187bobo20b2o60bo192bobo57b$134b2obo182b2obo80bobo211bo40b$135bo2bo181b2o83b2o163bo28bobo15bo41b$135bo2bo182b3o245b2o46b3o39b$136b2o111b3o70bo182bo2bo60bobo87b$248bo74bo2bo177bo51bobo100b$247bo4
+b2o73bo176bo3bo38bob3o4bobo20b2o78b$143b2o101bo3bo15b3o58bo176b4o37b2obo4bo5bo19b2o78b$142bo2bo100bo2bo4bo4b2o58bo5b3o112bo106b2o4bo2bo2bo99b$134b3o6b2o101bo3bo3bo4b3obo47bo6bobo118bo113bo2bo2bo39b2o58b$247b2obob3o52b2obobo4bo109bo11b3o110bo4bo101b$1
+34bobo113bo56bo2b2ob2o113bo119bo2bo16b2o89b$135bo115b4o20b2o30bo5bobo4bo105b3o36bo2bo80b2o17b2o89b$136bo116b2o11bob2o5b2o31b2o2bo8bo142bo194b$136b2o128bo2bo42bo2b3o2bo143bo3bo118b2o70b$133bob2obo12b2o113b3o43b3o149b4o119b2o70b$133b4ob2o10bo2bo121bo15
+2bo230b$134b5o12b2o122bo4bo145b2o231b$136b2o136bobo2bobo138b3o4b2o157bo72b$274bobobo3bo32b2o105bo153b2o7b2o72b$273bo4b3o2b2o29bo2bo103bo9b2o142bo2bo6bobo71b$278bobo3bo8b3o19b2o114bo144b2o81b$126b3o6bo141b2o14bobo136bo128b3o4b3o88b$127b2o3b2obo139bo4b
+2obo9bobo121b2o14bo133bo2bo88b$126b2o5bobo119b2o13bo22bo4b2o111bo4bobo15bo132bo3bo87b$131b3obo119b2o3b3o6bo22b3o3b2o111b2o5bo16bo124bo3bob2obobo87b$134b2o107bo16bobo5bo2bo26bo30bo80bobo23bo129b2ob2o88b$242b2o16bo2bo4bo2bo22b4o12b2o17bobo105bo123bobo3
+b3o14b2o73b$104bo136b5o14b3o6b2o24b2o13b2o17b2o107bo123bo20bo2bo72b$104bo7bo127bo21bo32bo143bo144b2o73b$104bo5b3o126b2o5bo14bo44b2o132bo107b3o108b$103b2o3bobo127b3ob2o16bobo33bo8bo2bo132bo217b$109bo2bo126bobob2o2b2o11b2o32bobo9bobo133bo109bo39bo66b$1
+08bo2b2o127bo2bo2b2o13bo31b4o10bo135bo104bo3b2o37bobo8bo56b$123b2o117b2o49b3o92b3o36b3o14bo105bobo38bobo7bo57b$123b2o119b2obo47bo94bo35bo2bo15bo101b3o42bo8b3o55b$247bo141bo39bo16bo102bo46b3o60b$403b2o24bo17bo76bo62b2o7b4o59b$122bo10b2o267bobo21bobo19
+bo75bo23b2o36bo2bo5b3o2bo58b$122bo3bobo256b2o17bo44bo74bob3o20b2o36b2o7bo2bo59b$120b2obob2o2bo249bo4bobo63bo75b3o20bo46b2o61b$121b6o2bo110bo138b2o5bo64bo75bo13b3o5b2o41bo4bobo59b$122bo5b2o109bobo136bobo71bo74b2o19b2o40b5o3bo60b$125bobo110b2ob2o55b2o1
+53bo74bo61b3ob2o2b2o59b$112b2o3b2o6bo113bo2bo12b2o41b2o154bo55bo6b2o9b2o13bo46b2o4b2o61b$106bo3b4o3bobo121b3o11b2o198bo53bobo3bo3bo22b2o47bobobobo61b$106bob2o2bo2bo3bo121bobo212bo51bo3bobo3b2o5b2ob2o11b3o48bo66b$106bob2o4bo3b2o7b2o113b2o213bo51bobo2b
+obob2o6b3o12bo22b2o93b$110bo3bo12b2o113b2o214bo51bo3bo2b2o7bo12bo23bobo93b$115bo11b2o330bo54bo4bo19bo3b2o20bo93b$138bobo21bo193b3o101bo54bo2bo24b2o114b$123b2o2bo10bobobo7bo12b2o141b2o50bo102bo32bo22bo22bo118b$124b3o10bo2b2obo4b3o11b2o76bo22b2o41b2o49
+bo104bo23b3o3b4o45bo2bo114b$125bo12b2o3bobob2obo90bo21b2o106b2o90bo22bobo3b2ob2o44b3o115b$111b2o25b2o3b2ob5o90b2o127bobo91bo21b3o2bo167b$111b2o7bobo19bob2o3b2o89b3o110b2o17bo92bo25b2o3bo162b$123bo17bobo16b2o185bo4bobo111bo25b4o163b$123bo36b2o135bo49b
+2o5bo112bo25b3o10b2o18b2o131b$123bo117b3o52b3o14bo32bobo119bo37b2o18b2o131b$120b2ob2o114bo4bo50b2ob2o13bobo153bo189b$121bobo115b2o3bo51b3o14b2o155bo188b$122bo118b4o52bo173bo36b2obo147b$237bobo57bobo172bo35bo4bo145b$228bob3o4bobo57b4o172bo34bo5bo144b$
+168b2o56b2obo4bo5bo59bo173bo36bo2bo144b$158bo2bo6b2o58b2o4bo2bo2bo234bo34bo2b2o19b2o123b$145b2obo6b2obo2b2o71bo2bo2bo55b2ob2o23b3o149bo24bo7bo2bo21b2o123b$141bo3b6o4b2obo4bo69bo4bo56bo5bo24bo150bo12b2o9b3o6bobo146b$140bo5bo4bo3b2o72bo2bo63bo3bo24bo15
+2bo10bobobo7b3o155b$140bo11bo4bo4b2o50b2o14b2o65bo41b2o138bo9bo3b2o5bo3bo154b$141bo9bo5b2ob2o42bo3b2o4b3o121bobo139bo9b2o8b4o6b2o147b$146bo57bob2o2bo6bo103b2o17bo140bo8b3o7bob2o4b2o2bo146b$143bo2bo2bo54bo2b5o2b4o97bo4bobo159bo26bob2o146b$134bo8b2o3bo
+59b3o3b3o98b2o5bo160bo22b2ob2o148b$130b2obobo5b2obo62b3o18bo85bobo58bo43b3o49bo12bo21b3o150b$130bo2b2ob2o2bo66b2o18bobo144b3o41bo2bo41b3o3b4o12bo20bo152b$130bo5bobo4bo63bo18b2ob2o142b2ob2o43bo41bobo3b2ob2o12bo19b2o2bo148b$131b2o2bo8bo84bo144b3o14bo29
+bo41b3o2bo18bo6b2o11b3o149b$135bo2b3o2bo84b2o19bo125bo14b3o25bobo47b2o3bo14bo5b2o11b2o150b$135b3o90b2o19bobo123bobo11bo3bo75b4o16bo169b$249b2o124b4o9b2o2b3o75b3o10b2o5bo14bo153b$226bo3bo147bo10bo3bo89b2o6bo11b3o153b$194bo32bo3bo157bo2bo99bo9bo2bo153b
+$195b2o31bo145b2ob2o11bobo6b2o92bo9bo2bo152b$194b2o27b3o5bo141bo5bo19b2o93bo9bobo152b$213bo8bo2bo3bo77b2o65bo3bo116bo8b3o152b$212bo2bo5bo7b3o74bobo66bo120bo162b$206b3o2bo3bo5bo2bo64b2o17bo188bo161b$140b2o64b3o2bo4bo4bobo59bo4bobo99bob2o97b2o5bo160b$1
+40bobo67bo3b2o67b2o5bo98b5o84bo12b2o6bo159b$124b3o87b2o66bobo104b4o74b2o9b3o19bo83bo74b$140bobo68b2o12bob3o174b2o60bobobo7b3o20bo82bo5b3o66b$128b2o10bo85b4o160b3o14bo58bo3b2o5bo3bo20bo80bobo3b2o2bo65b$130bo96b2o161b3o9bo4bo59b2o8b4o22bo80bo3bo5bo64b$
+124b4obo261bo4b2o4bo5bo58b3o7bob2o23bo79bo3bo70b$124b5o85b2o163b2o14b3o4bo3b2o97bo83bo2b2o65b$148b2o64b2o163b2o2b2o9b4o6bob2o98bo83b2o11b2o54b$148b2o217b3o13b2o7b2o2b3obo56bo6b2o41bo95b2o54b$124bobo239bo3bo12b2o2b2o3b2obo2b2o56bobo3bo3bo41bo150b$124b
+obo239bo3bo16bobob2o6bo55bo3bobo3b2o42bo149b$125bo240bo3bo15bo2bo2bo2bo60bobo2bobob2o43bo148b$124bobo99bo48b2o67bo42bo5b3o61bo3bo2b2o45bo147b$125b2o99bo47bobo66b2o22b2ob2o13bo75bo4bo45bo146b$125bo131b2o17bo65b5o21bo2bo13bobo74bo2bo47bo145b$251bo4bobo
+82bo19bo7bobo13b3o76bo49bo96b2o46b$114bo110b2o24b2o5bo81b2o5bo13bo8b2o143bo81bo13b2o46b$114bo33bo4bo96bobo86b3ob2o8bobo5bo5bo3bo144bo70b2o9b2o59b$114bo8bo23bo6bo69b3o113bobob2o2b2o3bobo10bobobobo144bo68bob3o8b2o58b$121bobo24bo4bo187bo2bo2b2o5bo12bo15
+0bo67bo3bo10bo57b$115b3o2bo3bo218b2o174bo67b2obo5b5o58b$116bob5o110bo111b2obo171bo67bo10bo59b$122bo110bobo112bo12b3o157bo137b$117b2o114b2o124b2o2bo97bo60bo136b$360b3o96bo2bo60bo60bo74b$226bo112b3o11bo7bo49b3o48b2o60bo51b3o3b4o73b$227b2o109bo2bo10bobo
+55bo2bo32bo13bob2o2bo58bo50bobo3b2ob2o72b$118b2o106b2o109bo4bo9bobo58bo32bo14b3o3bo58bo49b3o2bo77b$119b2o19bo102b2o92bo2b3o10bo59bo32bob3o11bobo2bo59bo53b2o3bo72b$138b2o102bobo92bo5bo66bobo35b3o11bo2b2o61bo53b4o73b$96bo42b2o103bo93b7o104bo9b2ob2obo63
+bo53b3o73b$95bob2o120bo124bo104b2o7b4o9b2o57bo23bo104b$99bo27bo91b2o96bo26bo105bo7bobo10b2o58bo22bo5b3o49bo46b$93bo3bo2bo9b2o14bo2bo88bobo95b3o23b2o17bo88b2o80bo20bobo3b2o2bo47b2o46b$91bo9bo6b3o14bo3bo185b2o2bo40bobo170bo20bo3bo5bo45b5o44b$91bo4b2o2b
+2o4b5o3b2o10b2o3bo182b2o2b2o40bobo84b2ob2o82bo19bo3bo50bo19bo29b$100b2o4b2o6b2o13bobo183b2o44bo86b3o84bo23bo2b2o44b2o5bo13bo29b$93bo5bo7bo18b2o3bo184b5o127bo87bo23b2o11b2o32b3ob2o8bobo5bo29b$94bo4b3o23bo3bo190b2o215bo35b2o33bobob2o2b2o3bobo35b$95bo4b
+2o7b3o14bo2bo188bo2bo216bo70bo2bo2b2o5bo36b$97b4o10bo15bo191b2o12b2o138b2o64bo71b2o46b$111bo10b2o209b2o138b2o65bo35bo36b2obo20b2o20b$118bo3b2o349bobo65bo33b5o36bo12b3o5b2o20b$118b3o351b2ob3o64bo32bo2b3o46b2o2bo27b$117bob2o90b2o123b2o138b2o65bo26b2o8b
+2o46b3o28b$120b2o88bobo104b3o15bo139bo2bo65bo32bo2bo48bo29b$121b2o89bo104bobo15b3ob3o25bo29bo78bobo47bo18bo21bo9b3o56b3o3bo16b$121b3o63bo129bo17b3o2bo25bobo29b2o25bobo48b2o47bobo18bo10b2o9b2o7b2o57bob2ob3o15b$117b2o2b3o63b2o128bo2bo18bo25bo3bo13b3o11
+b2o17bob3o4bobo13b3o22bo80bo8bob3o8b2o64b2o3bo2b3o13b$117b3ob3o62bobo129bobo44bo3bo8bo35b2obo4bo5bo36bo59bo2bo3bob3o11bo7bo3bo10bo68bob2ob2o12b$118b2ob2o196b3o43bobob3o4b2ob3o34b2o4bo2bo2bo16bo19b3o59bo4bo16bo7b2obo5b5o6b2o63bo2b2o12b$102b2o14b5o198b
+2o43b2obo2bo5bob2o40bo2bo2bo12bo3b2o81bob2obobo14bo7bo10bo6bo2bo59b2ob2o15b$102b2o16bo194b3o4b2o46bobo8bo39bo4bo16bobo83b2o3bo16bo23b2ob2o79b$321b2o14b2o31b2o11bo2bo5b2o23bo2bo19b3o87bo15b2o4bo21bobo40b2o4bo35b$336bo46b3o6b2o24b2o22bo103b2o5bo19b2o42
+b2o3bobo6b2o26b$333b2o2b2o215bo18bo3bo26b2o15b2ob2o4b3o26b$333b2o106b2o112bo18bo2bo25bo17b2o2bo4bo2bo25b$442b2o112bo4b2o11b3o26bo2bo15bob2o5b2o26b$393bo48bo114bo3b2o38b2ob4o14bobo34b$110b2o219bo60b2o48b2o114bo14bo26bo22b2o34b$110b2o12bo54b2o140b2o3b7
+o59bobob2o43b2o116bo13bo26bo3b3o2bo12bobo34b$122b2o54bobo140b2o3bo4b2o60b3ob2ob2o152b2o4bo9b2o28bo2bo2bob3o11bobo34b$70bo52b2o55bo146bob2o61bo3b2o2b2o3b2o130bo16b2o5bo8b2o10bo19b2o4b3o11b2o35b$69b3o83bo175bo60bo3bo7b2o26bobo2b2o98b3o22bo7bo2bo7b2o21b
+2obobo49b$68b2ob2o82b2o171bo2bo60bo2bo10bo11bo4bobo6bo2b2o2bo89bo6bo3bo22bo7b3o6b5o20b2obo50b$67b2obobo81bobo171bo2bo40b2o13b2o4bo23bobo2b2o2b2o7b2o2bo89bo3b3o4bo23bo7bo6bo19bo8bo50b$66b3o2b3o254b3o41b2o13b2o28bob4o2bobo5b2o2bobo89bo3b3obob2o24bobo10
+b2o5bo13bo59b$67bo6bo254b2o46b2o39bo6bobo105b2o3bo27b2o9b3ob2o8bobo5bo59b$68b5obo254b2o45bob2o42bob3o151bobob2o2b2o3bobo65b$69b4ob2o23b3o227b2o29bo15bo8b3o131bo59bo2bo2b2o5bo66b$74bo23bo3bo256b3o15bo2bo5b2o131bo61b2o76b$73bo12b2o11b2o257b2ob2o17bo138
+bo8bo54b2obo72b$86b2o13b2ob2o251b2o3bo15b2o46bo99bobo57bo12b3o57b$103b2o253bobobobo12bo47bobo92b3o2bo3bo67b2o2bo57b$359b2obo2bo59bobo93bob5o70b3o58b$71bo290b2obo60bo100bo71bo59b$69b2obo74b2o188bo25b2o157b2o135b$146bobo187bobo320b$72bo75bo186bo3bo13b3
+o38b3o24b2o236b$69bo2bo21b2o27bo211bo3bo8bo45b3o14b2o7b2o237b$70bo23b2o27b2o210bobob3o4b2ob3o41bo3bo7bobo4b2o8bo11bo15bo208b$122bobo211b2obo2bo5bob2o42b2ob3o5bo2bo2b3o19bobo13bo52b3o154b$75b2o263bobo8bo42b2o4bo4bobob6o18bobo13b3o71b3o133b$68b3o5b2o26
+2b2o11bo2bo40bo2bo9bo2b2o19bo71b2o15b3o61b2o70b$75b2o276b3o42b2o11b3o6b2o86bo12bo4b2o59b2o70b$62b3o10bo336bo7b2o80b4obo13bobo3bo131b$61bo3bo436b5o13b2o3b3o131b$60bo4bo454b2o3bo133b$59bo3bo378bo80bo21bo113b$59bo2bob3o355bo18bobo43bo14bobo14bo3bo21b2o1
+12b$59bo7bo352b2o2bo16bobo39b2obobo7bo5bobo14bobo22bobo112b$61bo3bobo352bo4bo16bo9bo30bo2b2ob2o2b2ob2o5bo91b2o62b$61bo3bob2o46b2o304b2o2bo2b2o21bobo29bo5bobo5bo4bobo90b2o62b$63b3ob2o45bobo305bob2o2b2o21bobo30b2o2bo8bo5b2o154b$116bo303b4o13b2o13bo35bo
+2b3o2bo6bo155b$342b2o76b3o13b2o50b3o168b$342b2o56b2o13b2o21bo8b2o12bobo195b$400b2o13b2o29bo2bo11bobobo7bo185b$405bo41b2o11bo2b2obo4b3o185b$404bob2o4bo48b2o3bobob2obo44bo140b$43bo20bobo321bo15bo2bo4bo2bo45b2o3b2ob5o10b3o29b2ob2o138b$42b3o22bo319bobo15
+bob2o5b2o49bob2o3b2o10bobo29b3ob2o137b$41b2ob2o17bo2bo319bo3bo15b2o56bobo16b2ob2o15b2o12b5o137b$42b3o17bobo285b2o34bo3bo13bobo76b2o18b2o13b3o138b$43bo17bo2bo285b2o34bobob3o12bo113bo139b$43bobo16b2o323b2obo2bo265b$43b4o344bobo92bo172b$46bo12b2o330b2o9
+3bo172b$24bo3b2o2b2obo23b2o22b2o289bo284b$24bo3b2o4bob2o4b2ob2o35bobo288bobo5bo98b3o176b$24bo3b2o2b2ob2o4bo5bo36bo294b2ob2o44b2o49bo3bo27b2o146b$28b2o12bo3bo326b3o2bo3b2o43bobo48bo4bo27b2o146b$26bo2bo13bo335b2ob2o45bo38b2obo5bo3b2o3bo172b$26bobo350b4
+o81bo3b6o11bo173b$5bo21bo30bob2o401bo5bo4bo2b2o6b3o171b$6bob2obobo43b5o401bo11bo183b$3o3b4o3bo43b4o294b3o106bo9bo184b$6bo2b2ob2o455bo189b$5bo52b3o292bo5bo109bo2bo186b$3b3o52b3o292b7o111bo187b$3b3o37b2o14bo295bo303b$24b3o16b2o310bo3bo17b2o280b$23bo2bo
+327bo21bo94b2o186b$23bo309bo21bo14bo3bo96b2o186b$23bo2bo305b3o21bo4bo8bob3o2bo281b$23bo2bo304bobobo20bo4bo8b2obo285b$25b3o302b3ob3o12bo5b2obobo11bo4bo18b2o261b$24bobo321bobo3bobo15bo4bo17bobo261b$24bo26b2o279bob3o13b2o3bo16bo24bo261b$26bo24b2o279b5o9
+bo3bo21bo3bo282b$20b3o4b2o303b2o2b2o11bo2b2o19b3o283b$19bob2o6bo304bob2o14bo306b$5bob2ob2o7bob2o5b2o306b2o9bo2b2o307b$4b5o2b2o7b3obo3bo303bobo2bo11bo27b2o280b$4bo2b3obo8b2o5bo303bobo2bo40b2o8bobo269b$10bo12bo2b2o304bo56bo269b$23b2obo3b2o354bob2o269b$
+25bo361bo5b2o264b$392b3o264b$347b2o43b3o264b$11b2o377bob2o265b$11b2o334b2o41bobo266b$391bo267b$22bo325bobo308b$22bo326bo309b$23bo313b2o10bo309b$337b2o320b$22b2o635b$20bo2bobo633b$20bo4bo633b$20bo638b$21b3o635b$659b$345b2o312b$345b2o312b!`,
+"puffclimber": `x = 6464, y = 3703, rule = B3/S23
+1281b2o84b2o$1281b2o84b2o$1280bo2bo82bo2bo$1280b4o82b4o$1279bob2obo80bob2obo$1280bo2bo82bo2bo2$1279b2o2b2o80b2o2b2o$1264b2o12bo6bo78bo6bo12b2o$1264b2o118b2o$1263bo2bo12bo4bo80bo4bo12bo2bo$1263b4o13bo2bo82bo2bo13b4o$12
+62bob2obo13b2o84b2o13bob2obo$1263bo2bo116bo2bo$1278b2o4b2o78b2o4b2o$1262b2o2b2o9bo2bo2bo2bo76bo2bo2bo2bo9b2o2b2o$1261bo6bo9b2o4b2o78b2o4b2o9bo6bo$1279bo4bo80bo4bo$1262bo4bo114bo4bo8b2o$1263bo2bo116bo2bo9b2o$1264b2o118b2o9bo2bo$1395b4o$1261b2o4b2o112b
+2o4b2o5bob2obo$1260bo2bo2bo2bo110bo2bo2bo2bo5bo2bo$1261b2o4b2o112b2o4b2o$1262bo4bo114bo4bo6b2o2b2o$1393bo6bo2$1255b2o137bo4bo$1254bo2bo137bo2bo$1254bo2bo138b2o$1253bo4bo$1253bo4bo134b2o4b2o$1254b4o134bo2bo2bo2bo$1253b2o2b2o134b2o4b2o$1253bo4bo135bo4b
+o$1253bo4bo3$1254b4o$1255b2o7bo$1263b2o$1252b2o4b2o3bobo8b2o$1251bo2bo2bo2bo13b2o$1252b3o2b3o$1252b2o4b2o2$1282b2o$1282b2o$1263b2o120b2o$1263b2o120b2o$1262bo2bo118bo2bo$1262b4o118b4o$1261bob2obo116bob2obo$1262bo2bo118bo2bo$1282b2o$1261b2o2b2o15b2o99b
+2o2b2o$1260bo6bo114bo6bo2$1261bo4bo116bo4bo$1262bo2bo15b4o99bo2bo$1263b2o15bo4bo99b2o$1279bo4bo$1260b2o4b2o16bo7bo89b2o4b2o$1259bo2bo2bo2bo5b2o15bo2bo86bo2bo2bo2bo$1260b2o4b2o6b2o4bo2bo7bo3bo86b2o4b2o$1261bo4bo14bo7bo5bo87bo4bo$1288b3o2bobo$1288bobo$
+1289b2o3$1266b2o114b2o$1266b2o114b2o$1265bo2bo112bo2bo$1265b4o112b4o$1264bob2obo110bob2obo$1265bo2bo26b2o56b2o26bo2bo$1295b2o56b2o$1264b2o2b2o24bo2bo54bo2bo24b2o2b2o$1263bo6bo23b4o54b4o23bo6bo$1293bob2obo52bob2obo$1264bo4bo24bo2bo54bo2bo24bo4bo$1265b
+o2bo112bo2bo$1266b2o25b2o2b2o52b2o2b2o25b2o$1292bo6bo50bo6bo$1263b2o4b2o108b2o4b2o$1262bo2bo2bo2bo21bo4bo52bo4bo21bo2bo2bo2bo$1263b2o4b2o23bo2bo54bo2bo23b2o4b2o$1264bo4bo25b2o56b2o25bo4bo2$1292b2o4b2o50b2o4b2o$1291bo2bo2bo2bo48bo2bo2bo2bo$1274b2o16b2
+o4b2o50b2o4b2o16b2o$1274b2o17bo4bo52bo4bo17b2o$1273bo2bo89b2o5bo2bo$1273b4o89b2o5b4o$1272bob2obo94bob2obo$1273bo2bo96bo2bo2$1272b2o2b2o94b2o2b2o$1271bo6bo92bo6bo2$1272bo4bo88b2o4bo4bo$1273bo2bo89b2o5bo2bo$1274b2o98b2o2$1271b2o4b2o92b2o4b2o$1270bo2bo2
+bo2bo90bo2bo2bo2bo$1271b2o4b2o92b2o4b2o$1272bo4bo94bo4bo7$1277b2o2b2o80b2o2b2o$1279b2o84b2o$1279b2o84b2o$1276bobo2bobo78bobo2bobo$1276bo6bo78bo6bo2$1276bo6bo78bo6bo$1277b2o2b2o80b2o2b2o$1260b2o2b2o12b4o82b4o12b2o2b2o$1262b2o118b2o$1262b2o15b2o84b2o15
+b2o$1259bobo2bobo11bo2bo82bo2bo11bobo2bobo$1259bo6bo112bo6bo$1277bo4bo80bo4bo$1259bo6bo9b2o4b2o78b2o4b2o9bo6bo$1260b2o2b2o11bob2obo80bob2obo11b2o2b2o$1261b4o13b4o82b4o13b4o$1279b2o84b2o$1262b2o118b2o$1261bo2bo116bo2bo2$1260bo4bo114bo4bo$1259b2o4b2o11
+2b2o4b2o$1260bob2obo114bob2obo$1261b4o116b4o$1262b2o118b2o3$1252b4o2$1252bo2bo$1251bob2obo$1251bo4bo2$1251bo4bo$1251b2o2b2o$1251b6o$1252bo2bo$1253b2o$1253b2o2$1250b2o4b2o$1250b2o4b2o$1250b2o4b2o2$1252bo2bo2$1272b2o$1272b2o$1259b2o2b2o116b2o2b2o$1261b
+2o120b2o$1261b2o120b2o$1258bobo2bobo14b2o98bobo2bobo$1258bo6bo14b2o98bo6bo$1596b4o$1258bo6bo114bo6bo$1259b2o2b2o41b3o72b2o2b2o194bo2bo11bo2bo$1260b4o44bo73b4o195bo2bo10bob2obo7b2o2b2o$1307bo272bo4bo9bo4bo9b2o$1261b2o120b2o195bo4bo24b2o$1260bo2bo16b2o
+100bo2bo194bo4bo9bo4bo6bobo2bobo$1280b2o298bo4bo9b2o2b2o6bo6bo$1259bo4bo116bo4bo192b3o2b3o8b6o$1258b2o4b2o114b2o4b2o191bob4obo9bo2bo7bo6bo$1259bob2obo116bob2obo193bo4bo11b2o9b2o2b2o46b2o84b2o$1260b4o118b4o211b2o10b4o45b2o2b2o80b2o2b2o$1261b2o120b2o27
+5b2o84b2o$1582b2o10b2o4b2o8b2o45bo6bo78bo6bo$1582b2o10b2o4b2o7bo2bo45bo4bo80bo4bo$1272b2o308b2o10b2o4b2o58b2o84b2o$1272b2o306bo4bo22bo4bo43b3o2b3o78b3o2b3o$1285b2o291b3o4b3o8bo2bo7b2o4b2o42b2o4b2o78b2o4b2o$1262b2o2b2o17b2o91b2o2b2o193b3o6b3o19bob2obo
+29b2o118b2o$1264b2o114b2o195b2o8b2o20b4o28b2o2b2o114b2o2b2o$1264b2o114b2o196b10o22b2o31b2o15b2o84b2o15b2o$1261bobo2bobo108bobo2bobo194b8o53bo6bo11bo2bo82bo2bo11bo6bo$1261bo6bo108bo6bo196b4o56bo4bo114bo4bo$1291b2o2b2o52b2o2b2o288b2o13bo4bo80bo4bo13b2o
+$1261bo6bo24b2o56b2o24bo6bo255b3o2b3o9b2o4b2o78b2o4b2o9b3o2b3o$1262b2o2b2o25b2o56b2o25b2o2b2o256b2o4b2o8bo2bo2bo2bo76bo2bo2bo2bo8b2o4b2o$1263b4o23bobo2bobo50bobo2bobo23b4o273b2ob4ob2o76b2ob4ob2o$1290bo6bo50bo6bo149bo152bo4bo80bo4bo$1264b2o114b2o124b2
+o135b2o118b2o10b2o$1263bo2bo23bo6bo50bo6bo23bo2bo122b2o79b3o53bo2bo116bo2bo7b2o2b2o$1291b2o2b2o52b2o2b2o233bo186b2o$1262bo4bo24b4o54b4o24bo4bo203bo53bo4bo114bo4bo5bo6bo$1261b2o4b2o108b2o4b2o255b2o4b2o112b2o4b2o5bo4bo$1262bob2obo25b2o56b2o25bob2obo255
+bo2bo2bo2bo110bo2bo2bo2bo6b2o$1263b4o25bo2bo54bo2bo25b4o256b2ob4ob2o110b2ob4ob2o3b3o2b3o$1264b2o114b2o259bo4bo114bo4bo5b2o4b2o$1291bo4bo52bo4bo$1290b2o4b2o50b2o4b2o$1291bob2obo52bob2obo278b4o138b2o$1270b2o2b2o16b4o54b4o16b2o2b2o257bo2bo137bo2bo$1272b
+2o19b2o56b2o19b2o258b6o$1272b2o98b2o399bo4bo$1269bobo2bobo92bobo2bobo395b2o4b2o$1269bo6bo92bo6bo254bo2b2o2bo132bo2bo2bo2bo$1517bo113bob4obo132b2ob4ob2o$1269bo6bo92bo6bo138bobo113bobo2bobo134bo4bo$1270b2o2b2o88b2o4b2o2b2o140b2o135b2o$1271b4o89b2o5b4o2
+78b2o$1634b2o$1272b2o98b2o260b2o$1271bo2bo96bo2bo$1631b2o4b2o22b2o$1270bo4bo94bo4bo255b3o2b3o22b2o$1269b2o4b2o92b2o4b2o253bo2bo2bo2bo$1270bob2obo94bob2obo254b2ob4ob2o$1271b4o96b4o256b8o14bobo$1272b2o98b2o279bo$1655bobo$1657bo$1642b2o12bobo105b2o$1640
+b2o2b2o11b2o103b2o2b2o$1642b2o15bo104b2o76b2o2b2o80b2o2b2o$1639bo6bo10b2o102bo6bo75b2o84b2o$1640bo4bo11bo104bo4bo76b2o84b2o$1642b2o120b2o75bobo2bobo78bobo2bobo$1639b3o2b3o114b3o2b3o72bo6bo78bo6bo$1639b2o4b2o114b2o4b2o$1841bo6bo78bo6bo$1842b2o2b2o80b2
+o2b2o$1642b2o120b2o59b2o2b2o12b4o82b4o12b2o2b2o$1641bo2bo118bo2bo60b2o118b2o$1827b2o15b2o84b2o15b2o$1640bo4bo116bo4bo56bobo2bobo11bo2bo82bo2bo11bobo2bobo$1639b2o4b2o114b2o4b2o55bo6bo112bo6bo$1638bo2bo2bo2bo112bo2bo2bo2bo72bo4bo80bo4bo$1638b2ob4ob2o11
+2b2ob4ob2o54bo6bo9b2o4b2o78b2o4b2o9bo6bo$1640bo4bo116bo4bo57b2o2b2o11bob2obo80bob2obo11b2o2b2o$1826b4o13b4o82b4o13b4o$1844b2o84b2o$1827b2o118b2o$1826bo2bo116bo2bo2$1645b2o114b2o62bo4bo114bo4bo$1643b2o2b2o110b2o2b2o59b2o4b2o112b2o4b2o$1645b2o114b2o62b
+ob2obo114bob2obo$1642bo6bo108bo6bo60b4o116b4o$1643bo4bo110bo4bo62b2o118b2o$1645b2o27b2o56b2o27b2o$1642b3o2b3o22b2o2b2o52b2o2b2o22b3o2b3o$1642b2o4b2o24b2o56b2o24b2o4b2o189b4o$1671bo6bo50bo6bo$1672bo4bo52bo4bo219bo2bo$1645b2o27b2o56b2o27b2o191bob2obo$1
+644bo2bo23b3o2b3o50b3o2b3o23bo2bo190bo4bo$1671b2o4b2o50b2o4b2o16b2o$1643bo4bo104b2o4bo4bo172b2o15bo4bo$1642b2o4b2o108b2o4b2o171b2o15b2o2b2o$1641bo2bo2bo2bo23b2o56b2o23bo2bo2bo2bo187b6o$1641b2ob4ob2o22bo2bo54bo2bo22b2ob4ob2o188bo2bo$1643bo4bo96b2o12bo
+4bo191b2o$1672bo4bo52bo4bo9b2o182b2o25b2o$1671b2o4b2o50b2o4b2o192b2o$1670bo2bo2bo2bo48bo2bo2bo2bo215b2o4b2o$1653b2o15b2ob4ob2o48b2ob4ob2o15b2o198b2o4b2o$1289b2o84b2o274b2o2b2o15bo4bo52bo4bo15b2o2b2o196b2o4b2o$1288b4o82b4o275b2o98b2o$1650bo6bo92bo6bo1
+77b3o17bo2bo$1287b6o80b6o272bo4bo88b2o4bo4bo180bo$1288b4o82b4o275b2o90b2o6b2o181b3o$1650b3o2b3o92b3o2b3o$1287b2o2b2o80b2o2b2o271b2o4b2o92b2o4b2o66b2o2b2o116b2o2b2o$1285b2obo2bob2o76b2obo2bob2o445b2o120b2o$1272b2o14bo2bo82bo2bo14b2o432b2o120b2o$1271b4
+o116b4o258b2o98b2o68bobo2bobo114bobo2bobo$1652bo2bo96bo2bo41bo25bo6bo114bo6bo$1270b6o13b2o84b2o13b6o400bobo$1271b4o14b2o84b2o14b4o256bo4bo94bo4bo40b2o24bo6bo114bo6bo$1650b2o4b2o92b2o4b2o66b2o2b2o116b2o2b2o$1270b2o2b2o10bobo2bobo78bobo2bobo10b2o2b2o25
+3bo2bo2bo2bo90bo2bo2bo2bo66b4o118b4o$1268b2obo2bob2o7bo2bo2bo2bo76bo2bo2bo2bo7b2obo2bob2o251b2ob4ob2o90b2ob4ob2o$1271bo2bo10bo8bo76bo8bo10bo2bo256bo4bo94bo4bo69b2o120b2o$1285bo8bo76bo8bo444bo2bo118bo2bo$1285b2o6b2o76b2o6b2o$1272b2o13b6o80b6o13b2o430b
+o4bo116bo4bo$1272b2o118b2o429b2o4b2o114b2o4b2o$1824bob2obo116bob2obo$1269bobo2bobo98bo13bobo2bobo428b4o118b4o$1268bo2bo2bo2bo96bobo11bo2bo2bo2bo428b2o120b2o$1268bo8bo96bobo11bo8bo$1268bo8bo97bo12bo8bo$1268b2o6b2o110b2o6b2o$1270b6o114b6o$1262bo2bo563b
+2o$1262bo2bo562bo2bo111b2o2b2o$1261bo4bo560b2o2b2o112b2o$1261bo4bo560b2o2b2o112b2o$1261bo4bo560bob2obo109bobo2bobo$1261bo4bo562b2o111bo6bo$1260b3o2b3o559bo4bo23b2o2b2o$1260bob4obo558b2o4b2o24b2o82bo6bo$1261bo4bo591b2o83b2o2b2o$1855bobo2bobo51b2o2b2o2
+4b4o$1829b2o24bo6bo53b2o$1263b2o563bo2bo5b2o77b2o27b2o$1263b2o563bo2bo5b2o16bo6bo50bobo2bobo23bo2bo$1263b2o591b2o2b2o51bo6bo$1261bo4bo559b2o4b2o23b4o82bo4bo$1259b3o4b3o556bo2bo2bo2bo78bo6bo21b2o4b2o$1258b3o6b3o555bo2bo2bo2bo10b2o11b2o54b2o2b2o23bob2o
+bo$1258b2o8b2o556bobo2bobo11b2o10bo2bo54b4o25b4o$1259b10o676b2o$1260b8o588bo4bo54b2o$1262b4o589b2o4b2o52bo2bo$1271b2o120b2o461bob2obo$1270b4o118b4o461b4o53bo4bo15b2o2b2o$1858b2o53b2o4b2o16b2o$1269b6o116b6o448b2o67bob2obo17b2o$1270b4o118b4o449b2o68b4o
+15bobo2bobo$1916b2o16bo6bo$1269b2o2b2o116b2o2b2o$1267b2obo2bob2o112b2obo2bob2o535bo6bo$1270bo2bo118bo2bo539b2o2b2o$1936b4o$1851b2o2b2o$1271b2o120b2o458b2o82b2o$1271b2o120b2o458b2o81bo2bo$1850bobo2bobo$1268bobo2bobo114bobo2bobo452bo6bo77bo4bo$1267bo2b
+o2bo2bo112bo2bo2bo2bo535b2o4b2o$1267bo8bo112bo8bo451bo6bo77bob2obo$1267bo8bo112bo8bo452b2o2b2o79b4o$1267b2o6b2o112b2o6b2o453b4o81b2o$1269b6o116b6o$1853b2o$1852bo2bo2$1274b2o6b2o106b2o459bo4bo$1273b4o5b2o105b4o457b2o4b2o$1851bob2obo$1272b6o110b6o458b4
+o$1273b4o112b4o460b2o$1290b2o11b2o56b2o$1272b2o2b2o12b2o10b4o54b4o24b2o2b2o$1270b2obo2bob2o106b2obo2bob2o$1273bo2bo24b6o52b6o24bo2bo$1302b4o54b4o2$1274b2o25b2o2b2o52b2o2b2o25b2o$1274b2o23b2obo2bob2o48b2obo2bob2o23b2o$1290b2o10bo2bo54bo2bo$1271bobo2bo
+bo11b2o95bobo2bobo$1270bo2bo2bo2bo106bo2bo2bo2bo$1270bo8bo23b2o56b2o23bo8bo$1270bo8bo23b2o56b2o23bo8bo$1270b2o6b2o106b2o6b2o$1272b6o22bobo2bobo50bobo2bobo22b6o$1299bo2bo2bo2bo48bo2bo2bo2bo$1282b2o15bo8bo48bo8bo$1281b4o14bo8bo48bo8bo$1299b2o6b2o48b2o6
+b2o$1280b6o15b6o52b6o$1281b4o2$1280b2o2b2o80b2o$1278b2obo2bob2o77bo2bo$1281bo2bo79b2o2b2o$1364b2o2b2o$1364bob2obo$1282b2o82b2o$1282b2o80bo4bo$1363b2o4b2o426bo$1279bobo2bobo509bobo$1278bo2bo2bo2bo509b2o$1278bo8bo78b2o$1278bo8bo77bo2bo$1278b2o6b2o77bo2
+bo293b2o$1280b6o374b2o2b2o$1363b2o4b2o291b2o$1362bo2bo2bo2bo287bo6bo$1362bo2bo2bo2bo288bo4bo$1363bobo2bobo291b2o$1659b3o2b3o$1659b2o4b2o3$1662b2o$1661bo2bo2$1660bo4bo$1659b2o4b2o$1658bo2bo2bo2bo$1658b2ob4ob2o$1660bo4bo$1487b2o84b2o$1485b2o2b2o80b2o2b
+2o$1487b2o84b2o$1484bo6bo78bo6bo$1485bo4bo80bo4bo$1487b2o84b2o$1484b3o2b3o78b3o2b3o$1484b2o4b2o78b2o4b2o$1470b2o118b2o$1468b2o2b2o114b2o2b2o$1470b2o15b2o84b2o15b2o$1467bo6bo11bo2bo82bo2bo11bo6bo$1468bo4bo114bo4bo$1470b2o13bo4bo80bo4bo13b2o$1467b3o2b3
+o9b2o4b2o78b2o4b2o9b3o2b3o$1467b2o4b2o8bo2bo2bo2bo76bo2bo2bo2bo8b2o4b2o$1258bo2bo82bo2bo135b2ob4ob2o76b2ob4ob2o$1258bo2bo82bo2bo137bo4bo80bo4bo$1257bo4bo80bo4bo121b2o118b2o$1257bo4bo80bo4bo120bo2bo116bo2bo$1257bo4bo80bo4bo$1257bo4bo80bo4bo119bo4bo114
+bo4bo$1256b3o2b3o78b3o2b3o117b2o4b2o112b2o4b2o$1256bob4obo78bob4obo116bo2bo2bo2bo110bo2bo2bo2bo$1241bo2bo12bo4bo80bo4bo12bo2bo101b2ob4ob2o110b2ob4ob2o$1241bo2bo116bo2bo103bo4bo114bo4bo$1240bo4bo114bo4bo$1240bo4bo13b2o84b2o13bo4bo$1240bo4bo13b2o84b2o1
+3bo4bo94b4o$1240bo4bo13b2o84b2o13bo4bo94bo2bo$1239b3o2b3o10bo4bo80bo4bo10b3o2b3o92b6o$1239bob4obo8b3o4b3o76b3o4b3o8bob4obo$1240bo4bo8b3o6b3o74b3o6b3o8bo4bo$1254b2o8b2o74b2o8b2o106bo2b2o2bo$1229bo2bo22b10o76b10o107bob4obo85bo$1229bo2bo9b2o12b8o78b8o12
+b2o94bobo2bobo85b2o$1228bo4bo8b2o14b4o82b4o14b2o186bobo$1228bo4bo8b2o118b2o$1228bo4bo6bo4bo114bo4bo95b2o$1228bo4bo4b3o4b3o98b2o10b3o4b3o93b2o$1227b3o2b3o2b3o6b3o96b3o9b3o6b3o$1227bob4obo2b2o8b2o96b2o3b2o5b2o8b2o89b2o4b2o$1228bo4bo4b10o97b2o2bobo6b10o
+90b3o2b3o$1239b8o100b4o8b8o90bo2bo2bo2bo$1241b4o102b2obo10b4o92b2ob4ob2o$1230b2o116b2o19b2o2b2o83b8o$1230b2o137b2o2b2o$1230b2o136b3o2b3o$1228bo4bo134b3o2b3o$1226b3o4b3o98b2o2b2o129b2o120b2o$1225b3o6b3o96b2o3b2o4b2o22bo6bo91b2o2b2o116b2o2b2o$1225b2o8b
+2o97b2o3bo4b2o22bo2b2o2bo93b2o120b2o$1226b10o98b4o2bo28b6o91bo6bo114bo6bo$1227b8o100b2o2bo127bo4bo116bo4bo$467b2o760b4o103b3o130b2o120b2o$437bo2bo26b2o902b2o93b3o2b3o114b3o2b3o250b4o82b4o$437bo2bo25bo2bo10b4o527b2o84b2o271bo2bo92b2o4b2o114b2o4b2o250b
+o2bo82bo2bo$436bo4bo24b4o540bo2bo82bo2bo270b4o471b6o80b6o$425b2o9bo4bo23bob2obo9bo2bo526bo2bo82bo2bo269b2o2b2o$424b4o8bo4bo11b2o11bo2bo9bob2obo524bo4bo80bo4bo265bo2bo4bo2bo91b2o120b2o$436bo4bo9b2o2b2o22bo4bo524bo4bo80bo4bo268bo4bo93bo2bo118bo2bo250bo
+2b2o2bo78bo2b2o2bo$423b6o6b3o2b3o10b2o10b2o2b2o539b4o82b4o270b4o470bob4obo78bob4obo$424b4o7bob4obo7bo6bo6bo6bo7bo4bo524b2o2b2o80b2o2b2o265bo10bo89bo4bo7b2o107bo4bo249bobo2bobo78bobo2bobo$436bo4bo9bo4bo22b2o2b2o524bo4bo80bo4bo266bo8bo89b2o4b2o6b2o106b
+2o4b2o233b4o116b4o$423b2o2b2o24b2o10bo4bo8b6o509b2o13bo4bo80bo4bo13b2o349bo2bo2bo2bo112bo2bo2bo2bo232bo2bo116bo2bo$421b2obo2bob2o19b3o2b3o8bo2bo10bo2bo509bo2bo116bo2bo123bo2bo118bo2bo5b2o92b2ob4ob2o112b2ob4ob2o231b6o13b2o84b2o13b6o$424bo2bo10b2o10b2o
+4b2o9b2o12b2o510bo2bo116bo2bo123bo2bo118bo2bo101bo4bo116bo4bo252b2o84b2o$438b2o41b2o509bo4bo12b4o82b4o12bo4bo121bo4bo116bo4bo121b2o$438b2o24b2o4b2o520bo4bo13b2o84b2o13bo4bo121bo4bo116bo4bo121b2o337bo2b2o2bo9b2o4b2o78b2o4b2o9bo2b2o2bo$425b2o9bo4bo11b2
+o8bo2bo2bo2bo5b2o4b2o507b4o116b4o122bo4bo116bo4bo460bob4obo9b3o2b3o78b3o2b3o9bob4obo$425b2o7b3o4b3o8bo2bo8b2o4b2o6b2o4b2o506b2o2b2o10b2o4b2o78b2o4b2o10b2o2b2o121bo4bo116bo4bo460bobo2bobo8bo2bo2bo2bo76bo2bo2bo2bo8bobo2bobo$433b3o6b3o20bo4bo7b2o4b2o506
+bo4bo9bo2bo2bo2bo76bo2bo2bo2bo9bo4bo120b3o2b3o114b3o2b3o475b2ob4ob2o76b2ob4ob2o$422bobo2bobo3b2o8b2o6bo4bo535bo4bo10b3o2b3o78b3o2b3o10bo4bo120bob4obo114bob4obo104b2o114b2o254b8o78b8o$421bo2bo2bo2bo3b10o6b2o4b2o22bo2bo524b2o4b2o78b2o4b2o137bo4bo116bo4
+bo103b2o2b2o110b2o2b2o205bo32b2o118b2o9b4o$421bo8bo4b8o6bo2bo2bo2bo667b2o344b2o114b2o206bobo31b2o118b2o9bo2bo$421bo8bo6b4o8b2ob4ob2o534b4o116b4o8bo2bo340bo6bo11b2o95bo6bo204b2o161b6o$421b2o6b2o20bo4bo537b2o118b2o9bo2bo112b2o120b2o105bo4bo12b2o96bo4bo
+235b2o4b2o112b2o4b2o$423b6o695bo4bo111b2o120b2o107b2o27b2o56b2o27b2o237b3o2b3o112b3o2b3o$991b2o4b2o112b2o4b2o5bo4bo111b2o120b2o104b3o2b3o22b2o2b2o52b2o2b2o22b3o2b3o233bo2bo2bo2bo110bo2bo2bo2bo3bo2b2o2bo$990bo2bo2bo2bo110bo2bo2bo2bo5b4o110bo4bo116bo4b
+o102b2o4b2o24b2o56b2o24b2o4b2o233b2ob4ob2o110b2ob4ob2o3bob4obo$991b3o2b3o112b3o2b3o5b2o2b2o107b3o4b3o112b3o4b3o129bo6bo50bo6bo263b8o112b8o4bobo2bobo$991b2o4b2o112b2o4b2o5bo4bo106b3o6b3o110b3o6b3o129bo4bo52bo4bo$1124bo4bo106b2o8b2o110b2o8b2o102b2o27b2
+o56b2o27b2o231b2o$1022bo214b10o112b10o102bo2bo23b3o2b3o50b3o2b3o23bo2bo229b4o138b2o$985b2o34b2o215b8o114b8o112b2o16b2o4b2o50b2o4b2o398b2o$984bo2bo33bobo101b4o111b4o118b4o104bo4bo4b2o104bo4bo227b6o$983b2o2b2o137b2o341b2o4b2o16b2o90b2o4b2o227b4o135b2o4
+b2o$983b2o2b2o479bo2bo2bo2bo15b2o6b2o56b2o23bo2bo2bo2bo365b3o2b3o$983bob2obo134b2o4b2o112bo2bo112bo2bo105b2ob4ob2o22bo2bo54bo2bo22b2ob4ob2o225b2o2b2o133bo2bo2bo2bo$985b2o135bo2bo2bo2bo111bo2bo112bo2bo107bo4bo110bo4bo225b2obo2bob2o131b2ob4ob2o$983bo4b
+o134b3o2b3o111bo4bo110bo4bo135bo4bo52bo4bo257bo2bo135b8o$982b2o4b2o133b2o4b2o111bo4bo110bo4bo134b2o4b2o50b2o4b2o276b2o$1242bo4bo110bo4bo133bo2bo2bo2bo48bo2bo2bo2bo275b2o$1242bo4bo4b2o18bo2bo54bo2bo24bo4bo116b2o15b2ob4ob2o48b2ob4ob2o256b2o$985b2o254b3
+o2b3o3b2o18bo2bo54bo2bo23b3o2b3o113b2o2b2o15bo4bo52bo4bo258b2o$984bo2bo253bob4obo22bo4bo52bo4bo22bob4obo115b2o$984bo2bo254bo4bo23bo4bo52bo4bo23bo4bo113bo6bo333bobo2bobo22b2o$1271bo4bo52bo4bo143bo4bo333bo2bo2bo2bo21b2o$982b2o4b2o270b2o9bo4bo52bo4bo145
+b2o82b2o251bo8bo$981bo2bo2bo2bo253b2o14b2o8b3o2b3o50b3o2b3o24b2o115b3o2b3o79b2o251bo8bo$981bo2bo2bo2bo253b2o24bob4obo50bob4obo24b2o115b2o4b2o78bo2bo250b2o6b2o14bo$982bobo2bobo254b2o25bo4bo52bo4bo25b2o201b4o252b6o18bo$1242bo4bo110bo4bo198bob2obo275bo$
+1240b3o4b3o106b3o4b3o114b2o81bo2bo277b2o$1239b3o6b3o22b2o56b2o22b3o6b3o112bo2bo345b4o11bobo104b4o$993b2o120b2o122b2o8b2o22b2o56b2o22b2o8b2o195b2o2b2o260bo2bo12b3o103bo2bo$992bo2bo118bo2bo122b10o10b2o11b2o56b2o23b10o112bo4bo63b2o12bo6bo258b6o13bo102b6
+o75b4o82b4o$992bo2bo118bo2bo123b8o11b2o9bo4bo52bo4bo22b8o112b2o4b2o62b2o295b2o$991bo4bo116bo4bo124b4o22b3o4b3o48b3o4b3o22b4o113bo2bo2bo2bo60bo2bo12bo4bo276b2o184bo2bo82bo2bo$991bo4bo116bo4bo149b3o6b3o46b3o6b3o13bo2bo121b2ob4ob2o60b4o13bo2bo259bo2b2o2
+bo114bo2b2o2bo73bob2obo80bob2obo$992b4o118b4o150b2o8b2o46b2o8b2o13bo2bo123bo4bo61bob2obo13b2o260bob4obo114bob4obo73bo4bo80bo4bo$991b2o2b2o116b2o2b2o150b10o48b10o13bo4bo190bo2bo276bobo2bobo114bobo2bobo$991bo4bo116bo4bo151b8o50b8o14bo4bo205b2o4b2o460bo
+4bo80bo4bo$717b2o272bo4bo116bo4bo153b4o54b4o16bo4bo189b2o2b2o9bo2bo2bo2bo459b2o2b2o80b2o2b2o$717b2o631bo4bo188bo6bo9b2o4b2o260b2o120b2o60b4o12b6o80b6o12b4o$716bo2bo629b3o2b3o205bo4bo261b2o120b2o77bo2bo82bo2bo$716b4o272b4o118b4o45b2o184bob4obo188bo4bo
+462bo2bo14b2o84b2o14bo2bo$715bob2obo272b2o120b2o46b2o185bo4bo190bo2bo276b2o4b2o114b2o4b2o56bob2obo13b2o84b2o13bob2obo$716bo2bo9b2o431bo2bo381b2o277b3o2b3o114b3o2b3o56bo4bo114bo4bo$729b2o259b2o4b2o114b2o4b2o42b4o659bo2bo2bo2bo112bo2bo2bo2bo71b2o4b2o78
+b2o4b2o$715b2o2b2o7bo2bo257bo2bo2bo2bo112bo2bo2bo2bo40bob2obo185b2o190b2o4b2o273b2ob4ob2o112b2ob4ob2o55bo4bo10b2o4b2o78b2o4b2o10bo4bo$714bo6bo6b4o258b3o2b3o114b3o2b3o42bo2bo186b2o189bo2bo2bo2bo273b8o114b8o56b2o2b2o10b2o4b2o78b2o4b2o10b2o2b2o$727bob2o
+bo257b2o4b2o114b2o4b2o232b2o190b2o4b2o460b6o114b6o$715bo4bo7bo2bo372b2o55b2o2b2o183bo4bo189bo4bo462bo2bo13bo2bo82bo2bo13bo2bo$716bo2bo384b2o54bo6bo180b3o4b3o656b2o118b2o$717b2o8b2o2b2o614b3o6b3o655b2o118b2o$726bo6bo427bo4bo180b2o8b2o$714b2o4b2o440bo2
+bo182b10o473b4o112b4o60b2o4b2o112b2o4b2o$713bo2bo2bo2bo4bo4bo263b2o98b2o14b2o49b2o184b8o474bo2bo112bo2bo60b2o4b2o112b2o4b2o$714b2o4b2o6bo2bo263bo2bo97b2o13bo2bo236b4o475b6o110b6o59b2o4b2o112b2o4b2o$715bo4bo8b2o264bo2bo112bo2bo45b2o4b2o577bo$994bo4bo1
+10bo4bo43bo2bo2bo2bo577b2o265bo2bo116bo2bo$726b2o4b2o260bo4bo110bo4bo44b2o4b2o577b2o82bo2b2o2bo23b4o54b4o23bo2b2o2bo$725bo2bo2bo2bo260b4o26b2o56b2o26b4o46bo4bo662bob4obo23bo2bo54bo2bo23bob4obo190b2o$726b2o4b2o260b2o2b2o24bo2bo54bo2bo24b2o2b2o136b2o84
+b2o489bobo2bobo22b6o52b6o22bobo2bobo190b2o$727bo4bo261bo4bo24bo2bo54bo2bo24bo4bo136b2o84b2o802bo2bo$994bo4bo23bo4bo52bo4bo9b2o12bo4bo135bo2bo82bo2bo801b4o$1023bo4bo52bo4bo9b2o153b4o82b4o491b2o24bo2b2o2bo50bo2b2o2bo24b2o191bob2obo$1024b4o54b4o164bob2o
+bo80bob2obo490b2o24bob4obo50bob4obo24b2o192bo2bo$995b4o24b2o2b2o52b2o2b2o24b4o136bo2bo82bo2bo517bobo2bobo50bobo2bobo16b2o$996b2o25bo4bo52bo4bo25b2o715b2o4b2o103b2o3b2o4b2o171b2o15b2o2b2o$1023bo4bo52bo4bo163b2o2b2o80b2o2b2o487b3o2b3o108b3o2b3o171b2o14
+bo6bo$993b2o4b2o108b2o4b2o118b2o12bo6bo78bo6bo12b2o471bo2bo2bo2bo23b2o56b2o23bo2bo2bo2bo$992bo2bo2bo2bo106bo2bo2bo2bo117b2o118b2o471b2ob4ob2o23b2o56b2o23b2ob4ob2o187bo4bo$993b3o2b3o23b4o54b4o23b3o2b3o117bo2bo12bo4bo80bo4bo12bo2bo471b8o95b2o11b8o189bo
+2bo$993b2o4b2o24b2o56b2o24b2o4b2o117b4o13bo2bo82bo2bo13b4o500b2o4b2o50b2o4b2o8b2o182b2o25b2o$1233bob2obo13b2o84b2o13bob2obo499b3o2b3o50b3o2b3o192b2o$1022b2o4b2o50b2o4b2o146bo2bo116bo2bo399bo99bo2bo2bo2bo48bo2bo2bo2bo215b2o4b2o$555bo465bo2bo2bo2bo48bo
+2bo2bo2bo160b2o4b2o78b2o4b2o412bobo81b4o14b2ob4ob2o48b2ob4ob2o14b4o196bo2bo2bo2bo$554b2o448b2o16b3o2b3o50b3o2b3o16b2o127b2o2b2o9bo2bo2bo2bo76bo2bo2bo2bo9b2o2b2o397b2o5bo75bo2bo15b8o50b8o15bo2bo197b2o4b2o$554bobo446bo2bo15b2o4b2o50b2o4b2o15bo2bo125bo6
+bo9b2o4b2o78b2o4b2o9bo6bo401bobo74b6o94b6o179bo17bo4bo$1003bo2bo96bo2bo143bo4bo80bo4bo420b2o359b2o$1002bo4bo94bo4bo125bo4bo114bo4bo573b2o188bo$1002bo4bo94bo4bo126bo2bo116bo2bo479bo2b2o2bo87b2o3bo2b2o2bo178b3o$1003b4o96b4o128b2o118b2o480bob4obo92bob4o
+bo179bo$1002b2o2b2o94b2o2b2o729bobo2bobo92bobo2bobo67b4o118b4o$1002bo4bo94bo4bo124b2o4b2o112b2o4b2o$1002bo4bo94bo4bo123bo2bo2bo2bo110bo2bo2bo2bo651bo2bo118bo2bo$1232b2o4b2o104bo7b2o4b2o480b2o98b2o69bob2obo116bob2obo$1233bo4bo105b2o7bo4bo481b2o98b2o42
+bo26bo4bo116bo4bo$1003b4o96b4o238b2o636bobo$1004b2o98b2o238b2o491b2o4b2o92b2o4b2o39b2o25bo4bo116bo4bo$1344bo19b2o471b3o2b3o92b3o2b3o66b2o2b2o116b2o2b2o$1001b2o4b2o92b2o4b2o231bo2bo19bo2bo469bo2bo2bo2bo90bo2bo2bo2bo65b6o116b6o$1000bo2bo2bo2bo90bo2bo2b
+o2bo231b2o20bo2bo469b2ob4ob2o90b2ob4ob2o66bo2bo118bo2bo$700bobo298b3o2b3o92b3o2b3o253bo4bo469b8o92b8o68b2o120b2o$700b2o299b2o4b2o92b2o4b2o217b2o34bo4bo645b2o120b2o$701bo444bobo176bo2bo34b4o$1146b2o6bobo169b2o9b2o23b2o2b2o642b2o4b2o114b2o4b2o$1147bo6b
+2o181b2o23bo4bo429bo212b2o4b2o114b2o4b2o$1155bo206bo4bo428bobo211b2o4b2o114b2o4b2o$965b2o84b2o275b5o464b2o$965b2o84b2o277b3o679bo2bo118bo2bo$964bo2bo82bo2bo96bobo178b2o30b4o$964b4o82b4o96b2o212b2o$963bob2obo80bob2obo96bo$964bo2bo82bo2bo307b2o4b2o$136
+0bo2bo2bo2bo646b2o$963b2o2b2o80b2o2b2o306b3o2b3o645b2o2b2o111b4o$551bo396b2o12bo6bo78bo6bo12b2o291b2o4b2o256bo2bo82bo2bo301b2o$549bobo396b2o118b2o555bo2bo82bo2bo298bo6bo110bo2bo$550b2o395bo2bo12bo4bo80bo4bo12bo2bo553bo4bo80bo4bo298bo4bo110bob2obo$947
+b4o13bo2bo82bo2bo13b4o553bo4bo80bo4bo300b2o112bo4bo$946bob2obo13b2o84b2o13bob2obo162b2o120b2o266bo4bo80bo4bo297b3o2b3o23b4o$947bo2bo116bo2bo163b2o120b2o266bo4bo80bo4bo297b2o4b2o109bo4bo$962b2o4b2o78b2o4b2o177bo2bo118bo2bo264b3o2b3o78b3o2b3o327bo2bo82
+b2o2b2o$946b2o2b2o9bo2bo2bo2bo76bo2bo2bo2bo9b2o2b2o161b4o118b4o264bob4obo78bob4obo326bob2obo53b4o24b6o$945bo6bo9b2o4b2o78b2o4b2o9bo6bo159bob2obo116bob2obo248bo2bo12bo4bo80bo4bo12bo2bo284b2o25bo4bo82bo2bo$963bo4bo80bo4bo178bo2bo118bo2bo249bo2bo116bo2b
+o283bo2bo5b2o76bo2bo26b2o$946bo4bo114bo4bo535bo4bo114bo4bo291b2o17bo4bo52bob2obo25b2o$947bo2bo116bo2bo161b2o2b2o116b2o2b2o247bo4bo13b2o84b2o13bo4bo281bo4bo23b2o2b2o52bo4bo$948b2o118b2o161bo6bo114bo6bo246bo4bo13b2o84b2o13bo4bo280b2o4b2o22b6o80b2o4b2o$
+1607bo4bo13b2o84b2o13bo4bo279bo2bo2bo2bo22bo2bo53bo4bo22b2o4b2o$945b2o4b2o112b2o4b2o159bo4bo116bo4bo246b3o2b3o10bo4bo80bo4bo10b3o2b3o40bo237b2ob4ob2o10b2o11b2o54b2o2b2o22b2o4b2o$944bo2bo2bo2bo110bo2bo2bo2bo159bo2bo118bo2bo247bob4obo8b3o4b3o76b3o4b3o8
+bob4obo40b2o238bo4bo12b2o11b2o54b6o$945b2o4b2o112b2o4b2o161b2o120b2o249bo4bo8b3o6b3o74b3o6b3o8bo4bo40bobo326bo2bo25bo2bo$946bo4bo114bo4bo549b2o8b2o74b2o8b2o323b2o4b2o53b2o$1231b2o4b2o114b2o4b2o261b10o76b10o324b2o4b2o53b2o$1230bo2bo2bo2bo112bo2bo2bo2b
+o247b2o12b8o78b8o12b2o311b2o4b2o$939b2o290b2o4b2o114b2o4b2o248b2o14b4o82b4o14b2o369b2o4b2o15b4o$938bo2bo290bo4bo116bo4bo249b2o118b2o313bo2bo52b2o4b2o$938bo2bo665bo4bo114bo4bo299b2o66b2o4b2o15bo2bo$937bo4bo662b3o4b3o110b3o4b3o297b2o88bob2obo$937bo4bo6
+61b3o6b3o108b3o6b3o366bo2bo16bo4bo$938b4o662b2o8b2o108b2o8b2o$937b2o2b2o662b10o110b10o387bo4bo$937bo4bo294b2o114b2o251b8o112b8o388b2o2b2o$937bo4bo15b2o277b2o114b2o253b4o116b4o390b6o$958b2o276bo2bo112bo2bo242b2o2b2o435b4o80bo2bo$1236b4o112b4o242b2o2b2
+o520b2o$938b4o293bob2obo110bob2obo240b3o2b3o434bo2bo81b2o$939b2o295bo2bo5b2o19b2o56b2o26bo2bo241b3o2b3o433bob2obo$966b2o277b2o19b2o56b2o712bo4bo77b2o4b2o$936b2o4b2o22b2o267b2o2b2o24bo2bo54bo2bo24b2o2b2o240bo6bo516b2o4b2o$935bo2bo2bo2bo289bo6bo23b4o54
+b4o23bo6bo239bo2b2o2bo433bo4bo77b2o4b2o$936b3o2b3o16bo303bob2obo52bob2obo270b6o434b2o2b2o$936b2o4b2o17bo273bo4bo12b2o10bo2bo54bo2bo24bo4bo681b6o79bo2bo$958bob3o273bo2bo13b2o97bo2bo683bo2bo$957b2o2b2o274b2o25b2o2b2o52b2o2b2o25b2o245b2o53b2o383b2o$957b
+2o2b2o300bo6bo50bo6bo270bo2bo52bobo382b2o$947b2o120b2o163b2o4b2o108b2o4b2o241b4o52bo$947b2o12b2o106b2o162bo2bo2bo2bo21bo4bo52bo4bo21bo2bo2bo2bo239b2o2b2o433b2o4b2o$946bo2bo7bo4bo105bo2bo162b2o4b2o23bo2bo54bo2bo23b2o4b2o237bo2bo4bo2bo430b2o4b2o$946b4o
+7bo4bo105b4o163bo4bo25b2o56b2o25bo4bo241bo4bo433b2o4b2o$945bob2obo8bobo105bob2obo180b2o344b4o$946bo2bo118bo2bo181b2o8b2o4b2o50b2o4b2o266bo10bo432bo2bo$496b2o764bo2bo2bo2bo48bo2bo2bo2bo266bo8bo$495b4o446b2o2b2o116b2o2b2o172b2o16b2o4b2o50b2o4b2o16b2o$9
+44bo6bo114bo6bo171b2o17bo4bo52bo4bo17b2o253b2o5bo2bo118bo2bo$494b6o744bo2bo96bo2bo259bo2bo118bo2bo$482b4o9b4o12b2o432bo4bo116bo4bo171b4o96b4o258bo4bo116bo4bo$482bo2bo24bo2bo432bo2bo118bo2bo171bob2obo94bob2obo257bo4bo116bo4bo$481b6o7b2o2b2o9b2o2b2o432
+b2o120b2o173bo2bo96bo2bo258bo4bo116bo4bo$492b2obo2bob2o7b2o2b2o1091bo4bo116bo4bo$495bo2bo10bob2obo429b2o4b2o114b2o4b2o169b2o2b2o94b2o2b2o256b3o2b3o114b3o2b3o$480bo2b2o2bo23b2o430bo2bo2bo2bo112bo2bo2bo2bo167bo6bo92bo6bo255bob4obo114bob4obo$480bob4obo2
+1bo4bo429b2o4b2o114b2o4b2o532bo4bo116bo4bo$480bobo2bobo8b2o10b2o4b2o429bo4bo116bo4bo170bo4bo94bo4bo$496b2o746bo2bo96bo2bo$1245b2o98b2o261b2o109b2o9b2o$483b2o8bobo2bobo10b2o1095b2o109b2o9b2o$483b2o7bo2bo2bo2bo8bo2bo728b2o4b2o92b2o4b2o258b2o120b2o$492b
+o8bo8bo2bo727bo2bo2bo2bo90bo2bo2bo2bo255bo4bo116bo4bo$480b2o4b2o4bo8bo448b2o113b4o173b2o4b2o92b2o4b2o254b3o4b3o112b3o4b3o$480b3o2b3o4b2o6b2o6b2o4b2o434b2o113bo2bo174bo4bo94bo4bo254b3o6b3o96b2o12b3o6b3o$479bo2bo2bo2bo5b6o7bo2bo2bo2bo432bo2bo111b6o533b
+2o8b2o96b2o12b2o8b2o$479b2ob4ob2o18bo2bo2bo2bo432b4o651b10o112b10o$480b8o20bobo2bobo432bob2obo651b8o114b8o$504bo444bo2bo84b2o24bo2b2o2bo536b4o118b4o$506bo530b2o24bob4obo$503b2o2bo440b2o2b2o82bo2bo23bobo2bobo$947bo6bo24b2o55b4o570bo2bo113b2o$979b2o54b
+ob2obo569bo2bo97b2o14b2o$508b2o2b2o434bo4bo24bo2bo54bo2bo26b2o541bo4bo96b2o13bo2bo$505b3o4b2o435bo2bo25b4o84b2o541bo4bo111b4o$492b2o11b3o7b2o433b2o25bob2obo52b2o2b2o17b2o549bo4bo110bob2obo253bo$491bo13b2o10bo460bo2bo52bo6bo16b2o3b2o4b2o538bo4bo82bo2b
+o25bo2bo253bobo$491bo25bo429b2o4b2o108b3o2b3o537b3o2b3o81bo2bo283b2o$496b3o11b3o433bo2bo2bo2bo21b2o2b2o52bo4bo21bo2bo2bo2bo536bob4obo80bo4bo23b2o2b2o$492b3o19b3o430b2o4b2o21bo6bo52bo2bo22b2ob4ob2o537bo4bo24bo2bo53bo4bo22bo6bo$494b4o13b4o433bo4bo83b2o
+11b2o11b8o568bo2bo53bo4bo$495b2o15b2o463bo4bo67b2o586bo4bo52bo4bo17b2o4bo4bo$496bo15bo465bo2bo52b2o4b2o569b2o25bo4bo51b3o2b3o16b2o5bo2bo$979b2o52bo2bo2bo2bo568b2o25bo4bo51bob4obo3b2o19b2o$1034b2o4b2o569b2o25bo4bo52bo4bo4b2o$976b2o4b2o51bo4bo568bo4bo2
+2b3o2b3o79b2o4b2o$975bo2bo2bo2bo622b3o4b3o20bob4obo78bo2bo2bo2bo$976b2o4b2o622b3o6b3o20bo4bo54b2o24b2o4b2o$977bo4bo67b2o554b2o8b2o80b2o25bo4bo$1050b2o555b10o81b2o$1608b8o24b2o54bo4bo$842b4o82b4o678b4o26b2o52b3o4b3o$842bo2bo82bo2bo686bo2bo18b2o51b3o6b
+3o$841b6o80b6o109b2o574bo2bo16bo4bo49b2o8b2o$1042b2o573bo4bo13b3o4b3o48b10o$1041bo2bo572bo4bo12b3o6b3o48b8o$840bo2b2o2bo78bo2b2o2bo107b4o572bo4bo12b2o8b2o50b4o$840bob4obo78bob4obo106bob2obo571bo4bo13b10o$840bobo2bobo78bobo2bobo107bo2bo571b3o2b3o13b8o
+$825b4o116b4o667bob4obo15b4o$825bo2bo116bo2bo91b2o2b2o571bo4bo$824b6o13b2o84b2o13b6o89bo6bo655bo2bo$843b2o84b2o771bo2bo$1040bo4bo573b2o80bo4bo$823bo2b2o2bo9b2o4b2o78b2o4b2o9bo2b2o2bo90bo2bo574b2o80bo4bo$823bob4obo9b3o2b3o78b3o2b3o9bob4obo91b2o575b2o8
+0bo4bo$823bobo2bobo8bo2bo2bo2bo76bo2bo2bo2bo8bobo2bobo666bo4bo78bo4bo$839b2ob4ob2o76b2ob4ob2o104b2o4b2o568b3o4b3o75b3o2b3o$840b8o78b8o104bo2bo2bo2bo566b3o6b3o74bob4obo$826b2o118b2o9b4o78b2o4b2o567b2o8b2o75bo4bo$826b2o118b2o9bo2bo79bo4bo569b10o$956b6o
+654b8o$795bo27b2o4b2o112b2o4b2o667b4o81b2o$794b2o27b3o2b3o112b3o2b3o752b2o$794bobo25bo2bo2bo2bo110bo2bo2bo2bo3bo2b2o2bo740b2o$822b2ob4ob2o110b2ob4ob2o3bob4obo738bo4bo$823b8o112b8o4bobo2bobo736b3o4b3o$1698b3o6b3o$1698b2o8b2o$958b2o739b10o$958b2o740b8o
+$1702b4o$955b2o4b2o$955b3o2b3o$954bo2bo2bo2bo$954b2ob4ob2o$955b8o11$887b2o$886bobo$888bo$824b4o118b4o$824bo2bo118bo2bo$704b3o116b6o116b6o$704bo$705bo$822bo2b2o2bo6b2o106bo2b2o2bo$822bob4obo6b2o106bob4obo$822bobo2bobo114bobo2bobo3$825b2o17b2o101b2o$78
+4b2o2b2o35b2o17b2o101b2o$784b2o2b2o$783b3o2b3o7bo2bo20b2o4b2o114b2o4b2o$770b4o9b3o2b3o7bo2bo20b3o2b3o114b3o2b3o$770bo2bo23bo4bo18bo2bo2bo2bo112bo2bo2bo2bo$769b6o8bo6bo6bo4bo18b2ob4ob2o112b2ob4ob2o$783bo2b2o2bo6bo4bo19b8o114b8o$784b6o7bo4bo41b2o$768bo
+2b2o2bo20b3o2b3o40b2o$768bob4obo20bob4obo$768bobo2bobo10b2o9bo4bo$785bo2bo$785b4o154b4o$771b2o11b2o2b2o9b2o142bo2bo$771b2o8bo2bo4bo2bo6b2o141b6o$784bo4bo9b2o$768b2o4b2o9b4o8bo4bo33b2o$768b3o2b3o5bo10bo2b3o4b3o31b2o18b4o54b4o23bo2b2o2bo$767bo2bo2bo2bo
+5bo8bo2b3o6b3o43b2o5bo2bo54bo2bo23bob4obo$767b2ob4ob2o17b2o8b2o43b2o4b6o52b6o22bobo2bobo$768b8o10b2o7b10o1179bo$796b8o1179bobo$798b4o52bo2b2o2bo50bo2b2o2bo24b2o1038b2o$854bob4obo50bob4obo24b2o$854bobo2bobo50bobo2bobo$941b2o4b2o$941b3o2b3o$857b2o56b2o
+23bo2bo2bo2bo$857b2o56b2o23b2ob4ob2o$941b8o1087b2o2b2o80b2o2b2o$854b2o4b2o50b2o4b2o1118b2o84b2o$854b3o2b3o50b3o2b3o1118b2o84b2o$853bo2bo2bo2bo48bo2bo2bo2bo1114bobo2bobo78bobo2bobo$853b2ob4ob2o48b2ob4ob2o14b4o1096bo6bo78bo6bo$854b8o50b8o15bo2bo$934b6o
+1095bo6bo78bo6bo$2036b2o2b2o80b2o2b2o$2019b2o2b2o12b4o82b4o12b2o2b2o$933bo2b2o2bo1080b2o118b2o$933bob4obo1080b2o15b2o84b2o15b2o$933bobo2bobo1077bobo2bobo11bo2bo82bo2bo11bobo2bobo$2018bo6bo112bo6bo$583b2o84b2o1365bo4bo80bo4bo$581b2o2b2o80b2o2b2o263b2o
+1080bo6bo9b2o4b2o78b2o4b2o9bo6bo$583b2o84b2o265b2o1081b2o2b2o11bob2obo80bob2obo11b2o2b2o$580bo6bo78bo6bo1346b4o13b4o82b4o13b4o$581bo4bo80bo4bo260b2o4b2o1097b2o84b2o$583b2o84b2o39b2o221b3o2b3o1066b2o2b2o8b2o118b2o$580b3o2b3o78b3o2b3o36bobo219bo2bo2bo2
+bo1067b2o9bo2bo116bo2bo$580b2o4b2o78b2o4b2o36bo88b2o84b2o45b2ob4ob2o1067b2o$566b2o118b2o110b4o82b4o45b8o1065bobo2bobo5bo4bo98bo15bo4bo$564b2o2b2o114b2o2b2o1316bo6bo4b2o4b2o88bob2o5b2o13b2o4b2o$566b2o15b2o84b2o15b2o109b6o80b6o1130bob2obo89bo7b2o15bob2
+obo$563bo6bo11bo2bo82bo2bo11bo6bo107b4o82b4o1118bo6bo6b4o91b4o21b4o$564bo4bo114bo4bo1317b2o2b2o8b2o93bobo22b2o$566b2o13bo4bo80bo4bo13b2o109b2o2b2o80b2o2b2o1119b4o103bobo$563b3o2b3o9b2o4b2o78b2o4b2o9b3o2b3o104b2obo2bob2o76b2obo2bob2o1224b3o$563b2o4b2o
+8bo2bo2bo2bo76bo2bo2bo2bo8b2o4b2o91b2o14bo2bo82bo2bo14b2o1105b2o105bo32b4o$579b2ob4ob2o76b2ob4ob2o106b4o116b4o1103bo2bo$581bo4bo80bo4bo1476bo2bo$566b2o118b2o92b6o13b2o84b2o13b6o1101bo4bo110b2o23bob2obo$565bo2bo116bo2bo92b4o14b2o84b2o14b4o1101b2o4b2o1
+09b2o23bo4bo$2007bob2obo$564bo4bo99bo14bo4bo90b2o2b2o10bobo2bobo78bobo2bobo10b2o2b2o1102b4o136bo4bo$563b2o4b2o97bobo12b2o4b2o87b2obo2bob2o7bo2bo2bo2bo76bo2bo2bo2bo7b2obo2bob2o1101b2o137b2o2b2o$562bo2bo2bo2bo96bobo11bo2bo2bo2bo89bo2bo10bo8bo76bo8bo10b
+o2bo1243b6o$562b2ob4ob2o97bo12b2ob4ob2o103bo8bo76bo8bo1258bo2bo$564bo4bo114bo4bo105b2o6b2o76b2o6b2o1259b2o$782b2o13b6o80b6o13b2o1246b2o$782b2o118b2o$556b4o1587b2o4b2o$556bo2bo219bobo2bobo112bobo2bobo1240b2o4b2o$555b6o217bo2bo2bo2bo95b2o13bo2bo2bo2bo1
+239b2o4b2o$778bo8bo96b2o12bo8bo$778bo8bo95bo14bo8bo1241bo2bo$554bo2b2o2bo216b2o6b2o110b2o6b2o$554bob4obo218b6o114b6o$554bobo2bobo$2018b2o2b2o116b2o2b2o$2020b2o120b2o$557b2o1461b2o120b2o$557b2o1458bobo2bobo114bobo2bobo$2017bo6bo114bo6bo$554b2o4b2o$554
+b3o2b3o1455bo6bo114bo6bo$553bo2bo2bo2bo1455b2o2b2o116b2o2b2o$553b2ob4ob2o1456b4o118b4o$554b8o$2020b2o120b2o$2019bo2bo118bo2bo$836b2o$565b2o120b2o147b2o1180bo4bo116bo4bo$563b2o2b2o116b2o2b2o1145b2o84b2o93b2o4b2o114b2o4b2o$565b2o120b2o1146bo2bo82bo2bo9
+3bob2obo116bob2obo$562bo6bo114bo6bo1142b2o2b2o80b2o2b2o93b4o118b4o$563bo4bo116bo4bo153b2o988b2o2b2o80b2o2b2o94b2o120b2o$565b2o120b2o155b2o988bob2obo80bob2obo$562b3o2b3o114b3o2b3o1144b2o84b2o$562b2o4b2o114b2o4b2o89b2o120b2o929bo4bo80bo4bo$780b4o118b4o
+927b2o4b2o78b2o4b2o$1819b2o118b2o$565b2o120b2o90b6o116b6o911bo2bo116bo2bo79b2o2b2o110b2o2b2o$564bo2bo118bo2bo90b4o118b4o911b2o2b2o13b2o84b2o13b2o2b2o80b2o114b2o$844b2o971b2o2b2o12bo2bo82bo2bo12b2o2b2o80b2o6b2o106b2o$563bo4bo116bo4bo88b2o2b2o59b2o55b2
+o2b2o910bob2obo12bo2bo82bo2bo12bob2obo77bobo2bobo3b2o103bobo2bobo$562b2o4b2o114b2o4b2o85b2obo2bob2o112b2obo2bob2o910b2o118b2o79bo6bo108bo6bo$561bo2bo2bo2bo112bo2bo2bo2bo87bo2bo118bo2bo911bo4bo10b2o4b2o78b2o4b2o10bo4bo107b2o2b2o52b2o2b2o$561b2ob4ob2o1
+12b2ob4ob2o1123b2o4b2o8bo2bo2bo2bo76bo2bo2bo2bo8b2o4b2o76bo6bo24b2o56b2o24bo6bo$563bo4bo116bo4bo1141bo2bo2bo2bo76bo2bo2bo2bo93b2o2b2o12b2o11b2o56b2o25b2o2b2o$781b2o120b2o928bobo2bobo78bobo2bobo95b4o13b2o8bobo2bobo50bobo2bobo23b4o$781b2o120b2o914b2o11
+8b2o108bo6bo50bo6bo$1818bo2bo116bo2bo81b2o114b2o$778bobo2bobo50b2o62bobo2bobo910bo2bo116bo2bo80bo2bo23bo6bo50bo6bo23bo2bo$576b2o199bo2bo2bo2bo49b2o61bo2bo2bo2bo928bo212b2o2b2o52b2o2b2o$568b2o6b2o106b2o91bo8bo112bo8bo907b2o4b2o12bobo97b2o4b2o77bo4bo24
+b4o54b4o24bo4bo$566b2o2b2o110b2o2b2o89bo8bo112bo8bo906bo2bo2bo2bo11bobo96bo2bo2bo2bo75b2o4b2o108b2o4b2o$568b2o114b2o91b2o6b2o112b2o6b2o906bo2bo2bo2bo12bo97bo2bo2bo2bo76bob2obo12b2o11b2o56b2o25bob2obo$565bo6bo108bo6bo90b6o116b6o909bobo2bobo112bobo2bob
+o78b4o13b2o10bo2bo54bo2bo25b4o$566bo4bo12b2o96bo4bo1335b2o114b2o$568b2o14b2o11b2o85b2o1364bo4bo52bo4bo$565b3o2b3o22b2o2b2o80b3o2b3o103b2o1016b2o237b2o4b2o50b2o4b2o$565b2o4b2o24b2o82b2o4b2o103b2o1014b2o2b2o236bob2obo52bob2obo$594bo6bo181b4o112b4o907b2
+o217b2o2b2o16b4o54b4o16b2o2b2o$595bo4bo1206bo6bo216b2o19b2o56b2o19b2o$568b2o27b2o85b2o97bo2bo112bo2bo905bo4bo217b2o98b2o$567bo2bo23b3o2b3o81bo2bo95bob2obo12b2o96bob2obo906b2o216bobo2bobo92bobo2bobo$584b2o8b2o4b2o180bo4bo12b2o69b2o25bo4bo903b3o2b3o213
+bo6bo92bo6bo$566bo4bo12b2o96bo4bo182b4o933b2o4b2o$565b2o4b2o108b2o4b2o93bo4bo110bo4bo1124bo6bo92bo6bo$564bo2bo2bo2bo23b2o81bo2bo2bo2bo92b2o2b2o81b6o23b2o2b2o1125b2o2b2o94b2o2b2o$564b2ob4ob2o22bo2bo80b2ob4ob2o92b6o82b4o24b6o906b2o218b4o96b4o$566bo4bo1
+10bo4bo95bo2bo112bo2bo906bo2bo$595bo4bo183b2o83b2o2b2o25b2o1129b2o98b2o$594b2o4b2o182b2o14b2o65b2obo2bob2o23b2o906bo4bo216bo2bo96bo2bo$593bo2bo2bo2bo197b2o68bo2bo933b2o4b2o$576b2o15b2ob4ob2o73b2o103b2o4b2o108b2o4b2o901bo2bo2bo2bo169bo43bo4bo94bo4bo$5
+74b2o2b2o15bo4bo73b2o2b2o101b2o4b2o108b2o4b2o901b2ob4ob2o170b2o40b2o4b2o92b2o4b2o$576b2o98b2o103b2o4b2o82b2o24b2o4b2o903bo4bo171b2o42bob2obo94bob2obo$573bo6bo92bo6bo190b2o1157b4o96b4o$574bo4bo94bo4bo103bo2bo112bo2bo1128b2o98b2o$576b2o98b2o190bobo2bob
+o$573b3o2b3o92b3o2b3o186bo2bo2bo2bo941b2o120b2o$573b2o4b2o92b2o4b2o186bo8bo940bo2bo118bo2bo$867bo8bo939b2o2b2o116b2o2b2o$805b2o60b2o6b2o939b2o2b2o116b2o2b2o$576b2o98b2o127b2o62b6o941bob2obo116bob2obo$575bo2bo96bo2bo1139b2o120b2o$1816bo4bo116bo4bo61bo
+bo$574bo4bo94bo4bo1135b2o4b2o114b2o4b2o61b2o$573b2o4b2o92b2o4b2o1325bo466b2o2b2o80b2o2b2o$572bo2bo2bo2bo90bo2bo2bo2bo1791b2o2b2o80b2o2b2o$572b2ob4ob2o90b2ob4ob2o194b2o940b2o120b2o530b3o2b3o78b3o2b3o$574bo4bo94bo4bo195b4o938bo2bo118bo2bo54bo474b3o2b3o
+78b3o2b3o$1817bo2bo118bo2bo52bobo8bobo$874b6o1116b2o5bo3b2o463bo6bo78bo6bo$875b4o936b2o4b2o114b2o4b2o56bobo3bo464bo2b2o2bo78bo2b2o2bo$1814bo2bo2bo2bo112bo2bo2bo2bo56b2o469b6o80b6o$874b2o2b2o934bo2bo2bo2bo112bo2bo2bo2bo510b2o2b2o114b2o2b2o$872b2obo2bo
+b2o933bobo2bobo114bobo2bobo511b2o2b2o114b2o2b2o$875bo2bo1576b3o2b3o12b2o84b2o12b3o2b3o$2455b3o2b3o11bo2bo82bo2bo11b3o2b3o$2474b4o82b4o$876b2o1577bo6bo10b2o2b2o80b2o2b2o10bo6bo$876b2o1051b2o5bo2bo515bo2b2o2bo7bo2bo4bo2bo74bo2bo4bo2bo7bo2b2o2bo$1821b2o
+106b2o5bo2bo516b6o11bo4bo80bo4bo11b6o$873bobo2bobo939bo2bo111bo4bo533b4o82b4o$872bo2bo2bo2bo937b2o2b2o110bo4bo529bo10bo74bo10bo$872bo8bo937b2o2b2o110bo4bo517b2o11bo8bo76bo8bo11b2o8b2o2b2o$786bo85bo8bo937bob2obo96b2o12bo4bo516bo2bo116bo2bo7b2o2b2o$787
+bo84b2o6b2o939b2o98b2o11b3o2b3o515b4o14b2o84b2o14b4o6b3o2b3o$785b3o86b6o939bo4bo109bob4obo514b2o2b2o114b2o2b2o5b3o2b3o$1818b2o4b2o109bo4bo512bo2bo4bo2bo108bo2bo4bo2bo$906bobo1096bo450bo4bo114bo4bo5bo6bo$906b2o6bobo1086bobo451b4o116b4o6bo2b2o2bo$907bo
+6b2o905b2o114b2o65b2o447bo10bo108bo10bo3b6o$915bo904bo2bo113b2o515bo8bo110bo8bo$1820bo2bo97b2o14b2o$1921b2o12bo4bo199b2o84b2o219b2o2b2o5b2o118b2o10b2o$910bobo905b2o4b2o81bo2bo22b3o4b3o196bo2bo82bo2bo220b2o138bo2bo$910b2o905bo2bo2bo2bo80bo2bo21b3o6b3o
+195bo2bo82bo2bo220b2o138b4o$890bo20bo905bo2bo2bo2bo79bo4bo20b2o8b2o194bo4bo80bo4bo216bobo2bobo134b2o2b2o$890bobo925bobo2bobo80bo4bo21b10o195bo4bo80bo4bo216bo6bo131bo2bo4bo2bo$890b2o1014bo4bo22b8o197b4o82b4o359bo4bo$1906bo4bo24b4o198b2o2b2o80b2o2b2o21
+6bo6bo135b4o$791bo1113b3o2b3o225bo4bo80bo4bo217b2o2b2o132bo10bo$663b2o124bobo1113bob4obo210b2o13bo4bo80bo4bo13b2o203b4o134bo8bo$663b2o125b2o44b2o1012b2o54bo4bo210bo2bo116bo2bo$836b2o991b2o17b2o2b2o62b2o204bo2bo116bo2bo203b2o81b2o56b2o$1828bo2bo18b2o6
+4b2o203bo4bo12b4o82b4o12bo4bo201bo2bo81b2o$1827b2o2b2o14bo6bo53b2o17b2o2b2o188bo4bo13b2o84b2o13bo4bo285bo$1827b2o2b2o15bo4bo54b2o17b2o2b2o189b4o116b4o201bo4bo$844b2o981bob2obo17b2o56b2o16b3o2b3o187b2o2b2o10b2o4b2o78b2o4b2o10b2o2b2o199b2o4b2o680b2o$84
+4b2o983b2o16b3o2b3o51bo4bo14b3o2b3o187bo4bo9bo2bo2bo2bo76bo2bo2bo2bo9bo4bo200bob2obo679b2o2b2o$1827bo4bo14b2o4b2o49b3o4b3o207bo4bo10b3o2b3o78b3o2b3o10bo4bo201b4o682b2o$1826b2o4b2o69b3o6b3o11bo6bo203b2o4b2o78b2o4b2o218b2o680bo6bo$1903b2o8b2o11bo2b2o2b
+o1198bo4bo$1850b2o52b10o13b6o189b4o116b4o888b2o10b2o$1829b2o18bo2bo52b8o210b2o118b2o886b3o2b3o5b2o2b2o$1828bo2bo75b4o544b2o2b2o116b2o2b2o548b2o4b2o7b2o$844b2o982bo2bo16bo4bo75b2o189b2o4b2o112b2o4b2o207b2o2b2o116b2o2b2o560bo6bo$844b2o1001b2o4b2o73bo2b
+o187bo2bo2bo2bo110bo2bo2bo2bo205b3o2b3o114b3o2b3o76b2o84b2o396bo4bo$1826b2o4b2o12bo2bo2bo2bo72b4o188b3o2b3o112b3o2b3o206b3o2b3o114b3o2b3o76b2o84b2o386b2o10b2o$1825bo2bo2bo2bo11b2ob4ob2o71b2o2b2o187b2o4b2o112b2o4b2o411bo2bo82bo2bo384bo2bo6b3o2b3o$1825
+bo2bo2bo2bo13bo4bo70bo2bo4bo2bo518bo6bo114bo6bo75b4o82b4o394b2o4b2o$1826bobo2bobo93bo4bo521bo2b2o2bo114bo2b2o2bo74bob2obo80bob2obo382bo4bo$1928b4o320b2o201b6o116b6o76bo2bo82bo2bo382b2o4b2o$1924bo10bo217b2o96bo2bo875bo2bo2bo2bo6b2o$1925bo8bo217b2o96b2
+o2b2o402b2o2b2o80b2o2b2o380b2ob4ob2o5bo2bo$836b2o1316bo95b2o2b2o201b2o9b2o109b2o62b2o12bo6bo78bo6bo12b2o367bo4bo$836b2o1091b2o319bob2obo200bo2bo8b2o108bo2bo61b2o118b2o379bo4bo$2252b2o202b4o118b4o60bo2bo12bo4bo80bo4bo12bo2bo377b2o4b2o$2250bo4bo199b2o2
+b2o116b2o2b2o59b4o13bo2bo82bo2bo13b4o376bo2bo2bo2bo$2249b2o4b2o195bo2bo4bo2bo110bo2bo4bo2bo55bob2obo13b2o84b2o13bob2obo375b2ob4ob2o$2455bo4bo15b2o99bo4bo59bo2bo116bo2bo378bo4bo$2456b4o16b2o100b4o75b2o4b2o78b2o4b2o$2252b2o198bo10bo110bo10bo55b2o2b2o9b
+o2bo2bo2bo76bo2bo2bo2bo9b2o2b2o$2251bo2bo198bo8bo112bo8bo55bo6bo9b2o4b2o78b2o4b2o9bo6bo$2251bo2bo403bo4bo80bo4bo$2457b2o120b2o60bo4bo114bo4bo$2249b2o4b2o385bo2bo116bo2bo$2248bo2bo2bo2bo385b2o118b2o$800b2o1446bo2bo2bo2bo200b2o2b2o12b2o96b2o2b2o$800b2o
+1447bobo2bobo201b2o2b2o12b2o96b2o2b2o60b2o4b2o112b2o4b2o$2457b3o2b3o108b3o2b3o58bo2bo2bo2bo110bo2bo2bo2bo$2457b3o2b3o108b3o2b3o59b2o4b2o112b2o4b2o$2641bo4bo114bo4bo345b2o$2122b2o120b2o211bo6bo22b2o2b2o52b2o2b2o22bo6bo532b2o$2121bo2bo118bo2bo210bo2b2o
+2bo22b2o2b2o52b2o2b2o22bo2b2o2bo531bo$2121bo2bo118bo2bo211b6o22b3o2b3o50b3o2b3o22b6o192b2o$800b2o1318bo4bo116bo4bo238b3o2b3o50b3o2b3o219bo2bo$800b2o1318bo4bo116bo4bo220b2o301bo2bo$2121b4o118b4o213b2o6b2o16bo6bo50bo6bo24b2o192bo4bo$2120b2o2b2o116b2o2b
+2o211bo2bo18b2o3bo2b2o2bo50bo2b2o2bo23bo2bo191bo4bo$2120bo4bo116bo4bo211b4o18b2o4b6o52b6o24b4o192b4o$2120bo4bo116bo4bo210b2o2b2o110b2o2b2o190b2o2b2o$2455bo2bo4bo2bo104bo2bo4bo2bo187bo4bo$2458bo4bo25b2o56b2o25bo4bo190bo4bo$2121b4o118b4o212b4o25bo2bo54
+bo2bo25b4o$2122b2o120b2o209bo10bo21b4o54b4o21bo10bo$2456bo8bo21b2o2b2o52b2o2b2o21bo8bo189b4o$687bo2bo82bo2bo28b2o1312b2o4b2o114b2o4b2o235bo2bo4bo2bo46bo2bo4bo2bo218b2o$687bo2bo82bo2bo28b2o1311bo2bo2bo2bo112bo2bo2bo2bo210b2o25bo4bo52bo4bo25b2o115b2o$6
+86bo4bo80bo4bo1341b3o2b3o114b3o2b3o217b2o2b2o16b4o54b4o16b2o2b2o121bobo73b2o4b2o$686bo4bo80bo4bo1341b2o4b2o106b2o6b2o4b2o217b2o2b2o12bo10bo46bo10bo12b2o2b2o121bo74bo2bo2bo2bo$686bo4bo80bo4bo1455b2o230b3o2b3o12bo8bo48bo8bo12b3o2b3o196b3o2b3o$686bo4bo8
+0bo4bo1687b3o2b3o92b3o2b3o196b2o4b2o$685b3o2b3o78b3o2b3o1710b2o56b2o$685bob4obo78bob4obo1686bo6bo92bo6bo$670bo2bo12bo4bo80bo4bo12bo2bo1331b2o98b2o238bo2b2o2bo92bo2b2o2bo$670bo2bo116bo2bo1330b4o97b2o14b2o223b6o94b6o70b2o120b2o$669bo4bo114bo4bo1445bo2b
+o398b2o120b2o$669bo4bo13b2o84b2o13bo4bo1328b6o111bo2bo397bo2bo118bo2bo$669bo4bo13b2o84b2o13bo4bo1329b4o111bo4bo223b2o98b2o71b4o118b4o$669bo4bo13b2o84b2o13bo4bo1444bo4bo222bo2bo96bo2bo69bob2obo116bob2obo$668b3o2b3o10bo4bo80bo4bo10b3o2b3o1327b2o2b2o25b
+2o84b4o223b4o96b4o70bo2bo118bo2bo$668bob4obo8b3o4b3o76b3o4b3o8bob4obo1325b2obo2bob2o22bo2bo82b2o2b2o221b2o2b2o94b2o2b2o$669bo4bo8b3o6b3o74b3o6b3o8bo4bo1329bo2bo25bo2bo68b2o12bo4bo218bo2bo4bo2bo88bo2bo4bo2bo65b2o2b2o116b2o2b2o$683b2o8b2o74b2o8b2o1371b
+o4bo54b2o11b2o12bo4bo221bo4bo94bo4bo67bo6bo114bo6bo$684b10o76b10o1372bo4bo53bo2bo252b4o96b4o182b2o$671b2o12b8o78b8o12b2o1332b2o26b4o54bo2bo248bo10bo88bo10bo65bo4bo107b2o7bo4bo$671b2o14b4o82b4o14b2o1332b2o25b2o2b2o52bo4bo24b4o220bo8bo90bo8bo67bo2bo118
+bo2bo$671b2o118b2o1359bo4bo52bo4bo25b2o399b2o120b2o$669bo4bo114bo4bo1327bobo2bobo22bo4bo53b4o253b2o98b2o$667b3o4b3o110b3o4b3o1324bo2bo2bo2bo79b2o2b2o22b2o4b2o393b2o4b2o98b2o14b2o4b2o$666b3o6b3o108b3o6b3o1323bo8bo79bo4bo21bo2bo2bo2bo391bo2bo2bo2bo97b2
+o13bo2bo2bo2bo$666b2o8b2o108b2o8b2o1323bo8bo22b4o53bo4bo22b3o2b3o393b2o4b2o114b2o4b2o$667b10o110b10o1324b2o6b2o23b2o82b2o4b2o394bo4bo116bo4bo$668b8o112b8o1327b6o91b2o$670b4o116b4o1357b2o4b2o52b4o5b2o$660b2o2b2o1484bo2bo2bo2bo52b2o$660b2o2b2o1485b3o2b
+3o74b2o$659b3o2b3o1484b2o4b2o50b2o4b2o15bo2bo509b2o$659b3o2b3o1541bo2bo2bo2bo14bo2bo408b4o97b2o14b2o$2209b3o2b3o14bo4bo407bo2bo113b2o$659bo6bo1542b2o4b2o14bo4bo406b6o111bo2bo$659bo2b2o2bo1565b4o524b4o$660b6o1565b2o2b2o376b2o144bob2obo$2231bo4bo376bob
+o26bo2b2o2bo24b2o84bo2bo$2231bo4bo377bo27bob4obo24b2o$662b2o1485b2o491bobo2bobo23bo2bo82b2o2b2o$661bo2bo116b2o1365bo2bo521b4o55b2o19b2o3bo6bo$661b4o116b2o1365bo2bo80b4o436bob2obo54b2o19b2o$660b2o2b2o170b2o1309bo4bo80b2o410b2o26bo2bo54bo2bo5b2o17bo4bo
+$657bo2bo4bo2bo167b2o1309bo4bo492b2o84b4o5b2o18bo2bo$660bo4bo120bo1361b4o78b2o4b2o434b2o2b2o52bob2obo25b2o$661b4o108b2o11b2o1359b2o2b2o76bo2bo2bo2bo403b2o4b2o21bo6bo52bo2bo$657bo10bo104b2o10bobo1359bo4bo77b3o2b3o404b3o2b3o108b2o4b2o$658bo8bo176b2o130
+1bo4bo77b2o4b2o403bo2bo2bo2bo21bo4bo52b2o2b2o21bo2bo2bo2bo$844b2o1795b2ob4ob2o22bo2bo52bo6bo21b2o4b2o$662b2o5bo2bo118bo2bo1847b8o24b2o83bo4bo$669bo2bo118bo2bo1353b4o578bo4bo$668bo4bo116bo4bo1353b2o520b2o4b2o52bo2bo$668bo4bo116bo4bo1874bo2bo2bo2bo52b2
+o$668bo4bo99b2o15bo4bo1350b2o4b2o517b2o4b2o74b2o$668bo4bo99b2o15bo4bo113b3o1233bo2bo2bo2bo517bo4bo51b2o4b2o16b2o$667b3o2b3o114b3o2b3o47b2o63bo1236b3o2b3o574bo2bo2bo2bo14bo2bo$667bob4obo114bob4obo47b2o64bo1235b2o4b2o329b4o82b4o156b2o4b2o15b4o65bo2bo82
+bo2bo$668bo4bo116bo4bo1934bo4bo15bob2obo64bo2bo82bo2bo$2483bo2bo82bo2bo179bo2bo64bo4bo80bo4bo$2482bob2obo80bob2obo246bo4bo80bo4bo$670b2o120b2o1688bo4bo80bo4bo177b2o2b2o63bo4bo80bo4bo$670b2o108b4o8b2o1956bo6bo62bo4bo80bo4bo$670b2o101b2o5bo2b2o7b2o1688
+bo4bo80bo4bo95b2o148b3o2b3o78b3o2b3o$668bo4bo97b2obobo4bo2b2o4bo4bo197b2o1487b2o2b2o80b2o2b2o95b2o80bo4bo62bob4obo78bob4obo$666b3o4b3o95bo5b2o2bo2bo3b3o4b3o38b2o154b4o1470b4o12b6o80b6o12b4o78bo2bo80bo2bo48bo2bo12bo4bo80bo4bo12bo2bo$665b3o6b3o94bo3bo6
+b2o3b3o6b3o37b2o1645bo2bo82bo2bo95b4o81b2o49bo2bo116bo2bo$665b2o8b2o95bo5bo8b2o8b2o192b6o1469bo2bo14b2o84b2o14bo2bo77bob2obo130bo4bo114bo4bo$666b10o98b4o10b10o180b2o12b4o9b4o1456bob2obo13b2o84b2o13bob2obo77bo2bo78b2o4b2o45bo4bo13b2o84b2o13bo4bo$667b8
+o100bo13b8o180bo2bo24bo2bo1456bo4bo114bo4bo158bo2bo2bo2bo44bo4bo13b2o84b2o13bo4bo$669b4o118b4o181b2o2b2o9b2o2b2o7b6o1471b2o4b2o78b2o4b2o92b2o2b2o77b2o4b2o45bo4bo13b2o84b2o13bo4bo$976b2o2b2o7b2obo2bob2o1466bo4bo10b2o4b2o78b2o4b2o10bo4bo75bo6bo77bo4bo4
+5b3o2b3o10bo4bo80bo4bo10b3o2b3o$976bob2obo10bo2bo1469b2o2b2o10b2o4b2o78b2o4b2o10b2o2b2o70b2o139bob4obo8b3o4b3o76b3o4b3o8bob4obo$672bo2bo112bo2bo186b2o23bo2b2o2bo1454b6o114b6o70b2o4bo4bo130bo4bo8b3o6b3o74b3o6b3o8bo4bo$672bo2bo112bo2bo184bo4bo21bob4obo
+1455bo2bo13bo2bo82bo2bo13bo2bo78bo2bo145b2o8b2o74b2o8b2o$671bo4bo110bo4bo182b2o4b2o10b2o8bobo2bobo1456b2o118b2o9b4o67b2o147b10o76b10o$671bo4bo110bo4bo200b2o1472b2o118b2o216b2o12b8o78b8o12b2o$671bo4bo110bo4bo1692bo5bo106bo2bo64b2o4b2o131b2o14b4o82b4o1
+4b2o$671bo4bo24bo2bo54bo2bo24bo4bo185b2o10bobo2bobo8b2o1456b2o4b2o14bo2b4o91b2o4b2o5bob2obo62bo2bo2bo2bo130b2o118b2o$670b3o2b3o23bo2bo54bo2bo23b3o2b3o183bo2bo8bo2bo2bo2bo7b2o1456b2o4b2o8b2o2bob2obobobo90b2o4b2o5bo4bo63b2o4b2o129bo4bo114bo4bo$670bob4o
+bo22bo4bo52bo4bo22bob4obo183bo2bo8bo8bo1465b2o4b2o7bob4ob3o4b2o89b2o4b2o75bo4bo128b3o4b3o110b3o4b3o$671bo4bo23bo4bo52bo4bo23bo4bo196bo8bo4b2o4b2o1468b3ob2obo2bo4bo102bo4bo197b3o6b3o108b3o6b3o$700bo4bo52bo4bo211b2o4b2o6b2o6b2o4b3o2b3o1455bo2bo15b5o3bo
+92bo2bo7b2o2b2o197b2o8b2o108b2o8b2o$700bo4bo52bo4bo210bo2bo2bo2bo7b6o5bo2bo2bo2bo1475b2o3bo104b6o198b10o90b3o17b10o$673b2o24b3o2b3o50b3o2b3o24b2o183bo2bo2bo2bo18b2ob4ob2o1257b4o82b4o99b2o138bo2bo200b8o93bo18b8o$673b2o24bob4obo50bob4obo24b2o184bobo2bo
+bo20b8o1447b2o139b2o203b4o94bo21b4o$673b2o25bo4bo52bo4bo25b2o1478bo2bo82bo2bo98bo2bo138b2o193b2o2b2o$671bo4bo110bo4bo1475bob2obo80bob2obo97b4o24b2o307b2o2b2o$669b3o4b3o106b3o4b3o1473bo4bo80bo4bo96bob2obo23b2o109b2o4b2o189b3o2b3o$668b3o6b3o22b2o56b2o2
+2b3o6b3o155bob2o1502bo2bo135b2o4b2o189b3o2b3o$668b2o8b2o22b2o56b2o22b2o8b2o154b5o1313bo4bo80bo4bo236b2o4b2o$669b10o23b2o56b2o23b10o153b2o5bo1312b2o2b2o80b2o2b2o96b2o2b2o331bo6bo$670b8o22bo4bo52bo4bo22b8o20b2o84b2o46b7o1297b4o12b6o80b6o12b4o79bo6bo135
+bo2bo191bo2b2o2bo$672b4o22b3o4b3o48b3o4b3o22b4o21b4o82b4o48b3o1315bo2bo82bo2bo435b6o$680bo2bo5b2o6b3o6b3o46b3o6b3o13bo2bo162b3o1303bo2bo14b2o84b2o14bo2bo80bo4bo$680bo2bo5b2o6b2o8b2o46b2o8b2o13bo2bo28b6o80b6o42b2o1303bob2obo13b2o84b2o13bob2obo80bo2bo$
+679bo4bo13b10o48b10o13bo4bo28b4o82b4o44bob2o1300bo4bo114bo4bo81b2o336b2o$679bo4bo14b8o50b8o14bo4bo20b2o140bo2bo1316b2o4b2o78b2o4b2o434bo2bo$679bo4bo16b4o54b4o16bo4bo20b2o5b2o2b2o80b2o2b2o44b2o1301bo4bo10b2o4b2o78b2o4b2o10bo4bo78b2o4b2o332b4o$679bo4bo
+94bo4bo25b2obo2bob2o76b2obo2bob2o1345b2o2b2o10b2o4b2o78b2o4b2o10b2o2b2o77bo2bo2bo2bo330b2o2b2o$678b3o2b3o92b3o2b3o11b2o14bo2bo82bo2bo14b2o1332b6o114b6o78b2o4b2o328bo2bo4bo2bo$678bob4obo92bob4obo10b4o116b4o1332bo2bo13bo2bo82bo2bo13bo2bo80bo4bo332bo4bo
+$679bo4bo4b2o88bo4bo1455b4o9b2o118b2o420b4o$689b2o104b6o13b2o84b2o13b6o1332b2o118b2o416bo10bo$796b4o14b2o84b2o14b4o1320bo2bo548bo8bo$681b2o98b2o1456bob2obo5b2o4b2o112b2o4b2o$681b2o98b2o12b2o2b2o10bobo2bobo78bobo2bobo10b2o2b2o1318bo4bo5b2o4b2o112b2o4b
+2o87b4o118b4o205b2o5bo2bo118bo2bo$681b2o98b2o10b2obo2bob2o7bo2bo2bo2bo76bo2bo2bo2bo7b2obo2bob2o1327b2o4b2o112b2o4b2o425bo2bo118bo2bo$679bo4bo94bo4bo11bo2bo10bo8bo76bo8bo10bo2bo1319bo4bo220bo2bo118bo2bo78b2o84b2o45bo4bo116bo4bo$677b3o4b3o90b3o4b3o23bo
+8bo76bo8bo1333b2o2b2o7bo2bo116bo2bo88bob2obo116bob2obo76bo2bo82bo2bo44bo4bo116bo4bo$676b3o6b3o88b3o6b3o22b2o6b2o76b2o6b2o1333b6o219bo4bo116bo4bo75b2o2b2o80b2o2b2o43bo4bo116bo4bo$676b2o8b2o88b2o8b2o9b2o13b6o80b6o13b2o1321bo2bo138b2o283b2o2b2o80b2o2b2o
+43bo4bo116bo4bo$677b10o90b10o10b2o118b2o1322b2o139b2o80bo4bo116bo4bo75bob2obo80bob2obo42b3o2b3o114b3o2b3o$678b8o92b8o1455b2o138bo2bo79b2o2b2o116b2o2b2o77b2o84b2o44bob4obo114bob4obo$680b4o96b4o10bobo2bobo112bobo2bobo1459b4o79b6o116b6o75bo4bo80bo4bo43b
+o4bo116bo4bo$793bo2bo2bo2bo110bo2bo2bo2bo1315b2o4b2o134bob2obo79bo2bo118bo2bo75b2o4b2o78b2o4b2o$793bo8bo110bo8bo1315b2o4b2o135bo2bo81b2o120b2o62b2o118b2o$793bo8bo110bo8bo1315b2o4b2o220b2o120b2o61bo2bo116bo2bo29b2o120b2o$793b2o6b2o110b2o6b2o1457b2o2b2
+o264b2o2b2o13b2o84b2o13b2o2b2o28b2o120b2o$795b6o114b6o1319bo2bo135bo6bo76b2o4b2o114b2o4b2o57b2o2b2o12bo2bo82bo2bo12b2o2b2o28b2o120b2o$787bo2bo1672b2o4b2o114b2o4b2o57bob2obo12bo2bo82bo2bo12bob2obo26bo4bo116bo4bo$787bo2bo1572b2o15bo4bo77b2o4b2o114b2o4b
+2o59b2o118b2o26b3o4b3o112b3o4b3o$786bo4bo1571b2o16bo2bo265bo4bo10b2o4b2o78b2o4b2o10bo4bo23b3o6b3o110b3o6b3o$786bo4bo1590b2o81bo2bo118bo2bo58b2o4b2o8bo2bo2bo2bo76bo2bo2bo2bo8b2o4b2o22b2o8b2o110b2o8b2o$786bo4bo1873bo2bo2bo2bo76bo2bo2bo2bo39b10o112b10o$
+786bo4bo1587b2o4b2o279bobo2bobo78bobo2bobo41b8o114b8o$785b3o2b3o1562b2o21bo2bo2bo2bo264b2o118b2o29b4o8b2o108b4o$785bob4obo85b2o1475b2o22b2o4b2o264bo2bo116bo2bo40b2o$786bo4bo87b2o1499bo4bo265bo2bo116bo2bo$878bo1589b4o112b4o165b3o50bo2bo113b2o$2363b3o2
+11b2o70b2o4b2o96b3o13b2o4b2o29bo2bo113b2o$788b2o1575bo102bo2bo105b2o5bo2bo60bo2bo2bo2bo94bo3bo11bo2bo2bo2bo27bo4bo12b2o97bo2bo$788b2o1574bo102bob2obo110bob2obo59bo2bo2bo2bo95b2obo11bo2bo2bo2bo27bo4bo12b2o97b4o$788b2o1461b4o118b4o90bo4bo110bo4bo24b2o3
+4bobo2bobo96b3o13bobo2bobo28bo4bo110bob2obo$786bo4bo1705b4o54b4o54bobo189bo4bo82bo2bo25bo2bo$784b3o4b3o1457bo2bo101b2o15bo2bo90bo4bo96b2o12bo4bo25bo189b3o2b3o81bo2bo$783b3o6b3o1455bob2obo99b2o2b2o11bob2obo89b2o2b2o24bo2bo54bo2bo10b2o12b2o2b2o192b2o21
+bob4obo80bo4bo23b2o2b2o$783b2o8b2o1455bo4bo99bob4o11bo4bo89b6o23bob2obo52bob2obo23b6o190b2o2b2o20bo4bo24bo2bo53bo4bo22bo6bo$784b10o1561b3o110bo2bo24bo4bo52bo4bo24bo2bo193b2o52bo2bo53bo4bo$785b8o43b2o1412bo4bo99b2o2b2o11bo4bo91b2o114b2o191bo6bo37b2o9b
+o4bo52bo4bo23bo4bo$787b4o45b2o1412b2o2b2o100b3o2bo10b2o2b2o91b2o25bo4bo52bo4bo25b2o192bo4bo22b2o14b2o9bo4bo51b3o2b3o23bo2bo$796b2o120b2o1330b6o100b2o2b3o9b6o118b2o2b2o52b2o2b2o221b2o24b2o25bo4bo51bob4obo24b2o$795b4o118b4o1330bo2bo103bo2bo11bo2bo89b2o
+4b2o22b6o52b6o22b2o4b2o188b3o2b3o21b2o25bo4bo52bo4bo$2252b2o104b3o13b2o90b2o4b2o23bo2bo54bo2bo10b2o11b2o4b2o188b2o4b2o19bo4bo22b3o2b3o79b2o4b2o$794b6o44b2o70b6o1330b2o105bo14b2o90b2o4b2o24b2o56b2o11b2o11b2o4b2o213b3o4b3o20bob4obo78bo2bo2bo2bo$795b4o4
+5b2o71b4o1577b2o56b2o244b3o6b3o20bo4bo54b2o24b2o4b2o$2249b2o4b2o114b2o4b2o89bo2bo112bo2bo193b2o19b2o8b2o80b2o25bo4bo$794b2o2b2o116b2o2b2o1327b2o4b2o114b2o4b2o116b2o4b2o50b2o4b2o219bo2bo19b10o81b2o$792b2obo2bob2o112b2obo2bob2o1325b2o4b2o114b2o4b2o116b
+2o4b2o50b2o4b2o243b8o24b2o54bo4bo$795bo2bo118bo2bo1574b2o4b2o50b2o4b2o218bo4bo21b4o26b2o52b3o4b3o$2251bo2bo118bo2bo99b4o96b4o42b2o154b2o4b2o28bo2bo10b2o6b2o51b3o6b3o$2497bo2bo54bo2bo63bobo152bo2bo2bo2bo27bo2bo10b2o4bo4bo49b2o8b2o$796b2o46b2o72b2o1556
+bo2bo96bo2bo43bo153b2ob4ob2o26bo4bo13b3o4b3o48b10o$796b2o46b2o72b2o1555bob2obo94bob2obo198bo4bo28bo4bo12b3o6b3o48b8o$2475bo4bo94bo4bo232bo4bo12b2o8b2o50b4o$793bobo2bobo6b2o106bobo2bobo1890bo4bo13b10o$792bo2bo2bo2bo5b2o105bo2bo2bo2bo1330b4o112b4o101bo
+4bo94bo4bo231b3o2b3o13b8o$792bo8bo112bo8bo1551b2o2b2o94b2o2b2o70b2o120b2o37bob4obo15b4o$792bo8bo112bo8bo1330bo2bo112bo2bo101b6o94b6o69bo2bo118bo2bo37bo4bo$792b2o6b2o112b2o6b2o1329bob2obo110bob2obo101bo2bo96bo2bo69b2o2b2o116b2o2b2o121bo2bo$794b6o15b2o
+99b6o1331bo4bo110bo4bo102b2o98b2o70b2o2b2o116b2o2b2o121bo2bo$815b2o19b2o1445b4o54b4o132b2o98b2o70bob2obo116bob2obo38b2o80bo4bo$836b2o1415bo4bo110bo4bo276b2o120b2o40b2o80bo4bo$2253b2o2b2o24bo2bo54bo2bo24b2o2b2o99b2o4b2o92b2o4b2o67bo4bo116bo4bo38b2o80b
+o4bo$799b2o114b2o1336b6o23bob2obo52bob2obo23b6o99b2o4b2o92b2o4b2o66b2o4b2o114b2o4b2o35bo4bo78bo4bo$798b4o112b4o1336bo2bo24bo4bo52bo4bo24bo2bo100b2o4b2o92b2o4b2o229b3o4b3o75b3o2b3o$2255b2o114b2o437b3o6b3o74bob4obo$797b6o110b6o1336b2o25bo4bo52bo4bo25b2
+o103bo2bo96bo2bo71b2o120b2o35b2o8b2o75bo4bo$798b4o13b2o97b4o1364b2o2b2o52b2o2b2o304bo2bo118bo2bo35b10o$815b2o11b2o22b2o32b2o1364b2o4b2o22b6o52b6o22b2o4b2o274bo2bo118bo2bo36b8o$797b2o2b2o24b4o20b4o30b4o24b2o2b2o1333b2o4b2o23bo2bo54bo2bo23b2o4b2o438b4o
+81b2o$795b2obo2bob2o106b2obo2bob2o1331b2o4b2o24b2o56b2o24b2o4b2o272b2o4b2o114b2o4b2o121b2o$798bo2bo24b6o18b6o28b6o24bo2bo1366b2o56b2o303bo2bo2bo2bo112bo2bo2bo2bo120b2o$827b4o20b4o30b4o1365bo2bo112bo2bo273bo2bo2bo2bo112bo2bo2bo2bo118bo4bo$2271b2o8b2o4
+b2o50b2o4b2o301bobo2bobo114bobo2bobo117b3o4b3o$799b2o25b2o2b2o18b2o2b2o28b2o2b2o25b2o1354b2o8b2o4b2o50b2o4b2o547b3o6b3o$799b2o23b2obo2bob2o14b2obo2bob2o24b2obo2bob2o23b2o1364b2o4b2o50b2o4b2o547b2o8b2o$807b2o18bo2bo20bo2bo30bo2bo1373b4o96b4o529b10o$79
+6bobo2bobo3b2o103bobo2bobo1363bo2bo54bo2bo551b8o$795bo2bo2bo2bo15b2o89bo2bo2bo2bo1341bo2bo96bo2bo287bo2bo241b4o$795bo8bo15b2o6b2o22b2o32b2o23bo8bo1340bob2obo94bob2obo286bo2bo5b2o106b2o$795bo8bo23b2o22b2o32b2o23bo8bo1340bo4bo94bo4bo285bo4bo4b2o105bo2b
+o$795b2o6b2o106b2o6b2o1350b2o379bo4bo110b2o2b2o$797b6o22bobo2bobo16bobo2bobo26bobo2bobo22b6o1342bo4bo4b2o88bo4bo285bo4bo110b2o2b2o$824bo2bo2bo2bo14bo2bo2bo2bo24bo2bo2bo2bo1369b2o2b2o94b2o2b2o285bo4bo110bob2obo$807b2o15bo8bo14bo8bo24bo8bo15b2o1352b6o9
+4b6o284b3o2b3o11b2o11b2o85b2o$806b4o14bo8bo14bo8bo24bo8bo14b4o1352bo2bo96bo2bo285bob4obo11b2o10bo2bo82bo4bo$824b2o6b2o14b2o6b2o24b2o6b2o1371b2o98b2o287bo4bo23b2o2b2o80b2o4b2o$805b6o15b6o18b6o28b6o15b6o1352b2o98b2o316b2o2b2o54b2o$806b4o96b4o1771bob2ob
+o53bo2bo$2260b2o4b2o92b2o4b2o286b2o27b2o54b2o2b2o25b2o$805b2o2b2o94b2o2b2o1349b2o4b2o92b2o4b2o286b2o25bo4bo52b2o2b2o24bo2bo$803b2obo2bob2o90b2obo2bob2o1347b2o4b2o92b2o4b2o286b2o24b2o4b2o51bob2obo24bo2bo$806bo2bo96bo2bo1742bo4bo12b2o69b2o$2262bo2bo96b
+o2bo284b3o4b3o10b2o67bo4bo22b2o4b2o$2649b3o6b3o22b2o53b2o4b2o20bo2bo2bo2bo$807b2o98b2o1740b2o8b2o21bo2bo80bo2bo2bo2bo$807b2o98b2o1741b10o22bo2bo81bobo2bobo$2651b8o82b2o$804bobo2bobo92bobo2bobo1402b2o2b2o80b2o2b2o247b4o23b2o4b2o52bo2bo$803bo2bo2bo2bo9
+0bo2bo2bo2bo1403b2o84b2o275bo2bo2bo2bo51bo2bo$803bo8bo90bo8bo1403b2o84b2o275bo2bo2bo2bo73b2o$803bo8bo90bo8bo1400bobo2bobo78bobo2bobo273bobo2bobo50b2o4b2o15bo2bo$803b2o6b2o90b2o6b2o1400bo6bo78bo6bo330bo2bo2bo2bo13b2o2b2o$805b6o94b6o1826bo2bo2bo2bo13b2
+o2b2o$2313bo6bo78bo6bo331bobo2bobo14bob2obo$2314b2o2b2o80b2o2b2o356b2o$2297b2o2b2o12b4o82b4o12b2o2b2o337bo4bo$2299b2o118b2o338b2o4b2o$2299b2o15b2o84b2o15b2o$2296bobo2bobo11bo2bo82bo2bo11bobo2bobo254b2o$2296bo6bo112bo6bo253bo2bo81b2o$2314bo4bo80bo4bo2
+70b2o2b2o79bo2bo$2296bo6bo9b2o4b2o78b2o4b2o9bo6bo252b2o2b2o79bo2bo$2297b2o2b2o11bob2obo80bob2obo11b2o2b2o253bob2obo$2298b4o13b4o82b4o13b4o256b2o79b2o4b2o$2316b2o84b2o272bo4bo76bo2bo2bo2bo$2299b2o118b2o254b2o4b2o75bo2bo2bo2bo$2298bo2bo116bo2bo337bobo2
+bobo2$2297bo4bo114bo4bo255b2o$2296b2o4b2o112b2o4b2o253bo2bo$2297bob2obo114bob2obo254bo2bo$2298b4o116b4o$2299b2o118b2o254b2o4b2o$2674bo2bo2bo2bo$2674bo2bo2bo2bo$2427b4o244bobo2bobo2$2427bo2bo182b2o$2426bob2obo181bobo$2426bo4bo182bo$2225bo$2226b2o198bo
+4bo$2225b2o199b2o2b2o$2426b6o$2427bo2bo$2428b2o$2428b2o2$2425b2o4b2o$2425b2o4b2o$2425b2o4b2o2$2245bobo109b2o68bo2bo$2246b2o109bobo$2246bo110bo264b2o$2622bobo$2296b2o2b2o116b2o2b2o199bo377b2o84b2o$2237bo60b2o120b2o578bo2bo82bo2bo$2235bobo8bobo49b2o120
+b2o578bo2bo82bo2bo$2236b2o5bo3b2o46bobo2bobo114bobo2bobo574bo4bo80bo4bo$2241bobo3bo47bo6bo114bo6bo574bo4bo80bo4bo$2242b2o165b2o589b4o82b4o$2295bo6bo106b2o6bo6bo500b3o71b2o2b2o80b2o2b2o$2296b2o2b2o116b2o2b2o501bo73bo4bo80bo4bo$2297b4o118b4o503bo57b2o1
+3bo4bo80bo4bo13b2o$2983bo2bo116bo2bo$2298b2o101b2o17b2o495b2o64bo2bo116bo2bo$2297bo2bo100b2o16bo2bo495b2o62bo4bo12b4o82b4o12bo4bo$2917bo64bo4bo13b2o84b2o13bo4bo$2296bo4bo116bo4bo559b4o116b4o$2295b2o4b2o114b2o4b2o557b2o2b2o10b2o4b2o78b2o4b2o10b2o2b2o$
+2296bob2obo116bob2obo508bo49bo4bo9bo2bo2bo2bo76bo2bo2bo2bo9bo4bo$2297b4o118b4o508bo50bo4bo10b3o2b3o78b3o2b3o10bo4bo$2298b2o120b2o509b3o64b2o4b2o78b2o4b2o$2263bobo135b2o$2264b2o135b2o580b4o116b4o$2264bo719b2o118b2o$2245bo$2243bobo55b2o678b2o4b2o112b2o
+4b2o$2244b2o54bo2bo111b2o2b2o559bo2bo2bo2bo110bo2bo2bo2bo$2299b2o2b2o112b2o562b3o2b3o112b3o2b3o$2299b2o2b2o112b2o562b2o4b2o112b2o4b2o$2299bob2obo109bobo2bobo$2301b2o106b2o3bo6bo$2299bo4bo23b2o2b2o75b2o702b2o$2298b2o4b2o24b2o64b2o16bo6bo690bo2bo$2330b
+2o64b2o17b2o2b2o651bo38b2o2b2o$2327bobo2bobo51b2o2b2o24b4o652b2o37b2o2b2o$2301b2o24bo6bo53b2o681bobo37bob2obo$2300bo2bo84b2o27b2o694b2o$2300bo2bo23bo6bo50bobo2bobo23bo2bo691bo4bo$2328b2o2b2o51bo6bo717b2o4b2o$2298b2o4b2o23b4o82bo4bo$2297bo2bo2bo2bo78b
+o6bo21b2o4b2o$2297bo2bo2bo2bo23b2o54b2o2b2o23bob2obo692b2o$2298bobo2bobo23bo2bo54b4o25b4o692bo2bo$2417b2o693bo2bo$2328bo4bo54b2o$2327b2o4b2o52bo2bo719b2o4b2o$2328bob2obo775bo2bo2bo2bo$2329b4o53bo4bo15b2o2b2o696bo2bo2bo2bo$2330b2o53b2o4b2o16b2o699bobo
+2bobo$2386bob2obo17b2o$2387b4o15bobo2bobo$2388b2o16bo6bo$2983b2o120b2o$2406bo6bo568bo2bo118bo2bo$2407b2o2b2o569bo2bo118bo2bo$2408b4o569bo4bo116bo4bo$2323b2o2b2o652bo4bo116bo4bo$2325b2o82b2o571b4o118b4o$2325b2o81bo2bo569b2o2b2o116b2o2b2o$2322bobo2bobo
+651bo4bo116bo4bo$2322bo6bo77bo4bo253bo2bo82bo2bo225bo4bo116bo4bo$2317b2o87b2o4b2o252bo2bo82bo2bo$2317b2o3bo6bo77bob2obo252bo4bo80bo4bo$2323b2o2b2o79b4o253bo4bo80bo4bo225b4o118b4o$2324b4o81b2o254bo4bo80bo4bo226b2o120b2o$2665bo4bo80bo4bo$2325b2o337b3o2
+b3o78b3o2b3o222b2o4b2o114b2o4b2o$2324bo2bo336bob4obo78bob4obo221bo2bo2bo2bo112bo2bo2bo2bo$2649bo2bo12bo4bo80bo4bo12bo2bo207b3o2b3o6b2o106b3o2b3o$2323bo4bo320bo2bo116bo2bo207b2o4b2o6b2o106b2o4b2o$2322b2o4b2o318bo4bo114bo4bo$2323bob2obo319bo4bo13b2o84b
+2o13bo4bo$2324b4o320bo4bo13b2o84b2o13bo4bo$2325b2o321bo4bo13b2o84b2o13bo4bo228b2o$2647b3o2b3o10bo4bo80bo4bo10b3o2b3o211b2o14b2o$2647bob4obo8b3o4b3o76b3o4b3o8bob4obo210b4o113b2o$2648bo4bo8b3o6b3o74b3o6b3o8bo4bo327bo2bo$2662b2o8b2o74b2o8b2o224b6o111bo2
+bo$2663b10o76b10o226b4o111bo4bo$2650b2o12b8o78b8o12b2o328bo4bo$2613b2o35b2o14b4o82b4o14b2o212b2o2b2o25b2o84b4o$2613bobo34b2o118b2o210b2obo2bob2o10b2o10bo2bo82b2o2b2o$2614bo33bo4bo114bo4bo211bo2bo13b2o10bo2bo82bo4bo$2646b3o4b3o110b3o4b3o237bo4bo54b2o2
+5bo4bo$2645b3o6b3o108b3o6b3o236bo4bo53bo2bo$2645b2o8b2o108b2o8b2o209b2o26b4o54bo2bo$2646b10o110b10o210b2o25b2o2b2o52bo4bo24b4o$2647b8o112b8o238bo4bo52bo4bo25b2o$2649b4o116b4o210bobo2bobo22bo4bo53b4o$2639b2o2b2o337bo2bo2bo2bo79b2o2b2o22b2o4b2o$2639b2o
+2b2o337bo8bo79bo4bo21bo2bo2bo2bo$2638b3o2b3o336bo8bo22b4o53bo4bo22b3o2b3o$2638b3o2b3o336b2o6b2o15b2o6b2o82b2o4b2o$2984b6o17b2o$2638bo6bo366b2o4b2o52b4o$2638bo2b2o2bo365bo2bo2bo2bo52b2o$2639b6o367b3o2b3o74b2o$2622b2o388b2o4b2o50b2o4b2o15bo2bo$2622bobo
+444bo2bo2bo2bo14bo2bo$2623bo17b2o427b3o2b3o14bo4bo$2640bo2bo426b2o4b2o14bo4bo$2640b4o449b4o$2639b2o2b2o447b2o2b2o$2636bo2bo4bo2bo444bo4bo$2639bo4bo447bo4bo$2640b4o366b2o$2636bo10bo361bo2bo$2637bo8bo362bo2bo80b4o$3008bo4bo80b2o$2641b2o5bo2bo118bo2bo23
+4bo4bo$2648bo2bo54b3o61bo2bo235b4o78b2o4b2o$2647bo4bo55bo60bo4bo233b2o2b2o76bo2bo2bo2bo$2647bo4bo54bo61bo4bo233bo4bo77b3o2b3o$2647bo4bo7b2o107bo4bo233bo4bo77b2o4b2o$2647bo4bo7b2o107bo4bo$2646b3o2b3o114b3o2b3o$2646bob4obo114bob4obo233b4o$2647bo4bo116b
+o4bo235b2o$2668b2o$2668b2o337b2o4b2o$2649b2o120b2o233bo2bo2bo2bo$2649b2o120b2o234b3o2b3o$2649b2o120b2o234b2o4b2o$2647bo4bo116bo4bo$2645b3o4b3o112b3o4b3o$2159b2o2b2o80b2o2b2o393b3o6b3o110b3o6b3o$2159b2o2b2o80b2o2b2o393b2o8b2o12b2o96b2o8b2o$2158b3o2b3o
+78b3o2b3o393b10o13b2o97b10o$2158b3o2b3o78b3o2b3o394b8o114b8o$2648b4o118b4o$2158bo6bo78bo6bo$2158bo2b2o2bo78bo2b2o2bo$2159b6o80b6o400bo2bo113b2o$2142b2o2b2o114b2o2b2o383bo2bo113b2o$2142b2o2b2o114b2o2b2o382bo4bo111bo2bo$2141b3o2b3o12b2o84b2o12b3o2b3o38
+1bo4bo4b2o105b4o$2141b3o2b3o11bo2bo82bo2bo11b3o2b3o381bo4bo4b2o104bob2obo$2160b4o82b4o400bo4bo17b2o63bo2bo25bo2bo$2141bo6bo10b2o2b2o80b2o2b2o10bo6bo380b3o2b3o16b2o63bo2bo$2141bo2b2o2bo7bo2bo4bo2bo74bo2bo4bo2bo7bo2b2o2bo380bob4obo80bo4bo23b2o2b2o$2142
+b6o11bo4bo80bo4bo11b6o382bo4bo24bo2bo53bo4bo22bo6bo$2160b4o82b4o430bo2bo53bo4bo$2156bo10bo74bo10bo425bo4bo52bo4bo23bo4bo$2144b2o11bo8bo76bo8bo11b2o386b2o25bo4bo51b3o2b3o23bo2bo$2143bo2bo116bo2bo385b2o25bo4bo51bob4obo24b2o$2143b4o14b2o84b2o14b4o385b2o
+25bo4bo52bo4bo$2142b2o2b2o114b2o2b2o382bo4bo22b3o2b3o79b2o4b2o$2139bo2bo4bo2bo108bo2bo4bo2bo377b3o4b3o20bob4obo78bo2bo2bo2bo$2142bo4bo114bo4bo379b3o6b3o20bo4bo54b2o24b2o4b2o$2143b4o116b4o380b2o8b2o80b2o25bo4bo$2139bo10bo108bo10bo377b10o81b2o$2140bo8b
+o110bo8bo379b8o24b2o54bo4bo$2651b4o26b2o52b3o4b3o$2133b2o2b2o5b2o118b2o393bo2bo18b2o51b3o6b3o$2135b2o522bo2bo16bo4bo49b2o8b2o$2135b2o144b3o374bo4bo13b3o4b3o48b10o$2132bobo2bobo143bo374bo4bo12b3o6b3o48b8o$2132bo6bo142bo375bo4bo12b2o8b2o50b4o$2658bo4bo
+13b10o$2132bo6bo240b2o275b3o2b3o13b8o$2133b2o2b2o240b2o276bob4obo15b4o$2134b4o243bo276bo4bo$2743bo2bo$2135b2o606bo2bo$2134bo2bo335bo2bo82bo2bo97b2o80bo4bo$2473bo2bo82bo2bo97b2o80bo4bo$2133bo4bo333bo4bo80bo4bo96b2o80bo4bo4b2o$2132b2o4b2o332bo4bo80bo4b
+o94bo4bo78bo4bo4b2o$2133bob2obo333bo4bo80bo4bo92b3o4b3o75b3o2b3o$2134b4o334bo4bo80bo4bo91b3o6b3o74bob4obo$2135b2o334b3o2b3o78b3o2b3o90b2o8b2o75bo4bo$2471bob4obo78bob4obo91b10o$2456bo2bo12bo4bo80bo4bo12bo2bo77b8o$2254b2o200bo2bo116bo2bo79b4o81b2o$2141
+b2o2b2o107b2o7b2o2b2o186bo4bo114bo4bo163b2o6b2o$2141b2o2b2o116b2o2b2o186bo4bo13b2o84b2o13bo4bo163b2o6b2o$2140b3o2b3o114b3o2b3o185bo4bo13b2o84b2o13bo4bo32b2o127bo4bo$2140b3o2b3o114b3o2b3o185bo4bo13b2o84b2o13bo4bo32bobo124b3o4b3o$2246b2o206b3o2b3o10bo4
+bo80bo4bo10b3o2b3o32bo124b3o6b3o$2140bo6bo70bo27b2o14bo6bo184bob4obo8b3o4b3o76b3o4b3o8bob4obo157b2o8b2o$2140bo2b2o2bo69b2o43bo2b2o2bo185bo4bo8b3o6b3o74b3o6b3o8bo4bo159b10o$2141b6o70bobo43b6o200b2o8b2o74b2o8b2o174b8o$2470b10o76b10o177b4o$2457b2o12b8o7
+8b8o12b2o$2143b2o120b2o190b2o14b4o85bo14b2o$2142bo2bo118bo2bo189b2o99b3o16b2o$2142b4o100b2o16b4o187bo4bo96b5o13bo4bo$2141b2o2b2o99b2o15b2o2b2o184b3o4b3o93b2o3b2o10b3o4b3o$2138bo2bo4bo2bo110bo2bo4bo2bo180b3o6b3o91b3o3b3o8b3o6b3o$2141bo4bo116bo4bo183b2
+o8b2o92b2o3b2o9b2o8b2o$2142b4o118b4o185b10o94b5o11b10o$2138bo10bo110bo10bo182b8o96b3o13b8o$2139bo8bo112bo8bo185b4o99bo16b4o$2584b2o2b2o32b2o$2143b2o120b2o317b2o2b2o32bobo$2254b2o327b3o2b3o32bo$2254b2o327b3o2b3o$2144b2o2b2o91b2o17b2o2b2o$2144b2o2b2o91
+b2o17b2o2b2o317bo6bo$2143b3o2b3o108b3o2b3o316bo2b2o2bo$2143b3o2b3o108b3o2b3o317b6o2$2143bo6bo22b2o2b2o52b2o2b2o22bo6bo$2143bo2b2o2bo22b2o2b2o52b2o2b2o22bo2b2o2bo319b2o$2144b6o22b3o2b3o50b3o2b3o22b6o319bo2bo$2172b3o2b3o50b3o2b3o347b4o$2584b2o2b2o$2146
+b2o24bo6bo50bo6bo24b2o317bo2bo4bo2bo$2145bo2bo23bo2b2o2bo50bo2b2o2bo23bo2bo319bo4bo$2145b4o24b6o52b6o24b4o320b4o$2144b2o2b2o110b2o2b2o315bo10bo$2141bo2bo4bo2bo104bo2bo4bo2bo313bo8bo$2144bo4bo25b2o56b2o25bo4bo$2145b4o25bo2bo54bo2bo25b4o190bo2bo118bo2b
+o5b2o$2141bo10bo21b4o54b4o21bo10bo186bo2bo118bo2bo$2142bo8bo21b2o2b2o52b2o2b2o21bo8bo186bo4bo116bo4bo$2170bo2bo4bo2bo46bo2bo4bo2bo214bo4bo116bo4bo$2146b2o25bo4bo52bo4bo25b2o190bo4bo116bo4bo$2152b2o2b2o16b4o54b4o16b2o2b2o196bo4bo116bo4bo$2152b2o2b2o12
+bo10bo46bo10bo12b2o2b2o195b3o2b3o114b3o2b3o$2151b3o2b3o12bo8bo48bo8bo12b3o2b3o194bob4obo114bob4obo$2151b3o2b3o92b3o2b3o195bo4bo116bo4bo$2175b2o56b2o$2151bo6bo92bo6bo$2151bo2b2o2bo92bo2b2o2bo197b2o120b2o$2152b6o94b6o198b2o120b2o$2162b2o292b2o120b2o$21
+62b2o290bo4bo116bo4bo$2154b2o98b2o196b3o4b3o112b3o4b3o$2153bo2bo96bo2bo194b3o6b3o110b3o6b3o$2153b4o96b4o194b2o8b2o110b2o8b2o$2152b2o2b2o94b2o2b2o194b10o112b10o$2149bo2bo4bo2bo88bo2bo4bo2bo192b8o114b8o$2152bo4bo94bo4bo197b4o118b4o$2153b4o96b4o$2149bo1
+0bo88bo10bo$2150bo8bo90bo8bo198bo2bo112bo2bo$2458bo2bo5b2o105bo2bo$2154b2o98b2o201bo4bo4b2o104bo4bo$2457bo4bo110bo4bo$2457bo4bo110bo4bo$2457bo4bo24bo2bo54bo2bo24bo4bo$2456b3o2b3o11b2o10bo2bo54bo2bo23b3o2b3o$2456bob4obo11b2o9bo4bo52bo4bo22bob4obo$2457
+bo4bo23bo4bo52bo4bo23bo4bo$2486bo4bo52bo4bo$2486bo4bo52bo4bo$2459b2o24b3o2b3o50b3o2b3o24b2o$2459b2o24bob4obo50bob4obo24b2o$2459b2o25bo4bo52bo4bo25b2o$2457bo4bo12b2o96bo4bo$2455b3o4b3o10b2o94b3o4b3o$2454b3o6b3o22b2o56b2o22b3o6b3o$2454b2o8b2o22b2o56b2o
+22b2o8b2o$2455b10o23b2o56b2o23b10o$2456b8o22bo4bo52bo4bo22b8o$2458b4o22b3o4b3o48b3o4b3o22b4o$2483b3o6b3o46b3o6b3o13bo2bo$2483b2o8b2o46b2o8b2o13bo2bo$2484b10o48b10o13bo4bo$2485b8o50b8o14bo4bo$2487b4o54b4o16bo4bo$2565bo4bo$2483b2o79b3o2b3o$2481b2o2b2o7
+7bob4obo$2483b2o80bo4bo$2480bo6bo$2481bo4bo$2483b2o82b2o$2480b3o2b3o79b2o$2480b2o4b2o79b2o$2565bo4bo$2563b3o4b3o40b2o$2483b2o77b3o6b3o39bobo$2482bo2bo76b2o8b2o40bo$2563b10o$2481bo4bo77b8o$2480b2o4b2o78b4o$2479bo2bo2bo2bo$2479b2ob4ob2o$2481bo4bo9$2622
+b2o$2622bobo$2623bo32$2465bo$2466b2o$2465b2o10$2485bobo$2486b2o$2486bo$2688bo$2686b2o$2477bo209b2o$2475bobo8bobo$2476b2o5bo3b2o$2481bobo3bo$2482b2o10$2692bo$2691bo$2691b3o$2503bobo$2504b2o$2504bo$2485bo$2483bobo$2484b2o6$2613b2o$2613bobo$2614bo15$262
+2b2o$2622bobo$2623bo7$2520bo$2521b2o$2520b2o11$2324b2o84b2o$2322b2o2b2o80b2o2b2o$2324b2o84b2o$2321bo6bo78bo6bo$2322bo4bo80bo4bo$2324b2o84b2o$2321b3o2b3o78b3o2b3o$2321b2o4b2o78b2o4b2o$2307b2o118b2o$2305b2o2b2o114b2o2b2o$2307b2o15b2o84b2o15b2o$2304bo6b
+o11bo2bo82bo2bo11bo6bo$2305bo4bo114bo4bo$2307b2o13bo4bo80bo4bo13b2o$2304b3o2b3o9b2o4b2o78b2o4b2o9b3o2b3o$2304b2o4b2o8bo2bo2bo2bo76bo2bo2bo2bo8b2o4b2o$2320b2ob4ob2o76b2ob4ob2o$2322bo4bo80bo4bo$2295b2o10b2o118b2o$2293b2o2b2o7bo2bo116bo2bo$2295b2o$2292b
+o6bo5bo4bo114bo4bo$2293bo4bo5b2o4b2o13b2o97b2o4b2o$2295b2o6bo2bo2bo2bo11bo2bo3bo2bo88bo2bo2bo2bo$2292b3o2b3o3b2ob4ob2o11b2ob2o5bo88b2ob4ob2o$2292b2o4b2o5bo4bo15bo4bo3bo89bo4bo$2334b3o$2335b2o$2295b2o37b3o98b4o$2294bo2bo34bo2bo99bo2bo$2332b3o99b6o$229
+3bo4bo34bo$2292b2o4b2o25b2o$2291bo2bo2bo2bo24b2o106bo2b2o2bo$2291b2ob4ob2o132bob4obo$2293bo4bo134bobo2bobo3$2436b2o$2436b2o2$2433b2o4b2o$2433b3o2b3o$2432bo2bo2bo2bo$2432b2ob4ob2o$2433b8o4$2306b2o120b2o$2304b2o2b2o116b2o2b2o$2306b2o120b2o$2303bo6bo114
+bo6bo$2304bo4bo116bo4bo$2306b2o120b2o$2303b3o2b3o114b3o2b3o$2303b2o4b2o114b2o4b2o$2613b2o$2613bobo$2306b2o120b2o184bo$2305bo2bo118bo2bo2$2304bo4bo116bo4bo$2303b2o4b2o114b2o4b2o$2302bo2bo2bo2bo112bo2bo2bo2bo$2302b2ob4ob2o112b2ob4ob2o$2304bo4bo116bo4bo
+6$2309b2o114b2o$2307b2o2b2o110b2o2b2o$2309b2o114b2o195b2o$2306bo6bo103b2o3bo6bo192bobo$2307bo4bo104b2o4bo4bo194bo$2309b2o27b2o56b2o27b2o$2306b3o2b3o22b2o2b2o52b2o2b2o22b3o2b3o$2306b2o4b2o24b2o56b2o24b2o4b2o$2335bo6bo50bo6bo8b2o$2336bo4bo52bo4bo9b2o$2
+309b2o27b2o56b2o27b2o$2308bo2bo23b3o2b3o50b3o2b3o23bo2bo$2335b2o4b2o50b2o4b2o$2307bo4bo110bo4bo$2306b2o4b2o108b2o4b2o$2305bo2bo2bo2bo23b2o56b2o23bo2bo2bo2bo$2305b2ob4ob2o22bo2bo54bo2bo10b2o10b2ob4ob2o$2307bo4bo96b2o12bo4bo$2336bo4bo52bo4bo$2335b2o4b2
+o50b2o4b2o$2334bo2bo2bo2bo48bo2bo2bo2bo$2317b2o15b2ob4ob2o48b2ob4ob2o15b2o$2315b2o2b2o15bo4bo52bo4bo15b2o2b2o$2317b2o98b2o$2314bo6bo92bo6bo$2315bo4bo94bo4bo$2317b2o98b2o$2314b3o2b3o92b3o2b3o$2314b2o4b2o92b2o4b2o3$2317b2o98b2o$2316bo2bo96bo2bo2$2315bo
+4bo94bo4bo$2314b2o4b2o92b2o4b2o$2313bo2bo2bo2bo90bo2bo2bo2bo$2313b2ob4ob2o90b2ob4ob2o$2315bo4bo94bo4bo15$2544b2o$2545b2o$2544bo6$2477b3o$2479bo$2478bo3$2495bo$2495b2o$2494bobo2$2553b2o$2524b3o25bobo$2526bo27bo$2525bo5$2487bo$2487b2o$2486bobo117$2304b
+2o$2305b2o$2304bo6$2237b3o$2239bo$2238bo3$2255bo$2255b2o$2254bobo2$2313b2o$2284b3o25bobo$2286bo27bo$2285bo5$2247bo$2247b2o$2246bobo3$1902b2o84b2o$1902b2o84b2o$1901bo2bo82bo2bo$1901b4o82b4o$1900bob2obo80bob2obo$1901bo2bo82bo2bo2$1900b2o2b2o80b2o2b2o$1
+885b2o12bo6bo78bo6bo12b2o$1885b2o118b2o$1884bo2bo12bo4bo80bo4bo12bo2bo$1884b4o13bo2bo82bo2bo13b4o$1883bob2obo13b2o84b2o13bob2obo$1884bo2bo116bo2bo$1899b2o4b2o78b2o4b2o$1883b2o2b2o9bo2bo2bo2bo76bo2bo2bo2bo9b2o2b2o94bo$1882bo6bo9b2o4b2o78b2o4b2o9bo6bo9
+2bo$1900bo4bo80bo4bo110b3o$1883bo4bo114bo4bo8b2o$1884bo2bo116bo2bo9b2o$1885b2o118b2o9bo2bo$2016b4o$1882b2o4b2o112b2o4b2o5bob2obo$1881bo2bo2bo2bo110bo2bo2bo2bo5bo2bo$1882b2o4b2o112b2o4b2o$1883bo4bo114bo4bo6b2o2b2o$2014bo6bo2$1876b2o137bo4bo$1875bo2bo1
+37bo2bo$1875bo2bo138b2o$1874bo4bo$1874bo4bo134b2o4b2o$1875b4o134bo2bo2bo2bo$1874b2o2b2o134b2o4b2o$1874bo4bo135bo4bo$1874bo4bo3$1875b4o116b2o$1876b2o117b2o2$1873b2o4b2o$1872bo2bo2bo2bo$1873b3o2b3o106b2o$1873b2o4b2o106b2o9b2o$1999b2o$1998bo2$1884b2o120
+b2o$1884b2o120b2o$1883bo2bo118bo2bo$1883b4o100b2o16b4o$1882bob2obo99b2o15bob2obo$1762b2o84b2o33bo2bo118bo2bo$1762b2o84b2o$1761bo2bo82bo2bo31b2o2b2o116b2o2b2o$1761b4o82b4o30bo6bo99b3o12bo6bo$1760bob2obo80bob2obo139bo$1761bo2bo82bo2bo31bo4bo116bo4bo$18
+83bo2bo101b2o15bo2bo$1760b2o2b2o80b2o2b2o32b2o108b2o10b2o$1745b2o12bo6bo78bo6bo12b2o121b2o5b2o$1745b2o118b2o14b2o4b2o99bo2b5o7b2o4b2o$1744bo2bo12bo4bo80bo4bo12bo2bo12bo2bo2bo2bo98bo3b3o7bo2bo2bo2bo$1744b4o13bo2bo82bo2bo13b4o13b2o4b2o100bo13b2o4b2o$17
+43bob2obo13b2o84b2o13bob2obo13bo4bo102b2o12bo4bo$1744bo2bo116bo2bo$1759b2o4b2o78b2o4b2o$1743b2o2b2o9bo2bo2bo2bo76bo2bo2bo2bo9b2o2b2o$1742bo6bo9b2o4b2o78b2o4b2o9bo6bo$1760bo4bo80bo4bo$1733b2o8bo4bo114bo4bo18b2o114b2o$1733b2o9bo2bo116bo2bo19b2o114b2o$1
+732bo2bo9b2o118b2o19bo2bo112bo2bo$1732b4o150b4o112b4o$1731bob2obo5b2o4b2o112b2o4b2o15bob2obo110bob2obo$1732bo2bo5bo2bo2bo2bo110bo2bo2bo2bo15bo2bo26b2o56b2o26bo2bo$1742b2o4b2o112b2o4b2o46b2o56b2o$1731b2o2b2o6bo4bo114bo4bo16b2o2b2o24bo2bo54bo2bo24b2o2b
+2o$1730bo6bo146bo6bo23b4o54b4o23bo6bo$1914bob2obo52bob2obo$1731bo4bo100b3o34b2o9bo4bo24bo2bo54bo2bo24bo4bo$1732bo2bo103bo33bo2bo9bo2bo112bo2bo$1733b2o103bo34bo2bo10b2o25b2o2b2o52b2o2b2o25b2o$1872bo4bo35bo6bo50bo6bo$1730b2o4b2o134bo4bo6b2o4b2o108b2o4b
+2o$1729bo2bo2bo2bo134b4o6bo2bo2bo2bo21bo4bo52bo4bo21bo2bo2bo2bo$1730b2o4b2o134b2o2b2o6b2o4b2o23bo2bo54bo2bo23b2o4b2o$1731bo4bo135bo4bo7bo4bo25b2o56b2o25bo4bo$1872bo4bo$1913b2o4b2o50b2o4b2o$1903b2o7bo2bo2bo2bo48bo2bo2bo2bo$1873b4o18b2o6b2o8b2o4b2o50b2
+o4b2o16b2o$1874b2o19b2o17bo4bo52bo4bo17b2o$1894bo2bo96bo2bo$1871b2o4b2o15b4o96b4o$1870bo2bo2bo2bo13bob2obo94bob2obo$1871b3o2b3o15bo2bo96bo2bo$1871b2o4b2o$1893b2o2b2o4b2o88b2o2b2o$1892bo6bo3b2o87bo6bo2$1744b2o120b2o25bo4bo94bo4bo$1744b2o120b2o26bo2bo9
+6bo2bo$1743bo2bo118bo2bo26b2o98b2o$1743b4o118b4o$1742bob2obo116bob2obo22b2o4b2o92b2o4b2o$1743bo2bo118bo2bo22bo2bo2bo2bo90bo2bo2bo2bo$1892b2o4b2o92b2o4b2o$1742b2o2b2o116b2o2b2o23bo4bo94bo4bo$1741bo6bo114bo6bo2$1742bo4bo116bo4bo$1743bo2bo118bo2bo195b2o
+$1744b2o120b2o197b2o$2064bo$1741b2o4b2o114b2o4b2o$1740bo2bo2bo2bo112bo2bo2bo2bo$1741b2o4b2o114b2o4b2o$1742bo4bo116bo4bo$1755b2o$1755b2o4$1747b2o14b2o98b2o$1747b2o14b2o98b2o150bo$1746bo2bo112bo2bo149b2o$1746b4o112b4o148bobo$1745bob2obo110bob2obo$1746b
+o2bo26b2o56b2o26bo2bo207b2o$1776b2o56b2o208b3o25bobo$1745b2o2b2o24bo2bo54bo2bo24b2o2b2o179bo27bo$1744bo6bo11b2o10b4o54b4o23bo6bo177bo$1763b2o9bob2obo52bob2obo$1745bo4bo24bo2bo54bo2bo24bo4bo$1746bo2bo112bo2bo$1747b2o25b2o2b2o52b2o2b2o25b2o$1773bo6bo50
+bo6bo168bo$1744b2o4b2o108b2o4b2o139b2o$1743bo2bo2bo2bo21bo4bo52bo4bo21bo2bo2bo2bo137bobo$1744b2o4b2o23bo2bo54bo2bo23b2o4b2o$1745bo4bo25b2o56b2o25bo4bo2$1773b2o4b2o50b2o4b2o$1772bo2bo2bo2bo48bo2bo2bo2bo$1755b2o16b2o4b2o50b2o4b2o16b2o$1755b2o17bo4bo52b
+o4bo17b2o$1754bo2bo96bo2bo$1754b4o96b4o$1753bob2obo94bob2obo$1754bo2bo96bo2bo2$1753b2o2b2o94b2o2b2o$1752bo6bo92bo6bo2$1753bo4bo94bo4bo$1754bo2bo96bo2bo$1755b2o98b2o2$1752b2o4b2o92b2o4b2o$1751bo2bo2bo2bo90bo2bo2bo2bo$1752b2o4b2o92b2o4b2o$1753bo4bo94bo
+4bo8$1681bobo$1681b2o$1682bo84$1824b2o$1825b2o$1824bo11$1775bo$1775b2o$1774bobo2$1833b2o$1804b3o25bobo$1806bo27bo$1805bo5$1767bo$1767b2o$1766bobo69$1338b2o2b2o80b2o2b2o$1338b2o2b2o80b2o2b2o$1337b3o2b3o78b3o2b3o$1337b3o2b3o78b3o2b3o2$1337bo6bo78bo6bo$
+1337bo2b2o2bo78bo2b2o2bo$1338b6o80b6o$1321b2o2b2o114b2o2b2o$1321b2o2b2o114b2o2b2o$1320b3o2b3o12b2o84b2o12b3o2b3o$1320b3o2b3o11bo2bo82bo2bo11b3o2b3o$1339b4o82b4o$1320bo6bo10b2o2b2o80b2o2b2o10bo6bo$1320bo2b2o2bo7bo2bo4bo2bo74bo2bo4bo2bo7bo2b2o2bo$1321b
+6o11bo4bo80bo4bo11b6o$1339b4o82b4o$1335bo10bo74bo10bo$1323b2o11bo8bo76bo8bo11b2o8b2o2b2o$1322bo2bo116bo2bo7b2o2b2o$1322b4o7bobo4b2o84b2o14b4o6b3o2b3o$1321b2o2b2o6bo2bo104b2o2b2o5b3o2b3o$1318bo2bo4bo2bo2bo3bo101bo2bo4bo2bo$1321bo4bo6bo2bo104bo4bo5bo6b
+o$1322b4o4bo2b3o106b4o6bo2b2o2bo$1318bo10bo108bo10bo3b6o$1319bo119bo8bo2$1312b2o2b2o5b2o118b2o10b2o$1314b2o138bo2bo$1314b2o138b4o$1311bobo2bobo134b2o2b2o$1311bo6bo131bo2bo4bo2bo$1453bo4bo$1311bo6bo135b4o$1312b2o2b2o23b2o107bo10bo$1313b4o24b2o108bo8bo
+2$1314b2o139b2o$1313bo2bo2$1312bo4bo$1311b2o4b2o$1312bob2obo$1313b4o$1314b2o2$1194bo2bo82bo2bo$1194bo2bo82bo2bo300b2o$1193bo4bo80bo4bo35b2o2b2o116b2o2b2o137b2o$1193bo4bo80bo4bo35b2o2b2o116b2o2b2o136bo$1193bo4bo80bo4bo34b3o2b3o114b3o2b3o$1193bo4bo80bo
+4bo34b3o2b3o114b3o2b3o$1192b3o2b3o78b3o2b3o$1192bob4obo78bob4obo33bo6bo114bo6bo$1177bo2bo12bo4bo80bo4bo12bo2bo18bo2b2o2bo114bo2b2o2bo$1177bo2bo116bo2bo19b6o116b6o$1176bo4bo114bo4bo$1176bo4bo13b2o84b2o13bo4bo$1176bo4bo13b2o84b2o13bo4bo20b2o120b2o$1176
+bo4bo13b2o84b2o13bo4bo19bo2bo118bo2bo$1175b3o2b3o10bo4bo80bo4bo10b3o2b3o18b4o118b4o88bo$1175bob4obo8b3o4b3o76b3o4b3o8bob4obo17b2o2b2o116b2o2b2o87b2o$1176bo4bo8b3o6b3o74b3o6b3o8bo4bo15bo2bo4bo2bo110bo2bo4bo2bo83bobo$1190b2o8b2o74b2o8b2o32bo4bo116bo4bo
+$1165bo2bo22b10o76b10o34b4o118b4o146b2o$1165bo2bo9b2o12b8o78b8o12b2o17bo10bo110bo10bo113b3o25bobo$1164bo4bo8b2o14b4o82b4o14b2o18bo8bo112bo8bo116bo27bo$1164bo4bo8b2o118b2o265bo$1164bo4bo6bo4bo114bo4bo20b2o120b2o$1164bo4bo4b3o4b3o110b3o4b3o$1163b3o2b3o
+2b3o6b3o108b3o6b3o$1163bob4obo2b2o8b2o108b2o8b2o18b2o2b2o110b2o2b2o$1164bo4bo4b10o110b10o19b2o2b2o110b2o2b2o82bo$1175b8o112b8o19b3o2b3o108b3o2b3o81b2o$1177b4o116b4o21b3o2b3o108b3o2b3o80bobo$1166b2o137b2o2b2o$1166b2o137b2o2b2o11bo6bo22b2o2b2o52b2o2b2o
+22bo6bo$1166b2o136b3o2b3o10bo2b2o2bo22b2o2b2o52b2o2b2o17b2o3bo2b2o2bo$1164bo4bo134b3o2b3o11b6o22b3o2b3o50b3o2b3o16b2o4b6o$1162b3o4b3o179b3o2b3o50b3o2b3o$1161b3o6b3o131bo6bo$1161b2o8b2o131bo2b2o2bo13b2o24bo6bo50bo6bo24b2o$1162b10o133b6o13bo2bo23bo2b2o
+2bo50bo2b2o2bo8b2o13bo2bo$1163b8o153b4o24b6o52b6o9b2o13b4o$1165b4o154b2o2b2o110b2o2b2o$1307b2o11bo2bo4bo2bo104bo2bo4bo2bo$1306bo2bo13bo4bo25b2o56b2o25bo4bo$1306b4o14b4o25bo2bo54bo2bo25b4o$1305b2o2b2o9bo10bo21b4o54b4o21bo10bo$1302bo2bo4bo2bo7bo8bo21b2
+o2b2o52b2o2b2o21bo8bo$1305bo4bo38bo2bo4bo2bo46bo2bo4bo2bo6b2o$1306b4o15b2o25bo4bo52bo4bo9b2o14b2o$1302bo10bo17b2o2b2o16b4o54b4o16b2o2b2o$1303bo8bo18b2o2b2o12bo10bo46bo10bo12b2o2b2o$1330b3o2b3o12bo8bo48bo8bo12b3o2b3o$1176bo2bo118bo2bo5b2o21b3o2b3o92b3
+o2b3o$1176bo2bo118bo2bo52b2o56b2o$1175bo4bo107b2o7bo4bo27bo6bo92bo6bo$1175bo4bo107b2o7bo4bo27bo2b2o2bo92bo2b2o2bo$1175bo4bo65b3o48bo4bo28b6o94b6o$1175bo4bo65bo50bo4bo$1174b3o2b3o65bo48b3o2b3o$1174bob4obo98b2o14bob4obo29b2o98b2o$1175bo4bo99b2o15bo4bo2
+9bo2bo96bo2bo$1332b4o96b4o$1331b2o2b2o94b2o2b2o$1177b2o120b2o27bo2bo4bo2bo88bo2bo4bo2bo$1177b2o120b2o30bo4bo94bo4bo$1177b2o120b2o31b4o96b4o$1175bo4bo116bo4bo25bo10bo88bo10bo$1173b3o4b3o97b2o13b3o4b3o24bo8bo90bo8bo$1172b3o6b3o96b2o12b3o6b3o$1172b2o8b2
+o110b2o8b2o27b2o98b2o$1173b10o112b10o$1174b8o114b8o$1176b4o118b4o3$1179bo2bo112bo2bo$1179bo2bo105b2o5bo2bo$1178bo4bo104b2o4bo4bo$1178bo4bo91b2o17bo4bo$1178bo4bo91b2o17bo4bo$1178bo4bo24bo2bo54bo2bo24bo4bo$1177b3o2b3o23bo2bo54bo2bo23b3o2b3o$1177bob4obo
+22bo4bo52bo4bo22bob4obo$1178bo4bo23bo4bo52bo4bo23bo4bo$1207bo4bo52bo4bo$1207bo4bo52bo4bo$1180b2o24b3o2b3o50b3o2b3o24b2o$1180b2o24bob4obo50bob4obo24b2o$1180b2o25bo4bo52bo4bo25b2o$1178bo4bo110bo4bo$1176b3o4b3o106b3o4b3o$1175b3o6b3o22b2o56b2o22b3o6b3o$1
+175b2o8b2o22b2o56b2o22b2o8b2o$1176b10o23b2o56b2o23b10o$1177b8o22bo4bo52bo4bo22b8o$1179b4o22b3o4b3o48b3o4b3o22b4o$1187bo2bo13b3o6b3o46b3o6b3o13bo2bo$1187bo2bo13b2o8b2o46b2o8b2o13bo2bo$1186bo4bo13b10o48b10o13bo4bo$1186bo4bo14b8o50b8o14bo4bo$1186bo4bo16
+b4o54b4o16bo4bo$1186bo4bo94bo4bo$1185b3o2b3o92b3o2b3o$1185bob4obo92bob4obo$1186bo4bo94bo4bo3$1188b2o6b2o90b2o$1188b2o6b2o90b2o$1188b2o98b2o$1186bo4bo94bo4bo$1184b3o4b3o90b3o4b3o$1183b3o6b3o88b3o6b3o$1183b2o8b2o88b2o8b2o$1184b10o90b10o$1185b8o92b8o$11
+87b4o96b4o32$1344b2o$1345b2o$1344bo15$1353b2o$1324b3o25bobo$1326bo27bo$1325bo5$1287bo$1287b2o$1286bobo57$1035bobo$1035b2o$1036bo58$1104b2o$1105b2o$1104bo9$773b2o84b2o$771b2o2b2o80b2o2b2o$773b2o84b2o$770bo6bo78bo6bo$771bo4bo80bo4bo$773b2o84b2o$770b3o2
+b3o78b3o2b3o249b2o$770b2o4b2o78b2o4b2o220b3o25bobo$756b2o118b2o208bo27bo$754b2o2b2o114b2o2b2o205bo$756b2o15b2o84b2o15b2o$753bo6bo11bo2bo82bo2bo11bo6bo$754bo4bo114bo4bo$756b2o13bo4bo80bo4bo13b2o$753b3o2b3o9b2o4b2o78b2o4b2o9b3o2b3o166bo$753b2o4b2o8bo2b
+o2bo2bo76bo2bo2bo2bo8b2o4b2o166b2o$769b2ob4ob2o76b2ob4ob2o181bobo$771bo4bo80bo4bo$756b2o118b2o10b2o$755bo2bo116bo2bo7b2o2b2o$888b2o$754bo4bo114bo4bo5bo6bo$753b2o4b2o112b2o4b2o5bo4bo$752bo2bo2bo2bo110bo2bo2bo2bo6b2o$752b2ob4ob2o110b2ob4ob2o3b3o2b3o$75
+4bo4bo114bo4bo5b2o4b2o3$746b4o138b2o$746bo2bo137bo2bo$745b6o$886bo4bo$885b2o4b2o$744bo2b2o2bo132bo2bo2bo2bo$744bob4obo85bo46b2ob4ob2o$744bobo2bobo85b2o47bo4bo$836bobo2$747b2o$747b2o2$744b2o4b2o$744b3o2b3o$743bo2bo2bo2bo$743b2ob4ob2o$744b8o4$755b2o120
+b2o$753b2o2b2o116b2o2b2o$755b2o120b2o$752bo6bo114bo6bo$753bo4bo116bo4bo$755b2o120b2o$752b3o2b3o114b3o2b3o$752b2o4b2o114b2o4b2o3$755b2o120b2o$754bo2bo118bo2bo$629b2o84b2o$627b2o2b2o80b2o2b2o34bo4bo7b2o107bo4bo$629b2o84b2o35b2o4b2o6b2o106b2o4b2o$626bo6
+bo78bo6bo31bo2bo2bo2bo112bo2bo2bo2bo$627bo4bo80bo4bo32b2ob4ob2o112b2ob4ob2o$629b2o84b2o36bo4bo116bo4bo$626b3o2b3o78b3o2b3o54b2o$626b2o4b2o78b2o4b2o54b2o$612b2o118b2o$610b2o2b2o114b2o2b2o$612b2o15b2o84b2o15b2o$609bo6bo11bo2bo82bo2bo11bo6bo21b2o114b2o$
+610bo4bo114bo4bo20b2o2b2o110b2o2b2o$612b2o13bo4bo80bo4bo13b2o24b2o114b2o$609b3o2b3o9b2o4b2o78b2o4b2o9b3o2b3o18bo6bo11b2o95bo6bo$609b2o4b2o8bo2bo2bo2bo76bo2bo2bo2bo8b2o4b2o19bo4bo12b2o96bo4bo$625b2ob4ob2o76b2ob4ob2o37b2o27b2o56b2o27b2o$627bo4bo80bo4bo
+36b3o2b3o22b2o2b2o52b2o2b2o22b3o2b3o$600b2o10b2o118b2o21b2o4b2o24b2o56b2o24b2o4b2o$598b2o2b2o7bo2bo116bo2bo49bo6bo50bo6bo$600b2o183bo4bo52bo4bo$597bo6bo5bo4bo114bo4bo22b2o27b2o56b2o27b2o$598bo4bo5b2o4b2o99b3o10b2o4b2o20bo2bo23b3o2b3o50b3o2b3o23bo2bo$
+600b2o6bo2bo2bo2bo110bo2bo2bo2bo28b2o16b2o4b2o50b2o4b2o$597b3o2b3o3b2ob4ob2o98bo2b2o7b2ob4ob2o18bo4bo4b2o104bo4bo$597b2o4b2o5bo4bo100b2ob2o9bo4bo19b2o4b2o16b2o90b2o4b2o$717bob2o33bo2bo2bo2bo15b2o6b2o56b2o23bo2bo2bo2bo$717b2o35b2ob4ob2o22bo2bo54bo2bo2
+2b2ob4ob2o$600b2o138b4o12bo4bo110bo4bo$599bo2bo137bo2bo41bo4bo52bo4bo$708bo30b6o39b2o4b2o50b2o4b2o$598bo4bo105bo73bo2bo2bo2bo48bo2bo2bo2bo$597b2o4b2o99b2ob2o57b2o15b2ob4ob2o48b2ob4ob2o15b2o$596bo2bo2bo2bo98bo9b2o22bo2b2o2bo18b2o2b2o15bo4bo52bo4bo15b2
+o2b2o$596b2ob4ob2o99bo2bo5b2o22bob4obo20b2o98b2o$598bo4bo102bobo29bobo2bobo17bo6bo92bo6bo$706b3o55bo4bo94bo4bo$766b2o98b2o$741b2o20b3o2b3o92b3o2b3o$741b2o20b2o4b2o92b2o4b2o2$738b2o4b2o$738b3o2b3o20b2o98b2o$737bo2bo2bo2bo18bo2bo96bo2bo$737b2ob4ob2o$73
+8b8o18bo4bo94bo4bo$763b2o4b2o92b2o4b2o$762bo2bo2bo2bo90bo2bo2bo2bo$762b2ob4ob2o90b2ob4ob2o$611b2o120b2o29bo4bo94bo4bo$609b2o2b2o116b2o2b2o$611b2o120b2o$608bo6bo114bo6bo$609bo4bo116bo4bo$611b2o120b2o$608b3o2b3o114b3o2b3o$608b2o4b2o114b2o4b2o3$611b2o12
+0b2o$610bo2bo118bo2bo2$609bo4bo116bo4bo$608b2o4b2o114b2o4b2o$607bo2bo2bo2bo112bo2bo2bo2bo$607b2ob4ob2o112b2ob4ob2o$609bo4bo116bo4bo6$614b2o114b2o132b2o$612b2o2b2o110b2o2b2o131b2o$614b2o114b2o132bo$611bo6bo108bo6bo$612bo4bo4b2o104bo4bo$614b2o6b2o19b2o
+56b2o27b2o$611b3o2b3o22b2o2b2o52b2o2b2o22b3o2b3o$611b2o4b2o24b2o56b2o24b2o4b2o$640bo6bo50bo6bo$630b2o9bo4bo52bo4bo$614b2o14b2o11b2o56b2o27b2o$613bo2bo23b3o2b3o50b3o2b3o23bo2bo$640b2o4b2o50b2o4b2o$612bo4bo110bo4bo$611b2o4b2o108b2o4b2o$610bo2bo2bo2bo23
+b2o56b2o23bo2bo2bo2bo$610b2ob4ob2o22bo2bo54bo2bo22b2ob4ob2o$612bo4bo12b2o96bo4bo139b2o$630b2o9bo4bo52bo4bo139b3o25bobo$640b2o4b2o50b2o4b2o140bo27bo$639bo2bo2bo2bo48bo2bo2bo2bo138bo$622b2o15b2ob4ob2o48b2ob4ob2o15b2o$620b2o2b2o15bo4bo52bo4bo15b2o2b2o$6
+22b2o98b2o$619bo6bo92bo6bo$620bo4bo94bo4bo$622b2o98b2o$619b3o2b3o92b3o2b3o$619b2o4b2o92b2o4b2o3$622b2o98b2o$621bo2bo96bo2bo2$620bo4bo94bo4bo$619b2o4b2o92b2o4b2o$618bo2bo2bo2bo90bo2bo2bo2bo$618b2ob4ob2o90b2ob4ob2o$620bo4bo94bo4bo40$525bo$525bobo$525b2
+o64$624b2o$625b2o$624bo15$633b2o$604b3o25bobo$606bo27bo$605bo124$384b2o$385b2o$384bo15$393b2o$364b3o25bobo$366bo27bo$365bo6$180b4o82b4o2$180bo2bo82bo2bo$179bob2obo80bob2obo$179bo4bo80bo4bo2$179bo4bo80bo4bo$179b2o2b2o80b2o2b2o$163b4o12b6o80b6o12b4o$18
+0bo2bo82bo2bo$163bo2bo14b2o84b2o14bo2bo$162bob2obo13b2o84b2o13bob2obo$162bo4bo114bo4bo$178b2o4b2o78b2o4b2o132bo2bo82bo2bo$162bo4bo10b2o4b2o78b2o4b2o10bo4bo116bo2bo82bo2bo$162b2o2b2o10b2o4b2o78b2o4b2o10b2o2b2o115bo4bo80bo4bo$162b6o114b6o115bo4bo80bo4b
+o$163bo2bo13bo2bo82bo2bo13bo2bo116bo4bo80bo4bo$164b2o118b2o117bo4bo80bo4bo$164b2o118b2o116b3o2b3o78b3o2b3o$182bo5bo213bob4obo78bob4obo$161b2o4b2o14bo2b4o91b2o4b2o98bo2bo12bo4bo80bo4bo12bo2bo$161b2o4b2o8b2o2bob2obobobo90b2o4b2o98bo2bo116bo2bo$161b2o4b
+2o7bob4ob3o4b2o89b2o4b2o97bo4bo114bo4bo$176b3ob2obo2bo4bo194bo4bo13b2o84b2o13bo4bo$163bo2bo15b5o3bo92bo2bo99bo4bo13b2o84b2o13bo4bo$184b2o3bo196bo4bo13b2o84b2o13bo4bo$155b2o228b3o2b3o10bo4bo80bo4bo10b3o2b3o$155b2o228bob4obo8b3o4b3o76b3o4b3o8bob4obo$15
+4bo2bo228bo4bo8b3o6b3o74b3o6b3o8bo4bo$154b4o24b2o216b2o8b2o74b2o8b2o$153bob2obo23b2o217b10o76b10o$154bo2bo230b2o12b8o78b8o12b2o$388b2o14b4o82b4o14b2o$153b2o2b2o229b2o118b2o$152bo6bo226bo4bo114bo4bo$384b3o4b3o110b3o4b3o$153bo4bo224b3o6b3o108b3o6b3o$15
+4bo2bo225b2o8b2o108b2o8b2o$155b2o227b10o110b10o$385b8o112b8o$152b2o4b2o227b4o116b4o$151bo2bo2bo2bo354b2o2b2o$152b2o4b2o355b2o2b2o$153bo4bo355b3o2b3o$514b3o2b3o2$514bo6bo$514bo2b2o2bo$162b4o118b4o227b6o$498b2o$162bo2bo118bo2bo210b2o$161bob2obo116bob2o
+bo228b2o$161bo4bo116bo4bo227bo2bo$516b4o$161bo4bo116bo4bo201b2o23b2o2b2o$161b2o2b2o116b2o2b2o201b2o20bo2bo4bo2bo$161b6o116b6o226bo4bo$162bo2bo118bo2bo228b4o$163b2o120b2o225bo10bo$163b2o120b2o226bo8bo$495b3o$160b2o4b2o114b2o4b2o96bo2bo106b2o10bo2bo5b2
+o$160b2o4b2o114b2o4b2o96bo2bo104bobo11bo2bo$160b2o4b2o114b2o4b2o95bo4bo103bo12bo4bo$385bo4bo101b2o13bo4bo$162bo2bo118bo2bo97bo4bo102bobo11bo4bo$385bo4bo103b2o11bo4bo$384b3o2b3o114b3o2b3o$384bob4obo114bob4obo$385bo4bo116bo4bo2$281b4o$274b2o111b2o120b2
+o$274b2o5bo2bo102b2o120b2o$280bob2obo101b2o120b2o$280bo4bo99bo4bo116bo4bo$383b3o4b3o112b3o4b3o$266b2o12bo4bo96b3o6b3o110b3o6b3o$266b2o12b2o2b2o96b2o8b2o110b2o8b2o$252b4o24b6o97b10o112b10o$281bo2bo99b8o114b8o$252bo2bo26b2o102b4o118b4o$251bob2obo25b2o$
+30b2o84b2o133bo4bo$29bo2bo82bo2bo160b2o4b2o103b2o113bo2bo$28b2o2b2o80b2o2b2o131bo4bo9b2o11b2o4b2o103b2o113bo2bo$28b2o2b2o80b2o2b2o131b2o2b2o9b2o11b2o4b2o102bo2bo111bo4bo$28bob2obo80bob2obo131b6o132b4o111bo4bo$30b2o84b2o134bo2bo25bo2bo103bob2obo110bo4
+bo$28bo4bo80bo4bo133b2o134bo2bo25bo2bo82bo4bo$27b2o4b2o78b2o4b2o132b2o163bo2bo81b3o2b3o$13b2o118b2o253b2o2b2o23bo4bo80bob4obo$12bo2bo116bo2bo114b2o4b2o15b4o110bo6bo22bo4bo53bo2bo24bo4bo$11b2o2b2o13b2o84b2o13b2o2b2o113b2o4b2o159bo4bo53bo2bo$11b2o2b2o1
+2bo2bo82bo2bo12b2o2b2o113b2o4b2o15bo2bo111bo4bo23bo4bo52bo4bo$11bob2obo12bo2bo82bo2bo12bob2obo135bob2obo111bo2bo23b3o2b3o51bo4bo25b2o$13b2o118b2o117bo2bo16bo4bo112b2o24bob4obo51bo4bo25b2o$11bo4bo10b2o4b2o78b2o4b2o10bo4bo280bo4bo52bo4bo25b2o$10b2o4b2o
+8bo2bo2bo2bo76bo2bo2bo2bo8b2o4b2o134bo4bo109b2o4b2o2bobo74b3o2b3o22bo4bo$26bo2bo2bo2bo76bo2bo2bo2bo150b2o2b2o108bo2bo2bo2bo2bo75bob4obo20b3o4b3o$27bobo2bobo78bobo2bobo151b6o109b2o4b2o24b2o54bo4bo20b3o6b3o$13b2o118b2o138bo2bo111bo4bo25b2o80b2o8b2o$12b
+o2bo116bo2bo138b2o130b2o11b2o81b10o$12bo2bo116bo2bo138b2o130b2o9bo4bo54b2o24b8o$415b3o4b3o52b2o26b4o$10b2o4b2o112b2o4b2o133b2o4b2o135b3o6b3o51b2o18bo2bo$9bo2bo2bo2bo110bo2bo2bo2bo132b2o4b2o135b2o8b2o49bo4bo16bo2bo$9bo2bo2bo2bo110bo2bo2bo2bo132b2o4b2o
+136b10o48b3o4b3o13bo4bo$10bobo2bobo112bobo2bobo278b8o48b3o6b3o12bo4bo$273bo2bo141b4o50b2o8b2o12bo4bo$406b2o65b10o13bo4bo$4b2o400b2o66b8o13b3o2b3o$2b2o2b2o468b4o15bob4obo$4b2o490bo4bo$bo6bo404bo2bo$2bo4bo405bo2bo$4b2o406bo4bo80b2o$b3o2b3o135b2o266bo4b
+o80b2o$b2o4b2o136b2o265bo4bo80b2o$144bo267bo4bo78bo4bo$165bo2bo5b2o235b3o2b3o75b3o4b3o$4b2o159bo2bo5b2o235bob4obo74b3o6b3o$3bo2bo157bo4bo242bo4bo75b2o8b2o$164bo4bo324b10o$2bo4bo156bo4bo325b8o$b2o4b2o155bo4bo12b2o230b2o81b4o$o2bo2bo2bo153b3o2b3o11b2o2
+30b2o$2ob4ob2o153bob4obo243b2o$2bo4bo156bo4bo24bo2bo214bo4bo$123b2o69bo2bo212b3o4b3o$123b2o68bo4bo210b3o6b3o$166b2o25bo4bo210b2o8b2o$12b2o120b2o30b2o25bo4bo211b10o$11bo2bo118bo2bo29b2o14b2o9bo4bo212b8o$10b2o2b2o99b2o15b2o2b2o26bo4bo12b2o8b3o2b3o213b4
+o$10b2o2b2o99b2o15b2o2b2o24b3o4b3o20bob4obo$10bob2obo116bob2obo23b3o6b3o20bo4bo$12b2o120b2o25b2o8b2o$10bo4bo116bo4bo24b10o$9b2o4b2o114b2o4b2o24b8o24b2o$165b4o26b2o$173bo2bo18b2o$12b2o78b3o20b2o17b2o37bo2bo16bo4bo$11bo2bo77bo22b2o16bo2bo35bo4bo13b3o4b
+3o$11bo2bo78bo39bo2bo35bo4bo12b3o6b3o$172bo4bo12b2o8b2o$9b2o4b2o114b2o4b2o33bo4bo13b10o$8bo2bo2bo2bo112bo2bo2bo2bo31b3o2b3o13b8o$8bo2bo2bo2bo112bo2bo2bo2bo31bob4obo15b4o$9bobo2bobo114bobo2bobo33bo4bo2$123b2o$123b2o49b2o$110b2o62b2o$110b2o62b2o$15b2o1
+14b2o39bo4bo$14bo2bo112bo2bo36b3o4b3o$13b2o2b2o110b2o2b2o34b3o6b3o$13b2o2b2o110b2o2b2o34b2o8b2o$13bob2obo110bob2obo35b10o$15b2o114b2o38b8o$13bo4bo110bo4bo38b4o$12b2o4b2o108b2o4b2o$44b2o56b2o$43bo2bo54bo2bo$15b2o25b2o2b2o52b2o2b2o25b2o$14bo2bo24b2o2b2
+o52b2o2b2o24bo2bo$14bo2bo24bob2obo52bob2obo24bo2bo$44b2o56b2o$12b2o4b2o22bo4bo52bo4bo22b2o4b2o$11bo2bo2bo2bo20b2o4b2o50b2o4b2o20bo2bo2bo2bo$11bo2bo2bo2bo106bo2bo2bo2bo$12bobo2bobo108bobo2bobo$44b2o56b2o$43bo2bo54bo2bo$43bo2bo54bo2bo$23b2o98b2o$22bo2b
+o15b2o4b2o50b2o4b2o15bo2bo$21b2o2b2o13bo2bo2bo2bo48bo2bo2bo2bo13b2o2b2o$21b2o2b2o13bo2bo2bo2bo48bo2bo2bo2bo13b2o2b2o$21bob2obo14bobo2bobo50bobo2bobo14bob2obo$23b2o98b2o$21bo4bo4b2o88bo4bo$20b2o4b2o3b2o87b2o4b2o3$23b2o98b2o$22bo2bo96bo2bo$22bo2bo96bo2
+bo2$20b2o4b2o92b2o4b2o$19bo2bo2bo2bo90bo2bo2bo2bo$19bo2bo2bo2bo90bo2bo2bo2bo$20bobo2bobo92bobo2bobo264$6320b3o$6320bo$6321bo42$6413b2o$6412b4o$6411b2ob2o7b2o$6411b2o2b2o5bob5o$6410b3o10b2o4b2o$6410b3o4b3o3bo$6410b3o4b3o3bo$6410b3o10b2o4b2o$6411b2o2b2
+o5bob5o$6411b2ob2o7b2o$6412b4o$6413b2o18bo$6432bobo5bo$6431b2obo3bo2bo2bo$6375bo7bob2o46bo3bo3bobob2o$6374b3o5bo6bo46bo7b2ob2o$6351b2o20bo4bo2b2o3bo2bo46bo7b2ob2o$6350bo2bo6bo11b3o4bobo5b2o44bo3bo3bobob2o$6327bo2bo22bo6b2ob3o6b3o4bobo5b2o42b2obo3bo2b
+o2bo$6326bo23b3o2b2o7b3o6bo4bo2b2o3bo2bo42bobo5bo$6338b2ob2o14bo4b2o3bo6b3o5bo6bo43bo$6329b3o5bo3b4o12bo4b2o3bo7bo7bob2o$6328bo2b3o3bo3b4o5b3o2b2o7b3o$6324bo3bo3bobo2b2o14bo6b2ob3o$6306b2o16bo3bo3bobo2b2o11bo2bo6bo$6305b2ob2o5b3o10bo2b3o3bo3b4o6b2o$6
+305bo2b2o10bo8b3o5bo3b4o102b2o$6305b4o6b2o3b3o15b2ob2o104bobo6b2o2bo$6305b2o4b2o3b2o2bobo3bo32b2o20b2o11b2o50bo2b2o5b2obo2bo$6305b2o4b2o3b2o2bobo4bo2bo28b2o20b2o11b2o51b2o3bo4bo4bo$6305b4o6b2o3b3o124bo5bo4bo2bobo$6305bo2b2o10bo126bo5bo4bo2bobo$6305b2
+ob2o5b3o80b3o46b2o3bo4bo4bo$6306b2o138bo2b2o5b2obo2bo$6447bobo6b2o2bo$6447b2o$6368b2o$6368b2o25bo$6395bo$6395bo2$6357b2o32b3o3b3o$6322b2o33b2o$6321bo2bo6bo$6324bo6b2ob3o$6321b3o2b2o7b3o8b2o$6328bo4b2o3bo6b2ob2o5b3o25b3o$6328bo4b2o3bo6bo2b2o10bo22b3o4
+b3ob2o$6321b3o2b2o7b3o7b4o6b2o3b3o18bo7b3o4bobo6b2o$6324bo6b2ob3o8b2o4b2o3b2o2bobo24b2obo4bo2bo5b2ob2o5b3o$6321bo2bo6bo13b2o4b2o3b2o2bobo24b2obo4bo2bo5bo2b2o10bo$6322b2o21b4o6b2o3b3o18bo7b3o4bobo5b4o6b2o3b3o$6345bo2b2o10bo22b3o4b3ob2o8b2o4b2o3b2o2bob
+o$6345b2ob2o5b3o25b3o18b2o4b2o3b2o2bobo$6346b2o56b4o6b2o3b3o$6404bo2b2o10bo$6404b2ob2o5b3o$6405b2o27$6395bo$6396bo$6394b3o4$6414b2o$6413bo2bo6bo$6416bo6b2ob3o$6413b3o2b2o7b3o$6420bo4b2o3bo$6420bo4b2o3bo$6413b3o2b2o7b3o$6416bo6b2ob3o$6413bo2bo6bo$6414
+b2o6$6416b4o7bo$6416bo3bo6bo$6415bo12bo2bo$6415bo3b2o5b3ob2obo$6415bo6b2o6b2ob2o$6415bo6b2o6b2ob2o$6415bo3b2o5b3ob2obo$6415bo12bo2bo$6416bo3bo6bo$6416b4o7bo4$6414b2o$6413b2ob2o5b3o$6413bo2b2o10bo$6413b4o6b2o3b3o$6413b2o4b2o3b2o2bobo$6413b2o4b2o3b2o2b
+obo$6413b4o6b2o3b3o$6413bo2b2o10bo$6413b2ob2o5b3o$6414b2o!`,
+"movingrak": `x = 2218, y = 609, rule = B3/S23
+2025bo$2023b2obo$2023b2obo5b3ob2o$2024b2o3bo4b2o2b2o$2028b2o5bo4bo$2028b2o5bo4bo$2024b2o3bo4b2o2b2o$2023b2obo5b3ob2o$2004bo18b2obo$2003bobo5bo13bo19bo$1744b2o256b2obo3bo2bo2bo28bobo5bo$1744bobo6b2o2bo223bo22bo3bo3bobob
+2o25b2obo3bo2bo2bo$1743bo2b2o5b2obo2bo220bobo5bo18bo7b2ob2o25bo3bo3bobob2o$1744b2o3bo4bo4bo219b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o$1744bo5bo4bo2bobo220bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$1744bo5bo4bo2bobo223bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o$
+1744b2o3bo4bo4bo224bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$1743bo2b2o5b2obo2bo221bo3bo3bobob2o9bo39bobo5bo$1723b2o19bobo6b2o2bo221b2obo3bo2bo2bo52bo$1722bo2bo6bo11b2o18b2o194bo19bobo5bo$1725bo6b2ob3o25bo2bo6bo185bobo5bo13bo$1700b2o20b3o2b2o7b3o27bo6b2ob3o1
+79b2obo3bo2bo2bo$1699bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o180bo3bo3bobob2o46b2o$1702bo6b2ob3o14bo4b2o3bo30bo4b2o3bo182bo7b2ob2o45b2o6b2o$1699b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo182bo7b2ob2o44bo8b2o$1706bo4b2o3bo8bo6b2ob3o25b3o2b2o7b3o180bo3bo3bobob2o35b3o$1
+706bo4b2o3bo5bo2bo6bo33bo6b2ob3o179b2obo3bo2bo2bo81bo$1699b3o2b2o7b3o7b2o38bo2bo6bo185bobo5bo39b2obobob2o36bobo5bo$1702bo6b2ob3o49b2o194bo46bo2bobo38b2obo3bo2bo2bo$1679b2o18bo2bo6bo297b3obo41bo3bo3bobob2o$1678bo2bo6bo11b2o314bo39bo7b2ob2o$1681bo6b2ob
+3o316bo5bo7b2o30bo7b2ob2o$1678b3o2b2o7b3o45b2o273b2o7b2o27bo3bo3bobob2o$1685bo4b2o3bo43b4o9b2o259b2o36b2obo3bo2bo2bo$1685bo4b2o3bo42b3obo9b2o298bobo5bo$1678b3o2b2o7b3o44b3obo309bo$1681bo6b2ob3o46b3o29b2o$1678bo2bo6bo52b2o28bo2bo6bo$1679b2o93bo6b2ob3o
+$1771b3o2b2o7b3o$1778bo4b2o3bo187bo$1747b2o29bo4b2o3bo186bobo5bo$1747b2o22b3o2b2o7b3o186b2obo3bo2bo2bo$1774bo6b2ob3o189bo3bo3bobob2o$1771bo2bo6bo197bo7b2ob2o$1772b2o205bo7b2ob2o$1976bo3bo3bobob2o$1974b2obo3bo2bo2bo$1975bobo5bo$1976bo$1695b2o$1694bo2b
+o6bo$1697bo6b2ob3o$1694b3o2b2o7b3o$1701bo4b2o3bo$1701bo4b2o3bo$1694b3o2b2o7b3o$1697bo6b2ob3o441b2o$1694bo2bo6bo446bobo6b2o2bo$1695b2o453bo2b2o5b2obo2bo$2151b2o3bo4bo4bo$2151bo5bo4bo2bobo$2151bo5bo4bo2bobo$2151b2o3bo4bo4bo$2150bo2b2o5b2obo2bo$2130b2o1
+9bobo6b2o2bo$2129bo2bo6bo11b2o18b2o$2132bo6b2ob3o25bo2bo6bo$2107b2o20b3o2b2o7b3o27bo6b2ob3o$2106bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o$2109bo6b2ob3o14bo4b2o3bo30bo4b2o3bo$2106b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo$2113bo4b2o3bo8bo6b2ob3o25b3o2b2o7b3o$2113bo4b2
+o3bo5bo2bo6bo33bo6b2ob3o$2106b3o2b2o7b3o7b2o38bo2bo6bo$2109bo6b2ob3o49b2o$2086b2o18bo2bo6bo$2085bo2bo6bo11b2o$2088bo6b2ob3o$2085b3o2b2o7b3o45b2o$2092bo4b2o3bo43b4o9b2o$2092bo4b2o3bo42b3obo9b2o$2085b3o2b2o7b3o44b3obo$2088bo6b2ob3o46b3o29b2o$2085bo2bo6
+bo52b2o28bo2bo6bo$2086b2o93bo6b2ob3o$2178b3o2b2o7b3o$2185bo4b2o3bo$2154b2o29bo4b2o3bo$2154b2o22b3o2b2o7b3o$2181bo6b2ob3o$2178bo2bo6bo$2179b2o3$1483b2o$1482b4o$1481b2ob2o7b2o607b2o$1481b2o2b2o5bob5o477bo124bo2bo6bo$1480b3o10b2o4b2o474bobo5bo120bo6b2ob
+3o$1480b3o4b3o3bo480b2obo3bo2bo2bo113b3o2b2o7b3o$1480b3o4b3o3bo482bo3bo3bobob2o118bo4b2o3bo$1480b3o10b2o4b2o478bo7b2ob2o116bo4b2o3bo$1481b2o2b2o5bob5o480bo7b2ob2o109b3o2b2o7b3o$1461b4o7bo8b2ob2o7b2o481bo3bo3bobob2o114bo6b2ob3o$1461bo3bo6bo9b4o16b4o7b
+o460b2obo3bo2bo2bo113bo2bo6bo$1460bo12bo2bo6b2o17bo3bo6bo461bobo5bo118b2o$1438b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo458bo$1438bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo175b2o$1437bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o173bo2bo6bo$1437bo3b2o5b3ob2obo4bo3b2o5
+b3ob2obo22bo6b2o6b2ob2o176bo6b2ob3o$1437bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo174b3o2b2o7b3o$1437bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo183bo4b2o3bo341bo$1437bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo187bo4b2o3bo340bobo5bo$1437bo12bo2bo48b4o7bo180b3o2b2o7b3o340b2o
+bo3bo2bo2bo$1417b4o7bo9bo3bo6bo247bo6b2ob3o258b2o6b2o75bo3bo3bobob2o$1417bo3bo6bo9b4o7bo244bo2bo6bo263b2o6b2o78bo7b2ob2o$1416bo12bo2bo262b2o359bo7b2ob2o$1416bo3b2o5b3ob2obo618bo3bo3bobob2o$1416bo6b2o6b2ob2o524bo90b2obo3bo2bo2bo$1416bo6b2o6b2ob2o523bo
+bo5bo84bobo5bo$1416bo3b2o5b3ob2obo523b2obo3bo2bo2bo81bo$1416bo12bo2bo77b4o7bo250b2o186bo3bo3bobob2o$1417bo3bo6bo81bo3bo6bo249bo2bo6bo181bo7b2ob2o$1417b4o7bo80bo12bo2bo248bo6b2ob3o176bo7b2ob2o$1509bo3b2o5b3ob2obo163b2o6b2o70b3o2b2o7b3o172bo3bo3bobob2o
+$1509bo6b2o6b2ob2o162b2o6b2o77bo4b2o3bo169b2obo3bo2bo2bo$1509bo6b2o6b2ob2o249bo4b2o3bo170bobo5bo13bo$1509bo3b2o5b3ob2obo243b3o2b2o7b3o172bo19bobo5bo$1509bo12bo2bo153b2o93bo6b2ob3o192b2obo3bo2bo2bo52bo$1510bo3bo6bo156bo2bo6bo82bo2bo6bo199bo3bo3bobob2o
+9bo39bobo5bo$1510b4o7bo159bo6b2ob3o78b2o210bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$1678b3o2b2o7b3o289bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o$1685bo4b2o3bo8b2o275bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$1685bo4b2o3bo8b2o273b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o
+$1499b2o177b3o2b2o7b3o285bobo5bo18bo7b2ob2o25bo3bo3bobob2o$1433b4o7bo55b2o179bo6b2ob3o287bo22bo3bo3bobob2o25b2obo3bo2bo2bo$1433bo3bo6bo54bo178bo2bo6bo11b2o300b2obo3bo2bo2bo28bobo5bo$1432bo12bo2bo230b2o18bo2bo6bo293bobo5bo33bo$1432bo3b2o5b3ob2obo251bo
+6b2ob3o49b2o238bo$1432bo6b2o6b2ob2o247b3o2b2o7b3o7b2o38bo2bo6bo$1432bo6b2o6b2ob2o254bo4b2o3bo5bo2bo6bo33bo6b2ob3o$1432bo3b2o5b3ob2obo255bo4b2o3bo8bo6b2ob3o25b3o2b2o7b3o$1432bo12bo2bo250b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo$1433bo3bo6bo257bo6b2ob3o14bo4b
+2o3bo30bo4b2o3bo$1433b4o7bo254bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o$1700b2o20b3o2b2o7b3o27bo6b2ob3o$695b4o7bo383b2o633bo6b2ob3o25bo2bo6bo$695bo3bo6bo382bo2bo6bo622bo2bo6bo31b2o$694bo12bo2bo381bo6b2ob3o618b2o$694bo3b2o5b3ob2obo376b3o2b2o7b3o$694bo6b2o6b2ob
+2o382bo4b2o3bo$694bo6b2o6b2ob2o382bo4b2o3bo$694bo3b2o5b3ob2obo376b3o2b2o7b3o$694bo12bo2bo381bo6b2ob3o$675b2o18bo3bo6bo363bo18bo2bo6bo1002b2o$674b2ob2o5b3o8b4o7bo9b2o350b2obo18b2o19bo989bo2bo6bo$674bo2b2o10bo25b2ob2o5b3o340b2obo5b3ob2o26b2obo991bo6b2o
+b3o$652b2o20b4o6b2o3b3o23bo2b2o10bo316bo21b2o3bo4b2o2b2o24b2obo5b3ob2o977b3o2b2o7b3o$651b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o312b2obo24b2o5bo4bo24b2o3bo4b2o2b2o982bo4b2o3bo$651bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2o3b2o2bobo312b2obo5b3ob2o13b2o5bo4b
+o28b2o5bo4bo981bo4b2o3bo$651b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo313b2o3bo4b2o2b2o7b2o3bo4b2o2b2o29b2o5bo4bo974b3o2b2o7b3o$651b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o317b2o5bo4bo5b2obo5b3ob2o27b2o3bo4b2o2b2o978bo6b2ob3o$109b2o540b2o4b2o3b2o2bobo5
+b2ob2o5b3o28bo2b2o10bo319b2o5bo4bo5b2obo37b2obo5b3ob2o977bo2bo6bo$108bo2bo6bo532b4o6b2o3b3o6b2o38b2ob2o5b3o318b2o3bo4b2o2b2o8bo38b2obo989b2o$111bo6b2ob3o527bo2b2o10bo49b2o327b2obo5b3ob2o51bo937bo7bob2o$108b3o2b2o7b3o506b2o18b2ob2o5b3o362bo18b2obo999b
+3o5bo6bo$115bo4b2o3bo504b2ob2o5b3o9b2o370b2obo19bo999bo4bo2b2o3bo2bo$115bo4b2o3bo504bo2b2o10bo378b2obo5b3ob2o1007b3o4bobo5b2o$108b3o2b2o7b3o505b4o6b2o3b3o377b2o3bo4b2o2b2o1005b3o4bobo5b2o116b2o$111bo6b2ob3o506b2o4b2o3b2o2bobo7b2o372b2o5bo4bo7b2o996bo
+4bo2b2o3bo2bo114bo2bo6bo$89bo18bo2bo6bo511b2o4b2o3b2o2bobo7b2o372b2o5bo4bo7b2o997b3o5bo6bo117bo6b2ob3o$87b2obo18b2o19bo499b4o6b2o3b3o377b2o3bo4b2o2b2o1008bo7bob2o37b2o6b2o70b3o2b2o7b3o$87b2obo5b3ob2o26b2obo498bo2b2o10bo78b2o298b2obo5b3ob2o80bo978b2o6
+b2o77bo4b2o3bo$66bo21b2o3bo4b2o2b2o24b2obo5b3ob2o487b2ob2o5b3o80b2ob2o5b3o288b2obo89b2obo1064bo4b2o3bo$64b2obo24b2o5bo4bo24b2o3bo4b2o2b2o486b2o90bo2b2o10bo287bo90b2obo5b3ob2o1046b3o2b2o7b3o$64b2obo5b3ob2o13b2o5bo4bo28b2o5bo4bo577b4o6b2o3b3o377b2o3bo4
+b2o2b2o952b2o93bo6b2ob3o$65b2o3bo4b2o2b2o7b2o3bo4b2o2b2o29b2o5bo4bo577b2o4b2o3b2o2bobo381b2o5bo4bo950bo2bo6bo82bo2bo6bo$69b2o5bo4bo5b2obo5b3ob2o27b2o3bo4b2o2b2o497b2o6b2o71b2o4b2o3b2o2bobo295b2o6b2o76b2o5bo4bo953bo6b2ob3o78b2o$69b2o5bo4bo5b2obo37b2ob
+o5b3ob2o499b2o6b2o71b4o6b2o3b3o295b2o6b2o72b2o3bo4b2o2b2o951b3o2b2o7b3o$65b2o3bo4b2o2b2o8bo38b2obo591bo2b2o10bo378b2obo5b3ob2o960bo4b2o3bo8b2o$64b2obo5b3ob2o51bo592b2ob2o5b3o381b2obo971bo4b2o3bo8b2o$45bo18b2obo656b2o393bo965b3o2b2o7b3o$43b2obo19bo202
+1bo6b2ob3o$43b2obo5b3ob2o2027bo2bo6bo11b2o$44b2o3bo4b2o2b2o2026b2o18bo2bo6bo$48b2o5bo4bo54b2o1992bo6b2ob3o49b2o$48b2o5bo4bo43b2o9b2o530b2o393bo1063b3o2b2o7b3o7b2o38bo2bo6bo$44b2o3bo4b2o2b2o43bobo540b2ob2o5b3o381b2obo1069bo4b2o3bo5bo2bo6bo33bo6b2ob3o$
+43b2obo5b3ob2o41b2o4bo32bo507bo2b2o10bo378b2obo5b3ob2o1058bo4b2o3bo8bo6b2ob3o25b3o2b2o7b3o$43b2obo51bobo35b2obo506b4o6b2o3b3o377b2o3bo4b2o2b2o1049b3o2b2o7b3o6b3o2b2o7b3o31bo4b2o3bo$45bo51b2obo35b2obo5b3ob2o495b2o4b2o3b2o2bobo381b2o5bo4bo1051bo6b2ob3o
+14bo4b2o3bo30bo4b2o3bo$98b2obo35b2o3bo4b2o2b2o493b2o4b2o3b2o2bobo381b2o5bo4bo1048bo2bo6bo19bo4b2o3bo23b3o2b2o7b3o$99b3o39b2o5bo4bo492b4o6b2o3b3o377b2o3bo4b2o2b2o1050b2o20b3o2b2o7b3o27bo6b2ob3o$110b2o29b2o5bo4bo492bo2b2o10bo378b2obo5b3ob2o378b4o7bo687
+bo6b2ob3o25bo2bo6bo$110b2o25b2o3bo4b2o2b2o493b2ob2o5b3o381b2obo389bo3bo6bo684bo2bo6bo31b2o$136b2obo5b3ob2o496b2o393bo389bo12bo2bo681b2o$136b2obo1292bo3b2o5b3ob2obo$138bo1293bo6b2o6b2ob2o$1432bo6b2o6b2ob2o$1432bo3b2o5b3ob2obo$1432bo12bo2bo$1433bo3bo6b
+o$61bo1371b4o7bo$59b2obo$59b2obo5b3ob2o$60b2o3bo4b2o2b2o$64b2o5bo4bo$64b2o5bo4bo1433b4o7bo$60b2o3bo4b2o2b2o1434bo3bo6bo$59b2obo5b3ob2o1435bo12bo2bo$59b2obo1383b2o6b2o53bo3b2o5b3ob2obo$61bo1384b2o6b2o53bo6b2o6b2ob2o$1509bo6b2o6b2ob2o$1509bo3b2o5b3ob2o
+bo$1417b4o7bo80bo12bo2bo$1417bo3bo6bo81bo3bo6bo$1416bo12bo2bo77b4o7bo$1416bo3b2o5b3ob2obo$1416bo6b2o6b2ob2o23b2o$1416bo6b2o6b2ob2o23b2o$1416bo3b2o5b3ob2obo$1416bo12bo2bo$1417bo3bo6bo9b4o7bo$1417b4o7bo9bo3bo6bo$1437bo12bo2bo48b4o7bo$1437bo3b2o5b3ob2ob
+o5b4o7bo29bo3bo6bo$1437bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$1437bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$1437bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$1437bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$1438bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$1438b4o7b
+o10bo3b2o5b3ob2obo22bo12bo2bo$1460bo12bo2bo25bo3bo6bo$1461bo3bo6bo29b4o7bo$1461b4o7bo9$1928bobo$647b2o393bo885b2o$646b2ob2o5b3o381b2obo764bo120bo$646bo2b2o10bo378b2obo5b3ob2o754b2o$646b4o6b2o3b3o377b2o3bo4b2o2b2o751b2o$646b2o4b2o3b2o2bobo381b2o5bo4bo
+$646b2o4b2o3b2o2bobo381b2o5bo4bo$646b4o6b2o3b3o377b2o3bo4b2o2b2o$646bo2b2o10bo378b2obo5b3ob2o$646b2ob2o5b3o381b2obo$647b2o393bo5$724b2o393bo$723b2ob2o5b3o381b2obo386b2o$61bo661bo2b2o10bo378b2obo5b3ob2o375bobo6b2o2bo$59b2obo635b2o23b4o6b2o3b3o351b2o24
+b2o3bo4b2o2b2o372bo2b2o5b2obo2bo$59b2obo5b3ob2o624b2o23b2o4b2o3b2o2bobo351b2o28b2o5bo4bo372b2o3bo4bo4bo$60b2o3bo4b2o2b2o647b2o4b2o3b2o2bobo381b2o5bo4bo372bo5bo4bo2bobo$64b2o5bo4bo612b2o32b4o6b2o3b3o377b2o3bo4b2o2b2o373bo5bo4bo2bobo$64b2o5bo4bo554b2o5
+4b2ob3o30bo2b2o10bo287bo56bo3bo29b2obo5b3ob2o375b2o3bo4bo4bo$60b2o3bo4b2o2b2o554b2ob2o5b3o44b2obobo30b2ob2o5b3o288b2obo54b3obo2bo27b2obo385bo2b2o5b2obo2bo$59b2obo5b3ob2o556bo2b2o10bo45bob2o29b2o298b2obo5b3ob2o43bobobo32bo387bobo6b2o2bo$59b2obo567b4o6
+b2o3b3o377b2o3bo4b2o2b2o47bo418b2o$61bo568b2o4b2o3b2o2bobo47bo7b2o324b2o5bo4bo46b2o7b2o$630b2o4b2o3b2o2bobo55b2o324b2o5bo4bo40bo3bobo8b2o$630b4o6b2o3b3o377b2o3bo4b2o2b2o45bobo$630bo2b2o10bo378b2obo5b3ob2o$630b2ob2o5b3o9b2o370b2obo19bo$138bo492b2o18b2
+ob2o5b3o362bo18b2obo$136b2obo511bo2b2o10bo49b2o327b2obo5b3ob2o51bo$136b2obo5b3ob2o500b4o6b2o3b3o6b2o38b2ob2o5b3o318b2o3bo4b2o2b2o8bo38b2obo$54b2o6b2o73b2o3bo4b2o2b2o498b2o4b2o3b2o2bobo5b2ob2o5b3o28bo2b2o10bo319b2o5bo4bo5b2obo37b2obo5b3ob2o$54b2o6b2o7
+7b2o5bo4bo497b2o4b2o3b2o2bobo5bo2b2o10bo25b4o6b2o3b3o317b2o5bo4bo5b2obo5b3ob2o27b2o3bo4b2o2b2o$141b2o5bo4bo497b4o6b2o3b3o5b4o6b2o3b3o23b2o4b2o3b2o2bobo313b2o3bo4b2o2b2o7b2o3bo4b2o2b2o29b2o5bo4bo$137b2o3bo4b2o2b2o498bo2b2o10bo7b2o4b2o3b2o2bobo23b2o4b2
+o3b2o2bobo312b2obo5b3ob2o13b2o5bo4bo28b2o5bo4bo$45bo90b2obo5b3ob2o500b2ob2o5b3o10b2o4b2o3b2o2bobo23b4o6b2o3b3o312b2obo24b2o5bo4bo24b2o3bo4b2o2b2o$43b2obo89b2obo512b2o20b4o6b2o3b3o23bo2b2o10bo316bo21b2o3bo4b2o2b2o24b2obo5b3ob2o$43b2obo5b3ob2o80bo535bo
+2b2o10bo25b2ob2o5b3o340b2obo5b3ob2o26b2obo$44b2o3bo4b2o2b2o614b2ob2o5b3o29b2o350b2obo39bo$48b2o5bo4bo614b2o393bo$48b2o5bo4bo5b2o$44b2o3bo4b2o2b2o$43b2obo5b3ob2o$43b2obo19bo980b2o382b2o5bo2bo373b2o5bo2bo373b2o5bo2bo$45bo18b2obo978b4o380b4o8bo371b4o8bo
+371b4o8bo$64b2obo5b3ob2o51bo915b2ob2o379b2ob2o3bo3bo371b2ob2o3bo3bo371b2ob2o3bo3bo$65b2o3bo4b2o2b2o8bo38b2obo916b2o382b2o5b4o10bo362b2o5b4o373b2o5b4o4bo$69b2o5bo4bo5b2obo37b2obo5b3ob2o1309bo763b2o$69b2o5bo4bo5b2obo5b3ob2o27b2o3bo4b2o2b2o1307b3o760b2o
+$65b2o3bo4b2o2b2o7b2o3bo4b2o2b2o29b2o5bo4bo$64b2obo5b3ob2o13b2o5bo4bo28b2o5bo4bo$64b2obo24b2o5bo4bo24b2o3bo4b2o2b2o1677bo2bo380bo2bo$66bo21b2o3bo4b2o2b2o24b2obo5b3ob2o1683bo383bo$87b2obo5b3ob2o26b2obo1690bo3bo379bo3bo$87b2obo39bo1692b4o380b4o$89bo$14
+55bo$1445b3o6b2o366bo2bo380bo2bo$1447bo6bobo369bo383bo$1446bo375bo3bo379bo3bo$270b4o380b4o380b4o380b4o380b4o13b4o363b4o13b4o$269bo3bo379bo3bo379bo3bo379bo3bo379bo3bo379bo3bo$273bo383bo383bo383bo383bo383bo$269bo2bo380bo2bo380bo2bo380bo2bo380bo2bo380bo
+2bo5$686b2o$685bobo391b2o$687bo392b2o$1079bo$735b2o$735bobo392b2o$735bo393b2o19b2o$1131bo17b4o$757b3o388b2ob2o7b2o$757b3o4b3ob2o378b2o2b2o5bob5o$755bo7b3o4bobo374b3o10b2o4b2o$761b2obo4bo2bo374b3o4b3o3bo$761b2obo4bo2bo374b3o4b3o3bo$755bo7b3o4bobo374b3
+o10b2o4b2o$757b3o4b3ob2o378b2o2b2o5bob5o$757b3o388b2ob2o7b2o347b2o$1149b4o355b2ob2o5b3o$1119b2o29b2o356bo2b2o10bo$1118b4o38b2o346b4o6b2o3b3o$726b3o388b2ob2o7b2o28b4o345b2o4b2o3b2o2bobo$726b3o4b3ob2o28b3o326b2o19b2o2b2o5bob5o23b2ob2o7b2o336b2o4b2o3b2o
+2bobo$724bo7b3o4bobo25b3o4b3ob2o315b4o17b3o10b2o4b2o21b2o2b2o5bob5o332b4o6b2o3b3o$169b2o532b3o24b2obo4bo2bo23bo7b3o4bobo311b2ob2o7b2o8b3o4b3o3bo27b3o10b2o4b2o330bo2b2o10bo$168b4o531b3o4b3ob2o14b2obo4bo2bo29b2obo4bo2bo311b2o2b2o5bob5o4b3o4b3o3bo27b3o4
+b3o3bo337b2ob2o5b3o$167b2ob2o7b2o520bo7b3o4bobo5bo7b3o4bobo29b2obo4bo2bo310b3o10b2o4b2o2b3o10b2o4b2o20b3o4b3o3bo338b2o$167b2o2b2o5bob5o522b2obo4bo2bo7b3o4b3ob2o26bo7b3o4bobo310b3o4b3o3bo10b2o2b2o5bob5o22b3o10b2o4b2o$166b3o10b2o4b2o520b2obo4bo2bo7b3o3
+8b3o4b3ob2o313b3o4b3o3bo10b2ob2o7b2o27b2o2b2o5bob5o$166b3o4b3o3bo521bo7b3o4bobo48b3o323b3o10b2o4b2o4b4o36b2ob2o7b2o$166b3o4b3o3bo523b3o4b3ob2o359b2o17b2o2b2o5bob5o7b2o38b4o$166b3o10b2o4b2o516b3o368b4o16b2ob2o7b2o52b2o$167b2o2b2o5bob5o497b3o388b2ob2o7
+b2o8b4o$167b2ob2o7b2o501b3o4b3ob2o378b2o2b2o5bob5o5b2o$168b4o508bo7b3o4bobo374b3o10b2o4b2o$138b2o29b2o515b2obo4bo2bo21b2o20b2o329b3o4b3o3bo27b2o20b2o$137b4o38b2o505b2obo4bo2bo21b2o20b2o329b3o4b3o3bo27b2o20b2o$136b2ob2o7b2o28b4o498bo7b3o4bobo374b3o10b
+2o4b2o75b2o$115b2o19b2o2b2o5bob5o23b2ob2o7b2o491b3o4b3ob2o378b2o2b2o5bob5o76b4o$114b4o17b3o10b2o4b2o21b2o2b2o5bob5o487b3o90b3o295b2ob2o7b2o79b2ob2o7b2o$113b2ob2o7b2o8b3o4b3o3bo27b3o10b2o4b2o578b3o4b3ob2o286b4o88b2o2b2o5bob5o$113b2o2b2o5bob5o4b3o4b3o3
+bo27b3o4b3o3bo583bo7b3o4bobo284b2o88b3o10b2o4b2o$112b3o10b2o4b2o2b3o10b2o4b2o20b3o4b3o3bo589b2obo4bo2bo374b3o4b3o3bo$112b3o4b3o3bo10b2o2b2o5bob5o22b3o10b2o4b2o531b2o6b2o41b2obo4bo2bo331b2o6b2o33b3o4b3o3bo$112b3o4b3o3bo10b2ob2o7b2o27b2o2b2o5bob5o533b2
+o6b2o35bo7b3o4bobo331b2o6b2o33b3o10b2o4b2o$112b3o10b2o4b2o4b4o36b2ob2o7b2o584b3o4b3ob2o378b2o2b2o5bob5o$94b2o17b2o2b2o5bob5o7b2o38b4o593b3o388b2ob2o7b2o$93b4o16b2ob2o7b2o52b2o986b4o$92b2ob2o7b2o8b4o599b2o392b2o55b2o$92b2o2b2o5bob5o5b2o515b2o83b2o308b
+o83b2o$91b3o10b2o4b2o520bobo6b2o2bo27b2o351bobo5bo33bo395b2o$91b3o4b3o3bo526bo2b2o5b2obo2bo25bobo6b2o2bo338b2obo3bo2bo2bo28bobo5bo15b2o370b4o38b2o$91b3o4b3o3bo504b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo315bo22bo3bo3bobob2o25b2obo3bo2bo2bo10b4o368b2ob2o7b2o
+28b4o$91b3o10b2o4b2o75b2o420bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo9b3o302bobo5bo18bo7b2ob2o25bo3bo3bobob2o7b2ob2o7b2o338b2o19b2o2b2o5bob5o23b2ob2o7b2o$92b2o2b2o5bob5o76b4o418bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4bo2bobo8b3o4b3ob2o291b2obo3bo2bo2bo14b
+o7b2ob2o28bo7b2ob2o5b2o2b2o5bob5o333b4o17b3o10b2o4b2o21b2o2b2o5bob5o$92b2ob2o7b2o79b2ob2o7b2o410b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo6bo7b3o4bobo290bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o4b3o10b2o4b2o330b2ob2o7b2o8b3o4b3o3bo27b3o10b2o4b2o$93b4o88b2
+o2b2o5bob5o406bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo13b2obo4bo2bo293bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o6b3o4b3o3bo337b2o2b2o5bob5o4b3o4b3o3bo27b3o4b3o3bo$94b2o88b3o10b2o4b2o404bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo13b2obo4bo2bo293bo7b2ob
+2o6bobo5bo31b2obo3bo2bo2bo8b3o4b3o3bo336b3o10b2o4b2o2b3o10b2o4b2o20b3o4b3o3bo$184b3o4b3o3bo411b2o3bo4bo4bo7b2o39bobo6b2o2bo9bo7b3o4bobo290bo3bo3bobob2o9bo39bobo5bo12b3o10b2o4b2o329b3o4b3o3bo10b2o2b2o5bob5o22b3o10b2o4b2o$100b2o82b3o4b3o3bo410bo2b2o5b2
+obo2bo48b2o23b3o4b3ob2o291b2obo3bo2bo2bo52bo20b2o2b2o5bob5o331b3o4b3o3bo10b2ob2o7b2o27b2o2b2o5bob5o$100b2o82b3o10b2o4b2o383b2o19bobo6b2o2bo75b3o282bo19bobo5bo77b2ob2o7b2o335b3o10b2o4b2o4b4o36b2ob2o7b2o$185b2o2b2o5bob5o385bobo6b2o2bo7b2o371bobo5bo13bo
+85b4o326b2o17b2o2b2o5bob5o7b2o38b4o$185b2ob2o7b2o388bo2b2o5b2obo2bo377b2obo3bo2bo2bo96b2o326b4o16b2ob2o7b2o52b2o$186b4o398b2o3bo4bo4bo379bo3bo3bobob2o421b2ob2o7b2o8b4o$187b2o399bo5bo4bo2bobo7b2o20b2o350bo7b2ob2o7b2o20b2o388b2o2b2o5bob5o5b2o$46bo541bo
+5bo4bo2bobo7b2o20b2o350bo7b2ob2o7b2o20b2o387b3o10b2o4b2o$45bobo5bo33bo500b2o3bo4bo4bo379bo3bo3bobob2o420b3o4b3o3bo30b2o$44b2obo3bo2bo2bo28bobo5bo15b2o475bo2b2o5b2obo2bo77b2o298b2obo3bo2bo2bo81bo340b3o4b3o3bo30b2o$23bo22bo3bo3bobob2o25b2obo3bo2bo2bo10
+b4o475bobo6b2o2bo79bobo6b2o2bo287bobo5bo84bobo5bo333b3o10b2o4b2o75b2o$22bobo5bo18bo7b2ob2o25bo3bo3bobob2o7b2ob2o7b2o466b2o90bo2b2o5b2obo2bo286bo90b2obo3bo2bo2bo330b2o2b2o5bob5o76b4o$21b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o5b2o2b2o5bob5o555b2o3bo4bo4bo3
+79bo3bo3bobob2o328b2ob2o7b2o79b2ob2o7b2o$23bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o4b3o10b2o4b2o553bo5bo4bo2bobo381bo7b2ob2o37bo289b4o88b2o2b2o5bob5o$26bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o6b3o4b3o3bo500b2o6b2o50bo5bo4bo2bobo36bobo278b2o6b2o54bo7b2ob
+2o35bobo290b2o88b3o10b2o4b2o$26bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo8b3o4b3o3bo500b2o6b2o50b2o3bo4bo4bo38b2o278b2o6b2o51bo3bo3bobob2o38b2o380b3o4b3o3bo$23bo3bo3bobob2o9bo39bobo5bo12b3o10b2o4b2o552bo2b2o5b2obo2bo38bo338b2obo3bo2bo2bo360b2o6b2o52b3o4b3o3bo
+$21b2obo3bo2bo2bo52bo20b2o2b2o5bob5o555bobo6b2o2bo380bobo5bo364b2o6b2o52b3o10b2o4b2o$2bo19bobo5bo77b2ob2o7b2o559b2o393bo434b2o2b2o5bob5o$bobo5bo13bo85b4o497b2o392b2o505b2ob2o7b2o$2obo3bo2bo2bo96b2o498b2o392b2o506b4o$2bo3bo3bobob2o1497b2o$5bo7b2ob2o$5
+bo7b2ob2o586b2o393bo$2bo3bo3bobob2o588bobo6b2o2bo380bobo5bo429b2o$2obo3bo2bo2bo81bo507bo2b2o5b2obo2bo377b2obo3bo2bo2bo424b4o$bobo5bo84bobo5bo501b2o3bo4bo4bo379bo3bo3bobob2o421b2ob2o7b2o$2bo90b2obo3bo2bo2bo497bo5bo4bo2bobo381bo7b2ob2o419b2o2b2o5bob5o$
+95bo3bo3bobob2o495bo5bo4bo2bobo381bo7b2ob2o418b3o10b2o4b2o$98bo7b2ob2o493b2o3bo4bo4bo379bo3bo3bobob2o420b3o4b3o3bo$98bo7b2ob2o492bo2b2o5b2obo2bo377b2obo3bo2bo2bo422b3o4b3o3bo$95bo3bo3bobob2o495bobo6b2o2bo380bobo5bo426b3o10b2o4b2o$93b2obo3bo2bo2bo497b
+2o393bo434b2o2b2o5bob5o$94bobo5bo1331b2ob2o7b2o$95bo1339b4o$1436b2o4$18bo$17bobo5bo$16b2obo3bo2bo2bo$18bo3bo3bobob2o$21bo7b2ob2o$21bo7b2ob2o$18bo3bo3bobob2o$16b2obo3bo2bo2bo$17bobo5bo1326b3o$18bo1333b3o4b3ob2o28b3o$75b2o1273bo7b3o4bobo25b3o4b3ob2o$74
+bobo1252b3o24b2obo4bo2bo23bo7b3o4bobo$76bo1014b2o236b3o4b3ob2o14b2obo4bo2bo29b2obo4bo2bo$1090b4o233bo7b3o4bobo5bo7b3o4bobo29b2obo4bo2bo$698b3o388b2ob2o7b2o230b2obo4bo2bo7b3o4b3ob2o26bo7b3o4bobo$148b3o547b3o4b3ob2o378b2o2b2o5bob5o226b2obo4bo2bo7b3o38b
+3o4b3ob2o$150bo545bo7b3o4bobo374b3o10b2o4b2o218bo7b3o4bobo48b3o$149bo552b2obo4bo2bo374b3o4b3o3bo227b3o4b3ob2o$702b2obo4bo2bo374b3o4b3o3bo227b3o$696bo7b3o4bobo374b3o10b2o4b2o199b3o$698b3o4b3ob2o378b2o2b2o5bob5o201b3o4b3ob2o$698b3o388b2ob2o7b2o203bo7b3
+o4bobo$1090b4o218b2obo4bo2bo$1091b2o219b2obo4bo2bo$1306bo7b3o4bobo$1308b3o4b3ob2o$1168b2o138b3o90b3o581bo7bob2o$1167b4o230b3o4b3ob2o570b3o5bo6bo$110b2o663b3o388b2ob2o7b2o219bo7b3o4bobo566bo4bo2b2o3bo2bo$109b4o662b3o4b3ob2o378b2o2b2o5bob5o221b2obo4bo2
+bo565b3o4bobo5b2o$108b2ob2o7b2o566b2o83bo7b3o4bobo291b2o81b3o10b2o4b2o128b2o6b2o81b2obo4bo2bo565b3o4bobo5b2o$108b2o2b2o5bob5o562b2o89b2obo4bo2bo291b2o81b3o4b3o3bo135b2o6b2o75bo7b3o4bobo566bo4bo2b2o3bo2bo$107b3o10b2o4b2o651b2obo4bo2bo374b3o4b3o3bo222b
+3o4b3ob2o570b3o5bo6bo$107b3o4b3o3bo652bo7b3o4bobo284b2o88b3o10b2o4b2o215b3o581bo7bob2o$107b3o4b3o3bo654b3o4b3ob2o286b4o88b2o2b2o5bob5o$107b3o10b2o4b2o554b3o90b3o295b2ob2o7b2o79b2ob2o7b2o$108b2o2b2o5bob5o556b3o4b3ob2o360bo17b2o2b2o5bob5o76b4o$108b2ob2
+o7b2o539bo18bo7b3o4bobo358bo15b3o10b2o4b2o75b2o$109b4o549b2o22b2obo4bo2bo356b3o15b3o4b3o3bo$110b2o549b2o23b2obo4bo2bo374b3o4b3o3bo$680bo7b3o4bobo374b3o10b2o4b2o231b3o$129b2o551b3o4b3ob2o378b2o2b2o5bob5o5b2o226b3o4b3ob2o$129b2o56b2o415b2o76b3o314bo73b
+2ob2o7b2o8b4o223bo7b3o4bobo$186b4o414bobo6b2o2bo85b3o292bobo5bo67b4o16b2ob2o7b2o52b2o166b2obo4bo2bo96b2o$185b2ob2o7b2o404bo2b2o5b2obo2bo83b3o4b3ob2o281b2obo3bo2bo2bo64b2o17b2o2b2o5bob5o7b2o38b4o165b2obo4bo2bo95b4o$185b2o2b2o5bob5o401b2o3bo4bo4bo81bo7
+b3o4bobo48b3o229bo3bo3bobob2o80b3o10b2o4b2o4b4o36b2ob2o7b2o150bo7b3o4bobo94b2ob2o7b2o$140b2o6b2o34b3o10b2o4b2o399bo5bo4bo2bobo86b2obo4bo2bo7b3o38b3o4b3ob2o222bo7b2ob2o78b3o4b3o3bo10b2ob2o7b2o27b2o2b2o5bob5o148b3o4b3ob2o97b2o2b2o5bob5o$140b2o6b2o34b3o
+4b3o3bo406bo5bo4bo2bobo86b2obo4bo2bo7b3o4b3ob2o26bo7b3o4bobo219bo7b2ob2o78b3o4b3o3bo10b2o2b2o5bob5o22b3o10b2o4b2o146b3o106b3o10b2o4b2o$184b3o4b3o3bo406b2o3bo4bo4bo81bo7b3o4bobo5bo7b3o4bobo29b2obo4bo2bo216bo3bo3bobob2o80b3o10b2o4b2o2b3o10b2o4b2o20b3o4
+b3o3bo262b3o4b3o3bo$94b2o88b3o10b2o4b2o398bo2b2o5b2obo2bo83b3o4b3ob2o14b2obo4bo2bo29b2obo4bo2bo214b2obo3bo2bo2bo83b2o2b2o5bob5o4b3o4b3o3bo27b3o4b3o3bo262b3o4b3o3bo$93b4o88b2o2b2o5bob5o401bobo6b2o2bo85b3o24b2obo4bo2bo23bo7b3o4bobo215bobo5bo87b2ob2o7b2
+o8b3o4b3o3bo27b3o10b2o4b2o255b3o10b2o4b2o$92b2ob2o7b2o79b2ob2o7b2o405b2o118bo7b3o4bobo25b3o4b3ob2o219bo95b4o17b3o10b2o4b2o21b2o2b2o5bob5o258b2o2b2o5bob5o$92b2o2b2o5bob5o76b4o536b3o4b3ob2o28b3o326b2o19b2o2b2o5bob5o4bo2bo15b2ob2o7b2o262b2ob2o7b2o54bo$9
+1b3o10b2o4b2o75b2o537b3o19bo368b2ob2o7b2o7bo20b4o272b4o64bo$91b3o4b3o3bo26b2o20b2o592bobo5bo362b4o28b2ob2o5b2o274b2o63b3o$91b3o4b3o3bo26b2o20b2o591b2obo3bo2bo2bo359b2o20b3o5bo3b4o503b2o$91b3o10b2o4b2o569b2o65bo3bo3bobob2o314bo63bo2b3o3bo3b4o503bobo6b
+2o2bo27b2o$92b2o2b2o5bob5o5b2o564bobo6b2o2bo56bo7b2ob2o311bobo5bo52bo3bo3bobo2b2o362b2o144bo2b2o5b2obo2bo25bobo6b2o2bo$18bo73b2ob2o7b2o8b4o562bo2b2o5b2obo2bo54bo7b2ob2o310b2obo3bo2bo2bo48bo3bo3bobo2b2o361b4o121b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo$17bob
+o5bo67b4o16b2ob2o7b2o52b2o500b2o3bo4bo4bo51bo3bo3bobob2o314bo3bo3bobob2o50bo2b3o3bo3b4o354b2ob2o7b2o112bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo223bo$16b2obo3bo2bo2bo64b2o17b2o2b2o5bob5o7b2o38b4o499bo5bo4bo2bobo48b2obo3bo2bo2bo319bo7b2ob2o49b3o5bo3b4o3
+54b2o2b2o5bob5o107bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4bo2bobo221bobo5bo33bo$18bo3bo3bobob2o80b3o10b2o4b2o4b4o36b2ob2o7b2o490bo5bo4bo2bobo49bobo5bo323bo7b2ob2o58b2ob2o355b3o10b2o4b2o106b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo220b2obo3bo2bo2bo28bobo5b
+o$21bo7b2ob2o78b3o4b3o3bo10b2ob2o7b2o27b2o2b2o5bob5o486b2o3bo4bo4bo51bo327bo3bo3bobob2o48bo371b3o4b3o3bo113bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo200bo22bo3bo3bobob2o25b2obo3bo2bo2bo$21bo7b2ob2o78b3o4b3o3bo10b2o2b2o5bob5o22b3o10b2o4b2o391b2o90bo2
+b2o5b2obo2bo286bo90b2obo3bo2bo2bo51bo2bo367b3o4b3o3bo113bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo199bobo5bo18bo7b2ob2o25bo3bo3bobob2o$18bo3bo3bobob2o80b3o10b2o4b2o2b3o10b2o4b2o20b3o4b3o3bo398bobo6b2o2bo79bobo6b2o2bo287bobo5bo84bobo5bo336b2o88b3o10b2
+o4b2o106b2o3bo4bo4bo7b2o39bobo6b2o2bo200b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o$16b2obo3bo2bo2bo83b2o2b2o5bob5o4b3o4b3o3bo27b3o4b3o3bo397bo2b2o5b2obo2bo77b2o298b2obo3bo2bo2bo81bo342b4o88b2o2b2o5bob5o107bo2b2o5b2obo2bo48b2o214bo3bo3bobob2o9bo3bo3bobob2o3
+0bo7b2ob2o$17bobo5bo87b2ob2o7b2o8b3o4b3o3bo27b3o10b2o4b2o391b2o3bo4bo4bo379bo3bo3bobob2o421b2ob2o7b2o79b2ob2o7b2o91b2o19bobo6b2o2bo269bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o$18bo95b4o17b3o10b2o4b2o21b2o2b2o5bob5o393bo5bo4bo2bobo381bo7b2ob2o419b2o2b2o
+5bob5o76b4o100bobo6b2o2bo7b2o281bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$115b2o19b2o2b2o5bob5o4bo2bo15b2ob2o7b2o397bo5bo4bo2bobo381bo7b2ob2o418b3o10b2o4b2o75b2o100bo2b2o5b2obo2bo285bo3bo3bobob2o9bo39bobo5bo$136b2ob2o7b2o7bo20b4o406b2o3bo4bo4bo379bo3bo3bobob
+2o420b3o4b3o3bo185b2o3bo4bo4bo283b2obo3bo2bo2bo52bo$22b2o113b4o28b2ob2o5b2o406bo2b2o5b2obo2bo377b2obo3bo2bo2bo422b3o4b3o3bo185bo5bo4bo2bobo263bo19bobo5bo$22b2o114b2o20b3o5bo3b4o412bobo6b2o2bo7b2o371bobo5bo13bo412b3o10b2o4b2o178bo5bo4bo2bobo262bobo5bo
+13bo$95bo63bo2b3o3bo3b4o412b2o19bobo6b2o2bo360bo19bobo5bo406b2o2b2o5bob5o5b2o173b2o3bo4bo4bo262b2obo3bo2bo2bo$94bobo5bo52bo3bo3bobo2b2o438bo2b2o5b2obo2bo48b2o327b2obo3bo2bo2bo52bo349b2ob2o7b2o8b4o171bo2b2o5b2obo2bo77b2o185bo3bo3bobob2o$93b2obo3bo2bo2
+bo48bo3bo3bobo2b2o439b2o3bo4bo4bo7b2o39bobo6b2o2bo317bo3bo3bobob2o9bo39bobo5bo343b4o16b2ob2o7b2o52b2o109bobo6b2o2bo79bobo6b2o2bo176bo7b2ob2o$33b2o6b2o52bo3bo3bobob2o50bo2b3o3bo3b4o433bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo318bo7b2ob2o6bobo5bo31b2o
+bo3bo2bo2bo340b2o17b2o2b2o5bob5o7b2o38b4o108b2o90bo2b2o5b2obo2bo174bo7b2ob2o$33b2o6b2o55bo7b2ob2o49b3o5bo3b4o433bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo318bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o356b3o10b2o4b2o4b4o36b2ob2o7b2o192b2o3bo4bo4bo171bo3b
+o3bobob2o$98bo7b2ob2o58b2ob2o435b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo314bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o354b3o4b3o3bo10b2ob2o7b2o27b2o2b2o5bob5o188bo5bo4bo2bobo168b2obo3bo2bo2bo81bo$95bo3bo3bobob2o48bo450bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4
+bo2bobo312b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o354b3o4b3o3bo10b2o2b2o5bob5o22b3o10b2o4b2o186bo5bo4bo2bobo169bobo5bo84bobo5bo$2bo90b2obo3bo2bo2bo51bo2bo447bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo314bobo5bo18bo7b2ob2o25bo3bo3bobob2o356b3o10b2o4b2o2b3o10b
+2o4b2o20b3o4b3o3bo193b2o3bo4bo4bo171bo90b2obo3bo2bo2bo$bobo5bo84bobo5bo506b2o21b2o3bo4bo4bo24bo2b2o5b2obo2bo315bo22bo3bo3bobob2o25b2obo3bo2bo2bo359b2o2b2o5bob5o4b3o4b3o3bo27b3o4b3o3bo192bo2b2o5b2obo2bo264bo3bo3bobob2o$2obo3bo2bo2bo81bo535bo2b2o5b2obo
+2bo25bobo6b2o2bo338b2obo3bo2bo2bo28bobo5bo363b2ob2o7b2o8b3o4b3o3bo27b3o10b2o4b2o186bobo6b2o2bo258b2o9bo7b2ob2o$2bo3bo3bobob2o616bobo6b2o2bo7b2o18b2o351bobo5bo13bo19bo371b4o17b3o10b2o4b2o21b2o2b2o5bob5o188b2o269bo2bo8bo7b2ob2o$5bo7b2ob2o6bo21b2o584b2o
+18b2ob2o5b3o362bo18b2obo391b2o19b2o2b2o5bob5o4bo2bo15b2ob2o7b2o464b2o6bo3bo3bobob2o$5bo7b2ob2o5bo22b2o604bo2b2o10bo378b2obo5b3ob2o401b2ob2o7b2o7bo20b4o190b2o287b2obo3bo2bo2bo$2bo3bo3bobob2o8bo627b4o6b2o3b3o377b2o3bo4b2o2b2o400b4o28b2ob2o5b2o192b2o287
+bobo5bo$2obo3bo2bo2bo638b2o4b2o3b2o2bobo381b2o5bo4bo400b2o20b3o5bo3b4o196bo290bo$bobo5bo13bo628b2o4b2o3b2o2bobo381b2o5bo4bo421bo2b3o3bo3b4o130b2o$2bo19bobo5bo621b4o6b2o3b3o377b2o3bo4b2o2b2o418bo3bo3bobo2b2o136bobo6b2o2bo$21b2obo3bo2bo2bo52bo564bo2b2o
+10bo378b2obo5b3ob2o420bo3bo3bobo2b2o135bo2b2o5b2obo2bo$23bo3bo3bobob2o9bo39bobo5bo557b2ob2o5b3o381b2obo435bo2b3o3bo3b4o130b2o3bo4bo4bo$26bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo554b2o393bo437b3o5bo3b4o130bo5bo4bo2bobo263bo$26bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3
+bobob2o1394b2ob2o132bo5bo4bo2bobo262bobo5bo$23bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o1380bo148b2o3bo4bo4bo262b2obo3bo2bo2bo$21b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o1381bo2bo143bo2b2o5b2obo2bo264bo3bo3bobob2o$22bobo5bo18bo7b2ob2o25bo3bo3bobob2o1531bobo6b
+2o2bo269bo7b2ob2o$23bo22bo3bo3bobob2o25b2obo3bo2bo2bo1533b2o281bo7b2ob2o$44b2obo3bo2bo2bo28bobo5bo1817bo3bo3bobob2o$45bobo5bo13bo19bo1236b3o583b2obo3bo2bo2bo$46bo18b2obo1255b3o4b3ob2o574bobo5bo$65b2obo5b3ob2o1242bo7b3o4bobo572bo$66b2o3bo4b2o2b2o1246b
+2obo4bo2bo$70b2o5bo4bo1245b2obo4bo2bo$70b2o5bo4bo1239bo7b3o4bobo$66b2o3bo4b2o2b2o1242b3o4b3ob2o$65b2obo5b3ob2o1244b3o$65b2obo1282b3o$67bo1283bobo$1351bo2bo$1351bo3b2o$1352b2ob2o$1354b3o$1401b3o$1348bo52b3o4b3ob2o$1347bo6b3o5b2o6b2o27bo7b3o4bobo$1348b
+o13b2o6b2o33b2obo4bo2bo$1350b2ob3o49b2obo4bo2bo$1350bo3b2o43bo7b3o4bobo$1351b2o48b3o4b3ob2o$1308b3o41bo48b3o$1308b3o4b3ob2o35bo$1306bo7b3o4bobo28bo3bo$1312b2obo4bo2bo29bobo19b2o$1312b2obo4bo2bo51b2o$1306bo7b3o4bobo27b3o$1308b3o4b3ob2o$1308b3o$1329b3o
+$1329b3o4b3ob2o$1327bo7b3o4bobo29bo18b3o$1333b2obo4bo2bo7b3o20bo17b3o4b3ob2o$1333b2obo4bo2bo7b3o4b3ob2o8b3o15bo7b3o4bobo$1327bo7b3o4bobo5bo7b3o4bobo29b2obo4bo2bo$1329b3o4b3ob2o14b2obo4bo2bo29b2obo4bo2bo$1329b3o24b2obo4bo2bo23bo7b3o4bobo$1350bo7b3o4bo
+bo25b3o4b3ob2o$1352b3o4b3ob2o28b3o$1352b3o19bo$1373bobo5bo$1372b2obo3bo2bo2bo$1374bo3bo3bobob2o$1377bo7b2ob2o$1377bo7b2ob2o$1374bo3bo3bobob2o$1372b2obo3bo2bo2bo$1373bobo5bo250b2o$1374bo257bobo6b2o2bo$1631bo2b2o5b2obo2bo$1632b2o3bo4bo4bo$1632bo5bo4bo2
+bobo263bo$1632bo5bo4bo2bobo262bobo5bo$1632b2o3bo4bo4bo262b2obo3bo2bo2bo$1631bo2b2o5b2obo2bo264bo3bo3bobob2o$1632bobo6b2o2bo269bo7b2ob2o$1632b2o281bo7b2ob2o$1912bo3bo3bobob2o$1910b2obo3bo2bo2bo$1911bobo5bo$1912bo$1709b2o$1709bobo6b2o2bo$1708bo2b2o5b2o
+bo2bo$1643b2o6b2o56b2o3bo4bo4bo$1643b2o6b2o56bo5bo4bo2bobo263bo$1709bo5bo4bo2bobo262bobo5bo$1709b2o3bo4bo4bo262b2obo3bo2bo2bo$1616b2o90bo2b2o5b2obo2bo194b2o6b2o60bo3bo3bobob2o$1616bobo6b2o2bo79bobo6b2o2bo196b2o6b2o63bo7b2ob2o$1615bo2b2o5b2obo2bo77b2o
+281bo7b2ob2o$1616b2o3bo4bo4bo357bo3bo3bobob2o$1616bo5bo4bo2bobo23b2o238bo90b2obo3bo2bo2bo$1616bo5bo4bo2bobo23b2o237bobo5bo84bobo5bo$1616b2o3bo4bo4bo262b2obo3bo2bo2bo81bo$1615bo2b2o5b2obo2bo264bo3bo3bobob2o$1616bobo6b2o2bo7b2o260bo7b2ob2o20b2o$1616b2o
+19bobo6b2o2bo248bo7b2ob2o20b2o$1636bo2b2o5b2obo2bo48b2o193bo3bo3bobob2o$1637b2o3bo4bo4bo7b2o39bobo6b2o2bo179b2obo3bo2bo2bo$1637bo5bo4bo2bobo6bobo6b2o2bo26bo2b2o5b2obo2bo178bobo5bo13bo$1637bo5bo4bo2bobo5bo2b2o5b2obo2bo25b2o3bo4bo4bo179bo19bobo5bo$1637
+b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo197b2obo3bo2bo2bo52bo$1636bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4bo2bobo199bo3bo3bobob2o9bo39bobo5bo$1637bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo203bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$1637b2o21b2o3bo4bo4bo24bo2b2o5b
+2obo2bo203bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o$1659bo2b2o5b2obo2bo25bobo6b2o2bo202bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$1660bobo6b2o2bo7b2o18b2o212b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o$1660b2o18b2ob2o5b3o223bobo5bo18bo7b2ob2o25bo3bo3bobob2o$1680bo
+2b2o10bo221bo22bo3bo3bobob2o25b2obo3bo2bo2bo$1680b4o6b2o3b3o240b2obo3bo2bo2bo28bobo5bo$1680b2o4b2o3b2o2bobo241bobo5bo13bo19bo$1680b2o4b2o3b2o2bobo242bo18b2obo$1680b4o6b2o3b3o261b2obo5b3ob2o$1680bo2b2o10bo264b2o3bo4b2o2b2o$1680b2ob2o5b3o271b2o5bo4bo$1
+681b2o281b2o5bo4bo$1960b2o3bo4b2o2b2o$1959b2obo5b3ob2o$1959b2obo$1961bo!`
 }
