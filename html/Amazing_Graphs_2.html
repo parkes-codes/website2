@@ -1676,6 +1676,9 @@ function ZS2(x, y) {
             
             function graph146(){zoomSet(20,15); value=t/2+0.2*((log((abs(X) + 1) ** (sin(X+t*2)+ sin(abs(X)*sin(Y*(Z/200))+Y)+Y + arcsin(sin(X)))))+div(1000+sin(t*1.5)*300,X*X+Y*Y+1));
                value%=1+Z/200*(sin(t*3)+sin(t+Y/5+sin(X/2+sin(t*2+Y))))}
+
+            function graph147(){zoomSet(0,45); rotatePlane(t/-2); const temp=Y; rotatePlane(t/2); value=sin(div(sin(X),cos(Y))); rotatePlane(t/2+cos(temp)*(Z/50+0.2)); value-=(sin(X)*Y)%(X*sin(Y)); value= value*(Z/60+0.1)+t/2}
+
 const graphFunctions = {
   1: graph1,
   2: graph2,
@@ -1822,7 +1825,8 @@ const graphFunctions = {
   143: graph143,
   144: graph144,
   145: graph145,
-  146: graph146
+  146: graph146,
+  147: graph147
 };
 
 const advancedList = [
@@ -1867,7 +1871,8 @@ const advancedList = [
  123,
  124,
  129,
- 132
+ 132,
+ 145
 ]
 
 
@@ -2017,8 +2022,8 @@ const names = {
 143: "doublespin",
 144: "unfold",
 145: "unveil",
-146: "heartbeat"
-
+146: "heartbeat",
+147: ""
 };
 
 
