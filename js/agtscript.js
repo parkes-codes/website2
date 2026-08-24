@@ -1,0 +1,1929 @@
+
+const editMode = false;
+let showAxes = false;
+
+let cameraX = 0;
+let cameraY = 0;
+let isPaused = false;
+
+let resolution = 400;
+
+  if (localStorage.getItem("res") && !editMode) {
+    resolution = localStorage.getItem("res");
+  }
+  
+let selectedGraphNumber = 1;
+let viewMode = 1;
+
+
+function isNoKeyboardDevice() {
+const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+if (
+/Android/i.test(ua) ||
+/iPhone/i.test(ua) ||
+/iPad/i.test(ua) ||
+/iPod/i.test(ua) ||
+/BlackBerry/i.test(ua) ||
+/Windows Phone/i.test(ua) ||
+/webOS/i.test(ua) ||
+/Mobile/i.test(ua) ||
+/Tablet/i.test(ua) ||
+/Kindle/i.test(ua) ||
+/Silk/i.test(ua)
+) {
+return true;
+}
+
+if (
+('ontouchstart' in window) ||
+(navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+(navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0)
+) {
+return true;
+}
+
+return false;
+}
+
+let zoom = 0;
+let X =0;
+let Y=0;
+let Z =0;
+let value = 0;
+let mousX=0.25
+let mousY=0.25
+
+let t = 0;
+let tea = 0;
+let lastTimestamp = 0;
+const pi = 3.14159265;
+let screenX = resolution/2;
+let screenY = resolution/2;
+
+const canvas = document.getElementById('graph');
+canvas.width = resolution;
+canvas.height = resolution;
+const ctx = canvas.getContext('2d');
+const timerDisplay = document.getElementById('timer');
+const boody = document.body;
+let fpsValues = [];
+
+
+const sliderW = document.getElementById('graph-slider');
+const sliderZ = document.getElementById('graph-slider-z');
+const valueW = document.getElementById('graph-value');
+const valueZ = document.getElementById('graph-value-z');
+const rainbowToggle = document.getElementById('rainbow-toggle');
+const rawr = document.getElementById('rowwy');
+
+const sliderH = document.getElementById('graph-slider-h');
+const valueH = document.getElementById('graph-value-h');
+let H = 0;
+let oldH = 0;
+let mouseX = 0;
+let mouseY = 0;
+let touchingValue = 0;
+let cacheMath = 0;
+let canTen = 0
+
+
+const leftArrowBtn = document.getElementById("left-arrow-btn");
+const rightArrowBtn = document.getElementById("right-arrow-btn");
+
+//isNoKeyboardDevice())
+
+if (isNoKeyboardDevice()) {
+leftArrowBtn.style.display = "block";
+rightArrowBtn.style.display = "block";
+} else {
+leftArrowBtn.style.display = "none";
+rightArrowBtn.style.display = "none";
+}
+
+
+function nextGraph() {
+const totalGraphs = Object.keys(graphFunctions).length;
+selectedGraphNumber = selectedGraphNumber === totalGraphs ? 1 : selectedGraphNumber + 1;
+cameraX = 0;
+cameraY = 0;
+}
+
+function prevGraph() {
+const totalGraphs = Object.keys(graphFunctions).length;
+selectedGraphNumber = selectedGraphNumber === 1 ? totalGraphs : selectedGraphNumber - 1;
+cameraX = 0;
+cameraY = 0;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+if (leftArrowBtn) leftArrowBtn.addEventListener("click", prevGraph);
+if (rightArrowBtn) rightArrowBtn.addEventListener("click", nextGraph);
+});
+
+function ra() {return Math.random()}
+function sign(inn) {return Math.sign(inn)}
+function sin(inn) {return Math.sin(inn)}
+function cos(inn) {return Math.cos(inn)}
+function sinh(inn){return Math.sinh(inn)}
+function cosh(inn){return Math.cosh(inn)}
+function tanh(inn){return Math.tanh(inn)}
+function tan(inn) {return Math.tan(inn)}
+function cot(inn) { return div(1,Math.tan(inn))}
+
+
+function abs(inn) {return Math.abs(inn)}
+function ceil(inn) {return Math.ceil(inn)}
+function floor(inn) {return Math.floor(inn)}
+function exp(inn) {return Math.exp(inn)}
+function sqrt(inn){if (inn<0) return 0; return Math.sqrt(inn)}
+function round(inn){return Math.round(inn)}
+function log(inn) {if (inn === 0) return 1000; return Math.log(inn)}
+function epow(inn) {return Math.pow(2.71828, inn)}
+function div(inn,outt) {if (abs(outt) <= 0.001) return 9; if (abs(outt)>=1000000) return 0; if (abs(inn) >= 10000) return 0; return inn/outt }
+function mul(inn, outt) { if (abs(inn) >= 10000 || abs(outt) >= 10000) return 0; return inn * outt;}
+function dista(x1,x2,y1,y2) {return (((x2 - x1) * (x2 - x1)) +((y2 - y1) * (y2 - y1)))}
+function arcsint(inn){return Math.asin((2*(abs(inn)%1))-1)*(div(abs(inn),inn))}
+function arcsin(inn){if (abs(inn)> 1) {return 1} return Math.asin(inn)}
+function arccos(inn){if (abs(inn>1)) {return 1} return Math.acos(inn)}
+function arctan(inn) {return Math.atan(inn)}
+function ring(inn) {return (tan(sin(X+inn*1.05708)+cos(Y))*(exp(Z/30)-0.99)/10)}
+function pow(inn, inn2){ return Math.pow(inn,inn2)}
+function floor(inn){return Math.floor(inn)}
+function fact(inn){inn=abs(inn); return (sqrt(2*pi*inn)*pow(div(inn,2.7182818), inn))}
+function rotatePlane(inn){oldY=Y; oldX=X; X=(oldX*cos(inn)-oldY*sin(inn));Y=(oldX*sin(inn)+oldY*cos(inn));}
+function atan2(inn, inn2) {return Math.atan2(inn, inn2)};
+function max(inn,inn2) {return Math.max(inn,inn2)}
+function min(inn,inn2) {return Math.min(inn,inn2)}
+
+function join(x, y) {
+const intX = Math.abs(Math.trunc(x)).toString();
+const intY = Math.abs(Math.trunc(y)).toString();
+const joinedInt = parseInt(intX + intY);
+
+const decX = Math.abs(x) - Math.abs(Math.trunc(x));
+const decY = Math.abs(y) - Math.abs(Math.trunc(y));
+const addedDec = decX + decY;
+
+const sign = (Math.sign(x) * Math.sign(y) === -1) ? -1 : 1;
+return sign * (joinedInt + addedDec);
+}
+function MAD(num1, num2) {
+const mean = (num1 + num2) / 2;
+const dev1 = Math.abs(num1 - mean);
+const dev2 = Math.abs(num2 - mean);
+return (dev1 + dev2) / 2;
+}
+
+const med = (arr) => {
+if (arr.length === 0) return undefined;
+const sorted = [...arr].sort((a, b) => a - b);
+const mid = Math.floor(sorted.length / 2);
+return sorted.length % 2 !== 0
+? sorted[mid]
+: (sorted[mid - 1] + sorted[mid]) / 2;
+};
+
+
+function madlist(data) {
+if (data.length === 0) return 0;
+
+// 1. Calculate the mean (average)
+const sum = data.reduce((acc, val) => acc + val, 0);
+const mean = sum / data.length;
+
+// 2. Calculate the sum of absolute deviations
+const absoluteDeviationsSum = data.reduce((acc, val) => {
+return acc + Math.abs(val - mean);
+}, 0);
+
+// 3. Return the average of those deviations
+return absoluteDeviationsSum / data.length;
+}
+
+
+function computeGeometry(x, y) {
+const d2 = x * x + y * y;
+if (d2 === 0) return 0; 
+const ix = x / d2;
+const iy = y / d2;
+const mx = (((ix % 2) + 2) % 2) - 1;
+const my = (((iy % 2) + 2) % 2) - 1;
+return Math.sqrt(mx * mx + my * my);
+}
+
+function fractal2(x, y) {
+let px = x;
+let py = y;
+let depth = round(Z/8+1);
+let maxDist = 0;
+let scale = 1.0;
+for (let i = 0; i < depth; i++) {
+  if (px + py > 0.5) {
+      px = 0.5 - px;
+      py = 0.5 - py;
+  }
+  if (px < 0) px = -px;
+  if (py < 0) py = -py;
+  let d = Math.min(
+      Math.abs(px),
+      Math.abs(py),
+      Math.abs(0.5 - px - py)
+  );
+  maxDist = Math.max(maxDist, d);
+  px *= 2;
+  py *= 2;
+}
+return maxDist
+}
+
+
+function geoMean(arr) {
+if (arr.length === 0) return 0;
+
+// Multiply all elements together
+const product = arr.reduce((acc, val) => acc * val, 1);
+
+// Take the nth root
+const thingygyy = Math.pow(product, 1 / arr.length);
+if (thingygyy>=-999) {return thingygyy}
+else {return 0};
+}
+
+function polyhedron(x, y, verts, faces, a1, a2, a3) {
+
+let ro = [0, 0, -4];
+let rd = normalize([x, y, 1]);
+
+// ---------- VECTOR ----------
+
+function sub(a,b){
+return [a[0]-b[0], a[1]-b[1], a[2]-b[2]];
+}
+
+function dot(a,b){
+return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+}
+
+function cross(a,b){
+return [
+a[1]*b[2]-a[2]*b[1],
+a[2]*b[0]-a[0]*b[2],
+a[0]*b[1]-a[1]*b[0]
+];
+}
+
+function length(v){
+return Math.sqrt(dot(v,v));
+}
+
+function normalize(v){
+let l = length(v);
+return [v[0]/l, v[1]/l, v[2]/l];
+}
+
+// ---------- ROTATE ----------
+
+function rotate(p){
+
+let x = p[0];
+let y = p[1];
+let z = p[2];
+
+// X
+let ny = y*Math.cos(a1) - z*Math.sin(a1);
+let nz = y*Math.sin(a1) + z*Math.cos(a1);
+y = ny;
+z = nz;
+
+// Y
+let nx = x*Math.cos(a2) + z*Math.sin(a2);
+nz = -x*Math.sin(a2) + z*Math.cos(a2);
+x = nx;
+z = nz;
+
+// Z
+nx = x*Math.cos(a3) - y*Math.sin(a3);
+ny = x*Math.sin(a3) + y*Math.cos(a3);
+x = nx;
+y = ny;
+
+return [x,y,z];
+}
+
+// Rotate verts ONCE
+let rverts = [];
+
+for(let i=0;i<verts.length;i++){
+rverts.push(rotate(verts[i]));
+}
+
+// ---------- TRIANGLE HIT ----------
+
+function rayTriangle(ro, rd, v0, v1, v2){
+
+let edge1 = sub(v1, v0);
+let edge2 = sub(v2, v0);
+
+let h = cross(rd, edge2);
+let a = dot(edge1, h);
+
+if(Math.abs(a) < 0.00001){
+return null;
+}
+
+let f = 1 / a;
+
+let s = sub(ro, v0);
+
+let u = f * dot(s, h);
+
+if(u < 0 || u > 1){
+return null;
+}
+
+let q = cross(s, edge1);
+
+let v = f * dot(rd, q);
+
+if(v < 0 || u + v > 1){
+return null;
+}
+
+let t = f * dot(edge2, q);
+
+if(t > 0.00001){
+
+return {
+  t:t,
+  u:u,
+  v:v
+};
+}
+
+return null;
+}
+
+// ---------- TRACE ----------
+
+let closest = 999999;
+let best = null;
+
+for(let i=0;i<faces.length;i++){
+
+let f = faces[i];
+
+let hit = rayTriangle(
+ro,
+rd,
+rverts[f[0]],
+rverts[f[1]],
+rverts[f[2]]
+);
+
+if(hit !== null && hit.t < closest){
+closest = hit.t;
+best = hit;
+}
+}
+
+// ---------- SHADING ----------
+
+if(best !== null){
+
+// your original distance shading
+let shade = 1 - (best.t / 8);
+
+if(shade < 0){
+shade = 0;
+}
+
+// ---------- EDGE DARKENING ----------
+
+let w = 1 - best.u - best.v;
+
+let edge = Math.min(best.u, best.v, w);
+
+// smaller number = thicker edges
+let edgeShade = Math.min(edge * 30, 1);
+
+// darken edges but preserve original shading
+shade *= edgeShade;
+
+return shade;
+}
+
+return 0;
+}
+
+     // A simple, low-poly hand model
+let donutVerts = [
+[1.50, 0.00, 0.50], [1.35, 0.00, 0.85], [1.00, 0.00, 1.00], [0.65, 0.00, 0.85], [0.50, 0.00, 0.50], [0.65, 0.00, 0.15], [1.00, 0.00, 0.00], [1.35, 0.00, 0.15],
+[1.06, 1.06, 0.50], [0.96, 0.96, 0.85], [0.71, 0.71, 1.00], [0.46, 0.46, 0.85], [0.35, 0.35, 0.50], [0.46, 0.46, 0.15], [0.71, 0.71, 0.00], [0.96, 0.96, 0.15],
+[0.00, 1.50, 0.50], [0.00, 1.35, 0.85], [0.00, 1.00, 1.00], [0.00, 0.65, 0.85], [0.00, 0.50, 0.50], [0.00, 0.65, 0.15], [0.00, 1.00, 0.00], [0.00, 1.35, 0.15],
+[-1.06, 1.06, 0.50], [-0.96, 0.96, 0.85], [-0.71, 0.71, 1.00], [-0.46, 0.46, 0.85], [-0.35, 0.35, 0.50], [-0.46, 0.46, 0.15], [-0.71, 0.71, 0.00], [-0.96, 0.96, 0.15],
+[-1.50, 0.00, 0.50], [-1.35, 0.00, 0.85], [-1.00, 0.00, 1.00], [-0.65, 0.00, 0.85], [-0.50, 0.00, 0.50], [-0.65, 0.00, 0.15], [-1.00, 0.00, 0.00], [-1.35, 0.00, 0.15],
+[-1.06, -1.06, 0.50], [-0.96, -0.96, 0.85], [-0.71, -0.71, 1.00], [-0.46, -0.46, 0.85], [-0.35, -0.35, 0.50], [-0.46, -0.46, 0.15], [-0.71, -0.71, 0.00], [-0.96, -0.96, 0.15],
+[0.00, -1.50, 0.50], [0.00, -1.35, 0.85], [0.00, -1.00, 1.00], [0.00, -0.65, 0.85], [0.00, -0.50, 0.50], [0.00, -0.65, 0.15], [0.00, -1.00, 0.00], [0.00, -1.35, 0.15],
+[1.06, -1.06, 0.50], [0.96, -0.96, 0.85], [0.71, -0.71, 1.00], [0.46, -0.46, 0.85], [0.35, -0.35, 0.50], [0.46, -0.46, 0.15], [0.71, -0.71, 0.00], [0.96, -0.96, 0.15]
+];
+
+let donutFaces = [
+[0,8,9], [0,9,1], [1,9,10], [1,10,2], [2,10,11], [2,11,3], [3,11,12], [3,12,4], [4,12,13], [4,13,5], [5,13,14], [5,14,6], [6,14,15], [6,15,7], [7,15,8], [7,8,0],
+[8,16,17], [8,17,9], [9,17,18], [9,18,10], [10,18,19], [10,19,11], [11,19,20], [11,20,12], [12,20,21], [12,21,13], [13,21,22], [13,22,14], [14,22,23], [14,23,15], [15,23,16], [15,16,8],
+[16,24,25], [16,25,17], [17,25,26], [17,26,18], [18,26,27], [18,27,19], [19,27,28], [19,28,20], [20,28,29], [20,29,21], [21,29,30], [21,30,22], [22,30,31], [22,31,23], [23,31,24], [23,24,16],
+[24,32,33], [24,33,25], [25,33,34], [25,34,26], [26,34,35], [26,35,27], [27,35,36], [27,36,28], [28,36,37], [28,37,29], [29,37,38], [29,38,30], [30,38,39], [30,39,31], [31,39,32], [31,32,24],
+[32,40,41], [32,41,33], [33,41,42], [33,42,34], [34,42,43], [34,43,35], [35,43,44], [35,44,36], [36,44,45], [36,45,37], [37,45,46], [37,46,38], [38,46,47], [38,47,39], [39,47,40], [39,40,32],
+[40,48,49], [40,49,41], [41,49,50], [41,50,42], [42,50,51], [42,51,43], [43,51,52], [43,52,44], [44,52,53], [44,53,45], [45,53,54], [45,54,46], [46,54,55], [46,55,47], [47,55,48], [47,48,40],
+[48,56,57], [48,57,49], [49,57,58], [49,58,50], [50,58,59], [50,59,51], [51,59,60], [51,60,52], [52,60,61], [52,61,53], [53,61,62], [53,62,54], [54,62,63], [54,63,55], [55,63,56], [55,56,48],
+[56,0,1], [56,1,57], [57,1,2], [57,2,58], [58,2,3], [58,3,59], [59,3,4], [59,4,60], [60,4,5], [60,5,61], [61,5,6],[56, 0, 1], [56, 1, 57],
+[57, 1, 2], [57, 2, 58], [58, 2, 3], [58, 3, 59], [59, 3, 4], [59, 4, 60], [60, 4, 5], [60, 5, 61], [61, 5, 6], [61, 6, 62], [62, 6, 7], [62, 7, 63], [63, 7, 0], [63, 0, 56]
+];
+
+
+let cubeVerts = [
+
+[-1, -1, -1],
+[ 1, -1, -1],
+[ 1,  1, -1],
+[-1,  1, -1],
+
+[-1, -1,  1],
+[ 1, -1,  1],
+[ 1,  1,  1],
+[-1,  1,  1]
+
+];
+
+let cubeFaces = [
+
+[0,1,2], [0,2,3], 
+[4,5,6], [4,6,7],
+
+[0,1,5], [0,5,4], 
+[2,3,7], [2,7,6], 
+
+[1,2,6], [1,6,5], 
+[0,3,7], [0,7,4]  
+
+];
+
+
+
+
+
+const phi = (1 +sqrt(5))/2;
+
+let dodecaVerts = [
+[-1, -1, -1], // 0
+[ 1, -1, -1], // 1
+[ 1,  1, -1], // 2
+[-1,  1, -1], // 3
+[-1, -1,  1], // 4
+[ 1, -1,  1], // 5
+[ 1,  1,  1], // 6
+[-1,  1,  1], // 7
+
+[0, -1/phi, -phi], // 8
+[0,  1/phi, -phi], // 9
+[0, -1/phi,  phi], // 10
+[0,  1/phi,  phi], // 11
+
+[-1/phi, -phi, 0], // 12
+[ 1/phi, -phi, 0], // 13
+[ 1/phi,  phi, 0], // 14
+[-1/phi,  phi, 0], // 15
+
+[-phi, 0, -1/phi], // 16
+[ phi, 0, -1/phi], // 17
+[ phi, 0,  1/phi], // 18
+[-phi, 0,  1/phi]  // 19
+];
+
+let dodecaFaces = [
+[9,0,16],
+[9,3,16],
+[9,0,8],
+
+[13,4,10],
+[13,5,10],
+[13,4,12],
+
+[13,0,8],
+[13,0,12],
+[13,1,8],
+[13,1,17],
+
+[13,18,17],
+[13,18,5],
+
+[2,1,8],
+[2,1,17],
+[2,9,8],
+
+[2,6,14],
+[2,18,17],
+[2,18,6],
+
+[19,0,16],
+[19,4,12],
+[19,0,12],
+
+[15,9,3],
+[15,2,14],
+[15,2,9],
+
+[15,3,16],
+[15,19,16],
+[15,19,7],
+
+[11,5,10],
+[11,18,5],
+[11,18,6],
+
+[11,4,10],
+[11,19,7],
+[11,19,4],
+
+[11,6,14],
+[11,15,7],
+[11,15,14]
+];
+
+let icosaVerts = [
+[-1,  phi,  0], [ 1,  phi,  0], [-1, -phi,  0], [ 1, -phi,  0], // 0-3
+[ 0, -1,  phi], [ 0,  1,  phi], [ 0, -1, -phi], [ 0,  1, -phi], // 4-7
+[ phi,  0, -1], [ phi,  0,  1], [-phi,  0, -1], [-phi,  0,  1]  // 8-11
+];
+
+
+let icosaFaces = [
+[0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11], // Top cap
+[1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8], // Upper middle
+[3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9], // Lower middle
+[4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]  // Bottom cap
+];
+
+
+function cube(x, y, a1, a2, a3) {
+// 1. Setup camera ray (orthographic projection for simplicity)
+let ro = [0, 0, -3]; // Ray origin
+let rd = [x, y, 1];  // Ray direction (normalized)
+let p = [0, 0, 0];   // Point in space
+
+// 2. Rotation Matrices
+const rotate = (p, a, b, c) => {
+let [x, y, z] = p;
+// Rotation X
+let xy = y * Math.cos(a) - z * Math.sin(a);
+let xz = y * Math.sin(a) + z * Math.cos(a);
+y = xy; z = xz;
+// Rotation Y
+let yx = x * Math.cos(b) + z * Math.sin(b);
+let yz = -x * Math.sin(b) + z * Math.cos(b);
+x = yx; z = yz;
+// Rotation Z
+let zx = x * Math.cos(c) - y * Math.sin(c);
+let zy = x * Math.sin(c) + y * Math.cos(c);
+x = zx; y = zy;
+return [x, y, z];
+};
+
+// 3. Signed Distance Function (SDF) for a Box
+const sdBox = (p, b) => {
+let q = [Math.abs(p[0]) - b[0], Math.abs(p[1]) - b[1], Math.abs(p[2]) - b[2]];
+let maxQ = Math.max(q[0], Math.max(q[1], q[2]));
+let lengthQ = Math.sqrt(Math.max(q[0], 0) ** 2 + Math.max(q[1], 0) ** 2 + Math.max(q[2], 0) ** 2);
+return Math.min(maxQ, 0) + lengthQ;
+};
+
+// 4. Raymarching Loop
+let t = 0;
+let color = 0;
+for (let i = 0; i < 64; i++) {
+let cp = [ro[0] + rd[0] * t, ro[1] + rd[1] * t, ro[2] + rd[2] * t];
+let rp = rotate(cp, a1, a2, a3);
+let d = sdBox(rp, [1, 1, 1]); // Cube size 1x1x1
+
+if (d < 0.001) {
+color = 1 - (i / 64); // Basic lighting based on iterations
+break;
+}
+t += d;
+if (t > 10) break;
+}
+
+return color;
+}
+
+
+
+const gcd = (x, y) => {
+// 1. Handle absolute values
+x = Math.abs(x);
+y = Math.abs(y);
+
+// 2. Identify the number of decimal places
+const xDecimals = (x.toString().split('.')[1] || "").length;
+const yDecimals = (y.toString().split('.')[1] || "").length;
+const multiplier = Math.pow(10, Math.max(xDecimals, yDecimals));
+
+// 3. Scale up to integers
+const a = Math.round(x * multiplier);
+const b = Math.round(y * multiplier);
+
+// 4. Recursive Euclidean Algorithm
+const findGcd = (a, b) => (b === 0 ? a : findGcd(b, a % b));
+
+// 5. Scale back down
+return findGcd(a, b) / multiplier;
+};
+
+const lcm = (a, b) => (a === 0 || b === 0) ? 0 : Math.abs((a / gcd(a, b)) * b);
+
+
+function harMean(arr) {
+// 1. Count the number of elements
+const n = arr.length;
+
+// 2. Sum the reciprocals (1/x)
+const sumOfReciprocals = arr.reduce((sum, x) => sum + (1 / x), 0);
+
+// 3. Divide n by the sum
+return div(n,sumOfReciprocals);
+}
+
+
+function divvies(num) {
+// Helper to get integer divisor count
+const getDivisorCount = (n) => {
+  if (n <= 0) return 0;
+  let count = 0;
+  for (let i = 1; i <= Math.sqrt(n); i++) {
+      if (n % i === 0) {
+          count += (i * i === n) ? 1 : 2;
+      }
+  }
+  return count;
+};
+
+// If it's already an integer, return the exact count
+if (Number.isInteger(num)) {
+  return getDivisorCount(num);
+}
+
+// For non-integers, interpolate between floor and ceil
+const low = Math.floor(num);
+const high = Math.ceil(num);
+const lowCount = getDivisorCount(low);
+const highCount = getDivisorCount(high);
+
+return lowCount + (num - low) * (highCount - lowCount);
+}
+
+
+const keysPressed = {
+w: false,
+a: false,
+s: false,
+d: false,
+};
+
+let cameraSpeed = 0.02;
+
+window.addEventListener('keydown', (e) => {
+if (e.key.toLowerCase() === 'w') keysPressed.w = true;
+else if (e.key.toLowerCase() === 'a') keysPressed.a = true;
+else if (e.key.toLowerCase() === 's') keysPressed.s = true;
+else if (e.key.toLowerCase() === 'd') keysPressed.d = true;
+
+if (e.key === ' ') {
+isPaused = !isPaused;
+}
+
+if (e.key.toLowerCase() === 'g') {
+showAxes = !showAxes;
+}
+
+});
+
+window.addEventListener('keyup', (e) => {
+if (e.key.toLowerCase() === 'w') keysPressed.w = false;
+else if (e.key.toLowerCase() === 'a') keysPressed.a = false;
+else if (e.key.toLowerCase() === 's') keysPressed.s = false;
+else if (e.key.toLowerCase() === 'd') keysPressed.d = false;
+});
+
+
+
+let graphNumZoom = 0;
+let graphNumZ = 0;
+let isHolding = false;
+let hideTimeout = null;
+
+sliderW.max = 10000;
+sliderW.value = graphNumZoom;
+sliderZ.max = 10000;
+sliderZ.value = graphNumZ;
+
+sliderW.addEventListener('input', function() {
+  graphNumZoom = parseInt(this.value);
+  valueW.textContent = `Zoom=${(graphNumZoom/100)}`;
+  this.blur();
+});
+
+sliderZ.addEventListener('input', function() {
+  graphNumZ = parseInt(this.value);
+  valueZ.textContent = `Z=${(graphNumZ/100)}`;
+  this.blur();
+});
+
+sliderH.addEventListener('input', function() {
+  H = parseInt(this.value)/100;
+  tea = H;
+  oldH = H;
+  valueH.textContent = `Hue=${(round(H*100)/100)}`;
+  this.blur();
+});
+
+rainbowToggle.addEventListener('change', () => {
+  if (!rainbowToggle.checked) {
+  valueH.textContent = `Hue=${(Math.round(H * 100) / 100)}`;
+} else {}
+});
+
+
+
+window.addEventListener('keydown', (e) => {
+const totalGraphs = Object.keys(graphFunctions).length;
+if (e.key === 'ArrowRight') {
+selectedGraphNumber = selectedGraphNumber === totalGraphs ? 1 : selectedGraphNumber + 1;
+cameraX = 0;
+cameraY = 0;
+} else if (e.key === 'ArrowLeft') {
+selectedGraphNumber = selectedGraphNumber === 1 ? totalGraphs : selectedGraphNumber - 1;
+cameraX = 0;
+cameraY = 0;
+} else if (e.key >= '1' && e.key <= '9') {
+viewMode = parseInt(e.key);
+updateSliderVisibility();
+} else if (e.key === "r" || e.key === "R") {
+if (e.metaKey) return;
+const answer = prompt("Set a resolution for the screen. It is how many pixels wide and tall it is. By default it is 500x500.")
+
+if (Math.pow(answer, 3) !== 0 && (answer > 0) && (answer <= 1500) && (answer - Math.ceil(answer) == 0)) {
+localStorage.setItem('res',answer)
+location.reload()
+}
+}
+});
+
+
+canvas.addEventListener('wheel', (e) => {
+e.preventDefault(); // prevent page scroll
+
+const zoomStep = 500;
+if (e.deltaY > 0) {
+graphNumZoom = Math.min(graphNumZoom + zoomStep, parseInt(sliderW.max));
+} else {
+graphNumZoom = Math.max(graphNumZoom - zoomStep, 0);
+}
+
+sliderW.value = graphNumZoom;
+valueW.textContent = `Zoom=${(graphNumZoom / 100)}`;
+});
+
+let sqrtX,sqrtY = 0;
+
+
+const imageData = ctx.createImageData(resolution, resolution);
+const data = imageData.data;
+let cacheMath2 = 0;
+let graphZoomScaling = 0;
+let graphAddScaling =0;
+function zoomSet(add,div) {graphZoomScaling = div; graphAddScaling = add; cacheMath2 = ((zoom+add)/div); X=(X+5)*(0.2+(cacheMath2)); Y=(Y+5)*(0.2+(cacheMath2)); Y=(0-Y)-cameraY; X=X+cameraX; cameraSpeed=0.01+(cacheMath2)/1000; sqrtX = X*X; sqrtY = Y*Y;}
+function fixZero() {if (Y==0) {Y++};}
+
+function ZS2(x, y) {
+let canvasSize = canvas.clientWidth / (500 / resolution);
+cacheMath = ((canvasSize - resolution) / 2) - canvasSize;
+canTen = canvasSize / 10;
+
+let X = (x + cacheMath) / canTen;
+let Y = (y + cacheMath) / canTen;
+
+// Step 2: SAME zoom math as zoomSet
+const add = graphAddScaling;   // already correct globally
+const div = graphZoomScaling;
+
+const scale = 0.2 + ((graphNumZoom / 100 + add) / div);
+
+X = (X + 5) * scale;
+Y = (Y + 5) * scale;
+
+Y = -Y - cameraY;
+X = X + cameraX;
+
+return { graphX: X, graphY: Y };
+}
+
+
+//graphss
+
+      function graph1(){zoomSet(0,45);               value=X*X+Y*Y+t*(Z/20)}
+      
+      function graph2(){zoomSet(20,25);              value=((sin((X*(Z+1)/30)+(3*(t)))-(t))/3)+((sqrtX/50)-(47*Y/150))}
+      
+      function graph3(){zoomSet(0,80);               value=(X+Y)+cos(((Z+1)/8)*X*Y+t)}
+      
+      function graph4(){zoomSet(10,45);              value=t/2+sin(X)*cos(Y+(sin(((Z+1)/10)*X+(t*(0.5+(Z/10))))*(15/(Z+1))))}
+      
+      function graph5(){zoomSet(0,80);               value=div(sin(X),(Y/(((Z+5)/5))))+t}
+      
+      function graph6(){zoomSet(10,45);              value=t/2+sin(X-(t/3))*cos(Y+(sin(((Z+1)/50)*X+(t*1)))*(100*((Z+0.1)/1500)))}
+      
+      function graph7(){zoomSet(0,205);              value=(X*X*X*X-Y*Y*Y*Y-((sin(pi*X*Y+(t/10)*Z))*(X*Y)))+t}
+      
+      function graph8(){zoomSet(10,80);  fixZero();  value=(sqrt(abs(sin(((X+(sin(t/1)))*(Y/2))+(t/10)))*(Z/2.5)))+(sin(Y+(t/10))*(Z/5))-X-Y+t}
+      
+      function graph9(){zoomSet(30,80);              value=(exp(abs(X)-3)-Y)*(((Z+5)/100)*sin(X+(Y*(1-Z/50))+t)+(sin(X)/3))+(t/3)}
+      
+      function graph10(){zoomSet(5,45);              value=sqrt(sin(X))+cos(Y*(1+(sin(X-t)*(Z/50))))+cos(X+(t/3));if (value<=sin(X-2*t)) {value*=sin(X+t)}value+=t/2}
+                                                     
+      
+      function graph11(){zoomSet(0,45);              value=sin(Y-t)+sin(X+t+sin(Y*(Z/20)+t+cos(X*(Z/20)+t)))+sin(Y)}
+      
+      function graph12(){zoomSet(20,40);             value= sin(t+Y)+cos(sin(X)+t);
+                                                     if (value<=0) {value+=sin(X)}
+                                                     value*=((Z+7)/20)}
+      
+      function graph13(){zoomSet(30,90);             value=((sin(X+sin(t))+cos(Y+cos(t)))/1.7)+sin((X+(sin(X)*(Z/20)))*(Y+(sin(Y)*(Z/20))))+t}
+      
+      function graph14(){zoomSet(0,70);              const tempX = sin(t/2); const tempY = cos(t/2);
+                                                     const dist = (sqrt(((tempX-X)*(tempX-X))+((tempY-Y)*(tempY-Y))))
+                                                     value=div(sin((abs(Y)+abs(X))),Y) + ((log(dist))-1)*(Z/12) + (t/3)}
+      function graph15(){zoomSet(3000,9000);
+                                                     const orbit1X = sin(t/2) * 2;
+                                                     const orbit1Y = cos(t/2) * 2;
+                                                     const orbit2X = orbit1X + sin(t*2.5);
+                                                     const orbit2Y = orbit1Y + cos(t*2.5);
+                                                     value=(div(1,sqrt((0.1/(epow(Z/15)-0.999))*dista(0,X,0,Y)*dista(orbit1X,X,orbit1Y,Y)*dista(orbit2X,X,orbit2Y,Y)))) + (dista(0,X,0,Y)/1.7) + t/3}
+      
+      function graph16(){zoomSet(0,90);              value= (dista(0,X+(sin(dista(0,X,0,Y)+t)*(Z/20)),0,Y+(cos(dista(0,X,0,Y)+t)*(Z/20))))+(t/3)}
+
+      function graph17(){zoomSet(0,45);              value=(Z/20)*div(abs(X),Y-(tan(t)*X))+sin(X)+Y+t}
+      
+      function graph18(){zoomSet(20,45);             value=cos(X)-sin(Y+0.5*(sin(X+t)))+(cos(X*Y+t)*(Z/70));
+                                                     if (abs(value) <= 0.5) {value+=t} else {value-=t}}
+      
+      function graph19(){zoomSet(0,45);              value=sin(X-t/2)+(Y)+1000;
+                                                     if (abs(value) % 1 <= 0.5 ) {value-=t/2} else {value+= X+t}
+                                                     value=sin(3*value)*((Z+1)/20)+t/8}
+                                                     
+      function graph20(){zoomSet(0,150);             value=arcsint(X)+(Y*(Z/50))+(t)+(sin((Y-(((Z+10)/20)*t))))}
+      
+      function graph21(){zoomSet(0,100);             value=(tan(X-Y-sin(Y+t))*Z/20)-arcsint(X-t)+sin((3*Y)+t);
+                                                     if (abs(value)%10<=1) {value*=(sin(X)+Y)*Z/30}}
+      
+      function graph22(){zoomSet(15,45);             value=sin(Y)+sin(X-t-(sin(Y-t)*(Z/20)))+(abs(Y)/3);
+                                                     if ((value-(abs(Y)/3))<=sin(Y+sin(X))) {value+=(1+(Z/300))*sin(X)}
+                                                     value+=t/1.5;}
+    
+      function graph23(){zoomSet(0,100);             value=sqrt(sqrtX+sqrtY)-(sqrt(5)+(Z/40)*sin(8*arctan(div(Y,X))+((3*t)+sin(-X*Y))))+t/(2-(Z/70))}
+
+      function graph24(){zoomSet(0,200);             value=abs(X)+abs(Y)+(abs(X)*abs(Y))+t+sin((Z/10)*abs(X)+(Z/10)*abs(Y)-t/2)}
+      
+      function graph25(){zoomSet(0,55);              value=sin(abs(X)-abs(Y)-(10*sin((X*Y-t)/10)));
+                                                     if (value<0) {value +=sin(X*Y)}
+                                                     if (abs(value / 20) <= 0) {value = Math.asin(value / 20);}
+                                                     else {value = Math.asin(value / 10)*20}
+                                                     value*=Z/50+0.1; value+=t*(2*(Z/100+0.1))}
+      
+      function graph26(){zoomSet(0,70);              value=ring(pi/2-t)-ring(pi/2+t)+sin(Y+t)+t}
+      
+      function graph27(){zoomSet(0,150);             value=div((Z/10)*tan((sqrtX)+(sqrtY)),(((sqrtX)+(sqrtY))+(sin(t+X)*10*X*Y)))+t+X*Y}
+      
+      function graph28(){zoomSet(0,100);             value=div((Z/10)*(X+sin(X+t)),Y+cos(Y-t))+X+(sin(X-t)*cos(Y-t))
+                                                     if (abs(value) % 1 <= 0.5) {value+=t/2} else {value-=t/2}}
+      
+      function graph29(){zoomSet(0,45);              value=((sin(X*Z/40)*sin(X*Z/40))+(sin((Y*(Z/40))-t)*sin((Y*(Z/40))-t))) -X +t -Y+sin(div(abs(X),0.1*Y))+t}
+      
+      function graph30(){zoomSet(0,45);              value=round(X)+sin(X+t)-X+Y; value+=div((Z/1.3+0.01),(value))-t}
+      
+      function graph31(){zoomSet(0,90);              value=
+                                                          (Y % abs((sin(Y+X+(Z/15)*sin((t/(Z/15+1))+Y)))))+
+                                                          (X % abs((sin(X+Y+(Z/15)*sin((t/(Z/15+1))+X)))))+t/3}
+      
+      function graph32(){zoomSet(0,120);             value=sqrtX+sqrtY+sin(X*Y*(Z/10)+t)+div(1,cos(X*Y*(Z/10)-t))+t}
+      
+      function graph33(){zoomSet(0,45);              const EX=X/((Z+20)/20); const EY= Y/((Z+20)/20);
+                                                     value=div((Y*(EY+cos(EX*EY-t))+ X*(EX+sin(EX*EY+t))),(abs(X)*abs(Y))-2)*(0.5+Z/20)+t}
+    
+      function graph34(){zoomSet(0,45);              value=div((X*sin(X)+Y*cos(Y)+div((X*Y),sin(X+t+(sin(t/1.5)*Y)))),abs(X*Y)+1)*((Z+1)/12)+t}
+      
+      function graph35(){zoomSet(0,90);              value=(tan(X+Y+t)/(X-Y) % (X+tan(t/1.5)*Y)+t)*((Z+1)/10)}
+      
+      function graph36(){zoomSet(0,45);              value=(tan(Y-t/2)%tan((X+((Z/30)*sin(Y)))+t/1))+sin((X+((Z/30)*sin(X)))-t/2)+cos((Y)+t/2)}
+      
+      function graph37(){zoomSet(0,45);              value =sin(X+sin(t-Y+sin(X+t+sin(Y+sin(X+t)))))+Y;
+                                                     if(abs(value+(Z/10)*sin(Y+t/20))%1<0.5){value+=t/9+2}else value-=t/3;}
+      
+      function graph38(){zoomSet(0,45);              value=((X%(sin(Y-t/2)+X)+Y%(sin(X+t/2)+Y))+(Z/50)*(sin(X)+cos(Y))-t)}
+      
+      function graph39(){zoomSet(0,60);              value=div(X%sin(Y+t/2),sin(X%Y+t)/(0.01+Z/30))+t}
+      
+      function graph40(){zoomSet(5,60);              value=exp(sin(X*Y)*tan(((Y/((Z+10)/5))+(sin(t/3)))*X))+t/8}
+      
+      function graph41(){zoomSet(0,90);              value=sin(X)*X+sin(Y)*Y-abs(cos(t+sin((Z/3)*Y)/5)*Y +sin(t+cos((Z/3)*X)/5)*X)+sin(X*Y)}
+      
+      function graph42(){zoomSet(0,45);              value=(0.05+Z/20)*(sin(X*Y-t)-cos(cos(t+Y/3)*Y+X+sin(5*X*Y+t)/5)+t+div(1,sin(Y+t)+(abs(X+(3*sin(t/2+Y)+1))%6-(3*sin(t/2)+1))))}
+      
+      function graph43(){zoomSet(0,45);              value=(sin(t/3+X+cos(Y+sin((Z/10)*X-t)+(t+sin(X+t)))+t)*(0.75+Z/50))+t}
+      
+      function graph44(){zoomSet(0,45);              value=sin(floor((Y+(sin(5*(X+sin(Y+t)))*((Z+5)/60)))-t)+Y+(Z/10)*cos(X+t+cos(Y)))+sin(Y+X+t/2)}
+      
+      function graph45(){zoomSet(0,45);
+                                                     const thingy3 = sin(t/4)*4; const thingy2 = Z/25+0.1;
+                                                     value= sin(X*thingy2)*sin(Y*(thingy3))-cos((X*(thingy3))+Y)*cos(X*Y*thingy2+t)-t}
+      
+      function graph46(){zoomSet(0,45);              value=(Z/20+0.5)*(pow(abs(X/3+sin(t+Y+sin((Z/10+1)*X)/2)),(sin(X-t)))/X+sin(Y*X+t))+t;}
+      
+      function graph47(){zoomSet(0,130);             value=(tan((X+Z*(sin(3*Y-2*t)/50))*Y-t/2) % 5 - sin(5*X+t)+t)*(Z/90+0.5)}
+      
+      function graph48(){zoomSet(0,75);              value=0.5*(pow(abs(X),tan((X+sin(Y*Y)*(Z*(Y/50)))-t/2))*div(1,abs(tan(X+t)))%(Y-sin(X*X)*(Z*X/50))+sin(Y))+t}
+      
+      function graph49(){zoomSet(0,120);             X=X*sin(X+t); Y=Y*cos(X+Y+t); value=tan((X-sin(Y)*(Z/20))%Y)+sin(Y+X+t)*(Z/50+0.6)+t;}
+      
+      function graph50(){zoomSet(0,45);              value=(Y+sin(t+div(1,(Y+2*sin(X+1*sin(5*Y+t)+t)))+t)*(X*(Z/100))+X*1)*(0.3+Z/100)+t+div(sin(Y*X),X);}
+      
+      function graph51(){zoomSet(0,45);              value=div(sin(X-t)*X-div(X*X,(Y+(Z/20)*sin(-t+X+sin(Y+t))))-cos(Y+t),X*(0.7-Z/200))+t;}
+      
+      function graph52(){zoomSet(0,45);              value=sin(sin(Y-t)*X*(Y*sin(Y+t)))*tan(X*Y*(0.02+Z/30))*(div(1,X*Y))*5+t;}
+      
+      function graph53(){zoomSet(0,45);              value=pow(abs(cos(abs(X)+t)),abs(X))+cos((0.2+Z/15)*Y+sin(X+Y+t)*Y-t);}
+      
+      function graph54(){zoomSet(0,45);              value=(0.2+Z/30)*(Math.pow(abs(X),-abs(Y+2*sin(X)))+sin(X+cos(t+Y-tan(X+t))-t));}
+      
+      function graph55(){zoomSet(0,45);              value=t/2+1.5*div(sin(X*X-t)*X-cos(Y*Y+t)*Y,(X+(0.1+Z/30)*sin(Y-t))*(Y+(0.1+Z/30)*sin(X+t)));}
+      
+      function graph56(){zoomSet(0,45);              value=sin(X%(sin(abs(Y)+t+sin(X-t/2))*Y))*((Z/30)+(Y%cos(Y-X+t)))+t/2;}
+      
+      function graph57(){zoomSet(0,45);              value=sin(X%(sin(abs(Y)+t+sin(X-t/2))*Y))*((0.4+Z/30)*(Y%cos(Y-X+t)))+t/2;} // same as 56 but with multiplication
+      
+      function graph58(){zoomSet(0,45);              value=(Z/40+0.01)*tan(X-sin(X-t))-cos(Y*sin(t+Y-div(X,sin(Y+t))));}
+      
+      function graph59(){zoomSet(0,45);              value=tan(t+X-Y-sin(X*Y*sin(t/4.5))*(div(sin(X+t)*(Z/5),X*Y)))/2;}
+      
+      function graph60(){zoomSet(0,45);              value=t+(0.1+Z/100)*tan(div(X,Y)%div(Y,X)-sin(X+(Z/50)*(X%sin(t+(Y+sin(X+t))))+t));}
+
+      function graph61(){zoomSet(0,45);              value=(Z/20)*Y+t/2+pow(abs(sin(t%Y+X%(Y+sin(X-t)))),abs(Y%div(X,Y)));}
+      
+      function graph62(){zoomSet(0,45);              value=t/5+tan(X*Y)*tan(X*Y+pi/2*sin(t/3+(Z/100)*Y));}
+      
+      function graph63(){zoomSet(0,45);              value=t/2+0.2*tan(X%tan((Z/30)*(sin(Y)+X)+t/2)-t)*(Y-sin(t+X));}
+      
+      function graph64(){zoomSet(0,45);              value=t/2+(0.1+Z/20)*cos(t+Y+(X-cos(t+2*Y-sin(-t+X*(Y-sin(t-2*X))))));}
+      
+      function graph65(){zoomSet(0,45);              value=t/2+sin(X+(Z/10)*tan((t+X/tan(sin(t)/1.5-pi/2))+Y-(sin(X+t))))*cos(Y+sin(X-t))+sin(Y);}
+
+      function graph66(){zoomSet(0,45);Z/=10;        value=0.65*sin(t-((Y-cos((X-Z*sin(t))+t/2))*(X+Z*sin(t+Y)))+(X+(Z*sin(t)))%sin(t+Y*(X+sin((Y+Z)+t))))+Y}
+
+
+
+      function graph67(){zoomSet(0,45); value=(Z/20+0.2)*sin(X);
+        if (value<0) {value*=sin(Y+t);  value+=(tan(Y+t)+X)/10}
+        else {value*=sin(Y-t);  value+=(tan(Y-t)+X)/3}
+        value+=t*(Z/20+0.2);
+      }
+        
+         
+      function graph68(){zoomSet(0,45); value=sin(X);
+        if (value<0) {value*=sin(Y+t)}
+        else {value*=sin(Y-t)}
+        if (value<0) {value*=2*sin(Y+t*2)}
+        else {value*=2*sin(X-t*2)}
+        
+        value+= sin(Y+t/2+sin(t)*X); value*=Z/20+0.1}
+      
+      function graph69(){zoomSet(0,45);rotatePlane(t/2); value=(tan(X*Y)*(log(Z/20+1)))%(Y+sin(X%cos(t+X+Y)));
+      rotatePlane(t/-2);
+       if (abs(value-(X+sin(2*X)/2))<-0.5+(sin(t/3)*10)+sin(Y+t)) {value=t+X/10}}
+      
+      function graph70(){zoomSet(0,45); value=sin(sin(t+X*(Z/40)));
+        if (Y=round(Y)) {value=sin((Y*(Z/40+0.5))+sin(t+X*(Z/40)));}
+        value+=t/2;
+      }
+      
+      function graph71(){zoomSet(0,45); value=X-t-sin(Y-t)
+      if(sin(value)<(Y+sin(t))){value=X+t+sin(Y+t)}
+      if(sin(value)<Y-2+(2*cos(t/2))){value=Y+X+sin(Y-t)}
+      value+=((Z-50)/9)*t}
+      
+      function graph72(){zoomSet(0,45);  value=0}
+      
+      function graph73(){zoomSet(0,45); value=Y-X;
+      if (abs(value)%1 > 0.5) {value=Y+X}
+      value+= sin(Y+t);
+      value*= (Z/25)+0.1}
+      
+      function graph74(){zoomSet(0,45); X+=sin(t); Y+=cos(t); value=X+Y; 
+      if (X-sin(t)<tan(t)*(Y+sin((Z/10)*X))-cos(t)) {value-=sin(t/2)} 
+      if (Y-cos(t)<-tan(t)*(X+sin((Z/10)*Y))+sin(t)) {value-=sin(t/3)}
+      }
+      
+      function graph75(){zoomSet(0,45); value=Y+t+(Z/20+0.05)*arcsin(sin(arcsin(sin(X*Y-t))+arccos(cos(X*Y*sin(t)-0.5))));}
+ 
+
+  
+      function graph76(){zoomSet(0,45); value=arcsin(sin((X-t/2)+Y*arccos(cos(X+t/2))));
+      if (value<0){value+=arccos(cos(value+t/2));}
+      if (value<0){value%=(X/5)+(tan(t)*Y/5)}
+      value*=(Z/40)+0.05; value+=t;}
+ 
+     
+      function graph77(){zoomSet(0,45); value=(Z/10+0)*div(arcsin(sin((Y-X+sin((Z/20)*X+t)))),Y)+t;}
+      
+      function graph78(){zoomSet(0,45); value=fact(sin(X)+sin(Y))+sin(Y+t)
+      if (sin(X-t)+cos(Y+sin(t+(Z/8)*X))<(X+Y)%0.1){value=-value}
+      if (sin(Y-t)+cos(X+sin(t+(Z/8)*Y))<(X+Y)%0.1){value=-value}
+      value*=Z/40+0.05}
+      
+      function graph79(){zoomSet(0,45); rotatePlane(t); value=arcsin(sin(X)+sin(Y));
+      if (value>0.5707){value=tan(sin(X)+cos(Y+(1.5*pi)))}
+      value=round(value*(Z/5+1.01))/(Z/5+1.01);
+      value-=t/2}
+      
+      function graph80(){zoomSet(0,45); value=(Z/10+0.1)*sin(t+Y+cos(Y+sin(X)))+t}
+      
+      function graph81(){zoomSet(0,45); value=sin(round(X+t)+(X-sin(t))%Y)+Y+cos(Y+sin(X+t));
+      if(value<0){value=X+t+sin(t)*sin(Y+5*t)}
+      value+=(Z/60)*tan(value)}
+      
+      function graph82(){zoomSet(10,45); rotatePlane(sin(t*2)/3); value=sin(t+Y+X)
+      for (let x = 0; x < 4; x++){
+      if(true) {value=(Z/30)*sin(value+t/((x+1)/3))}}
+      value+=Y}
+      
+      function graph83(){zoomSet(0,45); if(X>0){te = sin(t)*1} else {te = -sin(t)*1}; value=t+div(sin(div(X,Y)),sin(t-(cos((Z/10)*(X+sin(5*(Y+te))/5))))); value*=Z/50+1.1}
+      
+      function graph84(){zoomSet(0,45); thingy3 = (Z/37+0.1)*(pow(abs(sin(X)),abs(X))-sin(Y*div(10,tan(t/2)*Y+X))); value=t+(sin(Y)+X)%thingy3+thingy3;}
+      
+      function graph85(){zoomSet(0,45); value=sin(X+sin(sin(t/2)*10*Y)+sin(sin(t/2+Y/3)*-10*X));
+      value*=(Z/10+0.1);
+      value+=t+X} 
+      
+      function graph86(){zoomSet(0,45); value=t+sin(Y+cos(X))-sin(t+X+div(Y,sin(X+t+(Z/20)*sin(Y+t+(Z/20)*sin(5*Y-t)))));}
+      
+      function graph87(){zoomSet(0,45); 
+      thingy4=(tan(sin(X-t))<sin(Y-t)) ? t/2 : -t;
+      value=t+X+tan(Y+sin(X-thingy4)); 
+      if (tan(sin(X-t))<sin(Y-sin(t))) {value+=t; value/= 5};
+      value*=(Z/40+0.05)}
+      
+      function graph88(){zoomSet(0,45); value=sin(tan((Z/3)*X+(Z/3)*t)+t)/5+sin(X-t)+(Y)}
+      
+      function graph89(){zoomSet(0,45); value=t+tan(X+t)-tan(t/3+Y+sin(t/2+X-tan(abs(Y*(Z/20))))); value/=5; value%=value+0.1; value+=t/3}
+      
+      function graph90(){zoomSet(0,45); value=t+sin(tan(t/2+X%(sin(Y+t)+tan(X/(Z/12+0.1)))));}
+      
+      function graph91(){zoomSet(0,45); value=div(1,sin(tan(div(7,X))))-div(1,sin(tan(div(7,Y)))); value*=(Z/50+0.01); value+=t/2}
+      
+      function graph92(){zoom-=zoom+(graphNumZoom+5000)/8500-1 /*Flip zoom*/;   zoomSet(0,4); value=computeGeometry(X,Y)+t*Z/50;}
+            
+            function graph93(){zoom-=zoom+(graphNumZoom+5000)/8340-1; zoomSet(0,4); value=log((X,Y))+t/3;}
+     
+
+             function graph94() {zoomSet (0,45); value=0.5*(floor ((cos (Y+t)+X) *pi)%X)* (floor ((sin(X+t)+Y) *pi)%Y); value+=t/3+(Z/15)*div(sin(X-t+pi/2)+Y,Y-cos(X+t+pi/2));
+      value+=(Z/15)*div(cos(Y-t-pi/2)+X,X-sin(Y+t-pi/2))}
+
+
+      function graph95(){zoomSet(0,45); value=tan(X)%tan(Y+t)-tan(X+(Z/20+0.05)*sin(Y-t)); value/= 1.5+Z/300; value+=t}
+
+
+      function graph96(){zoomSet(0,45); value=sin(div(X*X,abs(Y+cos(t)))+div(Y*Y,abs(X+sin(t))));
+      value=abs(tan(t/2)*Y+X)%value+value-t/2; value*=Z/30+0.05}
+      
+      
+      function graph97(){zoomSet(0,45); s1 = sin(t/2+Y*(Z/20)); s2=sin(t/2+pi/3)*2; s3=sin(t/2+2*pi/3+X*(Z/20))*4; value=(gcd(round(X*s1),round(Y*s1))+gcd(round(X*s2),round(Y*s2))+gcd(round(X*s3),round(Y*s3)))/(10)+t/2; value+=Y*X/5}
+      
+      
+      function graph98(){zoomSet(0,45); value=lcm(round(X-sin(Y+t*1.6)),round(Y-cos(X+t*1.4)))*Z/50-gcd(round(X+cos(Y+t*1.2)),round(Y+sin(X+t)))*Z/50;rotatePlane(t/2); value+=X/5}
+      
+      function graph99(){zoomSet(0,45); rotatePlane(t/4); value=X*X+Y*Y+X*X*sin(t+(Z/20)*div(sin(t+Y),abs(Y))*X*X)+Y*Y*cos(div(1,X)*Y*Y)-tan(abs(X)*abs(Y)); value=div(value*(Z/80+0.5),X*X+Y*Y); value+=t/2}
+      
+      
+      function graph100(){zoomSet(0,90); value=0;rotatePlane(t/2); value+=sin(atan2(Y,X)+log(X*X+Y*Y+0.0001)+0.1*sin(5*t+log(X*X+Y*Y+0.0001))); rotatePlane(t/-2); value%=sin(value*Z/5+1); value*=(10+Z*tan(X*X+Y*Y))/(Z+1); value+=t/2;}
+       // if we ever add a second slider...                                              (Multiply this by W)
+
+
+      function graph101(){zoomSet(0,80); value=join(X,Y); rotatePlane(t/2); value=join(value,join(X,Y)); value%=0.1*tan(value); value*=Z/20+0.1; value+=t/2 }            
+      
+      function graph102(){zoomSet(0,45); value=MAD(sin(X-t),cos(Y-t)); rotatePlane(sin(t)*(Z/20)); value-=sin(Y+t)+cos(X+t)}
+      
+      function graph103(){zoomSet(0,50); value=+t/2+join(sin(X),cos(Y+sin(X+t)*sin(3*t)*0.5))-sin(X+cos(t+Y*(Z/25)))-cos(Y+sin(t+X*(Z/25))); value*=1+Z/800*tan(value)}
+      
+      function graph104(){zoomSet(0,45); value=value=t/2+tan(gcd(X, Y)) 
+        - sin(X + cos(Z/10 * Y+sin(t+tan(Y+sin(X+t))))) 
+        - cos(Y + sin(Z/10 * X+cos(t+tan(X+sin(Y+t)))));;
+     }
+
+      function graph105(){zoomSet(0,90); X+=(Z/50)*sin(Y+t/1.5); Y+=(Z/50)*cos(X+t); value=(divvies(abs(X))+divvies(abs(Y))); value*=1+(Z/300)*tan(value+t); value+=t;}
+
+
+      function graph106(){zoomSet(0,45); value=atan2(X+(Z/80)*tan(Y+t),Y); rotatePlane(t*2*pi); value-=atan2(X+(Z/80)*tan(X+t),Y); value-=t*2*pi; value*=(Z/20)+1}
+
+
+            function graph107(){zoomSet(0,45); value=join(X*(Z/40),Y);rotatePlane(t); value+=join(X,Y*(Z/40))*(value%sin(X)); value/=X*X+Y*Y+1; value+=t;};
+
+            function graph108(){zoomSet(0,45); value=arcsin(sin((sin(t+X))+Y))-arcsin(sin(X-sin(Y+t)-Y+t)); if (sin(value)>=sin(t/2)) {value%=sin(t)} else {value+=t}; value*=0.2+Z/20}
+      
+
+            function graph109() {zoomSet(0,80); value=max(abs(X),abs(Y))+abs(X+cos(abs(X)+t))*abs(Y); value%=sin(value*(Z/20)+t/2); value*=(Z/20+0.5); value+=t/2}
+
+            function graph110() {zoomSet(0,45); value=t+div(1,sin(X*(Z/20)-t))-div(1,sin(X-tan(X+t)+2*Y)); value*=(Z/90+0.1)}
+      
+      function graph111(){zoomSet(0,20); rotatePlane((sin(t)+t)*0.25); value=med([Y,X,sin(X+t),cos(Y+sin(t)*sin(X+t))]); rotatePlane(t/2); value=med([value,sin(value+t*2)]); value*=Z/20+0.1}
+
+
+      function graph112(){zoomSet(-20,200); value=value=t/2+(Z/10+0.1)*polyhedron(X,Y,cubeVerts,cubeFaces,t,t*1.1,t*1.2);
+        if (value==t/2) {value=t/2};}
+
+      function graph113(){zoomSet(0,200); value=2*cube(X,Y,t,Z/50*(Y+cos(Y+t/(Z/25+1))),Z/20*(X+(Z/50)*sin(X+t/(Z/20+1)))); if (value==0) {value=sin(t)/4+t/4}}
+             
+      
+      function graph114(){zoomSet(-20,200); value=t/2+(Z/10+0.1)*polyhedron(X,Y,icosaVerts,icosaFaces,t,t*1.1,t*1.2);
+      }
+      
+
+      function graph115(){zoomSet(-20,200); /*value=t/2+(Z/10+0.1)*polyhedron(X,Y,donutVerts,donutFaces,t,t*1.1,t*1.2);
+        if (value==t/2) {value=t/2};*/ value =0; // HEY NO PEAKING!
+      } 
+      
+      
+      function graph116(){zoomSet(0,200); value=tan(t/20+pow(10,(-10-(round(Z/15)))) * lcm(X,Y))
+      }
+      
+      function graph117(){zoomSet(-20,200); value=value=t/2+(Z/10+0.1)*polyhedron(X,Y,dodecaVerts,dodecaFaces,t,t*1.1,t*1.2);
+        if (value==t/2) {value=t/2};}
+        
+      function graph118(){zoomSet(0,45); value=t/2+(Z/20+0.1)*max(sin(X+t),Y)%min(cos(X-t),cos(Y+t));}
+      
+      function graph119(){zoomSet(0,45);rotatePlane(t/3); const thingymajig = Z/20*abs(X);  rotatePlane(t/2+thingymajig); const X2 = X; const Y2 =Y;
+        rotatePlane(t/-2-thingymajig); value=t/2+0.2*div(tan(X*X+Y*Y+t),Y2*X2*X2+X2*Y2*Y2)*(X*X+Y*Y);}
+      
+      function graph120(){zoomSet(0,45); value=geoMean([X+sin(t+Y),Y,sin(X),cos(Y-cos(t+X))]); X=0-X; Y=0-Y;
+       value+=geoMean([X+sin(-t+Y),Y,sin(X),cos(Y-cos(-t+X+pi))]); value=((Z/15+0.2)*value)+t/2}
+
+            function graph121(){zoomSet(0,45); value=pow(abs(X)*abs(Y),0.5)-geoMean([abs(X+sin(t)),abs(Y+cos(t))]);
+       value=tan(value+Z/(200/pi));}
+
+      function graph122(){zoomSet(0,45); value=t*2+harMean([tan(Y+sin(X/5+t)),tan(X),tan(t+sin(Y*Z/20))*0.5]);}
+      
+      function graph123(){zoomSet(0,45); value=X*X+Y*Y; for (let x = 0; x < Z/20*abs(Y+sin(t+X+cos(Y+t))); x++){value=sin(value+t)} value*=abs(Y)+1; value+=t;}
+      
+      function graph124(){zoomSet(0,45); value=sin(ra()*(Z/80)+t+X)+cos(ra()*(Z/80)+t+Y+sin(5*X));}
+      
+      function graph125(){zoomSet(0,45); value=(sign(abs(tan(-t+X+sin(Y+t)))%(sin((X+cos(Y+2*t))+t))-Z/100))/5+t/2;}
+      
+      function graph126(){zoomSet(0,45); value=sin(t/(Z/20+1))*(Z/20+0.1)+X*X+Y*Y; rotatePlane(tan(value)+(t/(Z/20+1)));value=t/2+(sin(X+(t/(Z/20+1)))+cos(Y+(t/(Z/20+1))))*(Z/20+0.1);  }
+      
+      function graph127(){zoomSet(0,45); rotatePlane(Y+sin(X)+X*sin(t)); value=(Z/20+0.1)*(tan(sin(X)+cos(Y+t))-sin(X+t)+Y);}
+      
+      function graph128(){zoomSet(0,45); rotatePlane(t/2+Z/20*sin(Y+t)); value=sin(round(X)-X+Y%X); rotatePlane(0-(t/2+Z/20*sin(Y+t))); 
+       value=value-sin(Y%sin(Y+t+sin(2*X)/2)+t);
+       value=value*(Z/50+0.1)+t/2}
+
+            function graph129(){zoomSet(0,Z/8-abs(0-Y)); value= (X+sin(Y))/5;}
+      
+      function graph130(){zoomSet(0,45); value=Z/10%(X-sin(Y+t+tan(Y-t+sin(X+2*t))))-t}
+      
+      function graph131(){zoomSet(0,45); value=t/2+Y; value+=tan(ring(t,Z/90))+tan(ring(0-t,Z/90));Y+=t*1.06;
+       value+=tan(ring(0,Z/90)); Y-=(1.06*2)*t; value+=tan(ring(0,Z/90))}
+
+             function graph132(){zoomSet(0,45); let temp = sin(t)*pi; if (Y>=0) {temp = sin(t)*-pi};
+       value=t+(Z/20+0.01)*((X-cos(t*3+tan(X+cos(Y*3+temp*3)/3)+t))*sin(tan(abs(Y+sin(X*3+temp*3)/3)+t)+t));}
+      
+      function graph133(){zoomSet(0,45); value=pow(X,4)+pow(Y-sin(t),4)-10*sin(Y+t)*X*X-10*cos(X)*Y*Y; value*=Z/200+0.0002}
+
+      function graph134(){zoomSet(0,45);  value=max(sin(X+Y*Z/20),2*cos(X-(t)*pi))+max(sin(Y+X*Z/20),2*cos(Y-(t)*pi))+sin(Y+sin(X+tan(Y+sin(X)))); value*=Z/20+0.1}
+
+      function graph135(){zoomSet(0,45); value=((sinh(abs(abs(X+sin(Y-t))+tan(t+Y)))))*(Z/20+0.1)+t/2}
+
+      function graph136(){zoomSet(0,90); value = 0; rotatePlane(tan(X*X+Y*Y-t/2)); temp1 = X+sin(Y*(Z/5));  rotatePlane(tan(X*X+Y*Y+t/1)); value=(temp1+Y)}
+
+      function graph137(){zoomSet(0,45); rotatePlane(sin(t)/3); value=mul(tan(X),tan(Y-(t+sin(X))))-mul(tan(Y+(t-sin(X+t))),tan(X))+Y; value*=Z/50+0.01; value+=t/2}
+
+      function graph138(){zoomSet(0,45); Y/=(Z/20+0.1); value=3*sin(sin(sin(cos(cos(cos((X+t*3)-t*2)+t*1.5)-t)+t/1.5)-t/2)+t/3)-Y}
+
+      function graph139(){zoomSet(0,45); value=sin(div(abs(X),Y+sin(X+t)))-(Z/10)*(abs(X+sin(t+Y))%(0.1*Y))}
+
+      function graph140(){zoomSet(0,45); value=(Z/20+0.1)*(tan(arcsin(sin(Y))+arcsin(sin(Y+sin(X+t)))-X))+t}
+
+      function graph141(){zoomSet(0,45); Y+=0.5; value=sin((X+sin(Z/20*Y+t))%1+t)-sin((X+sin(Z/20*Y-t))%(Y+sin(X+t)))}
+
+      function graph142(){zoomSet(0,45); Y=sin(Y); X=sin(X); value=(Z/30+1)*Y+t+(Z/2)*arcsin(sin(Y+t/1.1)+X)*arcsin(sin(Y+pi-t/1.2)+X)*arcsin(sin(X+t/1.3)+Y)*arcsin(sin(X+pi-t/1.4)+Y);}
+
+      function graph143(){zoomSet(0,45); rotatePlane(t/2); const temp = sin(X+sin(div(Y,X/10))); rotatePlane(t/-1);  value=t+(Z/30+0.1)*((3*sin(temp))%arcsin(abs(sin(Y))*temp));}
+
+      function graph144(){zoomSet(0,45); const temp = [sin(X+t*1.1+Y),sin(X+t*1.2+Y),sin(X-t*1.3),sin(X-t*1.4),sin(X+t*1.5+Y),sin(X+t*1.6),sin(X+t*1.7)]; value = (Z/20+0.1)*(tan(temp[+floor((sin(abs(X*Y))+1)*2.5)]*3))+t/2}
+
+      function graph145(){zoomSet(0,45); const temp = arcsin(sin(X+cos(Y))+sin(Y+t)); X*=-1; Y*=-1; const temp2 = arcsin(sin(X+cos(Y))+sin(Y+t)); X*=-1; value=temp+temp2+arcsin(sin(X+cos(Y))+sin(Y+t)); if (value==3) {value=tan(X*Y+t)}; value*=(Z/20+0.1)}
+      
+      function graph146(){zoomSet(20,15); value=t/2+0.2*((log((abs(X) + 1) ** (sin(X+t*2)+ sin(abs(X)*sin(Y*(Z/200))+Y)+Y + arcsin(sin(X)))))+div(1000+sin(t*1.5)*300,X*X+Y*Y+1));
+         value%=1+Z/200*(sin(t*3)+sin(t+Y/5+sin(X/2+sin(t*2+Y))))}
+
+      function graph147(){zoomSet(0,45); rotatePlane(t/-2); const temp=Y; rotatePlane(t/2); value=sin(div(sin(X),cos(Y))); rotatePlane(t/2+cos(temp)*(Z/50+0.2)); value-=(sin(X)*Y)%(X*sin(Y)); value= value*(Z/60+0.1)+t/2}
+
+const graphFunctions = {
+1: graph1,
+2: graph2,
+3: graph3,
+4: graph4,
+5: graph5,
+6: graph6,
+7: graph7,
+8: graph8,
+9: graph9,
+10: graph10,
+11: graph11,
+12: graph12,
+13: graph13,
+14: graph14,
+15: graph15,
+16: graph16,
+17: graph17,
+18: graph18,
+19: graph19,
+20: graph20,
+21: graph21,
+22: graph22,
+23: graph23,
+24: graph24,
+25: graph25,
+26: graph26,
+27: graph27,
+28: graph28,
+29: graph29,
+30: graph30,
+31: graph31,
+32: graph32,
+33: graph33,
+34: graph34,
+35: graph35,
+36: graph36,
+37: graph37,
+38: graph38,
+39: graph39,
+40: graph40,
+41: graph41,
+42: graph42,
+43: graph43,
+44: graph44,
+45: graph45,
+46: graph46,
+47: graph47,
+48: graph48,
+49: graph49,
+50: graph50,
+51: graph51,
+52: graph52,
+53: graph53,
+54: graph54,
+55: graph55,
+56: graph56,
+57: graph57,
+58: graph58,
+59: graph59,
+60: graph60,
+61: graph61,
+62: graph62,
+63: graph63,
+64: graph64,
+65: graph65,
+66: graph66,
+67: graph67,
+68: graph68,
+69: graph69,
+70: graph70,
+71: graph71,
+72: graph72,
+73: graph73,
+74: graph74,
+75: graph75,
+76: graph76,
+77: graph77,
+78: graph78,
+79: graph79,
+80: graph80,
+81: graph81,
+82: graph82,
+83: graph83,
+84: graph84,
+85: graph85,
+86: graph86,
+87: graph87,
+88: graph88,
+89: graph89,
+90: graph90,
+91: graph91,
+92: graph92,
+93: graph93,
+94: graph94,
+95: graph95,
+96: graph96,
+97: graph97,
+98: graph98,
+99: graph99,
+100: graph100,
+101: graph101,
+102: graph102,
+103: graph103,
+104: graph104,
+105: graph105,
+106: graph106,
+107: graph107,
+108: graph108,
+109: graph109,
+110: graph110,
+111: graph111,
+112: graph112,
+113: graph113,
+114: graph114,
+115: graph115,
+116: graph116,
+117: graph117,
+118: graph118,
+119: graph119,
+120: graph120,
+121: graph121,
+122: graph122,
+123: graph123,
+124: graph124,
+125: graph125,
+126: graph126,
+127: graph127,
+128: graph128,
+129: graph129,
+130: graph130,
+131: graph131,
+132: graph132,
+133: graph133,
+134: graph134,
+135: graph135,
+136: graph136,
+137: graph137,
+138: graph138,
+139: graph139,
+140: graph140,
+141: graph141,
+142: graph142,
+143: graph143,
+144: graph144,
+145: graph145,
+146: graph146,
+147: graph147
+};
+
+const advancedList = [
+10,
+12,
+18,
+19,
+21,
+22,
+25,
+28,
+37,
+67,
+68,
+69,
+70,
+71,
+73,
+74,
+76,
+78,
+79,
+81,
+82,
+83,
+87,
+97,
+98,
+101,
+102,
+103,
+104,
+105,
+107,
+111,
+112,
+113,
+114,
+115,
+117,
+119,
+123,
+124,
+129,
+132,
+145
+]
+
+
+const names = {
+1: "x^2+y^2",
+2: "",
+3: "three",
+4: "wav",
+5: "disco",
+6: "checker",
+7: "john mantle",
+8: "blood",
+9: "x^2 on steroids",
+10: "distort",
+11: "sine^5",
+12: "idk",
+13: "focus",
+14: "orbit",
+15: "orbit2",
+16: "embryo",
+17: "popcorn",
+18: "cells",
+19: "candy",
+20: "bwoop",
+21: "upstrean",
+22: "",
+23: "chasm",
+24: "crystal",
+25: "asin and abs",
+26: "rings",
+27: "tanningitrn",
+28: "pillars",
+29: "spear",
+30: "sine+",
+31: "supercool",
+32: "swap",
+33: "supercoool",
+34: "wobble",
+35: "columns",
+36: "toomuch",
+37: "sinesinesine",
+38: "noifs",
+39: "modintro",
+40: "supercooool",
+41: "",
+42: "rift",
+43: "running",
+44: "noifs2",
+45: "simmer",
+46: "stripes",
+47: "wiggle",
+48: "modbox",
+49: "modinfest",
+50: "obscured",
+51: "",
+52: "relay",
+53: "paint",
+54: "up",
+55: "mesh",
+56: "cool+",
+57: "cool-",
+58: "siphon",
+59: "twist",
+60: "idk",
+61: "glitch",
+62: "expand",
+63: "assemble",
+64: "melt",
+65: "swing",
+66: "swish",
+67: "if",
+68: "sploosh",
+69: "rising",
+70: "lanes",
+71: "waves",
+72: "redacted",
+73: "intersect",
+74: "lines",
+75: "compile",
+76: "rotate",
+77: "arcsineeee",
+78: "hypermod",
+79: "rotateplane",
+80: "sincossin",
+81: "disaster",
+82: "while",
+83: "zoop",
+84: "unsheath",
+85: "sea",
+86: "oil",
+87: "glimpse",
+88: "sprint",
+89: "idk",
+90: "s i n e",
+91: "hotmess",
+92: "fractal1",
+93: "fractal2",
+94: "toosoon",
+95: "idk",
+96: "absolute",
+97: "oneoverx",
+98: "confetti",
+99: "x^2 on meth",
+100: "pulse",
+101: "join rotate",
+102: "mitosis",
+103: "join",
+104: "almosteverything",
+105: "divisors",
+106: "timer",
+107: "join2",
+108: "arcsine+if",
+109: "mandelbron't",
+110: "toothpaste",
+111: "median is crazy",
+112: "cube",
+113: "cueb",
+114: "icosahedron",
+115: "redacted",
+116: "random lcm",
+117: "dodecahedron",
+118: "squares",
+119: "portal2",
+120: "geometricmean",
+121: "trigdemo",
+122: "harmonicmean",
+123: "sinedelbrot",
+124: "static",
+125: "sign",
+126: "yinyang",
+127: "goop",
+128: "idk",
+129: "illegal",
+130: "attract",
+131: "ringsplosion",
+132: "connection",
+133: "quartic",
+134: "smooth if",
+135: "tris",
+136: "yingyang2",
+137: "attack",
+138: "sin sin sin sin",
+139: "singularity",
+140: "double asin",
+141: "generic",
+142: "cells",
+143: "doublespin",
+144: "unfold",
+145: "unveil",
+146: "heartbeat",
+147: ""
+};
+
+
+function runGraph(num) {
+if (graphFunctions[num]) {
+graphFunctions[num]();
+}
+}
+
+function updateSliderVisibility() {
+const sliderContainerH = document.getElementById('slider-container-h');
+if ([2, 3, 4, 5].includes(viewMode)) {
+sliderContainerH.style.display = 'block';
+rawr.style.left= "20px"
+} else {
+sliderContainerH.style.display = 'none';
+rawr.style.left= "0px"
+}
+}
+updateSliderVisibility();
+let fps=0
+
+function colorMode1(hue, t, H) {
+return hsvToRgb(hue, 100, 100);
+}
+
+function colorMode2(hue, t, H) {
+return hsvToRgb(((H + hue / 4.5) - 27) % 360, ((Math.sin(hue / 60) + 1) * 50), 100);
+}
+
+function colorMode3(hue, t, H) {
+return hsvToRgb(((H + hue / 6.5) - 27) % 360, 100, ((Math.sin(hue / 60) + 1) * 50));
+}
+
+function colorMode4(hue, t, H) {
+return hsvToRgb((1.4 * hue + H) % 360, 100, ((Math.sin(hue / 82) + 1) * 50));
+}
+
+function colorMode5(hue, t, H) {
+return hsvToRgb((1.4 * hue + H) % 360, ((Math.sin(hue / 75) + 1) * 50), 100);
+}
+
+function colorMode6(hue, t, H) {
+return hsvToRgb(0, 0, ((Math.sin(hue / 75) + 1) * 50));
+}
+
+function colorMode7(hue, t, H) {
+return hsvToRgb(hue, 100, 100);
+}
+
+function colorMode8(hue, t, H) {
+return hsvToRgb((hue + t) % 360, 100, ((Math.sin(hue / 90) + 1) * 50));
+}
+
+function colorMode9(hue, t, H) {
+return hsvToRgb((1.4 * hue + H) % 360, ((Math.sin(hue / 75) + 1) * 50), 100);
+}
+
+const colorModeFunctions = {
+1: colorMode1,
+2: colorMode2,
+3: colorMode3,
+4: colorMode4,
+5: colorMode5,
+6: colorMode6,
+7: colorMode7,
+8: colorMode8,
+9: colorMode9,
+};
+
+
+
+const coordDisplay = document.createElement('div');
+coordDisplay.style.position = 'absolute';
+coordDisplay.style.background = 'rgba(0,0,0,0.8)';
+coordDisplay.style.color = 'white';
+coordDisplay.style.padding = '2px 5px';
+coordDisplay.style.borderRadius = '3px';
+coordDisplay.style.pointerEvents = 'none';
+coordDisplay.style.fontSize = '12px';
+coordDisplay.style.zIndex = 10;
+document.body.appendChild(coordDisplay);
+coordDisplay.style.display = 'none';
+
+let pixelX=0;
+let pixelY=0;
+
+function updateCoordDisplay(mx, my) {
+zoom = graphNumZoom / 100;
+Z = graphNumZ / 100;
+
+const rect = canvas.getBoundingClientRect();
+
+pixelX = Math.floor((mouseX - rect.left) * (canvas.width / rect.width));
+pixelY = Math.floor((mouseY - rect.top) * (canvas.height / rect.height));
+
+value = 0;
+
+X = (pixelX + cacheMath) / canTen;
+Y = (pixelY + cacheMath) / canTen;
+
+runGraph(selectedGraphNumber);
+
+const coords = ZS2(pixelX, pixelY);
+
+coordDisplay.textContent =
+`g${selectedGraphNumber} of (${coords.graphX.toFixed(3)}, ${coords.graphY.toFixed(3)}) with t ${t.toFixed(3)} is ${value.toFixed(5)}`;
+
+coordDisplay.style.left = `${mx}px`;
+coordDisplay.style.top = `${my}px`;
+}
+
+canvas.addEventListener('mousedown', (e) => {
+isHolding = true;
+
+if (hideTimeout) {
+clearTimeout(hideTimeout);
+hideTimeout = null;
+}
+
+coordDisplay.style.display = 'block';
+});
+
+canvas.addEventListener('mousemove', (e) => {
+mouseX = e.clientX;  mouseY = e.clientY;
+}); 
+
+window.addEventListener('mouseup', () => {
+if (!isHolding) return;
+isHolding = false;
+
+hideTimeout = setTimeout(() => {
+coordDisplay.style.display = 'none';
+}, 2000);
+});
+
+
+
+function animate(timestamp) {
+
+document.body.style.transformOrigin = "center center";
+// Compute the scale to fit the content within the window, but prevent going offscreen by limiting scale by width and height.
+let baseWidth = 600;
+let baseHeight = 600;
+let scaleW = window.innerWidth / baseWidth;
+let scaleH = window.innerHeight / baseHeight;
+// Choose the minimum scale so content always fits, never overflows
+let scale = Math.min(scaleW, scaleH);
+
+document.body.style.transform = `scale(${scale})`;
+document.body.style.transformOrigin = "center center";
+
+const deltaTime = lastTimestamp ? (timestamp - lastTimestamp) / 1000 : 0;
+lastTimestamp = timestamp;
+
+if (!isPaused) {
+t += deltaTime;
+}
+
+if (deltaTime > 0) {
+fpsValues.push(1 / deltaTime);
+if (fpsValues.length > 90) fpsValues.shift(); // keep last 5
+
+const sum = fpsValues.reduce((acc, val) => acc + val, 0);
+fps = sum / fpsValues.length;
+}
+
+if (t>= 120) {
+t=0;
+}
+
+if (rainbowToggle.checked) {
+H=((tea)%360)
+tea += 20*deltaTime;
+valueH.textContent = `Hue=${(round(H*100)/100)}`;
+sliderH.value = H*100;
+}
+
+
+let Asterisk = (advancedList.includes(selectedGraphNumber)) ? "*" : "";
+
+const name = names[selectedGraphNumber] ?? "";
+
+
+
+let canvasSize = canvas.clientWidth / (500/resolution);
+cacheMath = ((canvasSize - resolution) / 2) - canvasSize;
+canTen = canvasSize / 10;
+const thing1 = graphNumZoom / 100;
+const thing2 = graphNumZ / 100;
+
+const colorFunc = colorModeFunctions[viewMode] || colorMode1;
+
+const move = cameraSpeed * deltaTime * (10*zoom+200);
+if (keysPressed.w) cameraY -= move
+if (keysPressed.s) cameraY += move
+if (keysPressed.a) cameraX -= move
+if (keysPressed.d) cameraX += move
+
+let originScreenX = 0;
+let originScreenY = 0;
+let bestDist = Infinity;
+
+
+
+for (let y = 0; y < resolution; y++) {
+for (let x = 0; x < resolution; x++) {
+// w = zoom
+zoom = thing1;
+Z = thing2;
+
+
+X = (x + cacheMath) / canTen;
+Y = (y + cacheMath) / canTen;
+
+value=0;
+
+runGraph(selectedGraphNumber);
+
+const d = sqrtX + sqrtY;
+
+
+if (d < bestDist) {
+bestDist = d;
+originScreenX = x;
+originScreenY = y;
+}
+
+
+
+
+let rgb = 0;
+let hue = 0;
+
+hue = value*360;
+if (viewMode == 7 || viewMode == 8 || viewMode == 9) {
+  hue/=8
+}
+while (hue<0) {hue+=360}
+hue %= 360;
+
+
+rgb = colorFunc(hue, t, H);
+
+
+const index = (y * resolution + x) * 4;
+data[index] = rgb.r;
+data[index + 1] = rgb.g;
+data[index + 2] = rgb.b;
+data[index + 3] = 255;
+}
+}
+
+
+
+timerDisplay.textContent = `Time: ${t.toFixed(2)}s | Graph # ${selectedGraphNumber}${Asterisk} | ColorMode: ${viewMode} | fps${round(fps)} | ${name}`
+
+ctx.putImageData(imageData, 0, 0);
+
+if (showAxes) {
+ctx.strokeStyle = 'white';
+ctx.lineWidth = 0.01 * resolution;
+
+ctx.beginPath();
+ctx.moveTo(resolution / 2, 0);
+ctx.lineTo(resolution / 2, resolution);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(0, resolution / 2);
+ctx.lineTo(resolution, resolution / 2);
+ctx.stroke();
+
+if (cameraX !== 0 || cameraY !== 0) {
+ctx.fillStyle = 'black';
+
+const radius = Math.max(3, resolution * 0.01);
+
+
+
+ctx.beginPath();
+ctx.arc(originScreenX, originScreenY, radius*1.1, 0, 2 * Math.PI);
+ctx.fill();
+
+ctx.fillStyle = 'white';
+
+ctx.beginPath();
+ctx.arc(originScreenX, originScreenY, radius*0.9, 0, 2 * Math.PI);
+ctx.fill();
+}
+}
+
+if (isHolding) {
+updateCoordDisplay(mouseX,mouseY);
+}
+
+requestAnimationFrame(animate);
+}
+
+
+function hsvToRgb(h, s, v) {
+h = Math.min(360, Math.max(0, h));
+s = Math.min(100, Math.max(0, s));
+v = Math.min(100, Math.max(0, v));
+
+s /= 100;
+v /= 100;
+
+const c = v * s;
+const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+const m = v - c;
+
+let r, g, b;
+
+if (h < 60) {
+r = c; g = x; b = 0;
+} else if (h < 120) {
+r = x; g = c; b = 0;
+} else if (h < 180) {
+r = 0; g = c; b = x;
+} else if (h < 240) {
+r = 0; g = x; b = c;
+} else if (h < 300) {
+r = x; g = 0; b = c;
+} else {
+r = c; g = 0; b = x;
+}
+
+return {
+r: Math.round((r + m) * 255),
+g: Math.round((g + m) * 255),
+b: Math.round((b + m) * 255)
+};
+}
+
+
+
+window.onload = () => {
+document.body.focus();
+};
+
+
+
+if (editMode) {selectedGraphNumber = Object.keys(graphFunctions).length}
+requestAnimationFrame(animate);
+
+
+
