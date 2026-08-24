@@ -29,7 +29,6 @@
         font-family: "Courier New", courier, monospace;
         font-size: 16px;
         color: #f0f0f0;
-        margin-top: -10px;
         margin: 0;
         padding: 0;
         width: 100%;
@@ -219,17 +218,22 @@
         line-height: 0.7;
         text-align: left;
         font-size: 13px;
-        width: 300px;
-        align-self: center;
-        justify-self: center;
+        width: 100vw;
+        max-width: 300px;
+        min-width: 230px;
         border-radius: 6px;
+        margin-left: auto;
+        margin-right: auto;
+        /* margin-top: -10px; */
+        display: block;
       }
+ 
       #linksRow {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding: 15px 15px 30px 15px;
+        padding: 0px 15px 20px 15px;
         width: fit-content;
         max-width: 720px;
         margin-left: auto;
@@ -331,7 +335,7 @@
   </head>
   <body>
     <div id="backgroundOverlay"></div>
-    <h1 class="text" style="z-index: 50; position: relative; margin-bottom: -8px; text-align:center; font-size: 26px;" id="velkomm">Welcome to my website!</h1>
+    <h1 class="text" style="z-index: 50; position: relative; margin-bottom: -8px; margin-top: 10px; text-align:center; font-size: 26px;" id="velkomm">Welcome to my website!</h1>
     <h3 class="text" style="margin-bottom: 9px; text-align:center; position: relative; font-weight: 100; font-size: 13px;">↓Visit my socials↓</h3>
     <div id="linksRow" tabindex="0">
       <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
