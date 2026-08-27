@@ -945,9 +945,11 @@ function exportRLE() {
             textarea.select();
             try {
                 document.execCommand("copy");
-                alert("RLE copied to clipboard!");
+                alertMsg.textContent = "RLE Copied"
+                alertOpac = 100; animateAlert();
             } catch (e) {
-                alert("Could not copy RLE.");
+                alertMsg.textContent = "RLE Copy Failure"
+                alertOpac = 100; animateAlert();
             }
             document.body.removeChild(textarea);
         }
