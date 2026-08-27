@@ -21718,5 +21718,8 @@ b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo197b2obo3bo2bo2bo52bo$1636bo2b2o5b2obo2b
 "rake2": `x = 23, y = 64, rule = B3/S23
 15bobo5b$15bo2bo4b$18b2o3b$20bo2b$18b4ob$10bo6bo4bo$10bob2o5bo2bo$13bo5bo2bo$13bo7bob$15bob4o2b$15bo3bo3b$6b6o6bo4b$5bo5bo2b5o4b$11bo11b$5bo4bo3b5o4b$7b2o9bo4b$12bo2bo3bo3b$15bob4o2b$11bobo7bob$13bo5bo2bo$11b3o5bo2bo$17bo4bo$18b4ob$20bo2b$18b2o3b$15bo2
 bo4b$15bobo5b$23b$23b$23b$23b$23b$23b$23b$23b$23b$23b$10bobo10b$10bo2bo9b$13b2o8b$15bo7b$13b4o6b$12bo4bo5b$6b3o5bo2bo5b$8bo5bo2bo5b$6bobo7bo6b$10bob4o7b$7bo2bo3bo8b$2b2o9bo9b$o4bo3b5o9b$6bo16b$o5bo2b5o9b$b6o6bo9b$10bo3bo8b$10bob4o7b$8bo7bo6b$8bo5bo2bo5
-b$5bob2o5bo2bo5b$5bo6bo4bo5b$13b4o6b$15bo7b$13b2o8b$10bo2bo9b$10bobo10b!`
+b$5bob2o5bo2bo5b$5bo6bo4bo5b$13b4o6b$15bo7b$13b2o8b$10bo2bo9b$10bobo10b!`,
+
+"doubleGlid": `x = 8, y = 9, rule = B3/S23
+obo5b$bo6b$bo4b2o$6b2o$8b$3bo3bo$4bo3b$3b2ob2o$4b2o2b!`
 }
