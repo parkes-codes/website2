@@ -48,10 +48,13 @@
         text-align: left;
         z-index: 1;
         font-size: 10px;
-        max-width: 50%;
-        min-width: 50%;
+        width: fit-content;
+        padding-right: 5px;
+        max-width: 100%;
         z-index: 99999;
         text-shadow: 0 0 3px #000;
+        background-color: #2239;
+        border-radius: 3px;
     }
     #display2 {
         bottom: 12px;
@@ -169,38 +172,39 @@
         right: 10px;
         bottom: 10px
     }
-    .button2 {
-       background-color: #111;
-       color: #ddd;
-       border-radius: 50px;
-       font-size: 15px;
-       width: 15px;
-       height: 15px;
-       z-index: 10;
-       transition: all 100ms;
-    }
-    .button2:hover {
-        transform: scale(1.1);
-        filter: brightness(1.1)
-    }
     #btnrow3 {
         position: absolute;
         display: flex;
         flex-direction: row;
         left: 10px;
+        width: 135px;
+        padding-top: 3px;
+        padding-left: 5px;
         bottom: 36px;
+        z-index: 999;
+        background-color: #2239;
+        border-radius: 4px;
     }
     #camxin, #camyin {
         position: absolute;
-        width: 60px;
+        width: 100px;
         height: 10px;
         z-index: 5;
         transform: scale(0.5);
-        margin-left: 5px;
+        margin-left: 55px;
         bottom: 5px;
     }
     #camyin {
         bottom: -3px;
+    }
+    #promptMenu {
+        position: fixed;
+    }
+    #promptBtn {
+        transition: filter 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    #promptBtn:hover {
+        filter: brightness(90%);
     }
 
 </style>
@@ -209,14 +213,12 @@
  <p id="display"></p>
  <p id="display2"></p>
  <div id="btnrow3">
-    <button id="settingsbtn" class="button2" onclick="settingsPrompt()" tabindex="1">
-        <span style="margin-left: -4px; position: relative; top: -5px;">⊛</span>
-    </button>
+    <span style="z-index: 999; font-size: 10px; margin-bottom: 3px; text-shadow: 0 0 3px #000;">auto camera:</span>
     <input type="range" min="-10" max="10" step="0.05" value="0" id="camxin" tabindex="2">
     <input type="range" min="-10" max="10" step="0.05" value="0" id="camyin" tabindex="3">
 </div>
 <div id="alerttext"></div>
-    <button id="import" class="buttons" onclick="importlist()" tabindex="8">Import</button>
+    <button id="import" class="buttons" tabindex="8">Import</button>
     <button id="export" class="buttons" onclick="exportlist()" tabindex="11">Export</button>
 <div id="btnrow">
     <button id="import2" class="buttons" onclick="importRLE()" tabindex="10">Import RLE</button>
@@ -856,10 +858,10 @@
     <p>LWSS Gun (p30)
         <a class="link" onclick="loadLexi('lwssGun')">Spawn</a>
     </p>
-    <p>LWSS Gun Gliderless
+    <p>LWSS Gun Gliderless (p46)
         <a class="link" onclick="loadLexi('lwssGun2')">Spawn</a>
     </p>
-    <p>LWSS Gun Gliderless 2
+    <p>LWSS Gun Gliderless 2 (p44)
         <a class="link" onclick="loadLexi('lwssGun3')">Spawn</a>
     </p>
     <p>MWSS Gun 1 (p46)
@@ -1015,6 +1017,18 @@
     <p>Merger Based Demonoid
         <a class="link" onclick="loadLexi('test')">Spawn</a>
     </p>
+  </div>
+</div>
+
+<div id="promptMenuContainer">
+  <div id = "promptMenu" class="bigmenu" >
+    <div class="bigmenu-inner">
+      <h2 style="margin-top: -10px" id="promptName">Prompt Menu Name</h2>
+      <p id="promptDesc">Description of prompt</p>
+      <textarea id="promptInput" style="width: 100%; min-height: 80px; resize: vertical; box-sizing: border-box; font-family: inherit; margin-bottom: 12px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+      <button id="promptBtn" class="button" style="padding: 8px 16px; border-radius: 8px; margin-bottom: 8px;">Enter</button>
+    </div>
+  </div>
 </div>
 </body>
 <script src="../js/lexiconData.js"></script>

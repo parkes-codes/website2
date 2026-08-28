@@ -147,6 +147,12 @@ const tpsInput = document.getElementById("tpsInput");
 const tptInput = document.getElementById("tptInput");
 const camxin = document.getElementById("camxin");
 const camyin = document.getElementById("camyin");
+const promptMenu = document.getElementById("promptMenu");
+const promptInput = document.getElementById("promptInput");
+const promptBtn = document.getElementById("promptBtn");
+const promptName = document.getElementById("promptName");
+const promptDesc = document.getElementById("promptDesc");
+
 
 
 
@@ -183,10 +189,11 @@ let hiliteCorner1 = {x: -1, y: 1};
 let hiliteCorner2 = {x: 1, y: -1};
 let t2 = 0;
 let tpt = 0;
-let tps = 0
+let tps = 0;
+let inputFocus = false;
 
 let livePxHist = [];
-let maxPxLen = 100;
+let maxPxLen = 1000;
 
 let markerColors = [
     "faa",
@@ -233,14 +240,14 @@ let alertOpac = 100;
 function animateAlert() {
     alertMsg.style.opacity = `${alertOpac}%`
     if (alertOpac > 0) {
-        alertOpac--;
+        alertOpac-= 0.5;
         requestAnimationFrame(animateAlert)
     }
 }
 function loadLexi(id) {
 
     if (!lexloaded) {
-        alert("Lexicon file not found");
+        alert("FATAL: Lexicon file not found");
         return;
     }
 
@@ -329,7 +336,8 @@ function loadLexi(id) {
             }
 
             if (pixelsList.length === 0) {
-                alert("No live cells found in RLE or invalid format.");
+                alertMsg.textContent = "No live cells found in RLE or invalid format.";
+                alertOpac = 100; animateAlert();
                 return;
             }
             startingArray = pixelsList.slice();
@@ -337,7 +345,8 @@ function loadLexi(id) {
             startingArray = patternData.map(p => ({x: p.x, y: p.y + offsett}));
             livePxHist = [];
         } else {
-            alert("Pattern format not recognized.");
+            alertMsg.textContent = `Pattern format invalid`;
+            alertOpac = 100; animateAlert();
             return;
         }
 
@@ -353,7 +362,8 @@ function loadLexi(id) {
         maxPx = livePx;
     }
     else {
-        alert("Unknown pattern: " + id);
+        alertMsg.textContent = `Unknown pattern: ${id}`;
+        alertOpac = 100; animateAlert();
     }
 }
 
@@ -510,6 +520,10 @@ function draw() {
 
     rendered = 0;
     getData();
+
+    if (promptMenu.style.display === 'block') {
+        inputFocus = true;
+    }
 
     if (!paused) {
         camx += (Number(camxin.value) * tps) * tpt * 0.005
@@ -879,7 +893,8 @@ function exportRLE() {
     const export2 = document.getElementById("export2");
     if (export2) export2.blur();
     if (!pixels || pixels.length === 0) {
-        alert("No live cells to export.");
+        alertMsg.textContent = "Board is empty"
+        alertOpac = 100; animateAlert();
         return;
     }
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -957,14 +972,36 @@ function exportRLE() {
     copyToClipboard(rleString);
 }
 
-function importRLE() {
+function importRLE(string) {
     paused = true;
-    let rleString = prompt(
-        'Enter the RLE string to import.\nExample:\nx = 3, y = 3, rule = B3/S23\nbo$2bo$3o!'
-    );
+
+    let rleString = string;
 
     if (!rleString || rleString.trim() === "") {
         import2btn.blur();
+        promptMenu.style.display = "none";
+        promptInput.value = "";
+        alertMsg.textContent = "RLE Empty";
+        alertOpac = 100; animateAlert();
+        return;
+    }
+//rles need to follow the following forma and if they dont then return. heres an example rle. @lexiconData.js (749-768)  so you see anything with # at the front is a comment and is ignored. then theres x= and y= rule= and then the rle stuff. 
+
+    // Validate RLE format: ignore lines starting with #, must have header "x = ..., y = ..., rule = ..."
+    let parsedLines = rleString.split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
+    // Remove all comment lines
+    let nonCommentLines = parsedLines.filter(line => !line.startsWith("#"));
+
+    // Find the header: must contain 'x =', 'y =' and 'rule ='
+    let headerLineIdx = nonCommentLines.findIndex(line => /x\s*=\s*\d+\s*,\s*y\s*=\s*\d+\s*,\s*rule\s*=\s*.*$/i.test(line));
+
+
+    if (headerLineIdx == -1) {
+        import2btn.blur();
+        promptMenu.style.display = "none";
+        promptInput.value = "";
+        alertMsg.textContent = "RLE Syntax Failed";
+        alertOpac = 100; animateAlert();
         return;
     }
 
@@ -1025,8 +1062,11 @@ function importRLE() {
     }
 
     if (pixelsList.length === 0) {
-        alert('No live cells found in RLE or invalid format.');
+        alertMsg.textContent = "No live cells found in RLE or invalid format.";
+        alertOpac = 100; animateAlert();
         import2btn.blur();
+        promptMenu.style.display = "none";
+        promptInput.value = "";
         return;
     }
 
@@ -1036,14 +1076,35 @@ function importRLE() {
     }));
 
     import2btn.blur();
+    promptMenu.style.display = "none";
+    promptInput.value = "";
+    alertMsg.textContent = "RLE Loaded";
+    alertOpac = 100; animateAlert();
     resetState();
 }
 
-function importlist() {
+let activeMenuId = 1;
+import2btn.addEventListener("click", () => {
+    promptDesc.textContent = "Paste your RLE text below.";
+    promptName.textContent = "Load RLE File"
+    promptMenu.style.display = "block";
+    promptInput.value = "";
+    activeMenuId = 1;
+    promptInput.focus();
+});
+
+importbtn.addEventListener("click", () => {
+    promptDesc.textContent = "Paste your pixels list below.";
+    promptName.textContent = "Load Pixels"
+    promptMenu.style.display = "block";
+    promptInput.value = "";
+    activeMenuId = 2;
+    promptInput.focus();
+})
+
+function importlist(string) {
     paused = true;
-    let pixelListStr = prompt(
-        'Enter a list of pixels to import. Format: [{x:0,y:0},{x:1,y:1},...]'
-    ); 
+    let pixelListStr = string;
     if (pixelListStr === null || pixelListStr.trim() === "") {
         importbtn.blur()
         return;
@@ -1059,12 +1120,12 @@ function importlist() {
         ) {
             startingArray = imported.map(p => ({x: p.x, y: p.y}));
         } else {
-            alert('Invalid format. Please use: [{x:0,y:0},{x:1,y:1},...]');
+            alertMsg.textContent = 'Invalid format. Please use: [{x:0,y:0},{x:1,y:1},...]';
+            alertOpac = 100; animateAlert();
         }
     } catch (e) {
-        alert(
-            'Invalid input. Please enter: [{x:0,y:0}] or [{x:0,y:0},{x:1,y:1}].\n(JSON with quoted keys is NOT accepted.)'
-        );
+            alertMsg.textContent = 'Invalid format. Please use: [{x:0,y:0},{x:1,y:1},...]';
+            alertOpac = 100; animateAlert();
     }
     importbtn.blur();
     resetState();
@@ -1073,7 +1134,8 @@ function importlist() {
 function exportlist() {
     exportbtn.blur();
     if (pixels.length == 0) {
-        alert("No live pixels to export.")
+        alertMsg.textContent = "No live pixels to export.";
+        alertOpac = 100; animateAlert();
         return
     }
     if (pixels.length < Infinity) {
@@ -1113,10 +1175,26 @@ function exportlist() {
     alertOpac=100; animateAlert();
 } else {
     alert("Too many pixels! Use this console command instead. copy('[' + pixels.map(p => `{x:${p.x},y:${p.y}}`).join(',') + ']')")
-}
+ }
 }
 
-let inputFocus = false;
+
+promptBtn.addEventListener("click", () => {
+    const inputString = promptInput.value;
+    if (activeMenuId == 1) {
+        importRLE(inputString)
+    } else {
+        importlist(inputString);
+    }
+    promptMenu.style.display = "none";
+    import2btn.blur();
+    promptInput.value = "";
+    promptInput.blur();
+    setTimeout(() => {
+        inputFocus = false;
+    }, 100);
+})
+
 
 tptInput.addEventListener("focus", () => {
     inputFocus = true;
@@ -1130,6 +1208,13 @@ camxin.addEventListener("focus", () => {
 camyin.addEventListener("focus", () => {
     inputFocus = true;
 });
+promptMenu.addEventListener("focus", () => {
+    inputFocus = true;
+})
+promptInput.addEventListener("focus", () => {
+    inputFocus = true;
+})
+
 tptInput.addEventListener("blur", () => {
     inputFocus = false;
 });
@@ -1142,6 +1227,13 @@ camxin.addEventListener("blur", () => {
 camyin.addEventListener("blur", () => {
     inputFocus = false;
 });
+promptMenu.addEventListener("blur", () => {
+    inputFocus = false;
+});
+promptInput.addEventListener("blur", () => {
+    inputFocus = false;
+});
+
 
 tpsInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -1156,6 +1248,7 @@ camxin.addEventListener("keydown", (e) => {
         inputFocus = false;
     } else if (e.key === "/" || e.key === "\\") {
         camxin.value = 0;
+        camxin.blur();
     }
 });
 
@@ -1165,6 +1258,7 @@ camyin.addEventListener("keydown", (e) => {
         inputFocus = false;
     } else if (e.key === "/" || e.key === "\\") {
         camyin.value = 0;
+        camyin.blur();
     }
 });
 
@@ -1227,7 +1321,7 @@ window.addEventListener("keydown", (e) => {
         alertOpac = 100; animateAlert();
     }
 
-    if (cmdPressed && e.key.toLowerCase() === "c") {
+    if (cmdPressed && e.key.toLowerCase() === "c" && !inputFocus) {
         if (selectedLivePixels.length > 0) {
             let minX = Math.min(...selectedLivePixels.map(p => p.x));
             let minY = Math.min(...selectedLivePixels.map(p => p.y));
@@ -1243,7 +1337,7 @@ window.addEventListener("keydown", (e) => {
         e.preventDefault();
         return;
     }
-    if (cmdPressed && e.key.toLowerCase() === "v") {
+    if (cmdPressed && e.key.toLowerCase() === "v" && !inputFocus) {
         if (copiedPixels.length > 0) {
             if (!pastePreviewActive) {
                 pastePreviewActive = true;
@@ -1355,7 +1449,7 @@ window.addEventListener("keyup", (e) => {
         hiliteCorner1 = {x: -1, y: 1};
         hiliteCorner2 = {x: 1, y: -1};
     }
-    if (e.key.toLowerCase() === "i") {
+    if (e.key.toLowerCase() === "i" && !cmdPressed && !inputFocus) {
         let xplus = prompt("X+ (right from mouse):", "0");
         let yplus = prompt("Y+ (up from mouse):", "0");
         if (xplus !== null && yplus !== null) {
