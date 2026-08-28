@@ -1304,7 +1304,7 @@ window.addEventListener("keydown", (e) => {
     else if (e.key == "r") {
         e.preventDefault();
         if (cmdPressed) { loadLexi("blank");  camx = 0; camy = 0; zoom = 10;}
-        else {resetState(); camx = 0; camy = 0;};
+        else {resetState(); /* camx = 0; camy = 0; */};
     } else if (e.key.toLowerCase() === "s" && cmdPressed ) {
         e.preventDefault(); saveCurrent();
     } else if (e.key === "t" && paused) {
