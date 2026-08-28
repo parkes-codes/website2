@@ -1449,27 +1449,47 @@ window.addEventListener("keyup", (e) => {
         hiliteCorner1 = {x: -1, y: 1};
         hiliteCorner2 = {x: 1, y: -1};
     }
+
     if (e.key.toLowerCase() === "i" && !cmdPressed && !inputFocus) {
-        let xplus = prompt("X+ (right from mouse):", "0");
-        let yplus = prompt("Y+ (up from mouse):", "0");
+        if (selectedLivePixels.length === 0) {
+            alertMsg.textContent = "No cells selected to move";
+            alertOpac = 100; animateAlert();
+            e.preventDefault();
+            return;
+        }
+        let xplus = prompt("Move selection X+ (right):", "0");
+        let yplus = prompt("Move selection Y+ (up):", "0");
         if (xplus !== null && yplus !== null) {
             let dx = parseInt(xplus, 10);
             let dy = parseInt(yplus, 10);
             if (!isNaN(dx) && !isNaN(dy)) {
-                let nx = hoverX + dx, ny = hoverY + dy;
-                if (!pixels.some(p => p.x === nx && p.y === ny)) {
-                    pixels.push({x: nx, y: ny});
-                    alertMsg.textContent = `Placed 1 cell at (${nx},${ny})`;
-                    alertOpac = 100; animateAlert();
-                } else {
-                    alertMsg.textContent = "Cell already exists at destination";
-                    alertOpac = 100; animateAlert();
+                let selectedSet = new Set(selectedLivePixels.map(p => `${p.x},${p.y}`));
+                pixels = pixels.filter(p => !selectedSet.has(`${p.x},${p.y}`));
+                let already = new Set(pixels.map(p => `${p.x},${p.y}`));
+                let moved = [];
+                for (let sp of selectedLivePixels) {
+                    let nx = sp.x + dx;
+                    let ny = sp.y + dy;
+                    if (!already.has(`${nx},${ny}`)) {
+                        pixels.push({x: nx, y: ny});
+                        moved.push({x: nx, y: ny});
+                        already.add(`${nx},${ny}`);
+                    }
                 }
+                if (moved.length > 0) {
+                    selectedLivePixels = moved;
+                    alertMsg.textContent = `Moved ${moved.length} cell(s) by (${dx},${dy})`;
+                } else {
+                    selectedLivePixels = [];
+                    alertMsg.textContent = "No moved cells (destination blocked or duplicate)";
+                }
+                alertOpac = 100; animateAlert();
             }
         }
         e.preventDefault();
         return;
     }
+    
     if (e.key === "Delete" || e.key === "Backspace" && cmdPressed && !inputFocus) {
         if (selectedLivePixels.length > 0) {
             pixels = pixels.filter(
