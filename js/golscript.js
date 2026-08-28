@@ -1280,7 +1280,7 @@ window.addEventListener("keydown", (e) => {
 
     const stuff = [
         "rand010",
-        "rand025",
+        "rand026",
         "rand050",
         "rand100",
         "rand250",
