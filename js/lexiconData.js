@@ -21958,6 +21958,70 @@ b$13b2o7b2o2bo23b$22bo2b2o23b$23bob2o3b2o18b$21b3obo3bobo18b$31bo18b$21bo3b2o23b
 4bo5bo9b$36bo3b2o8b$35b2o13b$39bobo8b$37b2obo9b$34b4ob2o9b$36bobo11b$36bo4b2o7b$35bo4bobo7b$34bobo4bo8b$33b2ob2o6b5ob$33b2o2bo5bobo4b$30bo3b2ob2o3bo6bo$30bo2bo3bo7bo3bo$31bob2obo8bob2ob$35b2o5b2obo4b$35b2o9b2o2b$36bo9bo3b$34bo2bo9b2ob$33bo13bobo$37b2
 o7b2obo$37bo8bobob$35bob2o7bo3b$34bo3bo11b$33b3ob2o7bo3b$32bobo3bo7bobob$34bo2bo8b2obo$34bo3bo8bobo$34b2obo9b2ob$34bo11bo3b$35b2o9b2o2b$35bobo4b2obo4b$36b2o7bob2ob$45bo3bo$32b2o8bo6bo$33bob2o6bobo4b$37b2o5b5ob$33bo5bo10b$50b$33bo3b2o11b$34b3o13b$50b$
 36bo13b$34bo2bo12b$50b$33bo3b2o11b$34b5o11b$35bo14b$34b6o10b$34bo3bo11b$34bo3bo11b$38bo11b$36bob2o10b$36bo2bo10b$35b5o10b$35b2obo11b$36b2o12b$50b$36b2o12b$35b2obo11b$35b5o10b$36bo2bo10b$36bob2o10b$38bo11b$34bo3bo11b$34bo3bo11b$34b6o10b$35bo14b$34b5o1
-1b$33bo3b2o11b$50b$34bo2bo12b$36bo13b!`
+1b$33bo3b2o11b$50b$34bo2bo12b$36bo13b!`,
 
+"pfbr": `
+#O  by Lewis » September 29th, 2014, 4:28 pm,
+#C Modified later by NickGotts » October 9th, 2014, 10:48 am
+x = 16, y = 16, rule = B3/S23
+12bo$12b2o$12bo2bo2$13bobo$14bo7$3o$bo2bo$5bo$2bobo!`,
+
+"pforfr": `
+#O  by Lewis » September 29th, 2014, 4:28 pm, modified by me
+x = 54, y = 54, rule = B3/S23
+30b2o22b$30b2o22b$54b$54b$54b$54b$16b2o36b$16b2o15b3o18b$33bo20b$23b2o8b3o18b$23b2o5bob2o20b$30bo2bo4bo15b$33bo4bo15b$31b2o5bo15b$54b$54b$6b2o38b2o6b$6b2o38b2o6b$54b$54b$54b$54b$54b$9b2o43b$9b2o37bo5b$46b2ob3o2b$48b3ob2o$49bo4b$54b$50bo3b$2o8b2o38bo3b$2
+o11bo36bo3b$10bo2bo36bobob$7b6o38bo2b$7bobo44b$7bobo44b$54b$49bo4b$11b3o34b2o4b$48bo5b$49bobo2b$49bo2bob$50bobob$50bobob$51bo2b$54b$16b2o7bo28b$16b2o7bo28b$24bobo11b2o14b$25b3o9b2ob2o12b$25b2o2b4o9b2o10b$25bo7bo6bo3bo9b$26bo5bo8b3o10b$26bo27b!
+`,
+
+"diehard": `x = 32, y = 32, rule = B3/S23
+bbbbbbboobbooobbbboobobobbboobbb$boobbboboobobboboboboobbooobooob$boooobooobobbobboobbooobobooboob$oobobboobbbooboobooobobobbbboobb$obobbbobooooobboboboobobboobbobb$boobooooobbbobboboobbobobbobbbbb$bobbobbobbbbbbobbbooooboobooooob$boobbbobobooooobobo
+ooooobooboobo$obbobooobobbboobobbboboboboobooo$bbobobboobbbbbbbboobobbobbbobbob$oooobooobboobobboboboobbobbobobb$boobobooooobbbobooobbobbobbooboo$obbooboobbbbbobbobbbbbbbobooobbo$oobobooobooobooobbooboboobbbbobo$bboooobbbobobbobooobobbooobbobob$boobb
+bboobooobooobobbbbbbbooobbb$bbbooobbbbbbboboooboooboobbbboob$bobobbooobbobooobobbobobbboooobb$obobbbbooboboobboooboooboooboboo$obbooobobbbbbbbobbobbbbbooboobbo$ooboobbobbobbooobobbboooooboboob$bbobobbobboobobobboboobboooboooo$bobbobbbobboboobbbbbbbbo
+obbobobb$oooboobobobobbboboobbbobooobobbo$oboobooboooooobobooooobobobbboob$booooobooboooobbbobbbbbbobbobbob$bbbbbobbobobboobobbobbboooooboob$bbobboobboboobobobbooooobobbbobo$bboobbbbobobooobooboobbboobboboo$booboobobooobboobbobboboooboooob$booobooobb
+oobobobobboboobobbboob$bbboobbboboboobbbbooobboobbbbbbb!`,
+
+"diehard2": `
+#O by dvgrn » March 31st, 2022, 5:53 am
+x = 32, y = 32, rule = B3/S23
+18b2o$14b2obo2bob2ob2o$14bob2o2b2obob2o2$6b2o$obobo2bo$bo13bo$bob2obo
+7bobo10b3o$2ob3o8bobo10bo$o3bo11bo11bo$2o5bo$2o4b2o8b2o$3bo10bobo$3bo
+11bobo$5bo3b2o4b3o$9bo$3bo7bo2bobo$3b2o5b2o3b2o$15bo9bo$13bobo6b5o$13b
+obo5bo4b2o$14bo6bo4bo$24b2o$2b2o4b2o15bo$2bobo2bobo2b2o13b3o$4bo2bo4bo
+5b2o5b2obob2o$4b2ob2o5bobo2bo5b2o3b2o$7bo2bo2b2ob2o8bobob2o$7bob2o14b
+2ob2o$3b2ob2obo15b3o$3b2obo2bo5b2o$7b2o6b2o!`,
+
+"diehard3": `
+#O Dean Hickerson, 3/6/2022
+x = 32, y = 32, rule = B3/S23
+3b2o2b2obobo4bobo3bo$3bo5b2obobo2bo3bobo$2obo2b4o2b2o4bo2bo$bob2ob2o3b
+2o4bo4bo$bo2bobobo2bo2bo$2ob2o4bo4bo4b4obo$3b2o2b2obo2bo3b2o5bo3bo$3bo
+bo2bo9bobo6bobo$4b2o4bobo6b4o6b2o$3bob2o4bo2bo3b2o2bo6bo$10b2o2bo13bob
+o$30bo$31bo$7b2o3b2o15bobo$b2o5bo2bobo6bo7bo2bo$b2o2b3o3b2o6bobo$5bo
+13bo2bo6b3o$b2o17bobo7b2o$ob6o13bo7bo$o4bo2bo15b2o4b2o$b3o3b2o14bobo2b
+obo$3b2o18b2o4bo2$6b2o$5bobo5b2o4b2o$5b2o6bo2bo3bo$17bo5b3o$14bob3o5b
+2o$ob2o2b2o8b2o3b2o$2obo2b2o6bo$15b3ob2o$14bo2b4o!`,
+
+"diehard4": `
+#O by squareroot12621 » March 31st, 2022, 12:23 pm
+x = 103, y = 97, rule = B3/S23
+11bo$10bobo$9bobo$9b2o7bo$17bobo$17b2o$47bo$46bobo$47b2o$22b2o$22b2o3$
+27bo$26bobo$26b2o21bo$48bobo$48b2o4$33b2o$32bobo$33bo3$38b2o$38b2o7$24b
+2o5bo5bo$24b2o4bobo3b2o$31bo5bo$20b2o19b2o$20bo2bo17bobo$22b2o19bo37b
+2o$43b2o36bobo$14b2o66bo$14b2o$27bo$28b2o$9bo17b2o$8bobo$9b2o$2o32b2o
+$obo32bo$bobo29b3o$2bo4$78b2o$76bo2bo$76b2o2$84b2o$84b2o2$36b2o$36bob
+o51bo$11b2o24bo51bobo$10bobo76b2o$11bo48b2o13bo$60b2o12bobo$74b2o3$55b
+2o$55bobo38b2o$56bo39b2o2$101b2o$100bobo$80bo18bobo$79bobo18bo$79b2o4$
+99bo$98bobo$98b2o6$83b2o$83bobo$84bo$33b2o37b2o$33bobo36bobo$34bo38bo`,
+
+"diehard5": `
+#O by Pavgran » March 31st, 2022, 1:11 pm
+x = 90, y = 86, rule = B3/S23
+65bo9b2o$64bobo7bobo$45b2o18b2o7bo$45b2o26b2o2$54bo25b2o$52b3o24bo2bo$51bo28bobo$43b2o6b2o28bo2b3o$43bobo38bo$44bo40bo2$49b2o$49b2o5b2o$56b2o$52bo$51bobo$39b2o11bo$39b2o8bo10bo$48bobo8bobo$49bo4b2o3bobo$46bo7bobo3bo$45bob
+o8bo$46bo9b2o$43bo$35b2o5bobo$35b2o6bo7b2o$40bo10b2o$39bobo13bo30b2o$40bo13bobo29b2o$37bo17bo$36bobo11bo7bo$26b2o9bo11bobo5bobo$26b2o6bo14bo2bo5bo7b2o14b2o$17b2o14bobo14b2o9bo3bo2bo13b2o$16bo2bo14bo19b2o4bobo3b2o$17b2o12bo22bo6bo$30bobo19bobo18b2o$11
+b2o8bo9bo20b2o10b2o7b2o$11b2o6b3o6bo6bo28bobo$18bo8bobo4bo30b2o$3b2o13b2o8bo5b3o3bo41b2o$4bo9bo9b2o13bobo27bo11bobo$4bobo6bobo8b2o14bo14b2o5b2o4bobo11bo5b2o$5b2o7bo40b2o5b2o5bo18b2o$10b2o5bo25b2o6b2o$10b2o4bobo23bobo6b2o5b2o12bo$17bo21b2o2bo14b2o11bo
+bo4b2o$20bo17b2o32bo5b2o$2o17bobo18bo23b2o9bo7b2o$2o5bo12bo34b2o7b2o8bobo6bobo$6bobo14bo11b2o18b2o18bo9bo$6b2o14bobo10b2o25bo7b2o13b2o$23bo37bobo7bo$31b2o5b2o11b2o9bo5b3o6b2o$15b2o9bo4b2o5b2o11b2o6bo8bo8b2o$15b2o8bobo30bobo$26bo32bo11b2o$20b2o24b2o8b
+o13bo2bo$20b2o7b2o15b2o7bobo13b2o$29bobo24bo5b2o$30b2o9b2o10bo8b2o14bo$40bobo5b2o2bobo23b3o$40b2o6b2o3bo27bo$26b2o9bo42b2o$27bo8bobo$23bo3bobo7bo16b2o$22bobo3b2o4bo19b2o19bo$22bobo8bobo38bobo$23bo10bo8b2o5bo22bo2bo$31bo11b2o4bobo22b2o$30bobo16bo2bo$3
+1bo18b2o20b2o$26b2o43bobo$26b2o5b2o38bo$33b2o$50b2o$39bo9bo2bo$38bobo9bobo$31b2o6b2o10bo$32bo$29b3o13bo$29bo14bobo$44b2o$37b2o$37b2o!`,
+
+"diehard6": ``
 }
