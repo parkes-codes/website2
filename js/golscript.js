@@ -192,6 +192,7 @@ let tpt = 0;
 let tps = 0;
 let inputFocus = false;
 
+
 let livePxHist = [];
 let maxPxLen = 1000;
 
@@ -357,6 +358,7 @@ function loadLexi(id) {
         camx = 0; camy = 0;
         alertMsg.textContent = `Loaded ${id}`;
         alertOpac = 100;
+        mousedown = false;
         animateAlert();
         getData();
         maxPx = livePx;
@@ -1397,8 +1399,19 @@ window.addEventListener("keydown", (e) => {
     if (e.key == " ") { paused = !paused; }
     else if (e.key == "r") {
         e.preventDefault();
-        if (cmdPressed) { loadLexi("blank");  camx = 0; camy = 0; zoom = 10;}
-        else {resetState(); /* camx = 0; camy = 0; */};
+        if (cmdPressed) {
+            loadLexi("blank");
+            camx = 0; camy = 0;
+            zoom = 10;
+            camxin.value = 0; camyin.value = 0;
+            alertMsg.textContent = "Reset board";
+            alertOpac = 100; animateAlert();
+        }
+        else {
+            resetState();
+            alertMsg.textContent = "Loaded save";
+            alertOpac = 100; animateAlert();
+        };
     } else if (e.key.toLowerCase() === "s" && cmdPressed ) {
         e.preventDefault(); saveCurrent();
     } else if (e.key === "t" && paused) {
@@ -1628,6 +1641,8 @@ for (let i = 0; i<headers.length; i++) {
 } 
 
 window.addEventListener('beforeunload', function (event) {
-    event.preventDefault();
-    event.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+    if (pixels.length > 0) {
+        event.preventDefault();
+        event.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+    }
 });
