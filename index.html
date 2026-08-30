@@ -437,9 +437,9 @@
     <div id="column" aria-hidden="true">
       <input id="searchinput" type="text" placeholder="Search for a project" style="padding-left: 5px;">
       <div class="button-list" id="button-list">
+        <button class="button text linkbutton" data-url="html/gol" id="golbtn">Game of Life<span style="display:none;">gol conway conway's conways</span></button>
         <button class="button text linkbutton" data-url="html/Amazing_Graphs_2" id="ag2text">Amazing Graphs 2</button>
         <button class="button text linkbutton" data-url="html/trigslideshow">Trigonometery Slideshow</button>
-        <button class="button text linkbutton" data-url="html/gol" id="golbtn">Game of Life<span style="display:none;">gol conway conway's conways</span></button>
         <button class="button text linkbutton" data-url="html/coreball" id="corbtn" style="color: #000; font-weight: bold; text-shadow: 0px 0px 5px #ffff;">Coreball</button>
         <button class="button text linkbutton" data-url="game4/">Plinkformer<span style="display: none">platformer</span></button>
         <!-- <button class="button text linkbutton" data-url="html/clicker">Bad Clicker Game</button> -->
@@ -882,8 +882,22 @@
         t += 0.1;
         if (funbutton)
           funbutton.style.borderColor = `hsl(${(t * 50) % 360},50%,80%)`;
-        if (golbutton)
+        if (golbutton) {
           golbutton.style.color = `hsl(0,0%,${(Math.sin(t)) * 10 + 85}%)`;
+
+          const glowSpread = 18 + Math.sin(t*2) * 6;
+          const hue = (t * 10) % 360;
+          golbutton.style.boxShadow = `
+            0 0 ${glowSpread}px 4px hsl(${hue},95%,70%, 0.72), 
+            0 0 35px 2px hsl(${hue},100%,90%, 0.18)
+          `;
+          // Animate slight text-shadow pulse for more pop
+          golbutton.style.textShadow = `
+            0 0 ${(4 + Math.abs(Math.sin(t)) * 10).toFixed(1)}px hsl(${(hue+60)%360},100%,92%)
+          `;
+        }
+
+   
         if (corbutton) 
           corbutton.style.textShadow = `0px 0px ${Math.sin(t/4)*2+3}px #ffff`
         if (ag2text)
