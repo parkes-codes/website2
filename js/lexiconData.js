@@ -1,4 +1,4 @@
-const patterns = {
+patterns = {
 "blank": [            ],
 "4gc": `x = 12, y = 9, rule = B3/S23 
 4b4o4b$12b$2b8o2b$12b$12o$12b$2b8o2b$12b$4b4o4b!`,
