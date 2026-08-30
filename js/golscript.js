@@ -1577,6 +1577,7 @@ for (let i = 0; i < links.length; i++) {
     if (onclickAttr) {
         thislink.onkeydown = function (e) {
             if (e.key === "Enter" || e.keyCode === 13 || e.key == " ") {
+                lastClickedLink = thislink
                 eval(onclickAttr);
                 if (e.key == " ") {
                     // space key immediately unpauses, so we have to undo that.
