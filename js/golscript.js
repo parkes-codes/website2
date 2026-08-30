@@ -50,18 +50,10 @@ const promptInput = document.getElementById("promptInput");
 const promptBtn = document.getElementById("promptBtn");
 const promptName = document.getElementById("promptName");
 const promptDesc = document.getElementById("promptDesc");
-
-
-
+const lexBtn = document.getElementById("lex");
 
 let lexloaded = true;
-
-setTimeout(function() {
-    if (typeof patterns === "undefined") {
-        lexloaded = false;
-        console.log("job had one bro");
-    }
-}, 2000);
+let patterns = ""
 
 let startingArray = [];
 let pixels = [];
@@ -146,7 +138,6 @@ function animateAlert() {
 function loadLexi(id) {
 
     if (!lexloaded) {
-        alert("FATAL: Lexicon file not found");
         return;
     }
 
@@ -268,8 +259,6 @@ function loadLexi(id) {
         alertOpac = 100; animateAlert();
     }
 }
-
-setTimeout(function(){loadLexi('blank')},200);
 
 function isLive(pixel) {
     return pixels.some(p => p.x === pixel.x && p.y === pixel.y);
@@ -438,6 +427,8 @@ function draw() {
         let my = canvas.height / 2 - ((mouseY - rect.top) * (canvas.height / rect.height));
         hoverX = Math.floor((mx / zoom + camx));
         hoverY = 1 + Math.floor((my / zoom + camy));
+        if (hoverX === Infinity || hoverX === -Infinity) {hoverX = 0;}
+        if (hoverY === Infinity || hoverY === -Infinity ) {hoverY = 0;}
     }
 
     let cellSize = Math.max(zoom, 0.4);
@@ -466,13 +457,12 @@ function draw() {
     }
 
 
-    ctx.fillStyle = "#202525"; // Or "black" or other preferred color
+    ctx.fillStyle = "#202525"; 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     if (false) {
         
     } else {
-        // Checkerboard/grid rendering only if zoom >=2
         if (zoom >= 2) {
             ctx.strokeStyle = "#667373";
             ctx.lineWidth = zoom/20;
@@ -1604,6 +1594,26 @@ for (let i = 0; i < links.length; i++) {
         }
     }
 }
+
+setTimeout(function() {
+    if (patterns.length <= 1) {
+        lexloaded = false;
+        alertMsg.textContent = "LEXICON LOAD FAILED";
+        alertOpac = 100; animateAlert();
+        lexBtn.style.display = "none"
+    }
+}, 5000);
+
+let showCanvasInterval = setInterval(function() {
+    if ((typeof patterns === "object" && patterns !== null) || lexloaded == false) {
+        canvas.style.display = "block";
+        loadLexi('blank')
+        document.getElementById("loadingMsg").style.display = "none";
+        clearInterval(dotAnim);
+        clearInterval(showCanvasInterval);
+    }
+}, 100);
+
 
 window.addEventListener('beforeunload', function (event) {
     if (pixels.length > 0) {

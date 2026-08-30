@@ -24,7 +24,7 @@
 </head>
 <style>
     body {
-        background-color: #000;
+        background-color: #202525;
         overflow: hidden;
         font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
         color: #fff;
@@ -36,8 +36,8 @@
         left: 0px;
         top: 0px;
         z-index: 1;
-        display: block;
-        background: none;
+        display: none;
+        background-color: #202525;
     }
     #display, #display2 {
         position: fixed;
@@ -207,6 +207,16 @@
     #promptInput {
         z-index: 14;
     }
+    #loadingMsg {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        text-align: center;
+        width: max-content;
+        text-shadow: #fff 0px 0px 3px;
+    }
     .bigmenu-back {
         width: 100vw;
         height: 100vh;
@@ -220,6 +230,21 @@
 </style>
 <body>
  <canvas id="gamecanvas"></canvas>
+ <span id="loadingMsg">Loading Lexicon</span>
+ <script>
+    const loadingMsg = document.getElementById("loadingMsg");
+    let stringIndex = 0;
+    let dotStrings = [
+        "",
+        ".",
+        "..",
+        "..."
+    ]
+    let dotAnim = setInterval(() => {
+        loadingMsg.textContent = "Loading Lexicon" + dotStrings[stringIndex];
+        stringIndex= (stringIndex+1) % 4
+    },500)
+ </script>
  <p id="display"></p>
  <p id="display2"></p>
  <div id="btnrow3">
@@ -1100,6 +1125,6 @@
   </div>
 </div>
 </body>
-<script src="../js/lexiconData.js"></script>
 <script src="../js/golscript.js"></script>
+<script src="../js/lexiconData.js"></script>
 </html>
