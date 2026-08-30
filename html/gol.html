@@ -30,13 +30,11 @@
         color: #fff;
     }
     #gamecanvas {
-        border: #fff 5px solid;
-        border-radius: 10px;
-        width: calc(100vw - 11px);
-        height: calc(100vh - 11px);
-        margin-left: -8px;
-        margin-top: -8px;
-        position: relative;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        left: 0px;
+        top: 0px;
         z-index: 1;
         display: block;
         background: none;
@@ -53,7 +51,6 @@
         max-width: 100%;
         z-index: 99999;
         text-shadow: 0 0 3px #000;
-        background-color: #2239;
         border-radius: 3px;
     }
     #display2 {
@@ -63,7 +60,6 @@
         width: fit-content;
         height: 20px;
         border-radius: 5px;
-        z-index: 20;
         font-size: 12px;
         background: #fff;
         border-color: #0ff;
@@ -71,6 +67,7 @@
         margin-left: 3px;
         margin-right: 3px;
         z-index: 2;
+        border-style: outset;
     }
     .buttons:hover {
         background: #ccc;
@@ -91,25 +88,47 @@
         display: flex;
         flex-direction: row-reverse;
         position: absolute;
-        right: 65px;
-        bottom: 10px;
+        right: 62px;
+        bottom: 4px;
     }
     #btnrow2 {
         display: flex;
         flex-direction: row-reverse;
         position: absolute;
-        right: 65px;
-        bottom: 34px;
+        right: 62px;
+        bottom: 28px;
+    }
+    #btnrow3 {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        left: 10px;
+        width: 135px;
+        padding-top: 3px;
+        padding-left: 5px;
+        bottom: 32px;
+        z-index: 999;
+        border-radius: 4px;
     }
     #tpsInput, #tptInput {
         position: absolute;
-        bottom: 59px;
-        right: 65px;
+        bottom: 54px;
+        right: 62px;
         height: 15px;
         width: 40px;
     }
+    #import {
+        position: absolute;
+        right: 6px;
+        bottom: 28px
+    }
+    #export {
+        position: absolute;
+        right: 6px;
+        bottom: 4px
+    }
     #tptInput {
-        right: 10px;
+        right: 6px;
         width: 42px
     }
     #lex {
@@ -123,7 +142,7 @@
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
         width: 100vw; height: 100vh;
-        background: rgba(0,0,0,0.6);
+        background: none;
         z-index: 2000;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -135,10 +154,11 @@
         margin-top: -30px;
         margin-bottom: 50px;
         border-radius: 10px;
-        max-width: 600px;
+        max-width: fit-content;
         min-height: 150px;
         box-shadow: 0 0 16px rgba(0,0,0,0.23);
         padding: 32px;
+        padding-right: 60px;
         color: #000;
         font-size: 12px;
     }
@@ -160,30 +180,7 @@
         border-bottom: #0005 1px solid;
         padding: 5px 20px;
         margin: -5px 0px;
-        font-size: 20px;
-    }
-    #import {
-        position: absolute;
-        right: 10px;
-        bottom: 34px
-    }
-    #export {
-        position: absolute;
-        right: 10px;
-        bottom: 10px
-    }
-    #btnrow3 {
-        position: absolute;
-        display: flex;
-        flex-direction: row;
-        left: 10px;
-        width: 135px;
-        padding-top: 3px;
-        padding-left: 5px;
-        bottom: 36px;
-        z-index: 999;
-        background-color: #2239;
-        border-radius: 4px;
+        font-size: 25px;
     }
     #camxin, #camyin {
         position: absolute;
@@ -199,12 +196,25 @@
     }
     #promptMenu {
         position: fixed;
+        z-index: 11;
     }
     #promptBtn {
         transition: filter 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
     #promptBtn:hover {
         filter: brightness(90%);
+    }
+    #promptInput {
+        z-index: 14;
+    }
+    .bigmenu-back {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: rgba(17, 21, 24, 0.7);
+        z-index: -1;
     }
 
 </style>
@@ -217,6 +227,7 @@
     <input type="range" min="-10" max="10" step="0.05" value="0" id="camxin" tabindex="2">
     <input type="range" min="-10" max="10" step="0.05" value="0" id="camyin" tabindex="3">
 </div>
+
 <div id="alerttext"></div>
     <button id="import" class="buttons" tabindex="8">Import</button>
     <button id="export" class="buttons" onclick="exportlist()" tabindex="11">Export</button>
@@ -233,6 +244,7 @@
 <input type="number" placeholder="tpt" value="1" id="tptInput" class="buttons" tabindex="5">
 
 <div id="controlsMenu" class="bigmenu">
+  <div id="contBack" class="bigmenu-back"></div>
   <div id="controlsMenu-inner" class="bigmenu-inner">
     <h2 style="margin-top: -10px">Controls</h2>
     <h3>Basic Controls:</h3>
@@ -316,16 +328,17 @@
 </div>
 
 <div id="lexicon" class="bigmenu">
+  <div id="lexBack" class="bigmenu-back"></div>
   <div id="lexicon-inner" class="bigmenu-inner">
     <h2 style="margin-top: -10px">Lexicon</h2>
+    <button style="opacity:0;position:absolute;pointer-events:none;" tabindex="12" aria-hidden="true" id="invBtn"></button>
     <p> List of my favorite patterns in game of life </p>
     <p>
       Credit to 
-      <a href="https://pamblam.github.io/Go-Life/" target="_blank" rel="noopener noreferrer">Pablam</a>
-      and 
-      <a href="https://conwaylife.com/wiki" target="_blank" rel="noopener noreferrer">ConwayLife</a>
+      <a href="https://pamblam.github.io/Go-Life/" target="_blank" rel="noopener noreferrer" tabindex="13">Pablam</a>,
+      <a href="https://conwaylife.com/wiki" target="_blank" rel="noopener noreferrer" tabindex="14">ConwayLife</a> Wiki and Forums,
       and
-      <a href="https://cannabrava.co/golly/" target="_blank" rel="noopener noreferrer">Marcos</a> (a few)
+      <a href="https://cannabrava.co/golly/" target="_blank" rel="noopener noreferrer" tabindex="15">Marcos</a> (a few)
     </p>
     <h3 class="header3">Randoms</h3>
     <p>Random Pattern (10x10)
@@ -589,6 +602,12 @@
     <p>Forwards Spaceship Rake
         <a class="link" onclick="loadLexi('spaceshipRake')">Spawn</a>
     </p>
+    <p>Period 50 rake (cool)
+        <a class="link" onclick="loadLexi('50rake')">Spawn</a>
+    </p>
+    <p>p50 Big LWSS rake
+        <a class="link" onclick="loadLexi('50lwssrake')">Spawn</a>
+    </p>
 
 
     <h3 class="header3">Puffers</h3>
@@ -597,6 +616,9 @@
     </p>
     <p>Bi-Block Puffer
         <a class="link" onclick="loadLexi('bi-block-puffer')">Spawn</a>
+    </p>
+    <p>Fancier Bi-block Puffer
+        <a class="link" onclick="loadLexi('blockPuffFancy')">Spawn</a>
     </p>
     <p>Glider Eater Puffer
         <a class="link" onclick="loadLexi('gepuff')">Spawn</a>
@@ -648,6 +670,9 @@
     </p>
     <p>Out and forward puffer
         <a class="link" onclick="loadLexi('pforfr')">Spawn</a>
+    </p>
+    <p>Period 210 Puffer (cool)
+        <a class="link" onclick="loadLexi('210puff')">Spawn</a>
     </p>
     <h3 class="header3">Stretchers</h3>
     <p>Antstretcher
@@ -752,7 +777,6 @@
     <p>t50716 Diehard
         <a class="link" onclick="loadLexi('diehard5')">Spawn</a>
     </p>
-
 
     <h3 class="header3">Glider Guns</h3>
     <p>Glider Gun (p30)
@@ -940,9 +964,6 @@
     <p>Fermat Primes Computer
         <a class="link" onclick="loadLexi('fermatprimes')">Spawn</a>
     </p>
-    <p>Slowsilver Demonoid (MASSIVE AND SLOW)
-        <a class="link" onclick="loadLexi('slowsilver')">Spawn</a>
-    </p>
     <p>Shtshow (insanity)
         <a class="link" onclick="loadLexi('shtshow')">Spawn</a>
     </p>
@@ -958,8 +979,19 @@
     <p>14c/65 Growing Fuse Extender
         <a class="link" onclick="loadLexi('idk6')">Spawn</a>
     </p>
+
+    <h3 class="header3">Demonoids and Caterpillars</h3>
+    <p>Slowsilver Demonoid (MASSIVE AND SLOW)
+        <a class="link" onclick="loadLexi('slowsilver')">Spawn</a>
+    </p>
     <p>Merger Based Demonoid
         <a class="link" onclick="loadLexi('test')">Spawn</a>
+    </p>
+    <p>"The LifeViewer Size Demonoid!"
+        <a class="link" onclick="loadLexi('demonoid2')">Spawn</a>
+    </p>
+    <p>Knightship Caterpillar 
+        <a class="link" onclick="loadLexi('kshipcat')">Spawn</a>
     </p>
 
     <h3 class="header3">Miscellaneous</h3>
@@ -999,9 +1031,9 @@
     <p>Glider Eater
         <a class="link" onclick="loadLexi('glidereater')">Spawn</a>
     </p> 
-    <p>Fly-by deletion
+    <!-- <p>Fly-by deletion
         <a class="link" onclick="loadLexi('flyby')">Spawn</a>
-    </p>
+    </p> -->
     <p>Glider Racetrack (p46)
         <a class="link" onclick="loadLexi('racetrack')">Spawn</a>
     </p>
@@ -1055,7 +1087,8 @@
 
 <div id="promptMenuContainer">
   <div id = "promptMenu" class="bigmenu" >
-    <div class="bigmenu-inner">
+    <div id="promptBack" class="bigmenu-back"></div>
+    <div id ="promptBox" class="bigmenu-inner" style="z-index: 12; width: 80%; max-width: 600px;">
       <h2 style="margin-top: -10px" id="promptName">Prompt Menu Name</h2>
       <p id="promptDesc">Description of prompt</p>
       <textarea id="promptInput" style="width: 100%; min-height: 80px; resize: vertical; box-sizing: border-box; font-family: inherit; margin-bottom: 12px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>

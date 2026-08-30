@@ -32,110 +32,8 @@ function sampleFPS(now = performance.now()) {
 // Start the update loop
 requestAnimationFrame(sampleFPS);
 
-
-let webglSupported = false;
-let rendered = 0;
-let gl = null;
-let glProgram = null;
-let glBuffer = null;
-let glColorLoc = null;
-let glResolutionLoc = null;
-let glCamLoc = null;
-let glZoomLoc = null;
-
-let ctx = document.getElementById("gamecanvas").getContext("2d");
-
-
-// Shaders designed for colored rectangles (pixels), one per cell
-const glVertexShaderSource = `
-attribute vec2 a_position;
-uniform vec2 u_resolution;
-uniform vec2 u_cam;
-uniform float u_zoom;
-void main() {
-    // Place in model space: center camera, apply zoom, flip Y axis for Life
-    float x = (a_position.x-u_cam.x)*u_zoom + u_resolution.x/2.0;
-    float y = u_resolution.y/2.0 - (a_position.y-u_cam.y)*u_zoom;
-    // Rectangle per cell (see gl.POINTS/buffer below)
-    gl_Position = vec4(
-        2.0*(x/u_resolution.x - 0.5),
-        2.0*(y/u_resolution.y - 0.5),
-        0, 1
-    );
-    gl_PointSize = u_zoom;
-}
-`;
-
-const glFragmentShaderSource = `
-precision mediump float;
-uniform vec4 u_color;
-void main() {
-    gl_FragColor = u_color;
-}
-`;
-
-let canvas = document.getElementById("gamecanvas");
-try {
-    gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-    if (gl) {
-        webglSupported = true;
-        function compileShader(type, src) {
-            let sh = gl.createShader(type);
-            gl.shaderSource(sh, src);
-            gl.compileShader(sh);
-            if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
-                throw "Shader error: " + gl.getShaderInfoLog(sh);
-            }
-            return sh;
-        }
-        let vsh = compileShader(gl.VERTEX_SHADER, glVertexShaderSource);
-        let fsh = compileShader(gl.FRAGMENT_SHADER, glFragmentShaderSource);
-
-        glProgram = gl.createProgram();
-        gl.attachShader(glProgram, vsh);
-        gl.attachShader(glProgram, fsh);
-        gl.linkProgram(glProgram);
-        if (!gl.getProgramParameter(glProgram, gl.LINK_STATUS)) {
-            throw "Program link error: " + gl.getProgramInfoLog(glProgram);
-        }
-        gl.useProgram(glProgram);
-
-        glBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, glBuffer);
-
-        let loc = gl.getAttribLocation(glProgram, "a_position");
-        gl.enableVertexAttribArray(loc);
-        gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-        glColorLoc = gl.getUniformLocation(glProgram, "u_color");
-        glResolutionLoc = gl.getUniformLocation(glProgram, "u_resolution");
-        glCamLoc = gl.getUniformLocation(glProgram, "u_cam");
-        glZoomLoc = gl.getUniformLocation(glProgram, "u_zoom");
-    }
-} catch (e) {
-    webglSupported = false;
-    gl = null;
-}
-
-document.getElementById('lex').addEventListener('click', function() {
-    document.getElementById('lexicon').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-});
-
-document.getElementById('lexicon').addEventListener('click', function() {
-    document.getElementById('lexicon').style.display = 'none';
-    document.body.style.overflow = '';
-});
-
-document.getElementById('controls').addEventListener('click', function() {
-    document.getElementById('controlsMenu').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-});
-
-document.getElementById('controlsMenu').addEventListener('click', function() {
-    document.getElementById('controlsMenu').style.display = 'none';
-    document.body.style.overflow = '';
-});
+const canvas = document.getElementById("gamecanvas");
+const ctx = canvas.getContext("2d", { alpha: false });
 
 const display = document.getElementById("display");
 const display2 = document.getElementById("display2")
@@ -269,6 +167,7 @@ function loadLexi(id) {
         camx = 0; camy = 0;
         alertMsg.textContent = `Generated ${dimensions}x${dimensions} Board`;
         alertOpac = 100;
+        inputFocus = false;
         animateAlert();
         getData();
         return
@@ -289,7 +188,6 @@ function loadLexi(id) {
                 break;
             }
 
-            let xOff = 0, yOff = 0;
             let match = header.match(/x\s*=\s*(\d+)\s*,\s*y\s*=\s*(\d+)/i);
             if (match) {
                 i++; // Move to RLE body
@@ -353,12 +251,14 @@ function loadLexi(id) {
 
         resetState();
         saveCurrent();
+        paused = true;
         document.getElementById('lexicon').style.display = 'none';
         document.body.style.overflow = '';
         camx = 0; camy = 0;
         alertMsg.textContent = `Loaded ${id}`;
         alertOpac = 100;
         mousedown = false;
+        inputFocus = false;
         animateAlert();
         getData();
         maxPx = livePx;
@@ -885,9 +785,10 @@ function handleWheelZoom(e) {
 canvas.addEventListener('wheel', handleWheelZoom, {passive: false});
 
 function resizeCanvas() {
-    canvas.width = (window.innerWidth) - 25;
-    canvas.height = (window.innerHeight) - 25;
+    canvas.width = (window.innerWidth) - 0;
+    canvas.height = (window.innerHeight) - 0;
 }
+
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
@@ -987,16 +888,10 @@ function importRLE(string) {
         alertOpac = 100; animateAlert();
         return;
     }
-//rles need to follow the following forma and if they dont then return. heres an example rle. @lexiconData.js (749-768)  so you see anything with # at the front is a comment and is ignored. then theres x= and y= rule= and then the rle stuff. 
 
-    // Validate RLE format: ignore lines starting with #, must have header "x = ..., y = ..., rule = ..."
     let parsedLines = rleString.split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
-    // Remove all comment lines
     let nonCommentLines = parsedLines.filter(line => !line.startsWith("#"));
-
-    // Find the header: must contain 'x =', 'y =' and 'rule ='
     let headerLineIdx = nonCommentLines.findIndex(line => /x\s*=\s*\d+\s*,\s*y\s*=\s*\d+\s*,\s*rule\s*=\s*.*$/i.test(line));
-
 
     if (headerLineIdx == -1) {
         import2btn.blur();
@@ -1086,10 +981,12 @@ function importRLE(string) {
 }
 
 let activeMenuId = 1;
+
 import2btn.addEventListener("click", () => {
     promptDesc.textContent = "Paste your RLE text below.";
     promptName.textContent = "Load RLE File"
     promptMenu.style.display = "block";
+    inputFocus = true;
     promptInput.value = "";
     activeMenuId = 1;
     promptInput.focus();
@@ -1100,6 +997,7 @@ importbtn.addEventListener("click", () => {
     promptName.textContent = "Load Pixels"
     promptMenu.style.display = "block";
     promptInput.value = "";
+    inputFocus = true;
     activeMenuId = 2;
     promptInput.focus();
 })
@@ -1213,6 +1111,7 @@ camyin.addEventListener("focus", () => {
 promptMenu.addEventListener("focus", () => {
     inputFocus = true;
 })
+
 promptInput.addEventListener("focus", () => {
     inputFocus = true;
 })
@@ -1274,6 +1173,46 @@ tptInput.addEventListener("keydown", (e) => {
         tptInput.value=Math.max(1,Number(tptInput.value)-1);
         e.preventDefault();
     }
+});
+
+// buttons
+let lastClickedLink = null;
+
+const lexiconn = document.getElementById("lexicon");
+document.getElementById('lex').addEventListener('click', function() {
+    lexiconn.style.display = 'block';
+    inputFocus = true;
+    if (lastClickedLink) {
+        lastClickedLink.focus();
+    } else {
+        // reset to the top of the lexicon and set tabindex to the first link
+        document.getElementById("invBtn").focus();
+    }
+    
+});
+
+document.getElementById('controls').addEventListener('click', function() {
+    document.getElementById('controlsMenu').style.display = 'block';
+    inputFocus = true;
+    document.body.style.overflow = 'hidden';
+});
+
+// menu backs
+document.getElementById('lexBack').addEventListener('click', function() {
+    lexiconn.style.display = 'none';
+    document.body.style.overflow = '';
+    inputFocus = false;
+});
+
+document.getElementById('contBack').addEventListener('click', function() {
+    document.getElementById('controlsMenu').style.display = 'none';
+    document.body.style.overflow = '';
+    inputFocus = false;
+});
+
+document.getElementById('promptBack').addEventListener('click', function() {
+    document.getElementById('promptMenu').style.display = 'none';
+    inputFocus = false;
 });
 
 window.addEventListener("keydown", (e) => {
@@ -1396,7 +1335,7 @@ window.addEventListener("keydown", (e) => {
         if (!hiliteCorner1 || hiliteCorner1.x === -1) hiliteCorner1 = { x: hoverX, y: hoverY };
         hiliteCorner2 = { x: hoverX, y: hoverY };
     }
-    if (e.key == " ") { paused = !paused; }
+    if (e.key == " " && !inputFocus) { paused = !paused; }
     else if (e.key == "r") {
         e.preventDefault();
         if (cmdPressed) {
@@ -1634,11 +1573,37 @@ function rotateSelection(direction){
 }
 
 const headers = document.getElementsByClassName("header3");
-
+const links = document.getElementsByClassName("link");
 for (let i = 0; i<headers.length; i++) {
     let thisheader = headers[i];
     thisheader.style.color = `hsl(${170+Math.sin(i/2)*30},50%,50%)`;
 } 
+
+for (let i = 0; i < links.length; i++) {
+    let thislink = links[i];
+    thislink.setAttribute('tabindex', i + 25);
+    let onclickAttr = thislink.getAttribute('onclick');
+    if (onclickAttr) {
+        thislink.onkeydown = function (e) {
+            if (e.key === "Enter" || e.keyCode === 13 || e.key == " ") {
+                eval(onclickAttr);
+                if (e.key == " ") {
+                    // space key immediately unpauses, so we have to undo that.
+                    paused = false; setTimeout(() => {resetState()},16)
+                };
+                e.preventDefault();
+            }
+        };
+        thislink.onclick = function(e) {
+            lastClickedLink = thislink;
+            eval(onclickAttr);
+        }
+    } else {
+        thislink.onclick = function() {
+            lastClickedLink = thislink;
+        }
+    }
+}
 
 window.addEventListener('beforeunload', function (event) {
     if (pixels.length > 0) {
