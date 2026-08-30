@@ -999,8 +999,9 @@ function importlist(string) {
         importbtn.blur()
         return;
     }
+    pixelListStr = pixelListStr.replace(/\s+/g, '');
     try {
-        let fixed = pixelListStr.replace(/([{,]\s*)"(x|y)"\s*:/g, '$1$2:');
+        let fixed = pixelListStr.replace(/([{,])"(x|y)":/g, '$1$2:');
         let imported = eval(fixed);
         if (
             Array.isArray(imported) &&
