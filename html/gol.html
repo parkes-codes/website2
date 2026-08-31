@@ -49,7 +49,7 @@
         width: fit-content;
         padding-right: 5px;
         max-width: 100%;
-        z-index: 99999;
+        z-index: 2;
         text-shadow: 0 0 3px #000;
         border-radius: 3px;
     }
@@ -183,16 +183,15 @@
         font-size: 25px;
     }
     #camxin, #camyin {
-        position: absolute;
         width: 100px;
         height: 10px;
         z-index: 5;
         transform: scale(0.5);
-        margin-left: 55px;
-        bottom: 5px;
+        margin-left: -20px;
+        accent-color: #aff;
     }
     #camyin {
-        bottom: -3px;
+        margin-left: -40px;
     }
     #promptMenu {
         position: fixed;
@@ -248,7 +247,7 @@
  <p id="display"></p>
  <p id="display2"></p>
  <div id="btnrow3">
-    <span style="z-index: 999; font-size: 10px; margin-bottom: 3px; text-shadow: 0 0 3px #000;">auto camera:</span>
+    <span style="z-index: 999; font-size: 10px; margin-bottom: 3px; text-shadow: 0 0 3px #000; z-index: 2; margin-left: -5px; white-space: nowrap;">auto camera:</span>
     <input type="range" min="-10" max="10" step="0.05" value="0" id="camxin" tabindex="2">
     <input type="range" min="-10" max="10" step="0.05" value="0" id="camyin" tabindex="3">
 </div>
