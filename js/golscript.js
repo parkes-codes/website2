@@ -1542,25 +1542,55 @@ function getIntegerBBoxCenter(points){
     if((maxY-minY+1)%2===0)cy=Math.floor(cy)+0.5;else cy=Math.round(cy);
     return{cx,cy}
 }
-function rotateSelection(direction){
-    if(selectedLivePixels.length===0||draggingSelection)return;
-    let{cx,cy}=getIntegerBBoxCenter(selectedLivePixels);
-    let rotated=selectedLivePixels.map(p=>rotatePoint(p.x,p.y,cx,cy,direction));
-    let selSet=new Set(selectedLivePixels.map(p=>`${p.x},${p.y}`));
-    pixels=pixels.filter(p=>!selSet.has(`${p.x},${p.y}`));
-    let pixelSet=new Set(pixels.map(p=>`${p.x},${p.y}`));
-    let actuallyPlaced=[];
-    for(let i=0;i<rotated.length;i++){
-        let key=`${rotated[i].x},${rotated[i].y}`;
-        if(!pixelSet.has(key)){
-            pixels.push({x:rotated[i].x,y:rotated[i].y});
-            actuallyPlaced.push({x:rotated[i].x,y:rotated[i].y});
+
+function rotateSelection(direction) {
+    if (selectedLivePixels.length === 0 || draggingSelection) return;
+
+    let minX = Math.min(...selectedLivePixels.map(p => p.x));
+    let maxX = Math.max(...selectedLivePixels.map(p => p.x));
+    let minY = Math.min(...selectedLivePixels.map(p => p.y));
+    let maxY = Math.max(...selectedLivePixels.map(p => p.y));
+    let cx = (minX + maxX) / 2;
+    let cy = (minY + maxY) / 2;
+
+    function rotatePointBBox(px, py, cx, cy, dir) {
+        let x0 = px - cx, y0 = py - cy;
+        let rx, ry;
+        if (dir === 1) {
+            rx = -y0;
+            ry = x0;
+        } else if (dir === 2) {
+            rx = -x0;
+            ry = -y0;
+        } else if (dir === 3) {
+            rx = y0;
+            ry = -x0;
+        } else {
+            rx = x0;
+            ry = y0;
+        }
+        return {
+            x: Math.round(rx + cx),
+            y: Math.round(ry + cy)
+        };
+    }
+
+    let rotated = selectedLivePixels.map(p => rotatePointBBox(p.x, p.y, cx, cy, direction));
+    let selSet = new Set(selectedLivePixels.map(p => `${p.x},${p.y}`));
+    pixels = pixels.filter(p => !selSet.has(`${p.x},${p.y}`));
+    let pixelSet = new Set(pixels.map(p => `${p.x},${p.y}`));
+    let actuallyPlaced = [];
+    for (let i = 0; i < rotated.length; i++) {
+        let key = `${rotated[i].x},${rotated[i].y}`;
+        if (!pixelSet.has(key)) {
+            pixels.push({ x: rotated[i].x, y: rotated[i].y });
+            actuallyPlaced.push({ x: rotated[i].x, y: rotated[i].y });
             pixelSet.add(key);
         }
     }
-    selectedLivePixels=actuallyPlaced;
+    selectedLivePixels = actuallyPlaced;
     alertMsg.textContent = `Rotated ${actuallyPlaced.length} cells`;
-    alertOpac=100; animateAlert();
+    alertOpac = 100; animateAlert();
 }
 
 const headers = document.getElementsByClassName("header3");
