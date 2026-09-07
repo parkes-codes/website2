@@ -747,10 +747,13 @@
     <p>(c124b?) Tubstretcher 2
         <a class="link" onclick="loadLexi('tubstretch2')">Spawn</a>
     </p>
+    <p>Infinitely Extendable Tubstretcher
+        <a class="link" onclick="loadLexi('tubstretchbig')">Spawn</a>
+    </p>
     <p>Linestretcher
         <a class="link" onclick="loadLexi('line2')">Spawn</a>
     </p>
-    <p>Linestretcher 2
+    <p>Linestretcher 2 (8c/96)
         <a class="link" onclick="loadLexi('linestretcher')">Spawn</a>
     </p>
     <p>Zigzag Wickstretcher
@@ -1135,6 +1138,31 @@
     </p>
   </div>
 </div>
+<script>
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.hash && window.location.hash.length > 1) {
+      var hashvalue = window.location.hash.substring(1);
+      if (/^\d+$/.test(hashvalue)) {
+        var allPs = document.querySelectorAll('#lexicon-inner p');
+        var idx = parseInt(hashvalue, 10) - 1; 
+        if (idx >= 0 && idx < allPs.length) {
+          var p = allPs[idx];
+          var link = p.querySelector("a.link[onclick^='loadLexi']");
+          if (link) {
+            var match = link.getAttribute('onclick').match(/loadLexi\(['"]([^'"]+)['"]\)/);
+            if (match && match[1]) {
+              setTimeout(function() {
+                loadLexi(match[1]);
+              }, 80);
+            }
+          }
+        }
+      }
+    }
+  });
+})();
+</script>
 
 <div id="promptMenuContainer">
   <div id = "promptMenu" class="bigmenu" >
