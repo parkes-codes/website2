@@ -1593,8 +1593,19 @@ function rotateSelection(direction) {
     alertOpac = 100; animateAlert();
 }
 
+setTimeout(() => {
 const headers = document.getElementsByClassName("header3");
 const links = document.getElementsByClassName("link");
+
+const peas = document.querySelectorAll('#lexicon-inner p');
+
+for (let i = 2; i < peas.length; i++) {
+    const span = document.createElement('span');
+    span.style.color = '#dddf';
+    span.textContent = `#${i-1}`;
+    peas[i].appendChild(span);
+}
+
 for (let i = 0; i<headers.length; i++) {
     let thisheader = headers[i];
     thisheader.style.color = `hsl(${170+Math.sin(i/2)*30},50%,50%)`;
@@ -1625,7 +1636,7 @@ for (let i = 0; i < links.length; i++) {
             lastClickedLink = thislink;
         }
     }
-}
+} },100);
 
 setTimeout(function() {
     if (patterns.length <= 1) {
