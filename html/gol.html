@@ -1145,8 +1145,8 @@
       var hashvalue = window.location.hash.substring(1);
       if (/^\d+$/.test(hashvalue)) {
         var allPs = document.querySelectorAll('#lexicon-inner p');
-        var idx = parseInt(hashvalue, 10) - 1; 
-        if (idx >= 0 && idx < allPs.length) {
+        var idx = parseInt(hashvalue, 10) + 1; 
+        if (idx >= 2 && idx < allPs.length) {
           var p = allPs[idx];
           var link = p.querySelector("a.link[onclick^='loadLexi']");
           if (link) {
