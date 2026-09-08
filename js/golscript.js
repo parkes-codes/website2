@@ -73,6 +73,7 @@ let hoverY = 0;
 let tickn = 0;
 let livePx = 0;
 let maxPx = 0;
+let minPx = 0;
 let cmdPressed = false;
 let shiftpressed = false;
 let hiliteCorner1 = {x: -1, y: 1};
@@ -266,6 +267,7 @@ function loadLexi(id, index=null) {
         animateAlert();
         getData();
         maxPx = livePx;
+        minPx = livePx;
     }
     else {
         alertMsg.textContent = `Unknown pattern: ${id}`;
@@ -277,11 +279,6 @@ function isLive(pixel) {
     return pixels.some(p => p.x === pixel.x && p.y === pixel.y);
 }
 
-function settingsPrompt() {
-    maxPxLen = prompt("Length of max pixel's history?");
-    document.getElementById("settingsbtn").blur();
-    if (!maxPxLen) { maxPxLen = 100; }
-}
 
 let camChangeX = 0;
 let camChangeY = 0;
@@ -333,6 +330,7 @@ function tick() {
     livePxHist.unshift(livePx);
     if (livePxHist.length > maxPxLen) livePxHist.length = maxPxLen;
     maxPx = livePxHist.length ? Math.max(...livePxHist) : 0;
+    minPx = livePxHist.length ? Math.min(...livePxHist) : 0;
 
     const liveSet = new Set();
     for (let i = 0; i < N; ++i) {
@@ -693,7 +691,7 @@ function draw() {
     if ((keysPressed["s"] && !cmdPressed) || (keysPressed["arrowdown"] && !inputFocus)) camy -= (1 / Math.abs(Math.log(zoom + 1.5))) * 1;
 
     display.textContent = `cam: (${camx.toFixed(2)},${camy.toFixed(2)}) hover: (${hoverX},${hoverY}) zoom: ${zoom.toFixed(3)}`;
-    display2.textContent = `livepx: ${livePx} maxpx: ${maxPx} rendered: ${rendered} tick: ${tickn} fps: ${Math.ceil(fps)}`;
+    display2.textContent = `livepx: ${livePx} maxpx: ${maxPx} minpx: ${minPx} rendered: ${rendered} tick: ${tickn} fps: ${Math.ceil(fps)}`;
 
     requestAnimationFrame(draw);
 }
@@ -1770,6 +1768,43 @@ let showCanvasInterval = setInterval(function() {
         const loadParam = urlParams.get('load');
         if (!(loadParam && Number(loadParam) > 0)) {
             loadLexi('blank');
+        } else {
+            var params = new URLSearchParams(window.location.search);
+            var loadIdx = params.get("load");
+            if (loadIdx && /^\d+$/.test(loadIdx)) {
+                var allPs = document.querySelectorAll('#lexicon-inner p');
+                var idx = parseInt(loadIdx, 10)+1; 
+                console.log(idx)
+                if (loadIdx == 1) {
+                setTimeout(function() {
+                        loadLexi("rand010", 1);
+                    }, 80);
+                }
+                if (idx < allPs.length) {
+                    var p = allPs[idx];
+                    var linky = p.querySelector("a.link[onclick^='loadLexi']");
+                    if (linky) {
+                        const onClickAttr = linky.getAttribute('onclick');
+                        const funcMatch = onClickAttr.match(/loadLexi\s*\((.*)\)/);
+                        if (funcMatch && funcMatch[1]) {
+                            let argsRaw = funcMatch[1].trim();
+                            argsRaw = argsRaw.replace(/;$/, '');
+                            let args;
+                            try {
+                                args = eval('[' + argsRaw + ']');
+                            } catch (e) {
+                                args = [];
+                            }
+                            if (typeof loadLexi === 'function') {
+                                setTimeout(function() {
+                                    loadLexi.apply(null, args);
+                                }, 80);
+                            }
+                        }
+                    }
+
+                }
+            }
         }
         document.getElementById("loadingMsg").style.display = "none";
         clearInterval(dotAnim);

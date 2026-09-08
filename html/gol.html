@@ -1146,36 +1146,6 @@
     </p>
   </div>
 </div>
-<script>
-(function() {
-    // auto load the passed in lexicon entry from the url
-  document.addEventListener("DOMContentLoaded", function() {
-    var params = new URLSearchParams(window.location.search);
-    var loadIdx = params.get("load");
-    if (loadIdx && /^\d+$/.test(loadIdx)) {
-      var allPs = document.querySelectorAll('#lexicon-inner p');
-      var idx = parseInt(loadIdx, 10)+1; 
-      if (loadIdx == 1) {
-        setTimeout(function() {
-              loadLexi("rand010", 1);
-            }, 80);
-      }
-      if (idx < allPs.length) {
-        var p = allPs[idx];
-        var link = p.querySelector("a.link[onclick^='loadLexi']");
-        if (link) {
-          var match = link.getAttribute('onclick').match(/loadLexi\(['"]([^'"]+)['"]\)/);
-          if (match && match[1]) {
-            setTimeout(function() {
-              loadLexi(match[1]);
-            }, 80);
-          }
-        }
-      }
-    }
-  });
-})();
-</script>
 
 <div id="promptMenuContainer">
   <div id = "promptMenu" class="bigmenu" >
@@ -1192,6 +1162,6 @@
   </div>
 </div>
 </body>
-<script src="../js/golscript.js"></script>
+<script src="https://parkes-codes.github.io/website2/js/golscript.js"></script>
 <script src="https://parkes-codes.github.io/website2/js/lexiconData.js"></script>
 </html>
