@@ -137,6 +137,12 @@
     #controls {
         width: 60px
     }
+    #controlsMenu {
+        transition: all 0.25s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    #lexicon {
+        transition: all 0.25s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
     .bigmenu {
         display: none;
         position: fixed;
@@ -196,11 +202,13 @@
     #promptMenu {
         position: fixed;
         z-index: 11;
+        transition: all 0.25s cubic-bezier(0.215, 0.610, 0.355, 1);
     }
-    #promptBtn {
+    #promptBtn, #closeBtn {
         transition: filter 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+        background-color: #f0fafa
     }
-    #promptBtn:hover {
+    #promptBtn:hover, #closeBtn:hover {
         filter: brightness(90%);
     }
     #promptInput {
@@ -256,7 +264,7 @@
     <button id="import" class="buttons" tabindex="8">Import</button>
     <button id="export" class="buttons" onclick="exportlist()" tabindex="11">Export</button>
 <div id="btnrow">
-    <button id="import2" class="buttons" onclick="importRLE()" tabindex="10">Import RLE</button>
+    <button id="import2" class="buttons" tabindex="10">Import RLE</button>
     <button id="export2" class="buttons" onclick="exportRLE()" tabindex="9">Export RLE</button>
 </div>
 <div id="btnrow2">
@@ -366,7 +374,7 @@
     </p>
     <h3 class="header3">Randoms</h3>
     <p>Random Pattern (10x10)
-        <a class="link" onclick="loadLexi('rand010')">Generate</a>
+        <a class="link" onclick="loadLexi('rand010', 1)">Generate</a>
     </p>
     <p>Random Pattern (26x26)
         <a class="link" onclick="loadLexi('rand026')">Generate</a>
@@ -1140,22 +1148,27 @@
 </div>
 <script>
 (function() {
+    // auto load the passed in lexicon entry from the url
   document.addEventListener("DOMContentLoaded", function() {
-    if (window.location.hash && window.location.hash.length > 1) {
-      var hashvalue = window.location.hash.substring(1);
-      if (/^\d+$/.test(hashvalue)) {
-        var allPs = document.querySelectorAll('#lexicon-inner p');
-        var idx = parseInt(hashvalue, 10) + 1; 
-        if (idx >= 2 && idx < allPs.length) {
-          var p = allPs[idx];
-          var link = p.querySelector("a.link[onclick^='loadLexi']");
-          if (link) {
-            var match = link.getAttribute('onclick').match(/loadLexi\(['"]([^'"]+)['"]\)/);
-            if (match && match[1]) {
-              setTimeout(function() {
-                loadLexi(match[1]);
-              }, 80);
-            }
+    var params = new URLSearchParams(window.location.search);
+    var loadIdx = params.get("load");
+    if (loadIdx && /^\d+$/.test(loadIdx)) {
+      var allPs = document.querySelectorAll('#lexicon-inner p');
+      var idx = parseInt(loadIdx, 10)+1; 
+      if (loadIdx == 1) {
+        setTimeout(function() {
+              loadLexi("rand010", 1);
+            }, 80);
+      }
+      if (idx < allPs.length) {
+        var p = allPs[idx];
+        var link = p.querySelector("a.link[onclick^='loadLexi']");
+        if (link) {
+          var match = link.getAttribute('onclick').match(/loadLexi\(['"]([^'"]+)['"]\)/);
+          if (match && match[1]) {
+            setTimeout(function() {
+              loadLexi(match[1]);
+            }, 80);
           }
         }
       }
@@ -1171,11 +1184,14 @@
       <h2 style="margin-top: -10px" id="promptName">Prompt Menu Name</h2>
       <p id="promptDesc">Description of prompt</p>
       <textarea id="promptInput" style="width: 100%; min-height: 80px; resize: vertical; box-sizing: border-box; font-family: inherit; margin-bottom: 12px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
-      <button id="promptBtn" class="button" style="padding: 8px 16px; border-radius: 8px; margin-bottom: 8px;">Enter</button>
+      <div style="display: flex; flex-direction: row; gap:10px">
+        <button id="promptBtn" class="button" style="padding: 8px 16px; border-radius: 8px; margin-bottom: 8px;">Enter</button>
+        <button id="closeBtn" class="button" style="padding: 8px 16px; border-radius: 8px; margin-bottom: 8px;">Cancel</button>
+      </div>
     </div>
   </div>
 </div>
 </body>
-<script src="https://parkes-codes.github.io/website2/js/golscript.js"></script>
+<script src="../js/golscript.js"></script>
 <script src="https://parkes-codes.github.io/website2/js/lexiconData.js"></script>
 </html>

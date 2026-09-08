@@ -135,7 +135,7 @@ function animateAlert() {
         requestAnimationFrame(animateAlert)
     }
 }
-function loadLexi(id) {
+function loadLexi(id, index=null) {
 
     if (!lexloaded) {
         return;
@@ -153,10 +153,17 @@ function loadLexi(id) {
         }
         saveCurrent();
         paused = true;
-        document.getElementById('lexicon').style.display = 'none';
+        document.getElementById('lexicon').style.opacity = '0%';
+        setTimeout(() => {document.getElementById('lexicon').style.display = 'none'},250);
         document.body.style.overflow = '';
         camx = 0; camy = 0;
         alertMsg.textContent = `Generated ${dimensions}x${dimensions} Board`;
+        if (index !== null) {
+            const url = new URL(window.location.href);
+            url.search = `?load=${index}`;
+            window.history.replaceState({}, '', url);
+        }
+
         alertOpac = 100;
         inputFocus = false;
         animateAlert();
@@ -243,10 +250,16 @@ function loadLexi(id) {
         resetState();
         saveCurrent();
         paused = true;
-        document.getElementById('lexicon').style.display = 'none';
+        document.getElementById('lexicon').style.opacity = '0%';
+        setTimeout(() => {document.getElementById('lexicon').style.display = 'none'},250);
         document.body.style.overflow = '';
         camx = 0; camy = 0;
         alertMsg.textContent = `Loaded ${id}`;
+        if (index !== null) {
+            const url = new URL(window.location.href);
+            url.search = `?load=${index}`;
+            window.history.replaceState({}, '', url);
+        }
         alertOpac = 100;
         mousedown = false;
         inputFocus = false;
@@ -873,6 +886,8 @@ function importRLE(string) {
     if (!rleString || rleString.trim() === "") {
         import2btn.blur();
         promptMenu.style.display = "none";
+        document.getElementById('promptMenu').style.opacity = '0%';
+        setTimeout(() => {document.getElementById('promptMenu').style.display = 'none'},250);
         promptInput.value = "";
         alertMsg.textContent = "RLE Empty";
         alertOpac = 100; animateAlert();
@@ -952,7 +967,8 @@ function importRLE(string) {
         alertMsg.textContent = "No live cells found in RLE or invalid format.";
         alertOpac = 100; animateAlert();
         import2btn.blur();
-        promptMenu.style.display = "none";
+        promptMenu.style.opacity = '0%';
+        setTimeout(() => {promptMenu.style.display = 'none'},250);
         promptInput.value = "";
         return;
     }
@@ -963,10 +979,14 @@ function importRLE(string) {
     }));
 
     import2btn.blur();
-    promptMenu.style.display = "none";
+    document.getElementById('promptMenu').style.opacity = '0%';
+    setTimeout(() => {promptMenu.style.display = 'none'},250);
     promptInput.value = "";
     alertMsg.textContent = "RLE Loaded";
     alertOpac = 100; animateAlert();
+    const url = new URL(window.location.href);
+    url.search = ``;
+    window.history.replaceState({}, '', url);
     resetState();
 }
 
@@ -976,6 +996,8 @@ import2btn.addEventListener("click", () => {
     promptDesc.textContent = "Paste your RLE text below.";
     promptName.textContent = "Load RLE File"
     promptMenu.style.display = "block";
+    promptMenu.style.opacity = "0%";
+    setTimeout(() => {promptMenu.style.opacity = '100%'},20);
     inputFocus = true;
     promptInput.value = "";
     activeMenuId = 1;
@@ -985,7 +1007,9 @@ import2btn.addEventListener("click", () => {
 importbtn.addEventListener("click", () => {
     promptDesc.textContent = "Paste your pixels list below.";
     promptName.textContent = "Load Pixels"
+    promptMenu.style.opacity = "0%";
     promptMenu.style.display = "block";
+    setTimeout(() => {promptMenu.style.opacity = '100%'},20);
     promptInput.value = "";
     inputFocus = true;
     activeMenuId = 2;
@@ -996,7 +1020,9 @@ function importlist(string) {
     paused = true;
     let pixelListStr = string;
     if (pixelListStr === null || pixelListStr.trim() === "") {
-        importbtn.blur()
+        importbtn.blur();
+        alertMsg.textContent="List Empty";
+        alertOpac = 100; animateAlert();
         return;
     }
     pixelListStr = pixelListStr.replace(/\s+/g, '');
@@ -1077,15 +1103,39 @@ promptBtn.addEventListener("click", () => {
     } else {
         importlist(inputString);
     }
-    promptMenu.style.display = "none";
+    document.getElementById('promptMenu').style.opacity = '0%';
+    setTimeout(() => {document.getElementById('promptMenu').style.display = 'none'},250);
     import2btn.blur();
     promptInput.value = "";
     promptInput.blur();
     setTimeout(() => {
         inputFocus = false;
-    }, 100);
+    }, 300);
 })
 
+document.getElementById("closeBtn").addEventListener("click", () => {
+    document.getElementById('promptMenu').style.opacity = '0%';
+    setTimeout(() => {document.getElementById('promptMenu').style.display = 'none'},250);
+    import2btn.blur();
+    promptInput.value = "";
+    promptInput.blur();
+    setTimeout(() => {
+        inputFocus = false;
+    }, 300);
+})
+
+
+tptInput.addEventListener("keydown", (e) => {
+    if (e.key == " ") {
+        tptInput.blur();
+    }
+})
+
+tpsInput.addEventListener("keydown", (e) => {
+    if (e.key == " ") {
+        tpsInput.blur();
+    }
+})
 
 tptInput.addEventListener("focus", () => {
     inputFocus = true;
@@ -1171,7 +1221,10 @@ let lastClickedLink = null;
 
 const lexiconn = document.getElementById("lexicon");
 document.getElementById('lex').addEventListener('click', function() {
+    lexiconn.style.opacity = '0%';
     lexiconn.style.display = 'block';
+    setTimeout(() => {document.getElementById('lexicon').style.opacity = '100%'},20);
+
     inputFocus = true;
     if (lastClickedLink) {
         lastClickedLink.focus();
@@ -1183,26 +1236,35 @@ document.getElementById('lex').addEventListener('click', function() {
 });
 
 document.getElementById('controls').addEventListener('click', function() {
-    document.getElementById('controlsMenu').style.display = 'block';
+    document.getElementById('controlsMenu').style.opacity = '0%';
+    document.getElementById('controlsMenu').style.display = "block";
+    setTimeout(() => {
+        document.getElementById('controlsMenu').style.opacity = '100%';
+    },20)
     inputFocus = true;
     document.body.style.overflow = 'hidden';
 });
 
 // menu backs
 document.getElementById('lexBack').addEventListener('click', function() {
-    lexiconn.style.display = 'none';
+    document.getElementById('lexicon').style.opacity = '0%';
+    setTimeout(() => {document.getElementById('lexicon').style.display = 'none'},250);
     document.body.style.overflow = '';
     inputFocus = false;
 });
 
 document.getElementById('contBack').addEventListener('click', function() {
-    document.getElementById('controlsMenu').style.display = 'none';
+    document.getElementById('controlsMenu').style.opacity = '0%';
+    setTimeout(() => {
+        document.getElementById('controlsMenu').style.display = 'none';
+    },250)
     document.body.style.overflow = '';
     inputFocus = false;
 });
 
 document.getElementById('promptBack').addEventListener('click', function() {
-    document.getElementById('promptMenu').style.display = 'none';
+    document.getElementById('promptMenu').style.opacity = '0%';
+    setTimeout(() => {document.getElementById('promptMenu').style.display = 'none'},250);
     inputFocus = false;
 });
 
@@ -1336,6 +1398,9 @@ window.addEventListener("keydown", (e) => {
             camxin.value = 0; camyin.value = 0;
             alertMsg.textContent = "Reset board";
             alertOpac = 100; animateAlert();
+            const url = new URL(window.location.href);
+            url.search = ``;
+            window.history.replaceState({}, '', url);
         }
         else {
             resetState();
@@ -1596,13 +1661,16 @@ function rotateSelection(direction) {
 setTimeout(() => {
 const headers = document.getElementsByClassName("header3");
 const links = document.getElementsByClassName("link");
-
 const peas = document.querySelectorAll('#lexicon-inner p');
 
 for (let i = 2; i < peas.length; i++) {
+    peas[i].style.position = "relative";
     const span = document.createElement('span');
-    span.style.color = '#dddf';
+    span.style.color = '#899f';
     span.textContent = `#${i-1}`;
+    span.style.position = 'absolute';
+    span.style.right = '0';
+    span.style.top = '0';
     peas[i].appendChild(span);
 }
 
@@ -1615,13 +1683,49 @@ for (let i = 0; i < links.length; i++) {
     let thislink = links[i];
     thislink.setAttribute('tabindex', i + 25);
     let onclickAttr = thislink.getAttribute('onclick');
-    if (onclickAttr) {
+    if (onclickAttr && /loadLexi\s*\(.*\)/.test(onclickAttr)) {
+        let loadLexiMatch = onclickAttr.match(/loadLexi\s*\(\s*(['"])(.*?)\1(?:\s*,\s*\d+)?\s*\)/);
+        if (loadLexiMatch) {
+            let patternName = loadLexiMatch[2];
+            let newOnclick = `loadLexi('${patternName}', ${i+1})`;
+            thislink.setAttribute('onclick', newOnclick);
+
+            thislink.onkeydown = function (e) {
+                if (e.key === "Enter" || e.keyCode === 13 || e.key == " ") {
+                    lastClickedLink = thislink;
+                    loadLexi(patternName, i+1);
+                    if (e.key == " ") {
+                        paused = false; setTimeout(() => {resetState()},16)
+                    };
+                    e.preventDefault();
+                }
+            };
+            thislink.onclick = function(e) {
+                lastClickedLink = thislink;
+                loadLexi(patternName, i+1);
+            }
+        } else {
+            thislink.onkeydown = function (e) {
+                if (e.key === "Enter" || e.keyCode === 13 || e.key == " ") {
+                    lastClickedLink = thislink;
+                    eval(onclickAttr);
+                    if (e.key == " ") {
+                        paused = false; setTimeout(() => {resetState()},16)
+                    };
+                    e.preventDefault();
+                }
+            };
+            thislink.onclick = function(e) {
+                lastClickedLink = thislink;
+                eval(onclickAttr);
+            }
+        }
+    } else if (onclickAttr) {
         thislink.onkeydown = function (e) {
             if (e.key === "Enter" || e.keyCode === 13 || e.key == " ") {
-                lastClickedLink = thislink
+                lastClickedLink = thislink;
                 eval(onclickAttr);
                 if (e.key == " ") {
-                    // space key immediately unpauses, so we have to undo that.
                     paused = false; setTimeout(() => {resetState()},16)
                 };
                 e.preventDefault();
@@ -1638,6 +1742,18 @@ for (let i = 0; i < links.length; i++) {
     }
 } },100);
 
+if (localStorage.getItem("firstVisit") === null) {
+    document.getElementById('controlsMenu').style.opacity = '0%';
+    document.getElementById('controlsMenu').style.display = "block";
+    setTimeout(() => {
+        document.getElementById('controlsMenu').style.opacity = '100%';
+    },20)
+    inputFocus = true;
+    document.body.style.overflow = 'hidden';
+
+    localStorage.setItem("firstVisit", "false");
+}
+
 setTimeout(function() {
     if (patterns.length <= 1) {
         lexloaded = false;
@@ -1650,7 +1766,11 @@ setTimeout(function() {
 let showCanvasInterval = setInterval(function() {
     if ((typeof patterns === "object" && patterns !== null) || lexloaded == false) {
         canvas.style.display = "block";
-        loadLexi('blank')
+        const urlParams = new URLSearchParams(window.location.search);
+        const loadParam = urlParams.get('load');
+        if (!(loadParam && Number(loadParam) > 0)) {
+            loadLexi('blank');
+        }
         document.getElementById("loadingMsg").style.display = "none";
         clearInterval(dotAnim);
         clearInterval(showCanvasInterval);
