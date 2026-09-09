@@ -136,6 +136,37 @@ function animateAlert() {
         requestAnimationFrame(animateAlert)
     }
 }
+
+function zoomFit() {
+    if (pixels.length > 0) {
+        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        for (let p of pixels) {
+            if (p.x < minX) minX = p.x;
+            if (p.x > maxX) maxX = p.x;
+            if (p.y < minY) minY = p.y;
+            if (p.y > maxY) maxY = p.y;
+        }
+
+        let pad = 2;
+        minX -= pad; maxX += pad; minY -= pad; maxY += pad;
+
+        let w = maxX - minX + 1;
+        let h = maxY - minY + 1;
+
+        let vpw = (canvas && canvas.width) ? canvas.width : window.innerWidth;
+        let vph = (canvas && canvas.height) ? canvas.height : window.innerHeight;
+
+        let zoomX = (vpw * 1) / w;
+        let zoomY = (vph * 1) / h;
+        let fitZoom = Math.abs(Math.min(zoomX, zoomY))*0.9;
+
+        zoom = fitZoom
+
+        camx = Math.round((minX + maxX) / 2);
+        camy = Math.round((minY + maxY) / 2);
+    }
+}
+
 function loadLexi(id, index=null) {
 
     if (!lexloaded) {
@@ -169,6 +200,7 @@ function loadLexi(id, index=null) {
         inputFocus = false;
         animateAlert();
         getData();
+        zoomFit();
         return
     }
 
@@ -255,6 +287,7 @@ function loadLexi(id, index=null) {
         setTimeout(() => {document.getElementById('lexicon').style.display = 'none'},250);
         document.body.style.overflow = '';
         camx = 0; camy = 0;
+        zoomFit();
         alertMsg.textContent = `Loaded ${id}`;
         if (index !== null) {
             const url = new URL(window.location.href);
