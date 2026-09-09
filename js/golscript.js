@@ -1812,6 +1812,29 @@ let showCanvasInterval = setInterval(function() {
     }
 }, 100);
 
+// Source - https://stackoverflow.com/a/31732310
+// Posted by qingu, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-09-08, License - CC BY-SA 4.0
+
+var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+               navigator.userAgent &&
+               navigator.userAgent.indexOf('CriOS') == -1 &&
+               navigator.userAgent.indexOf('FxiOS') == -1;
+
+// i love when apple messes everything up
+if (isSafari) {
+    const buttonEls = document.querySelectorAll('.buttons:not(input)');
+    for (let i = 0; i < buttonEls.length; i++) {
+        buttonEls[i].style.paddingTop = "-5px";
+        buttonEls[i].style.paddingBottom = "18px";
+    }
+    importbtn.style.marginBottom = "2px";
+    lexBtn.style.marginBottom = "2px";
+    tptInput.style.marginBottom = "3px";
+    tpsInput.style.marginBottom = "3px";
+    tpsInput.style.marginRight = "-2px";
+}
+
 
 window.addEventListener('beforeunload', function (event) {
     if (pixels.length > 0) {
