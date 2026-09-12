@@ -1968,45 +1968,47 @@ setTimeout(function() {
 let showCanvasInterval = setInterval(function() {
     if ((typeof patterns === "object" && patterns !== null) || lexloaded == false) {
         canvas.style.display = "block";
-        const urlParams = new URLSearchParams(window.location.search);
-        const loadParam = urlParams.get('load');
-        if (!(loadParam && Number(loadParam) > 0)) {
+        // Always try to parse the URL parameters for a 'load' param
+        let urlParams;
+        try {
+            urlParams = new URLSearchParams(window.location.search ? window.location.search.replace(/^\?/, '') : '');
+        } catch (e) {
+            urlParams = new URLSearchParams();
+        }
+
+        let loadParam = urlParams.get('load');
+        if (!loadParam || !/^\d+$/.test(loadParam) || Number(loadParam) < 0) {
+            // fallback if no valid load param
             loadLexi('blank');
         } else {
-            var params = new URLSearchParams(window.location.search);
-            var loadIdx = params.get("load");
-            if (loadIdx && /^\d+$/.test(loadIdx)) {
-                var allPs = document.querySelectorAll('#lexicon-inner p');
-                var idx = parseInt(loadIdx, 10)+1; 
-                console.log(`LOADED ${idx} FROM LEX`)
-                if (loadIdx == 1) {
-                setTimeout(function() {
-                        loadLexi("rand010", 1);
-                    }, 80);
-                }
-                if (idx < allPs.length) {
-                    var p = allPs[idx];
-                    var linky = p.querySelector("a.link[onclick^='loadLexi']");
-                    if (linky) {
-                        const onClickAttr = linky.getAttribute('onclick');
-                        const funcMatch = onClickAttr.match(/loadLexi\s*\((.*)\)/);
-                        if (funcMatch && funcMatch[1]) {
-                            let argsRaw = funcMatch[1].trim();
-                            argsRaw = argsRaw.replace(/;$/, '');
-                            let args;
-                            try {
-                                args = eval('[' + argsRaw + ']');
-                            } catch (e) {
-                                args = [];
-                            }
-                            if (typeof loadLexi === 'function') {
-                                setTimeout(function() {
-                                    loadLexi.apply(null, args);
-                                }, 80);
-                            }
+            // Now go through the lexicon and load the correct pattern
+            var allPs = document.querySelectorAll('#lexicon-inner p');
+            var idx = parseInt(loadParam, 10) + 1; 
+            // Special case for legacy mode
+            if (loadParam == 1) {
+                setTimeout(function() { loadLexi("rand010", 1); }, 80);
+            }
+            if (idx < allPs.length) {
+                var p = allPs[idx];
+                var linky = p.querySelector("a.link[onclick^='loadLexi']");
+                if (linky) {
+                    const onClickAttr = linky.getAttribute('onclick');
+                    const funcMatch = onClickAttr.match(/loadLexi\s*\((.*)\)/);
+                    if (funcMatch && funcMatch[1]) {
+                        let argsRaw = funcMatch[1].trim();
+                        argsRaw = argsRaw.replace(/;$/, '');
+                        let args;
+                        try {
+                            args = eval('[' + argsRaw + ']');
+                        } catch (e) {
+                            args = [];
+                        }
+                        if (typeof loadLexi === 'function') {
+                            setTimeout(function() {
+                                loadLexi.apply(null, args);
+                            }, 80);
                         }
                     }
-
                 }
             }
         }
