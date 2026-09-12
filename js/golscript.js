@@ -51,6 +51,7 @@ const promptBtn = document.getElementById("promptBtn");
 const promptName = document.getElementById("promptName");
 const promptDesc = document.getElementById("promptDesc");
 const lexBtn = document.getElementById("lex");
+const lexiconn = document.getElementById("lexicon");
 
 let lexloaded = true;
 let patterns = ""
@@ -84,9 +85,6 @@ let tps = 0;
 let inputFocus = false;
 
 
-let livePxHist = [];
-let maxPxLen = 1000;
-
 let markerColors = [
     "faa",
     "afa",
@@ -118,7 +116,6 @@ function resetState() {
     dragStart = null;
     selectionOriginal = [];
     pastePreviewActive = false;
-    livePxHist = []
 }
 
 let confOpac = 0;
@@ -167,33 +164,66 @@ function zoomFit() {
     }
 }
 
-function loadLexi(id, index=null) {
-
+let loadCounter = 0;
+function loadLexi(id, index = null) {
     if (!lexloaded) {
         return;
     }
 
-    let offsett = (id === "sword") ? -50 : 0;
+    if (loadCounter > 0) {
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+        if (params.has('tpt')) {
+            params.delete('tpt');
+            console.log("REMOVED TPT")
+            url.search = params.toString() ? `?${params.toString()}` : '';
+            window.history.replaceState({}, '', url);
+        }
+    }
+
+    loadCounter++;
+
+
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tptParam = urlParams.get('tpt');
+        if (tptParam !== null) {
+            let tptValue = Number(tptParam);
+            if (!isNaN(tptValue) && typeof tpt !== "undefined") {
+                tpt = tptValue;
+                tptInput.value = tptValue;
+                console.log(`LOADED TPT: ${tpt}`)
+            }
+        }
+    } catch (e) {
+        console.log("TPT FAIL")
+    }
+
+    function updateURLWithLoad(index) {
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+        params.set('load', index);
+        url.search = params.toString();
+        window.history.replaceState({}, '', url);
+    }
 
     if (id.includes("rand")) {
         let dimensions = Number(id[4] + id[5] + id[6])
         pixels = [];
-        for (let y = dimensions/-2; y<dimensions/2; y++) {
-            for (let x = dimensions/-2; x<dimensions/2; x++) {
-                if (Math.random() < 1/4) {pixels.push({x: x, y: y})}
+        tickn = 0;
+        for (let y = dimensions / -2; y < dimensions / 2; y++) {
+            for (let x = dimensions / -2; x < dimensions / 2; x++) {
+                if (Math.random() < 1 / 4) { pixels.push({ x: x, y: y }) }
             }
         }
-        saveCurrent();
         paused = true;
-        document.getElementById('lexicon').style.opacity = '0%';
-        setTimeout(() => {document.getElementById('lexicon').style.display = 'none'},250);
+        lexiconn.style.opacity = '0%';
+        setTimeout(() => { lexiconn.style.display = 'none' }, 250);
         document.body.style.overflow = '';
         camx = 0; camy = 0;
         alertMsg.textContent = `Generated ${dimensions}x${dimensions} Board`;
         if (index !== null) {
-            const url = new URL(window.location.href);
-            url.search = `?load=${index}`;
-            window.history.replaceState({}, '', url);
+            updateURLWithLoad(index);
         }
 
         alertOpac = 100;
@@ -249,7 +279,7 @@ function loadLexi(id, index=null) {
                     for (let n = 0; n < count; n++) {
                         if (ch === "o") {
                             let centeredX = x - Math.floor(width / 2);
-                            let centeredY = (0 - y + offsett) + Math.floor(height / 2);
+                            let centeredY = (0 - y) + Math.floor(height / 2);
                             pixelsList.push({ x: centeredX, y: centeredY });
                         }
                         x++;
@@ -272,8 +302,7 @@ function loadLexi(id, index=null) {
             }
             startingArray = pixelsList.slice();
         } else if (Array.isArray(patternData)) {
-            startingArray = patternData.map(p => ({x: p.x, y: p.y + offsett}));
-            livePxHist = [];
+            startingArray = patternData.map(p => ({x: p.x, y: p.y}));
         } else {
             alertMsg.textContent = `Pattern format invalid`;
             alertOpac = 100; animateAlert();
@@ -283,16 +312,14 @@ function loadLexi(id, index=null) {
         resetState();
         saveCurrent();
         paused = true;
-        document.getElementById('lexicon').style.opacity = '0%';
-        setTimeout(() => {document.getElementById('lexicon').style.display = 'none'},250);
+        lexiconn.style.opacity = '0%';
+        setTimeout(() => {lexiconn.style.display = 'none'},250);
         document.body.style.overflow = '';
         camx = 0; camy = 0;
         zoomFit();
         alertMsg.textContent = `Loaded ${id}`;
         if (index !== null) {
-            const url = new URL(window.location.href);
-            url.search = `?load=${index}`;
-            window.history.replaceState({}, '', url);
+            updateURLWithLoad(index);
         }
         alertOpac = 100;
         mousedown = false;
@@ -360,10 +387,8 @@ function tick() {
 
     const N = pixels.length;
 
-    livePxHist.unshift(livePx);
-    if (livePxHist.length > maxPxLen) livePxHist.length = maxPxLen;
-    maxPx = livePxHist.length ? Math.max(...livePxHist) : 0;
-    minPx = livePxHist.length ? Math.min(...livePxHist) : 0;
+    if (livePx > maxPx) maxPx = livePx;
+    if (livePx < minPx) minPx = livePx;
 
     const liveSet = new Set();
     for (let i = 0; i < N; ++i) {
@@ -775,17 +800,23 @@ function handleWheelZoom(e) {
     if (isNaN(mx)) mx = mouseX;
     if (isNaN(my)) my = mouseY;
 
-    const isTrackpad = Math.abs(e.deltaY) < 8;
+    let wheelDelta;
+    if (e.shiftKey && Math.abs(e.deltaX) > 0) {
+        wheelDelta = e.deltaX;
+    } else {
+        wheelDelta = e.deltaY;
+    }
+
+    const isTrackpad = Math.abs(wheelDelta) < 8;
 
     let beforeX = ((mx - canvas.width / 2) / zoom) + camx;
     let beforeY = (-(my - canvas.height / 2) / zoom) + camy;
 
-    let op = (e.deltaY < 0) ? 1 : -1;
-    let steps = 10;
+    let op = (wheelDelta < 0) ? 1 : -1;
     
+    let steps = 10;
     let interval = 1000 / fps / steps;
-
-    let zoomStep = isTrackpad ? 1.005 : 1.02;
+    let zoomStep = isTrackpad ? 1.004 : 1.02;
 
     let performStep = function(step) {
         if (step > steps) return;
@@ -917,8 +948,8 @@ function importRLE(string) {
     if (!rleString || rleString.trim() === "") {
         import2btn.blur();
         promptMenu.style.display = "none";
-        document.getElementById('promptMenu').style.opacity = '0%';
-        setTimeout(() => {document.getElementById('promptMenu').style.display = 'none'},250);
+        promptMenu.style.opacity = '0%';
+        setTimeout(() => {promptMenu.style.display = 'none'},250);
         promptInput.value = "";
         alertMsg.textContent = "RLE Empty";
         alertOpac = 100; animateAlert();
@@ -1010,7 +1041,7 @@ function importRLE(string) {
     }));
 
     import2btn.blur();
-    document.getElementById('promptMenu').style.opacity = '0%';
+    promptMenu.style.opacity = '0%';
     setTimeout(() => {promptMenu.style.display = 'none'},250);
     promptInput.value = "";
     alertMsg.textContent = "RLE Loaded";
@@ -1134,8 +1165,8 @@ promptBtn.addEventListener("click", () => {
     } else {
         importlist(inputString);
     }
-    document.getElementById('promptMenu').style.opacity = '0%';
-    setTimeout(() => {document.getElementById('promptMenu').style.display = 'none'},250);
+    promptMenu.style.opacity = '0%';
+    setTimeout(() => {promptMenu.style.display = 'none'},250);
     import2btn.blur();
     promptInput.value = "";
     promptInput.blur();
@@ -1145,8 +1176,8 @@ promptBtn.addEventListener("click", () => {
 })
 
 document.getElementById("closeBtn").addEventListener("click", () => {
-    document.getElementById('promptMenu').style.opacity = '0%';
-    setTimeout(() => {document.getElementById('promptMenu').style.display = 'none'},250);
+    promptMenu.style.opacity = '0%';
+    setTimeout(() => {promptMenu.style.display = 'none'},250);
     import2btn.blur();
     promptInput.value = "";
     promptInput.blur();
@@ -1155,15 +1186,18 @@ document.getElementById("closeBtn").addEventListener("click", () => {
     }, 300);
 })
 
+let inputList = [
+    ' ', '=', '+', '-', '_', 'a', 's', 'w', 'd', 'A', 'S', 'W', 'D' 
+];
 
 tptInput.addEventListener("keydown", (e) => {
-    if (e.key == " ") {
+    if (inputList.includes(e.key)) {
         tptInput.blur();
     }
-})
+});
 
 tpsInput.addEventListener("keydown", (e) => {
-    if (e.key == " ") {
+    if (inputList.includes(e.key)) {
         tpsInput.blur();
     }
 })
@@ -1250,11 +1284,10 @@ tptInput.addEventListener("keydown", (e) => {
 // buttons
 let lastClickedLink = null;
 
-const lexiconn = document.getElementById("lexicon");
 document.getElementById('lex').addEventListener('click', function() {
     lexiconn.style.opacity = '0%';
     lexiconn.style.display = 'block';
-    setTimeout(() => {document.getElementById('lexicon').style.opacity = '100%'},20);
+    setTimeout(() => {lexiconn.style.opacity = '100%'},20);
 
     inputFocus = true;
     if (lastClickedLink) {
@@ -1278,8 +1311,8 @@ document.getElementById('controls').addEventListener('click', function() {
 
 // menu backs
 document.getElementById('lexBack').addEventListener('click', function() {
-    document.getElementById('lexicon').style.opacity = '0%';
-    setTimeout(() => {document.getElementById('lexicon').style.display = 'none'},250);
+    lexiconn.style.opacity = '0%';
+    setTimeout(() => {lexiconn.style.display = 'none'},250);
     document.body.style.overflow = '';
     inputFocus = false;
 });
@@ -1294,14 +1327,15 @@ document.getElementById('contBack').addEventListener('click', function() {
 });
 
 document.getElementById('promptBack').addEventListener('click', function() {
-    document.getElementById('promptMenu').style.opacity = '0%';
-    setTimeout(() => {document.getElementById('promptMenu').style.display = 'none'},250);
+    promptMenu.style.opacity = '0%';
+    setTimeout(() => {promptMenu.style.display = 'none'},250);
     inputFocus = false;
 });
 
 window.addEventListener("keydown", (e) => {
     cmdPressed = e.metaKey || e.ctrlKey;
-    keysPressed[e.key.toLowerCase()] = true;
+    const elower = e.key ? e.key.toLowerCase() : "";
+    keysPressed[elower] = true;
 
     const stuff = [
         "rand010",
@@ -1310,43 +1344,63 @@ window.addEventListener("keydown", (e) => {
         "rand100",
         "rand250",
         "rand500",
-    ]
+    ];
 
     if (Number(e.key) > 0 && Number(e.key) < 7 && !inputFocus) {
-        loadLexi(stuff[Number(e.key)-1])
+        loadLexi(stuff[Number(e.key) - 1]);
     }
 
-    if (e.key === "f") {
+    if (elower === "f") {
         const markerIndex = markers.findIndex(m => m.x === hoverX && m.y === hoverY);
         if (markerIndex !== -1) {
             markers.splice(markerIndex, 1);
         } else {
-            markers.push({x:hoverX, y:hoverY, color: `#${markerColors[colorIndex]}`});
+            markers.push({ x: hoverX, y: hoverY, color: `#${markerColors[colorIndex]}` });
         }
     }
 
-    if (e.key == "o") {
+    if (elower === "o") {
         sparseEnabled = !sparseEnabled;
         alertMsg.textContent = `Render Optimise ${sparseEnabled}`;
         alertOpac = 100; animateAlert();
     }
 
-    if (e.key === "n") {
-        colorIndex = (colorIndex+1)%markerColors.length;
+    if (elower === "n") {
+        colorIndex = (colorIndex + 1) % markerColors.length;
     }
 
-    if (e.key === "j") {
-        if (selectedLivePixels.length > 0) {seleToMarkers()};
+    if (elower === "j") {
+        if (selectedLivePixels.length > 0) {
+            seleToMarkers();
+        }
     }
 
-    if (cmdPressed && e.key.toLowerCase() === "g") {
+    if (elower === "p" && cmdPressed && markers.length > 0) {
+        const liveSet = new Set(pixels.map(p => `${p.x},${p.y}`));
+        let added = 0;
+        markers.forEach(marker => {
+            const key = `${marker.x},${marker.y}`;
+            if (!liveSet.has(key)) {
+                pixels.push({ x: marker.x, y: marker.y });
+                added++;
+            }
+        });
+        alertMsg.textContent = `${added} markers converted to live pixels`;
+        alertOpac = 100; animateAlert();
+        markers = [];
+        e.preventDefault();
+        draw();
+        return;
+    }
+
+    if (cmdPressed && elower === "g") {
         e.preventDefault();
         markers = [];
         alertMsg.textContent = "All markers cleared";
         alertOpac = 100; animateAlert();
     }
 
-    if (cmdPressed && e.key.toLowerCase() === "c" && !inputFocus) {
+    if (cmdPressed && elower === "c" && !inputFocus) {
         if (selectedLivePixels.length > 0) {
             let minX = Math.min(...selectedLivePixels.map(p => p.x));
             let minY = Math.min(...selectedLivePixels.map(p => p.y));
@@ -1362,7 +1416,8 @@ window.addEventListener("keydown", (e) => {
         e.preventDefault();
         return;
     }
-    if (cmdPressed && e.key.toLowerCase() === "v" && !inputFocus) {
+
+    if (cmdPressed && elower === "v" && !inputFocus) {
         if (copiedPixels.length > 0) {
             if (!pastePreviewActive) {
                 pastePreviewActive = true;
@@ -1374,10 +1429,26 @@ window.addEventListener("keydown", (e) => {
         return;
     }
 
-    if (cmdPressed && e.key.toLowerCase() === "d") {
+    if (cmdPressed && elower === "d") {
         rotateSelection(1);
         e.preventDefault();
         return;
+    }
+
+    if (cmdPressed && elower === "p") {
+        e.preventDefault();
+        if (markers.length > 0) {
+            const markerSet = new Set(markers.map(p => `${p.x},${p.y}`));
+            const pixelSet = new Set(pixels.map(p => `${p.x},${p.y}`));
+            markers.forEach(marker => {
+                const key = `${marker.x},${marker.y}`;
+                if (!pixelSet.has(key)) {
+                    pixels.push({ x: marker.x, y: marker.y });
+                }
+            });
+            alertMsg.textContent = "Converted all markers to live pixels";
+            alertOpac = 100; animateAlert();
+        }
     }
 
     function flipX() {
@@ -1386,7 +1457,7 @@ window.addEventListener("keydown", (e) => {
             let maxX = Math.max(...selectedLivePixels.map(p => p.x));
             let centerX = minX + (maxX - minX) / 2;
             const selSet = new Set(selectedLivePixels.map(p => `${p.x},${p.y}`));
-            selectedLivePixels = selectedLivePixels.map(p => ({x: Math.round(2 * centerX - p.x), y: p.y}));
+            selectedLivePixels = selectedLivePixels.map(p => ({ x: Math.round(2 * centerX - p.x), y: p.y }));
             pixels = pixels.filter(p => !selSet.has(`${p.x},${p.y}`)).concat(selectedLivePixels);
             alertMsg.textContent = `Flipped selection X axis`;
             alertOpac = 100; animateAlert();
@@ -1399,28 +1470,41 @@ window.addEventListener("keydown", (e) => {
             let maxY = Math.max(...selectedLivePixels.map(p => p.y));
             let centerY = minY + (maxY - minY) / 2;
             const selSet = new Set(selectedLivePixels.map(p => `${p.x},${p.y}`));
-            selectedLivePixels = selectedLivePixels.map(p => ({x: p.x, y: Math.round(2 * centerY - p.y)}));
+            selectedLivePixels = selectedLivePixels.map(p => ({ x: p.x, y: Math.round(2 * centerY - p.y) }));
             pixels = pixels.filter(p => !selSet.has(`${p.x},${p.y}`)).concat(selectedLivePixels);
             alertMsg.textContent = `Flipped selection Y axis`;
             alertOpac = 100; animateAlert();
         }
     }
 
-    if (cmdPressed && e.key.toLowerCase() === ",") {
+    if (cmdPressed && elower === ",") {
         flipX();
-        e.preventDefault(); return;
+        e.preventDefault();
+        return;
     }
-    if (cmdPressed && e.key.toLowerCase() === ".") {
-       flipY();
-        e.preventDefault(); return;
+
+    if (cmdPressed && elower === ".") {
+        flipY();
+        e.preventDefault();
+        return;
     }
-    if (e.key === "Shift" || e.key === "ShiftRight" || e.key === "ShiftLeft" || e.shiftKey) {
+
+    if (
+        e.key === "Shift" ||
+        e.key === "ShiftRight" ||
+        e.key === "ShiftLeft" ||
+        e.shiftKey
+    ) {
         shiftpressed = true;
         if (!hiliteCorner1 || hiliteCorner1.x === -1) hiliteCorner1 = { x: hoverX, y: hoverY };
         hiliteCorner2 = { x: hoverX, y: hoverY };
     }
-    if (e.key == " " && !inputFocus) { paused = !paused; }
-    else if (e.key == "r") {
+
+    if (elower == " " && !inputFocus) {
+        paused = !paused;
+    }
+
+    if (elower == "r") {
         e.preventDefault();
         if (cmdPressed) {
             loadLexi("blank");
@@ -1432,21 +1516,108 @@ window.addEventListener("keydown", (e) => {
             const url = new URL(window.location.href);
             url.search = ``;
             window.history.replaceState({}, '', url);
-        }
-        else {
+        } else {
             resetState();
             alertMsg.textContent = "Loaded save";
             alertOpac = 100; animateAlert();
-        };
-    } else if (e.key.toLowerCase() === "s" && cmdPressed ) {
-        e.preventDefault(); saveCurrent();
-    } else if (e.key === "t" && paused) {
-        tick()
-    } else if (e.key === "y" && paused) {
-        for ( let i = 0; i<tptInput.value; i++) {
+        }
+    }
+
+    if (elower === "s" && cmdPressed) {
+        e.preventDefault();
+        saveCurrent();
+    }
+
+    if (elower === "t" && paused) {
+        tick();
+    }
+
+    if (elower === "y" && paused) {
+        for (let i = 0; i < tptInput.value; i++) {
             tick();
         }
-    } 
+    }
+
+    if (elower === "u" && paused) {
+        if (selectedLivePixels.length > 0) {
+            const pixelSet = new Set(pixels.map(p => `${p.x},${p.y}`));
+            const relevantCells = new Set();
+
+            const neighbors = [
+                [0, 0],
+                [-1, -1], [0, -1], [1, -1],
+                [-1,  0],          [1,  0],
+                [-1,  1], [0,  1], [1,  1]
+            ];
+
+            selectedLivePixels.forEach(sel => {
+                neighbors.forEach(([dx, dy]) => {
+                    relevantCells.add(`${sel.x + dx},${sel.y + dy}`);
+                });
+            });
+
+            const willLive = [];
+            const nextPixelSet = new Set(pixelSet); 
+
+            const cellsKilled = new Set();
+            const cellsCreated = new Set();
+
+            relevantCells.forEach(cellStr => {
+                const [x, y] = cellStr.split(',').map(Number);
+
+                let count = 0;
+                for (let [dx, dy] of neighbors.slice(1)) { 
+                    const neighborStr = `${x + dx},${y + dy}`;
+                    if (pixelSet.has(neighborStr)) count++;
+                }
+
+                const isAlive = pixelSet.has(cellStr);
+                let survives = false;
+                if (isAlive) {
+                    if (count === 2 || count === 3)
+                        survives = true;
+                } else {
+                    if (count === 3)
+                        survives = true;
+                }
+
+                if (survives) {
+                    willLive.push({x, y});
+                    if (!isAlive) {
+                        cellsCreated.add(cellStr);
+                    }
+                } else {
+                    if (isAlive) {
+                        nextPixelSet.delete(cellStr);
+                        cellsKilled.add(cellStr);
+                    }
+                }
+            });
+
+            const relevantCellsSet = new Set(relevantCells);
+            let nextPixels = pixels.filter(
+                p => !relevantCellsSet.has(`${p.x},${p.y}`)
+            );
+            nextPixels = nextPixels.concat(willLive);
+            pixels = nextPixels;
+            const prevSelectionMap = new Set(selectedLivePixels.map(p => `${p.x},${p.y}`));
+
+            let newSelection = [];
+            for (let p of willLive) {
+                const cellKey = `${p.x},${p.y}`;
+                if (prevSelectionMap.has(cellKey) || cellsCreated.has(cellKey)) {
+                    newSelection.push({x: p.x, y: p.y});
+                }
+            }
+            selectedLivePixels = newSelection;
+
+            tickn++;
+            alertMsg.textContent = "Ticked selection";
+            alertOpac = 100; animateAlert();
+            draw();
+            return;
+        }
+    }
 });
 
 window.addEventListener("keyup", (e) => {
@@ -1807,7 +1978,7 @@ let showCanvasInterval = setInterval(function() {
             if (loadIdx && /^\d+$/.test(loadIdx)) {
                 var allPs = document.querySelectorAll('#lexicon-inner p');
                 var idx = parseInt(loadIdx, 10)+1; 
-                console.log(idx)
+                console.log(`LOADED ${idx} FROM LEX`)
                 if (loadIdx == 1) {
                 setTimeout(function() {
                         loadLexi("rand010", 1);
