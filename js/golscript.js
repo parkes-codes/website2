@@ -1,20 +1,18 @@
 console.clear();
-const FPS_BUFFER_SIZE = 120; // 2 seconds at 60 FPS
+const FPS_BUFFER_SIZE = 120; 
 let frameTimestamps = new Array(FPS_BUFFER_SIZE);
 let frameIndex = 0;
 let numSamples = 0;
 let fps = 0;
 let lastDisplayUpdate = 0;
-const DISPLAY_UPDATE_INTERVAL = 120; // ms, update FPS/UI at most ~8 times/sec
+const DISPLAY_UPDATE_INTERVAL = 120;
 
 function sampleFPS(now = performance.now()) {
     frameTimestamps[frameIndex] = now;
     frameIndex = (frameIndex + 1) % FPS_BUFFER_SIZE;
     if (numSamples < FPS_BUFFER_SIZE) numSamples++;
     
-    // Only update FPS/UI at DISPLAY_UPDATE_INTERVAL
     if (now - lastDisplayUpdate > DISPLAY_UPDATE_INTERVAL) {
-        // Find oldest timestamp still in the buffer within the last 1 sec
         let validFrames = 0;
         const oneSecAgo = now - 1000;
         for (let i = 0; i < numSamples; ++i) {
@@ -29,7 +27,6 @@ function sampleFPS(now = performance.now()) {
     requestAnimationFrame(sampleFPS);
 }
 
-// Start the update loop
 requestAnimationFrame(sampleFPS);
 
 const canvas = document.getElementById("gamecanvas");
@@ -75,6 +72,8 @@ let tickn = 0;
 let livePx = 0;
 let maxPx = 0;
 let minPx = 0;
+let maxReached = 1;
+let minReached = 1;
 let cmdPressed = false;
 let shiftpressed = false;
 let hiliteCorner1 = {x: -1, y: 1};
@@ -116,6 +115,9 @@ function resetState() {
     dragStart = null;
     selectionOriginal = [];
     pastePreviewActive = false;
+    getData();
+    maxPx = livePx; minPx = livePx;
+    minReached = 1; maxReached = 1;
 }
 
 let confOpac = 0;
@@ -123,6 +125,9 @@ function saveCurrent() {
     startingArray = pixels.map(p => ({x: p.x, y: p.y}));
     alertMsg.textContent = "Saved"
     alertOpac = 100; animateAlert();
+    getData();
+    maxPx = livePx; minPx = livePx;
+    minReached = 1; maxReached = 1;
 }
 
 let alertOpac = 100;
@@ -251,7 +256,7 @@ function loadLexi(id, index = null) {
 
             let match = header.match(/x\s*=\s*(\d+)\s*,\s*y\s*=\s*(\d+)/i);
             if (match) {
-                i++; // Move to RLE body
+                i++; 
             } else {
                 i = 0;
             }
@@ -328,6 +333,7 @@ function loadLexi(id, index = null) {
         getData();
         maxPx = livePx;
         minPx = livePx;
+        minReached = 1; maxReached = 1;
     }
     else {
         alertMsg.textContent = `Unknown pattern: ${id}`;
@@ -345,7 +351,7 @@ let camChangeY = 0;
 
 let prevStateHashes = new Set();
 let prevTickHashes = [];
-const MAX_STATE_HISTORY = 100; // Adjust for memory/perf balance
+const MAX_STATE_HISTORY = 100; 
 
 function hashPixArr(arr) {
     let hash = 5381;
@@ -387,8 +393,9 @@ function tick() {
 
     const N = pixels.length;
 
-    if (livePx > maxPx) maxPx = livePx;
-    if (livePx < minPx) minPx = livePx;
+    if (livePx > maxPx) {maxPx = livePx;  maxReached = tickn;}
+    if (livePx < minPx) {minPx = livePx; minReached = tickn;}
+
 
     const liveSet = new Set();
     for (let i = 0; i < N; ++i) {
@@ -749,7 +756,7 @@ function draw() {
     if ((keysPressed["s"] && !cmdPressed) || (keysPressed["arrowdown"] && !inputFocus)) camy -= (1 / Math.abs(Math.log(zoom + 1.5))) * 1;
 
     display.textContent = `cam: (${camx.toFixed(2)},${camy.toFixed(2)}) hover: (${hoverX},${hoverY}) zoom: ${zoom.toFixed(3)}`;
-    display2.textContent = `livepx: ${livePx} maxpx: ${maxPx} minpx: ${minPx} rendered: ${rendered} tick: ${tickn} fps: ${Math.ceil(fps)}`;
+    display2.textContent = `livepx: ${livePx} maxpx: ${maxPx}(${maxReached}) minpx: ${minPx}(${minReached}) rendered: ${rendered} tick: ${tickn} fps: ${Math.ceil(fps)}`;
 
     requestAnimationFrame(draw);
 }
@@ -1281,7 +1288,6 @@ tptInput.addEventListener("keydown", (e) => {
     }
 });
 
-// buttons
 let lastClickedLink = null;
 
 document.getElementById('lex').addEventListener('click', function() {
@@ -1293,7 +1299,6 @@ document.getElementById('lex').addEventListener('click', function() {
     if (lastClickedLink) {
         lastClickedLink.focus();
     } else {
-        // reset to the top of the lexicon and set tabindex to the first link
         document.getElementById("invBtn").focus();
     }
     
@@ -1309,7 +1314,6 @@ document.getElementById('controls').addEventListener('click', function() {
     document.body.style.overflow = 'hidden';
 });
 
-// menu backs
 document.getElementById('lexBack').addEventListener('click', function() {
     lexiconn.style.opacity = '0%';
     setTimeout(() => {lexiconn.style.display = 'none'},250);
@@ -1968,7 +1972,6 @@ setTimeout(function() {
 let showCanvasInterval = setInterval(function() {
     if ((typeof patterns === "object" && patterns !== null) || lexloaded == false) {
         canvas.style.display = "block";
-        // Always try to parse the URL parameters for a 'load' param
         let urlParams;
         try {
             urlParams = new URLSearchParams(window.location.search ? window.location.search.replace(/^\?/, '') : '');
@@ -1977,14 +1980,20 @@ let showCanvasInterval = setInterval(function() {
         }
 
         let loadParam = urlParams.get('load');
+        let apParam = urlParams.get('ap');
+        if (apParam === 'false') {
+            // paused by default
+        } else if (apParam === 'true') {
+            setTimeout(() => {
+                paused = false;
+            },300);
+        }
+
         if (!loadParam || !/^\d+$/.test(loadParam) || Number(loadParam) < 0) {
-            // fallback if no valid load param
             loadLexi('blank');
         } else {
-            // Now go through the lexicon and load the correct pattern
             var allPs = document.querySelectorAll('#lexicon-inner p');
             var idx = parseInt(loadParam, 10) + 1; 
-            // Special case for legacy mode
             if (loadParam == 1) {
                 setTimeout(function() { loadLexi("rand010", 1); }, 80);
             }
@@ -2018,6 +2027,8 @@ let showCanvasInterval = setInterval(function() {
     }
 }, 100);
 
+
+
 // Source - https://stackoverflow.com/a/31732310
 // Posted by qingu, modified by community. See post 'Timeline' for change history
 // Retrieved 2026-09-08, License - CC BY-SA 4.0
@@ -2026,6 +2037,10 @@ var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
                navigator.userAgent &&
                navigator.userAgent.indexOf('CriOS') == -1 &&
                navigator.userAgent.indexOf('FxiOS') == -1;
+
+
+// END
+
 
 // i love when apple messes everything up
 if (isSafari) {
