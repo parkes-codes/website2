@@ -1395,7 +1395,6 @@ window.addEventListener("keydown", (e) => {
         alertOpac = 100; animateAlert();
         markers = [];
         e.preventDefault();
-        draw();
         return;
     }
 
@@ -1620,7 +1619,6 @@ window.addEventListener("keydown", (e) => {
             tickn++;
             alertMsg.textContent = "Ticked selection";
             alertOpac = 100; animateAlert();
-            draw();
             return;
         }
     }
@@ -2048,14 +2046,14 @@ var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
 if (isSafari) {
     const buttonEls = document.querySelectorAll('.buttons:not(input)');
     for (let i = 0; i < buttonEls.length; i++) {
-        buttonEls[i].style.paddingTop = "-5px";
+        buttonEls[i].style.paddingTop = "3px";
         buttonEls[i].style.paddingBottom = "18px";
     }
-    importbtn.style.marginBottom = "2px";
-    lexBtn.style.marginBottom = "2px";
-    tptInput.style.marginBottom = "3px";
-    tpsInput.style.marginBottom = "3px";
-    tpsInput.style.marginRight = "-2px";
+    importbtn.style.marginBottom = "4px";
+    lexBtn.style.marginBottom = "4px";
+    tptInput.style.marginBottom = "8px";
+    tpsInput.style.marginBottom = "8px";
+    tpsInput.style.marginRight = "4px";
 }
 
 
