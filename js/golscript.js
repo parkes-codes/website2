@@ -175,6 +175,8 @@ function loadLexi(id, index = null) {
         return;
     }
 
+    setTimeout(() => {inputFocus = false;}, 500)
+
     if (loadCounter > 0) {
         const url = new URL(window.location.href);
         const params = new URLSearchParams(url.search);
