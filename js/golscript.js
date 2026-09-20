@@ -880,7 +880,7 @@ function exportRLE() {
     const export2 = document.getElementById("export2");
     if (export2) export2.blur();
     if (!pixels || pixels.length === 0) {
-        alertMsg.textContent = "Board is empty"
+        alertMsg.textContent = "Board is empty";
         alertOpac = 100; animateAlert();
         return;
     }
@@ -927,12 +927,24 @@ function exportRLE() {
     }
     let body = rleRows.join("$") + "!";
     let header = `x = ${width}, y = ${height}, rule = B3/S23\n`;
-    let rleString = header + body;
+
+    // Insert a newline after the "rule = B3/S23" and add newlines after every 250 chars in body
+    function insertNewlinesEveryNChars(str, n) {
+        let result = '';
+        for (let i = 0; i < str.length; i += n) {
+            result += str.substr(i, n);
+            if (i + n < str.length) result += '\n';
+        }
+        return result;
+    }
+
+    let formattedBody = insertNewlinesEveryNChars(body, 250);
+    let rleString = header + formattedBody;
 
     function copyToClipboard(txt) {
         if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(txt).then(function() {
-                alertMsg.textContent = "RLE Copied"
+                alertMsg.textContent = "RLE Copied";
                 alertOpac = 100; animateAlert();
             }, function() {
                 fallbackCopy(txt);
@@ -947,10 +959,10 @@ function exportRLE() {
             textarea.select();
             try {
                 document.execCommand("copy");
-                alertMsg.textContent = "RLE Copied"
+                alertMsg.textContent = "RLE Copied";
                 alertOpac = 100; animateAlert();
             } catch (e) {
-                alertMsg.textContent = "RLE Copy Failure"
+                alertMsg.textContent = "RLE Copy Failure";
                 alertOpac = 100; animateAlert();
             }
             document.body.removeChild(textarea);
@@ -1069,6 +1081,7 @@ function importRLE(string) {
     url.search = ``;
     window.history.replaceState({}, '', url);
     resetState();
+    zoomFit();
 }
 
 let activeMenuId = 1;
@@ -1389,6 +1402,12 @@ window.addEventListener("keydown", (e) => {
         if (selectedLivePixels.length > 0) {
             seleToMarkers();
         }
+    }
+
+    if (elower === "z") {
+        zoomFit();
+        alertMsg.textContent = "Centered Camera"
+        alertOpac = 100; animateAlert();
     }
 
     if (elower === "p" && cmdPressed && markers.length > 0) {
@@ -2073,3 +2092,6 @@ window.addEventListener('beforeunload', function (event) {
         event.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
     }
 });
+/js/golscript.js
+/js/golscript.js
+/js/golscript.js
