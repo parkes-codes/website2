@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Title Here</title>
+    <title>Untitled</title>
     <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
 </head>
 <style>
@@ -12,10 +12,8 @@
         overflow: hidden;
     }
       #gamecanvas {
-        border: #fff 5px solid;
-        border-radius: 10px;
-        width: calc(100vw - 11px);
-        height: calc(100vh - 11px);
+        width: calc(100vw);
+        height: calc(100vh);
         margin-left: -8px;
         margin-top: -8px;
         position: relative;
@@ -49,8 +47,14 @@ function updateMousePosition(e) {
 }
 canvas.addEventListener('mousemove', updateMousePosition);
 
+function fillRect(x,y,w,h) {ctx.fillRect(canvas.width/2+x,canvas.height/2-y,w,h)}
+function fillRectCentered(x,y,w,h) {ctx.fillRect(canvas.width/2 + x - w/2, canvas.height/2-y-h/2,w,h)}
+
 function draw() {
     ctx.clearRect(0,0,canvas.width,canvas.height)
+
+
+
     requestAnimationFrame(draw)
 }
 
