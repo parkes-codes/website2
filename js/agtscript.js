@@ -157,50 +157,105 @@ function max(inn,inn2) {return Math.max(inn,inn2)}
 function min(inn,inn2) {return Math.min(inn,inn2)}
 
 function join(x, y) {
-const intX = Math.abs(Math.trunc(x)).toString();
-const intY = Math.abs(Math.trunc(y)).toString();
-const joinedInt = parseInt(intX + intY);
+  const intX = Math.abs(Math.trunc(x)).toString();
+  const intY = Math.abs(Math.trunc(y)).toString();
+  const joinedInt = parseInt(intX + intY);
 
-const decX = Math.abs(x) - Math.abs(Math.trunc(x));
-const decY = Math.abs(y) - Math.abs(Math.trunc(y));
-const addedDec = decX + decY;
+  const decX = Math.abs(x) - Math.abs(Math.trunc(x));
+  const decY = Math.abs(y) - Math.abs(Math.trunc(y));
+  const addedDec = decX + decY;
 
-const sign = (Math.sign(x) * Math.sign(y) === -1) ? -1 : 1;
-return sign * (joinedInt + addedDec);
+  const sign = (Math.sign(x) * Math.sign(y) === -1) ? -1 : 1;
+  return sign * (joinedInt + addedDec);
 }
+
 function MAD(num1, num2) {
-const mean = (num1 + num2) / 2;
-const dev1 = Math.abs(num1 - mean);
-const dev2 = Math.abs(num2 - mean);
-return (dev1 + dev2) / 2;
+  const mean = (num1 + num2) / 2;
+  const dev1 = Math.abs(num1 - mean);
+  const dev2 = Math.abs(num2 - mean);
+  return (dev1 + dev2) / 2;
 }
 
 const med = (arr) => {
-if (arr.length === 0) return undefined;
-const sorted = [...arr].sort((a, b) => a - b);
-const mid = Math.floor(sorted.length / 2);
-return sorted.length % 2 !== 0
-? sorted[mid]
-: (sorted[mid - 1] + sorted[mid]) / 2;
+  if (arr.length === 0) return undefined;
+  const sorted = [...arr].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 !== 0
+  ? sorted[mid]
+  : (sorted[mid - 1] + sorted[mid]) / 2;
 };
 
 
 function madlist(data) {
-if (data.length === 0) return 0;
-
-// 1. Calculate the mean (average)
-const sum = data.reduce((acc, val) => acc + val, 0);
-const mean = sum / data.length;
-
-// 2. Calculate the sum of absolute deviations
-const absoluteDeviationsSum = data.reduce((acc, val) => {
-return acc + Math.abs(val - mean);
-}, 0);
-
-// 3. Return the average of those deviations
-return absoluteDeviationsSum / data.length;
+  if (data.length === 0) return 0;
+  const sum = data.reduce((acc, val) => acc + val, 0);
+  const mean = sum / data.length;
+  const absoluteDeviationsSum = data.reduce((acc, val) => {
+  return acc + Math.abs(val - mean);
+  }, 0);
+  return absoluteDeviationsSum / data.length;
 }
 
+
+let perlin_seed = 0; 
+function perlin(x, y = 0.0) {
+    let flow = perlin_seed || 0;
+
+    // Helper: fade function for smoothing
+    function fade(t) {
+        return t * t * t * (t * (t * 6 - 15) + 10);
+    }
+
+    // Helper: hash coordinates to pseudo-random gradient angle
+    function grad(ix, iy) {
+        // Use a hash function for more irregularity:
+        let s = Math.sin(ix * 374761393 + iy * 668265263 + flow * 1637);
+        let c = Math.cos(ix * 700001 + iy * 900001 + flow * 739);
+        // Hash further to break visible lines
+        let h = Math.abs(Math.sin(s * 12.9898 + c * 78.233) * 43758.5453) % 1;
+        let angle = h * Math.PI * 2;
+        return [Math.cos(angle), Math.sin(angle)];
+    }
+
+    // Multi-grid: combine several octave frequencies for fractal noise
+    let total = 0, amplitude = 1, maxValue = 0;
+    let frequency = 1.0;
+
+    for (let octave = 0; octave < 4; octave++) {
+        // Lattice
+        let fx = x * frequency, fy = y * frequency;
+        let x0 = Math.floor(fx), y0 = Math.floor(fy);
+        let x1 = x0 + 1, y1 = y0 + 1;
+        let sx = fx - x0, sy = fy - y0;
+
+        // Lattice gradients
+        let g00 = grad(x0, y0), g10 = grad(x1, y0), g01 = grad(x0, y1), g11 = grad(x1, y1);
+
+        // Offsets to lattice points
+        let dx0 = fx - x0, dy0 = fy - y0, dx1 = fx - x1, dy1 = fy - y1;
+
+        // Dot products for each corner
+        let n00 = g00[0] * dx0 + g00[1] * dy0;
+        let n10 = g10[0] * dx1 + g10[1] * dy0;
+        let n01 = g01[0] * dx0 + g01[1] * dy1;
+        let n11 = g11[0] * dx1 + g11[1] * dy1;
+
+        // Interpolations
+        let u = fade(sx), v = fade(sy);
+        let nx0 = n00 * (1 - u) + n10 * u;
+        let nx1 = n01 * (1 - u) + n11 * u;
+        let nxy = nx0 * (1 - v) + nx1 * v;
+
+        total += nxy * amplitude;
+
+        maxValue += amplitude;
+        amplitude *= 0.5;    // Reduce amplitude for each octave
+        frequency *= 2.0;    // Increase frequency for each octave
+    }
+
+    // Normalized to [-1,1]
+    return total / maxValue;
+}
 
 function computeGeometry(x, y) {
 const d2 = x * x + y * y;
@@ -1234,6 +1289,7 @@ return { graphX: X, graphY: Y };
 
       function graph147(){zoomSet(0,45); rotatePlane(t/-2); const temp=Y; rotatePlane(t/2); value=sin(div(sin(X),cos(Y))); rotatePlane(t/2+cos(temp)*(Z/50+0.2)); value-=(sin(X)*Y)%(X*sin(Y)); value= value*(Z/60+0.1)+t/2}
 
+      function graph148(){zoomSet(0,45); value=perlin(X, Y)*(Z/15+0.2)+t/2}
 const graphFunctions = {
 1: graph1,
 2: graph2,
@@ -1381,7 +1437,8 @@ const graphFunctions = {
 144: graph144,
 145: graph145,
 146: graph146,
-147: graph147
+147: graph147,
+148: graph148
 };
 
 const advancedList = [
@@ -1578,7 +1635,8 @@ const names = {
 144: "unfold",
 145: "unveil",
 146: "heartbeat",
-147: ""
+147: "",
+148: "perlin"
 };
 
 
