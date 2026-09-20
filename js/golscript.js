@@ -245,7 +245,7 @@ function loadLexi(id, index = null) {
         inputFocus = false;
         animateAlert();
         getData();
-        if (true) {maxPx = livePx;  maxReached = tickn; maxPeriod = -1;}
+        if (true) {maxPx = livePx;  maxReached = tickn; maxPeriod = -1;}b
         if (true) {minPx = livePx; minReached = tickn; minPeriod = -1;}
         zoomFit();
         return
@@ -2092,8 +2092,3 @@ window.addEventListener('beforeunload', function (event) {
         event.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
     }
 });
-/js/golscript.js
-/js/golscript.js
-/js/golscript.js
-/js/golscript.js
-js/golscript.js
