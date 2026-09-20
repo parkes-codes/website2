@@ -2095,3 +2095,5 @@ window.addEventListener('beforeunload', function (event) {
 /js/golscript.js
 /js/golscript.js
 /js/golscript.js
+/js/golscript.js
+js/golscript.js
