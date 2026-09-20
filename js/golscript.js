@@ -69,11 +69,15 @@ let clickedFirst = 0;
 let hoverX = 0;
 let hoverY = 0;
 let tickn = 0;
+
 let livePx = 0;
 let maxPx = 0;
 let minPx = 0;
-let maxReached = 1;
-let minReached = 1;
+let maxReached = 0;
+let minReached = 0;
+let minPeriod = 0;
+let maxPeriod = 0;
+
 let cmdPressed = false;
 let shiftpressed = false;
 let hiliteCorner1 = {x: -1, y: 1};
@@ -117,7 +121,9 @@ function resetState() {
     pastePreviewActive = false;
     getData();
     maxPx = livePx; minPx = livePx;
-    minReached = 1; maxReached = 1;
+    minReached = 0; maxReached = 0;
+    minPeriod = -1; maxPeriod = -1;
+
 }
 
 let confOpac = 0;
@@ -127,7 +133,9 @@ function saveCurrent() {
     alertOpac = 100; animateAlert();
     getData();
     maxPx = livePx; minPx = livePx;
-    minReached = 1; maxReached = 1;
+    minReached = 0; maxReached = 0;
+    minPeriod = -1; maxPeriod = -1;
+
 }
 
 let alertOpac = 100;
@@ -175,7 +183,7 @@ function loadLexi(id, index = null) {
         return;
     }
 
-    setTimeout(() => {inputFocus = false;}, 500)
+    setTimeout(() => {inputFocus = false;}, 300)
 
     if (loadCounter > 0) {
         const url = new URL(window.location.href);
@@ -237,6 +245,8 @@ function loadLexi(id, index = null) {
         inputFocus = false;
         animateAlert();
         getData();
+        if (true) {maxPx = livePx;  maxReached = tickn; maxPeriod = -1;}
+        if (true) {minPx = livePx; minReached = tickn; minPeriod = -1;}
         zoomFit();
         return
     }
@@ -335,7 +345,9 @@ function loadLexi(id, index = null) {
         getData();
         maxPx = livePx;
         minPx = livePx;
-        minReached = 1; maxReached = 1;
+        minReached = 0; maxReached = 0;
+        minPeriod = -1; maxPeriod = -1;
+
     }
     else {
         alertMsg.textContent = `Unknown pattern: ${id}`;
@@ -394,10 +406,6 @@ function tick() {
     if (draggingSelection) return;
 
     const N = pixels.length;
-
-    if (livePx > maxPx) {maxPx = livePx;  maxReached = tickn;}
-    if (livePx < minPx) {minPx = livePx; minReached = tickn;}
-
 
     const liveSet = new Set();
     for (let i = 0; i < N; ++i) {
@@ -479,9 +487,10 @@ function tick() {
 
     if (births.length > 0 || survivors.length !== pixels.length) tickn++;
     pixels = newPixels;
-}
 
-function drawPixelGL(x, y, color) {
+    getData();
+    if (livePx > maxPx) {maxPx = livePx; maxPeriod = tickn - maxReached; maxReached = tickn;}
+    if (livePx < minPx) {minPx = livePx; minPeriod = tickn - minReached; minReached = tickn;}
 
 }
 
@@ -489,6 +498,7 @@ function draw() {
 
     rendered = 0;
     getData();
+
 
     if (promptMenu.style.display === 'block') {
         inputFocus = true;
@@ -757,8 +767,8 @@ function draw() {
     if (keysPressed["w"] || (keysPressed["arrowup"] && !inputFocus)) camy += (1 / Math.abs(Math.log(zoom + 1.5))) * 1;
     if ((keysPressed["s"] && !cmdPressed) || (keysPressed["arrowdown"] && !inputFocus)) camy -= (1 / Math.abs(Math.log(zoom + 1.5))) * 1;
 
-    display.textContent = `cam: (${camx.toFixed(2)},${camy.toFixed(2)}) hover: (${hoverX},${hoverY}) zoom: ${zoom.toFixed(3)}`;
-    display2.textContent = `livepx: ${livePx} maxpx: ${maxPx}(${maxReached}) minpx: ${minPx}(${minReached}) rendered: ${rendered} tick: ${tickn} fps: ${Math.ceil(fps)}`;
+    display.textContent = `cam: (${camx.toFixed(2)},${camy.toFixed(2)}) hover: (${hoverX},${hoverY}) zoom: ${zoom.toFixed(3)} ${inputFocus}`;
+    display2.textContent = `livepx: ${livePx} maxpx: ${maxPx}(${maxReached}${maxPeriod == -1 ? "" : `,Δ${maxPeriod}`}) minpx: ${minPx}(${minReached}${minPeriod == -1 ? "" : `,Δ${minPeriod}`}) rendered: ${rendered} tick: ${tickn} fps: ${Math.ceil(fps)}`;
 
     requestAnimationFrame(draw);
 }
@@ -1901,7 +1911,7 @@ for (let i = 0; i < links.length; i++) {
                     lastClickedLink = thislink;
                     loadLexi(patternName, i+1);
                     if (e.key == " ") {
-                        paused = false; setTimeout(() => {resetState()},16)
+                        paused = false; // setTimeout(() => {resetState()}) (broke due to the randoms not auto saving anymore)
                     };
                     e.preventDefault();
                 }
