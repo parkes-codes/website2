@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Title Here</title>
+    <title>Stopwatch</title>
     <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
 </head>
 <style>
@@ -12,10 +12,9 @@
         overflow: hidden;
     }
       #gamecanvas {
-        border: #fff 5px solid;
         border-radius: 10px;
-        width: calc(100vw - 11px);
-        height: calc(100vh - 11px);
+        width: calc(100vw);
+        height: calc(100vh);
         margin-left: -8px;
         margin-top: -8px;
         position: relative;
@@ -39,6 +38,14 @@ let fps = 60;
 let fpsHist = [];
 let fpsAv = 0;
 
+let pauseHover = false;
+let resetHover = false;
+let speedHover = false;
+let halfHover = false;
+let paused = true;
+let time = 0;
+let speedMult = 1;
+
 let mx = 99999, my = 99999, md = false;
 let cx = 0, cy = 0;
 
@@ -50,49 +57,10 @@ function updateMousePosition(e) {
 }
 canvas.addEventListener('mousemove', updateMousePosition);
 
-function drawPauseBtn(color) {
+function drawBtn({ color, xpos = 0, length = 30, height = 40, ypos = -150, label = "", font = "40px Arial", vOffset = 0, xOffset = 0}) {
     ctx.lineCap = "round";
     ctx.save();
     ctx.lineWidth = 10;
-    let length = 30
-    let height = 40;
-    let ypos = -150;
-    ctx.strokeStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(cx-length,cy - ypos);
-    ctx.lineTo(cx+length,cy - ypos);
-    ctx.stroke();
-    ctx.moveTo(cx+length,cy - ypos);
-    ctx.lineTo(cx+length,cy-height - ypos);
-    ctx.stroke();
-    ctx.moveTo(cx+length,cy-height - ypos);
-    ctx.lineTo(cx-length,cy-height - ypos);
-    ctx.stroke();
-    ctx.moveTo(cx-length,cy-height - ypos);
-    ctx.lineTo(cx-length,cy - ypos);
-    ctx.stroke();
-    ctx.restore();
-
-    ctx.fillStyle=color;
-    ctx.fillRect(cx-length,cy-height - ypos,length*2,height);
-
-    ctx.font = "35px Arial";
-    ctx.textAlign = "center";
-    ctx.fillStyle="#333";
-    const temp  = paused ? 6 : 8
-    ctx.fillText(`${paused ? "▶︎" : "II"}`,cx,cy-temp - ypos);
-
-    ctx.restore();
-}
-
-function drawResetBtn(color) {
-    let xpos = 100;
-    ctx.lineCap = "round";
-    ctx.save();
-    ctx.lineWidth = 10;
-    let length = 30;
-    let height = 40;
-    let ypos = -150;
     ctx.strokeStyle = color;
     ctx.beginPath();
     ctx.moveTo(cx + xpos - length, cy - ypos);
@@ -109,23 +77,77 @@ function drawResetBtn(color) {
     ctx.stroke();
     ctx.restore();
 
-    ctx.fillStyle=color;
+    ctx.fillStyle = color;
     ctx.fillRect(cx + xpos - length, cy - height - ypos, length * 2, height);
 
-    ctx.font = "40px Arial";
+    ctx.font = font;
     ctx.textAlign = "center";
-    ctx.fillStyle="#333";
-    const temp  = 10
-    ctx.fillText("↺", cx + xpos, cy - temp - ypos);
-
+    ctx.fillStyle = "#333";
+    ctx.fillText(label, cx + xpos+xOffset, cy + vOffset - ypos);
     ctx.restore();
+    
 }
 
+function drawPauseBtn(color) {
+    const temp = paused ? 6 : 8;
+    const temp2 = paused ? 3 : 0;
+    drawBtn({
+        color,
+        xpos: 50,
+        length: 30,
+        height: 40,
+        ypos: -150,
+        label: `${paused ? "▶︎" : "II"}`,
+        font: "35px Arial",
+        vOffset: -temp,
+        xOffset: temp2
+    });
+}
+
+function drawResetBtn(color) {
+    drawBtn({
+        color,
+        xpos: 150,
+        length: 30,
+        height: 40,
+        ypos: -150,
+        label: "↺",
+        font: "40px Arial",
+        vOffset: -10
+    });
+}
+
+function drawSpeedBtn(color) {
+    drawBtn({
+        color,
+        xpos: -50,
+        length: 30,
+        height: 40,
+        ypos: -150,
+        label: "2x",
+        font: "40px Arial",
+        vOffset: -6
+    });
+}
+
+function drawHalfBtn(color) {
+    drawBtn({
+        color,
+        xpos: -150,
+        length: 30,
+        height: 40,
+        ypos: -150,
+        label: ".5x",
+        font: "40px Arial",
+        vOffset: -6
+    });
+}
 
 function formatime(seconds) {
     if (typeof seconds !== "number" || isNaN(seconds)) return "0.000";
 
-    let hrs = Math.floor(seconds / 3600);
+    let days = Math.floor(seconds / 86400);
+    let hrs = Math.floor((seconds % 86400) / 3600);
     let mins = Math.floor((seconds % 3600) / 60);
     let secs = Math.floor(seconds % 60);
     let millis = Math.floor((seconds % 1) * 1000);
@@ -133,73 +155,117 @@ function formatime(seconds) {
     const twoDigits = n => n.toFixed(0).padStart(2, "0");
     const threeDigits = n => n.toFixed(0).padStart(3, "0");
 
-    if (hrs > 0) {
-        return `${hrs}:${twoDigits(mins)}:${twoDigits(secs)}.${threeDigits(millis)}`;
+    let output = "";
+
+    if (days > 0) {
+        let hrsStr = hrs.toString();
+        if (hrs < 10) {
+            hrsStr = hrsStr.padStart(2, "0");
+        }
+        output += `${days}:`;
+        output += `${hrsStr}:`;
+        output += `${twoDigits(mins)}:${twoDigits(secs)}.${threeDigits(millis)}`;
+    } else if (hrs > 0) {
+        output += `${hrs}:${twoDigits(mins)}:${twoDigits(secs)}.${threeDigits(millis)}`;
     } else if (mins > 0) {
-        return `${mins}:${twoDigits(secs)}.${threeDigits(millis)}`;
+        output += `${mins}:${twoDigits(secs)}.${threeDigits(millis)}`;
     } else {
-        return `${secs}.${threeDigits(millis)}`;
+        output += `${secs}.${threeDigits(millis)}`;
     }
+
+    return output;
 }
 
+function drawBand(div,rad,i) {
+    ctx.lineCap = "butt";
+    ctx.strokeStyle = `hsl(${(i-1)*(360/20)},50%,50%)`;
+    ctx.beginPath()
+    const timeFix = time < 0.1 ? 0.0001*div : time
+    ctx.arc(cx,cy-100,rad,Math.PI/-2,(timeFix*Math.PI*2)/div%Math.PI*2-Math.PI/2);
+    ctx.stroke();
+}
 
-let pauseHover = false;
-let resetHover = false;
-let paused = false;
-let time = 0;
+function drawBar(div,i,y,ireal) {
+    if (ireal > 18) return;
+    ctx.strokeStyle = `hsl(${(ireal)*(360/20)},50%,50%)`;
+    ctx.fillStyle = ctx.strokeStyle;
+    const timeFix = time < 0.1 ? 0.0001*div : time
+    ctx.fillRect(cx-200+i*(2.1),cy+y,22,(timeFix/div%1)*-100-5)
+}
 
 function draw() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     if (!paused) {
-        time+=1/fps;
+        time+=speedMult/fps;
     }
 
      cx = canvas.width/2;
-     cy = canvas.height/2;
+     cy = 500;
 
      let btnColor = "";
-     if (Math.abs(mx)<35 && my<46-150 && my>-6-150) {
+
+     if (Math.abs(mx - 50) < 35 && my < -142 && my > -195) {
         pauseHover = true;
      } else {
         pauseHover = false;
      }
-     if ((mx)<135 && mx > 66 && my<46-150 && my>-6-150) {
+
+     if ((mx) < 185 && mx > 116 && my < -142 && my > -195) {
         resetHover = true;
      } else {
         resetHover = false;
      }
+
+     if ((mx) < -15 && mx > -84 && my < -142 && my > -195) {
+        speedHover = true;
+     } else {
+        speedHover = false;
+     }
+
+     if ((mx) < -115 && mx > -184 && my < -142 && my > -195) {
+        halfHover = true;
+     } else {
+        halfHover = false;
+     }
+
+     
+
 
 
      btnColor = pauseHover ? md ? "#999" : "#bbb" : "#eee" // peak coding
      drawPauseBtn(btnColor);
      btnColor = resetHover ? md ? "#999" : "#bbb" : "#eee" // peak coding
      drawResetBtn(btnColor)
+     btnColor = speedHover ? md ? "#999" : "#bbb" : "#eee" // peak coding
+     drawSpeedBtn(btnColor)
+     btnColor = halfHover ? md ? "#999" : "#bbb" : "#eee" // peak coding
+     drawHalfBtn(btnColor)
 
      ctx.fillStyle = "#fff";
      ctx.font = "40px monospace";
      ctx.textAlign = "center";
-     ctx.fillText(`${formatime(time)}`,cx,cy);
+     ctx.fillText(`${formatime(time)}`,cx,cy+200);
      ctx.restore();
 
-     ctx.strokeStyle = "#3689d78a";
-     ctx.lineWidth = 30
+     ctx.fillStyle = "#fff"
+     ctx.fillRect(cx-205,cy+105-405,410,-115);
+     ctx.fillStyle = "#000"
+     ctx.fillRect(cx-200,cy+100-405,400,-105);
+
      ctx.beginPath()
-     ctx.arc(cx,cy,300,0,Math.PI*2);
+     ctx.lineWidth = 3;
+     ctx.strokeStyle = "#fff";
+     ctx.arc(cx,cy-100,197,Math.PI/-2,Math.PI*2);
      ctx.stroke();
-     ctx.strokeStyle = "#ffffff50";
-     ctx.beginPath()
-     ctx.arc(cx,cy,300,Math.PI/-2,Math.PI/-2+time%1*Math.PI*2);
-     ctx.stroke();
-     ctx.beginPath()
-     ctx.arc(cx,cy,300,Math.PI/-2,Math.PI/-2+time/15%1*Math.PI*2);
-     ctx.stroke();
-     ctx.beginPath()
-     ctx.arc(cx,cy,300,Math.PI/-2,Math.PI/-2+time/60%1*Math.PI*2);
-     ctx.stroke();
-     ctx.beginPath()
-     ctx.arc(cx,cy,300,Math.PI/-2,Math.PI/-2+time/3600%1*Math.PI*2);
-     ctx.stroke();
+
+     ctx.lineWidth = 10;
+     for(let i = 0; i<20; i++) {
+        drawBand(Math.pow(2,i),i*10,i)
+        drawBar(Math.pow(2,i),i*10,-305,i)
+     };
+
+
 
     requestAnimationFrame(draw);
 }
@@ -207,8 +273,20 @@ function draw() {
 draw();
 
 function resizeCanvas() {
-  canvas.width = (window.innerWidth) - 25;
-  canvas.height = (window.innerHeight) - 25;
+    const dpr = window.devicePixelRatio*0.5 || 1;
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+
+    cx = canvas.width / 2;
+    cy = canvas.height / 2;
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
 resizeCanvas();
@@ -225,16 +303,25 @@ window.addEventListener("keyup", (e) => {
 window.addEventListener("pointerdown", () =>
 {
     md = true;
+})
+
+window.addEventListener("pointerup", () => {
+    md = false;
     if (pauseHover) {
         paused = !paused;
     }
     if (resetHover) {
         paused = true;
+        speedMult = 1;
         time = 0;
     }
+    if (speedHover) {
+        speedMult= Math.min(speedMult*2,Math.pow(10,6));
+    }
+    if (halfHover) {
+        speedMult = Math.max(speedMult/2,Math.pow(10,-2));
+    }
 })
-
-window.addEventListener("pointerup", () => {md = false})
 
 let lastTimestamp;
 function sampleFPS() {
