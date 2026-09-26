@@ -191,16 +191,13 @@
         margin: -5px 0px;
         font-size: 25px;
     }
-    #camxin, #camyin {
+    #acs {
         width: 100px;
         height: 10px;
         z-index: 5;
         transform: scale(0.5);
         margin-left: -20px;
         accent-color: #aff;
-    }
-    #camyin {
-        margin-left: -40px;
     }
     #promptMenu {
         position: fixed;
@@ -257,15 +254,18 @@
  </script>
  <p id="display"></p>
  <p id="display2"></p>
- <div id="btnrow3">
-    <span style="z-index: 999; font-size: 10px; margin-bottom: 3px; text-shadow: 0 0 3px #000; z-index: 2; margin-left: -5px; white-space: nowrap;">auto camera:</span>
-    <input type="range" min="-10" max="10" step="0.05" value="0" id="camxin" tabindex="2">
-    <input type="range" min="-10" max="10" step="0.05" value="0" id="camyin" tabindex="3">
+ <div id="btnrow3" style="display: flex; align-items: center; gap: 4px;">
+    <span style="font-size: 10px; margin-bottom: 3px; text-shadow: 0 0 3px #000; z-index: 2; margin-left: -5px; white-space: nowrap;">auto camera:</span>
+    <input type="range" min="0" max="3" step="1" value="0" id="acs" tabindex="2">
+    <span style="font-size: 10px; margin-bottom: 3px; text-shadow: 0 0 3px #000; z-index: 2; margin-left: -20px; white-space: nowrap;" id="camInfo">none |</span>
+    <input type="checkbox" style="position: relative; width: 10px; height: 10px; z-index: 2; align-self: flex-start; margin-bottom: 0; margin-top:2px; margin-left: 0px;" id="offBox">
+    <span style="font-size: 10px; margin-bottom: 3px; text-shadow: 0 0 3px #000; z-index: 2; margin-left: -3px; white-space: nowrap;" id="offscreenDisp">smooth</span>
 </div>
 
 <div id="alerttext"></div>
-    <button id="import" class="buttons" tabindex="8">Import</button>
-    <button id="export" class="buttons" onclick="exportlist()" tabindex="11">Export</button>
+<button id="import" class="buttons" tabindex="8">Import</button>
+<button id="export" class="buttons" onclick="exportlist()" tabindex="11">Export</button>
+<span id="watermark" style="left: 5px; top:5px; position: fixed; z-index: 3; font-size: 10px; opacity: 50%;">Written by <a target = "_blank" href="https://parkes-codes.github.io" style="color:#cde">parkes-codes</a> © 2026</span>
 <div id="btnrow">
     <button id="import2" class="buttons" tabindex="10">Import RLE</button>
     <button id="export2" class="buttons" onclick="exportRLE()" tabindex="9">Export RLE</button>
