@@ -40,8 +40,6 @@ const alertMsg = document.getElementById("alerttext");
 const exportbtn = document.getElementById("export");
 const tpsInput = document.getElementById("tpsInput");
 const tptInput = document.getElementById("tptInput");
-const camxin = document.getElementById("camxin");
-const camyin = document.getElementById("camyin");
 const promptMenu = document.getElementById("promptMenu");
 const promptInput = document.getElementById("promptInput");
 const promptBtn = document.getElementById("promptBtn");
@@ -49,6 +47,10 @@ const promptName = document.getElementById("promptName");
 const promptDesc = document.getElementById("promptDesc");
 const lexBtn = document.getElementById("lex");
 const lexiconn = document.getElementById("lexicon");
+const autoCamSlider = document.getElementById("acs");
+const camInfo = document.getElementById("camInfo");
+const offDisp = document.getElementById("offscreenDisp");
+const offBox = document.getElementById("offBox")
 
 let lexloaded = true;
 let patterns = ""
@@ -77,6 +79,8 @@ let maxReached = 0;
 let minReached = 0;
 let minPeriod = 0;
 let maxPeriod = 0;
+let autoCamMode = 0;
+let offscreenFit = false;
 
 let cmdPressed = false;
 let shiftpressed = false;
@@ -147,8 +151,8 @@ function animateAlert() {
     }
 }
 
-function zoomFit() {
-    if (pixels.length > 0) {
+function zoomFit(zoomType = 3, offscreen = false) {
+    if (pixels.length > 0 && ((rendered !== livePx) || !offscreen)) {
         let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
         for (let p of pixels) {
             if (p.x < minX) minX = p.x;
@@ -168,12 +172,25 @@ function zoomFit() {
 
         let zoomX = (vpw * 1) / w;
         let zoomY = (vph * 1) / h;
-        let fitZoom = Math.abs(Math.min(zoomX, zoomY))*0.9;
+        let fitZoom = Math.abs(Math.min(zoomX, zoomY)) * (0.9 - (offscreen? 0.2 : 0));
 
-        zoom = fitZoom
+        let newCamX = Math.round((minX + maxX) / 2);
+        let newCamY = Math.round((minY + maxY) / 2);
 
-        camx = Math.round((minX + maxX) / 2);
-        camy = Math.round((minY + maxY) / 2);
+        if (zoomType === 1) {
+            camx = newCamX;
+            camy = newCamY;
+        } else if (zoomType === 2) {
+            if (fitZoom < zoom) {
+                zoom = fitZoom;
+            }
+            camx = newCamX;
+            camy = newCamY;
+        } else if (zoomType === 3) {
+            zoom = fitZoom;
+            camx = newCamX;
+            camy = newCamY;
+        }
     }
 }
 
@@ -247,7 +264,7 @@ function loadLexi(id, index = null) {
         getData();
         if (true) {maxPx = livePx;  maxReached = tickn; maxPeriod = -1;}b
         if (true) {minPx = livePx; minReached = tickn; minPeriod = -1;}
-        zoomFit();
+        zoomFit(3);
         return
     }
 
@@ -333,7 +350,7 @@ function loadLexi(id, index = null) {
         setTimeout(() => {lexiconn.style.display = 'none'},250);
         document.body.style.overflow = '';
         camx = 0; camy = 0;
-        zoomFit();
+        zoomFit(3);
         alertMsg.textContent = `Loaded ${id}`;
         if (index !== null) {
             updateURLWithLoad(index);
@@ -359,9 +376,6 @@ function isLive(pixel) {
     return pixels.some(p => p.x === pixel.x && p.y === pixel.y);
 }
 
-
-let camChangeX = 0;
-let camChangeY = 0;
 
 let prevStateHashes = new Set();
 let prevTickHashes = [];
@@ -502,11 +516,6 @@ function draw() {
 
     if (promptMenu.style.display === 'block') {
         inputFocus = true;
-    }
-
-    if (!paused) {
-        camx += (Number(camxin.value) * tps) * tpt * 0.005
-        camy += (Number(camyin.value) * tps) * tpt * 0.005
     }
 
     {
@@ -767,9 +776,10 @@ function draw() {
     if (keysPressed["w"] || (keysPressed["arrowup"] && !inputFocus)) camy += (1 / Math.abs(Math.log(zoom + 1.5))) * 1;
     if ((keysPressed["s"] && !cmdPressed) || (keysPressed["arrowdown"] && !inputFocus)) camy -= (1 / Math.abs(Math.log(zoom + 1.5))) * 1;
 
-    display.textContent = `cam: (${camx.toFixed(2)},${camy.toFixed(2)}) hover: (${hoverX},${hoverY}) zoom: ${zoom.toFixed(3)} ${inputFocus}`;
+    display.textContent = `cam: (${camx.toFixed(2)},${camy.toFixed(2)}) hover: (${hoverX},${hoverY}) zoom: ${zoom.toFixed(3)}`;
     display2.textContent = `livepx: ${livePx} maxpx: ${maxPx}(${maxReached}${maxPeriod == -1 ? "" : `,Δ${maxPeriod}`}) minpx: ${minPx}(${minReached}${minPeriod == -1 ? "" : `,Δ${minPeriod}`}) rendered: ${rendered} tick: ${tickn} fps: ${Math.ceil(fps)}`;
 
+    if (autoCamMode > 0 && autoCamMode < 4) {zoomFit(autoCamMode, offscreenFit)}
     requestAnimationFrame(draw);
 }
 
@@ -827,10 +837,6 @@ function handleWheelZoom(e) {
     }
 
     const isTrackpad = Math.abs(wheelDelta) < 8;
-
-    let beforeX = ((mx - canvas.width / 2) / zoom) + camx;
-    let beforeY = (-(my - canvas.height / 2) / zoom) + camy;
-
     let op = (wheelDelta < 0) ? 1 : -1;
     
     let steps = 10;
@@ -1081,7 +1087,7 @@ function importRLE(string) {
     url.search = ``;
     window.history.replaceState({}, '', url);
     resetState();
-    zoomFit();
+    zoomFit(3);
 }
 
 let activeMenuId = 1;
@@ -1240,12 +1246,6 @@ tptInput.addEventListener("focus", () => {
 tpsInput.addEventListener("focus", () => {
     inputFocus = true;
 });
-camxin.addEventListener("focus", () => {
-    inputFocus = true;
-});
-camyin.addEventListener("focus", () => {
-    inputFocus = true;
-});
 promptMenu.addEventListener("focus", () => {
     inputFocus = true;
 })
@@ -1258,12 +1258,6 @@ tptInput.addEventListener("blur", () => {
     inputFocus = false;
 });
 tpsInput.addEventListener("blur", () => {
-    inputFocus = false;
-});
-camxin.addEventListener("blur", () => {
-    inputFocus = false;
-});
-camyin.addEventListener("blur", () => {
     inputFocus = false;
 });
 promptMenu.addEventListener("blur", () => {
@@ -1281,25 +1275,6 @@ tpsInput.addEventListener("keydown", (e) => {
     }
 });
 
-camxin.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        camxin.blur();
-        inputFocus = false;
-    } else if (e.key === "/" || e.key === "\\") {
-        camxin.value = 0;
-        camxin.blur();
-    }
-});
-
-camyin.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        camyin.blur();
-        inputFocus = false;
-    } else if (e.key === "/" || e.key === "\\") {
-        camyin.value = 0;
-        camyin.blur();
-    }
-});
 
 tptInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -1313,6 +1288,29 @@ tptInput.addEventListener("keydown", (e) => {
     }
 });
 
+autoCamSlider.addEventListener("input", (e) => {
+    autoCamMode = Number(e.target.value);
+    switch (autoCamMode) {
+        case 1:
+            camInfo.textContent = "cam only |";
+            break;
+        case 2:
+            camInfo.textContent = "cam+zoomout |";
+            break;
+        case 3:
+            camInfo.textContent = "cam+zoomall |";
+            break;
+        default:
+            camInfo.textContent = "none |";
+            break;
+    }
+});
+
+offBox.addEventListener("click", (e) => {
+    offBox.blur();
+    offscreenFit = !offscreenFit;
+    offDisp.textContent = offscreenFit ? "delayed" : "smooth"
+})
 let lastClickedLink = null;
 
 document.getElementById('lex').addEventListener('click', function() {
@@ -1405,7 +1403,7 @@ window.addEventListener("keydown", (e) => {
     }
 
     if (elower === "z") {
-        zoomFit();
+        zoomFit(3);
         alertMsg.textContent = "Centered Camera"
         alertOpac = 100; animateAlert();
     }
@@ -1544,7 +1542,6 @@ window.addEventListener("keydown", (e) => {
             loadLexi("blank");
             camx = 0; camy = 0;
             zoom = 10;
-            camxin.value = 0; camyin.value = 0;
             alertMsg.textContent = "Reset board";
             alertOpac = 100; animateAlert();
             const url = new URL(window.location.href);
