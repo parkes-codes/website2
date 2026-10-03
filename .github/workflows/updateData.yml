@@ -8,8 +8,8 @@ on:
     branches:
       - main
       - master
-  workflow_dispatch:  
-  
+  workflow_dispatch:
+
 jobs:
   update-date:
     runs-on: ubuntu-latest
@@ -18,10 +18,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Update JS Variable
+      - name: Update date
         run: |
-          DATE=$(date +"%Y-%m-%d")
-          sed -i "s/const updated = \".*\";/const updated = \"${DATE}\";/" js/config.js
+          DATE=$(date +%Y-%m-%d)
+          sed -i "s/lastUpdated: \"[^\"]*\"/lastUpdated: \"$DATE\"/" js/config.js
 
       - name: Commit and push
         run: |
