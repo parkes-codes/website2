@@ -1,0 +1,3 @@
+export const someData = {
+    lastUpdated: "2026-10-3"
+}

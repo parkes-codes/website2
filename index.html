@@ -39,7 +39,7 @@
         box-shadow: none;
         -webkit-box-shadow: none;
       }
-      .button {
+      .project-button {
         background: #000000;
         border: #ffffff 2px solid;
         color: #ffffff;
@@ -66,7 +66,7 @@
         z-index: 5;
         position: relative;
       }
-      .text {
+      .site-text {
         color: hsl(0, 100%, 100%);
         z-index:  5;
         position: relative;
@@ -93,13 +93,13 @@
         box-shadow: 0 4px 26px #113388cc, 0 0 0 5px #a0a0ff22;
         z-index: 2;
       }
-      .button:hover,
-      .button:focus-visible {
+      .project-button:hover,
+      .project-button:focus-visible {
         transform: scale(1.04);
         box-shadow: 0 4px 26px #113388cc, 0 0 0 5px #a0a0ff22;
         z-index: 5;
       }
-      #seeProjectsBtn {
+      #projects-toggle-btn {
         /* put default button styles to ensure same style on any device */
         appearance: auto;
         text-rendering: auto;
@@ -144,16 +144,16 @@
         transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
         transform: scale(1);
       }
-      #seeProjectsBtn:hover {
+      #projects-toggle-btn:hover {
         transform: scale(1.1);
       }
-      #seeProjectsBtn.cooldown {
+      #projects-toggle-btn.cooldown {
         opacity: 0.6;
         pointer-events: none;
         cursor: wait;
         filter: grayscale(0.4);
       }
-      #column {
+      #project-list-section {
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -167,11 +167,11 @@
         transition: opacity 0.55s cubic-bezier(0.26,1.2,0.49,1);
         will-change: opacity;
       }
-      #column.visible {
+      #project-list-section.visible {
         opacity: 1;
         pointer-events: auto;
       }
-      .button-list {
+      .project-list-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 8px;
@@ -180,69 +180,129 @@
         justify-items: stretch;
         align-items: stretch;
       }
-      .linkbutton, .button-list > button {
+      .project-link, .project-list-grid > button {
         display: flex;
         box-sizing: border-box;
         min-width: 0 !important;
         max-width: 100%;
       }
-      .linkbutton > .button, .button-list > button.button {
+      .project-link > .project-button, .project-list-grid > button.project-button {
         width: 100%;
       }
       @media (max-width: 1200px) {
-        .button-list {
+        .project-list-grid {
           grid-template-columns: repeat(4, 1fr);
         }
       }
       @media (max-width: 900px) {
-        #column {
+        #project-list-section {
           max-width: 100vw;
           padding: 0 3vw;
         }
-        .button-list {
+        .project-list-grid {
           grid-template-columns: repeat(3, 1fr);
         }
       }
       @media (max-width: 720px) {
-        #column {
+        #project-list-section {
           max-width: 100vw;
           padding: 0 2vw;
         }
-        .button-list {
+        .project-list-grid {
           grid-template-columns: repeat(2, 1fr);
           gap: 8px;
         }
       }
       @media (max-width: 450px) {
-        .button-list {
+        .project-list-grid {
           grid-template-columns: repeat(1, 1fr);
         }
       }
 
-      #backgroundOverlay {
+      #overlay-background {
         width: 100%;
         height: 100%;
         position: fixed;
         left: 0;
         top: 0;
         background-color: rgba(7, 9, 32, 0.9);
-        z-index: 0; 
-        pointer-events: none; 
+        z-index: 0;
+        pointer-events: none;
       }
-      #thingy, #thingy2 {
+
+      .video-section-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        position: relative;
+        transform: translateZ(0);
+        flex-direction: column;
+        transition: height 0.25s;
+      }
+
+      .youtube-iframe-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+        transition: height 0.5s cubic-bezier(.53, 1.7, .49, 1), opacity 0.4s;
+        height: auto;
+        opacity: 1;
+        overflow: hidden;
+      }
+      .youtube-iframe-wrapper iframe {
+        width: 100%;
+        max-width: 420px;
+        min-width: 180px;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        border: none;
+        border-radius: 18px;
+        background: #101520;
+        transition: transform 0.25s, height 0.5s cubic-bezier(.53,1.7,.49,1), opacity 0.35s;
+        min-height: 120px;
+        height: 236px;
+        opacity: 1;
+      }
+      .youtube-iframe-wrapper iframe:hover {
+        transform: scale(1.05);
+      }
+
+      .project-list-grid .project-link {
+        opacity: 0;
+        transition:
+          opacity 0.58s cubic-bezier(0.47,1.2,0.32,1),
+          transform 1s cubic-bezier(0.41,1.6,0.32,1),
+          height 0.25s;
+      }
+      .project-list-grid .project-link.visible {
+        opacity: 1;
+      }
+ 
+
+      .section-row {
+        display: flex;
+        flex-direction: row;
+      }
+ 
+      #about-section, #about-section-alt {
         color: #f0f0f0; 
         font-size: 15px;
         text-align:center;
         position: relative;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       }
-      #thingy {
+      #about-section {
         background: #191b1b;
         padding: 8px 8px 8px 8px;
         border: #9eaeae 2px solid;
         line-height: 0.7;
         text-align: left;
         font-size: 13px;
-        width: 100vw;
+        width: 100vw !important;
         max-width: 300px;
         min-width: 230px;
         border-radius: 6px;
@@ -251,21 +311,22 @@
         /* margin-top: -10px; */
         display: block;
       }
- 
-      #linksRow {
+      #profile-links-row {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         padding: 0px 15px 20px 15px;
-        width: fit-content;
+        width: 100%;
         max-width: 720px;
+        min-width: 300px;
         margin-left: auto;
         margin-right: auto;
         box-sizing: border-box;
         flex-wrap: wrap;
+        row-gap: 15px;
       }
-      #linksRow > * {
+      #profile-links-row > * {
         margin-left: 10px;
         margin-right: 10px;
       }
@@ -273,7 +334,7 @@
         z-index: 4;
         border-radius: 10px;
       }
-      .linkpicStyle {
+      .profile-link-image-container {
         font-size: 20px;
         display: flex;
         justify-content: center;
@@ -282,44 +343,34 @@
         margin-right: auto;
         height: 100px;
       }
-      .linkheader {
+      .profile-link-label {
         font-size: 15px;
       }
-      #funbutton {
+      #fun-project-btn {
         border-width: 4px;
       }
-      @media (max-width: 240px) {
-        #linksRow {
-          flex-direction: column;
-          align-items: center;
-        }
-        #linksRow > .pfp-container {
-          width: 100%;
-          margin-left: 0 !important;
-          margin-right: 0 !important;
-        }
-      }
-      @media (max-width: 450px) {
-        #linksRow {
-          flex-direction: row;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: stretch;
-        }
-        #linksRow > .pfp-container {
-          width: 45%;
-          min-width: 140px;
-          max-width: 100%;
-          margin: 4vw 2vw;
-        }
-      }
 
-      #linksRow:focus {
-        box-shadow: #000 0px 0px 10px !important;
-        filter: brightness(0.7);
+      @media (max-width: 720px) {
+        .youtube-iframe-wrapper, .youtube-iframe-wrapper iframe {
+          max-width: 99vw;
+        }
+        .youtube-iframe-wrapper iframe {
+          border-radius: 14px;
+          min-height: 120px;
+          height: 180px;
+        }
       }
-
-      #searchinput {
+      @media (max-width: 480px) {
+        .youtube-iframe-wrapper, .youtube-iframe-wrapper iframe {
+          max-width: 100vw;
+        }
+        .youtube-iframe-wrapper iframe {
+          border-radius: 10px;
+          min-height: 60px;
+          height: 120px;
+        }
+      }
+      #project-search-input {
         z-index: 100;
         background-color: #ffffee !important;
         display: block;
@@ -336,179 +387,230 @@
         transition: opacity 0.6s, transform 0.7s cubic-bezier(0.41,1.2,0.32,1);
       }
 
-      #searchinput.visible {
+      #project-search-input.visible {
         opacity: 1;
         transition-delay: 0.25s;
       }
 
-      #searchinput:focus {
+      #project-search-input:focus {
         outline: none !important;
         border: 3px #333 solid; 
       }
 
-      .button-list .linkbutton {
-        opacity: 0;
-        transition:
-          opacity 0.58s cubic-bezier(0.47,1.2,0.32,1),
-          transform 1s cubic-bezier(0.41,1.6,0.32,1);
+      #latest-video-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
       }
-      .button-list .linkbutton.visible {
-        opacity: 1;
+      .vertical-flex-column {
+        display: flex;
+        flex-direction: column;
+      }
+      #main-container-row {
+        align-self: center;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left:0px;
+        top:0px;
+        z-index: 5;
+      }
+      #left-section-column, #right-section-column {
+        width: 50vw !important;
+      }
+      #left-section-column {
+      border-right: 2px solid #fff;
+ 
       }
     </style>
   </head>
   <body>
-    <div id="backgroundOverlay"></div>
-    <h1 class="text" style="z-index: 50; position: relative; margin-bottom: -8px; margin-top: 10px; text-align:center; font-size: 26px;" id="velkomm">Welcome to my website!</h1>
-    <h3 class="text" style="margin-bottom: 9px; text-align:center; position: relative; font-weight: 100; font-size: 13px;">↓Visit my socials↓</h3>
-    <div id="linksRow" tabindex="0">
-      <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
-        <div class="text linkheader">Scratch</div>
-        <a href="https://scratch.mit.edu/users/sadie_is_awesome" target="_blank" class="linkpicStyle" style="margin: 0;" tabindex="-1">
-          <img src="images/scratch.jpg"
-            class="profilepic-link"
-            id="profilepicture"
-            alt="My Scratch Profile Picture and Link"
-            width="100" height="100"
-            style="width:100px;height:100px;object-fit:cover;"
-            tabindex="0"
-            role="link"
-            onclick="window.open('https://scratch.mit.edu/users/sadie_is_awesome', '_blank');"
-            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://scratch.mit.edu/users/sadie_is_awesome', '_blank');}"
-          >
-        </a>
+    <div id="overlay-background"></div>
+    <div id="main-container-row" class="section-row">
+      <div id="left-section-column" class="vertical-flex-column">
+        <h1 class="site-text" style="z-index: 50; position: relative; margin-bottom: -8px; margin-top: 10px; text-align:center; font-size: 26px;" id="welcome-heading">Welcome to my website!</h1>
+        <h3 class="site-text" style="margin-bottom: 9px; text-align:center; position: relative; font-weight: 100; font-size: 13px;">↓Visit my socials↓</h3>
+        <div id="profile-links-row" tabindex="0">
+          <div class="profile-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
+            <div class="site-text profile-link-label">Scratch</div>
+            <a href="https://scratch.mit.edu/users/sadie_is_awesome" target="_blank" class="profile-link-image-container" style="margin: 0;" tabindex="-1">
+              <img src="images/scratch.jpg"
+                class="profilepic-link"
+                id="profile-scratch"
+                alt="My Scratch Profile Picture and Link"
+                width="100" height="100"
+                style="width:100px;height:100px;object-fit:cover;"
+                tabindex="0"
+                role="link"
+                onclick="window.open('https://scratch.mit.edu/users/sadie_is_awesome', '_blank');"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://scratch.mit.edu/users/sadie_is_awesome', '_blank');}"
+              >
+            </a>
+          </div>
+          <div class="profile-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
+            <div class="site-text profile-link-label">OneCompiler</div>
+            <a href="https://onecompiler.com/users/436g67qxt" target="_blank" class="profile-link-image-container" style="margin: 0;" tabindex="-1">
+              <img src="images/OnecompLogo.png"
+                class="profilepic-link"
+                id="profile-onecompiler"
+                style="border: #eee 1px solid"
+                alt="My One Compiler Profile link"
+                width="100" height="100"
+                style="width:100px;height:100px;object-fit:cover;"
+                tabindex="0"
+                role="link"
+                onclick="window.open('https://onecompiler.com/@coding', '_blank');"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://onecompiler.com/users/436g67qxt', '_blank');}"
+              >
+            </a>
+          </div>
+          <div class="profile-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
+            <div class="site-text profile-link-label">YouTube</div> 
+            <a href="https://youtube.com/@parkes24" target="_blank" class="profile-link-image-container" style="margin: 0;" tabindex="-1">
+              <img src="images/youtubeprofpic.jpg"
+                class="profilepic-link"
+                id="profile-youtube"
+                alt="My Youtube Channel Profile Picture and Link"
+                width="100" height="100"
+                style="width:100px;height:100px;object-fit:cover;"
+                tabindex="0"
+                role="link"
+                onclick="window.open('https://youtube.com/@parkes24', '_blank');"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://youtube.com/@parkes24', '_blank');}"
+              >
+            </a>
+          </div>
+          <div class="profile-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
+            <div class="site-text profile-link-label">Github</div>
+            <a href="https://github.com/parkes-codes" target="_blank" class="profile-link-image-container" style="margin: 0;" tabindex="-1">
+              <img src="images/bigstupid.png"
+                class="profilepic-link"
+                id="profile-github"
+                alt="My Github Profile Picture and Link"
+                width="100" height="100"
+                style="width:100px;height:100px;object-fit:contain;"
+                tabindex="0"
+                role="link"
+                onclick="window.open('https://github.com/parkes-codes', '_blank');"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://github.com/parkes-codes', '_blank');}"
+              >
+            </a>
+          </div>
+        </div>
+        <div id="about-section" class="site-text">
+        </div>
+        <div class="video-section-container" id="latest-video-section">
+          <div class="section-row">
+            <h3 id="latest-video-heading">Latest video</h3>
+          <button id="latest-video-hide-btn" class="site-text" style="margin-left: 24px; background: none; border: none; color: #aaa; font-size: 15px; cursor: pointer; transition:color 0.3s;" aria-label="Hide Latest Video" tabindex="0">
+            ✕ Hide
+          </button>
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              const hideBtn = document.getElementById("latest-video-hide-btn");
+              const videoPlayer = document.getElementById("youtube-player-container");
+              if (hideBtn && videoPlayer) {
+                hideBtn.addEventListener("click", function() {
+                  videoPlayer.innerHTML = '';
+                  hideBtn.style.display = "none";
+                  document.getElementById("latest-video-heading").style.marginBottom = "0px"; 
+                  document.getElementById("latest-video-heading").style.display = "none"
+                });
+                hideBtn.addEventListener("keydown", function(e) {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    hideBtn.click();
+                  }
+                });
+              }
+            });
+          </script>
+          </div>
+          <div id="youtube-player-container" class="youtube-iframe-wrapper"></div>
+        </div>
       </div>
-      <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
-        <div class="text linkheader">OneCompiler</div>
-        <a href="https://onecompiler.com/users/436g67qxt" target="_blank" class="linkpicStyle" style="margin: 0;" tabindex="-1">
-          <img src="images/OnecompLogo.png"
-            class="profilepic-link"
-            id="onecompLink"
-            alt="My One Compiler Profile link"
-            width="100" height="100"
-            style="width:100px;height:100px;object-fit:cover;"
-            tabindex="0"
-            role="link"
-            onclick="window.open('https://onecompiler.com/users/436g67qxt', '_blank');"
-            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://onecompiler.com/users/436g67qxt', '_blank');}"
-          >
-        </a>
-      </div>
-      <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
-        <div class="text linkheader">YouTube</div> 
-        <a href="https://youtube.com/@parkes24" target="_blank" class="linkpicStyle" style="margin: 0;" tabindex="-1">
-          <img src="images/youtubeprofpic.jpg"
-            class="profilepic-link"
-            id="ytlink"
-            alt="My Youtube Channel Profile Picture and Link"
-            width="100" height="100"
-            style="width:100px;height:100px;object-fit:cover;"
-            tabindex="0"
-            role="link"
-            onclick="window.open('https://youtube.com/@parkes24', '_blank');"
-            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://youtube.com/@parkes24', '_blank');}"
-          >
-        </a>
-      </div>
-      <div class="pfp-container" style="display: flex; flex-direction: column; height: fit-content; justify-content: center; align-items: center;">
-        <div class="text linkheader">Github</div>
-        <a href="https://github.com/parkes-codes" target="_blank" class="linkpicStyle" style="margin: 0;" tabindex="-1">
-          <img src="images/bigstupid.png"
-            class="profilepic-link"
-            id="githublink"
-            alt="My Github Profile Picture and Link"
-            width="100" height="100"
-            style="width:100px;height:100px;object-fit:contain;"
-            tabindex="0"
-            role="link"
-            onclick="window.open('https://github.com/parkes-codes', '_blank');"
-            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.open('https://github.com/parkes-codes', '_blank');}"
-          >
-        </a>
+      <div id="right-section-column" class="vertical-flex-column">
+        <button id="projects-toggle-btn" tabindex="0" aria-controls="project-list-section" class="site-text">See all projects</button>
+        <div id="project-list-section" aria-hidden="true">
+          <input id="project-search-input" type="text" placeholder="Search for a project" style="padding-left: 5px;">
+          <div class="project-list-grid" id="project-list-grid">
+            <button class="project-button site-text project-link" data-url="html/gol" id="project-gol">Game of Life<span style="display:none;">gol conway conway's conways</span></button>
+            <button class="project-button site-text project-link" data-url="html/Amazing_Graphs_2" id="project-ag2">Amazing Graphs 2</button>
+            <button class="project-button site-text project-link" data-url="html/trigslideshow">Trigonometery Slideshow</button>
+            <button class="project-button site-text project-link" data-url="html/coreball" id="project-coreball" style="color: #000; font-weight: bold; text-shadow: 0px 0px 5px #ffff;">Coreball</button>
+            <button class="project-button site-text project-link" data-url="game4/">Plinkformer<span style="display: none">platformer</span></button>
+            <!-- <button class="project-button site-text project-link" data-url="html/clicker">Bad Clicker Game</button> -->
+            <!-- <button class="project-button site-text project-link" data-url="html/Listpractice">List Learning</button> -->
+            <button class="project-button site-text project-link" data-url="html/Canvaspractice">Canvasse</button>
+            <button class="project-button site-text project-link" data-url="html/oscilloscope">Oscilloscope</button>
+            <button class="project-button site-text project-link" data-url="html/spectrogram">Spectrogram</button>
+            <button class="project-button site-text project-link" data-url="html/flappy">Flappy Bird</button>
+            <button class="project-button site-text project-link" data-url="html/2048">2048</button>
+            <button class="project-button site-text project-link" data-url="html/tetris">Tetris</button>
+            <button class="project-button site-text project-link" data-url="html/dvd">DVD Sim</button>
+            <button class="project-button site-text project-link" data-url="html/game1">Arrassio</button>
+            <button class="project-button site-text project-link" data-url="html/game2">Jetpack Horse Ultra Pro Extreme 3D</button>
+            <button class="project-button site-text project-link" id="fun-project-btn" onclick="movestuff()">Fun button</button>
+            <button class="project-button site-text project-link" data-url="html/sierp">Simple Fractals</button>
+            <button class="project-button site-text project-link" data-url="html/ant" style="color: rgb(184, 205, 252)">Langton's Ant</button>
+            <button class="project-button site-text project-link" data-url="html/mousetrails" style="color: #eef; font-weight: bold;">Mouse Trails</button>
+            <button class="project-button site-text project-link" data-url="html/WaterSort">Water Sort</button>
+            <button class="project-button site-text project-link" data-url="html/texteffects">Text Effects</button>
+            <button class="project-button site-text project-link" data-url="html/funnytext">Funny Text</button>
+            <button class="project-button site-text project-link" data-url="html/rocketlaunch" style="color: #fed">Rocket Launch</button>
+            <button class="project-button site-text project-link" data-url="html/car">Car Game</button>
+            <button class="project-button site-text project-link" data-url="html/particles" style="color: #dfd">Particles</button>
+            <button class="project-button site-text project-link" data-url="html/fourier"><span class="site-text" style="color: #cff;">Fourier </span> <span class="site-text" style="color: #bcf;">Draw</span></button>
+            <button class="project-button site-text project-link" data-url="html/screensaver">Screensaver</button>
+            <button class="project-button site-text project-link" data-url="html/blockyblast">Blocky Blast</button>
+            <button class="project-button site-text project-link" data-url="html/encoding">Encoders</button>
+            <button class="project-button site-text project-link" data-url="html/loudwav">LOUD Audio</button>
+            <button class="project-button site-text project-link" data-url="html/cooltext">Cool Text</button>
+            <button class="project-button site-text project-link" data-url="html/voronoi">Plinkonoi <span style="display: none">voronoi vonoroi</span></button>
+            <button class="project-button site-text project-link" data-url="html/dino">Dino Game</button>
+            <button class="project-button site-text project-link" data-url="html/emojirain">Emoji Rain</button>
+            <button class="project-button site-text project-link" data-url="html/leftright">MP3 Combiner</button>
+            <button class="project-button site-text project-link" data-url="html/blobs">Blob 1</button>
+            <button class="project-button site-text project-link" data-url="html/blob2">Blob 2</button>
+            <button class="project-button site-text project-link" data-url="html/sorting" id="project-sorting-algos">Sorting Algos</button>
+            <button class="project-button site-text project-link" data-url="html/Ovogame">OvO Embed</button>
+            <!-- <button class="project-button site-text project-link" data-url="html/vibrate">Vibrate</button> -->
+            <button class="project-button site-text project-link" data-url="html/brot">Fractals Explorer</button>
+            <button class="project-button site-text project-link" data-url="html/countdown">Countdown</button>
+            <button class="project-button site-text project-link" data-url="html/spiral">Spiral</button>
+            <button class="project-button site-text project-link" data-url="html/news">Antimatter News</button>
+            <button class="project-button site-text project-link" data-url="html/plinko">Plinko</button>
+            <button class="project-button site-text project-link" data-url="html/fryer">Image Deep Fryer</button>
+            <button class="project-button site-text project-link" data-url="html/lightning">Mouse Lightning</button>
+            <button class="project-button site-text project-link" data-url="html/3d">Image To Cube</button>
+            <button class="project-button site-text project-link" data-url="html/timer">30 Minute Timer</button>
+            <button class="project-button site-text project-link" data-url="html/typing">Typing Test</button>
+            <button class="project-button site-text project-link" data-url="html/pelle">Scary Text</button>
+            <button class="project-button site-text project-link" data-url="html/hacking" id="project-hacking"><span>&nbsp;</span><span id="project-hacking-bits" style="color: #8f8">0101010010</span></button>
+            <button class="project-button site-text project-link" data-url="html/colors">Color Creator</button>
+            <button class="project-button site-text project-link" data-url="html/plinkdefense">Tower Defense</button>
+            <button class="project-button site-text project-link" data-url="html/flappy2">Flappy Bird 2</button>
+            <button class="project-button site-text project-link" data-url="html/game3">Aclassio</button>
+            <button class="project-button site-text project-link" data-url="html/skilltree">Skill Tree</button>
+            <button class="project-button site-text project-link" data-url="html/maze">Maze (fun)</button>
+            <!-- <button class="project-button site-text project-link" data-url="html/tomb">Momb of the Task <span style="display:none">tomb mask</span></button> -->
+            <button class="project-button site-text project-link" data-url="html/plinkemon">Inventory</button>
+            <button class="project-button site-text project-link" data-url="html/hscomp">HammerSpoon Helper</button>
+            <button class="project-button site-text project-link" data-url="html/stopwatch">Stopwatch</button>
+          </div>
+        </div>
+        <p class="site-text" style="left: 0%; text-align: center; opacity: 50%;">Warning: These links are desinged for 60fps computer devices!</p>
+        <div style="width:100%; height:20px; pointer-events:none; opacity:0;"></div>
       </div>
     </div>
-     <div id="thingy" class="text">
-      <div style="font-weight: bold; margin-bottom: -10px;">About this page:</div><br></br>
-      Projects: 58 <br></br>
-      Latest Update: Sep 13 2026 <br></br>
-      Current focus: Game of life babyyy
-     </div>
-    <button id="seeProjectsBtn" tabindex="0" aria-controls="column" class="text">See all projects</button>
-    <div id="column" aria-hidden="true">
-      <input id="searchinput" type="text" placeholder="Search for a project" style="padding-left: 5px;">
-      <div class="button-list" id="button-list">
-        <button class="button text linkbutton" data-url="html/gol" id="golbtn">Game of Life<span style="display:none;">gol conway conway's conways</span></button>
-        <button class="button text linkbutton" data-url="html/Amazing_Graphs_2" id="ag2text">Amazing Graphs 2</button>
-        <button class="button text linkbutton" data-url="html/trigslideshow">Trigonometery Slideshow</button>
-        <button class="button text linkbutton" data-url="html/coreball" id="corbtn" style="color: #000; font-weight: bold; text-shadow: 0px 0px 5px #ffff;">Coreball</button>
-        <button class="button text linkbutton" data-url="game4/">Plinkformer<span style="display: none">platformer</span></button>
-        <!-- <button class="button text linkbutton" data-url="html/clicker">Bad Clicker Game</button> -->
-        <!-- <button class="button text linkbutton" data-url="html/Listpractice">List Learning</button> -->
-        <button class="button text linkbutton" data-url="html/Canvaspractice">Canvasse</button>
-        <button class="button text linkbutton" data-url="html/oscilloscope">Oscilloscope</button>
-        <button class="button text linkbutton" data-url="html/spectrogram">Spectrogram</button>
-        <button class="button text linkbutton" data-url="html/flappy">Flappy Bird</button>
-        <button class="button text linkbutton" data-url="html/2048">2048</button>
-        <button class="button text linkbutton" data-url="html/tetris">Tetris</button>
-        <button class="button text linkbutton" data-url="html/dvd">DVD Sim</button>
-        <button class="button text linkbutton" data-url="html/game1">Arrassio</button>
-        <button class="button text linkbutton" data-url="html/game2">Jetpack Horse Ultra Pro Extreme 3D</button>
-        <button class="button text linkbutton" id="funbutton" onclick="movestuff()">Fun button</button>
-        <button class="button text linkbutton" data-url="html/sierp">Simple Fractals</button>
-        <button class="button text linkbutton" data-url="html/ant" style="color: rgb(184, 205, 252)">Langton's Ant</button>
-        <button class="button text linkbutton" data-url="html/mousetrails" style="color: #eef; font-weight: bold;">Mouse Trails</button>
-        <button class="button text linkbutton" data-url="html/WaterSort">Water Sort</button>
-        <button class="button text linkbutton" data-url="html/texteffects">Text Effects</button>
-        <button class="button text linkbutton" data-url="html/funnytext">Funny Text</button>
-        <button class="button text linkbutton" data-url="html/rocketlaunch" style="color: #fed">Rocket Launch</button>
-        <button class="button text linkbutton" data-url="html/car">Car Game</button>
-        <button class="button text linkbutton" data-url="html/particles" style="color: #dfd">Particles</button>
-        <button class="button text linkbutton" data-url="html/fourier"><span class="text" style="color: #cff;">Fourier </span> <span class="text" style="color: #bcf;">Draw</span></button>
-        <button class="button text linkbutton" data-url="html/screensaver">Screensaver</button>
-        <button class="button text linkbutton" data-url="html/blockyblast">Blocky Blast</button>
-        <button class="button text linkbutton" data-url="html/encoding">Encoders</button>
-        <button class="button text linkbutton" data-url="html/loudwav">LOUD Audio</button>
-        <button class="button text linkbutton" data-url="html/cooltext">Cool Text</button>
-        <button class="button text linkbutton" data-url="html/voronoi">Plinkonoi <span style="display: none">voronoi vonoroi</span></button>
-        <button class="button text linkbutton" data-url="html/dino">Dino Game</button>
-        <button class="button text linkbutton" data-url="html/emojirain">Emoji Rain</button>
-        <button class="button text linkbutton" data-url="html/leftright">MP3 Combiner</button>
-        <button class="button text linkbutton" data-url="html/blobs">Blob 1</button>
-        <button class="button text linkbutton" data-url="html/blob2">Blob 2</button>
-        <button class="button text linkbutton" data-url="html/sorting" id="algoText">Sorting Algos</button>
-        <button class="button text linkbutton" data-url="html/Ovogame">OvO Embed</button>
-        <!-- <button class="button text linkbutton" data-url="html/vibrate">Vibrate</button> -->
-        <button class="button text linkbutton" data-url="html/brot">Fractals Explorer</button>
-        <button class="button text linkbutton" data-url="html/countdown">Countdown</button>
-        <button class="button text linkbutton" data-url="html/spiral">Spiral</button>
-        <button class="button text linkbutton" data-url="html/news">Antimatter News</button>
-        <button class="button text linkbutton" data-url="html/plinko">Plinko</button>
-        <button class="button text linkbutton" data-url="html/fryer">Image Deep Fryer</button>
-        <button class="button text linkbutton" data-url="html/lightning">Mouse Lightning</button>
-        <button class="button text linkbutton" data-url="html/3d">Image To Cube</button>
-        <button class="button text linkbutton" data-url="html/timer">30 Minute Timer</button>
-        <button class="button text linkbutton" data-url="html/typing">Typing Test</button>
-        <button class="button text linkbutton" data-url="html/pelle">Scary Text</button>
-        <button class="button text linkbutton" data-url="html/hacking" id="hacktext"><span>&nbsp;</span><span id="hacknum" style="color: #8f8">0101010010</span></button>
-        <button class="button text linkbutton" data-url="html/colors">Color Creator</button>
-        <button class="button text linkbutton" data-url="html/plinkdefense">Tower Defense</button>
-        <button class="button text linkbutton" data-url="html/flappy2">Flappy Bird 2</button>
-        <button class="button text linkbutton" data-url="html/game3">Aclassio</button>
-        <button class="button text linkbutton" data-url="html/skilltree">Skill Tree</button>
-        <button class="button text linkbutton" data-url="html/maze">Maze (fun)</button>
-        <!-- <button class="button text linkbutton" data-url="html/tomb">Momb of the Task <span style="display:none">tomb mask</span></button> -->
-        <button class="button text linkbutton" data-url="html/plinkemon">Inventory</button>
-        <button class="button text linkbutton" data-url="html/hscomp">HammerSpoon Helper</button>
-        <button class="button text linkbutton" data-url="html/stopwatch">Stopwatch</button>
-      </div>
-    </div>
-    <p class="text" style="left: 0%; text-align: center; opacity: 50%;">Warning: These links are desinged for 60fps computer devices!</p>
-
-    <div style="width:100%; height:20px; pointer-events:none; opacity:0;"></div>
   </body>
-    <script>
+<script>
+
+
       const bounceSound = new Audio("sounds/click.wav");
-      const profileLinks = Array.from(document.querySelectorAll('.profilepic-link')).map(el => {
+      const profileLinksArr = Array.from(document.querySelectorAll('.profilepic-link')).map(el => {
         const rect = el.getBoundingClientRect();
         let dx = 3;
         let dy = 3;
@@ -528,18 +630,17 @@
         };
       });
 
-
-      function openButtonLink(e) {
+      function handleProjectButtonLink(e) {
         let url = e.currentTarget.getAttribute('data-url');
         if (
           url && 
           e.currentTarget.tagName === 'BUTTON' &&
           e.currentTarget.getAttribute('type') !== 'submit' &&
-          (!e.currentTarget.hasAttribute("onclick") || e.currentTarget.id === "funbutton")
+          (!e.currentTarget.hasAttribute("onclick") || e.currentTarget.id === "fun-project-btn")
         ) {
           // For file support
           const protocol = window.location.protocol;
-          if (/*protocol !== "http:" && */protocol !== "https:") {
+          if (protocol !== "https:") {
             if (!url.endsWith('.html')) url = url + '.html';
           }
           if (e.type === 'click' || e.key === "Enter" || e.key === " ") {
@@ -549,61 +650,57 @@
       }
 
       document.addEventListener('DOMContentLoaded', () => {
-        Array.from(document.getElementsByClassName('linkbutton')).forEach(btn => {
-          if (btn.id !== "funbutton") {
-            btn.addEventListener('click', openButtonLink);
+        Array.from(document.getElementsByClassName('project-link')).forEach(btn => {
+          if (btn.id !== "fun-project-btn") {
+            btn.addEventListener('click', handleProjectButtonLink);
             btn.addEventListener('keydown', function(e) {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                openButtonLink(e);
+                handleProjectButtonLink(e);
               }
             });
           }
         });
-   
       });
- 
 
-      const buttonss = document.getElementsByClassName("linkbutton");
-      const searcher = document.getElementById("searchinput");
-      const seeProjectsBtn = document.getElementById("seeProjectsBtn");
-      const columnDiv = document.getElementById("column");
-      const buttonList = columnDiv.querySelector('.button-list');
-      const searchInput = document.getElementById("searchinput");
+      const allProjectLinks = document.getElementsByClassName("project-link");
+      const projectSearchInput = document.getElementById("project-search-input");
+      const projectsToggleBtn = document.getElementById("projects-toggle-btn");
+      const projectListSection = document.getElementById("project-list-section");
+      const projectListGrid = projectListSection.querySelector('.project-list-grid');
 
-      Array.from(buttonss).forEach(btn => {
+      Array.from(allProjectLinks).forEach(btn => {
         btn.style.transform = "none";
         btn.removeAttribute('data-base-transform');
       });
- 
 
-      let projectsVisible = false;
+      let areProjectsVisible = false;
 
-      let isProjectsBtnOnCooldown = false;
-      let cooldownTimeout = null;
+      let isProjectsToggleOnCooldown = false;
+      let projectBtnCooldownTimeout = null;
 
-      function startProjectsBtnCooldown() {
-        isProjectsBtnOnCooldown = true;
-        seeProjectsBtn.classList.add('cooldown');
-        seeProjectsBtn.disabled = true;
-        cooldownTimeout = setTimeout(() => {
-          isProjectsBtnOnCooldown = false;
-          seeProjectsBtn.classList.remove('cooldown');
-          seeProjectsBtn.disabled = false;
+      function startProjectsToggleCooldown() {
+        isProjectsToggleOnCooldown = true;
+        projectsToggleBtn.classList.add('cooldown');
+        projectsToggleBtn.disabled = true;
+        projectBtnCooldownTimeout = setTimeout(() => {
+          isProjectsToggleOnCooldown = false;
+          projectsToggleBtn.classList.remove('cooldown');
+          projectsToggleBtn.disabled = false;
         }, 3000);
       }
 
       function toggleProjectsSection() {
-        if (isProjectsBtnOnCooldown) return; 
-        startProjectsBtnCooldown();
+        if (isProjectsToggleOnCooldown) return; 
+        startProjectsToggleCooldown();
 
-        const links = buttonList.querySelectorAll('.linkbutton');
-        if (!projectsVisible) {
-          columnDiv.classList.add("visible");
-          columnDiv.setAttribute('aria-hidden', 'false');
+        const links = projectListGrid.querySelectorAll('.project-link');
+        if (!areProjectsVisible) {
+          projectListSection.classList.add("visible");
+          projectListSection.setAttribute('aria-hidden', 'false');
 
           setTimeout(() => {
-            searchInput.classList.add("visible");
+            projectSearchInput.classList.add("visible");
           }, 200);
 
           links.forEach((el, idx) => {
@@ -613,11 +710,11 @@
           });
 
           setTimeout(() => {
-            searchInput.focus();
+            projectSearchInput.focus();
           }, 420);
 
-          seeProjectsBtn.textContent = "Hide projects";
-          projectsVisible = true;
+          projectsToggleBtn.textContent = "Hide projects";
+          areProjectsVisible = true;
         } else {
           let total = links.length;
 
@@ -628,23 +725,23 @@
           });
 
           setTimeout(() => {
-            searchInput.classList.remove("visible");// 
+            projectSearchInput.classList.remove("visible"); 
           }, total * 45 + 120);
 
           setTimeout(() => {
-            columnDiv.classList.remove("visible");
-            columnDiv.setAttribute('aria-hidden', 'true');
-            seeProjectsBtn.textContent = "See all projects";
+            projectListSection.classList.remove("visible");
+            projectListSection.setAttribute('aria-hidden', 'true');
+            projectsToggleBtn.textContent = "See all projects";
           }, total * 45 + 520);
 
-          projectsVisible = false;
+          areProjectsVisible = false;
         }
       }
 
-      seeProjectsBtn.addEventListener('click', toggleProjectsSection);
+      projectsToggleBtn.addEventListener('click', toggleProjectsSection);
 
-      seeProjectsBtn.addEventListener("keydown", function(e) {
-        if (isProjectsBtnOnCooldown) {
+      projectsToggleBtn.addEventListener("keydown", function(e) {
+        if (isProjectsToggleOnCooldown) {
           e.preventDefault();
           return;
         }
@@ -654,13 +751,13 @@
         }
       });
 
-      searcher.addEventListener("input", function(event) {
-        const searchStr = searcher.value.toLowerCase().trim();
+      projectSearchInput.addEventListener("input", function(event) {
+        const searchStr = projectSearchInput.value.toLowerCase().trim();
         let prefixMatches = [];
         let otherMatches = [];
 
-        for (let i = 0; i < buttonss.length; i++) {
-          const el = buttonss[i];
+        for (let i = 0; i < allProjectLinks.length; i++) {
+          const el = allProjectLinks[i];
           const content = el.textContent.toLowerCase();
           if (!searchStr || content.includes(searchStr)) {
             if (content.startsWith(searchStr) && searchStr !== "") {
@@ -671,8 +768,8 @@
           }
         }
 
-        for (let i = 0; i < buttonss.length; i++) {
-          buttonss[i].style.display = "none";
+        for (let i = 0; i < allProjectLinks.length; i++) {
+          allProjectLinks[i].style.display = "none";
         }
 
         let shown = 0;
@@ -687,14 +784,12 @@
           shown++;
         });
       });
- 
-
 
       let dvdAnimating = false;
       function updateProfileLinksDVD() {
         const scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft || 0;
         const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-        profileLinks.forEach(obj => {
+        profileLinksArr.forEach(obj => {
           let {el, x, y, dx, dy} = obj;
           const w = el.offsetWidth || 100;
           const h = el.offsetHeight || 100;
@@ -749,18 +844,18 @@
       }
       let t = 0;
       const pi = Math.PI;
-      const funbutton = document.getElementById("funbutton");
-      const golbutton = document.getElementById("golbtn");
-      const corbutton = document.getElementById("corbtn");
-      const ag2text = document.getElementById("ag2text");
-      const algoText = document.getElementById("algoText");
-      const hacktext = document.getElementById("hacktext");
-      const hacknum = document.getElementById("hacknum");
-      const thingy = document.getElementById("thingy");
-      const bgOverlay = document.getElementById("backgroundOverlay");
-      const velkomm = document.getElementById("velkomm");
+      const funProjectBtn = document.getElementById("fun-project-btn");
+      const golProjectBtn = document.getElementById("project-gol");
+      const coreballProjectBtn = document.getElementById("project-coreball");
+      const ag2ProjectBtn = document.getElementById("project-ag2");
+      const sortingAlgosProjectBtn = document.getElementById("project-sorting-algos");
+      const hackingProjectBtn = document.getElementById("project-hacking");
+      const hackingBitsSpan = document.getElementById("project-hacking-bits");
+      const aboutSection = document.getElementById("about-section");
+      const backgroundOverlay = document.getElementById("overlay-background");
+      const welcomeHeading = document.getElementById("welcome-heading");
 
-      let funclicked = false;
+      let funBtnClicked = false;
       const buttonOriginalTransformMap = new WeakMap();
       function getBaseTransform(el) {
         const style = window.getComputedStyle(el);
@@ -778,8 +873,8 @@
       }
 
       document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.button');
-        const column = document.getElementById('column');
+        const buttons = document.querySelectorAll('.project-button');
+        const projectListSectionInner = document.getElementById('project-list-section');
         buttons.forEach(function(btn) {
           btn.addEventListener('mouseenter', function() {
             let base = getBaseTransform(btn);
@@ -792,9 +887,9 @@
             btn.style.transform = base;
           });
           btn.addEventListener('focus', function(e) {
-            if (column && column.getAttribute('aria-hidden') === "true") {
+            if (projectListSectionInner && projectListSectionInner.getAttribute('aria-hidden') === "true") {
               btn.blur();
-              document.getElementById("linksRow").focus();
+              document.getElementById("profile-links-row").focus();
               return;
             }
             const deg = randomRotate();
@@ -807,12 +902,10 @@
             btn.style.transform = base;
           });
         });
- 
- 
 
-        function adjustPfpGrid() {
-          const linksRow = document.getElementById('linksRow');
-          const minPfpWidth = 140 * 2 + 20 * 2
+        function adjustProfileLinksRowGrid() {
+          const linksRow = document.getElementById('profile-links-row');
+          const minPfpWidth = 140 * 2 + 20 * 2;
           if (window.innerWidth <= minPfpWidth + 20) {
             linksRow.style.flexDirection = "column";
             Array.from(linksRow.children).forEach(el => el.style.width = "100%");
@@ -824,15 +917,15 @@
             Array.from(linksRow.children).forEach(el => el.style.width = "");
           }
         }
-        adjustPfpGrid();
-        window.addEventListener('resize', adjustPfpGrid);
+        adjustProfileLinksRowGrid();
+        window.addEventListener('resize', adjustProfileLinksRowGrid);
 
-        const searchBar = document.getElementById("searchinput");
+        const searchBar = document.getElementById("project-search-input");
 
         searchBar.addEventListener("focus", () => {
-          if (column && column.getAttribute('aria-hidden') === "true") {
+          if (projectListSectionInner && projectListSectionInner.getAttribute('aria-hidden') === "true") {
             searchBar.blur();
-            document.getElementById("linksRow").focus();
+            document.getElementById("profile-links-row").focus();
           }
         })
       });
@@ -849,14 +942,14 @@
       }
 
       function movestuff() {
-        if (!funclicked) {
-          profileLinks.forEach(obj => {
+        if (!funBtnClicked) {
+          profileLinksArr.forEach(obj => {
             const {dx, dy} = randomDxDy();
             obj.dx = dx;
             obj.dy = dy;
           });
-          if (profileLinks.length > 0 && !dvdAnimating) {
-            profileLinks.forEach(obj => {
+          if (profileLinksArr.length > 0 && !dvdAnimating) {
+            profileLinksArr.forEach(obj => {
               const el = obj.el;
               el.style.position = window.innerWidth > 700 ? 'absolute' : 'fixed';
               el.style.left = `${obj.x}px`;
@@ -868,55 +961,99 @@
             requestAnimationFrame(updateProfileLinksDVD);
           }
         } 
-        funclicked = true;
-        const texts = document.getElementsByClassName("text");
+        funBtnClicked = true;
+        const texts = document.getElementsByClassName("site-text");
         for (let i = 0; i < texts.length; i++) {
           texts[i].style.color = `hsl(${t * 100 % 360}, 50%, 70%)`;
           texts[i].style.transform = `rotate(${Math.sin(t + i) * 10}deg) scale(${Math.sin(t*2+i)*0.1+1})`;
         }
 
-        bgOverlay.style.backgroundColor = `hsla(${(t*30)%360},50%,50%,0.3)`
+        backgroundOverlay.style.backgroundColor = `hsla(${(t*30)%360},50%,50%,0.3)`
 
         requestAnimationFrame(movestuff);
       }
+
       function tick() {
         t += 0.1;
-        if (funbutton)
-          funbutton.style.borderColor = `hsl(${(t * 50) % 360},50%,80%)`;
-        if (golbutton) {
-          golbutton.style.color = `hsl(0,0%,${(Math.sin(t)) * 10 + 85}%)`;
+        if (funProjectBtn)
+          funProjectBtn.style.borderColor = `hsl(${(t * 50) % 360},50%,80%)`;
+        if (golProjectBtn) {
+          golProjectBtn.style.color = `hsl(0,0%,${(Math.sin(t)) * 10 + 85}%)`;
 
           const glowSpread = 18 + Math.sin(t*2) * 6;
           const hue = (t * 10) % 360;
-          golbutton.style.boxShadow = `
+          golProjectBtn.style.boxShadow = `
             0 0 ${glowSpread}px 4px hsl(${hue},95%,70%, 0.72), 
             0 0 35px 2px hsl(${hue},100%,90%, 0.18)
           `;
           // Animate slight text-shadow pulse for more pop
-          golbutton.style.textShadow = `
+          golProjectBtn.style.textShadow = `
             0 0 ${(4 + Math.abs(Math.sin(t)) * 10).toFixed(1)}px hsl(${(hue+60)%360},100%,92%)
           `;
         }
 
-   
-        if (corbutton) 
-          corbutton.style.textShadow = `0px 0px ${Math.sin(t/4)*2+3}px #ffff`
-        if (ag2text)
-          ag2text.style.color = `hsl(200,50%,${(Math.sin(t)) * 8 + 85}%)`;
-        if (algoText) {
-          algoText.style.color = `hsl(${(t*30)%360},50%,90%)`;
+        if (coreballProjectBtn) 
+          coreballProjectBtn.style.textShadow = `0px 0px ${Math.sin(t/4)*2+3}px #ffff`
+        if (ag2ProjectBtn)
+          ag2ProjectBtn.style.color = `hsl(200,50%,${(Math.sin(t)) * 8 + 85}%)`;
+        if (sortingAlgosProjectBtn) {
+          sortingAlgosProjectBtn.style.color = `hsl(${(t*30)%360},50%,90%)`;
         }
-        if (hacknum) {
+        if (hackingBitsSpan) {
           let temp = "";
           for (let i = 0; i < 10; i++) {
             temp += Math.floor(Math.random() * 2);
           }
-          hacknum.textContent = temp;
+          hackingBitsSpan.textContent = temp;
         }
 
         requestAnimationFrame(tick);
       }
       tick();
+
+      const API_KEY = 'AIzaSyC7gEwjzOTKn_YFqGN6Hd79c64wJDGmqI0'; 
+      const CHANNEL_ID = 'UChg4Ht2VjZOlNpYepy7LTDw';
+
+      const uploadPlaylistId = CHANNEL_ID.replace(/^UC/, 'UU');
+
+      const apiChunk = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadPlaylistId}&maxResults=1&key=${API_KEY}`;
+
+      async function fetchLatestVideo() {
+          try {
+              const response = await fetch(apiChunk);
+              const data = await response.json();
+
+              if (data.items && data.items.length > 0) {
+                  const video = data.items[0].snippet;
+                  const videoId = video.resourceId.videoId;
+
+                  document.getElementById('youtube-player-container').innerHTML = `
+                      <iframe 
+                          src="https://www.youtube.com/embed/${videoId}"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen>
+                      </iframe>
+                  `;
+              } 
+          } catch (error) {
+              console.error("Error fetching YouTube video:", error);
+              // fallback: could show an error somewhere
+          }
+      }
+
+      fetchLatestVideo();
+
+    </script>
+    <script type="module">
+      import { someData } from "./js/config.js";
+      window.configData = someData;
+      aboutSection.innerHTML = `
+        <div style="font-weight: bold; margin-bottom: -10px;">About this page:</div><br><br>
+        Projects: ${document.querySelectorAll(".project-button").length} <br><br>
+        Latest Update: ${window.configData.lastUpdated} <br><br>
+        Current focus: Game of life babyyy
+      </div>
+      `
     </script>
   </body>
 </html>
