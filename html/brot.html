@@ -321,6 +321,8 @@ void main() {
 const MAX_LYAP_SEQ = 30;
 
 // Combined GLSL fragment shader for all fractals
+
+
 const fragmentShaderSource = `
 precision highp float;
 varying vec2 v_pos;
@@ -550,6 +552,7 @@ void main() {
         color = hsl2rgb(hue,0.90,n==float(maxIter)?0.0:0.5);
     }
     else if (u_fractalMode == 10) {
+        bool isValidColor = false;
         for (int i=0; i<1024; ++i) {
             if (i >= maxIter) break;
             float denomRe = 2.0*zx + cx - 2.0;
@@ -567,19 +570,24 @@ void main() {
             zx=tmpRe; zy=tmpIm;
             modulus=zx*zx+zy*zy;
             n=float(i);
-            if (modulus > 4.0) break;
+            if (modulus > 4.0) {
+                isValidColor = true;
+                break;
+            }
         }
-        float sat=0.7,light=0.0,hue=0.0;
-        if(n<float(maxIter)){
-            float mod2=sqrt(modulus);
-            float nu=log(log(mod2+1e-8)/log(2.0))/log(2.0);
-            hue=mod((n+1.0-nu)*2.0*360.0/u_iterations+100.0*u_colorMultiplier,360.0)/360.0;
-            light=0.4+0.4*sin(0.07*n+nu*5.0);
-            sat=0.7+0.3*cos(0.12*n+nu*2.0);
-            light=clamp(light,0.1,0.9);
-            sat=clamp(sat,0.15,1.0);
+        float sat=0.7, light=0.0, hue=0.0;
+        if (n < float(maxIter) && isValidColor) {
+            float mod2 = sqrt(modulus);
+            float nu = log(log(mod2 + 1e-8) / log(2.0)) / log(2.0);
+            hue = mod((n + 1.0 - nu) * 2.0 * 360.0 / u_iterations + 100.0 * u_colorMultiplier, 360.0) / 360.0;
+            light = 0.4 + 0.4 * sin(0.07 * n + nu * 5.0);
+            sat = 0.7 + 0.3 * cos(0.12 * n + nu * 2.0);
+            light = clamp(light, 0.1, 0.9);
+            sat = clamp(sat, 0.15, 1.0);
+            color = hsl2rgb(hue, sat, light);
+        } else {
+            color = vec3(0.0);
         }
-        color=n<float(maxIter)?hsl2rgb(hue,sat,light):vec3(0.0);
     }
     else if (u_fractalMode == 11) {
         float rA, rB;
