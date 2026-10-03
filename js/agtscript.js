@@ -143,9 +143,9 @@ function epow(inn) {return Math.pow(2.71828, inn)}
 function div(inn,outt) {if (abs(outt) <= 0.001) return 9; if (abs(outt)>=1000000) return 0; if (abs(inn) >= 10000) return 0; return inn/outt }
 function mul(inn, outt) { if (abs(inn) >= 10000 || abs(outt) >= 10000) return 0; return inn * outt;}
 function dista(x1,x2,y1,y2) {return (((x2 - x1) * (x2 - x1)) +((y2 - y1) * (y2 - y1)))}
-function arcsint(inn){return Math.asin((2*(abs(inn)%1))-1)*(div(abs(inn),inn))}
-function arcsin(inn){if (abs(inn)> 1) {return 1} return Math.asin(inn)}
-function arccos(inn){if (abs(inn>1)) {return 1} return Math.acos(inn)}
+function asint(inn){return Math.asin((2*(abs(inn)%1))-1)*(div(abs(inn),inn))}
+function asin(inn){if (abs(inn)> 1) {return 1} return Math.asin(inn)}
+function acos(inn){if (abs(inn>1)) {return 1} return Math.acos(inn)}
 function arctan(inn) {return Math.atan(inn)}
 function ring(inn) {return (tan(sin(X+inn*1.05708)+cos(Y))*(exp(Z/30)-0.99)/10)}
 function pow(inn, inn2){ return Math.pow(inn,inn2)}
@@ -935,9 +935,9 @@ return { graphX: X, graphY: Y };
                                                      if (abs(value) % 1 <= 0.5 ) {value-=t/2} else {value+= X+t}
                                                      value=sin(3*value)*((Z+1)/20)+t/8}
                                                      
-      function graph20(){zoomSet(0,150);             value=arcsint(X)+(Y*(Z/50))+(t)+(sin((Y-(((Z+10)/20)*t))))}
+      function graph20(){zoomSet(0,150);             value=asint(X)+(Y*(Z/50))+(t)+(sin((Y-(((Z+10)/20)*t))))}
       
-      function graph21(){zoomSet(0,100);             value=(tan(X-Y-sin(Y+t))*Z/20)-arcsint(X-t)+sin((3*Y)+t);
+      function graph21(){zoomSet(0,100);             value=(tan(X-Y-sin(Y+t))*Z/20)-asint(X-t)+sin((3*Y)+t);
                                                      if (abs(value)%10<=1) {value*=(sin(X)+Y)*Z/30}}
       
       function graph22(){zoomSet(15,45);             value=sin(Y)+sin(X-t-(sin(Y-t)*(Z/20)))+(abs(Y)/3);
@@ -1086,24 +1086,24 @@ return { graphX: X, graphY: Y };
       if (Y-cos(t)<-tan(t)*(X+sin((Z/10)*Y))+sin(t)) {value-=sin(t/3)}
       }
       
-      function graph75(){zoomSet(0,45); value=Y+t+(Z/20+0.05)*arcsin(sin(arcsin(sin(X*Y-t))+arccos(cos(X*Y*sin(t)-0.5))));}
+      function graph75(){zoomSet(0,45); value=Y+t+(Z/20+0.05)*asin(sin(asin(sin(X*Y-t))+acos(cos(X*Y*sin(t)-0.5))));}
  
 
   
-      function graph76(){zoomSet(0,45); value=arcsin(sin((X-t/2)+Y*arccos(cos(X+t/2))));
-      if (value<0){value+=arccos(cos(value+t/2));}
+      function graph76(){zoomSet(0,45); value=asin(sin((X-t/2)+Y*acos(cos(X+t/2))));
+      if (value<0){value+=acos(cos(value+t/2));}
       if (value<0){value%=(X/5)+(tan(t)*Y/5)}
       value*=(Z/40)+0.05; value+=t;}
  
      
-      function graph77(){zoomSet(0,45); value=(Z/10+0)*div(arcsin(sin((Y-X+sin((Z/20)*X+t)))),Y)+t;}
+      function graph77(){zoomSet(0,45); value=(Z/10+0)*div(asin(sin((Y-X+sin((Z/20)*X+t)))),Y)+t;}
       
       function graph78(){zoomSet(0,45); value=fact(sin(X)+sin(Y))+sin(Y+t)
       if (sin(X-t)+cos(Y+sin(t+(Z/8)*X))<(X+Y)%0.1){value=-value}
       if (sin(Y-t)+cos(X+sin(t+(Z/8)*Y))<(X+Y)%0.1){value=-value}
       value*=Z/40+0.05}
       
-      function graph79(){zoomSet(0,45); rotatePlane(t); value=arcsin(sin(X)+sin(Y));
+      function graph79(){zoomSet(0,45); rotatePlane(t); value=asin(sin(X)+sin(Y));
       if (value>0.5707){value=tan(sin(X)+cos(Y+(1.5*pi)))}
       value=round(value*(Z/5+1.01))/(Z/5+1.01);
       value-=t/2}
@@ -1190,7 +1190,7 @@ return { graphX: X, graphY: Y };
 
             function graph107(){zoomSet(0,45); value=join(X*(Z/40),Y);rotatePlane(t); value+=join(X,Y*(Z/40))*(value%sin(X)); value/=X*X+Y*Y+1; value+=t;};
 
-            function graph108(){zoomSet(0,45); value=arcsin(sin((sin(t+X))+Y))-arcsin(sin(X-sin(Y+t)-Y+t)); if (sin(value)>=sin(t/2)) {value%=sin(t)} else {value+=t}; value*=0.2+Z/20}
+            function graph108(){zoomSet(0,45); value=asin(sin((sin(t+X))+Y))-asin(sin(X-sin(Y+t)-Y+t)); if (sin(value)>=sin(t/2)) {value%=sin(t)} else {value+=t}; value*=0.2+Z/20}
       
 
             function graph109() {zoomSet(0,80); value=max(abs(X),abs(Y))+abs(X+cos(abs(X)+t))*abs(Y); value%=sin(value*(Z/20)+t/2); value*=(Z/20+0.5); value+=t/2}
@@ -1272,24 +1272,28 @@ return { graphX: X, graphY: Y };
 
       function graph139(){zoomSet(0,45); value=sin(div(abs(X),Y+sin(X+t)))-(Z/10)*(abs(X+sin(t+Y))%(0.1*Y))}
 
-      function graph140(){zoomSet(0,45); value=(Z/20+0.1)*(tan(arcsin(sin(Y))+arcsin(sin(Y+sin(X+t)))-X))+t}
+      function graph140(){zoomSet(0,45); value=(Z/20+0.1)*(tan(asin(sin(Y))+asin(sin(Y+sin(X+t)))-X))+t}
 
       function graph141(){zoomSet(0,45); Y+=0.5; value=sin((X+sin(Z/20*Y+t))%1+t)-sin((X+sin(Z/20*Y-t))%(Y+sin(X+t)))}
 
-      function graph142(){zoomSet(0,45); Y=sin(Y); X=sin(X); value=(Z/30+1)*Y+t+(Z/2)*arcsin(sin(Y+t/1.1)+X)*arcsin(sin(Y+pi-t/1.2)+X)*arcsin(sin(X+t/1.3)+Y)*arcsin(sin(X+pi-t/1.4)+Y);}
+      function graph142(){zoomSet(0,45); Y=sin(Y); X=sin(X); value=(Z/30+1)*Y+t+(Z/2)*asin(sin(Y+t/1.1)+X)*asin(sin(Y+pi-t/1.2)+X)*asin(sin(X+t/1.3)+Y)*asin(sin(X+pi-t/1.4)+Y);}
 
-      function graph143(){zoomSet(0,45); rotatePlane(t/2); const temp = sin(X+sin(div(Y,X/10))); rotatePlane(t/-1);  value=t+(Z/30+0.1)*((3*sin(temp))%arcsin(abs(sin(Y))*temp));}
+      function graph143(){zoomSet(0,45); rotatePlane(t/2); const temp = sin(X+sin(div(Y,X/10))); rotatePlane(t/-1);  value=t+(Z/30+0.1)*((3*sin(temp))%asin(abs(sin(Y))*temp));}
 
       function graph144(){zoomSet(0,45); const temp = [sin(X+t*1.1+Y),sin(X+t*1.2+Y),sin(X-t*1.3),sin(X-t*1.4),sin(X+t*1.5+Y),sin(X+t*1.6),sin(X+t*1.7)]; value = (Z/20+0.1)*(tan(temp[+floor((sin(abs(X*Y))+1)*2.5)]*3))+t/2}
 
-      function graph145(){zoomSet(0,45); const temp = arcsin(sin(X+cos(Y))+sin(Y+t)); X*=-1; Y*=-1; const temp2 = arcsin(sin(X+cos(Y))+sin(Y+t)); X*=-1; value=temp+temp2+arcsin(sin(X+cos(Y))+sin(Y+t)); if (value==3) {value=tan(X*Y+t)}; value*=(Z/20+0.1)}
+      function graph145(){zoomSet(0,45); const temp = asin(sin(X+cos(Y))+sin(Y+t)); X*=-1; Y*=-1; const temp2 = asin(sin(X+cos(Y))+sin(Y+t)); X*=-1; value=temp+temp2+asin(sin(X+cos(Y))+sin(Y+t)); if (value==3) {value=tan(X*Y+t)}; value*=(Z/20+0.1)}
       
-      function graph146(){zoomSet(20,15); value=t/2+0.2*((log((abs(X) + 1) ** (sin(X+t*2)+ sin(abs(X)*sin(Y*(Z/200))+Y)+Y + arcsin(sin(X)))))+div(1000+sin(t*1.5)*300,X*X+Y*Y+1));
+      function graph146(){zoomSet(20,15); value=t/2+0.2*((log((abs(X) + 1) ** (sin(X+t*2)+ sin(abs(X)*sin(Y*(Z/200))+Y)+Y + asin(sin(X)))))+div(1000+sin(t*1.5)*300,X*X+Y*Y+1));
          value%=1+Z/200*(sin(t*3)+sin(t+Y/5+sin(X/2+sin(t*2+Y))))}
 
       function graph147(){zoomSet(0,45); rotatePlane(t/-2); const temp=Y; rotatePlane(t/2); value=sin(div(sin(X),cos(Y))); rotatePlane(t/2+cos(temp)*(Z/50+0.2)); value-=(sin(X)*Y)%(X*sin(Y)); value= value*(Z/60+0.1)+t/2}
 
       function graph148(){zoomSet(0,45); value=perlin(X, Y)*(Z/15+0.2)+t/2}
+
+
+    function graph149(){zoomSet(0,15); value =asin(cos(t/2+X+(Z/10)*sin(Y*X/50+t))); rotatePlane(t/4); value-=acos(sin(Y+t/3)); value=0.5*value + t/2}
+
 const graphFunctions = {
 1: graph1,
 2: graph2,
@@ -1438,7 +1442,8 @@ const graphFunctions = {
 145: graph145,
 146: graph146,
 147: graph147,
-148: graph148
+148: graph148,
+149: graph149
 };
 
 const advancedList = [

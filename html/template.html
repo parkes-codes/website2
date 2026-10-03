@@ -47,11 +47,13 @@ function updateMousePosition(e) {
 }
 canvas.addEventListener('mousemove', updateMousePosition);
 
-function fillRect(x,y,w,h) {ctx.fillRect(canvas.width/2+x,canvas.height/2-y,w,h)}
-function fillRectCentered(x,y,w,h) {ctx.fillRect(canvas.width/2 + x - w/2, canvas.height/2-y-h/2,w,h)}
+const fillRect = (x,y,w,h) => ctx.fillRect(canvas.width/2+x,canvas.height/2-y,w,h);
+const fillRectCentered = (x,y,w,h) => ctx.fillRect(canvas.width/2 + x - w/2, canvas.height/2-y-h/2,w,h);
 
 function draw() {
     ctx.clearRect(0,0,canvas.width,canvas.height)
+
+
 
 
 
