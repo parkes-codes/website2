@@ -1,3 +1,3 @@
 export const someData = {
-    lastUpdated: "2026-10-3"
+    lastUpdated: "2026-10-03"
 }
