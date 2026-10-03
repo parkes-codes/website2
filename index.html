@@ -23,9 +23,9 @@
     <link rel="icon" type="image/x-icon" href="images/icon.ico" />
     <style>
       html, body {
-        height: 100%;
-        background-image: url("images/plinkk.gif");
+        height: auto;
         min-height: 100vh;
+        background-image: url("images/plinkk.gif");
         font-family: "Courier New", courier, monospace;
         font-size: 16px;
         color: #f0f0f0;
@@ -100,7 +100,6 @@
         z-index: 5;
       }
       #projects-toggle-btn {
-        /* put default button styles to ensure same style on any device */
         appearance: auto;
         text-rendering: auto;
         color: buttontext;
@@ -122,7 +121,6 @@
         border-style: outset;
         border-color: buttonborder;
         border-image: none;
-
         /* actual button style */
         background: #000;
         border: #fff 2px solid;
@@ -282,12 +280,31 @@
         opacity: 1;
       }
  
-
       .section-row {
         display: flex;
         flex-direction: row;
       }
- 
+      @media (max-width: 760px) {
+        .section-row {
+          flex-direction: column !important;
+          align-items: center !important;
+        }
+        #main-container-row {
+          align-items: center !important;
+          justify-content: center !important;
+          display: flex !important;
+          flex-direction: column !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+        #left-section-column,
+        #right-section-column {
+          width: 100vw !important;
+          min-width: 0;
+          border-right: none !important;
+        }
+      }
+
       #about-section, #about-section-alt {
         color: #f0f0f0; 
         font-size: 15px;
@@ -302,9 +319,8 @@
         line-height: 0.7;
         text-align: left;
         font-size: 13px;
-        width: 100vw !important;
+        width: 80% !important;
         max-width: 300px;
-        min-width: 230px;
         border-radius: 6px;
         margin-left: auto;
         margin-right: auto;
@@ -410,20 +426,25 @@
       }
       #main-container-row {
         align-self: center;
-        width: 100%;
-        height: 100%;
-        position: fixed;
+        width: 100vw;
+        position: relative;
         left:0px;
         top:0px;
         z-index: 5;
       }
       #left-section-column, #right-section-column {
-        width: 50vw !important;
+        width: 50vw;
+        min-width: 280px;
       }
       #left-section-column {
-      border-right: 2px solid #fff;
- 
+        border-right: 2px solid #fff;
       }
+      @media (max-width: 99px) {
+        #left-section-column {
+          border-right: none;
+        }
+      }
+
     </style>
   </head>
   <body>
@@ -504,7 +525,7 @@
         <div class="video-section-container" id="latest-video-section">
           <div class="section-row">
             <h3 id="latest-video-heading">Latest video</h3>
-          <button id="latest-video-hide-btn" class="site-text" style="margin-left: 24px; background: none; border: none; color: #aaa; font-size: 15px; cursor: pointer; transition:color 0.3s;" aria-label="Hide Latest Video" tabindex="0">
+          <button id="latest-video-hide-btn" class="site-text" style="margin-left: 24px; background: none; border: none; color: #aaa; font-size: 15px; cursor: pointer; transition:color 0.3s; display: none" aria-label="Hide Latest Video" tabindex="0">
             ✕ Hide
           </button>
           <script>
@@ -638,7 +659,6 @@
           e.currentTarget.getAttribute('type') !== 'submit' &&
           (!e.currentTarget.hasAttribute("onclick") || e.currentTarget.id === "fun-project-btn")
         ) {
-          // For file support
           const protocol = window.location.protocol;
           if (protocol !== "https:") {
             if (!url.endsWith('.html')) url = url + '.html';
@@ -986,7 +1006,7 @@
             0 0 ${glowSpread}px 4px hsl(${hue},95%,70%, 0.72), 
             0 0 35px 2px hsl(${hue},100%,90%, 0.18)
           `;
-          // Animate slight text-shadow pulse for more pop
+
           golProjectBtn.style.textShadow = `
             0 0 ${(4 + Math.abs(Math.sin(t)) * 10).toFixed(1)}px hsl(${(hue+60)%360},100%,92%)
           `;
@@ -1037,7 +1057,7 @@
               } 
           } catch (error) {
               console.error("Error fetching YouTube video:", error);
-              // fallback: could show an error somewhere
+             
           }
       }
 
@@ -1045,15 +1065,30 @@
 
     </script>
     <script type="module">
-      import { someData } from "./js/config.js";
-      window.configData = someData;
-      aboutSection.innerHTML = `
-        <div style="font-weight: bold; margin-bottom: -10px;">About this page:</div><br><br>
-        Projects: ${document.querySelectorAll(".project-button").length} <br><br>
-        Latest Update: ${window.configData.lastUpdated} <br><br>
-        Current focus: Game of life babyyy
-      </div>
-      `
+      const focus = `Improving existing projects and scripts`;
+      async function loadConfigAndSetAboutSection() {
+        try {
+          const mod = await import("https://parkes-codes.github.io/website2/js/config.js");
+          window.configData = mod.someData;
+          aboutSection.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: -10px;">About this page:</div><br><br>
+            Projects: ${document.querySelectorAll(".project-button").length} <br><br>
+            Latest Update: ${window.configData.lastUpdated} <br><br>
+            Current focus: ${focus}
+          </div>
+          `;
+        } catch (err) {
+          aboutSection.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: -10px;">About this page:</div><br><br>
+            Projects: ${document.querySelectorAll(".project-button").length} <br><br>
+            Latest Update: (Failed to fetch remote config) <br><br>
+            Current focus: ${focus}
+          </div>
+          `;
+          console.error("Failed to load remote config.js", err);
+        }
+      }
+      loadConfigAndSetAboutSection();
     </script>
   </body>
 </html
