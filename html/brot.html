@@ -32,25 +32,21 @@
         font-size: 10px;
         z-index: 2;
     }
-    #resinput, #iterinput, #juliaslidera, #juliasliderb, #fractalslider, #fractallabel, #quarticmandela, #lyapunov-seq {
+    #iterinput, #juliaslidera, #juliasliderb, #fractalslider, #fractallabel, #quarticmandela, #lyapunov-seq {
         position: absolute;
         top: 6px;
         height: 13px;
         font-size: 10px;
         z-index: 2;
     }
-    #resinput {
-        right: 8px;
-        width: 40px;
-    }
     #iterinput {
-        right: 60px;
+        right: 10px;
         width: 40px;
     }
     #auto-iter-container {
         position: absolute;
-        right: 107px;
-        top: 6px;
+        right: 10px;
+        top: 28px;
         z-index: 2;
         display: flex;
         align-items: center;
@@ -71,16 +67,16 @@
         accent-color: #10ff68;
     }
     #juliaslidera {
-        right: 112px;
+        right: 62px;
         width: 40px;
     }
     #juliasliderb {
-        right: 164px;
+        right: 114px;
         width: 40px;
     }
     #julialabel {
         position: absolute;
-        right: 216px;
+        right: 176px;
         top: 9px;
         color: #fff;
         font-size: 10px;
@@ -92,14 +88,14 @@
         height: 17px;
     }
     #fractalslider {
-        right: 410px;
+        right: 360px;
         width: 180px;
-        top: 10px;
+        top: 5px;
         height: 17px;
         background: transparent;
     }
     #fractallabel {
-        right: 590px;
+        right: 550px;
         width: 180px;
         top: 9px;
         color: #fff;
@@ -166,29 +162,27 @@
  <canvas id="gamecanvas"></canvas>
  <div id="info"></div>
  <label id="fractallabel" for="fractalslider">Fractal:</label>
- <input id="fractalslider" type="range" min="0" max="11" step="1" value="0" title="Select Fractal Set">
+ <input id="fractalslider" type="range" step="1" value="0" title="Select Fractal Set">
  <label id="julialabel" for="juliaslidera">c = </label>
- <input id="juliaslidera" type="number" value="-0.7" min="-2" max="2" step="0.01" placeholder="Re(c)">
- <input id="juliasliderb" type="number" value="0.27015" min="-2" max="2" step="0.01" placeholder="Im(c)">
- <input id="iterinput" value="50" min="1" max="100" step="1" placeholder="iter" type="number">
+ <input id="juliaslidera" type="number" value="-0.7" step="0.0001" placeholder="Re(c)">
+ <input id="juliasliderb" type="number" value="0.271" step="0.0001" placeholder="Im(c)">
+ <input id="iterinput" value="50" step="1" max="1024" min="0" placeholder="iter" type="number">
  <span id="auto-iter-container">
     <input id="auto-iter-checkbox" type="checkbox" checked title="Auto iteration count by zoom">
     <label for="auto-iter-checkbox" title="Auto iteration by zoom">Auto-Iter</label>
  </span>
- <input id="resinput" value="1" min="0.5" max="5" step=0.1 placeholder="res" type="number">
- <input id="quarticmandela" type="number" value="1" min="-10" max="10" step="0.01" placeholder="a">
+ <input id="quarticmandela" type="number" value="1" step="0.01" placeholder="a">
  <label id="lyapunov-label" for="lyapunov-seq" style="display:none;">Lyapunov seq:</label>
- <input id="lyapunov-seq" type="text" value="AB" pattern="[ABab]+" style="display:none;" title="Sequence of A and B for Lyapunov fractal">
+ <input id="lyapunov-seq" type="text" value="AB" style="display:none;" title="Sequence of A and B for Lyapunov fractal">
  <div id="color-multiplier-container">
     <label id="color-multiplier-label" for="color-multiplier" title="Vibrancy (color multiplier)">Color:</label>
-    <input id="color-multiplier" type="number" min="0" step="1" value="1" placeholder="x" title="Color Multiplier">
+    <input id="color-multiplier" type="number" step="1" value="1" placeholder="x" title="Color Multiplier">
  </div>
  <button id="modebtn" title="Toggle Fractal Set" style="display: none;">Fractal</button>
 </body>
 <script>
 const canvas = document.getElementById("gamecanvas");
 const infoDiv = document.getElementById("info");
-const resInput = document.getElementById("resinput");
 const iterInput = document.getElementById("iterinput");
 const juliaReInput = document.getElementById("juliaslidera");
 const juliaImInput = document.getElementById("juliasliderb");
@@ -200,7 +194,6 @@ const colorMultiplierInput = document.getElementById("color-multiplier");
 const lyapunovSeqInput = document.getElementById("lyapunov-seq");
 const lyapunovLabel = document.getElementById("lyapunov-label");
 
-// UI hide logic for 'h' key
 let hudHidden = false;
 function setUiHidden(hidden) {
     hudHidden = hidden;
@@ -213,7 +206,6 @@ function setUiHidden(hidden) {
         juliaImInput,
         iterInput,
         document.getElementById("auto-iter-container"),
-        resInput,
         quarticAInput,
         lyapunovLabel,
         lyapunovSeqInput,
@@ -256,10 +248,11 @@ const FRACTAL_NAMES = [
     "Burning Mandelbrot",
     "Mandelship",
     "Magnet 1",
-    "Lyapunov"
+    "Lyapunov",
+    "Sieger Cloud"
 ];
 
-const COLOR_MULT_BY_ZOOM_MODES = [0,1,2,4,5,6,7,8,9]; 
+const COLOR_MULT_BY_ZOOM_MODES = [0,1,2,4,5,6,7,8,9,12]; // Include Sieger Cloud index (12)
 let fractalMode = parseInt(fractalSlider.value, 10);
 
 let keysPressed = [];
@@ -281,7 +274,6 @@ let leftX = 0;
 let rightX = 0;
 let mousePos = { x: canvas.width/2, y: canvas.height/2 };
 
-// Setup WebGL for computing fractal image
 let gl = canvas.getContext('webgl');
 if (!gl) {
     alert('WebGL not supported: cannot accelerate fractal rendering.');
@@ -319,9 +311,6 @@ void main() {
 `;
 
 const MAX_LYAP_SEQ = 30;
-
-// Combined GLSL fragment shader for all fractals
-
 
 const fragmentShaderSource = `
 precision highp float;
@@ -370,7 +359,7 @@ int get_lyap_seq_element(int arr[MAX_LYAP_SEQ], int idx, int len) {
     }
     return 0;
 }
-// FRACTAL MODES
+
 void main() {
     float x = v_pos.x, y = v_pos.y;
     float cx, cy, zx, zy, az, modulus, nu;
@@ -379,10 +368,13 @@ void main() {
     vec3 color = vec3(0.0);
     int maxIter = int(u_iterations);
 
-    if (u_fractalMode == 0 || u_fractalMode == 1 || u_fractalMode == 2 || u_fractalMode == 4 || u_fractalMode == 5 || u_fractalMode == 6 || u_fractalMode == 7 || u_fractalMode == 8 || u_fractalMode == 9 || u_fractalMode == 10 || u_fractalMode == 3) {
+    if (u_fractalMode == 0 || u_fractalMode == 1 || u_fractalMode == 2 || u_fractalMode == 4 || u_fractalMode == 5 || u_fractalMode == 6 || u_fractalMode == 7 || u_fractalMode == 8 || u_fractalMode == 9 || u_fractalMode == 10 || u_fractalMode == 3 || u_fractalMode == 12) {
         projectMandelbrot(x, y);
         if (u_fractalMode == 1) {
             zx = x; zy = y; cx = u_juliaRe; cy = u_juliaIm;
+        } else if (u_fractalMode == 12) {
+            zx = x;
+            zy = y;
         } else {
             zx = 0.0; zy = 0.0; cx = x; cy = y;
         }
@@ -626,6 +618,41 @@ void main() {
             }
         }
     }
+    else if (u_fractalMode == 12) {
+        // Sieger Cloud fractal
+        // Reference: https://fractalforums.org/fractal-mathematics-and-new-theories/28/the-sieger-cloud-fractal/3020
+        // z = y*exp(-abs(x)^p) + c, where c is a function of pixel, p is a real parameter (typically 3)
+        // Here we'll use a common simple variant for demo.
+
+        // Sieger "standard" cloud
+        float p = 3.0;
+        cx = x;
+        cy = y;
+        zx = x;
+        zy = y;
+        float abszx, abszy;
+        float bail = 1e6;
+        n = 0.0;
+        for(int i=0;i<1024;++i){
+            if(i>=maxIter) break;
+            abszx = abs(zx);
+            abszy = abs(zy);
+            float theta = atan(zy, zx);
+            float r = sqrt(zx*zx+zy*zy);
+            float newzx = zy * exp(-pow(abszx, p)) + cx;
+            float newzy = zx * exp(-pow(abszy, p)) + cy;
+            zx = newzx;
+            zy = newzy;
+            if(zx*zx+zy*zy > bail) { n = float(i); break; }
+        }
+        // Color by n, smooth coloring
+        if(n==0.0) n=float(maxIter);
+        float sm = log(log(length(vec2(zx,zy))+1e-8))/log(2.0);
+        float hue = mod((n + 1.0 - sm) * u_colorMultiplier * 360.0 / u_iterations + 320.0, 360.0) / 360.0;
+        float sat = 0.9;
+        float light = n==float(maxIter)?0.0:0.53;
+        color = hsl2rgb(hue, sat, light);
+    }
     gl_FragColor = vec4(color, 1.0);
 }
 `;
@@ -663,22 +690,21 @@ function setWebGLUniformsForUI() {
     gl.uniform1f(uniforms.u_juliaIm, +juliaIm);
     gl.uniform1f(uniforms.u_quarticA, +quarticA);
 
-    // Only multiply color by zoom/50 * 100 for specific modes
     let effectiveColorMultiplier = +colorMultiplier;
-    if (COLOR_MULT_BY_ZOOM_MODES.includes(fractalMode)) {
+    if (COLOR_MULT_BY_ZOOM_MODES.includes(fractalMode) && isAutoIter) {
         effectiveColorMultiplier *= (pseudoZoom / 50) * 100;
+    } else {
+        effectiveColorMultiplier*=10
     }
     gl.uniform1f(uniforms.u_colorMultiplier, effectiveColorMultiplier);
     gl.uniform1f(uniforms.u_iterations, +iterations);
     gl.uniform1f(uniforms.u_aspect, canvas.width / canvas.height);
 
-    // Lyapunov controls
     gl.uniform1f(uniforms.u_lyap_rAmin, lyap_rAmin);
     gl.uniform1f(uniforms.u_lyap_rAmax, lyap_rAmax);
     gl.uniform1f(uniforms.u_lyap_rBmin, lyap_rBmin);
     gl.uniform1f(uniforms.u_lyap_rBmax, lyap_rBmax);
 
-    // Sequence encode: A = 1, B = 0
     let seq = (lyapunovSeq||"AB").toUpperCase();
     let arr = new Int32Array(MAX_LYAP_SEQ);
     for (let i = 0; i < Math.min(seq.length, MAX_LYAP_SEQ); ++i) {
@@ -688,7 +714,6 @@ function setWebGLUniformsForUI() {
     gl.uniform1i(uniforms.u_lyap_seqlen, Math.min(seq.length, MAX_LYAP_SEQ));
 }
 
-// Buffer setup
 const quadBuffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
@@ -761,7 +786,6 @@ function onChangeRedraw() {
   }
   draw();
 }
-resInput.addEventListener("input", onChangeRedraw);
 iterInput.addEventListener("input", onChangeRedraw);
 juliaReInput.addEventListener("input", onChangeRedraw);
 juliaImInput.addEventListener("input", onChangeRedraw);
@@ -822,7 +846,6 @@ canvas.addEventListener('wheel', function(e) {
     e.preventDefault();
 }, {passive: false});
 
-// Zoom implementation, with correct mouse tracking for all modes
 function applyZoom(factor, mousePoint) {
   if (fractalMode === 11) {
     const mx = mousePoint.x / canvas.width;
