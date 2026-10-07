@@ -1,135 +1,92 @@
-patterns = {
-"blank": [            ],
-"4gc": `x = 12, y = 9, rule = B3/S23 
-4b4o4b$12b$2b8o2b$12b$12o$12b$2b8o2b$12b$4b4o4b!`,
-"gliderGun1": `x = 36, y = 9, rule = B3/S23
-12b2o22b$11bo3bo20b$10bo5bo7bo11b$2o8bo3bob2o4bobo11b$2o8bo5bo3b2o14b$11bo3bo4b2o12b2o$12b2o6b2o12b2o$22bobo11b$24bo11b!`,
-"acorn":`x = 7, y = 3, rule = B3/S23
-bo5b$3bo3b$2o2b3o!`,
-"15cycle":`x = 10, y = 3, rule = B3/S23
-2bo4bo2b$2ob4ob2o$2bo4bo2b!`,
-"queenbeeshuttle": `x = 22, y = 9, rule = B3/S23
-9bo12b$7bobo12b$6bobo13b$2o3bo2bo13b$2o4bobo13b$7bobo8b2o2b$9bo8bobob$20bob$20b2o!`,
-"glidertrain": `x = 43, y = 31, rule = B3/S23
+(function(){let t=document.createElement(`link`).relList;if(t&&t.supports&&t.supports(`modulepreload`))return;for(let t of document.querySelectorAll(`link[rel="modulepreload"]`))r(t);new MutationObserver(t=>{for(let n of t)if(n.type===`childList`)for(let t of n.addedNodes)t.tagName===`LINK`&&t.rel===`modulepreload`&&r(t)}).observe(document,{childList:!0,subtree:!0});function n(t){let n={};return t.integrity&&(n.integrity=t.integrity),t.referrerPolicy&&(n.referrerPolicy=t.referrerPolicy),n.credentials=t.crossOrigin===`use-credentials`?`include`:t.crossOrigin===`anonymous`?`omit`:`same-origin`,n}function r(t){if(t.ep)return;t.ep=!0;let r=n(t);fetch(t.href,r)}})();var lexpatterns={blank:[],"4gc":`x = 12, y = 9, rule = B3/S23 
+4b4o4b$12b$2b8o2b$12b$12o$12b$2b8o2b$12b$4b4o4b!`,gliderGun1:`x = 36, y = 9, rule = B3/S23
+12b2o22b$11bo3bo20b$10bo5bo7bo11b$2o8bo3bob2o4bobo11b$2o8bo5bo3b2o14b$11bo3bo4b2o12b2o$12b2o6b2o12b2o$22bobo11b$24bo11b!`,acorn:`x = 7, y = 3, rule = B3/S23
+bo5b$3bo3b$2o2b3o!`,"15cycle":`x = 10, y = 3, rule = B3/S23
+2bo4bo2b$2ob4ob2o$2bo4bo2b!`,queenbeeshuttle:`x = 22, y = 9, rule = B3/S23
+9bo12b$7bobo12b$6bobo13b$2o3bo2bo13b$2o4bobo13b$7bobo8b2o2b$9bo8bobob$20bob$20b2o!`,glidertrain:`x = 43, y = 31, rule = B3/S23
 30bo12b$31bo11b$25bo5bo11b$4bo21b6o5b6o$5bo30bo5bo$o4bo36bo$b5o30bo4bob$38b2o3b$43b$37bo5b$36bo6b$35b2o3b2ob$35bobo3b2o$36bo3b2ob$40bo2b$43b$40bo2b$36bo3b2ob$35
-bobo3b2o$35b2o3b2ob$36bo6b$37bo5b$43b$38b2o3b$b5o30bo4bob$o4bo36bo$5bo30bo5bo$4bo21b6o5b6o$25bo5bo11b$31bo11b$30bo12b!`,
-"spaceship1N": `x = 21, y = 11, rule = B3/S23
-6bo7bo6b$5bobo5bobo5b$4b2ob2o3b2ob2o4b$4b2o2bo3bo2b2o4b$5bobobobobobo5b$b7obobob7ob$o3b4obobob4o3bo$3b2o4bobo4b2o3b$3bo5bobo5bo3b$o8bobo8bo$obo5b2ob2o5bobo!`,
-"diagship":  /* 295P5H1V1 */`
+bobo3b2o$35b2o3b2ob$36bo6b$37bo5b$43b$38b2o3b$b5o30bo4bob$o4bo36bo$5bo30bo5bo$4bo21b6o5b6o$25bo5bo11b$31bo11b$30bo12b!`,spaceship1N:`x = 21, y = 11, rule = B3/S23
+6bo7bo6b$5bobo5bobo5b$4b2ob2o3b2ob2o4b$4b2o2bo3bo2b2o4b$5bobobobobobo5b$b7obobob7ob$o3b4obobob4o3bo$3b2o4bobo4b2o3b$3bo5bobo5bo3b$o8bobo8bo$obo5b2ob2o5bobo!`,diagship:`
 x = 52, y = 52, rule = B3/S23
 13b2o37b$5b2o4b2obobo35b$4b3o4b4o37b$3b2o6b2o5bo33b$2b2o2b2o3bo2bo2bo34b$b2o5bo7bo2b2o31b$b2obo3b4o40b$4bo3b2o2b2obo36b$5b3o4bobo37b$6b2o3b2o2bo36b$6bo5bo39b$b4
 obo2bo2bo3bo35b$b3o3b5o2b7obo29b$obo4bo10bo2b2o29b$3obo3bo3bo5b3o31b$7bobo2bo7b2o30b$bo3bo5b2o8b2o2bobo24b$4bo7bo8b3obob3o22b$3bo8b3o6bo4bo25b$5bo6bobo5bobo29b$
 5bo6bob2o3bo4bo27b$13bob4o3bo5bo2bo20b$12b2o2b2obobo3bob3o22b$17bo6bo2b3o3b3o16b$20bo2bo6b2o20b$16b2o4bo2bo10b2o14b$18bo13bo3bo15b$16b2o4b2o8bo19b$17bo3b3o8bobo
 bobo13b$17bo4b2o8bo5b2o12b$24bo8bo2b3o13b$21bo2bo8bo8bo9b$26b4o8b2o3bo8b$23bo6b2o6b2o3bo8b$23bo4bo12bo10b$23bo15bo12b$25b2obobo7bo2bo10b$25bo4bo9b3o9b$28b3ob2o2
 bo3bo3bob2o4b$29bo2b2obo5bo3bo2bo3b$37b2o2bo3bo6b$34bob2ob2obo2b2o3bob$31bo5bo3bo7bobo$32b2o12b2o3bo$38bo7b2o4b$39b3o3b2o2bo2b$38bo2bob3o6b$38bo4b2o7b$39bo12b$
-42bo2bo6b$41bo10b$42b2o8b!`,
-"2engcordership": `x = 41, y = 49, rule = B3/S23
+42bo2bo6b$41bo10b$42b2o8b!`,"2engcordership":`x = 41, y = 49, rule = B3/S23
 12bo28b$12bo5b3o20b$11bobo3b2o2bo19b$12bo3bo5bo18b$12bo3bo24b$17bo2b2o19b$18b2o11b2o8b$31b2o8b$41b$41b$41b$41b$41b$41b$b3o35b2o$b3o21bo13b2o$2bo12b2o9b2o13b$3b2
 o9bob3o8b2o12b$4bo9bo3bo10bo11b$3bo11b2obo5b5o12b$16bo10bo13b$41b$41b$b2o38b$b2o38b$2bo38b$2bo38b$bobo37b$o40b$bo2b2o35b$2bo3bo34b$4b2o35b$4bo36b$41b$41b$41b$41
-b$41b$41b$6b2o33b$6b2o33b$19bo21b$19b3o19b$20b2o19b$20bo20b$41b$18b2obo19b$18b4o19b$20b2o19b!`,
-"infection": `x = 49, y = 26, rule = B3/S23
+b$41b$41b$6b2o33b$6b2o33b$19bo21b$19b3o19b$20b2o19b$20bo20b$41b$18b2obo19b$18b4o19b$20b2o19b!`,infection:`x = 49, y = 26, rule = B3/S23
 20b3o3b3o20b$19bo2bo3bo2bo19b$4o18bo3bo18b4o$o3bo17bo3bo17bo3bo$o8bo12bo3bo12bo8bo$bo2bo2b2o2bo25bo2b2o2bo2bob$6bo5bo7b3o3b3o7bo5bo6b$6bo5bo8bo5bo8bo5bo6b$6bo5b
 o8b7o8bo5bo6b$bo2bo2b2o2bo2b2o4bo7bo4b2o2bo2b2o2bo2bob$o8bo3b2o4b11o4b2o3bo8bo$o3bo9b2o17b2o9bo3bo$4o11b19o11b4o$16bobo11bobo16b$19b11o19b$19bo9bo19b$20b9o20b$2
-4bo24b$20b3o3b3o20b$22bo3bo22b$49b$21b3ob3o21b$21b3ob3o21b$20bob2ob2obo20b$20b3o3b3o20b$21bo5bo21b!`, 
-"infectionCollision":  `x = 49, y = 98, rule = B3/S23
+4bo24b$20b3o3b3o20b$22bo3bo22b$49b$21b3ob3o21b$21b3ob3o21b$20bob2ob2obo20b$20b3o3b3o20b$21bo5bo21b!`,infectionCollision:`x = 49, y = 98, rule = B3/S23
 21bo5bo21b$20b3o3b3o20b$20bob2ob2obo20b$21b3ob3o21b$21b3ob3o21b$49b$22bo3bo22b$20b3o3b3o20b$24bo24b$20b9o20b$19bo9bo19b$19b11o19b$16bobo11bobo16b$4o11b19o11b4o$o3bo9b2o17b2o9bo3bo$o8bo3b2o4b11o4b2o3bo8bo$bo2bo2b2o2bo2b2o4
 bo7bo4b2o2bo2b2o2bo2bob$6bo5bo8b7o8bo5bo6b$6bo5bo8bo5bo8bo5bo6b$6bo5bo7b3o3b3o7bo5bo6b$bo2bo2b2o2bo25bo2b2o2bo2bob$o8bo12bo3bo12bo8bo$o3bo17bo3bo17bo3bo$4o18bo3bo18b4o$19bo2bo3bo2bo19b$20b3o3b3o20b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$
 49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$49b$20b3o3b3o20b$19bo2bo3bo2bo19b$4o18bo3bo18b4o$o3bo17bo3bo17bo3bo$o8bo12bo3bo12bo8bo$bo2bo2b2o2bo25bo2b2o2bo2bob$6bo5bo7
 b3o3b3o7bo5bo6b$6bo5bo8bo5bo8bo5bo6b$6bo5bo8b7o8bo5bo6b$bo2bo2b2o2bo2b2o4bo7bo4b2o2bo2b2o2bo2bob$o8bo3b2o4b11o4b2o3bo8bo$o3bo9b2o17b2o9bo3bo$4o11b19o11b4o$16bobo11bobo16b$19b11o19b$19bo9bo19b$20b9o20b$24bo24b$20b3o3b3o20b$22bo3bo22b$49b$21b3ob3o21b$2
-1b3ob3o21b$20bob2ob2obo20b$20b3o3b3o20b$21bo5bo21b!`,
-"antstretcher": `x = 144, y = 86, rule = B3/S23
+1b3ob3o21b$20bob2ob2obo20b$20b3o3b3o20b$21bo5bo21b!`,antstretcher:`x = 144, y = 86, rule = B3/S23
 114b2o28b$31b2o80b2o29b$30b2o75b2o5bo29b$31bobo72b2o5b2o29b$26bo4b3o74bo4bobo2b2o24b$25b5ob3o2bob2o70b2o3b2ob4o22b$25bo2b2o6bo3b2ob2o65b2o10bo21b$35bo4b2o3b2ob2o72bo21b$27b2o2b2ob2o2b2o5b2o3b2ob2o61bo27b$35bo7b2o5b2o3b2o
 b2o58b2o24b$21b3o3bo5b2o13b2o5b2o3b2ob2o79b$21bo5bo2bob2o19b2o5b2o3b2ob2o48b3o23b$22bo3b2obo28b2o5b2o3b2ob2o42b2o2bo22b$25b2o3bobo30b2o5b2o3b2ob2o39bo24b$13b3o10bo41b2o5b2o3b2ob2o59b$13bo5b3o2b2o47b2o5b2o3b2ob2o23b3o2bo25b$14bo2b2ob3ob2o52b2o5b2o3b2o
 b2o18bo2b3o25b$16bo10bo55b2o5b2o3b2ob2o16b2o26b$17bobob2o4bo60b2o5b2o3b2ob2o9b2ob2o25b$19b2obo70b2o5b2o3b2ob2o7b2o25b$17b2o3bobo73b2o5b2o3b2obobo28b$16b2o85b2o5b2o32b$18bo89b2o4bo29b$15b2o96bo30b$14b3o127b$13b2obo127b$12b4obo126b$17b3o124b$18b2o124b$
 10b3ob2o128b$9bo3b3o128b$12b3o129b$8bobobo131b$7b4o133b$7bo136b$8b2o134b$9bo2bo131b$2o142b$obo3b3o135b$o3bo4bo134b$3b2o139b$3bo5bo134b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$
-144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$143bo!`,
-"p58mwssGun": `x = 40, y = 29, rule = B3/S23
+144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$144b$143bo!`,p58mwssGun:`x = 40, y = 29, rule = B3/S23
 6bo33b$6b3o31b$9bo30b$8b2o30b$5bo34b$3b3o34b$2bo37b$2b2o36b$40b$2b2o7bobo2bobo21b$2bobo6bo2bo3bo21b$3bo5b2o3bobobo21b$3o7b3obo25b$o6b2o5b2o8b3o13b$7b2o4b2o8bo3bo12b$7b2o3bo9bo5bo11b$7b2obobo8bo3bo3bo10b$7b2obobo8bo7bo5b2o
-3b$21bobo3bobo5b2o3b$17b2o3b2o3b2o11b$10b2o4bobo21b$6b2o2b2o4bo19b2o2b$5bobo7b2o19bo3b$5bo13b2o16b3o$4b2o14bo4bo13bo$20bobobobo13b$21b2ob2obo12b$27bo12b$27b2o11b!`,
-"p69spiral": `x = 21, y = 21, rule = B3/S23
-10b3o8b$10bo2bo7b$10bo2bo7b$12b2o7b$21b$21b$21b$b3o17b$o2bo17b$o20b$3o15b3o$20bo$17bo2bo$17b3ob$21b$21b$21b$7b2o12b$7bo2bo10b$7bo2bo10b$8b3o10b!`,
-"c/3spaceship": `x = 16, y = 5, rule = B3/S23
-7b2obo5b$4b2obob2ob3ob$b4o2b2o6bo$o4bo3bo3b2ob$b2o13b!`,
-"spaceship5": `x = 15, y = 11, rule = B3/S23
-4bo5bo4b$3b3o3b3o3b$2bo2bo3bo2bo2b$b3o7b3ob$2bobo5bobo2b$4b2o3b2o4b$o4bo3bo4bo$5bo3bo5b$2o3bo3bo3b2o$2bo2bo3bo2bo2b$4bo5bo4b!`,
-"spaceship6": `x = 23, y = 23, rule = B3/S23
-20b2ob$20b2ob$19bo2bo$16b2obo2bo$22bo$14b2o3bo2bo$14b2o5bob$15bob5ob$16bo6b$23b$23b$13b3o7b$13bo9b$11b2o10b$5b2o4bo11b$5b3o3bo11b$3bo4bo14b$3bo3bo15b$7bo15b$2b2obobo15b$2o5bo15b$2o4b2o15b$2b4o17b!`,
-"p60spiral": `x = 42, y = 42, rule = B3/S23
+3b$21bobo3bobo5b2o3b$17b2o3b2o3b2o11b$10b2o4bobo21b$6b2o2b2o4bo19b2o2b$5bobo7b2o19bo3b$5bo13b2o16b3o$4b2o14bo4bo13bo$20bobobobo13b$21b2ob2obo12b$27bo12b$27b2o11b!`,p69spiral:`x = 21, y = 21, rule = B3/S23
+10b3o8b$10bo2bo7b$10bo2bo7b$12b2o7b$21b$21b$21b$b3o17b$o2bo17b$o20b$3o15b3o$20bo$17bo2bo$17b3ob$21b$21b$21b$7b2o12b$7bo2bo10b$7bo2bo10b$8b3o10b!`,"c/3spaceship":`x = 16, y = 5, rule = B3/S23
+7b2obo5b$4b2obob2ob3ob$b4o2b2o6bo$o4bo3bo3b2ob$b2o13b!`,spaceship5:`x = 15, y = 11, rule = B3/S23
+4bo5bo4b$3b3o3b3o3b$2bo2bo3bo2bo2b$b3o7b3ob$2bobo5bobo2b$4b2o3b2o4b$o4bo3bo4bo$5bo3bo5b$2o3bo3bo3b2o$2bo2bo3bo2bo2b$4bo5bo4b!`,spaceship6:`x = 23, y = 23, rule = B3/S23
+20b2ob$20b2ob$19bo2bo$16b2obo2bo$22bo$14b2o3bo2bo$14b2o5bob$15bob5ob$16bo6b$23b$23b$13b3o7b$13bo9b$11b2o10b$5b2o4bo11b$5b3o3bo11b$3bo4bo14b$3bo3bo15b$7bo15b$2b2obobo15b$2o5bo15b$2o4b2o15b$2b4o17b!`,p60spiral:`x = 42, y = 42, rule = B3/S23
 20b2o20b$20b2o20b$42b$42b$42b$31b2o9b$22b2o6bo2bo8b$22bo8b2o9b$6bo15bo19b$5bobo15bo18b$5bobo34b$6bo35b$42b$42b$42b$42b$42b$42b$32bo2bo6b$33b3o6b$2o38b2o$2o38b2o$6b3o33b$6bo2bo32b$42b$42b$42b$42b$4
-2b$42b$35bo6b$34bobo5b$18bo15bobo5b$19bo15bo6b$9b2o8bo22b$8bo2bo6b2o22b$9b2o31b$42b$42b$42b$20b2o20b$20b2o20b!`,
-"glidereater": `x = 56, y = 48, rule = B3/S23
+2b$42b$35bo6b$34bobo5b$18bo15bobo5b$19bo15bo6b$9b2o8bo22b$8bo2bo6b2o22b$9b2o31b$42b$42b$42b$20b2o20b$20b2o20b!`,glidereater:`x = 56, y = 48, rule = B3/S23
 27bo28b$26bobo27b$9b2o14bo3b2o3b2o20b$9bobo13bo3b2o3b2o20b$3ob2o4b3o12bo3b2o25b$4o2bo4b3o12bobo27b$4b2o4b3o7bo6bo28b$9bobo9b2o33b$9b2o9b2o34b$56b$56b$56b$56b$56b$27bobo26b$28b2o26b$28bo27b$5
-6b$56b$56b$56b$35bo20b$36b2o18b$35b2o19b$56b$56b$56b$56b$56b$42bobo11b$43b2o11b$43bo12b$56b$56b$56b$56b$56b$56b$51bo4b$50bo3b2o$49bo5bo$49b3o2bob$53bo2b$49b5obo$49bo4b2o$50b3o3b$52bob2o$53bobo!`,
-"achimsp144": `x = 28, y = 19, rule = B3/S23
-2o24b2o$2o24b2o$8b2o18b$7bo2bo17b$8b2o18b$28b$12b3o13b$12bobo13b$12b3o13b$13b2o13b$13b3o12b$13bobo12b$13b3o12b$28b$18b2o8b$17bo2bo7b$18b2o8b$2o24b2o$2o24b2o!`,
-"cordership": `x = 63, y = 58, rule = B3/S23
+6b$56b$56b$56b$35bo20b$36b2o18b$35b2o19b$56b$56b$56b$56b$56b$42bobo11b$43b2o11b$43bo12b$56b$56b$56b$56b$56b$56b$51bo4b$50bo3b2o$49bo5bo$49b3o2bob$53bo2b$49b5obo$49bo4b2o$50b3o3b$52bob2o$53bobo!`,achimsp144:`x = 28, y = 19, rule = B3/S23
+2o24b2o$2o24b2o$8b2o18b$7bo2bo17b$8b2o18b$28b$12b3o13b$12bobo13b$12b3o13b$13b2o13b$13b3o12b$13bobo12b$13b3o12b$28b$18b2o8b$17bo2bo7b$18b2o8b$2o24b2o$2o24b2o!`,cordership:`x = 63, y = 58, rule = B3/S23
 32b2obo27b$31b3obo6bobo18b$30bo4bobo4bo20b$31b2o6bobo3bo17b$32bo3bo2bo2b2o19b$35bob2o3bo20b$34bobo16b2o8b$34bobo16b2o8b$63b$63b$63b$63b$63b$63b$61b2o$52b2o7b2o$39bo9bob4o8b$34bo3b5o5b2obo3
 b2o6b$33bobo7b2o4bo2b2ob2o6b$33bo7bob2o5b6o7b$34bo8b2o6bo11b$35bo3b4o20b$40b3o20b$24bobo9b2o25b$24bobobo6bobo25b$23bo2b2obo4b2o27b$24b2o3bobob2obo26b$24b2o3b2ob5o26b$28bob2o3b2o26b$27bobo3
 3b$2b2obo57b$b3obo6bobo48b$o4bobo4bo50b$b2o6bobo3bo47b$2bo3bo2bo2b2o11bo37b$5bob2o3bo11b3o36b$4bobo17bo2bo35b$4bobo16bo4bo34b$24bo38b$63b$24bo2bo35b$25bobo35b$63b$21bo41b$20b3o40b$19b2ob2o
-39b$9bo8b2obo5bo35b$4bo3b5o4b2o6b2o36b$3bobo7b2o2b2o7b2o35b$3bo7bob2o48b$4bo8b2o48b$5bo3b4o50b$10b3o50b$63b$63b$63b$11b2o50b$11b2o50b!`,
-"KoksGalaxy": `x = 9, y = 9, rule = B3/S23
-6ob2o$6ob2o$7b2o$2o5b2o$2o5b2o$2o5b2o$2o7b$2ob6o$2ob6o!`,
-"LightspeedBubble": `x = 179, y = 37, rule = B3/S23
+39b$9bo8b2obo5bo35b$4bo3b5o4b2o6b2o36b$3bobo7b2o2b2o7b2o35b$3bo7bob2o48b$4bo8b2o48b$5bo3b4o50b$10b3o50b$63b$63b$63b$11b2o50b$11b2o50b!`,KoksGalaxy:`x = 9, y = 9, rule = B3/S23
+6ob2o$6ob2o$7b2o$2o5b2o$2o5b2o$2o5b2o$2o7b$2ob6o$2ob6o!`,LightspeedBubble:`x = 179, y = 37, rule = B3/S23
 bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo3b$b177ob$178
 bo$b130o2b3o2b3o2b35ob$o131b2o3b2o3b2o8bo26b$b130o3b2o3b2o3bob2obo4b24ob$146b2o5bo24bo$b130o17b30ob$o148bo29b$b130o19b28ob$150bo4bo22bo$b130o19b2o4b22ob$o149bo5bo4bo17b$b130o19b2o4b2o4b16ob
 $150bo5bo5bo4bo10bo$b130o19b2o4b2o4b2o4b10ob$o149bo5bo5bo5bo4bo5b$b130o19b2o4b2o4b2o4b2o4b4ob$150bo5bo5bo5bo5bo3bo$b130o19b2o4b2o4b2o4b2o4b4ob$o149bo5bo5bo5bo4bo5b$b130o19b2o4b2o4b2o4b10ob$
 150bo5bo5bo4bo10bo$b130o19b2o4b2o4b16ob$o149bo5bo4bo17b$b130o19b2o4b22ob$150bo4bo22bo$b130o19b28ob$o148bo29b$b130o17b30ob$146b2o5bo24bo$b130o3b2o3b2o3bob2obo4b24ob$o131b2o3b2o3b2o8bo26b$b13
-0o2b3o2b3o2b35ob$178bo$b177ob$bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo3b!`,
-"loneDotAgar": `x = 38, y = 38, rule = B3/S23
+0o2b3o2b3o2b35ob$178bo$b177ob$bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo3b!`,loneDotAgar:`x = 38, y = 38, rule = B3/S23
 4b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o4b$4bo2bobo2bo2bobo2bo2bobo2bo2bobo4b$5bo7bo7bo7bo8b$8bo7bo7bo7bo5b$2o2bobo5bobo5bobo5bobo5b2o$obo5bobo5bobo5bobo5bobo2bo$4bo7bo7bo7bo7bob$bo7bo7bo7bo7bo4b$o2
 bobo5bobo5bobo5bobo5bobo$2o5bobo5bobo5bobo5bobo2b2o$5bo7bo7bo7bo8b$8bo7bo7bo7bo5b$2o2bobo5bobo5bobo5bobo5b2o$obo5bobo5bobo5bobo5bobo2bo$4bo7bo7bo7bo7bob$bo7bo7bo7bo7bo4b$o2bobo5bobo5bobo5bob
 o5bobo$2o5bobo5bobo5bobo5bobo2b2o$5bo7bo7bo7bo8b$8bo7bo7bo7bo5b$2o2bobo5bobo5bobo5bobo5b2o$obo5bobo5bobo5bobo5bobo2bo$4bo7bo7bo7bo7bob$bo7bo7bo7bo7bo4b$o2bobo5bobo5bobo5bobo5bobo$2o5bobo5bob
 o5bobo5bobo2b2o$5bo7bo7bo7bo8b$8bo7bo7bo7bo5b$2o2bobo5bobo5bobo5bobo5b2o$obo5bobo5bobo5bobo5bobo2bo$4bo7bo7bo7bo7bob$bo7bo7bo7bo7bo4b$o2bobo5bobo5bobo5bobo5bobo$2o5bobo5bobo5bobo5bobo2b2o$5bo7
-bo7bo7bo8b$8bo7bo7bo7bo5b$4bobo2bo2bobo2bo2bobo2bo2bobo2bo4b$4b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o4b!`,
-"centinal": `x = 52, y = 17, rule = B3/S23
+bo7bo7bo8b$8bo7bo7bo7bo5b$4bobo2bo2bobo2bo2bobo2bo2bobo2bo4b$4b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o4b!`,centinal:`x = 52, y = 17, rule = B3/S23
 2o48b2o$bo48bob$bobo44bobob$2b2o10bo22b2o9b2o2b$13b2o21bo2bo12b$12b2obo3b2o10b2o3bo2bo12b$13bobo3b2o10b2o2b2ob2o12b$14b2o20b2o14b$52b$14b2o20b2o14b$13bobo3b2o10b2o2b2ob2o12b$12b2obo3b2o10b
-2o3bo2bo12b$13b2o21bo2bo12b$2b2o10bo22b2o9b2o2b$bobo44bobob$bo48bob$2o48b2o!`,
-"copperhead": `x = 6, y = 12, rule = B3/S23
-b4ob$6b$bo2bob$ob2obo$o4bo$6b$o4bo$2o2b2o$6o$bo2bob$2b2o2b$2b2o2b!`,
-"diuresis": `x = 29, y = 25, rule = B3/S23
+2o3bo2bo12b$13b2o21bo2bo12b$2b2o10bo22b2o9b2o2b$bobo44bobob$bo48bob$2o48b2o!`,copperhead:`x = 6, y = 12, rule = B3/S23
+b4ob$6b$bo2bob$ob2obo$o4bo$6b$o4bo$2o2b2o$6o$bo2bob$2b2o2b$2b2o2b!`,diuresis:`x = 29, y = 25, rule = B3/S23
 5b2o16b2o4b$6bo16bo5b$6bobo12bobo5b$7b2o12b2o6b$29b$4b2o18b2o3b$4bobo10b2o4bobo3b$5bo10bobo5bo4b$2bo13b2o9bob$2b6o8bo5b6ob$7bo14bo6b$4b2o18b2o3b$4bo20bo3b$5bo18bo4b$2b3o2bo14bo2b3ob$2bo2b3o8
-bo5b3o3bo$3bo12b2o7b3ob$4b2o10bobo5bo4b$6bo10b2o4bo2b2ob$4b2o18b2obob$bo2bo20bo3b$obobo2b2o12b2o2bo3b$bo2bobobo12bobob2o2b$4bobo16bo2bo2b$5b2o16b2o4b!`,
-"doublebarrel": `x = 50, y = 15, rule = B3/S23
-17bo32b$17b2o31b$18b2o30b$17b2o31b$32bo17b$31b2o15b2o$30b2o16b2o$17b2o12b2o17b$2o16b2o30b$2o15b2o31b$17bo32b$31b2o17b$30b2o18b$31b2o17b$32bo17b!`,
-"spaceNonfiller": `x = 37, y = 31, rule = B3/S23
+bo5b3o3bo$3bo12b2o7b3ob$4b2o10bobo5bo4b$6bo10b2o4bo2b2ob$4b2o18b2obob$bo2bo20bo3b$obobo2b2o12b2o2bo3b$bo2bobobo12bobob2o2b$4bobo16bo2bo2b$5b2o16b2o4b!`,doublebarrel:`x = 50, y = 15, rule = B3/S23
+17bo32b$17b2o31b$18b2o30b$17b2o31b$32bo17b$31b2o15b2o$30b2o16b2o$17b2o12b2o17b$2o16b2o30b$2o15b2o31b$17bo32b$31b2o17b$30b2o18b$31b2o17b$32bo17b!`,spaceNonfiller:`x = 37, y = 31, rule = B3/S23
 19b3o15b$18bo2bo15b$12b3o6bo4b3o8b$12bo2bobo3bo4bo2bo7b$12bo2bobo3bo4bo2bo7b$10bo10bo2bobob3o6b$10b2o2b2o2bobo4bo5bo5b$8bo16b2o2b3o5b$8b3obob2o10bo6bo3b$6bo8bo9bobo3b3o3b$6b3o5bo10bo8bo2b$3bobo25bob3ob$2b5obo26bob$b2o6bo2
 1b5ob$2o4b2o18bobo8b$bobo3bo2bo15bo2bo3bobob$8bobo18b2o4b2o$b5o21bo6b2ob$bo26bob5o2b$b3obo25bobo3b$2bo8bo10bo5b3o6b$3b3o3bobo9bo8bo6b$3bo6bo10b2obob3o8b$5b3o2b2o16bo8b$5bo5bo4bobo2b2o2b2o10b$6b3obobo2bo10bo10b$7bo2bo4bo3bobo2bo12b$7bo2bo4bo3bobo2bo12
-b$8b3o4bo6b3o12b$15bo2bo18b$15b3o19b!`,
-"spaceNonfCollision": `x = 171, y = 33, rule = B3/S23
+b$8b3o4bo6b3o12b$15bo2bo18b$15b3o19b!`,spaceNonfCollision:`x = 171, y = 33, rule = B3/S23
 153b3o15b$152bo2bo15b$19b3o124b3o6bo4b3o8b$18bo2bo124bo2bobo3bo4bo2bo7b$12b3o6bo4b3o117bo2bobo3bo4bo2bo7b$12bo2bobo3bo4bo2bo114bo10bo2bobob3o6b$12bo2bobo3bo4bo2bo114b2o2b2o2bobo4bo5bo5b$10bo10bo2bobob3o111bo16b2o2b3o5b$1
 0b2o2b2o2bobo4bo5bo110b3obob2o10bo6bo3b$8bo16b2o2b3o108bo8bo9bobo3b3o3b$8b3obob2o10bo6bo106b3o5bo10bo8bo2b$6bo8bo9bobo3b3o103bobo25bob3ob$6b3o5bo10bo8bo101b5obo26bob$3bobo25bob3o99b2o6bo21b5ob$2b5obo26bo98b2o4b2o18bobo8b$b2o6bo21b5o99bobo3bo2bo15bo2b
 o3bobob$2o4b2o18bobo113bobo18b2o4b2o$bobo3bo2bo15bo2bo3bobo99b5o21bo6b2ob$8bobo18b2o4b2o98bo26bob5o2b$b5o21bo6b2o99b3obo25bobo3b$bo26bob5o101bo8bo10bo5b3o6b$b3obo25bobo103b3o3bobo9bo8bo6b$2bo8bo10bo5b3o106bo6bo10b2obob3o8b$3b3o3bobo9bo8bo108b3o2b2o16
 bo8b$3bo6bo10b2obob3o110bo5bo4bobo2b2o2b2o10b$5b3o2b2o16bo111b3obobo2bo10bo10b$5bo5bo4bobo2b2o2b2o114bo2bo4bo3bobo2bo12b$6b3obobo2bo10bo114bo2bo4bo3bobo2bo12b$7bo2bo4bo3bobo2bo117b3o4bo6b3o12b$7bo2bo4bo3bobo2bo124bo2bo18b$8b3o4bo6b3o124b3o19b$15bo2bo
-152b$15b3o153b!`,
-"spacerake": `x = 22, y = 19, rule = B3/S23
-11b2o5b4o$9b2ob2o3bo3bo$9b4o8bo$10b2o5bo2bob$22b$8bo13b$7b2o8b2o3b$6bo9bo2bo2b$7b5o4bo2bo2b$8b4o3b2ob2o2b$11bo4b2o4b$22b$22b$22b$18b4o$o2bo13bo3bo$4bo16bo$o3bo12bo2bob$b4o17b!`,
-"b52-bomber": `x = 39, y = 21, rule = B3/S23
+152b$15b3o153b!`,spacerake:`x = 22, y = 19, rule = B3/S23
+11b2o5b4o$9b2ob2o3bo3bo$9b4o8bo$10b2o5bo2bob$22b$8bo13b$7b2o8b2o3b$6bo9bo2bo2b$7b5o4bo2bo2b$8b4o3b2ob2o2b$11bo4b2o4b$22b$22b$22b$18b4o$o2bo13bo3bo$4bo16bo$o3bo12bo2bob$b4o17b!`,"b52-bomber":`x = 39, y = 21, rule = B3/S23
 b2o36b$b2o17bo18b$19bobo12bobo2b$20bo12bo5b$2o7b2o23bo2bob$2obo5b2o23bobobo$3bo23bo7bo2bo$3bo23b2o7b2ob$o2bo17b2o5bo10b$b2o18bo17b$21b3o15b$36b2ob$36b2ob$b2o36b$o2bo35b$obobo16bobo4b2o5b2o2b$bo2bo17b2o4b2o5b2obo$5bo12bo3b
-o15bo$2bobo12bobo18bo$18bo16bo2bo$36b2ob!`,
-"back-rake": `x = 27, y = 18, rule = B3/S23
+o15bo$2bobo12bobo18bo$18bo16bo2bo$36b2ob!`,"back-rake":`x = 27, y = 18, rule = B3/S23
 5b3o11b3o5b$4bo3bo9bo3bo4b$3b2o4bo7bo4b2o3b$2bobob2ob2o5b2ob2obobo2b$b2obo4bob2ob2obo4bob2ob$o4bo3bo2bobo2bo3bo4bo$12bobo12b$2o7b2obobob2o7b2o$12bobo12b$6b3o9b3o6b$6bo3bo9bo6b$6bobo4b3o11b$12bo2bo4b2o5b$15bo11b$11bo3bo11b
-$11bo3bo11b$15bo11b$12bobo12b!`,
-"beluchenkos_p51": `x = 31, y = 31, rule = B3/S23
+$11bo3bo11b$15bo11b$12bobo12b!`,beluchenkos_p51:`x = 31, y = 31, rule = B3/S23
 3b2o21b2o3b$3b2o21b2o3b$31b$2o27b2o$2o5bo2b3o5b3o2bo5b2o$6b3ob3o5b3ob3o6b$5bo2bo13bo2bo5b$4b2o19b2o4b$5b2o17b2o5b$31b$4b2o19b2o4b$4b2o19b2o4b$4b2o19b2o4b$31b$31b$31b$31b$31b$4b2o19b2o4b$4b2o19b2o4b$4b2o19b2o4b$31b$5b2o17b
-2o5b$4b2o19b2o4b$5bo2bo13bo2bo5b$6b3ob3o5b3ob3o6b$2o5bo2b3o5b3o2bo5b2o$2o27b2o$31b$3b2o21b2o3b$3b2o21b2o3b!`,
-"bi-block-puffer": `x = 29, y = 38, rule = B3/S23
+2o5b$4b2o19b2o4b$5bo2bo13bo2bo5b$6b3ob3o5b3ob3o6b$2o5bo2b3o5b3o2bo5b2o$2o27b2o$31b$3b2o21b2o3b$3b2o21b2o3b!`,"bi-block-puffer":`x = 29, y = 38, rule = B3/S23
 13b3o13b$12bo3bo12b$7b3obo5bob3o7b$6bo2bobo5bobo2bo6b$5bo3bobob3obobo3bo5b$5bo7bobo7bo5b$7bo13bo7b$4bobo5b2ob2o5bobo4b$3b2obob2o9b2obob2o3b$2bobobob2o9b2obobobo2b$b2obo2bobo9bobo2bob2ob$o3bob2ob3ob3ob3ob2obo3bo$4bo8b3o8bo
 4b$2o3bob3ob2obob2ob3obo3b2o$29b$3b2o19b2o3b$3bo2b2o13b2o2bo3b$5bobo13bobo5b$2b2obo17bob2o2b$5bob2o11b2obo5b$5bo17bo5b$9b3o5b3o9b$7bo4bo3bo4bo7b$2b3o4bo2bo3bo2bo4b3o2b$bo2bo4b3o5b3o4bo2bob$4bo19bo4b$o3bo19bo3bo$o3bo19bo3b
-o$4bo19bo4b$bobo7bo5bo7bobob$12bo3bo12b$10b3o3b3o10b$29b$29b$29b$29b$13bobo13b$12b2ob2o12b!`,
-"blinkerpuffer": `x = 9, y = 18, rule = B3/S23
-3bo5b$bo3bo3b$o8b$o4bo3b$5o4b$9b$9b$9b$b2o6b$2ob3o3b$b4o4b$2b2o5b$9b$5b2o2b$3bo4bo$2bo6b$2bo5bo$2b6ob!`,
-"blinkership": `x = 15, y = 27, rule = B3/S23
-4bo5bo4b$3b3o3b3o3b$3bob2ob2obo3b$4b3ob3o4b$4b2o3b2o4b$15b$7bo7b$6bobo6b$5bo3bo5b$6bobo6b$3o3b3o3b3o$o2bo7bo2bo$o13bo$o13bo$bobo7bobob$15b$15b$15b$15b$6b3o6b$15b$15b$15b$15b$6b3o6b$6bobo6b$6b3o6b!`,
-"corderShip2": `x = 8, y = 6, rule = B3/S23
-6bob$4bob2o$4bobob$4bo3b$2bo5b$obo5b!`,
-"wickstretcher": `x = 49, y = 16, rule = B3/S23
+o$4bo19bo4b$bobo7bo5bo7bobob$12bo3bo12b$10b3o3b3o10b$29b$29b$29b$29b$13bobo13b$12b2ob2o12b!`,blinkerpuffer:`x = 9, y = 18, rule = B3/S23
+3bo5b$bo3bo3b$o8b$o4bo3b$5o4b$9b$9b$9b$b2o6b$2ob3o3b$b4o4b$2b2o5b$9b$5b2o2b$3bo4bo$2bo6b$2bo5bo$2b6ob!`,blinkership:`x = 15, y = 27, rule = B3/S23
+4bo5bo4b$3b3o3b3o3b$3bob2ob2obo3b$4b3ob3o4b$4b2o3b2o4b$15b$7bo7b$6bobo6b$5bo3bo5b$6bobo6b$3o3b3o3b3o$o2bo7bo2bo$o13bo$o13bo$bobo7bobob$15b$15b$15b$15b$6b3o6b$15b$15b$15b$15b$6b3o6b$6bobo6b$6b3o6b!`,corderShip2:`x = 8, y = 6, rule = B3/S23
+6bob$4bob2o$4bobob$4bo3b$2bo5b$obo5b!`,wickstretcher:`x = 49, y = 16, rule = B3/S23
 17b2o30b$13b2o4bo29b$12b3obo32b$ob2o2b2o3bo3b4obobo4b2o7b2o11b$o4b2o2bo8bob3o4bo4b2obo2bob2obo5b$ob2o4b2ob2o4bo11bo3bobob2obob2o5b$6bo7bo13b2o5bo2bobo3b2o3b$5bo9bobo4b3o3bo4bo2bobob3o3bo2b$5bo9bobo
-4b3ob2obo2b2obobo3bo2b2obob$6bo7bo13b2obo3b2o4b2o4bob$ob2o4b2ob2o4bo10bo8b2obobob2ob2o$o4b2o2bo8bob3o8bo3bo3b2obo2bobob$ob2o2b2o3bo3b4obobo7bobo3b2o4bo2bobob$12b3obo14bo5bob3o4bo2b$13b2o4bo17bobo9b$17b2o19bo10b!`, 
-"weekender": `x = 16, y = 11, rule = B3/S23
-bo12bob$bo12bob$obo10bobo$bo12bob$bo12bob$2bo3b4o3bo2b$6b4o6b$2b4o4b4o2b$16b$4bo6bo4b$5b2o2b2o5b!`,
-"simkingun": `x = 33, y = 20, rule = B3/S23
-2o5b2o24b$2o5b2o24b$33b$4b2o27b$4b2o27b$33b$33b$33b$33b$22b2ob2o6b$21bo5bo5b$21bo6bo2b2o$21b3o3bo3b2o$26bo6b$33b$33b$33b$33b$24bob2o5b$24b2obo5b!`,
-"tromboneSlide": `x = 116, y = 136, rule = B3/S23
+4b3ob2obo2b2obobo3bo2b2obob$6bo7bo13b2obo3b2o4b2o4bob$ob2o4b2ob2o4bo10bo8b2obobob2ob2o$o4b2o2bo8bob3o8bo3bo3b2obo2bobob$ob2o2b2o3bo3b4obobo7bobo3b2o4bo2bobob$12b3obo14bo5bob3o4bo2b$13b2o4bo17bobo9b$17b2o19bo10b!`,weekender:`x = 16, y = 11, rule = B3/S23
+bo12bob$bo12bob$obo10bobo$bo12bob$bo12bob$2bo3b4o3bo2b$6b4o6b$2b4o4b4o2b$16b$4bo6bo4b$5b2o2b2o5b!`,simkingun:`x = 33, y = 20, rule = B3/S23
+2o5b2o24b$2o5b2o24b$33b$4b2o27b$4b2o27b$33b$33b$33b$33b$22b2ob2o6b$21bo5bo5b$21bo6bo2b2o$21b3o3bo3b2o$26bo6b$33b$33b$33b$33b$24bob2o5b$24b2obo5b!`,tromboneSlide:`x = 116, y = 136, rule = B3/S23
 85b2o3b2o24b$85b2o2bob3o22b$89bo4bo21b$85b4ob2o2bo21b$85bo2bobobob2o20b$88bobobobo21b$89b2obobo21b$93bo22b$116b$79b2o35b$80bo7b2o26b$80bobo5b2o26b$81b2o33b$116b$116b$108bo7b$86bo19b3o5bob$86b2o17bo8b2o$85bobo17b2o6bobo$
 91b2o23b$91bo24b$92b3o21b$94bo21b$116b$116b$95b2o19b$67bo26bobo5b2o12b$65b5o14b2o8bo7b2o12b$64bo5bo13bo8b2o21b$64bo2b3o12bobo31b$63b2obo15b2o23bo8b$63bo2b4o33b2obobo7b$64b2o3bo3b2o27bobobobo7b$66b3o4b2o24bo2bobobob2o6b$66bo32b4ob2o2bo7b$63b2obo36bo4b
 o7b$49b2o3b2o7b2ob2o31b2o2bob3o8b$49b2o2bob3o41b2o3b2o10b$53bo4bo57b$49b4ob2o2bo15b2o40b$49bo2bobobob2o15bo20bo19b$52bobobobo13b3o3b2o14b5o17b$52bo3bobo13bo6bo13bo5bo16b$57bo21bobo12b3o2bo16b$52bobo25b2o4bo10bob2o15b$43b2o41b2obo4b4o2bo15b$44bo6bobob
@@ -137,60 +94,43 @@ o29bo4bo3bo3b2o16b$44bobo4b5o34bo4b3o18b$45b2o2b2obo4b2o30bo7bo18b$50b2o2bo4bo37
 b5o14b2o8bo7b2o48b$28bo5bo13bo8b2o57b$28bo2b3o12bobo67b$27b2obo15b2o23bo44b$27bo2b4o33b2obobo43b$28b2o3bo3b2o27bobobobo43b$30b3o4b2o24bo2bobobob2o42b$30bo32b4ob2o2bo43b$27b2obo36bo4bo43b$27b2ob2o31b2o2bob3o44b$48bo14b2o3b2o46b$47b2o67b$38b2o7bobo66b$
 39bo20bo55b$36b3o3b2o14b5o53b$36bo6bo13bo5bo52b$43bobo12b3o2bo52b$44b2o15bob2o51b$58b4o2bo51b$53b2o3bo3b2o52b$53b2o4b3o54b$61bo54b$61bob2o51b$60b2ob2o51b$116b$116b$52b2o62b$52bo63b$53b3o60b$55bo60b$116b$116b$116b$116b$116b$116b$116b$116b$116b$28bo87b
 $28b2o86b$27bobo86b$116b$116b$116b$116b$116b$116b$116b$116b$116b$116b$116b$24b2o5b2o83b$24b2o5b2o83b$116b$27b2o87b$27b2o87b$22b2o92b$22bob2o90b$25bo90b$4b2o17bobo90b$4b2o12bobo2b2o91b$18b2o96b$2o5b2o10bo96b$2o5b2o107b$116b$116b$116b$116b$116b$5b2obo1
-07b$5bob2o107b!`,
-"twirlingt": `x = 24, y = 24, rule = B3/S23
-7b2o3b2o10b$6bo7bo9b$9bobo12b$7b2o3b2o10b$24b$24b$24b$21b3o$20b3ob$13bo10b$3o9b3o9b$b3o20b$20b3ob$21b3o$24b$b3o20b$3o9b3o9b$13bo10b$24b$24b$10b2o3b2o7b$12bobo9b$9bo7bo6b$10b2o3b2o7b!`,
-"twinbees_shuttlepair": `x = 49, y = 14, rule = B3/S23
-17bo31b$2o15b2o30b$2o16b2o29b$17b2o11b2o17b$29bobo17b$29bo19b$29b3o17b$17b2o30b$18b2o29b$17b2o30b$17bo11b3o17b$29bo17b2o$29bobo15b2o$30b2o17b!`,
-"ringof_fire": `x = 34, y = 30, rule = B3/S23
+07b$5bob2o107b!`,twirlingt:`x = 24, y = 24, rule = B3/S23
+7b2o3b2o10b$6bo7bo9b$9bobo12b$7b2o3b2o10b$24b$24b$24b$21b3o$20b3ob$13bo10b$3o9b3o9b$b3o20b$20b3ob$21b3o$24b$b3o20b$3o9b3o9b$13bo10b$24b$24b$10b2o3b2o7b$12bobo9b$9bo7bo6b$10b2o3b2o7b!`,twinbees_shuttlepair:`x = 49, y = 14, rule = B3/S23
+17bo31b$2o15b2o30b$2o16b2o29b$17b2o11b2o17b$29bobo17b$29bo19b$29b3o17b$17b2o30b$18b2o29b$17b2o30b$17bo11b3o17b$29bo17b2o$29bobo15b2o$30b2o17b!`,ringof_fire:`x = 34, y = 30, rule = B3/S23
 16bo17b$14bobobo15b$12bobobobobo13b$10bobobobobobobo11b$8bobobo2b2obobobobo9b$6bobobobo6bo2bobobo7b$4bobobo2bo10bobobobo5b$5b2obo14bo2bobobo3b$3bo3bo18bob2o4b$4b3o20bo3bo2b$2bo25b3o3b$3b2o27bob$bo3bo24b2o2b$2b4o23bo3bo$o2
-9b3ob$b3o29bo$o3bo23b4o2b$2b2o24bo3bob$bo27b2o3b$3b3o25bo2b$2bo3bo20b3o4b$4b2obo18bo3bo3b$3bobobo2bo14bob2o5b$5bobobobo10bo2bobobo4b$7bobobo2bo6bobobobo6b$9bobobobob2o2bobobo8b$11bobobobobobobo10b$13bobobobobo12b$15bobobo14b$17bo16b!`,
-"p24gun": `x = 35, y = 41, rule = B3/S23
+9b3ob$b3o29bo$o3bo23b4o2b$2b2o24bo3bob$bo27b2o3b$3b3o25bo2b$2bo3bo20b3o4b$4b2obo18bo3bo3b$3bobobo2bo14bob2o5b$5bobobobo10bo2bobobo4b$7bobobo2bo6bobobobo6b$9bobobobob2o2bobobo8b$11bobobobobobobo10b$13bobobobobo12b$15bobobo14b$17bo16b!`,p24gun:`x = 35, y = 41, rule = B3/S23
 17b2o11b2o3b$16bo2bo9bo2bo2b$16bobo3b2ob2o3bobo2b$14b2o2bobo7bobo2b2o$15bobobo4bo4bobobob$14bo2b2o2b7o2b2o2bo$14b2o5bobobobo5b2o$23bobo9b$5bo2b2o9b3o5b3o5b$4bobo2bo2bo5bobobo3bobobo4b$4bob2obobobo4b2o2b5o2b2o4b$3b2obo2bob
 o2bo20b$3bo2bob2o2bo22b$4b3obobo3b3o18b$6b2obo5b2o18b$2bobo2bobo3bo2bo4bobobo9b$2b2o2b2obob2o2b3o4b3o10b$8b2obo3b2o6bo11b$2b5o4bo23b$bo4bob3o17b2o5b$bob2obobo6b2o7bo3bobo4b$2obo2bo6b4o8bo4bo4b$bobobobo5b2o2bo5b3o4b2o3b$bobob2obo2bo23b$2ob2o2b2o3b4o19
 b$3bo2b3o2bo2b2o4bo14b$3bobob2o5bo4bobo13b$2b2obo2b2obo2bo3bo3bo12b$4bo3b2o2bo2bo3bobo13b$4bobo7bo5bo14b$3b2ob2o10b3o14b$10b2o4b7o4b2o6b$10bo2bo2b2obob2o2bo2bo6b$11b2ob4o3b4ob2o7b$8b3o2bo11bo2b3o4b$7bo3b2ob2o7b2ob2o3bo3b$7b2obo3b2o7b2o3bob2o3b$8bob3o
-3bo5bo3b3obo4b$7bo6b2o7b2o6bo3b$8b6o11b6o4b$10bo2bo11bo2bo6b!`,
-"p44MWSSgun": `x = 50, y = 40, rule = B3/S23
+3bo5bo3b3obo4b$7bo6b2o7b2o6bo3b$8b6o11b6o4b$10bo2bo11bo2bo6b!`,p44MWSSgun:`x = 50, y = 40, rule = B3/S23
 14bo35b$2b2o2b3o2bob2o5bo29b$2b2o2b2obobob2obobobo3b2o24b$4b3o6bo4bo2b2o2bo24b$4bo17b2o9bo16b$4bo17b3o6b3o16b$30bo19b$30b2o18b$9b2o39b$9b2o39b$26b2o22b$24bobo23b$24b2o5b3o16b$31bobo16b$14b3o6b3o4bo2bo14b2o$2o12b3o7bo6b2o11b2obobo$2o11bo3bo26b2obo2b$1
 3b2ob2o30bob$44b2ob2ob$45bobo2b$45bobo2b$46bo3b$13b2ob2o13b2o17b$2o11bo3bo13b2o17b$2o12b3o33b$14b3o10b2o21b$27bobo20b$29bo20b$29b2o19b$50b$9b2o39b$9b2o39b$50b$50b$4bo17b3o25b$4bo17b2o26b$4b3o6bo4bo2b2o2bo24b$2b2o2b2obobob2obobobo3b2o24b$2b2o2b3o2bob2o
-5bo29b$14bo35b!`,
-"omnigun": `x = 49, y = 49, rule = B3/S23
+5bo29b$14bo35b!`,omnigun:`x = 49, y = 49, rule = B3/S23
 31b2o16b$31b2o5b2o9b$38b2o9b$49b$49b$7b2o27b2o11b$7b2o27b2o11b$42b2o5b$42b2o5b$b2o46b$b2o46b$5b2o42b$5b2o42b$49b$49b$49b$2o47b$2o47b$49b$49b$49b$49b$35b3o11b$35b2o12b$36bobo10b$38bo10b$39b2o8b$37bobo9b$37b2o10b$49b$49b$47
-b2o$47b2o$49b$49b$49b$42b2o5b$42b2o5b$46b2ob$46b2ob$5b2o42b$5b2o42b$11b2o27b2o7b$11b2o27b2o7b$49b$49b$9b2o38b$9b2o5b2o31b$16b2o31b!`,
-"p22gun": `x = 45, y = 21, rule = B3/S23
-18b2o25b$19bo25b$19bobo14b2o7b$20b2o12b2o2bo6b$24b3o7b2ob2o6b$24b2ob2o7b3o6b$24bo2b2o12b2o2b$25b2o14bobob$43bob$43b2o$45b$2o43b$bo43b$bobo13b3o25b$2b2o3bo8bo3bo24b$6bob2o6bo4bo23b$5bo4bo6b2obo24b$6bo3bo8bo3b2o20b$7b3o13bobo19b$25bo19b$25b2o18b!`, 
-"12spawn": `x = 5, y = 3, rule = B3/S23
-2o2bo$o3bo$o2b2o!`,
-"lwssGun": `x = 49, y = 45, rule = B3/S23
+b2o$47b2o$49b$49b$49b$42b2o5b$42b2o5b$46b2ob$46b2ob$5b2o42b$5b2o42b$11b2o27b2o7b$11b2o27b2o7b$49b$49b$9b2o38b$9b2o5b2o31b$16b2o31b!`,p22gun:`x = 45, y = 21, rule = B3/S23
+18b2o25b$19bo25b$19bobo14b2o7b$20b2o12b2o2bo6b$24b3o7b2ob2o6b$24b2ob2o7b3o6b$24bo2b2o12b2o2b$25b2o14bobob$43bob$43b2o$45b$2o43b$bo43b$bobo13b3o25b$2b2o3bo8bo3bo24b$6bob2o6bo4bo23b$5bo4bo6b2obo24b$6bo3bo8bo3b2o20b$7b3o13bobo19b$25bo19b$25b2o18b!`,"12spawn":`x = 5, y = 3, rule = B3/S23
+2o2bo$o3bo$o2b2o!`,lwssGun:`x = 49, y = 45, rule = B3/S23
 4b2o43b$4b2o43b$49b$49b$49b$49b$49b$49b$49b$5bo43b$4b3o42b$3b5o41b$2b2o3b2o40b$49b$49b$24b2o23b$4b3o15bo2bo23b$4b3o14bo15bobo9b$13b2o6bo10b3o2bo3bo7b$3bo9b2o6bo19bo7b$2bobo17bo2bo2b2o7bo4bo4b2o$bo3bo18b2o2bo2bobo7bo5b2o$2
 b3o24b3o5bo3bo7b$2o3b2o4bo25bobo9b$9bobo37b$10b2o20bo16b$30b3o16b$29bo19b$29b2o18b$17bo31b$17bo31b$49b$49b$49b$3b2o17bo26b$3b2o17b2o25b$10bobo8bobo25b$10bo3bo34b$2o12bo10b2o22b$2o8bo4bo7bo2bo7bo14b$14bo7bo7b2o3bo13b$10bo3bo7bo6bo5bo13b$10bobo9bo7b5o1
-4b$23bo2bo22b$25b2o22b!`,
-"104p177": `x = 46, y = 46, rule = B3/S23
+4b$23bo2bo22b$25b2o22b!`,"104p177":`x = 46, y = 46, rule = B3/S23
 16bo12bo16b$9b2o24b2o9b$8b3o3b2o14b2o3b3o8b$14b2ob2o8b2ob2o14b$16bo12bo16b$46b$46b$46b$2bo40bo2b$b2o40b2ob$b2o40b2ob$46b$46b$46b$2b2o38b2o2b$2b2o38b2o2b$o3bo36bo3bo$3bo38bo3b$3bo38bo3b$46b$46b$46b$46b$46b$46b$46b$46b$3bo3
-8bo3b$3bo38bo3b$o3bo36bo3bo$2b2o38b2o2b$2b2o38b2o2b$46b$46b$46b$b2o40b2ob$b2o40b2ob$2bo40bo2b$46b$46b$46b$16bo12bo16b$14b2ob2o8b2ob2o14b$8b3o3b2o14b2o3b3o8b$9b2o24b2o9b$16bo12bo16b!`,
-"p135g": `x = 54, y = 29, rule = B3/S23
+8bo3b$3bo38bo3b$o3bo36bo3bo$2b2o38b2o2b$2b2o38b2o2b$46b$46b$46b$b2o40b2ob$b2o40b2ob$2bo40bo2b$46b$46b$46b$16bo12bo16b$14b2ob2o8b2ob2o14b$8b3o3b2o14b2o3b3o8b$9b2o24b2o9b$16bo12bo16b!`,p135g:`x = 54, y = 29, rule = B3/S23
 26b2o26b$26b2o26b$6bo4bo30bo4bo6b$4b2ob4ob2o7b2o8b2o7b2ob4ob2o4b$6bo4bo8b2o10b2o8bo4bo6b$22bo8bo22b$54b$54b$54b$54b$54b$54b$2bo2bo4bo2bo26bo2bo4bo2bo2b$3o2b6o2b3o22b3o2b6o2b3o$2bo2bo4bo2bo12b2o12bo2bo4bo2bo2b$26b2o26b$54b
-$54b$54b$21bo10bo21b$21bo10bo21b$20bobo8bobo20b$21bo10bo21b$21bo10bo21b$21bo10bo21b$21bo10bo21b$20bobo8bobo20b$21bo10bo21b$21bo10bo21b!`,
-"p15_1": `x = 25, y = 25, rule = B3/S23
+$54b$54b$21bo10bo21b$21bo10bo21b$20bobo8bobo20b$21bo10bo21b$21bo10bo21b$21bo10bo21b$21bo10bo21b$20bobo8bobo20b$21bo10bo21b$21bo10bo21b!`,p15_1:`x = 25, y = 25, rule = B3/S23
 7bo9bo7b$8bo7bo8b$3b2ob3o7b3ob2o3b$2bobo15bobo2b$2b2o17b2o2b$25b$2bo7b2ob2o7bo2b$obo8bobo8bobo$b2o6bobobobo6b2ob$8bobo3bobo8b$6bo2bo5bo2bo6b$6b3o7b3o6b$25b$6b3o7b3o6b$6bo2bo5bo2bo6b$8bobo3bobo8b$b2o6bobobobo6b2ob$obo8bobo
-8bobo$2bo7b2ob2o7bo2b$25b$2b2o17b2o2b$2bobo15bobo2b$3b2ob3o7b3ob2o3b$8bo7bo8b$7bo9bo7b!`,
-"p51extend": `x = 60, y = 60, rule = B3/S23
+8bobo$2bo7b2ob2o7bo2b$25b$2b2o17b2o2b$2bobo15bobo2b$3b2ob3o7b3ob2o3b$8bo7bo8b$7bo9bo7b!`,p51extend:`x = 60, y = 60, rule = B3/S23
 3b2o3b5o5b5o3b2o32b$3b2o3b2ob2o5b2ob2o3b2o32b$8b2o2bo5bo2b2o37b$2o7bobo7bobo7b2o29b$2o8bo9bo8b2o29b$10bo2bo3bo2bo39b$11bo2bobo2bo40b$11bobo3bobo40b$3o25b3o29b$4o23b4o29b$o3b2o19b2o3bo29b$2obo2b2o15b2o2bob2o29b$3o25b3o29b$
 5bobo15bobo34b$6bo17bo35b$60b$6bo17bo35b$5bobo15bobo34b$3o25b3o29b$2obo2b2o15b2o2bob2o29b$o3b2o19b2o3bo29b$4o23b4o29b$3o25b3o29b$11bobo3bobo18b3ob3o15b$11bo2bobo2bo16bo3bobo3bo13b$10bo2bo3bo2bo39b$2o8bo9bo8b2o5bo9bo5b2o6b$2o7bobo7bobo7b2o5bo9bo5b2o6b
 $8b2o2bo5bo2b2o37b$3b2o3b2ob2o5b2ob2o3b2o8bo2bo3bo2bo8b2o3b$3b2o3b5o5b5o3b2o5bo3bobo3bobo3bo5b2o3b$32bob2o11b2obo9b$31bo2bo13bo2bo8b$30bo21bo7b$31b2o17b2o8b$31bo19bo8b$24bob2obo23bob2obob$30bo21bo7b$23bo35bo$23bo5b2o21b2o5bo$23b2o33b2o$60b$23b2o33b2o
 $23bo5b2o21b2o5bo$23bo35bo$30bo21bo7b$24bob2obo23bob2obob$31bo19bo8b$31b2o17b2o8b$30bo21bo7b$31bo2bo13bo2bo8b$32bob2o11b2obo9b$26b2o5bo3bobo3bobo3bo5b2o3b$26b2o8bo2bo3bo2bo8b2o3b$60b$29b2o5bo9bo5b2o6b$29b2o5bo9bo5b2o6b$60b$36bo3bobo3bo13b$38b3ob3o15b
-!`,
-"c/6ship": `x = 16, y = 32, rule = B3/S23
+!`,"c/6ship":`x = 16, y = 32, rule = B3/S23
 4bo6bo4b$3bobob2obobo3b$3b2o2b2o2b2o3b$7b2o7b$16b$5b2o2b2o5b$5b2o2b2o5b$6b4o6b$6bo2bo6b$5bo4bo5b$5bo4bo5b$5bob2obo5b$6bo2bo6b$6bo2bo6b$16b$o14bo$2o4bo2bo4b2o$o5b4o5bo$b2o4b2o4b2ob$2bo10bo2b$obo10bobo$b5o4b5ob$3bo2b4o2bo3b
-$2bo4b2o4bo2b$6bo2bo6b$7b2o7b$4b2ob2ob2o4b$16b$3bo8bo3b$2b3o6b3o2b$2bo2bo4bo2bo2b$b2o10b2ob!`,
-"loafer": `x = 9, y = 9, rule = B3/S23
-b2o2bob2o$o2bo2b2ob$bobo5b$2bo6b$8bo$6b3o$5bo3b$6bo2b$7b2o!`,
-"ponyexpress": `
+$2bo4b2o4bo2b$6bo2bo6b$7b2o7b$4b2ob2ob2o4b$16b$3bo8bo3b$2b3o6b3o2b$2bo2bo4bo2bo2b$b2o10b2ob!`,loafer:`x = 9, y = 9, rule = B3/S23
+b2o2bob2o$o2bo2b2ob$bobo5b$2bo6b$8bo$6b3o$5bo3b$6bo2b$7b2o!`,ponyexpress:`
 x = 74, y = 124, rule = B3/S23
 15b2o$14bo2bo$15bobo$5b2o5bo3bo$5b2o4bobo$11bo2bo$12b2o4$19b2o$19b2o10$15bo$14bobo$14b2o3$32bo$31bobo$32b2o$9b2o$8bo2bo$9b2o3$43b2o$29b2o12b2o$29b2o2$b2o$b2o22b2o10b2o$25b2o9bo2bo$36bo2bo$38bo12b2o$37bo13b2o$24bob2o4bo$29b2o$9b2o12bo3bobo$9b2o12b2o2b3o4bo$25bo3
 bobobo$26bobo2bobo$27bo4bo$32bo$39b3o$38bo2bo$31b2o5b2obo11b2o$31b2o20b4o$4b2o51bo$4b2o47b3obob2o$44bob3o4bo3bo3bo$47b2o4bo4bo2bo$2o37b3o15bo3bo$2o52b2o4bo$25b2o32bo$25b2o29b3o2$19b2o$19b2o3$15b2o$15b2o16b2o$33b2o3$5b2o$5b2o5$28b2o$28b2o3$24b2o$24b2o$49b2o$49b2
-o2$43b2o$21b2o20b2o$21b2o2$39b2o$39b2o16b2o$57b2o3$29b2o20b3o$29b2o$49b2o$49bo4bo$49bo15b2o$41bo8bo2bo11b2o$41b2o9bo$41bobo$44b4o$45b5o$45bo2b2o4bo$53b3o$52b2o2bo$52b2ob2o$55b3o$53bob2o12bo$45b2o5bo2bo14b2o$45b2o8bo11b2o$52bobo13bobo$53bo14b2o$68bo$54bo11bobo$54bo11bo2bo$54bo13b2o$69bo$71b3o!`,
-"zigzag-wickstretch": `#C zigzag c/2 orthogonal wickstretcher: Jason Summers, 14 Feb 2006
+o2$43b2o$21b2o20b2o$21b2o2$39b2o$39b2o16b2o$57b2o3$29b2o20b3o$29b2o$49b2o$49bo4bo$49bo15b2o$41bo8bo2bo11b2o$41b2o9bo$41bobo$44b4o$45b5o$45bo2b2o4bo$53b3o$52b2o2bo$52b2ob2o$55b3o$53bob2o12bo$45b2o5bo2bo14b2o$45b2o8bo11b2o$52bobo13bobo$53bo14b2o$68bo$54bo11bobo$54bo11bo2bo$54bo13b2o$69bo$71b3o!`,"zigzag-wickstretch":`#C zigzag c/2 orthogonal wickstretcher: Jason Summers, 14 Feb 2006
 x = 331, y = 1070, rule = B3/S23
 44bo13bo$43b3o11b3o$42boobo5bo4boobo$42b3o5b3o3b3o$43boo5boboo3boo$73bo13bo$72b3o11b3o$72boboo4bo5boboo$53bo19b3o3b3o5b3o$51boo4b3o13boo3boobo5boo$57bobbo$54bobbo$49bo7bo$48bo3boo4bobo17bo$48bo29b3o5b3o$49bo29bo5bobbo$59b3o3b3o11bobbo5bo$42bo9bo5bobb
 o3bobbo11b3o5bo$41b3o6b3o8bo3bo19bobo$41boboo5bo10bo3bo$42b3o5bobo5bobo5bobo45b3o11b3o$42boo7boo61bobbo10bobbo$62b3o6bo16bo5bo19bo6b3o4bo$62b3o5b3o14b3o3b3o18bo5bobbo4bo$62bobo4boobo13boobo3boboo18bobobbo3bo4bobo$63bo5b3o14b3o5b3o22boobobo$63bo6boo15
@@ -301,8 +241,7 @@ o8bo12bo5bo6bo9bo7bo18bobo$97bobbo11b3o5b3o14b3o3b3o10bo8bobo10b3o3b3o5b3o6b3o5b
 b3o$107bo23boo32bo$106bo19bo3bo8bo3bo13bo8bo13bo3bo5bo6bo16boo$125b3o10bobobobo11bobo8bo13b3o5boo5b3o15bobo$112bo12boboo10b5o11bobbo7boo21bobo4boboo14bo$110bobbo12b3o11b3o13boo39b3o$112bo13b3o3booboo4bo24boo29b3o$105b3o3bo14b3o3boob3o29bo29b3o16b3o$1
 04bobbo18boo4boobboboo3boo21bo30boo12boobbobbo$107bo26boobboobbobbo19bo16b5o24boo5bo$103bo3bo7b3o17bobo4bobbo18bo16boob3o27bo3bo$107bo9bo25boo18bo18b5o31bo$104bobo9bo18bobboo22bo20boo30bobo$135bo4boo19bo22bo$135bo3bobbo17bo$135b3obo19bo$136boob3oboo1
 3bo$137b3o17bo8bo32boo$138bo17bo8bobo31bobo$156boo7bobbo30bo$166boo$156boo$156bo$157bo$158bo$130b3o26bo$132bo27bo$131bo29bo$162bo$163bo$149bo14bo$150boo13bo$149boo6bo8bo17boo$156bobo8bo16bobo$155bobbo7boo16bo$156boo$166boo$167bo$166bo$165bo$145b3o16b
-o$147bo15bo$146bo15bo$161bo$160bo$159bo$158bo$157bo$156bo$156boo!`,
-"13engcorder": `#N 13-engine Cordership
+o$147bo15bo$146bo15bo$161bo$160bo$159bo$158bo$157bo$156bo$156boo!`,"13engcorder":`#N 13-engine Cordership
 #O Dean Hickerson
 #C The first c/12 diagonal spaceship to be found
 x = 97, y = 98, rule = b3/s23
@@ -321,8 +260,7 @@ o31b2ob3o27b3o24b$o2b3o33b2o2bo27bo25b$o5bo27b2o4bo2bo53b$b7o22b2o3bo
 obo91b$2b2obo91b$2b2o93b$3b3o91b$4bo55bo36b$5bo2bo52bo35b$2bo6bo50bo
 36b$2bo6bo87b$2bo4b3o87b5$41b3o7bobo43b$44b3o5bo44b$7b2o35b3o50b$7b2o
 36bo51b4$34bo62b$34bo62b$34bo62b$15b2o18b2o60b$15b2o18b3o59b$35b2o60b
-5$34bo62b$23b2o10bo61b$23b2o9bo!`,
-"spaceshipgun1": `#C p416 2c/5 spaceship gun: Dave Greene, 11 Apr 2003
+5$34bo62b$23b2o10bo61b$23b2o9bo!`,spaceshipgun1:`#C p416 2c/5 spaceship gun: Dave Greene, 11 Apr 2003
 #C 64 p416 guns driving 60 Herschel-based glider inserters
 #C to produce four construction salvos totalling 63 gliders.
 #C Synthesis of 2c/5 spaceship mostly by Noam Elkies.
@@ -605,9 +543,7 @@ oo$179boo599bobo17b3o12bo3bo26bo38boo3boo13bo29bo3bo$144bobbo618b3o12bo19boo8bob
 3obo$776boo4bobo33boo30bo6b3o15bobo11boo6bo19boo6boo20boo7boo23bobobo$764boo11bo5bo34boo31boo6bo15bo13boo6b3o18bo7bo23boo30bobbo$764boo8b3o97boo24bo14b3o5b3o23b3o31boo$774bo64b3o57boo14bo7bo24bobo4b3o9boo$841bo106boo4boo3bo7bobo$840bo112boobbobo7bo$9
 54bo5bo22boo$933boo20boobbo23boo$928boo3boo13boo9bo$844boo82boo17bobbo$826bo17boo101bobobo23boo5b3o$811boo12bobo16boo102bob3o22boo5boo$810b3o13bo18bo81boo12boo7b3o12bo19boo$809boboo23boo6bobo81bo5boo5bo22bobo4boo11b3o$808bobo25boo5boobo78b3o6boo6b3o2
 0bo5bo11bobo$808bobbo113bo18bo27b3o8boo$809boo5bo157bo$815bobo26boo$814booboobboo21boo$815boo3bobo$809boo3bobobb3o5bo$809boo9boo4bo$809boo15b3o15boo$810bo32bobbo$809bobo5boo25bobo$808boobo5boo23boobo$828bo13b3o$821boo4bobo12boo$809boo11bo5bo$809boo8b
-3o$819bo!`,
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"3engCorder_gun": `#N 3-engine Cordership rake
+3o$819bo!`,"3engCorder_gun":`#N 3-engine Cordership rake
 #O Jason Summers
 #C A period 240 c/2 orthogonal 3-engine Cordership rake created on Jan
 #C uary 19, 2004.
@@ -653,9 +589,7 @@ b5o218b$210bo250b$200b2o8b2o15b3o231b$199bo2bo9bo14bo233b$199bo2bo4b5o16bo232b$1
 obo231b$189bo8b4o3b4o18bo233b$189bo3bo3b2ob2o4b2o253b$189b4o5b2o30b5o226b$222b2o6bo4bo225b$222bobo5bo230b$209bo12bo8bo3bo225b$193b2o13bo2bo21bo227b$191b2ob2o11bo3bo249b$191bo2bo12bo3bo5b2o242b$191bo2bo12bo3bo5bobo241b$192b2o9b2o3bobo6bo243b$203b2o4bo
 24bo226b$225b6obo3bo224b$190bo2bo31bo5bo3b3o223b$189bo35bo5bo5bo223b$189bo3bo32bo3bo3b2obo223b$189b4o13b4o18bo5b3o224b$206bo3bo16b2o232b$206bo19b4o231b$207bo2bo14b2ob2o231b$226b2o11b3o219b$239bo221b$240bo220b$208b2o251b$207b2ob2o8bo240b$208b4o3bo4bob
 o238b$209b2o3bo5bo2bo237b$213bo2bo6bo237b$209b2o3bo5bo2bo237b$208b4o3bo4bobo238b$207b2ob2o8bo8b3o229b$192b4o5b2o5b2o19bo6bo224b$192bo3bo3b2ob2o25bo3bo3bo222b$192bo8b4o28bo227b$193bo2bo5b2o29bo4bo222b$224b3o6b5o223b$224bo236b$195b2o7bo20bo235b$194bobo
-3b2o7b5o247b$194bo18bo247b$194b3o13b3o6b3o239b$205b2o4bo7bo241b$205b2o13bo240b3$192b4o265b$192bo3bo13bo2bo247b$192bo16bo251b$193bo2bo12bo3bo247b$209b4o!`,
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"vacuumGun": `#N Vacuum (gun)
+3b2o7b5o247b$194bo18bo247b$194b3o13b3o6b3o239b$205b2o4bo7bo241b$205b2o13bo240b3$192b4o265b$192bo3bo13bo2bo247b$192bo16bo251b$193bo2bo12bo3bo247b$209b4o!`,vacuumGun:`#N Vacuum (gun)
 #O Dieter Leithner
 #C A true period 46 double-barreled gun found on February 21, 1997.
 x = 49, y = 43, rule = b3/s23
@@ -665,8 +599,7 @@ $16b2o31b$16bo32b$44b2o3b$16bo27b2o3b$16b2o31b$2o13bob2o13bo3bo12b$2o
 33b3o13b$31b2o3bo12b$31bo13b2o2b$31bo5bo7b2o2b$32bo3bo12b2$44b2o3b$44b
 2o3b5$37b2o10b$37bobo7b2o$39bo7b2o$37b3o9b$22bobo24b$21b3o25b$21b3o25b
 $21bo15b3o9b$25bobo11bo9b$21b2o4bo9bobo9b$16b2o4bo3b2o9b2o10b$15bobo6b
-o24b$15bo33b$14b2o!`,
-"slideGun": `#N Slide gun
+o24b$15bo33b$14b2o!`,slideGun:`#N Slide gun
 #O Jason Summers
 #C A diagonal slide gun constructed on September 3, 1999
 x = 109, y = 59, rule = b3/s23
@@ -676,8 +609,7 @@ o12b$46b3o22b3o5bobo27b$48bo15bo5bobo6b2o28b$47bo14b2o6bo38b$63b2o4b2o38b$55bo53
 7bobo5b2o8bo2bo14bobo9bo5bobo7bo12b2ob4o5b2o11b$5b2o3bo14b4o14bo19bo6b2o11b3ob2o3bo3bo2bo9b$2o3b2o3bo4bobob2o3b4o14b2o19b2o5bobo11b2ob2o3bo7bo8b$2o3b2o3bo5b2o3bo2bo60b5o3bo6bo6b2o$7bobo10bo18b2o45bo3b3o7bo6b2o
 $8bo8bo2bo10b3o4bobo27b2o26bo2bo9b$33bo3b3o28bo2bo24b2o11b$32bo4b2o70b$40b2o26bo2bo12bo24b$27bo11b3o25bo2bo11b2o25b$28bo38bobo12b3o24b$28bo39bo11b3o26b$24bo2bo11b2o39b2o27b$6bo5b2o9bo15b2o27b2o39b$4bo3bo3b3o
 10bo42b2o16b2o9bo11b$8bo5b2obo11bo55b4o7bobo10b$3bo5bo4bo2bo10b2o50bobo2bo2b3o5b2obo9b$3b2o9b2obo9b2o4b2o2b2o40bo2bo2b2o9b2ob2o3b2o3b$12b3o11b3o4b2o2b2o31b2o6b2o9bo6b2obo4b2o3b$12b2o13b2o4b2o35b2o4b2o3bo8bo5bo
-bo10b$28b2o48b2o10bo6bo11b$29bo49bo2bo26b$80bobo!`,
-"sideCarGun": `#N Sidecar gun
+bo10b$28b2o48b2o10bo6bo11b$29bo49bo2bo26b$80bobo!`,sideCarGun:`#N Sidecar gun
 #O Jason Summers
 #C A true period 60 sidecar gun that was created on March 7, 2000.
 x = 213, y = 142, rule = b3/s23
@@ -695,8 +627,7 @@ bo3bo182b$27b3o183b$27b3o5bo177b$35bobo4bo170b$24bo10b2o4bobo169b$23bobo16b2o169
 30bo46b2o134b$27b3o19bo27b2o134b$27bo20b2o50bo112b$48bobo16b2o8bo20b3o112b$20b2o45b2o7bobo18bo115b$20b2o14bo39bobo18b2o114b$36b2o5bobo31bo135b$35bobo3b3ob3o165b$40bo7bo18b3o143b$40b2o5b2o18b3o4b2obob2o14bo117b$66bo3bo3bo5bo12b2ob2o115b$65bo5bo3bo3bo1
 33b$66bo3bo5b3o3bo9bo5bo114b$20bo29bo16b3o12b2o129b$19b3o5b2o20b3o29bobo8b2obob2o114b$18b5o4b2o20b3o161b$17b2o3b2o40bo148b$35b2o3b2o5b2o3b2o9b2o26b2o120b$31b2o3b5o6b2o3b2o9bobo25bobo119b$22b2o6b2o4b2ob2o51bo120b$24bo7bo3b2ob2o38bo12b2o119b$21bo15b3o1
 2b2o25bo11b3o119b$21bo2bo27bobo23bobo10b2o120b$20b2ob2o29b2o21b2ob2o12bo118b$21b2o30b2o21bo5bo130b$53b2o11bo12bo133b$35b3o11b3o13b3o8b2o3b2o130b$19b2o3b2o9b3o26b5o24bo119b$19b2o3b2o8bo3bo24bobobobo22b3o118b$20b5o8bo5bo23b2o3b2o8bo12b5o117b$21bobo10bo
-3bo39bo11b2o3b2o116b$35b3o11b2o3b2o21bo13b5o117b$21b3o42bo24bo3bo117b$50bo3bo10bobo24bobo118b$51b3o11bobo11b2o12bo119b$51b3o12bo12b2o132b$66b2o145b$66b2o24b2o119b$22b2o42b2o24b2o119b$22b2o189b$51b2o160b$36b2o13b2o160b$36b2o!`,
-"pseudo14GG": `#Cpseudo p14 gun
+3bo39bo11b2o3b2o116b$35b3o11b2o3b2o21bo13b5o117b$21b3o42bo24bo3bo117b$50bo3bo10bobo24bobo118b$51b3o11bobo11b2o12bo119b$51b3o12bo12b2o132b$66b2o145b$66b2o24b2o119b$22b2o42b2o24b2o119b$22b2o189b$51b2o160b$36b2o13b2o160b$36b2o!`,pseudo14GG:`#Cpseudo p14 gun
 #CKarel Suhajda,Feb 2004
 #C
 x = 385, y = 337, rule = B3/S23
@@ -780,8 +711,7 @@ bo4boboobb3o3b3o13b6obo11bo18bo148bo$95bo5boboo42boboobo3boo3boo4bo11bo5boboo11b
 bobo3bo22boo18bobobbob4ob3o17boobobo3bo178boo$96bo5bobooboboo3boo14bo18bobbobbo4bo19bo5bobooboboo3boo173bo$94bobbobobobo3bobo3bobo34boo5boobbo16bobbobobobo3bobo3bobo174bo$94boobobobobboobobb4obboo38booboo17boobobobobboobobb4obboo170b3o$95bobo4bobobob
 obo3boobbo60bobo4bobobobobo3boobbo$94bobboobobo5bo4bobbobo59bobboobobo5bo4bobbobo174bo$94bobo3boboo3boobobbobooboo9boo47bobo3boboo3boobobbobooboo9boo160bobo$95bob4o7bobbobobo3bo5boobboo48bob4o7bobbobobo3bo5boobboo161boo$97bo3boobboobo4boob3o5bobo54bo
 3boobboobo4boob3o5bobo169bo$97boboo7bobbobobo3bo5bo55boboo7bobbobobo3bo5bo171bo$98boboboo3boobobbobooboo62boboboo3boobobbobooboo175b3o$100bobo5bo4bobbobo8boo55bobo5bo4bobbobo8boo$100bobo3bobobo3boobbo8bo56bobo3bobobo3boobbo8bo172bo$101bo3bobobb4obboo
-10b3o54bo3bobobb4obboo10b3o167bobo$105bobobo3bobo14bo58bobobo3bobo14bo168boo$106booboo3boo74booboo3boo!`,
-"p20GG": `#N p20 glider gun
+10b3o54bo3bobobb4obboo10b3o167bobo$105bobobo3bobo14bo58bobobo3bobo14bo168boo$106booboo3boo74booboo3boo!`,p20GG:`#N p20 glider gun
 #O Matthias Merzenich, Noam Elkies
 x = 78, y = 42, rule = B3/S23
 25bo14bo$24bobo12bobob2o$23bo2bo2b2o7bo2bobobob2o$23bob2obobo8b3obobobo$22b
@@ -803,8 +733,7 @@ b2obobo2bo6b2o27b3o3b2o4bo2bo4bob2o$3bo4bobo2bob2o3bobo34bobobobo2bo2bob2ob
 obo$3bob2ob2o2b2obo6bobo8bo2bo15b4ob2obo2b3o3bobo2bo2bo$2obo2bobo2b2obobo4b
 obo7bo2b2o2bo13bo2bo4bobo3b3o2bobo2b2o$bobobo2bo2bo2bobobobo10bo2b2o2bo14bo
 bo4bo2bo2bo4b2o$o2bo2bobo3b3o2bob2ob4o7b4o17bo6b2o$2o2bobo2b3o3bobo4bo2bo5b
-obo2bobo$5b2o4bo2bo2bo4bobo6b2o4b2o$15b2o6bo!`,
-"spaceRakeGun": `#C p90 gun for p20 space rake
+obo2bobo$5b2o4bo2bo2bo4bobo6b2o4b2o$15b2o6bo!`,spaceRakeGun:`#C p90 gun for p20 space rake
 #C The gun fires a p20 rake every 90 generations. (The smallest period
 #C for a p20 rake gun is 86). The rake gun is a stationary breeder.
 #C Dieter Leithner, 11 Nov 1994
@@ -829,8 +758,7 @@ bo3bo12bo2bo33b4o3b2ob2o16bobo5bo3bo12bo2bo33b4o3b2ob2o$bo3bo7bo31b2o46b5o4bo2bo
 bo7b3o22b2ob2o3bo3bo$21b3o13b2o11b4o43b2o5b4o32b4o8bo34b2o5b4o32b4o8bo34b2o5b4o$3b2o16b2o28b2o88b2o5bo2bo79b2o5bo2bo$2bo2bo240bo$2bo244bo$2bo82b2o158b3o$2bobo11bo68bo$2bobo11b2o49bo18b3o$3bo11bobo29bo19b2o19bo10bobo139bo$45bobo18bobo28bo3bo140bo$35b2
 o6b2o12b2o31b2o5bo19bo122b3o$2o3b2o27bo3bo4b2o12b2o26bo4b2o4bo4bo14b4o$o5bo26bo5bo3b2o39b2o11bo12bo4b2obobo3b2o$23b2o8bo3bob2o4bobo36bobo10bo3bo3bob2o5b3obo2bo2b2o110bo$bo3bo2b2o13b2o8bo5bo7bo51bobo2bob4o5b2obobo116bo$2b3o4b2o23bo3bo65b2o2b2o6b4o115b
 3o$8bo26b2o80bo2$231bo$92b2o138bo$91b2o137b3o$93bo3bobo$5bo46bo44b2o$3b2ob2o44b2o44bo$51bobo$2bo5bo$100bo$2b2obob2o90b2o$99bobo$33bo76bo$31b4o6b2o2b2o62bobo$25b2o3bobob2o5b4obo2bobo46bo8b2o3bo9b2o$25b2o2bo2bob3o5b2obo3bo3bo44b4o5b2o3bo9b2o$30bobob2o4
-bo12bo5b2o27b2o9b4o4b2o3bo$31b4o14bo4bo4b2o27b2o9bo2bo6bobo$33bo19bo39bo5b4o7bo$5b2o42bo3bo39bo4b4o$5b2o42bobo46bo3b!`,
-"diagWickstr": `#N p6 diagonal wickstretcher 1
+bo12bo5b2o27b2o9b4o4b2o3bo$31b4o14bo4bo4b2o27b2o9bo2bo6bobo$33bo19bo39bo5b4o7bo$5b2o42bo3bo39bo4b4o$5b2o42bobo46bo3b!`,diagWickstr:`#N p6 diagonal wickstretcher 1
 #O Paul Tooke, Jason Summers and Matthias Merzenich 
 #C The first known p6 diagonal wickstretcher; partially constructed in September 2004 and finished in January 2013
 x = 61, y = 61, rule = B3/S23
@@ -847,8 +775,7 @@ obo2b2o2bobobo5b4o11b4o$26bo6bobo4bo4bo9bo2bobo$25b2ob2o10bo3bobo7bobo
 2ob2o$15bo12bobo9bobo5bo$15bobo3bo7bobo2b2o10bo$16bobo3bo7bo2bobo6bo2b
 o$17bo4bo8b4o7bobo$18b4o10b2o6bo$40bob2o$24b4o3bob3o4bobo$23b6o2b6o3bo
 $24b4o4b4o4bo$19b2o$18b4o$17bo2bobo$16bobo2b2o$15bobo$14b2o$14b3o$15bo
-bo$16b2o!`,
-"hansLeoHassler": `#N P156 Hans Leo hassler
+bo$16b2o!`,hansLeoHassler:`#N P156 Hans Leo hassler
 #O Noam Elkies
 #C A period 156 traffic light hassler. The first period 156 oscillator
 #C  to be found.
@@ -859,8 +786,7 @@ x = 33, y = 40, rule = b3/s23
 13b3o17b$13bobo17b$3b2o8b3o17b$2bobo28b$2bo30b$b2o30b2$5b2o26b$4bo7bo
 5b2o13b$7bo3b3o6bo12b$3bo3bo2b5o2bo15b$4o3bo2b5o2bo3bo11b$5bo6bo4bo3b
 4o8b$19bo13b$10b2o21b$5b2obo4bob2o16b$5bo10bo16b$6b2o6b2o17b$3b3o2b6o
-2b3o14b$3bo2bo8bo2bo14b$4b2o10b2o!`,
-"wrGlider": `#C p103079214841 (prime: 4^13*1536-263) oscillator/gun --
+2b3o14b$3bo2bo8bo2bo14b$4b2o10b2o!`,wrGlider:`#C p103079214841 (prime: 4^13*1536-263) oscillator/gun --
 #C  p1536 base loop, 13 quadruplers, and a 263-step glider advancer.
 #C  Based on previous p97307852711 and p97307852687 oscillators;
 #C  original design by Gabriel Nivasch, 7 August 2003.
@@ -891,8 +817,7 @@ o153b2o60b2o7b2o$4bo2bo218b2o$bo2bob2o135b2o$obobo5bo63b2o39b2o26b2o$bo2bo4bobo9
 b2o$26b2o23bobo54bo11b2o$50bo2bo$8b2o41b2o183b2o$8b2o56bo67b2o100bo$62b2o2bobo65bo99bobo$62b2o2b2o67b3o96b2o$137bo11b2o$124b2o22bobo23bo$125bo22bo23b3o$122b3o22b2o22bo$122bo32b2o14b2o$155b2o$75b2o$9b2o64b2o$8bobo60b2o$8bo62bobo$7b2o64bo$73b2o158b2o$6
 0b2o155b2o14b2o$60b2o156bo22b2o$215b3o23bo$12b2o3b2obo194bo23bobo$13bo3b2ob3o35b2o109b2o2b2ob2o61b2o$10b3o10bo34b2o94b2o13bobo2bobo$10bo6b2ob3o130bobo16b2o3bo7bo$18bobo132bo19bob2o6b3o$18bobo131b2o16bo2bobo6bo38bo$19bo149bobobobo6b2o37b3o$170b2ob2o49
 bo$202bo20b2o$200b3o16b2o$199bo19bo$186b2o11b2o20bo$186b2o32b2o6$155b2o60b2o$155b2o60b2o17b2o$161b2o73b2o$161b2o$180b2o$176b2o2bo2b2o52b2o$159b2o16bo3bob2o52bo$159b2o5b2o9bobobo42b2o12b3o$166b2o10b2obob2o22b2o16bo14bo$181bo2bo4b2o16bo14b3o$181b2o6b2o
-17b3o11bo$210bo!`,
-"6engcordgun": `#C p784 six-engine Cordership gun: Dave Greene, 2 May 2003
+17b3o11bo$210bo!`,"6engcordgun":`#C p784 six-engine Cordership gun: Dave Greene, 2 May 2003
 #C Herschel-based insertion of 37 gliders into three salvos
 x = 1285, y = 1065, rule = B3/S23
 906bo6boo$906b3o4bobbobo$909bo5boob3o$908boo11bo$915boob3o$915boobo3$904boo3boo$904boo3boo4$900bo$899bobo$900bo7$917boo$917boo5$939boo$929boo6boboo$929boo5bo$907boo30bo$908bo26boobo$905b3o27boo$905bo$932bo$931bobo$931boo$935boo16bo$935bobo14b3o$914bo
@@ -1158,8 +1083,7 @@ obobo21bo42bo$437bo5boo22bobobo64bobo$437bobo25bo4bo66boobboo$438boo25bo3bo71boo
 obo5boo6bo5boo14boo$450boo71boo15bobo$451bo89boo$448b3o94boo$448bo32bo62bobo$480bobo58bo3bo$479bo3bo57boo29bo$480bo3bo8bo46boobo26b3o$481bo3bo5b3o45bobb3o24bo$482bo3bo3bo47bobobo26boo$483bobo4boo45bobobo5boo$484bo50b3obbo6boo$488bo47boboo$487bobo47bo
 o$488boobboo44bo$492boo$519boo5boo$519boo5bo32boo$524bobo32boo$524boo$520boo$520bobo$521bo$525bo$524b3o$486boo35b3obo49bo$482boobboo3boo31bo3bo47bobo$481bobo6bobo32bo3bo47bo$482bo7bo35bob3o$489boo36b3o$477b3o4boobbo39bo$477b3o4bo3bo13b3o11bo50boo3boo
 $477b3o5b3o14bo11b3o50boo3boo$474b3o6bobo4boo5boo4bo9bo$474b3o6boo6bo5boo14boo$474b3o14bobo65boboo$492boo63b3oboo$496boo58bo11boo$495bobo59b3oboo5bo$492boobbo62bobobbo4b3o$523bo39boo6bo$491bo3bo25b3o$490bo4bo24bo$489bobobo14bo11boo$488bobobo5boo7bobo
-$486bo4bo6boo7bobo$486bo3bo17bo$$488boo$511booboo$511booboo$511booboo$517bobo$514boo$515bo3bo$515bo$518boo$519bo$514bo4bo$514bo3bo9bo$516boo9bobo$528bo4$518boo3boo$518boo3boo3$510boboo$508b3oboo$507bo11boo$508b3oboo5bo$510bobobbo4b3o$514boo6bo!`,
-"shipgunidk": `#N P690 60P5H2V0 gun
+$486bo4bo6boo7bobo$486bo3bo17bo$$488boo$511booboo$511booboo$511booboo$517bobo$514boo$515bo3bo$515bo$518boo$519bo$514bo4bo$514bo3bo9bo$516boo9bobo$528bo4$518boo3boo$518boo3boo3$510boboo$508b3oboo$507bo11boo$508b3oboo5bo$510bobobbo4b3o$514boo6bo!`,shipgunidk:`#N P690 60P5H2V0 gun
 #O Jason Summers
 #C A gun that creates copies of 60P5H2V0 via glider synthesis. Created
 #C  in October 2003.
@@ -1301,8 +1225,7 @@ bo2b2o55b$739bo2bo18b2ob2o14b2o89b$186b2o543b5o7bo17bo2bo15b2o25bobo61b$186b2o54
 b$113bo4b2o3bo9b2o618b2o6bo2bo15b2o33bob2o10b2o40b$120bobo630b2o6b2ob2o14b2o34bobo52b$68bobo3bobo44bo641b2o52bo53b$70bo3bo8bobo2b2o20b2obob2o689b2o3b2o58b$66bo11bo3bo3bob3o4b2o13bo5bo690b5o59b$65bo3bo5bo3bo3bo6b2o3b2o14bo3bo629b3o60b3o60b$66bo11bo5b5
 obo21b3o629bo3bo60bo61b$70bo3bo12b3o653bo5bo121b$68bobo3bobo666bo5bo121b$87b3o656bo124b$84b5obo653bo3bo122b$68b2o13bo6b2o3b2o648b3o123b$68b2o12bo3bob3o4b2o649bo124b$83bobo2b2o781b$113b2o694b2o60b$113b2o630b2o62b2o60b$745b2o124b$34bobo14b2obo5bo3bo806
 b$29bo4bo2bo12bobobo4bo5bo9b2o794b$30b2o5b2o11bo4bo9bo9b2o794b$25b2o8bo3b2o9bobobo5bo3b2o805b$25b2o10b2o12b2obo6b3o807b$34bo2bo833b$34bobo24b3o807b$60bo3b2o805b$48b2o15bo9b2o794b$48b2o9bo5bo9b2o794b$60bo3bo806b$41bo829b$40b3o828b$39b5o827b$38bobobobo
-826b$38b2o3b2o826b3$41bo829b$40bobo828b$40bobo828b$41bo829b$40b2o829b$40b2o829b$40b2o!`,
-"c/5tubstretcher": `#N c/5 diagonal tubstretcher
+826b$38b2o3b2o826b3$41bo829b$40bobo828b$40bobo828b$41bo829b$40b2o829b$40b2o829b$40b2o!`,"c/5tubstretcher":`#N c/5 diagonal tubstretcher
 #O Matthias Merzenich
 #C A c/5 diagonal wickstretcher
 #C http://www.conwaylife.com/wiki/index.php?title=58P5H1V1
@@ -1317,8 +1240,7 @@ $40bob5o8b$41bo13b3$38b3o14b$38bo16b$36b2o17b$30b2o4bo18b$30b3o3bo18b$
 2o7b$5b3o3bo23b3o3bob2o2bo7b$3bo4bo24b3ob4ob5o3bo4b$3bo3bo25b2o3bo2bo
 4bo2bobo3b$7bo25b2o2b5o8bobo2b$2b2obobo29bo2b2o9bobob$2o5bo29b2o2bo10b
 obo$2o4b2o31bob2o10bob$2b4o33b2o14b2$42bo12b$41bobo11b$42bobo10b$43bob
-o9b$44bobo8b$45bo!`,
-"c/5greyship": `#N c/5 greyship
+o9b$44bobo8b$45bo!`,"c/5greyship":`#N c/5 greyship
 #O Hartmut Holzwart
 #C A c/5 orthogonal greyship discovered in March 2010
 #C http://www.conwaylife.com/wiki/index.php?title=C/5_orthogonal
@@ -1364,8 +1286,7 @@ bob2o41b$91b2o11bo11b2o9b2o20bobo5bo3bo11bob2o7bo8bobo10bobo21bobo8bobo42b$129bo
 o50b$85bo6bo5b2obo9b2o9b2o9bob2o11bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o51b$85bo3bo11bob2o7bo8bobo10bobo21bobo8bobo12bo12bob2o4bo3bo11bobo62b$86b2obo9b2o9b2o9bob2o11bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o63b$89bob2o7bo8bobo10bobo21bobo8bobo12bo12bob2o4b
 o3bo11bobo74b$87b2o9b2o9bob2o11bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o75b$88bo8bobo10bobo21bobo8bobo12bo12bob2o4bo3bo11bobo86b$86b2o9bob2o11bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o87b$85bobo10bobo21bobo8bobo12bo12bob2o4bo3bo11bobo98b$85bob2o11bo11bo8bob2o
 9b2o11b2o9b2obo7bo6bo5b5o99b$86bobo21bobo8bobo12bo12bob2o4bo3bo11bobo110b$88bo11bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o111b$98bobo8bobo12bo12bob2o4bo3bo11bobo122b$88bo8bob2o9b2o11b2o9b2obo7bo6bo5b5o123b$86bobo8bobo12bo12bob2o4bo3bo11bobo134b$85bob2o9b2o11b
-2o9b2obo7bo6bo5b5o135b$85bobo12bo12bob2o4bo3bo11bobo146b$86b2o11b2o9b2obo7bo6bo5b5o147b$88bo12bob2o4bo3bo11bobo158b$87b2o9b2obo7bo6bo5b5o159b$89bob2o4bo3bo11bobo170b$86b2obo7bo6bo5b5o171b$85bo3bo11bobo182b$85bo6bo5b5o183b$89bobo194b$86b5o!`,
-"c/4greyship": `#C sample c/4 greyship
+2o9b2obo7bo6bo5b5o135b$85bobo12bo12bob2o4bo3bo11bobo146b$86b2o11b2o9b2obo7bo6bo5b5o147b$88bo12bob2o4bo3bo11bobo158b$87b2o9b2obo7bo6bo5b5o159b$89bob2o4bo3bo11bobo170b$86b2obo7bo6bo5b5o171b$85bo3bo11bobo182b$85bo6bo5b5o183b$89bobo194b$86b5o!`,"c/4greyship":`#C sample c/4 greyship
 #C Hartmut Holzwart, February-March 2006
 x = 177, y = 183, rule = B3/S23
 6bo$5bobo$7bo$4b2o$3b3o$2b2o3bo$6bobo$4bo2b2o$5b2o$5bo2$6b2o$bobobo2bo33bo$bo3b3obo30b4o$bobob2o33b4o$6b2o28bo2b2o$8bo27b2o$5bo2bo27bo3b2o$4bo34b3o$3b3o34b2o$2bo3b2o31b2o2bo$40b2o$3b2o$5bobo32b2o$7bo31b2o2bo$6bo33b2o$7b4o25b3ob2o$11bo19bo9bo4b2o$30bo
@@ -1387,8 +1308,7 @@ o16bo16bo27bobo$30bo3bobo10bo3bobo10bo3bobo10bo3bobo10bo3bobo10bo3bobo$28bo2bo13
 2obo13b2obo13b2obo$34bobo14bobo14bobo14bobo14bobo14bobo$33bo16bo16bo16bo16bo16bo$28bo3b2o2bo8bo3b2o2bo8bo3b2o2bo8bo3b2o2bo8bo3b2o2bo8bo3b2o2bo$28bo4b2o10bo4b2o10bo4b2o10bo4b2o10bo4b2o10bo4b2o$27b2o2bo12b2o2bo12b2o2bo12b2o2bo12b2o2bo12b2o2bo$28bob2o13
 bob2o13bob2o13bob2o13bob2o13bob2o$28bob2o13bob2o13bob2o13bob2o13bob2o13bob2o$28bob2o13bob2o13bob2o13bob2o13bob2o13bob2o$27b2o2bo12b2o2bo12b2o2bo12b2o2bo12b2o2bo12b2o2bo$28bo16bo16bo16bo16bo16bo$28bo3b2o11bo3b2o11bo3b2o11bo3b2o11bo3b2o11bo3b2o$32b2o15
 b2o15b2o15b2o15b2o15b2o$33bo2bo13bo2bo13bo2bo13bo2bo13bo2bo13bo2bo2$33bob2o13bob2o13bob2o13bob2o13bob2o13bob2o$33bo3bo12bo3bo12bo3bo12bo3bo12bo3bo12bo3bo$33b3o14b3o14b3o14b3o14b3o14b3o$34b2obo13b2obo13b2obo13b2obo13b2obo13b2obo2$36bo16bo16bo16bo16bo1
-6bo$36bo16bo16bo16bo16bo16bo$34b2o15b2o15b2o15b2o15b2o15b2o$35bobo14bobo14bobo14bobo14bobo14bobo$36bo16bo16bo16bo16bo16bo!`,
-"slowpuffer1": `#N Slow puffer 1
+6bo$36bo16bo16bo16bo16bo16bo$34b2o15b2o15b2o15b2o15b2o15b2o$35bobo14bobo14bobo14bobo14bobo14bobo$36bo16bo16bo16bo16bo16bo!`,slowpuffer1:`#N Slow puffer 1
 #O David Bell
 #C An orthogonal period 744 c/2 puffer that outputs a single blinker once every 744 generations.
 x = 82, y = 73, rule = 23/3
@@ -1401,15 +1321,13 @@ x = 82, y = 73, rule = 23/3
 73b$2b6o74b3$53b2o27b$52b2ob4o23b$53b6o23b$54b4o24b2$27b2o53b$25bo4bo
 51b$24bo57b$24bo5bo40b6o5b$24b6o41bo5bo4b$45b2o24bo10b$44b4o24bo4bo4b$
 43b2ob2o26b2o6b$44b2o36b3$53b4o25b$52b6o24b$51b2ob4o24b$52b2o9b2o17b$
-62b2ob3o14b$63b5o14b$64b3o15b$77b4ob$76b6o$75b2ob4o$76b2o!`,
-"slowpuffer2": `#N Slow puffer 2
+62b2ob3o14b$63b5o14b$64b3o15b$77b4ob$76b6o$75b2ob4o$76b2o!`,slowpuffer2:`#N Slow puffer 2
 #O David Bell
 #C An orthogonal period 240 c/2 puffer that moves fast but creates relatively little debris.
 x = 22, y = 21, rule = 23/3
 3bo9b2o7b$bo3bo6b2ob3o4b$o12b5o4b$o4bo8b3o5b$5o17b3$20bob$b2o10b2obo2b
 obo$2ob3o6bobob4obo$b4o3b3obo9b$2b2o8bobob4obo$13b2obo2bobo$5b2o13bob$
-3bo4bo13b$2bo19b$2bo5bo13b$2b6o6b3o5b$13b5o4b$12b2ob3o4b$13b2o!`,
-"spiralGrowth1": `#C Spiral growth in Conway's Life using single-channel Snark recipe.
+3bo4bo13b$2bo19b$2bo5bo13b$2b6o6b3o5b$13b5o4b$12b2ob3o4b$13b2o!`,spiralGrowth1:`#C Spiral growth in Conway's Life using single-channel Snark recipe.
 #C Dave Greene, 21 June 2017, based on research and search utilities
 #C   by Simon Ekstrom and Adam P. Goucher.  Period is 262144 ticks.
 #C
@@ -1643,8 +1561,7 @@ b2o28bo$823bo78bo40bo60bobo$824b2o77bo37b3o62bo50b2o$823b2o26b3o78bobo5bo115bobo
 2b2ob4o63bo$869bobo50b3o13b2o4bo67b2o$870b2o26b2o44bobo64bobo$870bo26b2o46b2o$899bo4$943bo$941b3o$940bo$940b2o3$944b2o$943bobo$945bo2$930b2o$929bobo5b2o$929bo7b2o$928b2o2$942bo$938b2obobo44b2o$937bobobobo43bobo$934bo2bobobobob2o42bo$934b4ob2o2bo2bo$938bo4b2o$93
 6bobo$927bo8b2o$926b2o$926bobo3$939bo$939b3o$942bo6bo$941b2o4b2o$948b2o$910bo$908bobo$909b2o3$951b2o$944b2o5bobo$944b2o7bo11b2o$953b2o11b2o$965bo$940bo$939bobob2o$939bobobobo$936b2obobobobo2bo$936bo2bo2b2ob4o$938b2o4bo$944bobo$945b2o5$943bo$941b3o$940bo$940b2o5
 $942b3o$939bo4bo$930b2o7bo3bo$929bobo$929bo7b2o2bo$928b2o7bo$937bobo$941b2o$937bo5bo$937bo3bobo$934bo4bobobob2o$934b4ob2o2bo2bo$938bo4b2o$936bobo$936b2o5$939bo$939b3o$942bo$941b2o7$951b2o$944b2o5bobo$944b2o7bo$953b2o2$940bo$939bobob2o$939bobobobo$936b2obobobobo
-2bo$936bo2bo2b2ob4o$938b2o4bo$944bobo$945b2o5$943bo$941b3o$940bo$940b2o125$1029b2o$1029b2o!`,
-"sawtooth3": `#C Moving sawtooth with repeating minimum population of 1239
+2bo$936bo2bo2b2ob4o$938b2o4bo$944bobo$945b2o5$943bo$941b3o$940bo$940b2o125$1029b2o$1029b2o!`,sawtooth3:`#C Moving sawtooth with repeating minimum population of 1239
 #C David Bell, 10 July 2005
 x = 128, y = 173, rule = B3/S23
 20b3o17b3o26bo4b3o17b3o17b3o$15booboobo19bobooboo20b3obbobbo12booboobo19bobooboo$15boo4boboo13boobo4boo13b3o4boboo4bo12boo4boboo13boobo4boo$14bobbo3bobobo11bobobo3bobbo11bobbo5b4o3bo11bobbo3bobobo11bobobo3bobbo$21boboboboo5boobobobo21bo5b3o4bo18boboboboo5boobob
@@ -1657,8 +1574,7 @@ boobo$18bobo22b3o3b3obb3o23b3obb3o3b3o$18b3o21bo3bo4b3obobo21bobob3o4bo3bo$15bob
 o3bobobo11bobobo3bobbo$17booboo11bo9bo54boboboboo5boobobobo$18bobo10b4o7b4o50bo3boboboo5boobobo3bo$7bo11bo7booboo3bo5bo3booboo47bobobob3o5b3obobobo$5b4o18boobbo3bo5bo3bobboo$booboo3bo3bo12bobbo7bobo7bobbo50b3o9b3o$boobbo5b4o19bobbobobbo58b3obobobobob3o$obbo7bo3
 bo17b3obobob3o58b5obob5o$9bobbobo51booboo36bobo$10bo24boo3boo24booboo36b3o$35boo3boo62bobo3bobo$22boo11bobobobo$17boo4boo9booboboboo59boob3ob3oboo$17boo3boo10booboboboo59bo11bo$17boo3bo14bobo61bobbo7bobbo$33bo9bo57bo4bo3bo4bo$34bo7bo63bo3bo$100b6o5b6o$99boo7bo7
 boo$107bobo$84bo9bo12b3o$82b4o7b4o$78booboo3bo5bo3booboo19bo$78boobbo3bo5bo3bobboo18b4o$77bobbo7bobo7bobbo12bo3bo3booboo$85bobbobobbo19b4o5bobboo$66booboo13b3obobob3o17bo3bo7bobbo$66booboo42bobobbo$86boo3boo14b3o7bo$86boo3boo12boo$86bobobobo12bo4bo$85booboboboo
-11bo4bo$85booboboboo12bo3bo$88bobo17bo$84bo9bo$85bo7bo$$40bobo$41boo51bo$41bo50boo$93boo4$66booboo$66booboo17$66booboo$66booboo5$54bo$55boo$54boo23bobo$79boo$80bo8$66booboo$66booboo!`,
-"puffBreeder": `#N Pufferfish breeder
+11bo4bo$85booboboboo12bo3bo$88bobo17bo$84bo9bo$85bo7bo$$40bobo$41boo51bo$41bo50boo$93boo4$66booboo$66booboo17$66booboo$66booboo5$54bo$55boo$54boo23bobo$79boo$80bo8$66booboo$66booboo!`,puffBreeder:`#N Pufferfish breeder
 #O Ivan Fomichev
 #C MMS breeder based on the pufferfish, a semi-natural puffer.
 x = 495, y = 428, rule = B3/S23
@@ -1693,11 +1609,9 @@ $308b2o5bo2bo$207b2obo96b4o8bo$206bo3bo3b2o91b2ob2o3bo3bo$215b2o92b2o5b4o$205bo8
 3o$308bo14b4o$322bo3bo$290b5o31bo$289bo4bo18b2o7bo2bo$294bo15b3ob2o$289bo3bo16b5o$291bo6b6o7b3o$297bo5bo$260bo27b2o13bo$261b2o24b4o6bo4bo$260b3o24b2ob2o7b2o$264bo24b2o$264bo$285bo$283bo$279bo3bo2b2o$259b3o13bo2b3obo5bo$261bo12bob5o2bobo2b2o$260bo12b2ob2o5bo3b2o
 $274bo2bo7b3o2$275b2o$288b2o$279b4o4b4o15b2o$278bo3bo4b2ob2o10b4ob2o7bo$282bo6b2o11b6o6bo3bo$278bo2bo21b4o12bo$297b2o15bo4bo$294b3ob2o15b5o$294b5o5bo24b2o$295b3o5b3o21b2ob2o$302bo2bo21b4o$302bo3bo12b2o7b2o$303b4o12b2o7bo$303bo2b2ob3o5bo8bo3bo$307b3o5b2o8bo5bo$3
 07b3o6b3o6bo5bo$307b2o8bobo6b6o$306b2o4$324b2o$320b4ob2o$298bo21b6o$299b2o20b4o$298b2o3$321b2o$320b4o$320b2ob2o$279b4o7bo6bo24b2o$278b6o7b2o4bo$278b4ob2o5b2o26bo$282b2o32bo$312bo3bo2b2o$293b2o13bo2b3obo5bo$292b4o11bob5o2bobo2b2o$292b2ob2o9b2ob2o5bo3b2o$294b2o11
-bo2bo7b3o2$308b2o$321b2o$312b4o4b4o$311bo3bo4b2ob2o$315bo6b2o$311bo2bo!`,
-"puffertrain": `
+bo2bo7b3o2$308b2o$321b2o$312b4o4b4o$311bo3bo4b2ob2o$315bo6b2o$311bo2bo!`,puffertrain:`
 x = 5, y = 18, rule = B3/S23
-3bo$4bo$o3bo$b4o4$o$boo$bbo$bbo$bo3$3bo$4bo$o3bo$b4o!`,
-"pinwheelsynth": `x = 509, y = 478, rule = B3/S23
+3bo$4bo$o3bo$b4o4$o$boo$bbo$bbo$bo3$3bo$4bo$o3bo$b4o!`,pinwheelsynth:`x = 509, y = 478, rule = B3/S23
 488bo20b$488bobo18b$488b2o19b$509b$509b$476bo4bo27b$474b2o3b2o28b$475b2o3b2o27b$509b$509b$509b$509b$509b$509b$509b$464bobo42b$464b2o43b$465bo43b$509b$509b$509b$72bobo434b$73b2o434b$73bo379bo55b$451b2o10bobo43b$452b2o9b2o44b$464bo44b$509b$509b$509b$509b$509b$509
 b$509b$509b$509b$509b$509b$509b$509b$449bo59b$447b2o60b$448b2o59b$509b$445bo63b$438bo4b2o64b$438bobo3b2o63b$438b2o69b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$423bo85b$422bo86b$422b3o84b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$
 509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$378bobo128b$378b2o129b$379bo129b$137bobo369b$128bobo7b2o369b$129b2o7bo370b$129bo379b$126bo250bo15bo115b$124bobo250bobo11b2o116b$125b2o239bo10b2o13b2o115b$364b2o143b$365b2o14bo127b$124bobo14bo239bobo125
@@ -1715,14 +1629,12 @@ bo189b2o163b$158b2o184bobo162b$159b2o176b3o4bo164b$158bo178bo171b$152b2o184bo170
 9b$509b$509b$509b$509b$509b$393b2o114b$393bobo113b$393bo115b$509b$110b3o396b$112bo396b$111bo397b$509b$102bo6bo399b$102b2o5b2o398b$101bobo4bobo398b$424b2o83b$94bo329bobo82b$94b2o305b3o20bo84b$93bobo10b2o293bo107b$107b2o293bo106b$106bo402b$422b3o84b$422bo86b$423b
 o85b$108bo400b$108b2o399b$107bobo399b$509b$420bo88b$419b2o88b$419bobo87b$440b2o67b$440bobo66b$440bo68b$509b$509b$509b$440b3o66b$89b2o349bo68b$88bobo350bo17bo49b$90bo367b2o49b$458bobo48b$509b$451b3o55b$451bo57b$452bo56b$509b$445b3o61b$445bo63b$446bo62b$78bo372b2
 o56b$78b2o370b2o57b$77bobo372bo56b$509b$509b$509b$509b$509b$509b$509b$464bo44b$463b2o44b$463bobo43b$509b$509b$466b2o41b$465b2o42b$467bo41b$509b$509b$478bo30b$477b2o30b$477bobo4b2o23b$483b2o24b$485bo4bo18b$489b2o18b$489bobo17b$509b$509b$484b2o23b$483b2o24b$485bo
-23b$509b$509b$509b$509b$509b$488b2o19b$487b2o20b$489bo19b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$259bo249b$247b3o8b3o248b$246bo2bo8bob2o247b$249bo9b3o247b$245bo3bo9b2o248b$249bo259b$246bobo260b!`,
-"spiral3": `#N Popover
+23b$509b$509b$509b$509b$509b$488b2o19b$487b2o20b$489bo19b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$509b$259bo249b$247b3o8b3o248b$246bo2bo8bob2o247b$249bo9b3o247b$245bo3bo9b2o248b$249bo259b$246bobo260b!`,spiral3:`#N Popover
 #O Robert Wainwright
 #C A period 32 oscillator that works by hassling a pi-heptomino.
 x = 32, y = 32, rule = B3/S23
 21bo10b$20bobo9b2$13b2o3bo3b2o8b$13b2o2bo5bo8b$18bobo11b$20b2o10b$14b2o16b$3b2o8bo2bo15b$bobo9bobo4bo11b$o5bo7bo5bo11b$bo3b2o2b3o8bo11b2$3bobo16b2o3b2o3b$4bo12bo3bo2bo2b2o3b$8bo7b3o3bobo7b$7bobo6bobo4bo8b$3b2o2bo2bo16bo4b$3b2o3b2o16bobo3b2$11bo8b3o2b2o3bob$11bo
-13bo5bo$11bo5b2o9bobob$16bobo8b2o3b$16b3o13b$10b2o20b$11bobo18b$8bo5bo2b2o13b$8b2o3bo3b2o13b2$9bobo20b$10bo!`,
-"lightspOsc": `#N Light speed oscillator 1 modified
+13bo5bo$11bo5b2o9bobob$16bobo8b2o3b$16b3o13b$10b2o20b$11bobo18b$8bo5bo2b2o13b$8b2o3bo3b2o13b2$9bobo20b$10bo!`,lightspOsc:`#N Light speed oscillator 1 modified
 #O Josh Ball original
 #C A period 5 extensible oscillator extended by parkes-codes.
 x = 159, y = 19, rule = B3/S23
@@ -1731,8 +1643,7 @@ b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3ob2ob2o7b2o3bob2o2b$b2o2b2
 o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3obo7bo4b3o3bob2o$2b3o2bo3bo2b2ob2o2bo2bobo109b3o2b3o2bo2bo5bo3b$4bobob4o5bo4b5ob2o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3obo7bo4b3o3bob2o$6bobo3b5o3bobo8b2o3b2o3b2o3b2o3
 b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o3b2o4bobob4obo3b2obobo2bo$3bo2bo3b2o4bobobo2bob5o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3o2b3ob2ob2o7b2o3bob2o2b$4bobobo3bob4ob2obobo113bo3bob4o2b3obo4b$2bo3bo
 bo3bob2o6bob113o2bob2obo2bo2bo3bo4b$3bobo3bo6b6obo4bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo6b2o15b2o3b$bobobob2o2b5o5bobobo107b4o22b$obo3bo2b2o4bob2o2bo2b2o107bo2bo22b$bo5bobo2bo3b2obobo137b$8bo2b2
-o7bo138b!`,
-"snail":  `
+o7bo138b!`,snail:`
 #O Tim Coe
 #C The first c/5 orthogonal spaceship to be discovered. Has period 5. Found in January 1996.
 x = 38, y = 21, rule = B3/S23
@@ -1740,8 +1651,7 @@ bo36b$bo36b$o37b$b3o17b3o3b3o8b$b2obo9bo3bobo6b3o8b$2bo11b2obo7bo4b4o
 4b$6bo6bo3bobo3b2obo5b2o4b$3bo2bob3o3b2o9bo8b2obo$3b2obo5bo5bo17bob$9b
 ob7o20b2$9bob7o20b$3b2obo5bo5bo17bob$3bo2bob3o3b2o9bo8b2obo$6bo6bo3bob
 o3b2obo5b2o4b$2bo11b2obo7bo4b4o4b$b2obo9bo3bobo6b3o8b$b3o17b3o3b3o8b$o
-37b$bo36b$bo!`,
-"slide-breeder": `#C Breeder using slide-gun technology (Slide-o-04b-060 and 
+37b$bo36b$bo!`,"slide-breeder":`#C Breeder using slide-gun technology (Slide-o-04b-060 and 
 #C  Slide-o-04f-060) from Jason Summers' slide-gun collection.
 #C Makoto Kohno, 22 Dec 2002.
 x = 2393, y = 4182, rule = B3/S23
@@ -2007,8 +1917,7 @@ obo$1348bo3bo7boo3boo3bo12b3o4boob3o$1352bo14bobo12b3o4bobb4o$1349bobo16bo6bo7b3
 bobboo8boo$1329bo44boobboo11boo4boo$1319bo5bo4bo40boo10bo7boo4boo$1328b3o39b3o10bo4bobo$1319booboboo45boo10bo4bo$1365boo7boo$1364bobo7boo$1364bo$1363boo$1337bo$1335bobo7boo4b3o3bo5boo$1336boo6bobo4bo5bo6bo$1345bo5b3o10bobo7bo$1365boo7b4o$1375b4o7bo$1
 319bo8bo46bobbo6bobo$1318b3o7boo17b3o25b4o4boo3bo9boo$1317b5o5bobo16boobo24b4o5boo3bo9boo$1316bobobobo22boobbo3bo20bo8boo3bo$1316boo3boo22b4o4boo30bobo$1347bobo3boo31bo$1348boo25bobo$1321boo17bo6boo26boo$1321boo16bobo5b3o6boo13bo4bo$1323bo14bo3boo12b
 obo11boo$1321b3o14bo3boo14bo11bobo$1319bo18bo3boo3b3o8boo$1319b5o5boo8bobo5b3o$1320boo6bobo9bo5bo3bo33boo$1328bo16bo5bo25boboo3b3o$1327boo17bo3bo22bobbo3bo5boobo5boo$1318boo3boo22b3o22boobbo4bo4bobbo5boo$1319b5o37boo8boo5b4o4boobo$1319booboo37boo7b3o
-7bo3b3o$1319booboo47boo11boo$1320b3o49boo$1373bo5$1321boo25boo$1321boo25boo!`,
-"dartgun": `#N p448dartgun
+7bo3b3o$1319booboo47boo11boo$1320b3o49boo$1373bo5$1321boo25boo$1321boo25boo!`,dartgun:`#N p448dartgun
 #O Michael Simkin
 #C A p448 gun that fires c/3 "dart" spaceships.
 x = 2219, y = 2173, rule = B3/S23
@@ -2300,19 +2209,16 @@ bo$114b2o1862b2o29b2o$54b2o1922b2o4b2o6b2o15b2o$54bo59b2o25b2o1841b2o5bobo$55bo5
 o$95bobo$96bo4b2o$84b2o15bobo$83bobo17bo1912b2o$83bo19b2o8b2o1901b2o4b2o$82b2o27bob2o1907b2o$110bo$113bo$109b2obo$109b2o2$93b2o11bo1914b2o$93b2o10bobo1913bobo$105b2o1916bo$109b2o1912b2o$109bobo$104b2o5bo$104b2o5b2o3$81bo$81b3o$84bo$83b2o4$106b2o$107b
 o$101b2o4bobo$101bo6b2o2b2o$99bobo10b2o$99b2o3$82b2o29b2o$82b2o15b2o6b2o4b2o$99bobo5b2o$101bo$101b2o4$82b2o24b2o$82bo24bobo$80bobo24bo$80b2o24b2o4$97b2obo$97bob2o2$90b2o$90b2o7$80b2o$81bo$81bobo$82b2o3$87b2o$86b2o$80b2o6bo$81bo$68b2o11bobo$69bo12b2o1
 2b2o$69bobo24bobo$70b2o2b2o$74b2o21b2o$92b2o$92b3o$95bo$75b2o$69b2o4b2o13bobo3bo$69b2o20b2o$91b2ob2o$93bo4$70b2o$69bobo$69bo$68b2o!
-`,
-"diagPuff": `x = 30, y = 36, rule = B3/S23
+`,diagPuff:`x = 30, y = 36, rule = B3/S23
 10b3o17b$10bo19b$11bo18b$13b2o15b$14bo15b$30b$11bo18b$8b4obo16b$8bo4bo16b$9bo4b2o14b$11bo2b3o13b$15b2o13b$12b2ob2o13b$12b2ob5o10b$10b2o3b2o13b$9b2o4bo5bo8b$10b2ob3o4bobo7b$7b5ob2o6bo8b$6b2o3bob2o15b$8bob2o18b$11bo18b$23bo6b$11bo10bobo3bob$4bo5b3o9bobo2bobo$3b2o
-5bo12bo4bob$3bobo7b2o15b$8b3o3b2o14b$bo4b5o2bo16b$2o3b3o22b$obo3bo23b$30b$3b2o25b$2b3o25b$30b$b2o27b$bo28b!`,
-"puff3": `#N c/3 puffer #1
+5bo12bo4bob$3bobo7b2o15b$8b3o3b2o14b$bo4b5o2bo16b$2o3b3o22b$obo3bo23b$30b$3b2o25b$2b3o25b$30b$b2o27b$bo28b!`,puff3:`#N c/3 puffer #1
 #O David Bell
 #C The first c/3 orthogonal puffer, discovered in April 1996
 x = 87, y = 38, rule = B3/S23
 43bo$42bobo$41bo3bo2$35b2ob4o3b4ob2o$35b2o4b2ob2o4b2o$34bo2bob3o3b3obo2bo2$42bobo$40bobobobo$36b2obo7bob2o$36b2o4bobo4b2o$35bo3b2o5b2o3bo$43bo$32bo9bobo9bo$24bo3b3ob3obo5bobo5bob3ob3o3bo$24b2obo5bob2o4b2ob2o4b2obo5bob2o$20b3o2b2obo3bo3bo4b2ob2o4bo3bo
 3bob2o2b3o$20b2o2b2ob5obo2bo13bo2bob5ob2o2b2o$19bo2bo5bob2obo2b2ob2obobob2ob2o2bob2obo5bo2bo$24b2o6b4ob3o7b3ob4o6b2o$28bo4bo7bobobo7bo4bo$40b2obob2o$40b2o3b2o$5bob2o32b2ob2o32b2obo$b3ob2obob2o63b2obob2ob3o$o6b2o2b4o24b2obobob2o24b4o2b2o6bo$b2o3bo3bo4
 bo23bo2bobo2bo23bo4bo3bo3b2o$13b3o5b2o15bobobobobobo15b2o5b3o$19bob2o16bobo3bobo16b2obo$16bob2o3b2o5b2o23b2o5b2o3b2obo$15b2ob2obobo5b2o9bo5bo9b2o5bobob2ob2o$15b2obo4bob2o2b2ob2obo6bobo6bob2ob2o2b2obo4bob2o$19b2obo2bob3o2bo2b2o4b2ob2o4b2o2bo2b3obo2bob
-2o$25bo4bobo3b2o2bo5bo2b2o3bobo4bo$26bob2o2b3o2bo11bo2b3o2b2obo$32b2obobo2bo5bo2bobob2o$33bobobob9obobobo!`,
-"c3greyship": `#N c/3 greyship
+2o$25bo4bobo3b2o2bo5bo2b2o3bobo4bo$26bob2o2b3o2bo11bo2b3o2b2obo$32b2obobo2bo5bo2bobob2o$33bobobob9obobobo!`,c3greyship:`#N c/3 greyship
 #O Hartmut Holzwart
 #C A c/3 orthogonal greyship using several methods of stabilization,
 #C   constructed 11 November 2005.
@@ -2328,8 +2234,7 @@ b269ob2o2b2o$8b4o4bo274b2o$10bobo5b270o$10bobo2b4o272b2o$9bo5bo3b266ob2o2b2o$9b2
 3bo2b193o3b3ob2o$37b2o7bo5bo188b2o$38bo8b3o4b182obo$39bo2bo7bo3bo5bo175bo$43bo4b2o5b3o4b170obo2bo$40b2o6b3o7bo3bo5bo164bobo$40bobo13b2o5b3o4b161o5bo$39b2o15b3o7bo3bo5bo155bo$40bobo21b2o5b3o4b152o$41bo22b3o7bo3bo5bo144b2obo$72b2o5b3o4b143o3bo$72b3o7bo
 3bo5bo129bo4b2o$80b2o5b3o4b127o3b3ob2o$80b3o7bo3bo5bo123b2o$88b2o5b3o4b117obo$88b3o7bo3bo5bo110bo$96b2o5b3o4b105obo2bo$96b3o7bo3bo5bo99bobo$104b2o5b3o4b96o5bo$104b3o7bo3bo5bo90bo$112b2o5b3o4b87o$112b3o7bo3bo5bo79b2obo$120b2o5b3o4b78o3bo$120b3o7bo3bo5
 bo64bo4b2o$128b2o5b3o4b62o3b3ob2o$128b3o7bo3bo5bo58b2o$136b2o5b3o4b52obo$136b3o7bo3bo5bo45bo$144b2o5b3o4b40obo2bo$144b3o7bo3bo5bo34bobo$152b2o5b3o4b31o5bo$152b3o7bo3bo5bo25bo$160b2o5b3o4b22o$160b3o7bo3bo5bo14b2obo$168b2o5b3o4b13o3bo$168b3o7bo3bo5bo4b
-2o$176b2o5b3o4b3ob2o$176b3o7bo3b2o$184b2o$184b3o!`,
-"c2wick": `#N c/2 wickstretcher
+2o$176b2o5b3o4b3ob2o$176b3o7bo3b2o$184b2o$184b3o!`,c2wick:`#N c/2 wickstretcher
 #C A c/2 orthogonal wickstretcher that stretches a period 6 wick
 x = 43, y = 61, rule = b3/s23
 3bo39b$bo41b$o6bo35b$o6bo35b$6obo35b2$5b2o36b$4bo38b$7bo35b$2b2o39b$bo
@@ -2343,9 +2248,7 @@ b2o8b5o15b5o3b$b6obobo4bobob3o3b3o5bo2bo3bo2b$o4bo4bob2obobobo2b2ob3o
 2b4ob2o$3b3o5bob2o5bobo4b4o3b2o3bobob$4b2o5b2o2b5o2bob2o5b3o2b2obo2bo$
 14bo7b2obob2o2bo3bo2bo2b2o$15b3o8bobo7b2o5b$5o12bo25b$o4b2obo34b$o5bob
 o34b$bo4bo36b$3bob3o35b$5b3o35b2$3b2o38b$b2o40b$bo2bo38b$bo41b$2b2o39b
-$7bo35b$4bo38b$5b2o36b2$6obo35b$o6bo35b$o6bo35b$bo41b$3bo!`,
-
-"bobsled": `#C revised switch-engine 'bobsled run' using boats as catalysts
+$7bo35b$4bo38b$5b2o36b2$6obo35b$o6bo35b$o6bo35b$bo41b$3bo!`,bobsled:`#C revised switch-engine 'bobsled run' using boats as catalysts
 #C David Bell, 2 July 2005
 x = 216, y = 232, rule = B3/S23
 100boo5boo$100boo5boo6$101bo5bo$100b3o3b3o$91boo6boobbobobboo$91boo6bo3bobo3bo$99boboo3boobo$99boo7boo$$92bo$91bobo$90bo3bo$91b3o$89boo3boo$100b3o$71boo27b3o$72bo26bo3bo$72bobo6bobo14bo5bo$73boo5bobbo4bo10booboo$79boo5boo$77boo3bo9bo6booboo$79boo11bo
@@ -2358,8 +2261,7 @@ bobo84b3o4boo$26boo4boboo83bo3bo3boo$26boo3booboo83booboo$32boboo84bobo$33bobo$3
 o5boo$32bobobobo10bobo25b3o7bo46boo$33b5o9bo3bo24bo4bo9bo41bobo$34b3o10bo8boo17bo5bo8boo42bo$35bo10bo4bo3bobbo17bo8bo$47bo6b3o20boo8boo$42boo3bo3bobb3o48bo$41bobo5bobobboo21boo8boo15bobo$41bo12boo20bo8bo18boo$40boo13bobo5boo10bo5bo8boo50boo$56bo6boo1
 1bo4bo9bo49bobo$35boo40b3o7bo54bo$35boo50bobbo$53boo3boo$53boo3boo53bo$112bobo$55b3o54boo$55b3o92boo$56bo92bobo$150bo3$121bo$120bobo$55boo63boo$55boo101boo$157bobo$158bo3$129bo$128bobo$128boo$150bo4bo10boo$149b4o3bo8bobo$148bo6bo10bo$149boo$150boobo$
 137bo14bo$136bobo$136boo$174boo$173bobo$174bo3$145bo$144bobo11boo$144boo10boobbo$161bo3bo16boo$155bo5bo3bo15bobo$156bobboo3bobo15bo$157b3o5bo$165bo$153bo$152bobo$152boo$190boo$189bobo$190bo3$161bo$160bobo$160boo$198boo$197bobo$198bo3$169bo$168bobo$16
-8boo$206boo$205bobo$206bo3$177bo$176bobo$176boo$214boo$213bobo$214bo3$185bo$184bobo$184boo6$193bo$192bobo$192boo5$212boo$212bo$213b3o$215bo!`,
-"blockstacker": `#N Blockstacker
+8boo$206boo$205bobo$206bo3$177bo$176bobo$176boo$214boo$213bobo$214bo3$185bo$184bobo$184boo6$193bo$192bobo$192boo5$212boo$212bo$213b3o$215bo!`,blockstacker:`#N Blockstacker
 #O Jason Summers
 #C A pattern that creates an infinite row of blocks. Created on August 28, 1999.
 x = 531, y = 915, rule = b3/s23
@@ -2459,8 +2361,7 @@ o196bo2bo77b$245bobo5bo196b2o79b$245bo285b$244b2o16b2o3b2o262b$265bo265b$262bo5b
 44bo3bo6b2o7bobo188b$274bo46b3o7bobo6b2o189b$321b3o2b2o6bo196b$325bo2bo2bo2bo196b$271b2obob2o48b2o6bo196b$271bo5bo53bobo197b$272bo3bo54b2o198b$253b2o18b3o63b2o190b$254bo84b2o190b$254bobo5b2o267b$255b2o5b3o266b$264b2obo263b$264bo2bo263b$264b2obo263b$2
 62b3o57b2o15b3o189b$262b2o57b2o6b3o199b$256b2o65bo5bo9bobo189b$256b2o72bo7b5o188b$278b2o57b2o3b2o187b$270b2o5bobo57b2o3b2o187b$271b2o6bo251b$270bo260b$337b2o192b$326bo8b2obo192b$325b3o7bo195b$324b2ob2o202b$263bo59b3ob3o6b3obo190b$253b2o3b2o3b2o58b3ob
 3o10bo190b$262bobo58b3ob3o10bo190b$254bo3bo64b3ob3o201b$255b3o12bo53b2ob2o202b$255b3o11b3o53b3o203b$268bobobo53bo204b$268bobobo62b2o3b2o189b$258bo10b3o65b3o191b$257b3o10bo65bo3bo190b$256bo3bo76bobo191b$258bo79bo192b$255bo5bo8bo260b$255bo5bo7b3o259b$2
-56bo3bo7bobobo258b$257b3o8bobobo64b2o192b$269b3o65b2o192b$270bo260b7$258b2o271b$258b2o!`,
-"bdaypuff": `
+56bo3bo7bobobo258b$257b3o8bobobo64b2o192b$269b3o65b2o192b$270bo260b7$258b2o271b$258b2o!`,bdaypuff:`
 #O Unknown
 #C http://conwaylife.com/wiki/Birthday_puffer
 #C http://conwaylife.com/patterns/birthdaypuffer.rle
@@ -2486,8 +2387,7 @@ b2o110b2o39bo33b$199b2o18bo60bobo32b$199b2o18bo61b2o32b$132b2o85bo38b2o55b$131bo
 b2o26bo3bo12bobo16b$179b2o66bo3b2o27bobo14bobo15b$179b2o64b2o6bo27bo15bobo13bob$246bob5obo38b2o3bobo11b2ob$221bo32bo33b2o3b2o5bo11bobo$171b2o47bobo24b2o7bo31b2o8bobo12bob$171b2o47b2o27b2o4bo42b2o12bobo$249bo4b2o56bobo$248bo3bo62b$248b3o64b$248bo45b5o
 11b5o$259b2o35b3o10bob4o$259b2o47bo6b$309b2o4b$315b$312b3o$315b$315b$315b$315b$315b$315b$255bo59b$254bobo58b$254b2o59b$224b2o89b$224b2o8bo80b$193b2o33bo4bobo11bo24bo42b$192bobo33bo4bobo10bobo22bobo41b$192b2o34bo5bo11b2o24b2o41b$315b$230b3o82b$315b$21
 1b2o102b$211b2o102b$283b2o30b$253bo15b2o12b2o30b$203b2o47bobo14b2o44b$203b2o47b2o61b$315b$265b2o48b$265b2o48b$270b2o2b2o39b$274b3o3b2obo7b2o22b$269bo10bo3b2o5b2o22b$276bobo2bo4b2o27b$269bo2bob4o6bo30b$263b2o5b3ob3o38b$263b2o50b$315b$315b$315b$315b$31
-5b$315b$271b2o16bo25b$271b2o13b5o24b$286b3ob2o23b$281b2o4b4o3bo20b$280b2o7bob3obo19b$281b3o4b2ob3ob2o18b$281b3o5b2ob4o19b$291bo23b!`,
-"billiardTables": `#C A "billiard table" oscillator is defined as any oscillator in
+5b$315b$271b2o16bo25b$271b2o13b5o24b$286b3ob2o23b$281b2o4b4o3bo20b$280b2o7bob3obo19b$281b3o4b2ob3ob2o18b$281b3o5b2ob4o19b$291bo23b!`,billiardTables:`#C A "billiard table" oscillator is defined as any oscillator in
 #C  which the rotor is enclosed within the stator. This definition
 #C  is not exact, because the meaning of "enclosed" is not entirely
 #C  clear.
@@ -2544,8 +2444,7 @@ obobbo16bobo8bo53b3obbo14boobobbobo16bobo4bo12bo4boboo31bo4bo20bobo16bobo$20bob4
 boo22bo$28bobobo20bobboob3obbo14b3o7b3o25bo5bo12bobobo18boob3obbo84boo7boo16b5o$28bobobb5o16boobo4b3obbo8bobo13bobo22boo4boo11bo4bo18bo6boboo81bo8bo17bo$25boobobobo5bo16bobo7b3o8boobo5bo5boboo38boobo5bo17bob3obbobo83bo8bo14boo3boo$26bobbobobobobbo14b
 obbo7bo14bo4bobo4bo25boo4boo8boobo6bo14boobo3b3obo82boo7boo10boobo5boboboo$26bo5boboboboo13boobo7boboo8boobo5bo5boboo23bo5bo11bobo5bo12bobo3bobobbo79boobo5boobo13bobo7bobo$27b5obbobo19bo7bobbo8bobo13bobo22bo5bo12boboo3boo12bobobboob3o80boboo5boboo12b
 obboo5boobbo$32bobobo16b3o7bobo13b3o7b3o25boo4boo12bo16boobobo4bo81boo7boo17boobbobo4boo$27b5obboboboo13bobb3o4boboo15bo5bo49b7o10bobobobobobb4o76bo8bo20bo3b5o$27bo6boboobo16bobb3oboobbo11boobo5boboo25boo4boo19bo10bobbo4boboobbo77bo8bo19bo7bo$28bobb3
-o23boo3bo3boo11boobob3oboboo26bo5bo15boo14boboboobo82boo7boo20b7o$27boobbo23bobobbobo20bo3bo29bo5bo16boo15boobobbo84boobo5boobo$55boobbooboo20bobo30boo4boo36boo85boboo5boboo18b3o$83booboo190bobbo$278boo!`,
-"bargeExt": `#N Barge (extended)
+o23boo3bo3boo11boobob3oboboo26bo5bo15boo14boboboobo82boo7boo20b7o$27boobbo23bobobbobo20bo3bo29bo5bo16boo15boobobbo84boobo5boobo$55boobbooboo20bobo30boo4boo36boo85boboo5boboo18b3o$83booboo190bobbo$278boo!`,bargeExt:`#N Barge (extended)
 #O Hartmut Holzwart and David Bell
 #C A period 3 c/3 orthogonal spaceship.
 x = 101, y = 67, rule = b3/s23
@@ -2560,8 +2459,7 @@ bobo3bo3bo21b$22bob2o3bobo3b2obo3bob2o3bobo3b2obo3bob2o3bobo3b2obo22b$21b2o6bobo
 3o4bobo4b3o3b3o4bo21b$21bo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bo21b$25bobobobobobo9bobobobobobo9bobobobobobo25b$21b2o4bobobobo4b2ob2o4bobobobo4b2ob2o4bobobobo4b2o21b$23bo2b2obobob2o2bo5bo2b2obobob2o2bo5bo2b2obobob2o2bo23b$21bo3bo3bobo3bo3bobo
 3bo3bobo3bo3bobo3bo3bobo3bo3bo21b$22bob2o3bobo3b2obo3bob2o3bobo3b2obo3bob2o3bobo3b2obo22b$21b2o6bobo6b2ob2o6bobo6b2ob2o6bobo6b2o21b$24b2obobobobob2o7b2obobobobob2o7b2obobobobob2o24b2$23bo13bo5bo13bo5bo13bo23b$22bobo11bobo3bobo11bobo3bobo11bobo22b$21b
 o4b3o3b3o4bobo4b3o3b3o4bobo4b3o3b3o4bo21b$21bo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bo21b$25bobobobobobo9bobobobobobo9bobobobobobo25b$21b2o4bobobobo4b2ob2o4bobobobo4b2ob2o4bobobobo4b2o21b$23bo2b2obobob2o2bo5bo2b2obobob2o2bo5bo2b2obobob2o2bo23b$
-21bo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bo21b$22bob2o3bobo3b2obo3bob2o3bobo3b2obo3bob2o3bobo3b2obo22b$21b2o6bobo6b2ob2o6bobo6b2ob2o6bobo6b2o21b$24b2obobobobob2o7b2obobobobob2o7b2obobobobob2o!`,
-"barge2ext": `#N Barge 2 (extended)
+21bo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bobo3bo3bo21b$22bob2o3bobo3b2obo3bob2o3bobo3b2obo3bob2o3bobo3b2obo22b$21b2o6bobo6b2ob2o6bobo6b2ob2o6bobo6b2o21b$24b2obobobobob2o7b2obobobobob2o7b2obobobobob2o!`,barge2ext:`#N Barge 2 (extended)
 #O Hartmut Holzwart
 #C A c/2 period 2 orthogonal spaceship.
 x = 105, y = 70, rule = B3/S23
@@ -2575,8 +2473,7 @@ b3o26b$26bo17bo15bo17bo26b$34b2ob2o11b2ob2o11b2ob2o34b$25b2o51b2o25b$32b9o7b9o7b
 obobo9bobobobo9bobobobo33b$26b3o3bo2bobo2bo3bo3bo2bobo2bo3bo3bo2bobo2bo3b3o26b$26bo17bo15bo17bo26b$34b2ob2o11b2ob2o11b2ob2o34b$25b2o51b2o25b$32b9o7b9o7b9o32b$30b2obo5bob2o3b2obo5bob2o3b2obo5bob2o30b$30bo11bo3bo11bo3bo11bo30b$32bo2bobo2bo7bo2bobo2bo7b
 o2bobo2bo32b$29b2o2bo2bo2bo2b2ob2o2bo2bo2bo2b2ob2o2bo2bo2bo2b2o29b$33bobobobo9bobobobo9bobobobo33b$26b3o3bo2bobo2bo3bo3bo2bobo2bo3bo3bo2bobo2bo3b3o26b$26bo17bo15bo17bo26b$34b2ob2o11b2ob2o11b2ob2o34b$25b2o51b2o25b$32b9o7b9o7b9o32b$30b2obo5bob2o3b2obo5
 bob2o3b2obo5bob2o30b$30bo11bo3bo11bo3bo11bo30b$32bo2bobo2bo7bo2bobo2bo7bo2bobo2bo32b$29b2o2bo2bo2bo2b2ob2o2bo2bo2bo2b2ob2o2bo2bo2bo2b2o29b$33bobobobo9bobobobo9bobobobo33b$26b3o3bo2bobo2bo3bo3bo2bobo2bo3bo3bo2bobo2bo3b3o26b$26bo17bo15bo17bo26b$34b2ob2
-o11b2ob2o11b2ob2o34b$25b2o51b2o25b!`,
-"advancer": `#C p30 glider advancer #6, advances gliders by 60 generations.
+o11b2ob2o11b2ob2o34b$25b2o51b2o25b!`,advancer:`#C p30 glider advancer #6, advances gliders by 60 generations.
 #C The device uses six copies of David Bell's p30 in-line NOT gate.
 #C Speed of information transmission within the device: 13/36 = 0.361c
 #C Dieter Leithner, 27 Dec 1993; from Jason Summers' jslife collection.
@@ -2593,9 +2490,7 @@ oo12boo$84b3o11b3o$75boo9boobo9boo3boo14boo$75bo5bo4bobbo10boo18boo$
 105bo4b3o18bo$103b3o4b3o$$109bo9bo8boo3boo$108bobo8bo8boo3boo$107bo3bo
 7bob3o5b5o$108b3o19bobo$106boo3boo11bo$121boboo5b3o$121boo3$116boo3boo
 8bo$116boo3boo7bobo$117b5o$118bobo$$118b3o8bo$109boo17b3o$109boo16b5o$
-126boo3boo3$119boo$119boo7b3o$128b3o3$129boo$129boo!`,
-"gliderDetecter": // p1 pseudo-heisenburp
-`
+126boo3boo3$119boo$119boo7b3o$128b3o3$129boo$129boo!`,gliderDetecter:`
 x = 2826, y = 2487, rule = B3/S23
 40bo$41bo$39b3o17$40bo4bo4bo4bo4bo$41bo4bo4bo4bo4bo$39b3o2b3o2b3o2b3o2b3o3$40bo4bo4bo4bo4bo$41bo4bo4bo4bo4bo$39b3o2b3o2b3o2b3o2b3o3$40bo4bo4bo4bo4bo$41bo4bo4bo4bo4bo$39b3o2b3o2b3o2b3o2b3o3$40bo4bo4bo4bo4bo$41bo4bo4bo4bo4bo$39b3o2b3o2b3o2b3o2b3o3$bo38
 bo4bo4bo4bo4bo18bo$2bo38bo4bo4bo4bo4bo18bo$3o36b3o2b3o2b3o2b3o2b3o16b3o37$40bo$41bo$39b3o210$729bo$729b3o$732bo$731b2o2$712bo42bo$712b3o38b3o$715bo36bo$714b2o11b2o23b2o7b2o$727b2o32bo$694bo64bobo$694b3o6b2o54b2o$697bo5b2o$696b2o3$697b2o$697b2o3b2o$70
@@ -2731,8 +2626,7 @@ o32b2o$2618bo33b2o$2619bo$2618b2o$2575bo78b2o$2573b3o71b2o5b2o$2547b2o23bo74b2o$
 bo44bo2bo$2561b2o4b2o44b2o4b2o$2561bo2bo54bobo$2563b2o56bo$2554b2o65b2o$2554b2o20b2o33b2o$2577bo34bo$2574b3o32b3o$2574bo34bo2$2543bo$2543b3o$2546bo$2545b2o2$2609b2o$2609bo$2610b3o$2612bo2$2564b2o$2564bo$2562bobo$2562b2o12$2544b2o15b2o$2543bobo15b2o$2
 543bo$2542b2o6$2549bo$2549b3o$2552bo$2551b2o28b2o$2581bo$2579bobo$2575b2o2b2o$2575b2o4$2574b2o4b2o$2574b2o4b2o5$2547b2o35bo$2546bobo33b3o$2546bo34bo$2545b2o34b2o$2549b2o$2549b2o3bo$2553bobo6b2o$2554bobo5b2o$2556bo$2556b2o$2548b2o$2549bo$2549bobo$2550
 b2o2b2o$2554b2o32b2o$2588b2o4$2583b2o$2583b2o$2587b2o$2587b2o3$2548b2o31b2o$2547bobo16b2o13b2o$2547bo18bobo$2546b2o20bo$2562b2o4b2o$2562bo2bo$2564b2o$2555b2o$2555b2o7$2545b2o$2546bo$2546bobo$2547b2o$2563bo$2561b3o$2560bo$2560b2o3$2534b2o$2534b2o7$256
-7b2o$2567b2o4$2562b2o$2562b2o$2524b2o40b2o$2524b2o40b2o3$2560b2o$2545b2o13b2o$2545bobo$2547bo$2547b2o!`,
-"lwssBreed": `#C This is, to my knowledge, the first LWSS breeder created.
+7b2o$2567b2o4$2562b2o$2562b2o$2524b2o40b2o$2524b2o40b2o3$2560b2o$2545b2o13b2o$2545bobo$2547bo$2547b2o!`,lwssBreed:`#C This is, to my knowledge, the first LWSS breeder created.
 #C Lucas Brown, 24 January 2008, 4:21 PM PST
 x = 1640, y = 619, rule = B3/S23
 1194b2o$1192bo4bo$1198bo129bo$1192bo5bo129b4o$1193b6o27bo89b2o5bo6b2o$1224bo3bo83b4ob2o4b3o7bo$1229bo82b6o7b2ob6o$1224bo4bo5bo2bo74b4o4b4o9bobo$1225b5o9bo80bo3bo4bob7o$1235bo3bo82b3o4bo7b2o$1236b4o77b2obobo3b2o4b2o4b2o$1316b3obo8bo2bo4b2o$1310bo4b2o2
@@ -2885,8 +2779,7 @@ obo3bobobo3b2o4b2o4b2o171b3ob2o6b2o82b4o3bo7b2o240b3o2bobo7bob4o3b3o$188b5o9bo80
 ob2o4b3o7bo134bo5bo2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o3b2o21bo4b3o2b2o415bo82b6o7b2ob6o145b4ob2o112bo4bo10bo2bo158b3ob2o6b2o82b4o3bo7b2o$156b6o27bo89b2o5bo6b2o137b2o80bo2bo6bob3o409bo3bo83b4ob2o4b3o7bo145b6o115b2o12bobo159b5o83b6o7bo
 2b6o$155bo5bo129b4o140bobo2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o3b2o21bo4b3o2b2o379b6o27bo89b2o5bo6b2o148b4o293b3o83bo5bo4bob2o6bo$161bo129bo144b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o2b2o20bobo4b2o2b2o379bo5bo129b4o416b2
 o119bo4bo7b2o$155bo4bo333bo4b2o4b2o17b2o386bo129bo415b4ob2o112bo4bo10bo2bo$157b2o339b2o6b2o8bobo387bo4bo546b6o115b2o12bobo$499bobo3bobo8bo2bo4b2o382b2o549b4o$423b4o72bobo3bobobo3b2o4b2o4b2o$422bo3bo82b3o4bo7b2o$412b5o9bo80bo3bo4bob7o$411bo4bo5bo2bo74
-b4o4b4o9bobo$416bo82b6o7b2ob6o$411bo3bo83b4ob2o4b3o7bo$380b6o27bo89b2o5bo6b2o$379bo5bo129b4o$385bo129bo$379bo4bo$381b2o!`,
-"cs-lwss-fr": `#C eight p384 c/12 forward rakes playing Freeze Tag with an LWSS
+b4o4b4o9bobo$416bo82b6o7b2ob6o$411bo3bo83b4ob2o4b3o7bo$380b6o27bo89b2o5bo6b2o$379bo5bo129b4o$385bo129bo$379bo4bo$381b2o!`,"cs-lwss-fr":`#C eight p384 c/12 forward rakes playing Freeze Tag with an LWSS
 #C to produce a p384 spaceship: David Bell, 5 June 2005
 #C (adapted from a previous version from 29 February 2004)
 x = 642, y = 598, rule = B3/S23
@@ -2960,8 +2853,7 @@ oo50boo5b3o27boo$410bob5o23bobbo58bo28boo$416bo23b3o18boo40boo$385bo25boo47bobo4
 8boo9bobo10bobo$388bo3b3oboboo5b5o104bobo28bo13bo$392boo3bo7boob3o103bobo$405boobbo105bo$406b3o$400bo6bo96bo$400boo98boobobo36boo$401bo98bobbooboobb3o28bobbo$393boo6bo98bo5bobo4bo28boo$393boo4bobo99boobbo8bo$402bo102bobb3obbo$403bo76b3o6bo15b3o42bo$3
 97boo5bo74bo4bo3bobo45boo11bobo$400bo4bo73bo4boo3bo47boo10bobo$402bobo74bo6bo49bo13bo$480b3obobbobo$484b5o56boo$489bo54bobbo$463bo81boo$463bo$463bo$467bo$463b3obbo$462bo4bo$462bo3bo$463b3o11bobbo$439b3o35bobbo$482bo$443boo17bobo12b4obo21boo$445bo10b3
 o3bobo12boobobo22boo$439b4obo11bo5bobo39bo$439b5o18bobo$463boo$456bobbo$439bobo14boboo$439bobo14bobbo$440bo15bobo25boo9bo$439bobo14b3o25boo8b3o$440boo51bobobo$440bo52bobobo$494b3o$495bo$$500bo$455bo44bo$453booboo$453b3oboo$454b5o$444boo9b3o$444boo10b
-o7$452boo$452boo!`,
-"lineshipExt": `#C  Optimized version of Jason Summers' p96 c/12 diagonal lineship. Extended by me
+o7$452boo$452boo!`,lineshipExt:`#C  Optimized version of Jason Summers' p96 c/12 diagonal lineship. Extended by me
 #C A p768 version was also constructed.  David Bell, 24 June 2005
 x = 823, y = 798, rule = B3/S23
 617bo205b$618bob2obobo197b$612b3o3b4o3bo197b$618bo2b2ob2o197b$617bo205b$615b3o205b$615b3o17b2o186b$635b2o186b$823b$823b$823b$823b$823b$823b$643b2o178b$643b2o178b$631b4o188b$635bo187b$617bob2ob2o7bo4bo186b$616b5o2b2o7b2o
@@ -3056,8 +2948,7 @@ o3bo26b2o15b2ob2o4b3o14b$731bo18bo2bo25bo17b2o2bo4bo2bo13b$732bo4b2o11b3o26bo2bo
 bobo57bo12b3o45b$696b3o2bo3bo67b2o2bo45b$697bob5o70b3o46b$703bo71bo47b$698b2o123b$823b$823b$823b$823b$678b3o142b$699b3o121b$682b2o15b3o61b2o58b$684bo12bo4b2o59b2o58b$678b4obo13bobo3bo119b$678b5o13b2o3b3o119b$696b2o3bo121b$699bo21bo101b$663bo14bobo14b
 o3bo21b2o100b$659b2obobo7bo5bobo14bobo22bobo100b$659bo2b2ob2o2b2ob2o5bo91b2o50b$659bo5bobo5bo4bobo90b2o50b$660b2o2bo8bo5b2o142b$664bo2b3o2bo6bo143b$664b3o156b$637bobo183b$637bobobo7bo173b$636bo2b2obo4b3o173b$637b2o3bobob2obo44bo128b$637b2o3b2ob5o10b3
 o29b2ob2o126b$641bob2o3b2o10bobo29b3ob2o125b$640bobo16b2ob2o15b2o12b5o125b$659b2o18b2o13b3o126b$695bo127b$823b$662bo160b$662bo160b$823b$656b3o164b$655bo3bo27b2o134b$654bo4bo27b2o134b$644b2obo5bo3b2o3bo160b$640bo3b6o11bo161b$639bo5bo4bo2b2o6b3o159b$63
-9bo11bo171b$640bo9bo172b$645bo177b$645bo2bo174b$647bo175b$823b$823b$647b2o174b$647b2o174b!`,
-"7engCSgun": `#C p726 V-gun for seven-engine-in-a-row Cordership: a 21-glider salvo
+9bo11bo171b$640bo9bo172b$645bo177b$645bo2bo174b$647bo175b$823b$823b$647b2o174b$647b2o174b!`,"7engCSgun":`#C p726 V-gun for seven-engine-in-a-row Cordership: a 21-glider salvo
 #C  meets a 27-glider salvo, following a recipe posted on 7 May 2003.
 #C The p726 Herschel factories are made from matched pairs of stable
 #C  glider reflectors; they could be replaced by Herschel factories
@@ -3393,8 +3284,7 @@ bo1028b$1295b2o35bo992b$1290b2o2bo35b2o993b$1290bo3bo36b2o992b$1277b2o12b3o1031b
 334bo990b$1334bobo988b$1300bo33b2o989b$1299bo1025b$1299b3o24bo998b$1325bo999b$1124bo200b3o997b$1095bobo27bo1199b$1074bo21b2o25b3o1199b$1075b2o19bo42bobo1183b$1074b2o64b2o1183b$1140bo1184b$2325b$2325b$1304bo1020b$1302b2o1021b$1303b2o1020b$1272bo1052b$
 1271bo1053b$1271b3o20bobo1028b$1294b2o1029b$1112bo182bo1029b$1113bo1211b$1111b3o16bo1194b$1128bobo1194b$1129b2o1194b$2325b$2325b$2325b$1276bo1048b$1274b2o1049b$1096bo178b2o1048b$1097bo170bobo1054b$1095b3o170b2o1055b$1269bo1055b$2325b$1118bo1206b$1116
 bobo1206b$1117b2o1206b$2325b$2325b$2325b$1247bo1077b$1245b2o1078b$1246b2o1077b$2325b$1111bo1213b$1112b2o1211b$1111b2o1212b$2325b$2325b$2325b$2325b$2325b$1249bo1075b$1249bobo1073b$1243bo5b2o1074b$1242bo1082b$1242b3o1080b$2325b$2325b$1116bobo1206b$1117
-b2o1206b$1117bo1207b!`,
-"crystal": `#C High-period oscillator built by David Dauthier, showing
+b2o1206b$1117bo1207b!`,crystal:`#C High-period oscillator built by David Dauthier, showing
 #C  a common crystal forming on a glider stream. Several adjustable
 #C  high-period guns have been constructed that make use of two
 #C  identical copies of this repeatable growth-and-decay reaction.
@@ -3418,8 +3308,7 @@ b2o$12b2o224b2o3$14b2o220b2o$12bo3bo218bo3bo$6b2o3bo5bo216bo5bo3b2o$6b2o2b2obo3b
 o3bo2bobo58b2o3b2o17b5o24b5o17b2o3b2o58bobo2bo3bob2o2b2o$10b2o3bo5bo63b2o3b2o16b2o3b2o22b2o3b2o16b2o3b2o63bo5bo3b2o$16bo3bo78bo9b5o24b5o9bo78bo3bo$18b2o79bobo7b5o24b5o7bobo79b2o$90b2o8bo8bo2bo26bo2bo8bo8b2o$90bobo15bo3bo26bo3bo15bobo$16b2o74b2o14bo34
 bo14b2o74b2o$16b2o4bo68b2o7bo7bob2o28b2obo7bo7b2o68bo4b2o$5b2o6b2o6b5ob2o62b2o6b3o7bo32bo7b3o6b2o62b2ob5o6b2o6b2o$5b2o5b3o5bo2b2o4bo57b3o8b5o46b5o8b3o57bo4b2o2bo5b3o5b2o$13b2o5b2o8bo8b2o56b2o3b2o44b2o3b2o56b2o8bo8b2o5b2o$16b2o4bo7bo8b2o57b5o3b2o3b2o2
 6b2o3b2o3b5o57b2o8bo7bo4b2o$16b2o12bo67bo3bo3bo5bo26bo5bo3bo3bo67bo12b2o$29bo69bobo48bobo69bo$27b2o58b2o3b2o6bo6bo3bo28bo3bo6bo6b2o3b2o58b2o$108b3o30b3o$88bo3bo66bo3bo$89b3o8b2o48b2o8b3o$89b3o8b2o48b2o8b3o4$108b2o32b2o$90b2o16b2o32b2o16b2o$90b2o68b2o
-!`,
-"forwardMWSSrake": `#C A c/3 period 90 forward MWSS rake, shooting a period 90 MWSS stream
+!`,forwardMWSSrake:`#C A c/3 period 90 forward MWSS rake, shooting a period 90 MWSS stream
 #C which travels ahead of the puffer. This works by taking a forward
 #C period 90 LWSS rake, and converting each of the LWSS's into MWSS's
 #C using two period 90 sideways LWSS rakes. The "hammer" reaction
@@ -3485,8 +3374,7 @@ bo6b2o2bobo2bo61bo53b3o4b3ob2o2b4o2b2o2bo4bo$86bo2bo6bo117bo5b3o4b2o2bob2o6b2o$8
 obo2bo$130b3o57bo7bo4bo13b7o3b3o2b3o$130bo2bo13bo36b2o4bo3b4o2bob2o22bobob3o$130bo16bobo21bob2o8bo2b2ob2o2bobobob2ob2o23bo4bo$130bo16b2o21b2ob2ob2o4bo3bo2b2obo8bo28b2o$131bobo35bo2bobo2bo5b4o13b2o$170bo5b2o4bo2bobo2b2o$179b2obo2bobo2b2o$56b2ob3o117b2
 o4bobo4bo$56b2o4b2o14b2o101bobobobobobo8bo$55bo2bobo3bo13b2o119b2o$62b3o2b3o129bobo$64b3obobo$64bo4bo13b3o102b2o$65b2o18bo102bobo$54bob2o26bo103bo$53b2ob2ob2o69b3o$52bo2bobo2bo68bo2bo44b2o$53bo5b2o4b2o65bo43b2o$62b2ob2o65bo45bo$62b2o3bo38b2o21bobo$62
 b2o41bobo57b3o$107bo57bo$166bo$155bo$154b2o$154bobo2$64bob2o22b2obo34b3o6bo5b2o$63b2ob2ob2o16b2ob2ob2o15b2ob3o14bo4b2o6bobo$62bo2bobo2bo16bo2bobo2bo14b2o4b2o11bo6b2o5bo$63bo5b2o4b2o4b2o4b2o5bo14bo2bobo3bo$72b2ob2o4b2ob2o30b3o2b3o8b2o$72b2o3bo2bo3b2o3
-2b3obobo6b2o$72b2o10b2o32bo4bo9bo$119b2o2$119b2o$118bo2bo$118bo2bo$117b2obo$118bobob2o$115b2obobo$115b2obobobo$116bobobo2bo$117bo2bo3b2o$116b5o2b3o$117b3obob2o$121bo$121bo!`,
-"gliderloop": `#N p63 glider loop
+2b3obobo6b2o$72b2o10b2o32bo4bo9bo$119b2o2$119b2o$118bo2bo$118bo2bo$117b2obo$118bobob2o$115b2obobo$115b2obobobo$116bobobo2bo$117bo2bo3b2o$116b5o2b3o$117b3obob2o$121bo$121bo!`,gliderloop:`#N p63 glider loop
 #O Mike Playle
 #C A period-63 oscillator based on a stable reflector
 #C Discovered on 25 Apr 2013
@@ -3499,8 +3387,7 @@ obo$43bo2$29b2o$30bo8bo$30bobo5b2o$31b2o$45bo$46bo$44b3o4$41b2o$41bo$
 2o55b2o5bo8b5o$b2o3bo3b2o57bobo10bo$o2b3o5bo57b2o9bo$2obo76b2o$3bo$3b
 2o3$11b2o$12bo10b2o$9b3o10b2o$9bo14bo5$53bobo$53b2o$40bo13bo$40b3o$43b
 o$42b2o4$38b3o$38bo$39bo$52b2o$45b2o5bobo$45bo8bo$54b2o2$41bo$40bobob
-2o$40bobobobo$37b2obobo3bo2bo$37bo2bo2b2ob4o$39b2o4bo$45bobo$46b2o!`,
-"gunstar": `#N Gunstar
+2o$40bobobobo$37b2obobo3bo2bo$37bo2bo2b2ob4o$39b2o4bo$45bobo$46b2o!`,gunstar:`#N Gunstar
 #O David Buckingham
 #C A four-barreled true period 144 glider gun found in 1990.
 #C www.conwaylife.com/wiki/index.php?title=Gunstar
@@ -3514,8 +3401,7 @@ o14b$104b2o26bo16b$103bobo43b$102b3o10b2o32b$22b2o78b2o11b2o32b$22b2o81b2o42b$13
 o60bo26bobo12b2o18b$17bo131b$18bo2bo90bo3b2o31b$13bo2bobo91bobo3b2o31b$12bo3b3obo88bo6b2o31b$12b3o4b2o89b2o37b$18bobo90bo3bobobo29b$19bo84b2o9bo3bo29b$7b2o8bob2o83bobo8bo3bo29b$7b2o9b2o45b2o38b3o9bo31b$43b2o20b3o38b2o41b$39b2o2b2o2b2o10b2o2bo2bobo34b
 2o44b$39b2o2bo2bobo10b2o2b2o2b2o34b3o43b$5bo18b2o19b3o15b2o84b$3ob2o2b2o10b4o4b2o15b2o102b$4o4b2o10b3ob2o2b2o74b2o43b$4b2o19bo25bo52b2o43b$50bobo7b2o87b$49b2o9b2o87b$52b2o95b2$55b2o20bo71b$47b3o6bo8b2o8b3o71b$51b3obo9b2o7bo74b$46bo2bob3o20b2o73b2$47b
 3o57b2o40b$107b2o40b$92bo56b$93bo55b$91b3o12bob2o39b$106bobo40b$56b2o25b2o22bo41b$56bo2bo23b2o22b2o40b$95bo11b2o40b$56bo2bo37b3obo5b2o40b$55bo2bo39bob3o46b$55bobo37b3obo2bo46b$56bo37bo2bo3bo47b$68bobo25b2o51b$56b2o11b2o78b$56b2o4b2o5bo15b2o11bo50b$61
-bobo21bo10bobo50b$61bo24b3o8b2o50b$60b2o26bo60b2$107b2o40b$101b2o4b2o40b$101b2o46b2$106b2obo39b$107bobo39b$108bo40b$107b2o40b$107b2o40b$107b2o!`,
-"leafbug2a": `#N leafbug2a.rle
+bobo21bo10bobo50b$61bo24b3o8b2o50b$60b2o26bo60b2$107b2o40b$101b2o4b2o40b$101b2o46b2$106b2obo39b$107bobo39b$108bo40b$107b2o40b$107b2o40b$107b2o!`,leafbug2a:`#N leafbug2a.rle
 #C https://conwaylife.com/wiki/Leaf_bug_2
 #C https://www.conwaylife.com/patterns/leafbug2a.rle
 #C 29591 cells, 15129x7988 in min.pop. phase.
@@ -3924,8 +3810,7 @@ bo4bo$7442b3o34bo2b2o161b3o31b2o$7380b2o58bo3b2o35b2o161bo3bo31b2o60b2o$7380b2o6
 o160bo$7434bo157bo99bo$7433b3o155bo100b3o$7432b3obo$7431b2o2b3o249b2o$7432b2obo251b2o9bo$7433bo96b2o60b2o105b2o$7530b2o60b2o104b2o3$7420bo$7418b2o$7419b2o2$7534b2o52b2o$7534b2o52b2o3$7380b2o102b2o152b2o102b2o$7380b2o102b2o152b2o102b2o$7616bobo$7617b2
 o$7443b2o172bo61b2o$7443b2o234b2o2$7500bobo$7500b2o$7501bo40b2o36b2o$7542b2o36b2o16$7553bo$7534b2o16bo35b2o$7534b2o16b3o33b2o3$7380b2o102b2o89bo62b2o102b2o$7380b2o102b2o90bo61b2o102b2o$7574b3o2$7443b2o234b2o$7443b2o234b2o4$7542b2o36b2o$7542b2o36b2o12
 $7607bo$7606bo$7526b3o77b3o$7526bo2bo$7525bo3bo$7521bo4bo2b2o62b3o$7522bo5bo$7520b3o3b2o$7525b3o8b2o48b2o8bo$7484b2o39b3o8b2o48b2o3bo2b2ob2o39b2o$7484b2o104bo5bo41b2o$7590b3o2$7443b2o234b2o$7443b2o92bo141b2o$7538bo$7536b3o3$7538b2o44b2o$7538b2o44b2o7
-$7534b2o52b2o$7534b2o52b2o12$7484b2o152b2o36bobo$7484b2o152b2o37b2o$7677bo2$7679b2o$7679b2o5$7542bobo$7542b2o$7543bo3$7584bobo$7585b2o$7585bo$7534b2o52b2o$7534b2o52b2o!`,
-"waterstrider": `#N waterstrider.rle
+$7534b2o52b2o$7534b2o52b2o12$7484b2o152b2o36bobo$7484b2o152b2o37b2o$7677bo2$7679b2o$7679b2o5$7542bobo$7542b2o$7543bo3$7584bobo$7585b2o$7585bo$7534b2o52b2o$7534b2o52b2o!`,waterstrider:`#N waterstrider.rle
 #O FWKnightship, 2025
 #C https://conwaylife.com/wiki/Water_strider
 #C https://www.conwaylife.com/patterns/waterstrider.rle
@@ -4549,8 +4434,7 @@ obo10959bo157bobo$1442b3o155b2o10960b3o155b2o$1241b2o133b2o152b2o69bo63b2o10694b
 2bobo$1485bo11119bo$1335b2o148b3obobo79b2o10882b2o148b3obobo79b2o$1335b2o148bo5bo79b2o10882b2o148bo5bo79b2o$1487b3o11117b3o$1487b3o11117b3o3$1430b2o44b2o11072b2o44b2o$1430b2o44b2o11072b2o44b2o6$1621bo11119bo$1426b2o52b2o137bobo10924b2o52b2o137bobo$14
 26b2o52b2o138b2o10924b2o52b2o138b2o3$1281bo11119bo$1281bobo11117bobo$1281b2o11118b2o7$1241b2o133b2o40b2o68b2o40b2o133b2o10694b2o133b2o40b2o68b2o40b2o133b2o$1241b2o133b2o40b2o68b2o40b2o133b2o10694b2o133b2o40b2o68b2o40b2o133b2o4$1439bobo11117bobo$1439b
 2o11118b2o$1440bo11119bo3$1471bobo11117bobo$1472b2o11118b2o$1472bo11119bo6$1426b2o52b2o11064b2o52b2o$1426b2o52b2o11064b2o52b2o12$1241b2o286bo135b2o10694b2o286bo135b2o$1241b2o422b2o10694b2o422b2o!
-`,
-"solifuge": `#N solifuge.rle
+`,solifuge:`#N solifuge.rle
 #O Nico Brown, 2025
 #C https://conwaylife.com/wiki/Solifuge
 #C https://www.conwaylife.com/patterns/solifuge.rle
@@ -4572,8 +4456,7 @@ b2obo$118bo27bob2ob3o50b2o$118b2o25b3obo4bo$117bobo24bo4bob3o44b2o$145b3ob2obo33
 $167bobo$168bo2$102b3o$104bo$103bo3$158b2o$158b2o2$165bo$165b2o2bo$161bo5bo2bo$99b2o59bo2b2o5bo$98bobo59bo5b2o2bo$100bo59bo2bo5bo$161bo2b2o$145b2o18bo$145b2o4$150b3o$150bobo$135bo3bo9bo2bo$95b3o36bo5bo7bo2bo$97bo36b2o3bo9b2o$96bo38b5o4b2o$137bo5bo$14
 4b2o5b2o$153bo$138bo11bobo$138bo12bo$140bo$139bo$139bo$92b2o28b2o$91bobo28b2o$93bo2$110b2o$110b2o4$93b2o$92bo2bo$92bobo$93bo$104b3o$104bo2bo$104b2ob2o$91bo17bo$90b2o11b3o2bo$89bobo10bo$103b3o$77b2o25bo$77b2o11bo2b2o$90bo2$65b2o$65b2o14bo13b2o$81bo12b
 obo$48b2o31bo11b3o$34bo12b2o45b2o$22b2o10b2o13bo19bo$18b2obob2o9bobo32bo5b2o$16bo19b2o31bo4bo2bo$21b2o10bo2bo38b2o3bo$14b2o16b2obo40bob3o$18bo14b2o42bo$13bo2bo58b2o3bo$14bobo58b2o$15bo59bo2b2o$22bo$20b4o57bo$19b2o3bo57bo$18bo3b2o55bo2bo$19b4o57b2o$20
-bo59bo3$8bo$6b2ob2o$9b2o$5bo3b2o$5bo2bo$6b2o2$2o2$8bobo$8b2o$8b2o!`,
-"spiralGrowth2":  `#N smallerspiralgrowth.rle
+bo59bo3$8bo$6b2ob2o$9b2o$5bo3b2o$5bo2bo$6b2o2$2o2$8bobo$8b2o$8b2o!`,spiralGrowth2:`#N smallerspiralgrowth.rle
 #O Dave Greene, 2017
 #C https://conwaylife.com/wiki/Spiral_growth
 #C https://www.conwaylife.com/patterns/smallerspiralgrowth.rle
@@ -4657,15 +4540,13 @@ o$423b2o$425b4o$425bo3bo$428b2o2$430b3o$400bobo26bo3bo$401b2o25bo5bo$401bo26bo5b
 bo57bo$369b2o60bob2o27bobo$369bo60b2o2bo27b2o$432b2o29bo$428b4o$427bo3bo$427b2o2$424bo$425bo$423b3o3$417b2o$416bobo5b2o$416bo7b2o$415b2o2$429bo$419b2o4b2obobo$419bo4bobobobo$421bo2bobobobob2o$391bo28b5ob2o2bo2bo$392b2o31bo4b2o$391b2o29b2obo$422bo2b2o
 $423b2o$425b4o$425bo3bo$428b2o3$425bo$424b2o27b3o$424bobo28bo$454bo$438b2o$431b2o5bobo$431b2o7bo$440b2o2$427bo$426bobob2o4b2o$426bobobobo4bo$423b2obobobobo2bo$423bo2bo2b2ob5o$415bo9b2o4bo$416b2o13bob2o$415b2o13b2o2bo$432b2o$428b4o$427bo3bo$427b2o7$41
 7b2o$416bobo5b2o$416bo7b2o$415b2o2$429bo$419b2o4b2obobo$419bo4bobobobo$421bo2bobobobob2o$420b5ob2o2bo2bo$425bo4b2o$422b2obo$422bo2b2o$423b2o$425b4o$425bo3bo$428b2o7$438b2o$431b2o5bobo$431b2o7bo$440b2o2$427bo$426bobob2o$426bobobobo$425b2obobobo2bo$426
-bo2b2ob4o$426bo4bo$427b3obo2b2o$429b2o3b2o17$435b2o$435b2o!`,
-"c/3synth": `x = 228, y = 130, rule = B3/S23
+bo2b2ob4o$426bo4bo$427b3obo2b2o$429b2o3b2o17$435b2o$435b2o!`,"c/3synth":`x = 228, y = 130, rule = B3/S23
 214bobo11b$106bo107b2o12b$104bobo97bobo8bo12b$105b2o97b2o22b$205bo22b$100bo127b$98bobo127b$99b2o17bo94bo14b$116bobo92b2o15b$117b2o93b2o14b$228b$228b$97bo130b$95bobo130b$90bo5b2o130b$91b2o135b$90b2o136b$184bo43b$182b2o44b$183b2o43b$228b$91bo136b$89bob
 o115bobo18b$90b2o115b2o19b$183bo24bo19b$119bo61b2o45b$120bo61b2o44b$118b3o53bo53b$174bobo51b$174b2o52b$120bo107b$121b2o105b$120b2o106b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$228b$49bo100bo77b$21
 bo26bo96bo3b2o77b$22bo25b3o94b2o2bobo6b2o68b$20b3o121bobo11bobo67b$43bobo112bo69b$43b2o183b$23bo20bo183b$22bobo203b$23b2o203b$167bo60b$166b2o60b$6bo21b2o136bobo59b$6b2o21bo198b$5bobo18b3o53bo145b$26bo54bobo144b$83b2o143b$83bo144b$82bobo143b$84bo143b$
 85bo142b$30b2o51bobo142b$29bo2bo49bo2bo67b3o72b$30bobo120bo74b$31bo51b3o53b2o13bo73b$84b2o52bobo87b$83bo56bo18b2o67b$29b2o53b2o73bobo22bo43b$29b2o16b2o33bobo74bo23b2o43b$47bobo33bo99bobo42b$47bo180b$228b$bo226b$b2o225b$obo45bo179b$47b2o72bo106b$47bob
 o71b2o105b$116bo3bobo105b$116b2o110b$115bobo110b$228b$11bo216b$11b2o215b$10bobo25b2o144b2o42b$37b2o145bobo41b$39bo144bo43b$228b$228b$228b$228b$228b$228b$228b$228b$228b$209b3o16b$209bo18b$210bo17b$228b$213bo14b$212b2o14b$212bobo13b$228b$228b$228b$228b
-$87b3o138b$89bo138b$88bo139b$228b$228b$228b$228b$228b$228b$226b2o$225b2ob$227bo!`,
-"tetheredrake": `x = 71, y = 60, rule = B3/S23
+$87b3o138b$89bo138b$88bo139b$228b$228b$228b$228b$228b$228b$226b2o$225b2ob$227bo!`,tetheredrake:`x = 71, y = 60, rule = B3/S23
 60bo2$58b3obo$57bob2o$57b2obo$55bob3o2$57bo$28bobo22bo$27bo24bobo$28b
 o2bo20b2o$30b3o23b2o$56bobo$51b2o5bo$51b2o5b2o5$52b2o3b2o$37b2o12b2ob
 obob2o$38b2o10b3obobob3o$37bo11bo3b2ob2o3bo$49bo11bo$50bo9bo2$53b2ob2o
@@ -4676,8 +4557,7 @@ $33b3o3b2o17b2o$32bo2b2o2bobo$31b6o3bo$10bo8b3o10bo2b2o16bo$2bo6bobo6b
 o3bo10b2obo16b2o$b3o6bo7bo3bo11b3o15b2obo$3obo13bo3bo2b2o24bo2b3o$bo3b
 o7bo5b3o3b2o23bobobo9bo$2bo3bo4b2ob2o33bobobo9bobo3b2o$3bob3o2bo4bo14b
 o16b3o2bo7bobo3bo2b2o$4b3o22bobo16bob2o7bobobobo$5bo8bo15bo18b2o9bo$50b
-o$9bo2bo$11b2o51b3o$64b3o$64b3o$61b3o$61b3o$61b3o!`,
-"knightship": `#N Sir Robin
+o$9bo2bo$11b2o51b3o$64b3o$64b3o$61b3o$61b3o$61b3o!`,knightship:`#N Sir Robin
 #O Adam P. Goucher, Tom Rokicki; 2018
 #C The first elementary knightship to be found in Conway's Game of Life.
 #C https://conwaylife.com/wiki/Sir_Robin
@@ -4691,8 +4571,7 @@ o$10bobo2b2o$10bo2bobobo$10b3o6bo$11bobobo3bo$14b2obobo$11bo6b3o2$11bo
 o$22b2o3bo$21bo$21b2obo$20bo$19b5o$19bo4bo$18b3ob3o$18bob5o$18bo$20bo$
 16bo4b4o$20b4ob2o$17b3o4bo$24bobo$28bo$24bo2b2o$25b3o$22b2o$21b3o5bo$
 24b2o2bobo$21bo2b3obobo$22b2obo2bo$24bobo2b2o$26b2o$22b3o4bo$22b3o4bo$
-23b2o3b3o$24b2ob2o$25b2o$25bo2$24b2o$26bo!`,
-"truep14": `x = 72, y = 60, rule = B3/S23
+23b2o3b3o$24b2ob2o$25b2o$25bo2$24b2o$26bo!`,truep14:`x = 72, y = 60, rule = B3/S23
 38b2o3bo2bo2bo$38bo2b3o2b6o4b2o$39b2o3b2o6bo3bo$26b2o5bo2bo5b2o2b2o2b
 2obo3bo2b2o$26bo6b7o3bo2bobo2bob4obo2bo$4b2o21bo12b3o4b2o2bo4bob2o$4b
 obo4b2o3b2o6b4o2bo4b3ob2o2b4o4bo3b2obo$7bo3b2o2bobo6bo3b3o3bo3bobobo4b
@@ -4714,8 +4593,7 @@ o3b2o4bobo2bobo3bo6bo$11b2o6b2o3b2o12bobo3bo3bobob2obob11o$10bo8b2ob3o
 13bobobobobobobo14bo$9b3o8b4o15bobob2ob2o2bobob5o2b2o$19bo2bo18bo3bo4b
 ob2o5bo2bo$40b2o3bob3o5b2o2b2o$14b3o7bo21b2o8bo$15bo7bobo28bo$13b2o9b
 o29b2o$13b2o4$14b2o$14bobo$15b2o2$12b2o$13bo$10b3o$10bo!
-`,
-"growingPiwaveship":`
+`,growingPiwaveship:`
 #C https://conwaylife.com/wiki/3c/14_pi_wave
 #C https://www.conwaylife.com/patterns/growing3c14piwaveship.rle
 x = 3665, y = 3673, rule = B3/S23
@@ -5621,8 +5499,7 @@ o9bo4bo16bo5bo$2093bo2bobo4bo5bo2bo57bo3b3o5bo2bo64b2o7bo4bo7bo3bo21bo10b2o$2094
 o2bo70bo2bo4b2o5bo20bo$2092b2o4bo5bo3bo68bo2bobo2bo2bo2b4o62bobo5b6o$2091bo4bobo5bo73bobobo2bo2bo2bo3bo70bobo$2090b5obobo4bo5bo2bo69bo2bo7b2o74b4obo$2089bo8bo3bo6b3o66bobobo2bo83bo3b2o$2089b6obobo11bo66bo2bobo2bo85b2o17b2o$2086bobo7bobo77b2o4bo2bo7b2
 o76b4o14b2ob3o$2085b6ob2o4b2o75bo4bobo2bo2bo2bo3bo78bo15b5o$2084b2o5b2o5bo2bo72b5obobo2bo2bo2b4o96b3o$2083b2o4b2o4bo3bo73bo8bo2bo118b4o$2084b2o4b4obo3bo2bo70b6obobo120b6o$2100bobo67bobo7bobo119b2ob4o$2084b2o4b5o74b6ob2o4b2o119b2o$2083b2o4b2o8b3o66b2o
 5b2o5bo2bo$2084b2o5b2obo4b2o66b2o4b2o4bo3bo$2085b6obobo4b3o66b2o4b4obo3bo2bo$2086bobo19bo75bobo$2089b6o5bobo2b2obo59b2o4b5o$2089bo9bo2bo2bo61b2o4b2o8b3o$2091b2o6bo5bo62b2o5b2obo4b2o$2091b4o4bo3bo65b6obobo4b3o$2094bo5bo3b3o63bobo19bo$2101b2o70b6o5bobo
-2b2obo$2104b5obo62bo9bo2bo2bo$2105bo4bo64b2o6bo5bo$2106b2o67b4o4bo3bo$2107bo2bo67bo5bo3b3o$2108bobo74b2o$2188b5obo$2189bo4bo$2190b2o$2191bo2bo$2192bobo!`,
-"linestretcher": `
+2b2obo$2104b5obo62bo9bo2bo2bo$2105bo4bo64b2o6bo5bo$2106b2o67b4o4bo3bo$2107bo2bo67bo5bo3b3o$2108bobo74b2o$2188b5obo$2189bo4bo$2190b2o$2191bo2bo$2192bobo!`,linestretcher:`
 #O Lineship except I removed the part where it deletes the end of the line
 x = 659, y = 653, rule = B3/S23
 617bo41b$618bob2obobo33b$612b3o3b4o3bo33b$618bo2b2ob2o33b$617bo41b$615b3o41b$615b3o17b2o22b$635b2o22b$659b$659b$659b$659b$659b$659b$643b2o14b$643b2o14b$631b4o24b$635bo23b$617bob2ob2o7bo4bo22b$616b5o2b2o7b2obo23b$616bo2b3obo10bo24b$622bo36b$659b$659b$
@@ -5702,13 +5579,11 @@ bo285b2o34bobob3o12bo253b$43bobo16b2o323b2obo2bo265b$43b4o344bobo265b$46bo12b2o3
 2bo13bo335b2ob2o45bo229b$26bobo350b4o276b$5bo21bo30bob2o597b$6bob2obobo43b5o597b$3o3b4o3bo43b4o294b3o301b$6bo2b2ob2o645b$5bo52b3o292bo5bo299b$3b3o52b3o292b7o299b$3b3o37b2o14bo295bo303b$24b3o16b2o310bo3bo17b2o280b$23bo2bo327bo21bo282b$23bo309bo21bo14b
 o3bo284b$23bo2bo305b3o21bo4bo8bob3o2bo281b$23bo2bo304bobobo20bo4bo8b2obo285b$25b3o302b3ob3o12bo5b2obobo11bo4bo18b2o261b$24bobo321bobo3bobo15bo4bo17bobo261b$24bo26b2o279bob3o13b2o3bo16bo24bo261b$26bo24b2o279b5o9bo3bo21bo3bo282b$20b3o4b2o303b2o2b2o11bo
 2b2o19b3o283b$19bob2o6bo304bob2o14bo306b$5bob2ob2o7bob2o5b2o306b2o9bo2b2o307b$4b5o2b2o7b3obo3bo303bobo2bo11bo27b2o280b$4bo2b3obo8b2o5bo303bobo2bo40b2o8bobo269b$10bo12bo2b2o304bo56bo269b$23b2obo3b2o354bob2o269b$25bo361bo5b2o264b$392b3o264b$347b2o43b3o
-264b$11b2o377bob2o265b$11b2o334b2o41bobo266b$391bo267b$22bo325bobo308b$22bo326bo309b$23bo313b2o10bo309b$337b2o320b$22b2o635b$20bo2bobo633b$20bo4bo633b$20bo638b$21b3o635b$659b$345b2o312b$345b2o312b!`,
-"hwssgun": `x = 25, y = 44, rule = B3/S23
+264b$11b2o377bob2o265b$11b2o334b2o41bobo266b$391bo267b$22bo325bobo308b$22bo326bo309b$23bo313b2o10bo309b$337b2o320b$22b2o635b$20bo2bobo633b$20bo4bo633b$20bo638b$21b3o635b$659b$345b2o312b$345b2o312b!`,hwssgun:`x = 25, y = 44, rule = B3/S23
 10b3o$13bo$9bo3bo$8bobo2bo$6bo2bobo$6bo3bo$6bo16b2o$7b3o13bo$21bobo$2o
 2bo16b2o$o2b2o$b5o8bo$13bob2o$13bobo$b5o8bo$o2b2o$2o2bo4$6b2o$7bo$7bo
 bo$8b2o$4b2o$5bo$5bobo$6b2o2$9b2o$9b2o5$4bo2bobo$2b2obob3o$3bo6bo$2b2o
-5bo$15b2o$3bo5b2o3bobo$2bo6bo5bo$3b3obob2o$3bobo2bo!`,
-"3c7grow":  `#N 3c7growingspaceship.rle
+5bo$15b2o$3bo5b2o3bobo$2bo6bo5bo$3b3obob2o$3bobo2bo!`,"3c7grow":`#N 3c7growingspaceship.rle
 #C https://conwaylife.com/wiki/3c/7_orthogonal
 #C https://www.conwaylife.com/patterns/3c7growingspaceship.rle
 x = 672, y = 136, rule = B3/S23
@@ -5774,8 +5649,7 @@ b3o8bob3o4bobo2bo9b2o$44bobo17b3o11b2obob2o15bo11bo2bo6bo3b3o4bobo4bo9bo3bo2b2o6
 14bo16bo2bo7b3o3b2o2b3o2bobo3bo2bo3bo17bo3b2o13b2o30bo32b3o3bo$44b2o2b2o11b4o16bob2ob3o3bob6o2b3o2bobo3bo2bo20b2o3b2o42bo2bo34bo$48bobo5b3ob2ob2o11b2o5bo3b2o2b2o3b2ob2ob2o2bo3bo3bobo3bo17bo3b2o13b2o30bo34bo$48b2o5b4ob3o2bo10b2o4b2o3b2o2bo9b2o4b5ob3o4
 bo17b4o13b2ob2o8bo6b2obo8bob2o$48b2ob5o7b3o9bob4o7b2o2b3o2bo11bobo7bo3b2o12bo18bo5bo4bobobo3b3obo7b5o$47bo2b3ob2o7b2o14bo6b4obo5bo9bo15bobo6bo2b2o3bo17b4obo5bo10b3ob2o2b2ob2o$50b3o2bob3obo11b2o2bobo6bobo4b2obo10bo14bo2bo4bo2bo6bo10b2o11bob3o5b2o3bobo
 4b2o3bo$49bobo3bo3b2o3bo3bob2o5b3obo11b3o26bo3b3o4bobo4bo9bo3bo2b2o6b2o4b3ob4o3b2o2b5o$55bo3bo4b2ob2o2b3o4b2ob2o39bo9bo3bo3bo11bob2o5bo4b3o13bobob2obo$56bobo6bo2bo2bo2bobo5bo40bo9bo3b2obo8bob2o8bo3bo4b3o10bo$64bo4b2o8b3o42bo3bobo2b2o3b2o12bobo6bob2o2
-b2o2bo$80b2o44b2ob2o8b2ob5o2bo2bo3b2o10bobo$130b2ob3o3b5o4bo5bob2o11bo$140b4o2bobo4bo3bo$144b2o8bo2bo$154bobo!`,
-"flyingwing": `#N Flying wing
+b2o2bo$80b2o44b2ob2o8b2ob5o2bo2bo3b2o10bobo$130b2ob3o3b5o4bo5bob2o11bo$140b4o2bobo4bo3bo$144b2o8bo2bo$154bobo!`,flyingwing:`#N Flying wing
 #O knightlife
 #C https://conwaylife.com/wiki/Flying_wing
 #C https://conwaylife.com/patterns/flyingwing.rle
@@ -5787,8 +5661,7 @@ bo4bo5b2ob2obobobo5bo2bo5b3o9b3o$14bo3bo9bo6bo8bo3bo3bob2o2b3o15bo5bo15b3o2b2obo
 o4bob2o45b2obo4bob2ob2obo4bob2o$31bo4bo3bo2bobo2bo3bo4bo43bo4bo3bo2bobo2bo3bo4bo$10bo32bobo67bobo32bo$10bobo18b2o7b2obobob2o7b2o43b2o7b2obobob2o7b2o18bobo$10b2o31bobo67bobo31b2o$37b3o9b3o55b3o9b3o$37bo3bo9bo55bo9bo3bo$37bobo4b3o65b3o4bobo$8bo34bo2bo4
 b2o53b2o4bo2bo34bo$8bobo35bo65bo35bobo$8b2o32bo3bo65bo3bo32b2o$42bo3bo65bo3bo$37bo8bo65bo8bo$37bobo3bobo67bobo3bobo$6bo30b2o81b2o30bo$6bobo141bobo$6b2o143b2o2$35bo87bo$35bobo83bobo$4bo30b2o85b2o30bo$4bobo145bobo$4b2o147b2o2$33bo91bo$33bobo87bobo$2bo3
 0b2o89b2o30bo$2bobo149bobo$2b2o151b2o2$31bo95bo$31bobo91bobo$o30b2o93b2o30bo$obo153bobo$2o155b2o2$29bo99bo$29bobo95bobo$29b2o97b2o$3o153b3o$obo153bobo$3o153b3o$27bo103bo$6b2o19bobo99bobo19b2o$8bo18b2o101b2o18bo$6b3o141b3o$5bob2o141b2obo$4bobo145bobo$
-4bobo18bo107bo18bobo$25bobo103bobo$9b2o14b2o105b2o14b2o$8bo2bo135bo2bo$9b2o137b2o2$23bo111bo$12b2o9bobo107bobo9b2o$11bo2bo8b2o109b2o8bo2bo$12b2o131b2o3$21bo115bo$21bobo111bobo$17b2o2b2o113b2o2b2o$17b2o121b2o!`,
-"slowsilver": `x = 39023, y = 39084, rule = B3/S23
+4bobo18bo107bo18bobo$25bobo103bobo$9b2o14b2o105b2o14b2o$8bo2bo135bo2bo$9b2o137b2o2$23bo111bo$12b2o9bobo107bobo9b2o$11bo2bo8b2o109b2o8bo2bo$12b2o131b2o3$21bo115bo$21bobo111bobo$17b2o2b2o113b2o2b2o$17b2o121b2o!`,slowsilver:`x = 39023, y = 39084, rule = B3/S23
 38689b2o$38689b2o49$38674b2o$38674b2o7bo$38682bobo4bo$38681bo2bo3bobo$38666bo15b2o4bo2bo$38665bobo21b2o28bo$38664bo2bo49b3o$38665b2o26bo22bo$38681bo11b3o20b2o$38679b3o14bo$38663bo14bo16b2o$38663b3o12b2o$38666bo$38665b2o3$38666b2o$38666b2o17b2o$38685b
 2o6$38682b2o32b2o$38682bo20b2o11b2o$38683b3o18bo$38685bo15b3o$38679b2o20bo$38679bo49b2o$38680b3o47bo$38682bo5bo14b2o22b3o$38687bobo13b2o22bo$38686bo2bo$38687b2o3$38688b2o46b2o$38688bo42b2o3b2o$38669b2o15bobo42b2o$38669b2o15b2o2$38730b2o12b2o$38731bo5
 b2o5bo$38722b2o4b3o6b2o6b3o$38721bo2bo3bo18bo$38722bobo$38723bo5$38668b2o$38667bobo$38667bo$38666b2o61b2o$38729b2o7bo$38737bobo4bo$38736bo2bo3bobo$38721bo15b2o4bo2bo$38720bobo21b2o28bo$38719bo2bo49b3o$38720b2o26bo22bo$38668b2o66bo11b3o20b2o$38667bo2b
@@ -6086,8 +5959,7 @@ o4b2o12bobo19b2o4b2o44b2o4b2o$224bo27b2o11bo2bo19bobo55bobo$223b3o40b2o22bo57bo$
 bo5b3o5b3o$309b2o47b2o11b2o9bobo8bo3bo$358b2o23bo8b2o3b2o$387b2o$295b2o89bo2bo5bo$295bo12b2o77b2o5bobo$293bobo12bo10b2o73bobo$293b2o11bobo10b2o74bo$302b2o2b2o$302b2o$329b2o52b2o$328bobo16b2o34b2o$328bo18bobo45b2o$301b2o19bo4b2o20bo44bo2bo$301b2o4b2o1
 2bobo19b2o4b2o44b2o4b2o$307b2o11bo2bo19bobo55bobo$321b2o22bo57bo$336b2o7b2o56b2o$336b2o14bo5b2o33b2o$351bobo5bo34bo$322b2o26bo2bo2b3o32b3o$306b2o13bo2bo26b2o3bo34bo4b2o$306bobo13bobo71b2o$308bo14bo$308b2o$326b2o$327bo$327bobo$328b2o62b2o$392bobo$394b
 o$394b2o$390b2o$346b2o42bobo$346bo44bo$344bobo3b2o$344b2o4b2o12$326b2o15b2o$325bobo15b2o$325bo$324b2o2$364bo$346bo16bobo$346b2o15bo2bo$345bobo16b2o3$350b2o$350bo12b2o$335b2o11bobo12bo10b2o$335b2o11b2o11bobo10b2o$357b2o2b2o$357b2o2$337b2o$337bo2bo$337
-bo2bo15b2o$337b2ob2o14b2o4b2o$338b2ob2o19b2o$337b2o3b2o$337bo2b3o$337bo$338bobo$339bo$361b2o$361bobo$363bo$363b2o!`,
-"sawtooth177": `x = 68, y = 76, rule = B3/S23
+bo2bo15b2o$337b2ob2o14b2o4b2o$338b2ob2o19b2o$337b2o3b2o$337bo2b3o$337bo$338bobo$339bo$361b2o$361bobo$363bo$363b2o!`,sawtooth177:`x = 68, y = 76, rule = B3/S23
 59b2o$59b2o3$56b2o$56b2o8b2o$7b2o57bo$7b2o50b2o6bo$59b2o5b2o2$10b2o54b
 2o$2o8b2o55bo$bo61bo$o6b2o53bo3bo$2o5b2o55b2o2$2o$o$4bo43b3o$bo3bo41b
 o2bo$2b2o43bo3bo$46b2obobo$46b2ob2o$47b3o$17b3o$17bo2bo$16bo3bo29b2o$
@@ -6096,8 +5968,7 @@ o2bo$2b2o43bo3bo$46b2obobo$46b2ob2o$47b3o$17b3o$17bo2bo$16bo3bo29b2o$
 o$34bobo$29bo3bo3bo$27b2o5b3o$28b2o2b2o3b2o11$7b4o24b2o$5b2o4b2o22b2o
 $5b2o5bo$7b2obobo$12bo9bo4bo$8bo3bo7b2ob4ob2o$8bo4bo8bo4bo$10b3o3bo$10b
 2o4bo$16b2o$18bo$18b3o3$21bo$20bob5o$19b2o5bo$19b2o3bo2bo$27bo$21b2ob
-o2bo$24bo2bo$25b2o$25b2o!`,
-"quadpush": `x = 416, y = 413, rule = B3/S23
+o2bo$24bo2bo$25b2o$25b2o!`,quadpush:`x = 416, y = 413, rule = B3/S23
 #O David Greene
 151b2o263b$151b2o16b2o245b$169b2o245b$416b$416b$416b$161b2o253b$150b3o8b2o253b$131b2o16b2ob2o262b$113b2o16b2o16b2ob2o262b$113b2o34b5o15b3o244b$148b2o3b2o6bo6bo3bo243b$160b3o4bo5bo95b2o145b$111bo47bo3bo3b2obob2o77b2o15bo2bo144b$112bo8b2o27b2o6bob3obo8
 6b2o18bo144b$112bo8b2o26b5o5b5o107bo144b$149bo20bo98bobo144b$151b3o15bobo97bobo144b$110b2o3b2o36bo15bobo78b3o6b2o9bo145b$113bo17b3o17b2o17b2o78b3o6b2o155b$110bo5bo13bo3bo16b2o19bo76bo3bo162b$111b2ob2o13bo5bo35b3o74bo5bo12b2o3b2o142b$112bobo15bo3bo21b
@@ -6140,8 +6011,7 @@ b$325bo90b$302bo22bo90b$302bobo20bo90b$241b2o59b2o20b3o89b$240b3o81b3o89b$240b2o
 $416b$416b$265bobo35bo112b$265b2o35b3o111b$266bo35b3o111b$280bo135b$279bo136b$279b3o20bobo111b$303bo112b$287bo128b$287b2o127b$282b2o4b2o126b$274bobo5b2o4b3o7b2o116b$274b2o5bo6b2o8b2o116b$275bo5bo2bo2b2o127b$284bo2bo128b$416b$281bo134b$280bobo133b$416
 b$280b3o133b$416b$416b$280b3o133b$416b$280bobo133b$281bo134b$416b$257bo23bo134b$257bobo21bo134b$242b2o13b2o6b2o149b$242b3o20bobo148b$241bob2o15b2o6bo147b$241b3o8bo6bobo3bo2bo7b2o138b$242bo9bobo4bobo6bo7b2o138b$252b2o11bobo148b$265b2o149b$416b$259bo15
 6b$259bo156b$258bobo155b$259bo156b$259bo156b$259bo156b$259bo156b$258bobo155b$259bo156b$259bo156b$416b$416b$416b$245b3o168b$245bobo168b$245b3o168b$245b3o168b$245b3o168b$245b3o168b$217bo27bobo168b$216bobo26b3o168b$216bobo197b$217bo198b$416b$212b2o7b2o1
-93b$211bo2bo5bo2bo192b$212b2o7b2o193b$416b$217bo198b$216bobo197b$216bobo197b$217bo198b!`,
-"doubleslide": `x = 355, y = 340, rule = B3/S23
+93b$211bo2bo5bo2bo192b$212b2o7b2o193b$416b$217bo198b$216bobo197b$216bobo197b$217bo198b!`,doubleslide:`x = 355, y = 340, rule = B3/S23
 #O David Greene Book
 38b2o$38b2o2$24b2o$24b2o5$24b3o11b3o$24b3o10bo3bo$23bo3bo8bo5bo$36b2obob2o42b2o$22b2o3b2o56b2o2$39bo59b2o12b2o$38bobo44bo13b2o12b2o$38bobo43bobo$22b3o14b2o42bo3bo39b2o$26b2o13bo41b5o9bo29b2o$26b2o12b3o39b2o3b2o9bo$27b2o10bo3bo39b5o10bo14bo13bo$25bobo
 10bob3obo39b3o24b2ob2o10bobo$25b2o7bo4b5o41bo40bobo$32b2o62b2o3b2o7bo5bo10bo$33b2o64bo$20b2o3b2o69bo5bo7b2obob2o$20b2o3b2o3b2o52bo12b2ob2o22b2obob2o$30b2o54b2o10bobo23bo5bo$22b3o60b3o11bo11bo13bo3bo$22b3o60b2o12bo11bo2bo11b3o$23bo62bo24bo$85bobo26b2o
@@ -6177,28 +6047,24 @@ bob2o2b2o15bo9b2o3b2o110bo5bo20bobobobo$132b2o18bo5bo21bo9b5o64bobo44bo5bo21b2ob
 b4o10b2o33bo$202b2o31bo4b4o$202bobo35bo25b2o$192bo73b2o$191b3o60b2o$190bo3bo59b2o38bo$192bo72bob2o5b3o15bobo$189bo5bo69bobo5b2obo16b2o$189bo5bo10bo59bo5bo2b2o$190bo3bo11bo53bo5b2o3b6o3bo$191b3o11bobo27b2o21bobo5b2o4bo2b2o2bobo$204b2ob2o24bo3bo5bo2b3o
 10b2o5b2o5b3o3b2o$203bo5bo17b2o3bo5bo9bo3bo41bo$206bo20b2o2b2obo3bo8bo4bobo18b3o3b2o14b2o$203b2o3b2o22bo5bo16b2o15bo2b2o2bobo12b2o$233bo3bo17b2o14b6o3bo21bobo$235b2o18b2o15bo2b2o26b2o$207bo44bobo5b2o11b2obo26bo$207bo44bo7bobo11b3o$191b2o15bo53bo$191b
 2o69b2o2$205b2o$205b2o100bo$179b2o127bo$170bo8bobo124b3o$169bobo2b2o6bo7b2o$169bobobo2bo2bo2bo7b2o$170bo3b2o6bo136bobo$179bobo138b2o$179b2o139bo$167b2o3b2o$167b2o3b2o144b2o$168b5o145b2o$169bobo2$169b3o129bo$300b2o$299b2o4b2o2b2o$298b3o4b2o2b2o$299b2o
-4b2o$289bo10b2o$170b2o116b3o10bo$170b2o116b3o2$286b2o3b2o$286b2o3b2o3$289bo$288bobo$287b2o$287b2o$287b3o$288bobo$289b2o!`,
-"lwsscr": `x = 178, y = 141, rule = B3/S23
+4b2o$289bo10b2o$170b2o116b3o10bo$170b2o116b3o2$286b2o3b2o$286b2o3b2o3$289bo$288bobo$287b2o$287b2o$287b3o$288bobo$289b2o!`,lwsscr:`x = 178, y = 141, rule = B3/S23
 #O David Greene Book
 36bo$35b4o2bo6bobo$36b4obo9bo$33b2o3b3o6bo2bo$32b2o2bo9b3o$32b2obo$24b2o8bo$24b2o2$58bo$57bobo2$56bo2bo$56b2o$16b2o38bo$16b2o4$58b2o$57bo$58b2o$8b2o$8b2o$45b3o$45bobo$45bobo$41b2o4bo17bobo6bobo$41b2o3b3o16bobo9bo$42bo23bo6bo2bo$2o41b4o25b3o$2o8bo33b2
 o$9bobo33bo2$8bo2bo32bo$8b2o34bobo37bo$8bo35b4o35bobo$45b3o$45bo12bo23bo2bo$49b2o7b5o19b2o$49b3o4bobo3bo19bo$10b2o36b3o3b3o3b3o$9bo40b3o2b2o$10b2o44bo$57b3o$58b2o24b2o$83bo$83b2o$83b3o$17bobo6bobo55b2o$17bobo9bo52bob3o$18bo6bo2bo52bo3bo$24b3o53bo2bo$
 81b3o$81b2o3$36bo$35bobo2$34bo2bo$34b2o43b2o$34bo44b2o28b3o$109bobo$108bo3bo$108bo3bo$93b2o17bo$36b2o55b2o11b2o4bo$35bo69bo6bo$36b2o33b2o32bo5bo$71b2o37b2o$105bo3bo$94b2o10bobo$94bo$85b2o6b3o$43bobo6bobo30b2o22b3o$43bobo9bo38bo13bo3bo$44bo6bo2bo8b2o2
 8bo14bo2bo$50b3o10b2o28b2o13b2o3$96bobo$96b4o$96b2o2bo$99b3o15bo$55b2o40b3o16bobo$55b2o48bo9b2ob2o$94bo9bo3bo6b2ob2o$30b2o61b2o13bo9b3o$29b2ob2o59bobo9bo8bo3b3o$30b4o73bo5bo4b3o$31b2o35b2o42bo5b2o$67b2o48b3o$69bo47b2o$116b2o$138bo$138b2o$119b2o15b5o$
 119b2o20bo$135bo5b2o$127bobo8b2ob3o$127bobo3b2o2b2obobo$128bo5b2o2bo2bo11b3o$138b2o6bo$134bob2o6b3o5b2o$119b3o12bo10bo4b4o$119bo2b2o21b2ob3ob2o$100b2o18b3o23bobo$99b2o20bo55bo$101bo75bo$168bo8bo$168bobo$167bo3bo2b3o$169b5obo$169bo$136b2o18b2o15b2o$13
-6b2o18b2o2$147b2o$147b2o7bobo$147bo5bo4bo$152bobo4bo$151bo6bo$128b2o22b4o2bo$128b2o26bo9bo$164b4o$163bob5o$155bo6b2o6bo2b3o$152bo4bo5b3obo3bo$152bo5bo5b2o2bobo$152bo$154bo2bo$154b3o4b2o$161b2o$160b2o$160b2o6b2o$160b3o5b2o$160bo$159bo$158bo$157b3o!`,
-"backwardcr": `x = 167, y = 137, rule = B3/S23
+6b2o18b2o2$147b2o$147b2o7bobo$147bo5bo4bo$152bobo4bo$151bo6bo$128b2o22b4o2bo$128b2o26bo9bo$164b4o$163bob5o$155bo6b2o6bo2b3o$152bo4bo5b3obo3bo$152bo5bo5b2o2bobo$152bo$154bo2bo$154b3o4b2o$161b2o$160b2o$160b2o6b2o$160b3o5b2o$160bo$159bo$158bo$157b3o!`,backwardcr:`x = 167, y = 137, rule = B3/S23
 #O David Greene Book
 35bo$33b2o2b2obo6b2ob2o$35b5obo8b2o$34b2o4bo5bobob2o$32bobo11bobo$46b2o$24b2o6b3o$24b2o33b3o$59b3o2$58b2obo$57bo3bo$57b3o2$16b2o32bo$16b2o31b3o$48b2ob2o$48bobob2o$47b3o2b3o$46bo6bo$46bob5o7bo$45b2ob4o8bo$8b2o36bo13bo$8b2o37bo11b3o2$58bob2o$59bo$49bo2
 3b2ob2o$48bob2o24b2o$72bobob2o$2o46bo23bobo$2o46bo2bo20b2o$8b3o39bo$8b3o$44b2o$7b2obo32b2o5bo$6bo3bo33b2o3bo$6b3o36bo3b2o$50bo$48bo$51bo$48bo2b2o$49bobo2bo$53b2o$55bo14b2o$55b2o2b2o9b2o$56bo2b2o$56b2obo$57b2o2$24b2ob2o$27b2o$23bobob2o33b2o$23bobo36b2
 o$23b2o4$34b3o$34b3o$54b2o30bobo$33b2obo17b2o30bo2bo2bo7bobo$32bo3bo49bob2obobo5b2ob2o$32b3o57bo6b2obo$84b3o11bo$84b2o13bo$76b2o7b2o12bo$76b2o$46b2o$46b2o2$34b2o$75b2o$36bo37bo2bo$68b2o4bo2bo$33bo34b2o4b4obo$34b2o41bo2bo$37b2o39bobo$37bobo41b2o3bo9b2
 o$37bo49bo8b2o$81bo2b2o$82b4o6bo$92b3o$91bo3bo$92bo2bo10b2ob2o$92bo2bo13b2o$93b2o10bobob2o$105bobo$105b2o2$123b3o$116bo$114b3o5b2o$69b2o44bo4b4o$69bobo43b2ob3ob2o$69bo46bobo4$141bo$140bobo$139bo3bo$119b2o19bobo$120b2o5bo13bo$119b3o3bo$120bo3bo3bo9b4o
 $121b7o9bo4bo$5bo115bo2b3o13bo22b3o$3b2o118bo12bo2bo3bo19bobo$4b2o95b2o18b2o14bob3obo19b3o$101bobo18bo2bo12bob3o5b2o$101bo21b2o21b2o2bo$146b2ob2o11b2o$146bo14b2ob2o$148b2o10b2o2b2o$119b2o27bo11b2o3b2o$108bo10b2o39b2o2b2o$108b4o50bobo$110b2o$106bob2o$
-104b2ob2o$104bo2b2o37b3o$105b2o40bob3o$146b2ob2o$146b2ob2o$148bo2$159b2o$159b2o7$151b2o$151b2o!`,
-"megaOWSS": `x = 21, y = 28, rule = B3/S23
+104b2ob2o$104bo2b2o37b3o$105b2o40bob3o$146b2ob2o$146b2ob2o$148bo2$159b2o$159b2o7$151b2o$151b2o!`,megaOWSS:`x = 21, y = 28, rule = B3/S23
 14b2o$10b4ob2o$10b6o$11b4o3$5b14o$4bo13bo$18bo$4bo12bo$2b2o$o18bo$20bo
 $o19bo$b20o4$5b14o$4bo13bo$18bo$4bo12bo$6b2o2$14b2o$10b4ob2o$10b6o$11b
-4o!`,
-"ajss": `x = 127, y = 69, rule = B3/S23
+4o!`,ajss:`x = 127, y = 69, rule = B3/S23
 #O David Greene Book
 10b2o$8bo4bo$14bo$8bo5bo$9b6o5$78b6o$77bo5bo$83bo$77bo4bo$79b2o$2b2o
 86b2o$o4bo82b2ob2o4b6o$6bo81b4o4bo5bo$o5bo82b2o11bo$b6o89bo4bo$98b2o5$
@@ -6206,25 +6072,21 @@ $o19bo$b20o4$5b14o$4bo13bo$18bo$4bo12bo$6b2o2$14b2o$10b4ob2o$10b6o$11b
 3ob2o$52bob3ob3ob3ob3ob3ob3ob3ob3ob3ob3ob3ob3ob3ob3ob3ob3o2b7o$44b5obo
 bo67b5o$44b2o2bob2o$120b2o$118bo4bo$124bo$118bo5bo$119b6o8$98b2o$b6o
 89bo4bo$o5bo82b2o11bo$6bo81b4o4bo5bo$o4bo82b2ob2o4b6o$2b2o86b2o$79b2o$
-77bo4bo$83bo$77bo5bo$78b6o5$9b6o$8bo5bo$14bo$8bo4bo$10b2o!`,
-"bhpuff": `x = 48, y = 22, rule = B3/S23
+77bo4bo$83bo$77bo5bo$78b6o5$9b6o$8bo5bo$14bo$8bo4bo$10b2o!`,bhpuff:`x = 48, y = 22, rule = B3/S23
 #O David Greene Book
 44bo$42bo3bo$47bo$16bo2b3o20bo4bo$13b2o2bob2obo20b5o$9bob4o3b3ob2o13b
 2o$8b5obo2bobob4o6b2o2b5obo$6bo4bo4b4obo3bo5b4o7bo$7bo6bo4bo2bo2b2o4bo
 10bo$bo5bo2bo3b5o3bo2bob3ob2o7b3o$obo4bo2bo6bo5b2o9b3o2bo3bo$obo4bo2bo
 6bo5b2o9b3o2bo3bo$bo5bo2bo3b5o3bo2bob3ob2o7b3o$7bo6bo4bo2bo2b2o4bo10bo
 $6bo4bo4b4obo3bo5b4o7bo$8b5obo2bobob4o6b2o2b5obo$9bob4o3b3ob2o13b2o$
-13b2o2bob2obo20b5o$16bo2b3o20bo4bo$47bo$42bo3bo$44bo!`,
-"biggerbiblock": `x = 18, y = 55, rule = B3/S23
+13b2o2bob2obo20b5o$16bo2b3o20bo4bo$47bo$42bo3bo$44bo!`,biggerbiblock:`x = 18, y = 55, rule = B3/S23
 10bobo5b$10bo2bo4b$13b2o3b$15bo2b$13b4ob$5bo6bo4bo$5bob2o5bo2bo$8bo5bo2bo$8bo7bob$10bob4o2b$10bo3bo3b$b6o6bo4b$o5bo2b5o4b$6bo11b$o4bo3b5o4b$2b2o9bo4b$7bo2bo3bo3b$10bob4o2b$6bobo7bob$8bo5bo2bo$6b3o5bo2bo$12bo4bo$13b4ob$15bo2b$13b2o3b$10bo2bo4b$10bobo
 5b$18b$10bobo5b$10bo2bo4b$13b2o3b$15bo2b$13b4ob$12bo4bo$6b3o5bo2bo$8bo5bo2bo$6bobo7bob$10bob4o2b$7bo2bo3bo3b$2b2o9bo4b$o4bo3b5o4b$6bo11b$o5bo2b5o4b$b6o6bo4b$10bo3bo3b$10bob4o2b$8bo7bob$8bo5bo2bo$5bob2o5bo2bo$5bo6bo4bo$13b4ob$15bo2b$13b2o3b$10bo2bo4b
-$10bobo5b!`,
-"bbbcol": `x = 118, y = 55, rule = B3/S23
+$10bobo5b!`,bbbcol:`x = 118, y = 55, rule = B3/S23
 10bobo92bobo10b$10bo2bo90bo2bo10b$13b2o88b2o13b$15bo86bo15b$13b4o84b4o13b$5bo6bo4bo82bo4bo6bo5b$5bob2o5bo2bo82bo2bo5b2obo5b$8bo5bo2bo82bo2bo5bo8b$8bo7bo84bo7bo8b$10bob4o86b4obo10b$10bo3bo88bo3bo10b$b6o6bo90bo6b6ob$o5bo2b5o90b5o2bo5bo$6bo104bo6b$o4bo
 3b5o90b5o3bo4bo$2b2o9bo90bo9b2o2b$7bo2bo3bo88bo3bo2bo7b$10bob4o86b4obo10b$6bobo7bo84bo7bobo6b$8bo5bo2bo82bo2bo5bo8b$6b3o5bo2bo82bo2bo5b3o6b$12bo4bo82bo4bo12b$13b4o84b4o13b$15bo86bo15b$13b2o88b2o13b$10bo2bo90bo2bo10b$10bobo92bobo10b$118b$10bobo92bobo
 10b$10bo2bo90bo2bo10b$13b2o88b2o13b$15bo86bo15b$13b4o84b4o13b$12bo4bo82bo4bo12b$6b3o5bo2bo82bo2bo5b3o6b$8bo5bo2bo82bo2bo5bo8b$6bobo7bo84bo7bobo6b$10bob4o86b4obo10b$7bo2bo3bo88bo3bo2bo7b$2b2o9bo90bo9b2o2b$o4bo3b5o90b5o3bo4bo$6bo104bo6b$o5bo2b5o90b5o2
-bo5bo$b6o6bo90bo6b6ob$10bo3bo88bo3bo10b$10bob4o86b4obo10b$8bo7bo84bo7bo8b$8bo5bo2bo82bo2bo5bo8b$5bob2o5bo2bo82bo2bo5b2obo5b$5bo6bo4bo82bo4bo6bo5b$13b4o84b4o13b$15bo86bo15b$13b2o88b2o13b$10bo2bo90bo2bo10b$10bobo92bobo10b!`,
-"bigagun": `#N p144bigagun.rle
+bo5bo$b6o6bo90bo6b6ob$10bo3bo88bo3bo10b$10bob4o86b4obo10b$8bo7bo84bo7bo8b$8bo5bo2bo82bo2bo5bo8b$5bob2o5bo2bo82bo2bo5b2obo5b$5bo6bo4bo82bo4bo6bo5b$13b4o84b4o13b$15bo86bo15b$13b2o88b2o13b$10bo2bo90bo2bo10b$10bobo92bobo10b!`,bigagun:`#N p144bigagun.rle
 #C https://conwaylife.com/wiki/Big_A
 #C https://www.conwaylife.com/patterns/p144bigagun.rle
 x = 492, y = 488, rule = B3/S23
@@ -6284,11 +6146,9 @@ b2obo43b2o$272bo70bo2bo48b2o8b3o32bo2bo15b2o$267b3ob2o4b2o65b2o59bo36b2o10b3o2b2
 2o$358b2o$328bo2bo44b2o8b2o10bo$328bob2o42b2o2bo7b2o8bobo$327b2obo41b3ob2o18b3o47b2o15b2o$327bo2bo41bobo71b2o15b2o$391b2o5b2o$323bo67bobo3bo2bo30b2o$322bobo68b2o3bo28b2o2b2o$322bobo43b3o2b3o18bobo3bo25bobo$323bo70bo3bobo26bo$341b2o55bobo22bo$341b2o79
 b3o4b2o27b2o$331bo9b2o26bobo49bob3o3bo27b3o20b2o$332bo9bo23b2ob3o48bo3bo5b3o23bobo2bo2b2o10b2o2b2o2b2o$330bo2bo7bobo21bo2b2o49bo3bo8bo23b2o2b2o2b2o10bobo2bo2b2o$320b2o8bobo7b2obo22b2o50b3obo37b2o15b3o$320b2o36b2o24b2o33b3o56b2o$335b2o21b2o24b2o34bo14
 b2o$335b2o4b2o92b2o$341b2o100b2o18b2o$442bo2bo11b2o4b2o$443b2o12bobo12bo$448bo8bo13b5o$447b3o20bo3b3o$446b5o20b2o5bo$472b4o$473b2o2bo$331b2o142b2o$330bo2bo113b5o$330bo2bo114b3o$331bobo7b2o106bo$335b2o4b2o110b2o$335b2o4b2o109bo2bo$341bo111b2o$340bobo9
-2b2o24b2o$340bob2o91b2o24b2o3$341b2o$341b2o!`,
-"47p72": `x = 14, y = 30, rule = B3/S23
+2b2o24b2o$340bob2o91b2o24b2o3$341b2o$341b2o!`,"47p72":`x = 14, y = 30, rule = B3/S23
 #O Parkes-Codes
-b2o11b$b2o11b$14b$14b$2obo10b$bobo10b$2bo11b$b2o4b2o5b$b2o4b2o5b$b2o7bobob$10bo2bo$10bo2bo$11b2ob$14b$14b$14b$14b$14b$14b$14b$b2o11b$b2o4b2o5b$7b2o5b$14b$ob2o10b$obo11b$bo12b$b2o11b$b2o11b$b2o11b!`,
-"infinitecorderships": `
+b2o11b$b2o11b$14b$14b$2obo10b$bobo10b$2bo11b$b2o4b2o5b$b2o4b2o5b$b2o7bobob$10bo2bo$10bo2bo$11b2ob$14b$14b$14b$14b$14b$14b$14b$b2o11b$b2o4b2o5b$7b2o5b$14b$ob2o10b$obo11b$bo12b$b2o11b$b2o11b$b2o11b!`,infinitecorderships:`
 x = 960, y = 981, rule = B3/S23
 490b2o$490bobo$492bo4b2o$488b4ob2o2bo2bo$488bo2bobobobob2o$491bobobobo$492b2obobo$496bo2$482b2o$483bo7b2o$483bobo5b2o$484b2o6$511bo$494b2o15b3o$494bo19bo$495b3o15bobo$497bo15bobo$514bo5$529b2o$529b2o4$509b2o$508bobo$508bo$507b2o7b2o$516b2o2$524b2obo$
 524b2ob3o$530bo$524b2ob3o$523bo2b2o$522bobo$504bo16bobob2obo$504b3o15bo2bob2o$507bo17bo$506b2o16b2o$521bobo2b2o$521b2o2bo2bo$473b2o51b2o$472bobo$466b2o4bo$464bo2bo2b2ob4o44b2o$464b2obobobobo2bo24b2o18bo$467bobobobo28bo16bobo2b2o$467bobob2o29bobo14b2o
@@ -6430,8 +6290,7 @@ bo$101bo13b5o4b2o8b2o9b3o19b2o78b5o122b2o$101b2o13b3o18b2o5bo101b2o3b2o$101b2o14
 bobobo$151b2o3b2o17bo$174b2o$139b2o33bobo$139b2o13bo32bobo$153bobo31b2o$153bobo32bo$154bo$153b2o59b2o$153b2o27b2o31b2o$153b2o26b2o22b2o7bo$183bo21bo$193b2o8bobo$191bo3bo7b2o$182bo7bo5bo$182bobo4b2obo3bo$171b2o12b2o3bo5bo$171b2o12b2o4bo3bo$185b2o6b2o$
 182bobo25b2o$182bo27b2o3$199b2o8b2o$200b2o7b2obo$199bo12bo27b2o$212bo27b2o$209bo2bo$210b2o2$192bo$192b2o14b2o$180bobo8bobo14bobo$180bo3bo23bo$170b2o12bo10b2o$170b2o8bo4bo7bo2bo24b2o$184bo7bo28bobo$180bo3bo7bo18bo4b2o4b3o$180bobo9bo17bobob2o2bo4b3o$19
 3bo2bo12bo3bob3o4b3o$195b2o12bo3bob2o4bobo6b2o$209bo3b2o6b2o7bobo$210bobo19bo$211bo20b2o6$448bo$446b3o$445bo$445b2o3$439bo$438bobo$431b2ob2o3bo$429bo2bob2o$429b2o$442b2o$434bo2bo4b2o$434b4o$431bo$431b5o11bo$435bo7b2obobo$433bo8bobobobo$433b2o4bo2bobo
-bobob2o$439b4ob2o2bo2bo$443bo4b2o$441bobo$441b2o!`,
-"loafergun": `
+bobob2o$439b4ob2o2bo2bo$443bo4b2o$441bobo$441b2o!`,loafergun:`
 x = 226, y = 195, rule = B3/S23
 174b2o5bo20bo23b$174b2o5b3o18bobo21b$184bo5b2o11bobo7bo12b$183b2o5b2o11bo2bo6b2o11b$203bobo2b2o4b2o10b$202bobo3b2o4b3o7b2o$202bo5b2o4b2o8b2o$213b2o11b$213bo12b$127b2o54b2o3b2o11bo24b$126bo2bo44bo11bo13bo25b$126bo46b3o7bo5bo10b3o23b$126bo45b5o7b2ob2o3
 7b$126bobo42b2o3b2o7bobo38b$126bobo43b5o9bo39b$127bo44bo3bo9bo39b$173bobo50b$174bo18bo11b2o6b2o11b$124b2o3b2o47b2o13bobo8bo2bo4bo2bo10b$124bo5bo9b3o35bobo12b2o8b6o2b6o9b$141bo31b2o4b3o22bo2bo4bo2bo10b$125bo3bo11bo30bo2bo4b3o22b2o6b2o11b$126b3o11b3o30
@@ -6452,8 +6311,7 @@ o29b2o85b$11b2o48bo2bo36bobo4bo25b2o4b2o84b$61bob2o36bo18b3o11b2o4b3o83b$29b2o3b
 187b$15bobo7b2o8bo190b$16b2o5bo2bo10bo188b$22bo7b2ob4o189b$22bo6bo2b4o190b$22bo7b2o29b2o163b$23bo2bo34bo2bo9bo151b$25b2o29b2o7bo7bobo150b$16b2o37bo2bo6bo8b2o12b2o6b2o128b$16b2o16b3o19b2o7bo9b2o9bo4bo2bo4bo126b$34b2obo23bo2bo11b2o8bo4bo2bo4bo126b$32bo
 4bo23b2o12b2o9bo4bo2bo4bo126b$33b4o20bo19bo10b2o6b2o128b$33b2o21b3o167b$55bo3bo166b$16b3o8b2o28bo10b3o155b$15b2ob2o6bobo25bo5bo6b2ob2o154b$15b2ob2o8bo25bo5bo6b2ob2o12bo141b$15b5o35bo3bo7b5o11b2o141b$14b2o3b2o35b3o7b2o3b2o10bobo140b$226b$96b2o128b$20b
 o75bobo127b$19bob2o9b3o51bo4b2o6bo7b2o117b$19bo11bo3bo49bobo2bo2bo2bo2bo7b2o117b$30bo5bo48b2obob3o6bo126b$19b2obo43b2o5b2o10b2ob2o6bobo127b$17bo2bo8bo7bo29bo5b2o10b2obo7b2o128b$17bobo9bo7bo19b2o5b3o18bobo138b$57b2o5bo21bo139b$30bo5bo189b$31bo3bo190b$
-32b3o191b$18b3o205b$17bo3bo204b$16bo5bo203b$17bo3bo204b$18b3o205b$18b3o205b$226b$226b$226b$19b2o205b$19b2o205b!`,
-"b29g": `
+32b3o191b$18b3o205b$17bo3bo204b$16bo5bo203b$17bo3bo204b$18b3o205b$18b3o205b$226b$226b$226b$19b2o205b$19b2o205b!`,b29g:`
 x = 623, y = 516, rule = B3/S23
 498bo11b2o111b$497bobo10b2o111b$489bo3b2o2bobo123b$488bobo2bo2b2ob2o122b$488bobo3bobo126b$489bob4o2bob2o80bo11b2o28b$491bo3bobob2o79bobo10b2o28b$490bo3bobo75bo3b2o2bobo40b$489bo3bobo75bobo2bo2b2ob2o39b$489b2o3bo62b2o12b
 obo3bobo43b$469b2o4bo82bo13bob4o2bob2o39b$328b2o136b2o2bo4b3o54bo25bobo13bo3bobob2o39b$328bobo133b3ob2o8bo53b3o24b2o12bo3bobo43b$330bo4b2o126bo13b2o23b2o31bo36bo3bobo44b$326b4ob2o2bo2bo125b3ob2o32b2o30b2o36b2o3bo45b$326bo2bobobobob2o127bob2o10bobo34b
@@ -6606,8 +6464,7 @@ o19b2obo139bo7b2o18bo7b2o32bobob2o2b2o36b2o79b2o41b$13b2o108bo5bo89b2o19bo2bo67b
 bo2bobo2bobo36b2o79bo44b$14b2o44bo242bo2bobobobob2o15bo2bobobobob2o48b2obobo22b2obobo16bobo5bo4b3o2b2o161b$14b2o39b3o73bo3b2o91bo3b2o69b4ob2o2bo2bo15b4ob2o2bo2bo47bobobobo21bobobobo17bo6bo2bobo2b2o2bo10bo37bo111b$42b2o3bo7bo2bo71bobo3bo90bobo3bo73bo4
 b2o21bo4b2o46bo2bobobobob2o15bo2bobobobob2o21b2o4b2o3bo7b2obobo32b2obobo110b$42bo3bobo6bo2bo70bobo3bo90bobo3bo72bobo25bobo52b4ob2o2bo2bo15b4ob2o2bo2bo9b2o11bo2b2o3b2o7bobobobo31bobobobo110b$29b2o12bo3bobo6bo2bo65b2obobo3bo87b2obobo3bo73b2o26b2o57bo4b
 2o21bo4b2o12bo13bobob2o2b3obo2bobobobob2o25bo2bobobobob2o107b$28bobo13bo3bobob2o4bo66b2obo2b4obo85b2obo2b4obo156bobo25bobo15b3o11bo3bo2bo2bo2bob4ob2o2bo2bo25b4ob2o2bo2bo107b$28bo13bob4o2bob2o8bo66bobo3bobo6b2o80bobo3bobo6b2o147b2o26b2o16bo14b2ob2obo3
-b2o6bo4b2o31bo4b2o109b$27b2o12bobo3bobo75b2ob2o2bo2bobo6b2o76b2ob2o2bo2bobo6b2o213bo10bobo35bobo115b$41bobo2bo2b2ob2o72bobo2b2o3bo86bobo2b2o3bo233b2o36b2o116b$42bo3b2o2bobo61b2o10bobo82b2o10bobo397b$50bobo10b2o49b2o11bo83b2o11bo398b$51bo11b2o558b!`,
-"sslinepuff": `
+b2o6bo4b2o31bo4b2o109b$27b2o12bobo3bobo75b2ob2o2bo2bobo6b2o76b2ob2o2bo2bobo6b2o213bo10bobo35bobo115b$41bobo2bo2b2ob2o72bobo2b2o3bo86bobo2b2o3bo233b2o36b2o116b$42bo3b2o2bobo61b2o10bobo82b2o10bobo397b$50bobo10b2o49b2o11bo83b2o11bo398b$51bo11b2o558b!`,sslinepuff:`
 x = 32, y = 156, rule = B3/S23
 18bo$18b4o$5bobo12b2o$5bo2bo14bo$8b2o10b4o$10bo13bo$8b4o8bo2b3o$7bo4bo
 9b3o$9bo2bo10bo$9bo2bo5bob3o$11bo6b2o2bo$5bob4o8b3o$5bo3bo9bo$8bo12bo$
@@ -6637,8 +6494,7 @@ o7bobo$8b2o8bo$10bo7b4o$8b4o8b2o$7bo4bo10bo$9bo2bo7b4o$9bo2bo11bo$11bo
 8bo2b3o$5bob4o11b3o$5bo3bo13bo$8bo9bob3o$6bobo9b2o2bo$19b3o$7b3o9bo$8b
 2o11bo$7b3o9bobo$22bo$6bobo10bobo$8bo12bo$5bo3bo9bo$5bob4o8b3o$11bo6b
 2o2bo$9bo2bo5bob3o$9bo2bo10bo$7bo4bo9b3o$8b4o8bo2b3o$10bo13bo$8b2o10b
-4o$5bo2bo14bo$5bobo12b2o$18b4o$18bo!`,
-"unstablepuff": `
+4o$5bo2bo14bo$5bobo12b2o$18b4o$18bo!`,unstablepuff:`
 x = 17, y = 99, rule = B3/S23
 obo$o2bo5bo$3b2o4b4o$5bo5b2o$3b4o7bo$2bo4bo3b4o$4bo2bo7bo$4bo2bo3bo2b
 3o$6bo6b3o$ob4o8bo$o3bo4bob3o$3bo5b2o2bo$bobo6b3o$10bo$2b3o7bo$3b2o5bo
@@ -6654,8 +6510,7 @@ obob3o2bo$2bo2bobo2bob2o$2bo2bo5b2o$2bo2bobo2b2o$2bo2bobob2o$2bo2bo$5b
 obob2o$5bobo2b2o$4b2o5b2o$2bo2bo5b3o$4bo5b3o$bo2bo5bo$bobo8bo$10bobo$
 2b3o8bo$3b2o5bobo$2b3o7bo$10bo$bobo6b3o$3bo5b2o2bo$o3bo4bob3o$ob4o8bo$
 6bo6b3o$4bo2bo3bo2b3o$4bo2bo7bo$2bo4bo3b4o$3b4o7bo$5bo5b2o$3b2o4b4o$o
-2bo5bo$obo!`,
-"htrackpuff": `
+2bo5bo$obo!`,htrackpuff:`
 x = 247, y = 1330, rule = B3/S23
 163b3o11b3o67b$162bo2bo10bo2bo67b$165bo4b3o6bo67b$165bo4bo2bo5bo67b$162bobo5bob2o2bobo68b$247b$247b$247b$172bo74b$172bo5b3o66b$177bo2bo66b$180bo66b$176bo3bo66b$168b2o6bo3bo66b$168b2o2b3o5bo66b$171bo2bo2bobo67b$172b2o73
 b$172bobo72b$247b$169b2o76b$156b3o88b$155bo2bo9bo4bo73b$158bo9bo2bo75b$158bo10b2o76b$155bobo12bo76b$65bo13bo92bobo72b$64b3o11b3o91b2o73b$63b2obo5bo4b2obo166b$63b3o5b3o3b3o167b$64b2o5bob2o3b2o167b$247b$247b$247b$74bo172b$64bo7b3o99b3o70b$63b3o7bo173b$
@@ -6723,8 +6578,7 @@ bo3bo180b$53bo8bo184b$49b2obo3b3o4bobo62b2o117b$48bo3b4o72bobo116b$34bo13b3ob4o2
 35b$110b2o135b$48b2o197b$48b2o197b$247b$247b$49bobo195b$43b2o3bo4bo193b$43b2o3bo4bo193b$48b2o197b$247b$48b2o2b2o193b$48b2o2b2o193b$48b3obo75b2o117b$49bo78bobo116b$50bo79bo116b$130b2o115b$247b$13b3o231b$13bo2bo230b$13bo233b$13bo3bo38b3o188b$13bo25bo18
 bo188b$14bobo18b2obob2o15bo79b2o108b$34b5ob2o95bo109b$29b2o2bo4bobo6b2o69b2o15bobo109b$28bobo3b3o2b2o4b2o2bo68b2o15b2o110b$30bo4b2o2bo4bo5bo196b$37b2o4bo2bob2o98bo98b$44b2o101bo99b$43bobo101b3o97b$46bo200b$43bo203b$44bobo200b$45bo201b$247b$247b$247b$
 117b2o128b$116bobo128b$116bo130b$115b2o130b$247b$247b$247b$247b$81b3o163b$83bo163b$82bo25b2o137b$109bo137b$109bobo135b$110b2o135b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$128b2o117b$128bobo116b$130bo116b$130b2o115b$247b$247b$247b$247b$1
-06b3o138b$108bo138b$107bo29b2o108b$137bo109b$118b2o15bobo109b$118b2o15b2o110b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$117b2o7b3o118b$116bobo8bo119b$116bo8b3o119b$115b2o130b!`,
-"noengRake": `
+06b3o138b$108bo138b$107bo29b2o108b$137bo109b$118b2o15bobo109b$118b2o15b2o110b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$247b$117b2o7b3o118b$116bobo8bo119b$116bo8b3o119b$115b2o130b!`,noengRake:`
 x = 531, y = 201, rule = B3/S23
 392bo$390b2obo$388b3o$387bo2bo$386bo$387bo2bo2bo$388b4obo$390bob3o$381bobo8b3o$378bo4bo7b2o$377b3o4bo6bo2b2obo$376bobo12bo2b3o$375b2o2b2o4bo6b2obo$376b2o2b5o4$342b2o32b2o2b5o$341b3o31b2o2b2o4bo$307bobo15b2o12bo36bobo$307bobo2bo11b3o11b2obo35b3o4bo$30
 6bo3bob3o8bo2bo2bobo5b2o39bo4bo7b3o$307b2ob6o7b2o3bo2bo6b2ob3o37bobo6bo2bo$307b2obobo2bo5bo9bo7bo51bob2o$310bobobo2bo3b8obo10bo49b3o$310bo3bo2bo12bo14bo$311b2o2b2ob12o12bo3bo42b2o$312b2o3bo14bobo6b2ob2o$318b15obo7bo48b3o$282b3o58b2ob2o43b3o$280b2ob2o
@@ -6749,8 +6603,7 @@ ob2o24b2obo2b2obo3bo5b2o16b2obo56bobo2bo170bo4bobobo10bo5b3o6b2o$109b3o26bo5b6o6
 b3o8bo$133b2o36bob3o12b2o28bo213bo$132bo2bo33b4obo15bo$132bobo33bo2bo2bo42bo$133bo33bo46b2ob2o81b2o72b2o$105bo62bo2bo41bobobo81bo2bo70bo2bo70b2o$103b2o3bo60b3o40b2o3bo81bobo71bobo71bo$103b2o2bo63b2obo38bobo2bo81bo73bo69b2ob2o$103b4obo64bo40b2obo14b2o
 b2o207b3obo$231bo213b2obo$218b2o10b2ob2o213b2o$100b2obo113bob3o9bo3bo195b2obo13b2o$99bob2obo45b2o64bo3b3o11bo195bo2b3o9b3o$99bo3bo45b3o65bobo10bo199bo2b2obo9bo$99bob2o44bo70bo9bo201b2o$100b2obo42b2obo77b2ob3o198b3o$103bobo39b2o79b2o201bob3o$103bobo40
 b2ob3o75b2obo196b4obo$147bo80bo197bo2bo2bo$149bo80b3o192bo$153bo77b2o193bo2bo$150bo3bo272b3o$149b2ob2o275b2obo$150bo37b3o240bo$151b2ob2o31bo2bob2o$187b3o$188b5o$190b2o$189bobo$190bo$188bo$185b4o2bo$184b2ob2o2bo$185b2o2b2o3$191b3o$185b3ob6o$185bo2b3ob
-3o$185b2o3bo$189bo$187b3o2b3o$192bo!`,
-"allosci1": `
+3o$185b2o3bo$189bo$187b3o2b3o$192bo!`,allosci1:`
 x = 3555, y = 866, rule = B3/S23
 3552bobo$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b
 $3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$3555b$355
@@ -7999,8 +7852,7 @@ o4bo23bo4bo3bo10b2obobo2bobobobo28bo26b2o4bo3bo4b2o31bobo6b2o2bobobo6bo42b2o4b2o
 ob8ob2o12bobob2obo23bob2obobo15bo2b2o2bob2o26b4o30b2o5b2o34b2o2b2o8bobobobo3bo3b2o38bob4obo68b5o70bob2ob2obo162b2obo3b2o3b2o177bo3bo2bo31bobo14bobo800bo333bo3bobo18bobo3bo666b2o3b2o176bo178bo3b2o3bo70b2o2b3obo2bob3o2b2o239b$168bobobobo14b4o4b4o13bobo
 2bobobo19bobobo2bobo15bo4bobo29bo32b2o7b2o35bobo10bo3bobobo5bo39bob2obo71bo73bobobobo167b3o6bo176b2o3bobo32bobo14bobo294b2o841bo2bo18bo2bo138bobo529bo3bo357b2ob2ob2o73b2o3b6o3b2o241b$168b2o3b2o37bobob2obo2b2o19b2o2bob2obobo14b5obo62bo9bo35bobo15bo6bo
 bob2o364b6o183bo32b2obobo10bobob2o293b2o842b2o20b2o140bo527b3o5b3o435bobo10bobo241b$212b2o5bo27bo5b2o19bo34b2o74bo17b4ob2obob2o363bo226b2o10b2o1833bo9bo436b6o2b6o242b$219b2o25b2o23b3o35bo31b2ob2o63bobo36b5o2b5o319bob2o2521bo2bo247b$271bo38b3o29bobo60
-b3obobo34b3o2b2o2b2o2b3o316b2ob2o2518b3o4b3o244b$312bo27bobobobo57bo3bobo34bo7b2o7bo2838bo8bo244b$340b2o3b2o57b2o2bo36bobobob2o2b2obobobo3092b$407b2o37b2ob2o6b2ob2o3093b$448bo3b4o3bo3095b$448bobobo2bobobo3095b$447b2ob2o4b2ob2o3094b!`,
-"allosci2": `x = 3217, y = 649, rule = B3/S23
+b3obobo34b3o2b2o2b2o2b3o316b2ob2o2518b3o4b3o244b$312bo27bobobobo57bo3bobo34bo7b2o7bo2838bo8bo244b$340b2o3b2o57b2o2bo36bobobob2o2b2obobobo3092b$407b2o37b2ob2o6b2ob2o3093b$448bo3b4o3bo3095b$448bobobo2bobobo3095b$447b2ob2o4b2ob2o3094b!`,allosci2:`x = 3217, y = 649, rule = B3/S23
 2b2obo6b2obo24b2o13bo57b2ob2o2b2o53bob2o6b2obo57b2o29b2o69bob2o6bob2o4b2o112bo40b2obo6b2obo18bo140b2obo6b2obo23bo53b2o84b2obo6bob2o24b2o24bo106b2o4b2obo4b2o4b2o29b2o8b2o114b2o8b2o4b2obo23b2o4b2o52b2o4b2o42bo3bo19b2o4b2
 obo6b2obo33b2o3b2o58b2o57b2o4b2obo6bob2o17bo139b2o4b2obo6b2obo71b2o18bo65b2o4bob2o6b2obo103bo53b2o4b2obo6b2obo32b2o129b2o4b2obo6bob2o23bo135b2obo10b2o4bob2o159b2obo6b2obo4b2o4b2o23bo141b2o4b2o4b2obo6b2obo4b2o48b2o11bo15bo85b2obo6bob2o6b2obo6b2obo9b2o
 137b$2bob2o6bob2o24bobob2o9b3o53bo2bobobo2bo53b2obo6bob2o8b2o7b2o38b2o29b2o69b2obo6b2obo5bo6b2o104bo40bob2o6bob2o19b2o138bob2o6bob2o21b3o46b2o6bo14bo69bob2o6b2obo25bo22b3o107bo4bob2o5bo5bo21bo7bo9b2o115bo9bo4bob2o23bobo2bobo52bobo2bobo40b3o3b3o18bo4b
@@ -8787,8 +8639,7 @@ o136b2o226bo138b2o3bo6b2o13b2o15bo112b$2b2o12b2o13bo2bo12bo2bo300bobobobo12bo2bo
 333b2o5b2o40b3obo9b2o12b2o10bo2bo18bo80b$55bo2bo2bo310bo2bo338b2o782b3obo15b3o487bobo507bo17bo9b2o142b2o362b2o17b2o13b2o24bobo11b2o4bo2bo79b$54bob5o312b2o1122bo4bobo14bo487bo3bo504bobob2o3b2o3b2o5b3o516bo17b2o39b2o12b2o3b5o10b2o66b$38b2o11bo2bo1442b2
 o3b2obo7bo493bo3bo504b2o2bo5bo3bo8bo501b2o10b2o2bo17bo52bo5b3ob2o9b2o66b$30b2o6bobo10b4ob3o1446bo6bobo492bo3bo508bobobobobobobo508b2o11bo2bo57b2o18b2obo78b$31bo8bo14bo3bo1445b2o6bo493bo3bo509b2ob2obobob2o522bobo17bo38bobo19b2o79b$28b3o9b2o11bobo2b2o1
 947bo3bo515bobo525b2o17b2o26b2o10bo2bo99b$28bo24b2o1952bo3bo515bobo543b2o13b2o12b2o10bo2b2o17b2o79b$2008bobo517bo526b2o17b3obo9b2o25bo19b2obo78b$2009bo1045bobo17b2o39b2o16b3ob2o9b2o66b$3041b2o11bo2bo18bo57b5o10b2o66b$3041b2o10b2o2bo76bo2bo79b$3056bo7
-9bo80b$3054b2o161b!`,
-"congaline": `x = 221, y = 256, rule = B3/S23
+9bo80b$3054b2o161b!`,congaline:`x = 221, y = 256, rule = B3/S23
 91bo73b2o$89b3o72bobo$88bo69b2o4bo$88b2o66bo2bo2b2ob4o$156b2obobobobo2bo$84bo74bobobobo$74bo8bobo73bobob2o$74bo3bo3bo2bo74bo$70b2ob2ob3o4b2o12b2o5b2o$69bo5bo21b2o5b2o48bo18b2o$70bo4bo76b3o9b2o7bo$66bo4bo3b
 o75bo12b2o5bobo$65bobo82bobo18b2o$64bo2bo2b5o22b2o5b2o44bobo$65b2o2b2o25b2obo3bob2o44bo$67b3o28b2o3b2o$67bobo29b2ob2o$68bo31bobo$65b3o6bo24b2ob2o$65bo8bobo58b2o24b2o$74b2o59b2o25bo$79b2o15bobo5bobo52b3o$79b2o16b2o5b2o53bo24b2o$76bo107bo$76b5o14b4o56b
 2o29bo$81bo13bo2bo13bo11b2o29bobo8b2o14b5o$78b3o12bobo15bobo10b2o31bo9bo13bo$77bo15b2o4bo3bo3b2o2bobo34b2o7b2o8bobo12b3o$77b4o16b3o2bobo2bo2b2ob2o33b2o18b2o15bo$75b2o3bo3b2o10bo5bobo3bobo23b2ob2o43b4o$74bo2b3o4b2o10b2o5bob4o2bob2o20bobo2b2o35b2o3bo3b
@@ -8817,8 +8668,7 @@ b2obo46bobo18bo43b2o2bobo$31b2o7bo2bo2b3o4b2o35b2obo17b2obo46bobo42b2o$40b2obobo
 b2o24bo49bo2bo5b2o5bo$69bo68b3o49bo9bobob2obo$69b2o66bo53bo8bo4bobo$137b2o49b3o7b2obobobob2o$188bo9bo2bobobo2bo$200bobo3bo$90b3o3b2o7b2o92b2o3b2o$80bo8bobobo2bo2bob2obo2bo32b3o21b2o7b2o27bobo$79bobo5b3o3b3o2b2obo3bobo34bo5bo8b5o2bo2bob2obo2bo23b4o3bo
 $59b2o18bobo4bo4bo4b2o3bob2obo34bo5bobo5b3obob3o2b2obo3bobo23bo4b2obo$58bobo5b2o12bo5b2ob2obobo3bob2o2bo22b2o18bobo4bo4bo4b2o3bob2obo26bo5bo$58bo7b2o9b3o10bobo3b2o6bo21bobo5b2o12bo5b2ob2ob4o2b2ob2obo26bob6o$57b2o18bo12bobobo4b2obob2o20bo8bo9b3o10bobo
 bob2o4bobo25bobo3bo$89b2obob4obo2bobo20b2o18bo12bobobo2bob4ob2o24bo2bo$71bo21bo4bo2bo2bo52b2obob4obo2bobo26b2o$67b2obobo21b3o5b2o35bo21bo4bo2bo2bo$66bobobobo23b2o37b2obobo21b3o5b2o$63bo2bobobobob2o58bobobobo23b2o$63b4ob2o2bo2bo55bo2bo3bobob2o$67bo4b2
-o57b4ob2o2bo2bo$65bobo67bo4b2o$65b2o66bobo$133b2o!`,
-"diagfuse": `x = 127, y = 133, rule = B3/S23
+o57b4ob2o2bo2bo$65bobo67bo4b2o$65b2o66bobo$133b2o!`,diagfuse:`x = 127, y = 133, rule = B3/S23
 56b2o$52b4ob2o$25b3o24b6o$53b4o$25bo37b4o$62bo3bo$57b2o7bo$46bo9b4o2bo
 2bo$28b3o13b2o9bo3b2o$45b2o9b4o2bo2bo$28b6o8bo2bo4b2o5b2o7bo$33b3o6bob
 o4bo2bo9bo3bo$35bo8bo5b3o10b4o$33bobo7bobo4b2o$33b2o8bobo$2b3o29b2o9b
@@ -8844,8 +8694,7 @@ o4bobo$27b3o7bo3bo39bobo$27b3o11bo3bo38bo$26bob2o11bo3bo38bo$26b3o12bo
 2o$30bo7bo28b3o2b2o$30bo7bo29b2o2b2o$30bo2bobo2bo32b3o$30b3o3b3o32b2o
 8$71bo$70bobo$69bo3bo$70bob2o$72bo$60b2o4b2o$60b3o2bo2bo6bobo$60b3o2bo
 2bo5bo$60b3o4b2o5bo3bo$59bob2o3b3o5bo3bo$59b3o4b3o5bo$60bo4b2ob2o4bo2b
-o$66b3o5b3o$67bo2$64bobobobo$63bo7bo$63bo7bo$63bo2bobo2bo$63b3o3b3o!`,
-"elbow1": `x = 263, y = 178, rule = B3/S23
+o$66b3o5b3o$67bo2$64bobobobo$63bo7bo$63bo7bo$63bo2bobo2bo$63b3o3b3o!`,elbow1:`x = 263, y = 178, rule = B3/S23
 103b2o158b$104bo158b$104bobo156b$105b2o7bo148b$113b2o148b$112b2o149b$113b2o148b$100b2o37b3o121b$100bobo38bo121b$47b2o53bo38bo121b$47bo52b3o10b2o25bo122b$45bobo64b2o149b$32b2o11b2o66b2o9bo15bo122b$31bo2b2o78bo7b2o17bo121
 b$30b6o64b3o20b2o16bo8bo112b$15b2o15b4o47bo18bo36b3o8b2o62b2o47b$o13bo2bo36b3o26b2o15bobo112bo47b$2o11b2o2bo35bo4bo41b2o63b2o48bobo11bo33b$14bo2bo34bo5bo106bo50b2o10b2o33b$15bo9bo6b4o17bo109bobo61b3obo31b$26b2o2b6o18b2o97b2o8b2o61b2o35b$15bo9b2o4bo2b
 2o69b2o45bo2bo51b2o18b2o17b3o14b$14bo2bo14b2o20b2o48bobo44b2o2bo53bo18bo15bo4bo13b$13b2o2bo35bo50bo47bo2bo50b2o2bo33bo5bo12b$14bo2bo34bo5bo8bo35b2o6bobo15b4o20bo16b2o35bo2bo17bo20bo13b$15b2o36bo4bo8b2o42b2o16b2obo36bo2b2o34bobo16b2o18b2o14b$54b3o55bo
@@ -8858,8 +8707,7 @@ b$30b6o64b3o20b2o16bo8bo112b$15b2o15b4o47bo18bo36b3o8b2o62b2o47b$o13bo2bo36b3o26
 3o3b3o63b2o45bo5bo115b$140b3o3b3o114b$140bob2ob2obo114b$99bo42b2ob2o116b$69b2o7b2o20b2o40b2ob2o41b3o3b3o66b$69bob2o3b2obo19b2o41b2ob2o41bo2bobo2bo66b$69bo3bobo3bo107bo3bobo3bo65b$69b2o2bobo2b2o107b4o3b4o65b$70b3o3b3o109bo7bo66b$29bo41bo5bo165b2o18b$2
 9b2o211b2o19b$244bo18b$263b$263b$263b$77bo185b$77b2o184b$132bo7bo122b$133bo6b2o121b$131b3o129b$263b$117bo145b$118b2o143b$117b2o69bo74b$188b2o73b$263b$122bo140b$123b2o138b$122b2o139b$263b$263b$263b$263b$263b$263b$263b$263b$210b3o50b$212bo50b$211bo51b$
 155bo107b$156bo106b$154b3o106b$263b$140bo122b$141b2o120b$140b2o121b$263b$263b$145bo117b$146b2o115b$145b2o116b$263b$263b$263b$263b$263b$263b$263b$263b$263b$263b$263b$178bo84b$179bo83b$177b3o83b$187b3o73b$163bo25bo73b$164b2o22bo74b$163b2o98b$263b$263b$
-168bo94b$169b2o92b$168b2o93b$263b$263b$263b$263b$263b$263b$263b$263b$263b$263b$186bo76b$186bo2bo73b$186bo2b2o72b!`,
-"elbow2": `x = 187, y = 206, rule = B3/S23
+168bo94b$169b2o92b$168b2o93b$263b$263b$263b$263b$263b$263b$263b$263b$263b$263b$186bo76b$186bo2bo73b$186bo2b2o72b!`,elbow2:`x = 187, y = 206, rule = B3/S23
 141b2o44b$141bo45b$159b2o26b$128b2o29bo27b$128bo58b$173b2o12b$173bo13b$187b$187b$139b2o3b2o41b$142bo44b$139bo5bo10b2o3b2o24b$95b2o43b2ob2o12b5o25b$95bo31b3o11bobo14b3o26b$126bo3bo11bo16bo27b$82b2o41bo5bo10bo27b2obob2o10
 b$82bo42bo5bo55b$128bo41bo5bo10b$126bo3bo56b$127b3o41b2ob2o11b$128bo44bo13b$82bo55bobo19bo26b$82bo13bo41b2o21b2o24b$81bobo11b3o27b3o11bo3b3o14b2o25b$80b2ob2o9b5o26b3o14bo3bo40b$79bo5bo7b2o3b2o24bo3bo12bo5bo39b$82bo11b5o33bobo6b2obob2o39b$79b2o3b2o8bo
 3bo24b2o3b2o3b2o39b3o10b$95bobo35bo20b2o3b2o12bo3bo9b$96bo59b3o28b$155bo3bo12bo5bo8b$156bobo13b2o3b2o8b$98bo58bo29b$96b2ob2o45b2o39b$146bo40b$95bo5bo45b3o4b2o31b$149bo5bo31b$95b2obob2o24b2o24b3o32b$77b2obob2o42bo9b4o12bo34b$77bo5bo47b2o7bo33b2o11b$78
@@ -8876,8 +8724,7 @@ bo8b2o27bo36b5o66b2obob2o$9bo8b2o13b2o7b3o26b2o89b2obob2o18b$14b2obo2bob2o15bob2
 3bo14b4o5bo26bo121b$4b2o3b2o3bo4bobob2o3b4o31b2o122b$4bo4b2o3bo5b2o3bo2bo35b2o11bo109b$11bobo10bo51bo103b2o5b$12bo8bo2bo15b2o34b3o6b2o93bo6b$40bobo42bo101b$41b3o123b2o18b$42b2o9bo45b2o66bo19b$25b3o3bo7b2o13b2o43bo87b$27bo4bo6b3o11b2o132b$2o24bo3b3o15
 4b$bo185b$bobo8b2o26b2o145b$2b2o8bo5bo21bo9bo136b$9b2o6b5ob2o24bo137b$8b3o5bo2b2o4bo23b3o135b$9b2o5b2o8bo29bo130b$12b2o4bo7bo29bobo128b$12bo13bo29b2o129b$25bo8b2o26bo124b$23b2o9bobo23b2o125b$36bo24b2o14bo109b$36b2o37b3o109b$74bo112b$74b2o111b$32bo154
 b$32bobo152b$32b2o153b$187b$187b$187b$69b2o3b2o111b$47bo21bobobobo111b$46bo23b5o112b$46b3o22b3o113b$53bo18bo114b$53bobo131b$53b2o132b$187b$58b2o127b$58bo128b$187b$72b2o113b$72bo114b$187b$187b$187b$22b2o163b$22bo164b$32bo154b$30b2o155b$31b2o154b$187b$
-187b$187b$187b$187b$187b$187b$187b$187b$187b$17bo169b$16bo170b$16b3o168b$23bo163b$23bobo161b$23b2o162b$187b$187b$187b$187b$187b$12b2o173b$12bo174b!`,
-"racetrack": `x = 571, y = 383, rule = B3/S23
+187b$187b$187b$187b$187b$187b$187b$187b$187b$17bo169b$16bo170b$16b3o168b$23bo163b$23bobo161b$23b2o162b$187b$187b$187b$187b$187b$12b2o173b$12bo174b!`,racetrack:`x = 571, y = 383, rule = B3/S23
 490b2o12b2o2bo4b2o$490b2o12bob2o6b2o2bo$505bo6bo6bo3bo$505b3o4bo11bo12b2o$520b2o2bo12b2o$505b3o4bo9b2o$505bo6bo3bo3b3o$490b2o12bob2o5b2o$490b2o12b2o2bo4bo2bo3b3o$513bo8b2o$520b2o2bo12b2o$514b2o8bo12b2o$478bo40bo3bo$474b
 2o2bo39bo$466b2o5bo5bo13b2o$466b2o4b2o2bobo14b2o$473b2o3bo$474b3o24bo$487b2o3b2o7bobo$474b3o9bo2bobo2bo6b2o$473b2o3bo6bo9bo$355b2o5b2o102b2o4b2o2bobo5b2o9b2o$355b2o5b2o102b2o5bo5bo5bo9bo$474b2o2bo7bo2bobo2bo$478bo8b2o3b2o2$496b3o$496bo$490bo6bo$489bo
 $489b3o2$156bo$157bo3bo194bo5bo157bo$148b2o2b2o8bo192bobo3bobo121bo34b2o$148b2o2bo5b2o2bo191bo3bobo3bo118b2o33bob3o11b2o$152bobo5b2o21bo3b3o164bo3bobo3bo119b2o15b2o19b2o10b2o$153b2o3b3o21bobo2b5o3b2o157bo9bo135bo7b2o11b2o$182bo3b2o3b2o2b2o290b2o10bo2
@@ -8907,8 +8754,7 @@ o76b3o3b2o228bo7bo$19b2obo2b2o3bo2bo90b2o5bobo$2o12b3o2b2o2bo2bo3b3o90bo2b2o5bo2
 468b2o$41bo6bo461bo$46bobo459bobo$47b2o459b2o4$18b2o32bobo$16b2o2bo32b2o446b2o$16b6o31bo446bobo$16b4o15b3o464bo$28b3o2bo4bo11b2o$30bo2bo5bo10b2o7bo$29bo8bo21bo$16b4o16b2o20b3o$3b2o11b6o$3b2o11b2o2bo15b2o$18b2o18bo$33bo5bo10b2o$26b2o5bo4bo11b2o$35b3o3
 $55b3o$57bo11b2o$56bo12bo$70b3o$72bo2$39b2obo$20b2o12b3o2b2o2bo$20b2o13b2o6bo434b2o$36b3o3b2o3b3o3bo423bobo$37bo3bo3b5o2bobo12b2o410bo$44b2o3b2o3bo12b2o$37bo3bo3b2o3bo2bo$36b3o3b2o2bo3b3o$20b2o13b2o6bo$20b2o12b3o2b2o2bo2bo3b3o$39b2obo2b2o3bo2bo$44b2o
 3b2o3bo12b2o417b2o$45b5o2bobo12b2o417b2o$47b3o3bo$476b2o$464b2ob2o7bo$463bo3bobo4bobo$463b3obo6b2o$466b2o$467b2o$483bo$444bo37bo2bo$443b2o36b5o10b2o$429b2o11b3obo33b2ob3o10b2o$429b2o10b2o19b2o17bob2o$442b2o11b2o7bo17b2o$443bo10bobo4b2o2bo$456bo5bo2bo
-16b2o$443bo19bobo15bob2o$442b2o19b2o15b2ob3o10b2o$429b2o10b2o38b5o10b2o$429b2o11b3obo16b2o17bo2bo$443b2o18bobo17bo$444bo17bo2bo$461b2o2bo$464bo9b2o$462b2o10bobo$476bo$476b2o!`,
-"fermatprimes": `x = 838, y = 736, rule = B3/S23
+16b2o$443bo19bobo15bob2o$442b2o19b2o15b2ob3o10b2o$429b2o10b2o38b5o10b2o$429b2o11b3obo16b2o17bo2bo$443b2o18bobo17bo$444bo17bo2bo$461b2o2bo$464bo9b2o$462b2o10bobo$476bo$476b2o!`,fermatprimes:`x = 838, y = 736, rule = B3/S23
 46b3o12b3o$46bo2bo10bo2bo$46bo16bo$46bo3bo8bo3bo$46bo6b4o6bo$47bobobo2b2o2bobobo$51bo6bo$51bo6bo$50bob2o2b2obo$50bo3b2o3bo$51bo6bo$51b2o4b2o$54b2o$49bo3bo2bo3bo$53bo2bo$50b4o2b4o$52b2o2b2o$53b4o$52bo4bo2$52bob2obo$51bo6
 bo$51bo6bo$53b4o$49b2obob2obob2o$48bo2b2ob2ob2o2bo$47b2o2b8o2b2o$47bo3bo2b2o2bo3bo$46b2o5bo2bo5b2o$46b2o3b3o2b3o3b2o$47bo2b2obo2bob2o2bo$48b2obob4obob2o$53bo2bo$48bo12bo82b3o15b3o$48bo4bo2bo4bo81bo3bo13bo3bo$50b2o6b2o82b2o4bo11bo4b2o$44bo5b3o4b3o81bo
 bob2ob2o3b3o3b2ob2obobo$43b3o8b2o84b2obo4bob2ob3ob2obo4bob2o$43bob2o4bobo2bobo75bo4bo4bo3bo4bobo4bo3bo4bo$44b3o2bob2o4b2obo69b2ob3o15bo5bo$39b3o2b3o2bo10bo67b2obo3b2o2b2o7b2o9b2o7b2o$38bo2bo4bo77b5o4bo2b2o$41bo9bo6bo61b2ob2obobobo5bo2bo$41bo4b3o4b4o7
@@ -9010,11 +8856,9 @@ obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
 obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo2bo2bo6bo5b2o9b3o2bo3bo$27b3o16bo205bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3
 bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3b
 o3bo3bo3bo2bo3b5o3bo2bob3ob2o7b3o$27b2o15b3o729bo6bo4bo2bo2b2o4bo10bo$28bo15b3o728bo4bo4b4obo3bo5b4o7bo$27b3o15bo719bo11b5obo2bobob4o6b2o2b5obo$26bo3b3o11b2o717bo6bo7bob4o3b3ob2o13b2o$31b2o12b2o723bo11b2o2bob2obo20b5o$31b2o730bo6bo2b3o9bo2b3o20bo4bo$
-28bo735b6o3b3o40bo$28bo744b2o3b2o31bo3bo$28bo747b2ob2o32bo$774b6o$772bo3b3o$776bo$772bo3bo$773b4o!`,
-"gepuff": `x = 39, y = 39, rule = B3/S23
+28bo735b6o3b3o40bo$28bo744b2o3b2o31bo3bo$28bo747b2ob2o32bo$774b6o$772bo3b3o$776bo$772bo3bo$773b4o!`,gepuff:`x = 39, y = 39, rule = B3/S23
 b4o34b$o3bo12bo2bo18b$4bo16bo17b$o2bo13bo3bo17b$18b4o17b$39b$39b$14bobo22b$8b3ob2o3bo21b$5b2o4b4obob2o19b$3b2o5b5o4bo19b$3b2o4bo5bo3bo19b$3b5o8b3o20b$5b2o9bo22b$39b$10b2o5bo2bo18b$9b4o8bo17b$9b2ob2o3bo3bo17b$11b2o5b4o13b2o2b$bo24b4o4b4ob$b2o22bo3bo4b
-2ob2o$obo26bo6b2ob$25bo2bo10b$39b$6bo16b2o14b$6b2o15b2o8b2o4b$5bobo14bo3bo5bo2bo3b$23bo3bo4bo2b2o2b$23bo4bo2bo2b2o3b$11bo13bobo3b4o4b$11b2o26b$10bobo26b$35b2o2b$34b4ob$34b2ob2o$19b2o15b2ob$17b2ob2o17b$17b4o18b$18b2o19b!`,
-"hbreeder": `x = 647, y = 262, rule = B3/S23
+2ob2o$obo26bo6b2ob$25bo2bo10b$39b$6bo16b2o14b$6b2o15b2o8b2o4b$5bobo14bo3bo5bo2bo3b$23bo3bo4bo2b2o2b$23bo4bo2bo2b2o3b$11bo13bobo3b4o4b$11b2o26b$10bobo26b$35b2o2b$34b4ob$34b2ob2o$19b2o15b2ob$17b2ob2o17b$17b4o18b$18b2o19b!`,hbreeder:`x = 647, y = 262, rule = B3/S23
 183b6o4b4o$182bo5bo3b6o$188bo3b4ob2o$182bo4bo8b2o$169b5o10b2o$157bo10bo4bo$155bo3bo13bo33b2o$160bo7bo3bo30b4ob2o6b2o$133b5o17bo4bo9bo32b6o5b2ob2o$132bo4bo18b5o43b4o6b4o$137bo47b2o16bo11b2o$132bo3bo48b2o9bo6bo$134bo61bo$
 167bo7b4o17bo6b2o7b3o$145b2o21bo6b5o20b2ob2o5bo3b2o$133b2o5b2o3b2o20bo10bobo9b2o9bob5o2bobo2b2o$133b2o5b2o31b2o4b2o9b2o10bo2b3obo5bo$172bo2b2o29bo3bo2b2o$130b2o40b2obo2bo31bo$128bo4bo34b2o4b2o2bo33bo$117b3o14bo32b3o6b3o3bobo$116b5o7bo5bo34bo6b2o4b2o3
 2b2o$116b3ob2o7b6o48bo14b2o14b2ob2o$119b2o36bobo4bo5b2o24bo4bo12b4o$158bo4b2o4b2o31bo12b2o$163b3o2bo27bo5bo$167b2o28b6o$122bobo42bo295b2o$121bo4bo334bo4bo29b2o$121bo4bo340bo26bo4bo$121b2o338bo5bo32bo$462b6o26bo5bo$121b2o2b2o24b2o342b6o$121b2o2b2o20b4
@@ -9048,8 +8892,7 @@ o8b3o$337bo8b2o5bo2bo4bo227bo27b3o5b2o8bo$350b2obobo33b2o198b2o16b2o$350b2obo3bo
 2b2o231bo5bo5b4o$344b2o7b2o24bob2o7b2o180b6o48b6o$298b4o71b3o195bo5bo$297b6o4b3o53b2o15b3o194bo$297b4ob2o2b5o52b2o206bo4bo$301b2o3b3ob2o24b2o54b4o177b2o13b2o$309b2o22b3ob2o42b6o4bo3bo189b3ob2o$333b5o9b3o30bo5bo8bo189b5o$334b3o9b5o35bo4bo2bo191b3o$346
 b3ob2o19b2o7bo4bo$349b2o18bo4bo7b2o$361b4o10bo$360b6o3bo5bo$360b4ob2o3b6o$364b2o$327b2o$328b2o47b3o14b6o$327bo48b5o12bo5bo$376b3ob2o17bo$379b2o12bo4bo$395b2o3$363bo$361bo3bo52b2o$366bo49b2ob2o$361bo4bo49b4o$362b5o50b2o2$400bo$399bobo9b2o3bo$385b2o6b4
 ob2obo7b3o4b2o$385b2o5bo4b2obo7bo2bo5b2o$361b2o28bo7bobo6bo7b2o$358b4o30bobo4bobo6b2o$358b2obo3bo35b2o$330b2o8b3o14bob3o4bo13b2o9b2obo6bo$330b2o28bo6bo12b2o10bo5b3o$367bo30b2o18b2o$351b2o10b4o28b3o11b2o5b2ob2o$328b4o18bo2bo51b4ob2o4b4o$327b6o17bobo52
-b6o6b2o$327b4ob2o17bo54b4o$331b2o2$370b6o$337b6o26bo5bo$336bo5bo32bo$342bo26bo4bo$336bo4bo29b2o$338b2o!`,
-"hpuffer": `x = 1330, y = 247, rule = B3/S23
+b6o6b2o$327b4ob2o17bo54b4o$331b2o2$370b6o$337b6o26bo5bo$336bo5bo32bo$342bo26bo4bo$336bo4bo29b2o$338b2o!`,hpuffer:`x = 1330, y = 247, rule = B3/S23
 735b5o$734bo4bo$739bo$734bo3bo$736bo9$69b5o$68bo4bo$73bo$68bo3bo$70bo2$788b3o$787b5o$787b3ob2o$719bo70b2o$720bo$716bo4bo$719b3o$716b2o4bo44bo63b2o$718bo3bo43b3o58b4ob2o6b2o$65bo652bo47bo2bo57b6o5b2ob2o$66bo652b3o46b2o58b4o6b4o$64b3o702b5o15b2o36bo11b
 2o$771bobo15b2o8b3o25bo$122b3o645bo37bo$66bo54b5o642bobo36bobo7bo9b2o7b3o$65bobo53b3ob2o638bobobob2o5b2o27bobo10b2o2b2ob2o5bo3b2o$64b2ob2o55b2o639bo3bob2o5b5o11b2o12bo7b2o2b3o2bob5o2bobo2b2o$64b2ob2o696b2obo11b2obo10b2o20b2o8bo2b3obo5bo$63bo3bo711bo2
 b4o29b2o4bo8bo3bo2b2o$63bo2b3o710bo2b2ob2o30bo3bo12bo$64b2o3bo95b2o650bob3o14bo$65b4o92b4ob2o6b2o603bo2b2o34bob2o$67b2o49bo26b3obo11b6o5b2ob2o601bo3b2o34b3o19b2o$112b2o4bo25b6o12b4o6b4o603bo2b2o35bo18b2ob2o$59bobobo19b2o26bo2bo3bo14b2o8bob2ob2o11bo11
@@ -9090,8 +8933,7 @@ bob2ob2o11bo11b2o105b2o3b2o51b4o$337b2o4bo25b6o12b4o6b4o103bo2b2o35bo18b2ob2o$29
 3bo2b2o$289b2ob2o196b2obo11b2obo10b2o20b2o8bo2b3obo5bo$289b2ob2o55b2o139bo3bob2o5b5o11b2o12bo7b2o2b3o2bob5o2bobo2b2o$290bobo53b3ob2o138bobobob2o5b2o27bobo10b2o2b2ob2o5bo3b2o$291bo54b5o142bobo36bobo7bo9b2o7b3o$347b3o145bo37bo$496bobo15b2o8b3o25bo$289b
 3o202b5o15b2o36bo11b2o$291bo152b3o46b2o58b4o6b4o$290bo152bo47bo2bo57b6o5b2ob2o$443bo3bo43b3o58b4ob2o6b2o$441b2o4bo44bo63b2o$444b3o$441bo4bo$445bo$444bo70b2o$512b3ob2o$512b5o$513b3o2$295bo$293bo3bo$298bo$293bo4bo$294b5o9$461bo$459bo3bo$464bo$459bo4bo$
 460b5o!
-`,
-"trafhassle": `x = 1043, y = 759, rule = B3/S23
+`,trafhassle:`x = 1043, y = 759, rule = B3/S23
 45b2o439b2o132bo23bo$45b2o269bo16bo153bo131bob3o17b3obo141bo168b2o4b2o52b2o4b2o$51b2ob2o260b3o12b3o153bobo134bo2b2o7b2o2bo146bobo166bobo2bobo52bobo2bobo$55bo113b2o9b2o137bo10bo154b2obobo128b2o3bo2b2o7b2o2bo3b2o140bobo169bo2bo56bo2bo$50bo2b2o115bo9bob
 o129b2o4b2o10b2o4b2o146bo2bo2bo127bo4bo17bo4bo141bo33bo134b2o2b2o54b2o2b2o$40b2o2b3o4b3o116bobo8b2o130bo22bo147b2o4bob2o125b4o19b4o175bobo132b3o2b3o52b3o2b3o$5b2o5b2obo24b2o2bobo4b3o89b2obo4b2o3b2o13b2o100b2obo5bob2o27bobo18bobo69b2o3b2o4b2obo60b2obo
 4b2o2bo85b2obo4b2obo126b2obo6b2obo88b3obo75b2o4b2o5b2obo42bo2bo5b4o47bo2bo5b4o$6bo5bob2o28b3o3bo2b2o88bob2o4b2o3b2o18b3o94bob2o5b2obo28b2o18b2o70b2o3b2o4bob2o61bobo2bo3bo87bob2o4bob2o21b2o5b4o19b4o5b2o64bob2o6bob2o54bo32bo4bob2o73bo5bo5bob2o50bob2obo
@@ -9281,8 +9123,7 @@ obobo94b2o8b2o4b2o20b3o5bobo3bobo5b3o$6b2o2b2o15bobo3bobo5bo9bo5bobo3bobo130b2o1
 o5bobo3bobo95bobobobo3bo5bo30bobo3bobo95bob2o6b2obo25bo17bo$2b2obo6b2obo12bo4b3o8bo3bo8b3o4bo98bobo4b2o4b2o30b3o3b3o95b2obo6bob2o24bo2bo13bo2bo$2bob2o6bob2o27b2o3b2o112b2obo4bo5bo173b4o13b4o$166b2o3bo5bo$29bo2bo27bo2bo103bo2b2o4b2o172b2o17b2o$29b4o27
 b4o102bo3bo5bo22b3o21b3o124bo2bo13bo2bo$35bo21bo108b2o3bo5bo24bo19bo128b3o13b3o$31b5o21b5o105bo2b2o4b2o20bo3bo19bo3bo$31bo4b2o4b3o3b3o4b2o4bo104bo5b2obo21bobo2bo19bo2bobo122bob2o13b2obo$32b2o2bo5bobo3bobo5bo2b2o105b2o4bob2o19bo2bobo23bobo2bo120b2obo1
 3bob2o$34bobo5b3o3b3o5bobo136bo3bo10b2ob2o10bo3bo$34bobob2o13b2obobo136bo15bobo15bo$35b2obo15bob2o138b3o10bobobobo10b3o$38bo15bo154b2o3b2o$38b2o3b2o3b2o3b2o$42bo2bobo2bo$43b2o3b2o!
-`,
-"tubstretch2": `
+`,tubstretch2:`
 x = 346, y = 313, rule = B3/S23
 126b2o$126bo2b3o$127bob3o13$120b2o$119bobo$121bo12$98bo$98b2o$97bobo$104b2o$105b2o$104bo3$19b2o133bo$19b2o131bobo$44b2o107b2o$44b2o5$90b2o$19b3o67bobo$18bo3bo21b3o44bo$17bo5bo19bo3bo$8b2o7b2obob2o$8b2o32bo5bo$42b2o3b2o$20bo$8bo10bobo$7b3o9bobo23bo$6b
 o3bo8b2o23bob2o$8bo9bo25bo$5bo5bo5b3o24bo3bo$5bo5bo4bo3bo24bo2bo$6bo3bo4bob3obo23b5o18bo$7b3o6b5o4bo19b5o18b2o$26b2o16b2o3b2o16bobo$25b2o18b5o24b2o$38bobo5b3o26b2o$38b2o7bo26bo$10bo28bo2$180bo$10bo21bobo144bo$8bobo22b2o144b3o$9b2o22bo$18b2o6b2o$18b2o
@@ -9310,9 +9151,7 @@ b4o7bobo52bo3bo17b2obobo4bo8bo7bo$141b2o8bobo17b2o8b2o5b2o7bo6bo54bobo10b2o8b4o4
 b2o4b2o11b2o2b2o20b2o6b2o7b2o30bo2bo6bobo$118b2o4b2o8b2o2bo2b2o19bobo6b2o7bobo24b2o2bo3bo7bobo$126bobo5b4o19b2o3bo19bo4bo3bo14b3o2b2o2bo7bo2bo3b2o$128bo7bo20b2o2b2o19b2o2bo4bo4b2o5bob2o16bobo4b2o$186bo4bo4b2o5bo2bo8b3o4bobo$187b3o13bob2o15bo$156b2o48
 b3o$156b2obo47b2o$159bo$159bo37bo$156bo2bo20b2o14b2o$130b2o9b2o14b2o20bobo14bobo8bobo$130bobo9b2o37bo23bo3bo$125b2o4b3o7bo6bo44b2o10bo12b2o$121b4o2bo4b3o12bobo17b2o24bo2bo7bo4bo8b2o$121b3ob2o4b3o12bo3b2o3b2o9bobo28bo7bo$130bobo13bo3b2o3b2o8b3o4b2o4bo
 18bo7bo3bo$130b2o14bo3b2o12b3o4bo2b2obobo17bo9bobo$147bobo15b3o4b3obo3bo12bo2bo$148bo9b2o6bobo4b2obo3bo12b2o$157bobo7b2o6b2o3bo$157bo19bobo$156b2o20bo!
-`,
-// peak naming ikr
-"quart": `x = 108, y = 60, rule = B3/S23
+`,quart:`x = 108, y = 60, rule = B3/S23
 2bo$b3o5b3o12bo5bo$2obo4bo2bo5b3o3b3o3b3o$3o4b3obo4bo2bo3bob2ob2obo$3o2bo6bo3bo2bo4b3ob3o$b2o5bo4bo4b4o2b3o2b2o$7bo6bobobob2o2b3o$14bobob2o2bo2b2o39b3o$12b2o3bo2b2o2b3o5b3o24b3o4bo2bo$15b2o4b3o3b2o2bo2bo7b3o3b3o7bo2bo4bo$12b5o2b2o8bo5bo5bo2bo2bo2bo10
 bo4bo$12bo6b2obo5b3o2b2o6bo3bo4bo6bo3bo5bobo$11b2o5b2o5b2o3b2ob6ob2obo7bo4bo4bo$12bo2b4obo2bob2o2b4o2bo2b2o2bo4bo2b2o2b2obo3bob2o6b3o$13bo3bo6b2o5bo5b2o2bob2o2bo2b2o2b2obo3b2o2bo4bo2bo$13b2o2bo9bob2o6b5ob3o2bo4b2o2bo4bo10bo$8bo3b2ob2o19bob2o2bobo2bo8
 bo2b4o2bo7bo$7b3o4bo20bo5bo2b2ob2o2b2o5b2o3b2ob3obobo$7bob2o25bo2b2o4b2o4bo6bo2b2o4b2o$8b3o23b2o3bo2bob2obo2bo4bo4bo32bobo$8b6o20b4obobo5bob2o4b3o7b2o2bo23bo2bo$8b3obob2o14bo6bobo3bobobo9bo6bo25bo5b2o$11bo4bo12b3o3b3obo2bo4b2ob2o5b6o6bo19b3o2bo3bo$10
@@ -9321,8 +9160,7 @@ $11bobo22b2o22b3o3bob9ob6obobo5bob4o3bobo$35bo2bo22b2o4bo17bo3bo2bob2o6b2o$31b3o
 9b2ob3o28bobo2b2o2bob2o2bob2o2bob2o4bob3o7bo$28bo4bobo24b2obob2o3bo5bo5bo5bo5b2o$27bobo5b2o23bo2bo26bo3bo$34b2o26bo4bo25bo$28b2o4b2ob2o22b2obobo4bo16bo3bo$27b2ob2o31bobo3b2obo14b2o3b6o$27b5o4bo26bob3o4bo14b2o3bob5o$28b3o31b2obo2bo3bob2o10b2o6b3ob2o$2
 9bo31bo2bobo4b2o2bo8b3o3b2o5b2o$29b2o30b2obo2bo2bo2b2o8bobob4o$30bo3bo29bo2b2o2bo6b2o3bo2b2o3bo$33b3o28bob2ob2o6b6o6bob2o$33bob2o26b2o2bobo7b4obob5ob2obo$34b3o25bo2b3obobo12bo4b2o2bo$34b3o25b2o4b2ob3o7b3o3bo4b2o$34b2o28b2o2bobo3bo12bo$64bob2o2bob2o16
 b2o$65b2obobobo$68bobobo$63b3o3bobo$63bo2bob2o$64bobobobo$65bo3b2o!
-`,
-"rakebr": `x = 398, y = 405, rule = B3/S23
+`,rakebr:`x = 398, y = 405, rule = B3/S23
 81b2o5b4o$79b2ob2o3bo3bo$79b4o8bo$80b2o5bo2bo2$75b2o9bo$73b5o8b3o$73b2o4bo5bo3bo$73b2o5b5o4bo$75b2o4b4obob2o$78b3ob2o3bo$84bobo2$64bo$62b2o24b4o$63b2o22bo3bo$70b4o17bo$69bo3bo13bo2bo$49bo23bo$47b2o20bo2bo$48b2o14b2o$63b4o$53bo9b2ob2o$53bo11b2o$49bo2b
 2o4bobo$49bo7bo2b2o$49bo2b2o4bobo$53bo11b2o$19bo20b2o11bo9b2ob2o$17b2o20b4o20b4o$18b2o19b2ob2o20b2o$30b3ob2o5b2o$29b2o5bo$28bo7b2o$29b2o5bo$30b3ob2o5b2o$39b2ob2o$39b4o$40b2o$20bo2bo$24bo$20bo3bo$10b2o9b4o$9b2o5b3o$5b3o6b2ob2o$9b2o5b3o$10b2o9b4o$20bo3
 bo19bo2bo$24bo23bo$20bo2bo7b2o11bo3bo$33bo11b4o$28bo7b2o2b3o$13b3o11bo8b2o2b3o$13bo14bo7b2o2b3o$14bo18bo11b4o$31b2o11bo3bo$48bo80b2o5b4o$28b3o13bo2bo79b2ob2o3bo3bo$28bo98b4o8bo$29bo23b2o73b2o5bo2bo$51b2ob2o$51b4o16b2o$43b3o6b2o15b2ob2o53bo7b2o$43bo25
@@ -9354,8 +9192,7 @@ $317bo9bo8b2ob2o45bo6bobo$325bobo4bo3b4o27bo17bo2bo6bo$324bo2bo5bo3b2o26bobo16b2
 3b2o5bo2bo$285bobo29b2o28b2o8bo6b2obo3bo2bo5b2o$317b2o28b2o6bobo4b5o4bo3bo$356b2o4bo2bo4bo4b2o$362b5o4bo3bo$344bo2bo16b2obo3bo2bo5b2o$348bo17bo11b2ob2o$331b2o11bo3bo9b4o16b4o$333bo11b4o8bo3bo17b2o$328bo7b2o2b3o18bo$327bo8b2o2b3o14bo2bo$328bo7b2o2b3o$
 333bo11b4o$331b2o11bo3bo19bo2bo$348bo23bo$344bo2bo12bo7bo3bo$358b3o3bo4b4o$334b3o21b2o5b2o$334bo22bo6b3o$335bo22b2o5b2o$358b3o3bo4b4o$360bo7bo3bo$349b3obo18bo$349b2o17bo2bo2$377b2o$375b2ob2o$364b3o8b4o16b2o$364bo11b2o15b2ob2o$365bo27b4o$394b2o2$382b2
 o$376b3o3b2o9bo$376b3o14b2o$375bo3bo12bob2o$375b4o13bobo$376b3o13b2o3$384bo2bo$388bo6b2o$384bo3bo4b2ob2o$385b4o4b4o$394b2o!
-`,
-"shtshow": `x = 1326, y = 912, rule = B3/S23
+`,shtshow:`x = 1326, y = 912, rule = B3/S23
 694b3o81b3o83b3o265bo$694bo82bo2b5o75b5o2bo263b3o$689b3o3bo80bo3bobob2o73b2obobo3bo148b3o106b3o4b2o$689bo7b2o77bo6bo77bo6bo147bo2b5o101bo2b3o2bob2o$684b3o3bo7bo79bo6bobo69bobo6bo148bo3bobob2o99bo3bobo2bobo$684bo7b2o13bo67bobo6b2ob2o67b2ob2o6bobo145bo
 6bo101bo4bobobobob2o$679b3o3bo7bo8b2o3bobo64b2obob2o3b2obobo65bobob2o3b2obob2o146bo6bobo99bo4bobo3b2o$679bo7b2o9b5ob2o4b2o61bobobob2o6bob2o6b3o9b3o9b3o9b3o9b3o6b2obo6b2obobobo142bobo6b2ob2o95bobo4bo3bob3o$674b3o3bo7bo8bo4bob2ob5o60b2o3bo2bo3b2obo3bo4
 bo3bo7bo3bo7bo3bo7bo3bo7bo3bo4bo3bob2o3bo2bo3b2o140b2obob3o2b2obobo93b2obob2o9b2o$674bo7b2o9b5ob6ob4o61bo3bobo2b2o4b2o7b2o3b2o5b2o3b2o5b2o3b2o5b2o3b2o5b2o3b2o7b2o4b2o2bobo3bo138bobobo3bo5bob2o91bobobobo$669b3o3bo7bo8bo4b4o3b3o4bobo60bo6bo4bobob2o2b2o
@@ -9881,16 +9718,14 @@ b2o3b2obobobobo$694bo3bob2obobob2obo3bo$702b2ob2o$682b2o8bo10bobo10bo8b2o$681b2o
 o$678bo4bobo2b2o4b2o7bobo7b2o4b2o2bobo4bo$678bo3b2o2bob2ob2ob2ob5obobob5ob2ob2ob2obo2b2o3bo$679bo21bobobobo21bo$680b21o3bo3b21o2$682b21o3b21o$681bo21bobo21bo$680bo3b20ob20o3bo$677bobo2bo2bo37bo2bo2bobo$676bo2bobo4b37o4bobo2bo$675b2o10bo33bo10b2o$674b
 o13b33o13bo$673b4o12bo29bo12b4o$672bo4bo12b29o12bo4bo$672bo2bo15bo25bo15bo2bo$672bo2bo16b25o16bo2bo$673bo19bo21bo19bo$674b4obo14b21o14bob4o$675bo3bo15bo17bo15bo3bo$676bo19b17o19bo$676bobo18bo13bo18bobo$698b13o$675b3o21bo9bo21b3o$675b2o23b9o23b2o$675b
 3o26bo26b3o$701b3ob3o$676bobo23bo3bo23bobo$676bo24bobobobo24bo$675bo3bo21bobobobo21bo3bo$674b4obo20bo7bo20bob4o$673bo26bo7bo26bo$672bo2bo24bo2bobo2bo24bo2bo$672bo2bo24b3o3b3o24bo2bo$672bo4bo53bo4bo$673b4o55b4o$674bo59bo$675b2o55b2o$676bo2bo49bo2bo$67
-7bobo49bobo!`,
-"halfFiller": `x = 65, y = 80, rule = B3/S23
+7bobo49bobo!`,halfFiller:`x = 65, y = 80, rule = B3/S23
 31b2ob2o29b$30bobobobo28b$30bobobobo28b$28b2obo2bob2o27b$27bobo4bo30b$26bo3bobobob2o27b$26b3obobobo2bo27b$29bo2bo2b2o28b$26b2o37b$25bo2b3o3b3o28b$25bobo9bobo25b$26bobob2ob2obob2o25b$28bob2ob2obo28b$28bobo3bobo28b$29bo5bo29b$65b$27b11o27b$27bo2bobobo2
 bo27b$65b$24b2o6bo6b2o24b$24bobo3b5o3bobo24b$22bobob3o7b3obobo22b$21bobobobo9bobobobo21b$21bobobobob2o3b2obobobobo21b$22bo3bob2obobob2obo3bo22b$30b2ob2o30b$10b2o8bo10bobo10bo8b2o10b$9b2o3bo4b2o7b4ob4o7b2o4bo3b2o9b$8b2o2b2o4bo3b3o3bo7bo3b3o3bo4b2o2b2o
 8b$9bo4b5obo4bo3b3ob3o3bo4bob5o4bo9b$13bo4bobo23bobo4bo13b$10b2o3b2ob2obo7b3ob3o7bob2ob2o3b2o10b$13b2o4bo25bo4b2o13b$3b5o3b2o5bo6b2o2b2o3b2o2b2o6bo5b2o3b5o3b$3bo4b2obo2bo10b2o2b3ob3o2b2o10bo2bob2o4bo3b$3bo6bo18bobobobo18bo6bo3b$4bo5b2obo17bobo17bob2o
 5bo4b$6b2o2bo3b2o11b4obob4o11b2o3bo2b2o6b$9bo17b2o3bo3b2o17bo9b$7b3o20b2ob2o20b3o7b$6bo8bo5bo5b3obobob3o5bo5bo8bo6b$6bo4bobo2b2o4b2o7bobo7b2o4b2o2bobo4bo6b$6bo3b2o2bob2ob2ob2ob5obobob5ob2ob2ob2obo2b2o3bo6b$7bo21bobobobo21bo7b$8b21o3bo3b21o8b$65b$10b2
 1o3b21o10b$9bo21bobo21bo9b$8bo3b20ob20o3bo8b$5bobo2bo2bo37bo2bo2bobo5b$4bo2bobo4b37o4bobo2bo4b$3b2o10bo33bo10b2o3b$2bo13b33o13bo2b$b4o12bo29bo12b4ob$o4bo12b29o12bo4bo$o2bo15bo25bo15bo2bo$o2bo16b25o16bo2bo$bo19bo21bo19bob$2b4obo14b21o14bob4o2b$3bo3bo1
 5bo17bo15bo3bo3b$4bo19b17o19bo4b$4bobo18bo13bo18bobo4b$26b13o26b$3b3o21bo9bo21b3o3b$3b2o23b9o23b2o3b$3b3o26bo26b3o3b$29b3ob3o29b$4bobo23bo3bo23bobo4b$4bo24bobobobo24bo4b$3bo3bo21bobobobo21bo3bo3b$2b4obo20bo7bo20bob4o2b$bo26bo7bo26bob$o2bo24bo2bobo2bo
-24bo2bo$o2bo24b3o3b3o24bo2bo$o4bo53bo4bo$b4o55b4ob$2bo59bo2b$3b2o55b2o3b$4bo2bo49bo2bo4b$5bobo49bobo5b!`,
-"spaceshipRake": `#C p240 c/2 forward rake for a 2c/5 spaceship.
+24bo2bo$o2bo24b3o3b3o24bo2bo$o4bo53bo4bo$b4o55b4ob$2bo59bo2b$3b2o55b2o3b$4bo2bo49bo2bo4b$5bobo49bobo5b!`,spaceshipRake:`#C p240 c/2 forward rake for a 2c/5 spaceship.
 #C This is the first rake in which the output travels in the
 #C same direction as the rake, but at a slower speed.
 #C Rake constructed by Jason Summers, March 2003.
@@ -10011,8 +9846,7 @@ bo43b8o8bo107b2o15b2o54bo5bo7b3o59b$343b6o453bo12bo8bo3bo119bo22b2o7b8o3bo55b4o4
 o186b2o3bo5bo2bo10bo66b$800bo2bo165bo5b2o105bo11bo188b4o3bo4bobo78b$963b2o5b2ob3o104bo3bo197b2ob2o8bo80b$948bo2bo5b2o3b2ob2o17b2o93bo5bob2o178b4o5b2o5b2o18b3o5bo64b$947bo8b4o3b4o17bobo92bo5b2o180bo3bo3b2ob2o23bo5bo3bo62b$947bo3bo3b2ob2o4b2o18bo94b6o1
 82bo8b4o24bo3bo67b$947b4o5b2o30b5o275bo2bo5b2o29bo4bo62b$988bo4bo101b2o211b5o63b$979b2o7bo105b2ob2o173bo9b2o14b3o75b$953b2o24bobo7bo3bo101b4o5b2o164b3o8b5o12bo77b$951bo4b3o3b2o15bo11bo104b2o5b2ob4o159bo3bo5bo4b2o13bo76b$949b2o4b5o6b2o136b6o159bo4b5o5
 b2o90b$949bo6b2obo4b3o138b4o160b2obob4o4b2o92b$949bo9b2o4bo8b2o295bo3b2ob3o12b3o80b$950bo2bo5b2o13bobo295bobo18bo82b$952bo6b2o13bo319bo81b$1376b$948bo2bo315b4o105b$947bo319bo3bo13bo2bo87b$947bo3bo315bo16bo91b$947b4o13b4o300bo2bo12bo3bo87b$964bo3bo315
-b4o88b$964bo411b$965bo2bo407b!`,
-"brokenlines": `x = 227, y = 118, rule = B3/S23
+b4o88b$964bo411b$965bo2bo407b!`,brokenlines:`x = 227, y = 118, rule = B3/S23
 141b3o3b3o$141bo2bobo2bo$141bo7bo$141bo7bo$142bobobobo2$145bo$144b3o$143b2ob2o$144b3o$144b3o$144b3o$136b3o5bobo5bo$136bo2bo4bobo4b3o$136bo8bo5bob2o$
 136bo3bo11b3o$136bo3bo11b3o$136bo15b3o$137bobo12b2o5$146bo$147b2o$87bo2bo55b2o$85b6o$81b2obo8bo$77b2obobobob8o2bo$75b3ob2o3bobo7b3o$74bo6bo2bo3b2ob3o$35bo2bo36b4o3bob4o5bob2o$33b6o37bo5bo5bo5bobo$29b2obo8bo32bo3bo4bob2o2bo4b2o$25b2o3bobob8o2bo29b4o2b
 4obo4b2o2bo$23b3obobo2bobo3bo3b3o34b2o4bo6b3o$22bo4bo4bo3b2o2b2o34b3o3b3o5bo$23b6obob4obobo3b2o30bo5b2o5bob2o7b2obo5b2o$24bo3b3o5bob3o3bo31b3o8b2obob3o3bo4bo4bobo$22bo3b2o3bob2o2b6o26bob2o5b2ob2o9b3o3b2o6b2o2bo2b2o$22b5ob4obo7b2o26b2obo10bo5b2o2b2o4b
@@ -10029,8 +9863,7 @@ o36b2ob2o93bo2bo12b2ob2o$ob2obo3b2o20bo6b2o2b2obobo23bo2bo9bobobo87bo5bo3bo12b4o
 ob2o14b2ob2ob3o2bo3bobob2o2bo2b2o31bo2bo3bobo98bo5bo$10b2o2bobo7bo2b2o3bob2obo4bobo32bob3obo5bob2o101bo$9bo6bo4bo2bobobo4bo8b2o33bo6bo2bobobo88bo2bo4bo4bo$10b3o3b3o3bobo36b2o6bo6bo2b2o4bobobobo92bo5b2o$19bo8bo33bo5b2o5bo3bo6bo2bob2o87bo3bo$8b5ob4obo4
 2bobo3bobo5bo7bobob2obo89b4o$8bo3b2o3bob2o2b2o2b2o34b2o17b3obo4bo$10bo4b2o5bobob2o2bo50bo4b5o$9b5o2bob4obo3bob2o44bobo3bob2o$8bo4bo2bobo3bo3b2o41bo5bo2bob2obob2o2b2o$9b3o6bobo3bo3b3o37bobo7bobo2bo3bo2bo$11b2obobobob8o2bo36bo3bo3bo6b2o4b2o$15b2obo8bo4
 0bobo5bobo3bo5bo$19b6o44bo8b2obo2bobo2bo$21bo2bo42b3o9bobobo2bob2o$62b2ob7ob2o4bobobob2obo$62bo3bobobo3bo5bo2bo2bobo$63b4o3b4o9b2o2bo$65bo5bo$58b2o5bo5bo5b2o$58bo2b2ob2o5b2ob2o2bo$59bobob4obob4obobo$58b2o2bo4b3o4bo2b2o$60bobo11bobo$60bo2bo9bo2bo$61b2
-o11b2o!`,
-"tmachine": `#N Turing machine
+o11b2o!`,tmachine:`#N Turing machine
 #O Paul Rendell
 #C A pattern capable of turing-complete computation. Created in April 
 #C 2000.
@@ -10438,8 +10271,7 @@ bobo6b2o69b3o34b3o7bobo7b2o798b$376bobo4bo5bobobo14bo25b2o25bo4bobo76b4o10b2o7b2
 o8b3o796b$883bo2bo7bobo17bo799b$415b3o449b4o11bo11b2o18b2o798b$415bo451bo3bo10bo3bo12bo814b$416bo450bo14b4o12b2o814b$868bo2bo26bobo813b2$895bo818b$423bo2bo8bo140bo318b2o12b2o3b2o798b$423bo10bobo137b3o317bobo12bo5bo798b$419bo2bo3b2o5bo3b2o134bo1140b$4
 16b4o3b2obobo4bo3b2o134b2o331b2o2bo3bo799b$415b4o14bo3b2o466b2o4b3o800b$415bo2bo8b2o5bobo3b2o437bo7bo19bo806b$415b4o16bo4bobo434bobo5b4o825b$410b2o4b4o22bo432b2o8b2o2bo2b2o820b$409bobo7bo22b2o431b2o11b2o2b2o820b$409bo465b2o7bo10b2o817b$408b2o161bo299
 b2o4bobo4bo10b3o816b$570b3o297bobo6bo4bo10b2o13bo803b$569b5o296bo21b2o7b2o5b2ob2o801b$568b2o3b2o294b2o21b2o7bobo810b$903bo3bo5bo800b$903b2o809b$572bo334b2obob2o800b$572bo1141b2$568b2o1144b$569bo1144b$566b3o1145b$566bo1147b$907b2o805b$908bo805b$905b3o
-806b$905bo!`,
-"logt2": `x = 290, y = 218, rule = B3/S23
+806b$905bo!`,logt2:`x = 290, y = 218, rule = B3/S23
 156bo$155bobo$155b2obo7b2o$140b2o13b2ob2o6bobo$139bobo13b2obob3o6bo$125bo12b3o14bobo2bo2bo2bo2bo7b2o$125b4o8b3o16bo4b2o6bo8bo$126b4o8b3o25bobo$115bo10bo2bo9bobo24b2o$115b2o9b4o10b2o$125b4o8bo$125bo12bo$136b3o2$101bo$100
 b4o$83b2o14b2obo$83bo2bo11b3obobo3b2o$87bo11b2obo6bo$74bo12bo12b4o$74b2o11bo7bo5bo$42bo40bo2bo9bo$42bo40b2o9b3o13b2o$44bo5bo59bobo$43bo6bobo58b3o$42bo3bo2bo62b2o$43bo2bobob2o57b2o$48bob2o57b3o$62b2o7b2o$62bo9bo$72bobo5bo29bo$73b2o3bobo29b2o$77bobo9b3
 o2b2o$76bo2bo11bo2b3o$77bobo10bo5b2obo$78bobo15bo2bo$70b2o8bo15b2obo$26b2o2bo39bo23b3o6b2o$29bobo62b2o7bobo$28bo76bo$105b2o$30b2o2$31b2o75b3o$30bo47b2o29b3o$28b2ob2o45bo$31b2o$16bo12bo166bo$16bo22b3o154b2o$18bo5bo13bo$17bo6bobo10bo4b2o81bo$16bo3bo2bo
@@ -10455,28 +10287,23 @@ bo41b2obob2o$60bo3bo42b3o5b2o108bo$59bo5bo7bo18bo11bob2o114b2obo$49b2o8bo3bob2o4
 $223b4o34b2o10bo4b2o3b2o$222b4o31b2obo2bob2o4b3o$212b3o7bo2bo27bo3bo4bo2bo4bo9b3o$211b3o8b4o19bo6b2o7bo8b2o8b3o$147b2o68b2o4b4o7b2o9b3o12bo20bo$148bo67bobo7bo7bobo11bo$145b3o68bo19bo10b2o$145bo69b2o19b2o2$250bo14b2obob2o$248b2ob2o12bo5bo8bo$266bo3bo9
 b2o$247bo5bo13b3o2$191bo55b2o3b2o$192bo42b2o$190b3o43bo4$266bo$266bo$265bobo$264b2ob2o$233b2o3b2o23bo5bo$174b2o58b5o27bo$174bobo58b3o25b2o3b2o$174bo61bo15bo$251b3o$250b5o$249b2o3b2o$250b5o$250bo3bo$252bo$265bo$265b2o$233b3o$253bo$233bobo16b2o$171b2o5
 9b5o$172bo23b2o33b2o3b2o$197bo33b2o3b2o$197bobo6bo$198b2o4bobo$202b2o10b2o3b2o$187b2o13b2o11b2o3bo$187b2o13b2o10bo7b2o$187b2o15bobo15b3o6bo4b2o$188bo17bo15b2o6b2o4bo$187bobo30bo16b3o$186b2obo29b2o18bo3$187bo$187b2o$204b2o$204bobo$204bo$215bo$213b4o$2
-03bobo6bobob2o9b2o$176bo26bo3bo3bo2bob3o9bo$173b4o30bo4bobob2o$172b4o7bo4b2o18bo4b4o$172bo2bo7b2o3bobo16bo7bo$172b4o6bobo4b3o11bo3bo$167b2o4b4o13b3o10bobo$166bobo7bo12b3o$166bo21bobo$165b2o21b2o!`,
-"mosq1": `x = 1794, y = 411, rule = B3/S23
+03bobo6bobob2o9b2o$176bo26bo3bo3bo2bob3o9bo$173b4o30bo4bobob2o$172b4o7bo4b2o18bo4b4o$172bo2bo7b2o3bobo16bo7bo$172b4o6bobo4b3o11bo3bo$167b2o4b4o13b3o10bobo$166bobo7bo12b3o$166bo21bobo$165b2o21b2o!`,mosq1:`x = 1794, y = 411, rule = B3/S23
 1660b4o$1659bo3bo$1663bo$1662bo29$1790b4o$1789bo3bo$1793bo$1792bo3$1790b
 o$1791bo$1791bo$1790b2o$1789bo4$1790b4o$1789bo3bo$1793bo$1792bo282$107b
 ob3o$108b4o$107bo$112bo31$94bob3o$95b4o$94bo$99bo13$98bo$99bo$94bo4bo
 $95b5o6$201b6o$133b5o64b3o$132bo4bo67bo$137bo$136bo3$b5o$o4bo$5bo$4bo
-7$183bo$178bo$179b4o$178bob3o!`,
-"mosq5": `x = 2754, y = 650, rule = B3/S23
+7$183bo$178bo$179b4o$178bob3o!`,mosq5:`x = 2754, y = 650, rule = B3/S23
 2622bo$2623bo$2619bo3bo$2620b4o29$2752bo$2753bo$2749bo3bo$2750b4o4$2749bo$2750b2o$2751bo$2751bo$2750bo3$2752bo$2753bo$2749bo3bo$2750b4o345$175bo$173bo2b2o$173b3o$174bo40$3bo$4bo$o3bo$b4o140$793bo$792b2o$791bobo17$824b3
-o34$305b5o$304bo4bo$309bo$308bo10$280bo$281bo$277bo3bo$278b4o!`,
-"teeth": `x = 472, y = 127, rule = B3/S23
+o34$305b5o$304bo4bo$309bo$308bo10$280bo$281bo$277bo3bo$278b4o!`,teeth:`x = 472, y = 127, rule = B3/S23
 466b3o$467bo2bo$471bo$468bobo22$438bo$438b2o$438bo2bo2$439bobo$440bo5$
 241b2o$240bo$240bo$236b4o8$252b2o$253bo$253b2o$253bo2$250b3o45$3b3o$b
 o2bo$o$bobo$264b3o$265bo2bo$269bo$266bobo14$239b2o$241bo$241bo$242b4o
-$33bo$32b2o$30bo2bo2$30bobo$31bo!`,
-"catacryst": `x = 2555, y = 1772, rule = B3/S23
+$33bo$32b2o$30bo2bo2$30bobo$31bo!`,catacryst:`x = 2555, y = 1772, rule = B3/S23
 2350bo$2350bo$2348b2o$2347bo$2347bo$2347bo$2347bo6$2377bo$2376b2o$2374b
 o2bo2$2374bobo$2375bo133$2552b2o$2553b2o$2553bo29$2538bo$2537bobo$2539b
 o$2540bo1489$1201bo$1201bo$1202b2o$1204bo$1204bo$1204bo$1204bo17$1180b
 2o$1182bo$1182bo$1183b4o50$3bo$2b2o$o2bo2$obo$bo11$30bo$30bo$28b2o$27b
-o$27bo$27bo$27bo!`,
-"telegraph": `x = 10432, y = 2413, rule = B3/S23
+o$27bo$27bo$27bo!`,telegraph:`x = 10432, y = 2413, rule = B3/S23
 2137b2o$2136bo3bo5bo$2117bo17bo5bo3bobo$2117b3o5b2o8bo3bob2o2bobo249b2o$2120bo4b2o8bo5bo4bo246b2obo$2119b2o15bo3bo252b2o2bo2bo$2137b2o259bobo$2143b2o3b2o249bo$2143bo5bo288bo$2398b2o4b2o31bobo$2144bo3bo249b2o2bob2o30b
 o3b2o6b2o$2119b2o3b2o19b3o254bo22b2o9bo3bob2o4bobo$2119b2o3b2o299b2o9bo3bob3o4b3o$2120b5o312bobob2o2bo4b3o$2121bobo277b2o3b2o30bo4b2o4b3o$2402b5o41bobo$2121b3o279b3o42b2o$2404bo$2143bo291bo$2143bobo289bobo$2143b2o290b2o2$2125bo22bo274b2o$2126bo20b3o2
 56b2o15bobo29bo$2124b3o19b5o255bo16bo30b3o$2120bo24b2o3b2o255b3o43b5o$2119b3o16bo7b5o247bo10bo42b2o3b2o$2118b5o14b2o7bo3bo247b3o52b5o$2117b2o3b2o12b2obo7bobo251bo51bo3bo$2136b2o10bo233bo17b2o52bobo$2135b2o245bo47b3o22bo$2136b2o292bo$2119b3o25b2o233bo
@@ -11987,8 +11814,7 @@ bo3b2o$8053bo2bo$8054bob2obob2o$8058bo2b2o$1637b2o6419b4o$1637b2o2$8057b2o3b2o$1
 6bo2bo56bo2bo356bo2bo116bo2bo356bo2bo56bo2bo56bo2bo476bo2bo296bo2bo116bo2bo74bo$1609bo76bo179bo239bo59bo119bo59bo359bo119bo299bo119bo59bo359bo119bo719bo119bo59bo59bo299bo119bo59bo719bo59bo59bo59bo359bo119bo359bo59bo59bo479bo299bo119bo70bo5bo$1608bobo
 71bo3bo175bo3bo235bo3bo55bo3bo115bo3bo55bo3bo355bo3bo115bo3bo295bo3bo115bo3bo55bo3bo355bo3bo115bo3bo715bo3bo115bo3bo55bo3bo55bo3bo295bo3bo115bo3bo55bo3bo715bo3bo55bo3bo55bo3bo55bo3bo355bo3bo115bo3bo355bo3bo55bo3bo55bo3bo475bo3bo295bo3bo115bo3bo71b2ob
 2o$1607bo3b2o70b4o176b4o236b4o56b4o116b4o56b4o356b4o116b4o296b4o116b4o56b4o356b4o116b4o716b4o116b4o56b4o56b4o296b4o116b4o56b4o716b4o56b4o56b4o56b4o356b4o116b4o356b4o56b4o56b4o476b4o296b4o116b4o72bobo$1596b2o9bo3b2o6447bo$1596b2o9bo3b2o6447bo$1608bobo
-$1609bo6418b2o9b2o$8028bobo7bobo$8031bo8bo5bo$1612bo6415bo2bo13bobo11b2o$1610b2ob2o6416bo13b2obo10b2o$8021b2o5bobo14b2ob2o3b2o$1609bo5bo6404bobo5b2o15b2obo4b2o$8020bo24bobo$1609b2obob2o6403b2o25bo9$1611b2o$1611b2o!`,
-"crawler1": `
+$1609bo6418b2o9b2o$8028bobo7bobo$8031bo8bo5bo$1612bo6415bo2bo13bobo11b2o$1610b2ob2o6416bo13b2obo10b2o$8021b2o5bobo14b2ob2o3b2o$1609bo5bo6404bobo5b2o15b2obo4b2o$8020bo24bobo$1609b2obob2o6403b2o25bo9$1611b2o$1611b2o!`,crawler1:`
 #O https://conwaylife.com/forums/viewtopic.php?&p=213923#p213923
 x = 2303, y = 1557, rule = B3/S23
 581b2o12b2o$580bobo10b2ob2o$582bo10b4o$594b2o17b2o$576b2o34b4o$577b2o33b2ob2o$561b3o3b2o7bo37b2o$560bo3bo2b2o14b3o$547bo11bo5bo17bo2bo46b2o$547bo12b5o18bo47b2ob2o$547bo35bo47b4o$584bobo45b2o17b2o$531bo34b2o9b3o70b4o$5
@@ -12106,8 +11932,7 @@ b2ob2o4bo7b7o$165b2o4b2o3b2o8b4o$165b2o3b2obo$171bob2o16b2o$139bo31b3o15bo2bo$13
 $78b3o$97b2o17bo3bo$84b2o10b2o19b2o$71b2o10b2obo10bob2o16bo$71b2o9b4o13b2o17bo$82b2o11b6o17bo$74bo7b2obo9bo2bo13bo3bo3b3o3b3o$59b2o12bobo9b2o8b3o14b6ob4o3b4o$59b2o12bobo8b2o25bob4o2b3o4bo3bo$74bo43b4o3b4o2bo$62bo55bo6b2o3bo$47b2o12bobo23b2o27bo3bo4bo
 2b2o$47b2o12bobo22bo2bo27b4o3b5o$62bo22b2o31b3o3b3o$50bo34bo5bo$35b2o12bobo32b2obob3o$35b2o12bobo33bobo$50bo34b3o$38bo69b2o$23b2o12bobo69b2o$23b2o12bobo68bo9b2o11b3o$38bo78b2obo13bo$26bo90b2obo2bo7b2obo$11b2o12bobo89bo5bo8b2o$11b2o12bobo90bo3bo$26bo9
 3bo5b2o$14bo111b2o$13bobo105bo4b2obo$13bobo115b2o$14bo90bo12b3o7b4o$18b3o84b2o23bo$18bo85bobo$bo17bo96bo$obo113b2o$116b3o$103bo15bo$102bobobo8b2o2b2o$102bo3bo7b2o$18bo84b4o7b3o$18b2o84bo$20bo79bo$17b2obo25b2o50bo$17b3o26bobo49b2o$46bo$12b2o$11bo74b2o
-$12b3o71b2o$13bo3b2o82b3o6b3o$15bo2bo94bo$16b2o92b2obo$75b2o34b2o$89b3o4b2ob2o$72bo4bo17bo3bobo3b2o$72bo3bo18bo3b2o4b2o$72bo3bo17b2obo7b2obo$74b2o19bobobo10b2o$74bo21b3o8b4o$109bo5$97b3o$96bo2bo$95bo2bo$96b2o$92bo$91b2o$91bo4bobo$92bo3bob2o$98bo!`,
-"crawler2": `
+$12b3o71b2o$13bo3b2o82b3o6b3o$15bo2bo94bo$16b2o92b2obo$75b2o34b2o$89b3o4b2ob2o$72bo4bo17bo3bobo3b2o$72bo3bo18bo3b2o4b2o$72bo3bo17b2obo7b2obo$74b2o19bobobo10b2o$74bo21b3o8b4o$109bo5$97b3o$96bo2bo$95bo2bo$96b2o$92bo$91b2o$91bo4bobo$92bo3bob2o$98bo!`,crawler2:`
 #O https://conwaylife.com/forums/viewtopic.php?&p=213923#p213923
 x = 487, y = 488, rule = B3/S23
 202b4o$201bo3bo$205bo$201bo2bo15bo2bo$224bo$220bo3bo$193b2o26b4o$193b2o$240b4o$198b2o39bo3bo$181b2o16b2o42bo$181b2o15bo40bo2bo15bo2bo$181bo80bo$179b3o11b3o62bo3bo$179bobo13bo63b4o$178bo2bo12bo$178bobo97b4o$277bo3bo$170b
@@ -12141,8 +11966,7 @@ bobo$140b2o64bo2bo5bobo3bo$140bobo59b3o2b2o6bo3bobo$140bo74bobob2o$216b3o$196b2o
 o113bo13bo$195b3o$194bo2bo$193bo2bo$195b2obobo$193bob2o4bo$195b2o3bo$194bobob2o2$78b2o$77bobo$79bo5$192b2o$192bobobo$192b2o2bo$178b2o12b2obo$178b2o14bo6b2o$74b3o121b2o$76bo124bob2o$75bo90b2o28b2obo3b2o$166b2o28b2o3bob2o$196b2obo$201b2o$154b2o42b2o$15
 4b2o3$142b2o$71b2o69b2o$70bobo$72bo$130b2o$130b2o3$118b2o$118b2o3$106b2o$67b3o36b2o$69bo$68bo$94b2o$94b2o3$82b2o$82b2o4$64b3o$63bo3bo$68bo$66b2o12bo$62bobo13b2o2$67bo11b2o$66b3o8bobo$63bobo2bo4b6o$62bob2o7bo$62bob2o7bo3b2o$49b2o12bo11bo2bo$49b2o26b2o
 2$68bo$67b4o$53bo10b2o2bobobo$53bo8bobo2b2o4b2o$38b3o12bo6b2o4b2o2bobo$37bo3bo20bobobo2b2o$36bo27b4o$36bo3b2o24bo$37bob3o$38bo2bo$30b2o8bo$30b2o$29bo2bo14bo$29bo2bo14bo$14b3o12bobo13bo12bobo$30bo26b2ob2o$24bo19b2o11b2o2b2o$10bo12bo2bo20b2o7b3o$10bo13
-b3o20b2o7bobo$9bobo12b2o3b2o24b5o$10bo19bo24bo3b2o$10bo6bo10b2o25bobob2o$16b4o36b2ob2o$13b2o2bobobo36bo$11bobo2b2o4b2o$9b2o4b2o2bobo$11bobobo2b2o$3b2o8b4o$b2obo10bo$b2o$7bo$2o2bob2o$3bo2bo$bobo$2bo!`,
-"wsShip": `
+b3o20b2o7bobo$9bobo12b2o3b2o24b5o$10bo19bo24bo3b2o$10bo6bo10b2o25bobob2o$16b4o36b2ob2o$13b2o2bobobo36bo$11bobo2b2o4b2o$9b2o4b2o2bobo$11bobobo2b2o$3b2o8b4o$b2obo10bo$b2o$7bo$2o2bob2o$3bo2bo$bobo$2bo!`,wsShip:`
 #O https://conwaylife.com/forums/viewtopic.php?t=2031
 x = 51, y = 210, rule = B3/S23
 6b2o3b2o25b2o3b2o6b$7bobobo27bobobo7b$b2obo2b2ob2o2bob2o15b2obo2b2ob2o2bob2ob$b2obobo5bobob2o15b2obobo5bobob2ob$o2bo2bo5bo2bo2bo13bo2bo2bo5bo2bo2bo$obo13bobo13bobo13bobo$2bo13bo17bo13bo2b$3bo11bo19bo11bo3b$3bo11bo19bo11b
@@ -12156,12 +11980,10 @@ b2o3b2o22b$21bob2ob2obo21b$20b2ob2ob2ob2o20b$20b2ob2ob2ob2o20b$20b2obo3bob2o20b$
 3b$23b2ob2o23b$51b$23bo3bo23b$24bobo24b$22bobobobo22b$23b2ob2o23b$23b2ob2o23b$51b$24bobo24b$24bobo24b$22bo5bo22b$23b2ob2o23b$23b2ob2o23b$51b$23bo3bo23b$24bobo24b$22bobobobo22b$23b2ob2o23b$23b2ob2o23b$51b$24bobo24b$24bobo24b$22bo5bo22b$23b2ob2o23b$23b
 2ob2o23b$51b$23bo3bo23b$24bobo24b$22bobobobo22b$23b2ob2o23b$23b2ob2o23b$51b$24bobo24b$24bobo24b$22bo5bo22b$23b2ob2o23b$23b2ob2o23b$51b$23bo3bo23b$24bobo24b$22bobobobo22b$23b2ob2o23b$23b2ob2o23b$51b$24bobo24b$24bobo24b$22bo5bo22b$23b2ob2o23b$24bobo24b
 $22b2o3b2o22b$20bo3bobo3bo20b$19b2o3bobo3b2o19b$19b2ob2o3b2ob2o19b$51b$21bobo3bobo21b$20bo3bobo3bo20b$24bobo24b$19b2o3bobo3b2o19b$17b2obobobobobobob2o17b$24bobo24b$23b2ob2o23b$24bobo24b$21b2obobob2o21b$21b2obobob2o21b$22bobobobo22b$23b2ob2o23b$24bobo
-24b$51b$51b$51b$23b5o23b$23bobobo23b$23b2ob2o23b$23b2ob2o23b$51b$20b3o5b3o20b$22bo5bo22b$19bo3bo3bo3bo19b$19bo4bobo4bo19b$19bo11bo19b$19b5o3b5o19b!`,
-"2drags":  `
+24b$51b$51b$51b$23b5o23b$23bobobo23b$23b2ob2o23b$23b2ob2o23b$51b$20b3o5b3o20b$22bo5bo22b$19bo3bo3bo3bo19b$19bo4bobo4bo19b$19bo11bo19b$19b5o3b5o19b!`,"2drags":`
 #O https://conwaylife.com/forums/viewtopic.php?t=2031
 x = 54, y = 36, rule = B3/S23
-40b3o4b3o4b$40b3o4b3o4b$54b$54b$54b$39b5o2b5o3b$43bo2bo7b$5bo6bo28bo2b2o2bo5b$4bobo4bobo26b2o6b2o4b$4bobo4bobo25bo10bo3b$5bo6bo25bo12bo2b$54b$4b3o4b3o22b3o12b3o$4b4o2b4o11b6o6b3o10b3ob$7bo2bo13bo6bo7bo10bo3b$4b3ob2ob3o9bo8bo6b3o6b3o3b$4b2o6b2o10bo2b2o2bo10bo4bo6b$3b2o8b2o25bo8bo4b$20b3o10b3o3bo2bo4bo2bo3b$2bo12bo3bo3bo8bo3bobo2bo6bo2bo2b$o2bo10bo2bo2bo14bo8b2o8b$o2bo10bo2bo4b2o8b2o4bo2bobo2bobo2bo2b$44b2o8b$3b3o6b3o24b3o6b3o3b$3bo10bo25bo8bo4b$5bo6bo27bo8bo4b$3b3o6b3o23bo3bo4bo3bo2b$38bo3bo4bo3bo2b$6bob2obo25bo2bo2bo2bo2bo2bob$7bo2bo43b$3bob2ob2ob2obo39b$3b3o6b3o39b$54b$3bobo6bobo39b$3bobo6bobo39b$b3ob3o2b3ob3o37b!`,
-"p6ships": `
+40b3o4b3o4b$40b3o4b3o4b$54b$54b$54b$39b5o2b5o3b$43bo2bo7b$5bo6bo28bo2b2o2bo5b$4bobo4bobo26b2o6b2o4b$4bobo4bobo25bo10bo3b$5bo6bo25bo12bo2b$54b$4b3o4b3o22b3o12b3o$4b4o2b4o11b6o6b3o10b3ob$7bo2bo13bo6bo7bo10bo3b$4b3ob2ob3o9bo8bo6b3o6b3o3b$4b2o6b2o10bo2b2o2bo10bo4bo6b$3b2o8b2o25bo8bo4b$20b3o10b3o3bo2bo4bo2bo3b$2bo12bo3bo3bo8bo3bobo2bo6bo2bo2b$o2bo10bo2bo2bo14bo8b2o8b$o2bo10bo2bo4b2o8b2o4bo2bobo2bobo2bo2b$44b2o8b$3b3o6b3o24b3o6b3o3b$3bo10bo25bo8bo4b$5bo6bo27bo8bo4b$3b3o6b3o23bo3bo4bo3bo2b$38bo3bo4bo3bo2b$6bob2obo25bo2bo2bo2bo2bo2bob$7bo2bo43b$3bob2ob2ob2obo39b$3b3o6b3o39b$54b$3bobo6bobo39b$3bobo6bobo39b$b3ob3o2b3ob3o37b!`,p6ships:`
 #O https://conwaylife.com/forums/viewtopic.php?t=2031
 x = 261, y = 269, rule = B3/S23
 6bo3bo25bo3bo25bo3bo24bo29bo29bo105b$5bobobobob3o19bobobobob3o19bobobobob3o18bobo7b3o17bobo7b3o17bobo7b3o94b$4bo2bo4b2o2bo17bo2bo4b2o2bo17bo2bo4b2o2bo20bo2b2obo2bo20bo2b2obo2bo20bo2b2obo2bo94b$5bo4b2o2b3o18bo4b2o2b3o18b
@@ -12220,12 +12042,10 @@ $7bo5bo21b2o10bo17bo5bo5bo17bo2bo3bo2bo24bo24b2o7b2o19b2o2b2o3bo23bobo2bo20bobo2
 13b$189b2o22bo5bo2bobobo20bo4bo8b$190bo22bo3bobo26bo3bob2o7b$189b3o21bo3bobo4bo22b2o2b2obo6b$187bo5bo19bo4b2o5b2o23b2obo7b$186bo2bobo2bo18bo2bo7b2o24b2o9b$186bo7bo19bo2bo30bo2bo9b$188bo3bo21bo2bo4bo24bobobo9b$186b2o5b2o22b2o3b2o22b2obobob2o6b$215b2ob
 2obo2b2o20b2obob3o7b$214b2o3bobo2bobo19bo8bo5b$215bobobobobo23b3o5bo5b$213b5obobob5o19bobo5bo5b$213b3o3bobob2ob2o18b2o4b2o7b$214bo7bo23b2o5bo7b$218bo7b2o18b2o5b2o6b$219b4o27bob3o6b$217b2o4bo26b2obo7b$216bo2bobo2bo22bobo11b$215b2ob3obobo21b3obo2bo7b$2
 15b2o3bo2bo22bo2bo4bo6b$215b4o6bo20bo2b2ob2o7b$214bob3o3bo2b3o19bo5bo7b$213bo2bo2b2o24b4o4bob2o4b$214bo2bo2b2o3b3o17b4o3bob3o4b$216b2ob2o3b3o17bo4b4o8b$216bo4b2obo21b2o13b$214bob2obobobob2o18b2o3bo2bo7b$213bo2bo3b4o2bo23b2obobo5b$214bo5b4obo27b2o6b$2
-20b3obo21b2o3b2o8b$220b2o24b3o3bo8b$247bo2b2ob2o6b$247b3obo9b$246bo2bobob2o6b$245bo3bobo2bo6b$245bo3bobo9b$246b5o4b2o4b$249bo3bobo5b$247b2o4b2o6b$247b2o4bo7b$246b2o13b$253b2o6b!`,
-"tiniest2":  `
+20b3obo21b2o3b2o8b$220b2o24b3o3bo8b$247bo2b2ob2o6b$247b3obo9b$246bo2bobob2o6b$245bo3bobo2bo6b$245bo3bobo9b$246b5o4b2o4b$249bo3bobo5b$247b2o4b2o6b$247b2o4bo7b$246b2o13b$253b2o6b!`,tiniest2:`
 #O  DivusIulius » July 22nd, 2013, 6:24 pm
 x = 5, y = 3, rule = B3/S23
-b4o$b2obo$2o2bo!`,
-"coeshipGun": `
+b4o$b2obo$2o2bo!`,coeshipGun:`
 #O https://conwaylife.com/forums/viewtopic.php?f=2&t=1643&p=218635#p218635
 x = 4604, y = 5379, rule = B3/S23
 536b2o5b2o$536b2o5b2o6$23b2o$23bo$17b2ob2obo$15bo2bobobo$15b2o4bo13bo$33b3o$32bo$25b2o5b2o502bo7bo$24b3o509b2o5b2o$12b2o10bo511b3o3b3o$11bobo10b2o2b5o505b2ob2o$10bo13bo4b4o505bo3bo$9bo10b3obo3b2o505b2o7b2o$9b2o5bo518b
@@ -12946,8 +12766,7 @@ o11bo1374b6ob2o156b2o$544b2o10bobo4b2o1604b2o$552b2o2b2o6bo1603bo2bo$526b2o24b2o
 2obo18bo20bo1336bo7bo6bo2b3o21bo91bo183bo222b2o$530b3o18b3o18b2o1336b8o7bo3b2o17bo2bo88bo2bo180bo2bo216b3o4b2o$531b5o14bo2b2o1361bo$533b3o14b3obo8bo1346b2o531bo3bo$530b2o16b2obob2o6b3o1346bo532bo3bo$530b2o2b2o11bo2bo9bo1351bo15b5o511bobo$532b4o10b6o7
 bobo1349b2o16bobob2o509b3o$522bo7bo4bo11bo2bo9b2o1366b2o$522b3o5b3ob2o12b2obob2o1362b2o11b2o$525bo6bo2bo3bo10b3obo5b2o1355bo12bo3b3o$524bobo7b2o2b2o10bo2b2o6bo1356bo10b2ob3obo2b2o$524b2o8bo4bo11b3o5bo1359bobo7bo3b3o3b2o$544bo7b3o4b2o1359b2o12bo509bo7
 bo$524b2o17b3o8b2o1376b2o508bob2o5b2obo$524bo17bo11bo1376bobo6b2o500bo3b2ob2o3bo$526bo16b2o10b3o1375b2o5bo502bo3bobo3bo$525b2o30bo1375b3o5b3o500b3o3b3o$1923b2o4bo3b2o8bo$531b2o1390bo2bobobo$531bo1393b2ob2obo$532bo20b2o1376bo$533bobo9bo7b2o1376b2o$534
-b2o8bo$544bo2bo$545b5o4b2o$545b2obobo3bo$548bobo4b3o$537b2o4bo13bo1886b2o5b2o$537bo2bobobo1899b2o5b2o$539b2ob2obo$545bo$545b2o!`,
-"idkgun": `x = 2879, y = 2871, rule = B3/S23
+b2o8bo$544bo2bo$545b5o4b2o$545b2obobo3bo$548bobo4b3o$537b2o4bo13bo1886b2o5b2o$537bo2bobobo1899b2o5b2o$539b2ob2obo$545bo$545b2o!`,idkgun:`x = 2879, y = 2871, rule = B3/S23
 2710b2o5b2o$2709bo2bobobo2bo$2709b2o3bobob2o$2696b2o18bobo$2697bo15b4obo$2697bobo18b3o$2595b2o101b2o18b2o$2595b2o109b2o10bobo$2705bo2bo10bob3o$2706b2o3$2596bo5bo$2595b3o3b3o$2594bo2b2ob2o2bo104b2o$2594bo3bobo3bo104bo$
 2596bobobobo107b3o$2680bo4b2o13b2o3b2o5bo$2593b2ob2o3b2ob2o74b2o3b3o2bo11bobo$2595bo7bo73bo2b2o5bo2bo8bo7bo$2677b3o2bob2o2bob2o8b2o3b2o10bo$2682bobo5bo3bo21bobo$2679b3o2bo4bo4bo21bobo$2679bo4b2o4b2obob2obo16b2ob2o$2696bobo$2698b2o2$2590b2o15b2o$2590b
 obo13bobo$2591bo15bo90b2o$2595b2o5b2o93bo2bo6b2o54bo$2595b2o5b2o94b2o7bo53b3o$2705bobo52bo$2705b2o53b2o$2603b2o6b2o81b2o$2601bo4bo2bo4bo78bo2bo$2601bo4bo2bo4bo79b2o17bo7bo$2601bo4bo2bo4bo6b2o89b4o3b4o$2603b2o6b2o8b2o89bo3bobo3bo$2653b2o6b2o13bo36bo2b
@@ -13574,8 +13393,7 @@ b2o$13b3o9b3o54bo15bobo29bo7b2o$15bo8bo3b2o23b2o42b2ob2o27b3o4bobo$29bo23b2o42bo
 o7bo$16b2o7bo64b2o39b2o14bo4bo9bo$16bobo5b2o64bobo54bobobo4bo5bo$13b2obobo23bo40b2o7bo4b3o5b3o40b2obo5bo3bo$13bobobo22b3o39bo2bo6b2o3bo2b2ob2o2bo$15bo23bo43b2o13b3o3b3o63b2o5b2o$14b2o23b2o58bo5bo64b2o5b2o$13b3o6bo143bo15bo$13b3o5bobo53b2o86bobo13bobo
 $13b3o5bobo12b2o38bo2bo8b2o75b2o15b2o$13b3o6bo12bo2bo37b3o10bo$14b2o11bo8b2o24bo16b10o11b2ob2o$15bo10bobo33b3o13bo2b6o2b3o9bobo$13bobobo8bobo36bo12b2o2b4o2bo2bo9bobo$13b2obobo8bo36b2o10b2o11b2o11bo68bo5bo$16bobo38b2o18bo92b3o3b3o$16b2o39bo19bob2o88b2
 ob2ob2ob2o$55bobo17bobob2o87b3o7b3o$55b2o18b2o$51bo15b2o101bo7bo$50bobo13bo2bo$50bobo14b2o$51bo$126b4o$126bo3bo40bo$126bo43b3o$64b2o61bo2bo38bo2bo$65bo103bobobo$62b3o105b3o$48b2o12bo6bo3bo97bo5b2o$47bo2bo17b2o3b2o102b2o$48b2o18b2o3b2o$59b2o7bo5bo$59b
-obo$52b2o7bo$51bo2bo6b2o$52b2o5$48b2o6b2o$46bo4bo2bo4bo$46bo4bo2bo4bo$46bo4bo2bo4bo$48b2o6b2o4$2o$o$b3o$3bo$b2o$bo4b2o$2bo3b2o$b2o!`,
-"fastloafgun": `x = 207, y = 246, rule = B3/S23
+obo$52b2o7bo$51bo2bo6b2o$52b2o5$48b2o6b2o$46bo4bo2bo4bo$46bo4bo2bo4bo$46bo4bo2bo4bo$48b2o6b2o4$2o$o$b3o$3bo$b2o$bo4b2o$2bo3b2o$b2o!`,fastloafgun:`x = 207, y = 246, rule = B3/S23
 146bobo58b$146bo3bo56b$150bo7bo48b$136b2o8bo4bo4b4o47b$88b2o34bo11b2o12bo4bobob2o46b$88bobo2bo30b3o19bo3bo3bo2bob3o8b2o35b$89b6o32bo18bobo6bobob2o9b2o35b$50bo41bob2o30b2o28b4o47b$49bobo39b2o11b2o21b3o28bo48b$48bo3bo38b2
 o11b2o22bobo76b$48bo3bo31bo6b2o34bo3bo75b$48bo3bo8bo4bo16bobo6b2obo31b5o75b$48bo3bo6b2ob4ob2o13bo3bo39b2o3b2o74b$11b2o28bo6bo3bo8bo4bo15bo3bo11b2o27b5o75b$11bobo25b3o6bo3bo29bo3bo11b2o28b3o76b$12bo25bo10bobo30bo3bo42bo49b2o26b$7bo8bo21b2o10bo22b2o7bo
 3bo92bo27b$6bobo6b3o9b2o43bobo7bo3bo5b2obo72bo8bobo6b2o19b$14bo2b2o8b2o14b2o28bo9bobo5b2o75b2o7b2o7b2o19b$14bo3bo23bo2bo38bo6b2o64bo5b2o4b2o36b$6b3o7bobo23bobobo15b2ob2o24b2o8b2o3b2o4b2o43bobo3b2o4b3o15bo19b$6b3o34bo2b3o14b3o26bob2o7b3o7bo31b2o11bobo
@@ -13613,8 +13431,7 @@ ob3obo3b2o3bo5bo121b$13bobo41bobo4bo5b2o3bo4bo3bo8bobo42b2o67b$12b2o45bo2b2ob4o4
 o16b2obo2bo2bo2bo10bo2bo13b2o91b$57b2o15b2o2b2o6bo9b2o10b2o3bo7b3o83b$10b2o71bobo8b2o3bo8b2o6bo4bo11bo73b$10b2o12b2o57b2o11b2o5b2o7bo3bo5bo7bo3bo72b$25b2o61bo8bo2bo4bo5bobo2bo12bo3bo73b$11bo12bo4b2o31bo23b2o10bobo10bo2bo14bo2bo74b$10bobo16b2o30b3o23b
 2o23b2o15bo2bo9bo64b$9bo3bo16bo87b3o8bobo9bobo63b$9bo3bo14b5obo84bo22b2o63b$9b2ob2o15b3o3bo5b2o18b3o55bo87b$34bo6b2o75b3o7b2o6b2o69b$2bo47b2o9bobo62bo4bo2bo4bo67b$bobo20b3o15bo7b2o9bobo54b3o5bo4bo2bo4bo67b$b2o8b2o10bo3bo13bobo35bo38b3o5bo4bo2bo4bo67b
 $9bo4bo8bo3bo8b2o2bo2bo3b2o12b3o14b2o10b2o36b2o6b2o69b$8bo6bo8b3o9b2obo8bo29bobo9b2o26b3o86b$7bo8bo23b2o3b3o25b2o12b2o6bo3b2o18bo87b$7bo8bo28bo15b3o7bo3bo10b3o5bo3bobo18bo87b$7bo8bo45bo7bo5bo10b2o6b5o18b3o86b$8bo6bo53bo2bo3bo13b2o4b3o108b$9bo4bo9b3o4
-9bo13b2o115b$11b2o10bo3bo39bo3bo3bo131b$23bo3bo38bob2o3b2o132b$24b3o39bo140b$65b2o140b!`,
-"ggCam": `x = 7114, y = 3634, rule = B3/S23
+9bo13b2o115b$11b2o10bo3bo39bo3bo3bo131b$23bo3bo38bob2o3b2o132b$24b3o39bo140b$65b2o140b!`,ggCam:`x = 7114, y = 3634, rule = B3/S23
 6687bo$6687b2o$6685bo3bo$6685bo2bo$6683b2o3bo14bo2bo$6683b3o21bo$6703bo3bo$6680b2o22b4o$6680b2o$6723b4o$6722bo3bo$6668b2o56bo$6668b2o13b2o37bo2bo15bo2bo$6684b2o59bo$6683bo57bo3bo$6742b4o$6649bo28b3o$6648bobo16bo12bo80
 b4o$6647bo7b2o9b3o10bo80bo3bo$6650bo4b2o8b2ob2o94bo$6649bobo14bob3o89bo2bo15bo2bo$6650bo14bobobo113bo$6643b2o23bo110bo3bo$6643b2o9b2o9b2o13bo99b4o$6680b2o$6651b2obobo22bobo117b4o$6631b2o18b2o2bobo140bo3bo$6631b2o24bo17b2o125bo$6666bo7bobo121bo2bo15bo
 2bo$6667b2o7bo20bo123bo$6619b2o32bobob3o36b3o118bo3bo$6619b2o31b3o3bo36b2obo119b4o$6651bo2b4o6b3o28b3o$6650bo5bo7bo2bo28b2o$6607b2o45bo9b2ob2o$6607b2o44b2o14bo6b2o$6649bo13b3o2bo8b2o154bo$6637bo12b2ob2o7bo13bo155bo2bo$6606b2o28bobo12bo2bo8b3o$6605bo2
@@ -14384,8 +14201,7 @@ $2444bobo$2464b2o$2464b2o$2384bo$2384b2o$2383bobo$2448bo$2447bobo$2446bo2bo$2447
 o$2419b2o21bobo3b2o$2419b2o26b3o$2434b3o5b2ob5o$2445bo$2380b2o62bo$2379bo2bo$2379bobo23b2ob2o12b3o4b2o$2380bo9b2ob2o10bo4b2o16bo2bo$2393bobo9bo5bo17b2o$2393b3o11bo25b3o$2377bobo9bo2bo15bobo$2377bo2bo27bo$2377bo2bo7bo4bo$2378b2o7b2o$2388bobo3bo36bo$23
 64b2o23b2o2bo36b3o$2364b2o24b3o36b2ob2o$2430bob3o$2429bobobo$2352b2o29b2o47bo$2352b2o26b2ob2o44b2o$2367b3o10b2o3bo$2356bo22bo3b2o$2354b2ob2o21b2ob2o$2354b2ob2o21b2o$2354bo2b2o3bo67bo$2355b2o4b2ob2o65b2o2$2361bo3bo$2362b2o$2344b2o16bo$2332b3o8b2o18bo$
 2333b2o9bob2o15bo$2330b2obo12b2o13bo3b3o3b3o$2325bo16b6o12b3ob4o3b4o$2342bo2bo14b2o2b3o4bo3bo$2324b2o16b3o18b4o3b4o2bo$2325bobo35bo6b2o3bo$2324bobo34bo3bo4bo2b2o$2325bo36b4o3b5o$2332b2o29b3o3b3o$2329b2ob2o$2329b2o3bo$2328bo3b2o$2329b2ob2o$2329b2o3$23
-17b3o$2317bo2bo$2316bo4bo$2318bobo$2315bob3o$2316b2o4$2318bo$2317bo2bo$2318b2o!`,
-"c4s": `x = 1095, y = 585, rule = B3/S23
+17b3o$2317bo2bo$2316bo4bo$2318bobo$2315bob3o$2316b2o4$2318bo$2317bo2bo$2318b2o!`,c4s:`x = 1095, y = 585, rule = B3/S23
 163bo$161b2o$163bo$165bobo$164bo2bo83bo$30bo133bo2bo81b2o$28bo2b2o131bobo25bobo56bo$26b3o137bo25bo3bo48bo3b2o$25bobo136b2o26bo4b2o12b2o30bo2b2obobo$25bob2o135b2o28bo3bo2b2o7b3o5bobo4b2o14b3o6b2o$obobo3bobobo11bo4bo110b
 obobo3bobobo15bob2o23b2o3bo10bo6bo7bo2bo10bobo7b2o$23b2o142b2o43bo5bo2b3o5bo10bob2o9bo$4bo7bo127bo7bo42b4o18b2o5bo5bo2bo9bo4bo8bo$22bo4b2o138b2obo18b2obo2bo16b3o10b2o11b2o11bo$obobo7bo13bo113bobobo3bobobo14b2obo18b4o2bo13bo2b2o4b2o29b2o$23b3o143bo8bo
 2b2o10bo15b2o4b2o20bo4b2o7bo$4bo7bo12bo118bo7bo13bo2b2o7b2o2bo26bo3b2obo2bo21bo$26bo140b3o8bo3b3o2b3o23b3o22b3o$obobo7bo12b2o113bobobo3bobobo29b2obo2b2o23b2ob2obobo18bo$26bo139bo16bo33bo3bo19bo$26b2o138b2o16b2o31bo22b2o$23bo2b2o137bo2b2o15bo3bo51bo$2
@@ -14501,8 +14317,7 @@ o21bo$23bo4bo11bo2b2o74bo2b2o20bo2b2o16bo$22b2o19b2o72b3o22b3o20b2o3bo29bo21bobo
 9b2o2bobo22b2o2bobo16bo2b2obob3o14bo2b2obob3o14bo3bo18bo24b2obo21b2obo$4bo3bobobo12bo3b2o25bo2b2o5b2ob2o14bo2b2o5b2ob2o12b2o3bo3b4o12b2o3bo3b4o15bo16b2o29bo24bo$26bo16bo10b2o3bob2ob2o17b2o3bob2ob2o10bo8bo7bo16bo7bo18b2o14bo3bo24bobo22bobo$26bo16b3obo
 8bo3b2o3bo5bobo11bo3b2o3bo5bob2obo61b3o13b2o24bo2b2o20bo2b2o$24bo17bo2bo15bo6b2obob2obo13bo6b2obobo21bo24bo17b3o14bo24bo3bo3b3o14bo3bo3b3o$22b3o16b2o4bo17b2o9bo17b2o26bobo22bobo34b2o23bobo4bo3b2o12bobo4bo3b2o$25bo14bo6bo74bo2bo21bo2bo30bo2b2o30bo10bo
 13bo$21bo4b2o12b2o4bo75bo2bo21bo2bo13b3o12b2o3bo32bo4bob2obo14bo4bobo$46bo76bobo22bobo16bobo11bo37b2obobo19b2obob2obo$22b2o18b3o76bo24bo16bo2bobo83bo$23bo4bo12bo4b2o71b2o23b2o16bo3bo$24bob2o12b3o78bo24bo16bo$24bobo14b2o121b2o$25b3o137b3o$27bo2b2o133b
-3o$29bo!`,
-"bsgun": `x = 385, y = 292, rule = B3/S23
+3o$29bo!`,bsgun:`x = 385, y = 292, rule = B3/S23
 186b2o5b2o$186b2o5b2o$182bo15bo$181bobo13bobo$181b2o15b2o7$186bo7bo$185bobo5bobo$107b2o79bo3bo$107b2o76bo2bo3bo2bo$107b2o77bobo3bobo$107bo80b2ob2o$106bobo76b2ob2ob2ob2o$107bobob3o48bo22b2o2bobo2b2o$108bob4o43bo4b3o21b3o
 3b3o$109bo43b4obo6bo21bo5bo$153b3obobo4b2o$105b2o51bobo$106bo52bo7b2o35b2o$106bobo14b2o33b2o7b2o17b2o10bo5b2o$107b2o13bo2bo32b2o26b2o9b3o$114b3o6b2o33b2o36bo3bo$112b2ob2o79b2ob2o$114bo$126b2o49bo19b3o$126bo50b3o17b3o$127b3o50bo$129bo49b2o$184bo$184bo
 bo$135b2o28bo18b2o158b2o9b2o14b2o$135bo28bobo32b2ob2o20b2o5b2o111b2o8b2o15b2o$116b2o19bo26bobo32b2ob2o20b2o5b2o122b5o$117bo18b2o27bo33b2ob2o16bo15bo119b4o$117bobo8b2o4bo3b2o29b2o18b2o6bob2ob2obo13bobo13bobo$118b2o7bo2bo3b4o2bo28bobo17bobo5b3o3b3o13b2
@@ -14539,8 +14354,7 @@ obo25b2o8bo3bo90b2o4bobo3bo$148b2o41b3o5b2o17b2o9bobo4b2o56b3o3b3o20bo6bo4bo$161
 o21bo$143b2o23b2o16b4o4b3o21bob2ob2obo69bo3bo25bobo13b7ob2o$148b2o17bobo17b2o5bo22b2o7b2o68b2ob2o25bobo12bo6bobo2bo$147b4o18bo47b2o7b2o66b3o3b3o22b2ob2o11b2o2b2obo3b2o$146bo2bobo65b3o5b3o66b2o5b2o42b2ob2o$145bobo2b2o67b3ob3o68bo7bo$144bobo74bobo$143b
 2o73bo2bobo2bo$143b3o71bo2bo3bo2bo$144bobo71b2o5b2o109b2o18b2o$145b2o190bo7b2o10bo$337bobo5b2o10bobo$289b2o15b2o30b2o18b2o$289bobo13bobo15b3o3b3o31bo$290bo15bo16b3o3b3o30bobo$294b2o5b2o19bob2o3b2obo29bobo$213b2o15b2o62b2o5b2o19bob2o3b2obo30bo$213bobo
 13bobo91b2o5b2o$214bo15bo93bo5bo$218b2o5b2o121b2o$218b2o5b2o121bo$349b3o$325b2ob2o6b2o13bo$324bo5bo5b2o$322b5ob2ob2o$321b2ob3ob2ob2o36b2o$321b3o6bo10b2o26b2o$322bobo16b2o17b2o$323b2o35b2o$368b3o$363b2o3b2obo2b2o$363bo6b2o2b2o$364b3o3b2o$366bo$335bo5b
-o$334b3o3b3o$333bo2b2ob2o2bo$333b3o5b3o10$329b2o15b2o$329bobo13bobo$330bo15bo$334b2o5b2o$334b2o5b2o!`,
-"soligun": `
+o$334b3o3b3o$333bo2b2ob2o2bo$333b3o5b3o10$329b2o15b2o$329bobo13bobo$330bo15bo$334b2o5b2o$334b2o5b2o!`,soligun:`
 #O  Entity Valkyrie » December 9th, 2025, 7:01 am
 x = 2624, y = 1729, rule = B3/S23
 280b2o1116b2o$274bob2obobo1116bobob2o$274b2obobo1120bobo2bo$278b2o1120b2o2b2o$1391b2o$1391b2o$275b2o$275b2o2$1399bo$1398bobo$1397bo3bo3b2o$1397bo3bo3b2o$356bo1040b2ob2o$350b3o2bobo$348b3obo2bo$322b2ob2o5b2ob2o2b2o6bo4
@@ -14976,8 +14790,7 @@ bobo115bo3bo8b2o2b2ob2o5b2ob2o26b2obobo$2298bob2o7b2o8bo28bobo114bob4o57bo$2297b
 ob2o10bo2bobo5b2o10b2o$2310b2o30b2o124bo19b2o13bo7b2o3b2o22bo$2337bo131bo2bo24bo3bo2bo2bobo29bobo$2333b2obobo159b4obo2bo4b2o26bobo$2332bobobobo166bo4bo2bo26bo$2329bo2bobobobob2o164bobo3b2o$2329b4ob2o2bo2bo$2333bo4b2o144b2o15b2o$2331bobo150bo12b2obo3b
 o21b2o$2331b2o152b3o9b2o5bo21bo$2487bo5b3o8bo22b3o$2485b2o13bobo26bo9b2o$2485bo14b3o35bo2bo$2487bo50bo2bo$2486b2o7b2o34b2o6b2o$2495b2o33bobo$2530bo$2527b2obo7b2o$2526bobob2o6b2o$2513b4o9bobo$2512bo4bo6bobob3o2bo8b2o$2510b3o4b2o4bobo2b2ob3o7bo2bo$2509
 bo6bobo4bo6bo6b3o2bobo$2510bob2obo8b3o2bob5o4b3ob2o$2510bo2bobo2bo8bobobo3bo7bo$2513bob2obo7bo2bobob2o4bobobo$2510bobo6bo6b2o2b2ob2o5b2ob2o$2510b2o4b3o$2511bo4bo$2512b4o5$2622b2o$2603b2o18bo$2603b2o15b3o$2620bo$2621b2o$2600b2o14b2o4bo$2600bobob2o10b2
-o3bo$2598bobob2obo15b2o$2598b2o!`,
-"idk3": `
+o3bo$2598bobob2obo15b2o$2598b2o!`,idk3:`
 #O by dvgrn » January 19th, 2026, 4:33 pm
 x = 3916, y = 3318, rule = B3/S23
 3818b2o4b2o19bo66b2o$3818bobo2bobo14b2o2bobobobob2obobobobo49b3o$3820bo2bo5b2o5b2o2bo7bo2bo2bo3bo2bobo33bo9b2o3bobo$3819bo4bo3bo2bo4bo5bob2o4b6o6b3o32b3o8bo2b3o$3819bo4bo4b3o5bo3b2o9b2o3bo2bo39bo7bobo2b2o$3819bo4bo7b2
@@ -15753,8 +15566,7 @@ b2o9b2o3bo5b3o4bo4bo2515bo2b2o2bo3b3o5bo3b2o9b2o3bo2bo$633b3o6b6o4b2obo5bo4bo2bo
 2bobobobob2obobobobo$652bo19b2o4b2o2514b2o4b2o19bo2$3234b2o19bo2b2o$3233bo2bo2b2o14b4obo$3233bob2o3bo19bo$3232b2obo4bob2o9b7ob2o$3232bo3bob3o2bo8bo6bobo2bo$3233b2o6b2o9b2o2b2obo3b2o$3234b3o2b2o15b2ob2o$3232bo3b3obo3b2o$3232b7obobo2bo$3239b2ob2o5b2o$3
 232b2o8bo5bo2bo7bo6b2o$3232bo2bob4o2bo5bobo6bobo6bo$3233b6o2b2o4b2obo7bobo6bobo$3237bo2bo6b3o9bo8b2o$3235bo3bob2o4b2o24bo$3234bobo3bo2bo28bobo$3234bo2bo4bobo27bobo$3238b3obo2bo27bo$3234bo2bo2b2o2b2o$3235bo$3236bo43b2o$3233b2obo22b2o19bo$3233b2o24bo18
 bobo$3249b3o8b3o15b2o$3234bo9bo6bo11bo$3233bobo7bobo4bo6b2o3bo$3233b2o8b3o7b2obobo2bo$3242bobo8b2o3bobo3b2o$3243bo12bob2o3bobo$3234b2o6bo10b4o6bo$3233bobo17bo3b3o2b2o7b2o8bo$3233bo12bo2b2o2b2obo2bo11b2o6b3o$3232b2o12b4obobo3b2o19bo$3239bo2bo8b2o2b2o4
-bo15bobo$3237b3o2b3o3b3o5bo4bo15b2o$3238b2o2b2o3bo2bo4bo5b3o6b4o3b2o3b2o$3239bo2bo5b2o5b2o2b2o2b2obobobo2bobob4obo$3237bobo2bobo14b2o2b3o2bo6bo4bobo$3237b2o4b2o26b2o!`,
-"idk4": `
+bo15bobo$3237b3o2b3o3b3o5bo4bo15b2o$3238b2o2b2o3bo2bo4bo5b3o6b4o3b2o3b2o$3239bo2bo5b2o5b2o2b2o2b2obobobo2bobob4obo$3237bobo2bobo14b2o2b3o2bo6bo4bobo$3237b2o4b2o26b2o!`,idk4:`
 #O Entity Valkyrie February 22nd, 2026, 3:04 am
 x = 183, y = 187, rule = B3/S23
 7b2o86bo$7b2o86b3o$98bo$97b2o$10b2o$2o8b2o$bo26bob2o$o6b2o19b2obo59b2o$2o5bo83b2o$8bo$97b2o3b2o$6bo81b2o8b5o$9bo78b2o8b2ob2o$6bo2bo13b2o5b2o66b2ob2o8b2o$8b3o12b2o5b2o10bo48b2o6b3o7bo2bo48b2o$8b3o30b2o48b2o15bo52b2o$7bo2
@@ -15775,8 +15587,7 @@ o2bo$37b2o6b2o5bobo4b2o2bo33b2o2bo31b2o11b2o6b2o3b2o$36b2o19b4ob2o20b2o10bo4bobo
 o19b2o3bo11b3o6bo23b2o9b2o3bobo8bo2bo$72b2o5b3o15b2o4bobo19b7ob2o16b2o13bo3bo8b2o$78bo17bobo5bo8bo10bo6bob2o16b2o13bo3bo$62bo15b2o16bo15bobo8bo2b3o22bo14bo3bo$61bobo31b2o27b2o2bo3bo17bobo14bobo$61bobo62bo4bobo16bob2o6b2o6bo$58b2obob2o47b3o11b2o2bo3bo
 25b2o$56bo2bobo3bo4b3o39b3o15bo3bo$56b2o3b3obo4bo2bobo13b2o22bo9bo6bo3bo11bo4b2o$60bo9bo4bo12bo2bo30bobo6bobo12bo4b2o$60b3ob2o5b3obo11b2o34bo8bo12b3o33b2o$64bo21b3o5bo18bo24b2o39bo2bo$60b4o22bo2bo3bobo16b3o9b4o9bobo37b2ob2o$59bo27b3o3b2o17b3o8b2obo10
 bo3bo3b3o19bo6b3obobo$60b6o56bo5bo9b4o4bo16b2obob2o4bobo5bo$66bo20b3o3b2o29b2obobo16bo16bob2obob3obobob5o$62b3ob2o11bobo4bo2bo3bobo16bobo10bob2o17bo23bobobob2o$62bo19bo3b3o5bo18bo24b4o4bo17b2ob2obobobo4b2o$58b2o3b3obo10bo2bo5b2o33b2o13bo3bo3b3o16bo3b
-ob2o2bo5bo$58bo2bobo3bo9bobobo6bo2bo29bob3o11bobo22bobo3bo5b2o2bo$60b2obob2o10bo2bo8b2o30b2ob3o11b2o22b2o3b2o9b2o$63bobo12b2o46bo18b3o$63bobo80bo$64bo81bo!`,
-"idk5": `
+ob2o2bo5bo$58bo2bobo3bo9bobobo6bo2bo29bob3o11bobo22bobo3bo5b2o2bo$60b2obob2o10bo2bo8b2o30b2ob3o11b2o22b2o3b2o9b2o$63bobo12b2o46bo18b3o$63bobo80bo$64bo81bo!`,idk5:`
 #O  Chris C
 x = 1220, y = 1034, rule = B3/S23
 587b3o10b3o522bo11b2o$586bo3bo8bo3bo520bobo10b2o$1116bo3b2o2bobo$590bo8bo507b2o6bobo2bo2b2ob2o$586bo7b2o7bo503b2o6bobo3bobo$588b3o2bo2bo2b3o514bob4o2bob2o$589b2ob2o2b2ob2o517bo3bobob2o$1117bo3bobo$1116bo3bobo$591b8o51
@@ -15974,8 +15785,7 @@ o2bobo33b2o30bobo91bobo$173b2o67b2o34b2o17b2o10bobo561bobo10b2o20b2ob2o29b2o92b2
 b2o91b2o$159b3o134b2o590b2o$161bo119b2o620b2o$282bo620bo121b2o$186bo66b2o24b3o622b3o24b2o76b2o14b2o6bo$184b3o66b2o11b2o11bo626bo11b2o11b2o77bo22b2o6bo$183bo82bo652bo87b3o22bobo5bobo$183b2o82b3o646b3o88bo32bobo$269bo646bo124bo$1038b3o$201b2o71b2o634b2
 o126bo$200bobo72bo634bo$202bo72bobo630bobo102bo$265bo10b2o630b2o10bo92b3o$231b2o30b3o654b3o30b2o61bo$231b2o29bo660bo29b2o60b2o$262b2o658b2o$163b2o82b2o48b2o588b2o48b2o$163b2o83bo48b2o588b2o48bo$248bob2o682b2obo$249bo2bo680bo2bo$250b2o682b2o$254b2o2b2
 o659b2o$253b3o2b3o658b2o92bo21bo$254b2obo3bo750b3ob3obo8bo$257b5obo747bo8b2o2b2o2bo7bo$257bo5bo746bob2o10b2o9b2o$178b2o77bo2b2obo10bo3b2o626b2o3bo97b2ob2o2bobo$178b2o78bo4bo9bobo3bo626bo3bobo97b2o7bo8bo4bo$262b2o8bobo3bo628bo3bobo106b2o3bo2bo$258b3ob
-o5b2obobo3bo630bo3bobob2o98bobo5bo5bo$258bo9b2obo2b4obo626bob4o2bob2o98bobo$259b2o11bobo3bobo6b2o608b2o6bobo3bobo103bo$268b2ob2o2bo2bobo6b2o608b2o6bobo2bo2b2ob2o$269bobo2b2o3bo626bo3b2o2bobo$257b2o10bobo642bobo10b2o91b2o$257b2o11bo644bo11b2o91b2o!`,
-"lobgun": `
+o5b2obobo3bo630bo3bobob2o98bobo5bo5bo$258bo9b2obo2b4obo626bob4o2bob2o98bobo$259b2o11bobo3bobo6b2o608b2o6bobo3bobo103bo$268b2ob2o2bo2bobo6b2o608b2o6bobo2bo2b2ob2o$269bobo2b2o3bo626bo3b2o2bobo$257b2o10bobo642bobo10b2o91b2o$257b2o11bo644bo11b2o91b2o!`,lobgun:`
 #O Entity valkrie again... June 7th, 2026, 1:07 pm
 x = 1055, y = 1068, rule = B3/S23
 180bo28b2o5b2o$133b2o8b2o36b2o26b2o5b2o$133bo2b6o2bo34b2o24bo15bo$134b2o6b2o37bo22bobo13bobo$131b3o10b3o57b2o15b2o$131bo2bobo4bobo2bo$132b2o4b2o4b2o16b2o$74bo83b2o2bo24b3o$74bo82bo2bobo$73bobo10b2o8b2o40b2o13b2obob3ob
@@ -16372,8 +16182,7 @@ obobobo16b2o8b2o2bo$63bo85bo3bobo3bo23b5o$63b3o83bo2b2ob2o2bo$66bo66b6o11b3o3b3o
 obo5bobo41b2o15bo22b2o6bo$54bobo5bobo12b2o27bo12bo4bo22bo2b2o$63bo12bo2bo24bobo11bobo26bobo2bo$54b3o20b2o25b2o12b3obo23b2o2bo2bob2o$100bo19b2o25bobobob2obo21b2o$99bobo19bo23bo3b3o26bobo$54b3o42bobo20b3o19bob3obob4o16bo6b3o$55bo44bo16b2o4bo20bo3bo3bo3
 bo13b2ob2ob3ob2o$117b2o3bo2bo19b3o5b3o14b2ob2ob5o$123b2o22bob3obo18bo5bo$148b5o20b2ob2o$149b3o2$121b3o$120b5o47bo5bo$119bob3obo45b2o5b2o$117b3o5b3o17b2o23bob2o3b2obo$108b2o6bo3bo3bo3bo16b2o23bob2o3b2obo$108bobo4bob4obob3obo42b3o3b3o$101b2o7bo5bo4b3o3
 bo43b3o3b3o$100bo2bo6bob2o3b3obobobo$101b2o6b2obobo4bo2bo2b2o23bo$109bo2bobo5bo2bobo24bo$97b2o8bob2o3bobo4b2o2bo24bo$96bo2bo2bo4b3o2b2obobo7b2o$96bobo2b2o9bobo2bo48b2o15b2o$95b2ob5ob6ob2ob3o25bo23bobo13bobo$97bo7bo3bobobo28bobo22bo15bo$97bobo5bobobob
-o2bo26bobo27b2o5b2o$96b2ob2o5b2ob2o2b2o28bo27b2o5b2o!`,
-"crabsynth": `
+o2bo26bobo27b2o5b2o$96b2ob2o5b2ob2o2b2o28bo27b2o5b2o!`,crabsynth:`
 x = 2667, y = 2745, rule = B3/S23
 2o$2o$6b3o$6bo$7bo4$22b3o$22bo$23bo17$38b3o$38bo$39bo10$49b3o$49bo$50bo15$80bo$79b2o$68bo10bobo$67b2o$67bobo8$88bo$87b2o$87bobo9$83b3o$83bo$84bo15$99bo$98b2o$98bobo3$101b3o$101bo$102bo13b3o$116bo$117bo$105bo$104b2o$10
 4bobo12$110b3o$110bo$111bo8$111b3o$111bo$112bo4$128b3o$128bo$129bo16$144b3o$144bo$145bo2$148b3o$148bo$149bo10$159b3o$159bo$160bo16$192b3o$192bo$182b3o8bo$182bo$183bo5$192bo$191b2o$191bobo13$205b3o$205bo$206bo5$203b3o$203bo$204bo20$215b3o$215bo$216bo$
@@ -16399,8 +16208,7 @@ $2178bo21$2165b3o$2165bo$2166bo8$2165b3o$2165bo$2166bo16$2170b3o$2170bo$2171bo5$
 bo$2241b2o$2241bobo10$2265b3o$2265bo$2266bo14$2273b3o$2273bo$2274bo4$2279b3o7b3o$2279bo9bo$2280bo9bo12$2304b3o$2304bo$2305bo10$2299b3o$2299bo$2300bo4$2302b3o$2302bo$2303bo10$2312b3o$2312bo$2313bo2$2321b3o$2321bo$2322bo53b3o4b3o$2376bo6bo$2377bo6bo3$2
 325bo$2324b2o$2324bobo3$2396b3o$2328bo67bo$2327b2o68bo$2327bobo3bo$2332b2o$2332bobo$2351b3o$2351bo$2352bo59b3o$2412bo$2413bo3$2417bo$2416b2o$2416bobo6$2416bo$2415b2o$2415bobo7$2418b3o$2418bo$2419bo4$2433b3o$2433bo$2434bo5$2447bo$2446b2o5b3o$2446bobo4
 bo$2454bo10$2465b3o$2465bo$2466bo20$2486b3o3b3o$2486bo5bo$2487bo5bo7$2501bo$2500b2o$2500bobo17$2514b3o$2514bo$2515bo15$2533b3o$2533bo$2534bo8$2545b3o$2545bo$2546bo5$2562bo$2561b2o9bo$2561bobo7b2o$2571bobo4$2571b3o$2571bo$2572bo5$2573bo$2572b2o$2572bo
-bo8$2586bo$2585b2o$2585bobo2$2590bo$2589b2o$2589bobo78$2665bo$2664b2o$2664bobo9$2660b3o$2660bo$2661bo12$2658bo$2657b2o$2657bobo$2664bo$2663b2o$2663bobo!`,
-"idk6": `
+bo8$2586bo$2585b2o$2585bobo2$2590bo$2589b2o$2589bobo78$2665bo$2664b2o$2664bobo9$2660b3o$2660bo$2661bo12$2658bo$2657b2o$2657bobo$2664bo$2663b2o$2663bobo!`,idk6:`
 #O by codeholic » March 1st, 2026, 6:13 pm
 x = 2433, y = 1156, rule = B3/S23
 1943b2o$1923b3o16b2o$1925bo18bo14b2o$1907b2o15bo34bobo$1908b2o49bo16bo$1891b2o14bo67b2o$1890bobo82bobo$1875bo16bo29b2o67b3o$1875b2o44bo2b2o65bo$1874bobo44bo4bo65bo15b2o$1858b3o61b5o80b2o$1860bo148bo14b2o$1842b2o15bo65
@@ -16755,8 +16563,7 @@ bo3bo5bobo8b2o7bo$1858bo7b2o6b2o3b2o4b2o6b2ob2o25b2ob2o6b2o5b2ob2o6bo2bo6bo$1877
 o7bo11b2o23b2o11bo18bo7b2o$1845b2o2bo6b2obo17bo12bo39bo30bob2o6bo2b2o$1845bo2b2o5bob2o6b3o17bo4bo39bo4bo26b2obo5b2o2bo$1846b5o3bobo7bo3bo15bobo2bo41bo2bobo14b2o3b2o6bobo3b5o$1874b2o4b2o3b2o3b3o35b3o3b2o3b2o4b2o4bo5bo$1863bo5bo5bo4bo2b2o2b3o2bo35bo2b3
 o2b2o2bo4bo$1846b5o12b2o3b2o2b3o3bobo4b2o2bo41bo2b2o4bobo3b3o3bo3bo13b5o$1845bo2b2o22bo2b4obobo4b2o43b2o4bobob4o2bo4b3o15b2o2bo$1845b2o2bo24bo5bob5o47b5obo5bo24bo2b2o$1873b2o2b3obo4bo47bo4bob3o2b2o$1853b2o3bo18bo3bob2o51b2obo3bo18bo3b2o$1854bo2bobo21
 b2ob2o49b2ob2o21bobo2bo$1851b3o3bob2ob2o4b2o81b2o4b2ob2obo3b3o$1851bo2b3o4bobo4bo83bo4bobo4b3o2bo$1854bo2b4o2bobo3b3o77b3o3bobo2b4o2bo$1855b2o4bobob4o2bo77bo2b4obobo4b2o$1857b5obo5bo81bo5bob5o$1857bo4bob3o2b2o79b2o2b3obo4bo$1859b2obo3bo87bo3bob2o$185
-8b2ob2o95b2ob2o!`,
-"idk7": `
+8b2ob2o95b2ob2o!`,idk7:`
 x = 199, y = 198, rule = B3/S23
 148bo$68bo11b2o70b2o$67bobo10b2o69bo2bo12b2o$59bo3b2o2bobo76bo4bo2b2o11b2o$50b2o6bobo2bo2b2ob2o72bo3bo3bo2bo$50b2o6bobo3bobo74b7o5bo$59bob4o2bob2o69bo$61bo3bobob2o70b7o5bo$60bo3bobo3b2o71bo3bo3bo2bo$59bo3bobo5b2o73bo4bo
 2b2o10bo23b2o$59b2o3bo5b2o79bo2bo10bo24b2o$49b3o19bo2b2o76b2o10bo4bo$25b2o3b2o17bo2bo19b4o88bo5bo12b2o$25b2o2bob3o14bo3bo20bo2b2o86bo18bobo5b2o$29bo4bo13bobob2o110bo7bo12bo5b2o$25b4ob2o2bo14b2ob2o111bo3b2obo10b3o$o8b2o14bo2bobobob2o14b3o34b2o77b2o$9b
@@ -16779,8 +16586,7 @@ b2o2b2o3b2o3bo10b2o$8b2o6bob4o39b2o43bo3bo5bo3b2o48b2o3b5o2bobo10b2o$17b2o42bo45
 bo4bo$56b2o6bo3bo3bo5bo3bo2b2obo39b2o3bo5bobobo$54bo2bob5o5bo11bo3b2ob2o15bo24b3o6bob2o$52b3o3b3o12bo3bo26b2o$51bo19bobo3bobo24bobo23b3o39b3o5b3o$52b3o3b3o35b2o30b2o3bo38bo2b2ob2o2bo$54bo2bob5o33bo30bo15b2o27b3o3b3o$21b2ob2o30b2o6bo13b2o14b3o31bo5bo9
 b2o28bo5bo$22bobo32b3obo3bo12b2o14bo34bo3bo31b2o$22bobo33b2o2bobo99b2o$23bo142bo$148b2o$148b2o$162b2o$134b2o26b2o16b2o$124b2o6b2ob2o12b2o29b2o$124b2o6bo2bo13b2o$132bo2bo$133b2o2$120b2o11b2o$120b2o10bo2bo$101b2o29bo2bo13b2o$101b2o29b2ob2o12b2o$134b2o$
 112b3o7b2o$100b2o9bo4bo4bo2bo23b2o$100b2o8bo5bo4bo2bo23b2o12b2o5b2o$111bo8bo3bo37bob2ob2obo$112b2o8b2o39bobobobo$163bobobobo$112b2o8b2o38bo7bo$111bo8bo$100b2o8bo5bo8b2o$100b2o9bo4bo9bo$112b3o7bo39bo2bobo2bo$122bo2bo33b2o4bobo4b2o$101b2o55bo15bo$101b2
-o55b2obobo5bobob2o$162b2o5b2o!`,
-"idk8": `x = 450, y = 397, rule = B3/S23
+o55b2obobo5bobob2o$162b2o5b2o!`,idk8:`x = 450, y = 397, rule = B3/S23
 137bo2b2o308b$115b2o20b4obo307b$114bo2bo2b2o20bo307b$114bob2o3bo13b7ob2o305b$113b2obo4bob2o9bo6bobo2bo303b$113bo4bob2o2bo9b2o2b2obo3b2o303b$114b2o2bo3b2o14b2ob2o307b$115bo4b2o328b$113bo3b3obo3b2o323b$113b4o4bobo2bo4b2o3
 17b$120b2ob2o5bo2bo316b$113b2o8bo7bobo316b$113bo2bo3b2o2bo4b2obo5b2o310b$114b6o2b2o5b3o6b2o310b$121bo7b2o319b$116bo5b2o326b$115bobo2b2o2bo29bo295b$115b2obo4bobo28b3o293b$116b2ob3obo2bo30bo68b2o2bo219b$116b2o3b2o2b2o29bobo66bob4o20b2o197b$116bo39bobo6
 6bo20b2o2bo2bo196b$117bo23b2o14bo65b2ob7o13bo3b2obo196b$114b4o23bo79bo2bobo6bo9b2obo2bobob2o195b$115bo15b3o8b3o76b2o3bob2o2b2o9bo2b2o3bo2bo195b$133bo10bo80b2ob2o14b2o2b3ob2o196b$115bo8b3o5bo113b3obobo197b$114bobo6b2o2bo7bo6bo29b2o67b2o3bo7bo195b$114b
@@ -16846,8 +16652,7 @@ bo43b$43b3o24bo335b2o42b$44bob2o22b2o14bo363b$44bo40bobo362b$51bo2b2o29bobo362b$
 o3b2o67b$42bo4bo5bo7bo285b3o4bobo4b2o7bo2bo3b4o2bo66b$42b2o3bo2bobo4bo2bobo5b2o278bo22b2o7bob2o66b$50bob2o5bo2bo5b2o307b2obobo67b$42b4o4bobo2bo4b2o315b2obobo67b$42bo3bobobo3b2o292bo31bob2o66b$44bo2bob2o296b3o4bobo23bo69b$43b2ob2o3b2o14b2ob2o275b3o3bo
 bobo20bobo69b$42bo2b2o2b2o2bo9b2o2b2obo3b2o278b3o21b2o70b$42b2obo4bob2o9bo6bobo2bo279bo16b2o76b$43bobo4bo13b7ob2o273bobo21bo2bo75b$43bo2bo2b2o20bo276bo8b2o10bo2bobo75b$44b2o20b4obo284bobo14bo76b$66bo2b2o287bo10bob2o77b$370bo79b$450b$364b2o8b2o74b$344
 b2ob2o7bo7bobo8bo74b$344bo12b2o8bo3bobo4b2o70b$345b2o2bo4b2obo7b2obobob3o2bobo70b$346b3o5b2obo6bo3bobo6bo72b$346b3o5b2obo6b4obobob4ob4o68b$345b2o2bo15bo2b2obobo2bobo2bo68b$344bo19b3o6bo2b2o72b$344b2ob2o16b2o2bo3bo3bobo70b$362b2o3b2o4bo2b2o2b2o68b$352
-b2o3bo2bo2bo2bobob2ob2o3b3obo67b$353bo2bob5o4bo2bo3bob2o4bo67b$350b3o3b2ob3o8bobobo2bob3o68b$350bo20b2ob2o2b2o70b!`,
-"spidergun": `x = 15426, y = 15955, rule = B3/S23
+b2o3bo2bo2bo2bobob2ob2o3b3obo67b$353bo2bob5o4bo2bo3bob2o4bo67b$350b3o3b2ob3o8bobobo2bob3o68b$350bo20b2ob2o2b2o70b!`,spidergun:`x = 15426, y = 15955, rule = B3/S23
 1949b2o6b2o$1947bo4bo2bo4bo$1947bo4bo2bo4bo$1947bo4bo2bo4bo$1949b2o6b2o5$1935b2o5b2o15b2o4b2o$1935b2o5b2o15b2o4b2o4$1964b2o$1960b2o2b2o$1936bo5bo16bobo11b2o$1935b3o3b3o15bo12bobo$1934b2o2bobo2b2o5b2o6b2o12bo$1934bo3
 bobo3bo5b2o19b2o$1934bob2o3b2obo$1934b2o7b2o4$1966b2o4b2o$1966bobo2bobo$1968bo2bo$1941b3o24b2obo$1941b3o27b2o$1940bo3bo4b5o17bo$1939bo5bo2bob3obo7bo6bobo$1940b2ob2o4bo3bo5b4o6b2o$1950b3o5b4o$1940b2ob2o6bo6bo2bo$1939bo5bo12b4o18b2o$1935b2o3bo3bo14b4o1
 7b2o$1935b2o4b3o18bo$1941b3o43bo$1987b3o$1961bo28bo$1930bo30bo27b2o$1930b4o25bobo$1924b2o5b4o6bo13bo2b2obo$1923bo2bo4bo2bo5b3o10b3o2b2o$1924b2o5b4o4bo3bo11bo$1930b4o7bo17b2o2bo$1930bo7bo5bo14bo2bobo23b2o$1925bo12bo5bo15b2o2bo23b3o$1924b3o12bo3bo20b2o
@@ -19585,8 +19390,7 @@ bobo6bo3bobo3bo$131b2o8b2obo6bo2bo6bo11b2obobobobob2o6bo2bobo2bo$105b2o25bo10bo8
 o31b3o22bobo2bob2ob2obo2bobo$78bo11bo26b3o4bobo4b3o$77b3o5b2o4bo31bo3bo$59b2o15b5o4b3ob2obo$53b2o4bo15b2o3b2o3b2obobobo$53b2o5b3o28bo$62bo25b3o4bobo29b2o5b2o$45b3o39b3o8bo24b2o2b2o5b2o2b2o$45bobo29b3o7b3o4bo4bo2b2o19b2o13b2o$45b3o29b3o7b3o4b2obo2bob2
 o$45b3o25b2o13bo9b2o$45b3o25b2o$45b3o22b2o6b2o$45bobo14b2o5b3o5bo2bo$45b3o14b2o6b2o6b2o$73b2o$73b2o53bo5bo$127b3o3b3o$126b2ob2ob2ob2o$73bobo3bobo43b3o7b3o$60b2o2bobo8bo3bo13bo$53b2o4b3obo3bo3bo11bo9b4o11bo3bo3bo3bo6bo7bo$53b2o3b2o6bo3bo3bo5bo3bo2b2o5
 b4o10bo2bobobobo2bo$59bob5o5bo11bo2bo2bo4bo2bo14b2ob2o$60b3o12bo3bo7b2o5b4o$73bobo3bobo11b4o4b2o6bo2b2ob2o2bo$60b3o30bo7bobo4bobo7bobo$59bob5o21b3o13bo5b2ob2ob2ob2o$53b2o3b2o6bo13b2o5b3o13b2o4b2o2bobo2b2o$53b2o4b3obo3bo12b2o29bobobobo$60b2o2bobo45bo3
-bo$127b2o5b2o$85b2o3b2o35b2o5b2o$86b5o$87b3o18b2o$88bo19bo$98bo7bobo$93bo4b4o4b2o$93bo5b4o$99bo2bo$99b4o$98b4o$98bo!`,
-"smallweek": `x = 294, y = 292, rule = B3/S23
+bo$127b2o5b2o$85b2o3b2o35b2o5b2o$86b5o$87b3o18b2o$88bo19bo$98bo7bobo$93bo4b4o4b2o$93bo5b4o$99bo2bo$99b4o$98b4o$98bo!`,smallweek:`x = 294, y = 292, rule = B3/S23
 126b2o5b2o$125bobo5bobo$96b8o18bo2bo9bo2bo$28b2o4b2o60bob4obo17bob4o7b4obo$28bobo2bobo39b2o19b8o17b2ob3o7b3ob2o9bo$30bo2bo41bo49b2o7b2o11b3o44b2o4b2o$29b2o2b2o42bo2b2o30b2o11b3o5b3o10bo47bobo2bobo$28b3o2b3o37b4obo2bo27b
 2o2bo13b3ob3o13bo48bo2bo$30bo2bo38bo3bob2obob2o24bob2o16bobo12bo2bo47bo4bo77b2o4b2o$25bo46b2o4bo2bo2bo23bo17bo2bobo2bo8bo51b6o77bobo2bobo$25bo25bo23b4ob2obo19bobo2bo16bo2bo3bo2bo6bo3bo49b4o80bo2bo$52bo3bo15b4o6bo19bo2bo3bob2o13b2o5b2o9bo134b2o2b2o$25
 bo17b2o2b2o8bo14bo2bo3b2o22bo5b2o2bo27bo5bo42b3o32bo52b3o2b3o$24bobo5bo10b2o2bo5b2o2bo15bobo5b4o13b2ob2o9b2o27bo5bo42b3o32bo2b2o50bo2bo$32bobo12bobo5b2o11bo2bobo2b2o2bo3bo12bo4bo39bo3bo44bo17b2o13bo5bo57bo$24b3o9b2o10b2o3b3o12b4obo7bo20bo40b3o18b2o25
@@ -19637,8 +19441,7 @@ bobo3bo$26bo9b2o6b2o17bo4b2ob2o12b2o8b2o8bobo16b2o8b2o2bo6b2o2bo54bo2bo2bo2b2o57
 2obo73bo5bo$66bo7bo45bo8bo25bobo2bobo42bo7bo74bo3bo$31b4o30bobo5bobo31b2o11bo8bo72bo3bo2b2o2b2o74b3o$30b6o29b2o7b2o29b2o2b2o10bo6bo55b2o16b4o5bobo7b3o55b2o$30bo4bo69bo4bo11bo4bo44b2ob2o8b2o19b2o3bo2bo64b2o$31bo2bo71bo2bo14b2o46bo9b2obo18bo6b4o5bo3bo2
 3bo3b2o$29bobo2bobo67bobo2bobo61b2o2bo4b3o18bob2ob4o8bo3bo21b2obob3o$29b2o4b2o67b2o4b2o62b3o6bo18bo2bo2bo4b2o31bo4b3o$174b3o25b2obob2obo3bo6b3o22bo3bo14bo18bobo$173b2o2bo27bo2bob4o33b3o15b3o16bo3bo$172bo32b2o2bo21b2o35bo19bo$172b2ob2o34bo9b3o8b2o13b3
 o15b3o16bo4bo$210b2o17bobo14bo3bo14bo22bo$180bo2bob2obo2bo28bo3bo6bo8b2o4bo4b3o30bo3bo$180b4ob2ob4o28bo3bo15b2o4b2obob3o30bobo$180bo2bob2obo2bo56bo3b2o20bo$221b3o49b3o$228b2o42b5o$226bo4bo39b2o3b2o$226bo4bo31bobo$226bo4bo31bo3bo$227bo2bo22b2o12bo$225
-bobo2bobo20b2o8bo4bo4b3o$225b2o4b2o34bo5b3o$263bo3bo$263bobo!`,
-"idk15": `x = 1609, y = 973, rule = B3/S23
+bobo2bobo20b2o8bo4bo4b3o$225b2o4b2o34bo5b3o$263bo3bo$263bobo!`,idk15:`x = 1609, y = 973, rule = B3/S23
 37b2o$37bo$35bobo$35b2o$10b2o$10b2o2$43bo$43b3o$46bo14bo$45b2o12b3o$58bo$58b2o3$57b2o$38b2o17b2o$38b2o2$2o$2o3$41b2o$21b2o19bo$21bobo15b3o$23bo15bo$23b2o19b2o$45bo$42b3o$42bo6$35b2o$36bo$36bobo15b2o$37b2o15b2o12$55b2o$
 55bobo$57bo$57b2o9$45b2o$45b2o6$56b2o$28b2o5b2o19bo$29bo6bo17bobo$26b3o7bobo15b2o$26bo10b2o4bo$42bobo$42bobo$43bo10b2o$54bobo$56bo$56b2o$41b2o$42bo$39b3o$39bo295$1471b2o$1471b2o9$1456b2o$1456b2o2$1520b2o3b2o$1520b2o2bob3o$1524bo4bo$1520b4ob2o2bo$1417
 bo102bo2bobobob2o$1415b3o105bobobobo$1414bo109b2obobo$1414b2o112bo$1476b2o$1476bo37b2o$1477b3o35bo7b2o$1479bo35bobo5b2o$1383b2o131b2o$1384bo$1384bobo$1385b2o2b2o37bo$1389b2o35b3o15bo9bo$1425bo18b3o5b3o$1412b2o11b2o20bo3bo$1412b2o32b2o3b2o73b2o$1526bo
@@ -19687,8 +19490,7 @@ $1219b2o52b2o23b2o20bo44bo2bo$1134b2o52b2o124b2o4b2o44b2o4b2o$1133bobo16b2o34b2o
 320bobo168bo$873b2o322bo120bo47b2o$1197b2o51b2o64b3o$1250bo64bo$1251b3o61b2o$960b2o190bo100bo$960b2o188b3o$1149bo$883b2o264b2o$876b2o5bobo204bo$876b2o7bo202b3o$885b2o200bo$1087b2o$872bo$871bobob2o251b2o165b2o$871bobobobo67b2o182bo165b2o$870b2obobobo2
 bo64b2o182bobo$871bo2b2ob4o175b2o72b2o$871bo4bo180bo$872b3obo2b2o176bobo$874b2o3b2o177b2o2b2o37bo$1062b2o35b3o15bo9bo$1098bo18b3o5b3o$1085b2o11b2o20bo3bo$1085b2o6b2o24b2o3b2o184b2o$1092b3ob2o212b2o$1091b2o3b2o24bo$1090bo2bobo25bobo$1089b2o2b3o25bobo2
 0b2o$1090b2obobo26bo21b2o$1091bo$1101bo$1056b2o44bo7b2o$1055bobo16b2o24b3o7b2o$1055bo18bobo45b2o$1054b2o20bo44bo2bo$1070b2o4b2o44b2o4b2o$1070bobo55bobo$1072bo57bo$1063b2o7b2o56b2o$1063b2o20b2o33b2o$1086bo34bo$1083b3o32b3o$1083bo34bo11$1074bo$1072b3o$
-1071bo$1071b2o10$1051b2o$1051b2o9$1066b2o$1066b2o!`,
-"idk9": `
+1071bo$1071b2o10$1051b2o$1051b2o9$1066b2o$1066b2o!`,idk9:`
 #O by parrot » January 22nd, 2026, 12:16 am
 x = 73, y = 68, rule = B3/S23
 8b2o$9bo$9bobo$10b2o5$2o5b2o$2o5b2o10bo$18b2o$4b2o12bobo2b2o$4b2o17bo
@@ -19698,16 +19500,14 @@ o2bo10b2o3bo$46b2o12bo2bobo$58bo4bobo$42bo15b5obo$41bobo18bo$41bobo14b
 2o3bo$42bo15b2o4bo$63b2o2$55b2o$54bo2bo13b2o$55b2o14bo$69bobo$51bo17b
 2o$50bobo11bo$50bobo10bobo$51bo12bo$69b2o$69bobo$56b2o13bo$55bo2bo12b
 2o$56b2o!
-`,
-"gliderloop2": `
+`,gliderloop2:`
 #O by B468S02357 » January 19th, 2026, 9:28 pm
 x = 65, y = 76, rule = B3/S23
 5b2o7b2o49b$6bo7bobob2o45b$6bobo7bobobo7bo36b$7b2o6bo2bo2bo5bobo35b$15b2o2b2o7bo36b$65b$65b$4b2o59b$5bo59b$5bobo57b$6b2o3b3o12b3o36b$10bo3bo10bo3bo35b$9bo5bo8bo5bo34b$10bo3b
 o10bo3bo35b$11b3o12b3o3b2o31b$32bobo30b$34bo30b$34b2o29b$65b$65b$11bo7b2o2b2o40b$10bobo5bo2bo2bo40b$11bo7bobobo41b$20b2obobo39b$24b2o39b$65b$65b$65b$65b$65b$55bo9b$53b3o9b$52
 bo12b$52b2o11b$65b$65b$60b2o3b$61bo3b$3b2o56bob2o$4bo48b2o4b3o2bo$2bo50b2o3bo3b2ob$2b5o14b2o35b4o3b$7bo13bo22b2o15bo3b$4b3o12bobo21bobo12b3o4b$3bo15b2o22bo13bo7b$3b4o35b2o14
 b5o2b$b2o3bo3b2o50bo2b$o2b3o4b2o48bo4b$2obo56b2o3b$3bo61b$3b2o60b$65b$65b$11b2o17bo34b$12bo17b3o32b$9b3o21bo31b$9bo22b2o31b$65b$65b$65b$65b$65b$65b$42b2o21b$35b2o5bobo20b$35
-b2o7bo20b$44b2o19b$65b$31bo33b$30bobob2o29b$30bobobobo28b$27b2obobobobo2bo25b$27bo2bo2b2ob4o25b$29b2o4bo29b$35bobo27b$36b2o27b!`,
-"slide3": `
+b2o7bo20b$44b2o19b$65b$31bo33b$30bobob2o29b$30bobobobo28b$27b2obobobobo2bo25b$27bo2bo2b2ob4o25b$29b2o4bo29b$35bobo27b$36b2o27b!`,slide3:`
 #O by Wngks Life » August 12th, 2026, 9:47 pm
 x = 971, y = 985, rule = B3/S23
 59b4o$58b6o$57b8o$56b2o6b2o$o18bo37b8o$3o6b2o6b3o38b6o$3bo5b2o5bo42b4o$2b2o12b2o$45b2o$45bo$15b2o29bo13b2o$10b2o3b2o16bo11b2o4b2o6bo2bo6b2o$10b2o21b3o11b2o3bo7b2o7bo$36bo8b2o2bo2bobo12bobo$35b2o9bobo4b2o12b2o$30b2o7bo4b
@@ -19789,12 +19589,10 @@ o21bo2b3obo$889b2o27bo21bo3b3o17bo5bo$889b2o26bobo23bobo20b4o$917bobo22bo22b2o$9
 obo45bo10b2o12bo2bo3bo3bo2bo18b2obobobo7bobo27b2o$809b2o7b2o44bo11b2o13b3o7b3o22bo4bo7b2o21b2o$818bo44bo59b2obo2bobo30bobo$863bo25b7o3b7o16bob4obobob2o10bo18b2o$821bo67bo6bobo6bo16bo6bob3obo9bo17b2o$822b2o40b3o23bobob2o3b2obobo18b6o3bo2bo2b2o22bo$821
 b2o5bo35b3o24b2obo5bob2o21bo2bob3o5b2o16b3o3bobo$829bo33bo3bo28bobo14b3o14b5o21bo2bo2b3o$827b3o33bobo29b2ob2o12bo3bo11bo31bo$864b2ob2o43bo3bo8bo2bo2bo25bobo$824bo88b3o8bob2o3bo24b3o3bo$825b2o97b2o2b3o30bo$824b2o40bo60bo21b2o4b2o5bo$867b2o59bo20b2o4b2
 o$866b2o59b2o16bo9bo$913b3o28bobo8b2ob2o$912bo3bo28bo10bob2o$912bo3bo39bo3bo3b2o$913b3o34b2o8bo3b2o$950b2o7b2o17$874bo$868bo3bobo$866bobo4b2o$867b2o20$878bobo$874bo4b2o$875bo3bo$873b3o5$879bo$877bobo$878b2o2$885bo$886b2o$885b2o$892bo$890bobo4bo$891b2
-o5b2o$897b2o13$902bo$903bo2bobo$901b3o3b2o$907bo2$904bo$905b2o$904b2o11$917bobo7bo$918b2o8bo$918bo7b3o3$931bo$929bobo$930b2o4bo$937b2o$936b2o2$934bo$932bobo$933b2o10$947b2o$946bo2bo$947b2o!`,
-"line2": `x = 58, y = 50, rule = B3/S23
+o5b2o$897b2o13$902bo$903bo2bobo$901b3o3b2o$907bo2$904bo$905b2o$904b2o11$917bobo7bo$918b2o8bo$918bo7b3o3$931bo$929bobo$930b2o4bo$937b2o$936b2o2$934bo$932bobo$933b2o10$947b2o$946bo2bo$947b2o!`,line2:`x = 58, y = 50, rule = B3/S23
 6b2o50b$5bobo50b$7bo50b$4bo53b$3bo54b$obobobo2b5o44b$2obo2bob7o43b$3b2o10b2o41b$3b2ob3o2b2ob3o41b$5b2o2bobo3bobo40b$10b2o3b3o2b2o36b$7b5o3bo2b3ob2o34b$8b2o3bob4obo3bo2b2o29b$12bo11bo3b2o28b$20bo3bo2b2o29b$17b2obob3ob3o29b$21b5o32b$17b2o5bo3bo29b$25bo2bo
 bo27b$24b4o4bo25b$28bo3b2o24b$22b2o4bo5bo23b$32bo2bo22b$30b3obo23b$34bo23b$29b4obo23b$30b3ob2o22b$30b3ob2o22b$31b2o3bo21b$37bo2b3o15b$36b4o2bo15b$35bo3bo18b$35b3o3bo16b$37b4o3b2o12b$40bo4b2o11b$36bo3bo3bo13b$36bo4b2o5bo9b$37bobob2o5b2o8b$47bobo8b$43b2o1
-3b$43b2ob2ob2obo5b$45b3ob5o4b$46bobo4bo4b$45b2o2b3o6b$46bo3bo5bob$45bobo2b2o4b2o$55bobo$49bo3bo4b$54bo3b$51bo2bo3b!`,
-"bubship": `x = 196, y = 217, rule = B3/S23
+3b$43b2ob2ob2obo5b$45b3ob5o4b$46bobo4bo4b$45b2o2b3o6b$46bo3bo5bob$45bobo2b2o4b2o$55bobo$49bo3bo4b$54bo3b$51bo2bo3b!`,bubship:`x = 196, y = 217, rule = B3/S23
 97bo98b$94b4o98b$94b3o99b$93bo102b$90b2ob2o101b$89b3obo102b$86bob2o2b3o101b$85bo3bo4bo2b2o97b$79bobo2bo3bo7bo99b$79bo3b2ob2o108b$79bobob2o111b$82bo113b$196b$83bob2o109b$83bo2bo109b$80b2obo112b$79b3obobo110b$80b2ob2o111b
 $86bo109b$84bobo109b$84bo111b$39bo47bo108b$15bo22b2o3bo41b3o108b$13b4o19bo5bo3bo39bo109b$13b2obo19bobo3bo4bo38bo109b$7b2ob2obo3bo17bo6b4obo37bobo108b$7b3ob2o4b2o6bo6b7o2bo4b3obobo31bo111b$7bo3b2o11b2o5bob2o3bo2b2o7bobo25b3ob2o3bo108b$9b3o4b3o4b2obo2b
 ob2o19bo26bobo4bo109b$8bobo5b3o2b2o5bo3bo45b4o114b$8b2o8b2o7bo3bo45bo6b2obo108b$8bo10b2obo54b4o3bo2bo108b$8b2o14b3ob2o47b4o2bo112b$9b2o70bobo112b$9bobo67bo116b$78b3o115b$8b2o66b2ob2o115b$75bob2o117b$8bo66b3o118b$8b5o62bobo118b$8b4o63bobobo116b$8bo2bo
@@ -19827,25 +19625,21 @@ bobob3ob2ob3o7b2o2b2ob2o12bobo11b3o12bo2bo11bo7bobo12b2obo48b$3b2o3bo2bo9b2obobo
 obo62b2obo118b$o3b3obo70bo116b$4bobobobo185b$bo3b2obo68bo2bo115b$2b3obobo68b2obo115b$3b2o2b4o64b2o119b$8bo2bo63b2o119b$11bo184b$8bo2bo63b3o2b2o114b$8b4o63bobobo116b$8b5o62bobo118b$8bo66b3o118b$75bob2o117b$8b2o66b2ob2o115b$78b3o115b$9bobo67bo116b$9b2o
 70bobo112b$8b2o14b3ob2o47b4o2bo112b$8bo10b2obo54b4o3bo2bo108b$8b2o8b2o7bo3bo45bo6b2obo108b$8bobo5b3o2b2o5bo3bo45b4o114b$9b3o4b3o4b2obo2bob2o19bo26bobo4bo109b$7bo3b2o11b2o5bob2o3bo2b2o7bobo25b3ob2o3bo108b$7b3ob2o4b2o6bo6b7o2bo4b3obobo31bo111b$7b2ob2ob
 o3bo17bo6b4obo37bobo108b$13b2obo19bobo3bo4bo38bo109b$13b4o19bo5bo3bo39bo109b$15bo22b2o3bo41b3o108b$39bo47bo108b$84bo111b$84bobo109b$86bo109b$80b2ob2o111b$79b3obobo110b$80b2obo112b$83bo2bo109b$83bob2o109b$196b$82bo113b$79bobob2o111b$79bo3b2ob2o108b$79
-bobo2bo3bo7bo99b$85bo3bo4bo2b2o97b$86bob2o2b3o101b$89b3obo102b$90b2ob2o101b$93bo102b$94b3o99b$94b4o98b$97bo98b!`,
-"wickship2": `x = 37, y = 65, rule = B3/S23
+bobo2bo3bo7bo99b$85bo3bo4bo2b2o97b$86bob2o2b3o101b$89b3obo102b$90b2ob2o101b$93bo102b$94b3o99b$94b4o98b$97bo98b!`,wickship2:`x = 37, y = 65, rule = B3/S23
 7bo6bo7bo6bo7b$6b3o4b3o5b3o4b3o6b$bo3b2obo4bob2o3b2obo4bob2o3bob$3o2b3o8bo3bo8b3o2b3o$ob2ob3o3bobo2bo3bo2bobo3b3ob2obo$b3ob3o2bobobob2ob2obobobo2b3ob3ob$b2o2b3o2bo15bo2b3o2b2ob$5b3o9bobo9b3o5b$5b3o2bo6bobo6bo2b3o5b$5b3o2bobo2bo5bo2bobo2b3o5b$6b2o8b2ob2o
 8b2o6b$16b2ob2o16b$37b$9b2ob2o2bo3bo2b2ob2o9b$8bo3b2o2bo3bo2b2o3bo8b$8b2o2b2obo5bob2o2b2o8b$8b3o4b2o3b2o4b3o8b$9bo4b2o5b2o4bo9b$10bo15bo10b$16bo3bo16b$14b3o3b3o14b$13bo3bobo3bo13b$15b3ob3o15b$14bobobobobo14b$15b2obob2o15b$16b5o16b$12b2o9b2o12b$13bo3bobo
 3bo13b$10b2obobobobobobob2o10b$10b5o7b5o10b$10b6obobob6o10b$13b2o2bobo2b2o13b$10b2o5bobo5b2o10b$9bobo3bobobobo3bobo9b$8bobo6bobo6bobo8b$8bo5bob2ob2obo5bo8b$9bo8bo8bo9b$12b3o7b3o12b$14bo7bo14b$15bo5bo15b$14bobo3bobo14b$13b2o2bobo2b2o13b$12bo3bo3bo3bo12b$
-12bobob5obobo12b$13bo3b3o3bo13b$18bo18b$17bobo17b$15b2o3b2o15b$15bobobobo15b$16b2ob2o16b$17bobo17b$37b$37b$37b$16b5o16b$16bobobo16b$16b2ob2o16b$16b2ob2o16b$37b$13b3o5b3o13b$15bo5bo15b$12bo3bo3bo3bo12b$12bo4bobo4bo12b$12bo11bo12b$12b5o3b5o12b!`,
-"c5wick": `x = 156, y = 21, rule = B3/S23
+12bobob5obobo12b$13bo3b3o3bo13b$18bo18b$17bobo17b$15b2o3b2o15b$15bobobobo15b$16b2ob2o16b$17bobo17b$37b$37b$37b$16b5o16b$16bobobo16b$16b2ob2o16b$16b2ob2o16b$37b$13b3o5b3o13b$15bo5bo15b$12bo3bo3bo3bo12b$12bo4bobo4bo12b$12bo11bo12b$12b5o3b5o12b!`,c5wick:`x = 156, y = 21, rule = B3/S23
 25bo88bo14bo26b$5b2o7bobo8b3o44b2o4bo12b2ob2o9b2o4bo3bo2b4o6bo5b4o3bobo4bo4b2ob$2o2bo2bo3bo2b2obob2o7bo36bobo3b4o2bobobo13bo12bo2bo3bo2bo3bo5bo2b2obo6b2obo3b3obobob$o2bob2o2b3o5b2obo2b5o2b2o21b3o11bo3bo3bo3bo2b2o9bo3b3o3
 bo4bo3b3o7bo2b2obob2o4b2o4bo3bob3o2b2ob$bobo3b2o3b4o4bobo5b2obo22b2ob3o7bo2bob3o4bo2b2o2b3obo6b3o2bo3bo2bo3b2o3bo2bo3b2o2bob6o6b2ob3o5bob$2obob2o2b3o4b4obob2obo3bo6b2ob3ob4o5bo4b2o4b3o4b2obobob3obo7bo2b3o5bo2bo3b2o7b2o4bob2o6b2o4b2o7b2o2b2o2b$bo4bobo
 4b2o6bobobobob3o12b5o5bob2o7b2o4bo4bo4bo4b3o3bobo6bo2bo7b3o2b2o3bo13bob3o4b2o2b2ob2o2b$bob3o2bo2b2o4b2obo2bo3bob2obo3bobo3bo6bob2o2bo5bobo12bo8bo6bobo5bo6b3o2b3ob2obo2b2ob2o8b3obobo2b3o3b3o2bo$2bo3bo2b2o4bob2ob2o5bo3bobob2ob3o2b7o6b2o3b3ob2o15bo2bo4b
 obob2o2b3ob2o9b2o3b2o5b2o9bo3b2o9b4ob$3b5o8bo6bobobo7b2o5bo3b3o7b2o3b5o15b4o6bo26b7o29bob$42b3o111b$3b5o8bo6bobobo7b2o5bo3b3o7b2o3b5o15b4o6bo26b7o29bob$2bo3bo2b2o4bob2ob2o5bo3bobob2ob3o2b7o6b2o3b3ob2o15bo2bo4bobob2o2b3ob2o9b2o3b2o5b2o9bo3b2o9b4ob$bob
 3o2bo2b2o4b2obo2bo3bob2obo3bobo3bo6bob2o2bo5bobo12bo8bo6bobo5bo6b3o2b3ob2obo2b2ob2o8b3obobo2b3o3b3o2bo$bo4bobo4b2o6bobobobob3o12b5o5bob2o7b2o4bo4bo4bo4b3o3bobo6bo2bo7b3o2b2o3bo13bob3o4b2o2b2ob2o2b$2obob2o2b3o4b4obob2obo3bo6b2ob3ob4o5bo4b2o4b3o4b2obob
 ob3obo7bo2b3o5bo2bo3b2o7b2o4bob2o6b2o4b2o7b2o2b2o2b$bobo3b2o3b4o4bobo5b2obo22b2ob3o7bo2bob3o4bo2b2o2b3obo6b3o2bo3bo2bo3b2o3bo2bo3b2o2bob6o6b2ob3o5bob$o2bob2o2b3o5b2obo2b5o2b2o21b3o11bo3bo3bo3bo2b2o9bo3b3o3bo4bo3b3o7bo2b2obob2o4b2o4bo3bob3o2b2ob$2o2bo
-2bo3bo2b2obob2o7bo36bobo3b4o2bobobo13bo12bo2bo3bo2bo3bo5bo2b2obo6b2obo3b3obobob$5b2o7bobo8b3o44b2o4bo12b2ob2o9b2o4bo3bo2b4o6bo5b4o3bobo4bo4b2ob$25bo88bo14bo26b!`,
-"wavy": `x = 21, y = 58, rule = B3/S23
+2bo3bo2b2obob2o7bo36bobo3b4o2bobobo13bo12bo2bo3bo2bo3bo5bo2b2obo6b2obo3b3obobob$5b2o7bobo8b3o44b2o4bo12b2ob2o9b2o4bo3bo2b4o6bo5b4o3bobo4bo4b2ob$25bo88bo14bo26b!`,wavy:`x = 21, y = 58, rule = B3/S23
 13bobo5b$13bo2bo4b$16b2o3b$18bo2b$16b4ob$8bo6bo4bo$8bob2o5bo2bo$11bo5bo2bo$11bo7bob$13bob4o2b$13bo3bo3b$4b6o6bo4b$3bo5bo2b5o4b$9bo11b$3bo4bo3b5o4b$5b2o9bo4b$10bo2bo3bo3b$7bobo3bob4o2b$6bo4bo7bob$6bo4bo5bo2bo$6b2o2b2o5bo2b
 o$8b2o5bo4bo$16b4ob$18bo2b$16b2o3b$13bo2bo4b$13bobo5b$21b$21b$21b$21b$10bobo8b$10bo2bo7b$13b2o6b$15bo5b$13b4o4b$5b2o5bo4bo3b$3b2o2b2o5bo2bo3b$3bo4bo5bo2bo3b$3bo4bo7bo4b$4bobo3bob4o5b$7bo2bo3bo6b$2b2o9bo7b$o4bo3b5o7b$6bo14b$o5bo2b5o7b$b6o6bo7b$10bo3bo
-6b$10bob4o5b$8bo7bo4b$8bo5bo2bo3b$5bob2o5bo2bo3b$5bo6bo4bo3b$13b4o4b$15bo5b$13b2o6b$10bo2bo7b$10bobo8b!`,
-"qbstretch": `
+6b$10bob4o5b$8bo7bo4b$8bo5bo2bo3b$5bob2o5bo2bo3b$5bo6bo4bo3b$13b4o4b$15bo5b$13b2o6b$10bo2bo7b$10bobo8b!`,qbstretch:`
 #O by amling » August 27th, 2023, 6:24 pm
 x = 159, y = 4597, rule = B3/S23
 51bo5bo101b$50b3o3b3o100b$50bob2o2bob2o99b$51b3o5bo99b$51b3o4b3o98b$51b2o3bo102b$56bo4bo97b$56bo102b$58b2obo97b$58bo100b$159b$64bo94b$58b3o2b3o93b$63bob2o92b$58bo5b3o92b$23b3o11b3o18b3o3b2o93b$23bo2bo10bo2bo16bo2b2o97b
@@ -20178,8 +19972,7 @@ bo13bo5bo13bo5bo13bo5bo13bo5bo72b$bo3bo15bo3bo15bo3bo15bo3bo15bo3bo73b$2b3o17b3o
 ob2o15b2ob2o15b2ob2o15b2ob2o15b2ob2o73b$b2ob2o15b2ob2o15b2ob2o15b2ob2o15b2ob2o73b$2b3o17b3o17b3o17b3o17b3o74b$159b$159b$16bo19bo19bo19bo82b$15b4o16b4o16b4o16b4o80b$14b2obobo14b2obobo14b2obobo14b2obobo79b$3b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3obo2bo2b2o8b3
 obo2bo2b2o74b$3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o9b2obobo3b2o74b$15b4o16b4o16b4o16b4o80b$16bo19bo19bo19bo82b$159b$159b$159b$159b$3bo19bo19bo19bo19bo75b$2b3o17b3o17b3o17b3o17b3o74b$b5o15b5o15b5o15b5o15b5o73b$obobobo13bobobobo13bobobobo13bobobobo1
 3bobobobo72b$2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o13b2o3b2o72b$159b$159b$3bo19bo19bo19bo19bo75b$2bobo17bobo17bobo17bobo17bobo74b$2bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo7bobo74b$3bo6bo3bo8bo6bo3bo8bo6bo3bo8bo6bo3bo8bo75b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12
-b2o74b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o74b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o74b$10bo3bo15bo3bo15bo3bo15bo3bo84b$12bobo17bobo17bobo17bobo84b!`,
-"greystretch": `
+b2o74b$3b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o4bo4bo8b2o74b$3b2o5bo12b2o5bo12b2o5bo12b2o5bo12b2o74b$10bo3bo15bo3bo15bo3bo15bo3bo84b$12bobo17bobo17bobo17bobo84b!`,greystretch:`
 #O by amling
 x = 179, y = 197, rule = B3/S23
 18b3o5b3o5b3o5b3o9b3o5b3o9b3o5b3o9b3o5b3o9b3o5b3o9b3o5b3o5b3o5b3o18b$17bo2bo5bo2bo3bo2bo5bo2bo7bo2bo5bo2bo7bo2bo5bo2bo7bo2bo5bo2bo7bo2bo5bo2bo7bo2bo5bo2bo3bo2bo5bo2bo17b$10b3o3bobo9bobobobo9bobo5bobo9bobo5bobo9bobo5bobo
@@ -20273,8 +20066,7 @@ obobobobobobobobobo19bo28b$45b2obobobobobobobobobobobobobobobobobobobobobobobobo
 obobobobobobobobobobobobobobobobobobobobobobobobobobobo48b$48bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo48b$45b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$45b2o
 bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$48bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobo48b$48bobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob
 obobobobobobobobo48b$45b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$45b2obobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobobob2o45b$49bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo3bo
-3bo3bo3bo3bo3bo3bo3bo3bo3bo49b!`,
-"chiken": `
+3bo3bo3bo3bo3bo3bo3bo3bo3bo49b!`,chiken:`
 #O by amling » October 6th, 2023, 4:45 pm
 x = 309, y = 539, rule = B3/S23
 2bo$b3o5b3o12bo5bo$2obo4bo2bo5b3o3b3o3b3o$3o4b3obo4bo2bo3bob2ob2obo$3o2bo6bo3bo2bo4b3ob3o$b2o5bo4bo4b4o2b3o2b2o$7bo6bobobob2o2b3o$14bobob2o2bo2b2o39b3o$12b2o3bo2b2o2b3o5b3o24b3o4bo2bo$15b2o4b3o3b2o2bo2bo7b3o3b3o7bo2bo4b
@@ -20399,8 +20191,7 @@ b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3
 3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$92b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$67bo24b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o
 3b3o3b3o3b3o3b3o3b3o74bo$68b24o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b3o3b74o$70bo2bo2bo2bo2bo2bo2bo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo3bobo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo$91b2o
 b2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2ob2o!
-`,
-"idk193": `
+`,idk193:`
 #O by dvgrn » May 24th, 2019, 2:36 pm
 x = 4367, y = 4162, rule = B3/S23
 2682b2o$2681b4o$2680b2ob2o7b2o$2680b2o2b2o5bob5o$2679b3o10b2o4b2o$2679b3o4b3o3bo$2679b3o4b3o3bo$2679b3o10b2o4b2o$2680b2o2b2o5bob5o$2660b4o7bo8b2ob2o7b2o$2660bo3bo6bo9b4o16b4o7bo$2659bo12bo2bo6b2o17bo3bo6bo$2637b4o7bo1
@@ -20694,10 +20485,8 @@ b4o7bo8b2ob2o7b2o$24bo12bo2bo126b2o2b2o5bob5o$24bo3b2o5b3ob2obo123b3o10b2o4b2o$2
 $46b2o$102b4o7bo$102bo3bo6bo$101bo12bo2bo$57b2o6b2o34bo3b2o5b3ob2obo$57b2o6b2o34bo6b2o6b2ob2o$101bo6b2o6b2ob2o$101bo3b2o5b3ob2obo$9b4o7bo80bo12bo2bo$9bo3bo6bo81bo3bo6bo$8bo12bo2bo77b4o7bo$8bo3b2o5b3ob2obo$8bo6b2o6b2ob2o20b2o20b2o$8bo6b2o6b2ob2o20b2o2
 0b2o$8bo3b2o5b3ob2obo$8bo12bo2bo$9bo3bo6bo9b4o7bo$9b4o7bo9bo3bo6bo$29bo12bo2bo48b4o7bo$29bo3b2o5b3ob2obo5b4o7bo29bo3bo6bo$29bo6b2o6b2ob2o4bo3bo6bo28bo12bo2bo$29bo6b2o6b2ob2o3bo12bo2bo24bo3b2o5b3ob2obo$29bo3b2o5b3ob2obo4bo3b2o5b3ob2obo22bo6b2o6b2ob2o$
 29bo12bo2bo6bo6b2o6b2ob2o21bo6b2o6b2ob2o$30bo3bo6bo10bo6b2o6b2ob2o21bo3b2o5b3ob2obo$30b4o7bo10bo3b2o5b3ob2obo22bo12bo2bo$52bo12bo2bo6b2o17bo3bo6bo$53bo3bo6bo9b4o16b4o7bo$53b4o7bo8b2ob2o7b2o$73b2o2b2o5bob5o$72b3o10b2o4b2o$72b3o4b3o3bo$72b3o4b3o3bo$72b
-3o10b2o4b2o$73b2o2b2o5bob5o$73b2ob2o7b2o$74b4o$75b2o!`,
-"c10ship": `x = 18, y = 10, rule = B3/S23
-2bo15b$bobo5bo8b$2obo3bo2bo2bo4b$2bo3bo3bobob2o2b$5bo7b2ob2o$5bo7b2ob2o$2bo3bo3bobob2o2b$2obo3bo2bo2bo4b$bobo5bo8b$2bo15b!`,
-"lshipsmall": `x = 659, y = 653, rule = B3/S23
+3o10b2o4b2o$73b2o2b2o5bob5o$73b2ob2o7b2o$74b4o$75b2o!`,c10ship:`x = 18, y = 10, rule = B3/S23
+2bo15b$bobo5bo8b$2obo3bo2bo2bo4b$2bo3bo3bobob2o2b$5bo7b2ob2o$5bo7b2ob2o$2bo3bo3bobob2o2b$2obo3bo2bo2bo4b$bobo5bo8b$2bo15b!`,lshipsmall:`x = 659, y = 653, rule = B3/S23
 617bo41b$618bob2obobo33b$612b3o3b4o3bo33b$618bo2b2ob2o33b$617bo41b$615b3o41b$615b3o17b2o22b$635b2o22b$659b$659b$659b$659b$659b$659b$643b2o14b$643b2o14b$631b4o24b$635bo23b$617bob2ob2o7bo4bo22b$616b5o2b2o7b2obo23b$616bo2b
 3obo10bo24b$622bo36b$659b$659b$606bo3b2o2b2obo41b$606bo3b2o4bob2o39b$606bo3b2o2b2ob2o40b$610b2o47b$608bo2bo47b$608bobo48b$609bo49b$659b$659b$659b$659b$659b$659b$659b$659b$612b2ob2o42b$613bobo43b$600bo12b2o44b$599b3o10b2obo43b$598b2ob2o12b2o4bo37b$599
 b3o10b2ob2o4bo37b$600bo58b$600bobo20b2o34b$600b4o19b2o34b$603bo55b$659b$599b2ob2o55b$598bo5bo54b$599bo3bo55b$592b3o5bo58b$591bo3bo63b$590bo4bo29b2o32b$589bo3bo30bo2bo31b$589bo2bob3o27bo2bo31b$589bo7bo26bo2bo31b$591bo3bobo27b2o32b$570bo20bo3bob2o60b$5
@@ -20782,8 +20571,7 @@ bob2o5b2o49bob2o3b2o10bobo29b3ob2o137b$41b2ob2o17bo2bo319bo3bo15b2o56bobo16b2ob2
 o81bo3b6o11bo173b$5bo21bo30bob2o401bo5bo4bo2b2o6b3o171b$6bob2obobo43b5o401bo11bo183b$3o3b4o3bo43b4o294b3o106bo9bo184b$6bo2b2ob2o455bo189b$5bo52b3o292bo5bo109bo2bo186b$3b3o52b3o292b7o111bo187b$3b3o37b2o14bo295bo303b$24b3o16b2o310bo3bo17b2o280b$23bo2bo
 327bo21bo94b2o186b$23bo309bo21bo14bo3bo96b2o186b$23bo2bo305b3o21bo4bo8bob3o2bo281b$23bo2bo304bobobo20bo4bo8b2obo285b$25b3o302b3ob3o12bo5b2obobo11bo4bo18b2o261b$24bobo321bobo3bobo15bo4bo17bobo261b$24bo26b2o279bob3o13b2o3bo16bo24bo261b$26bo24b2o279b5o9
 bo3bo21bo3bo282b$20b3o4b2o303b2o2b2o11bo2b2o19b3o283b$19bob2o6bo304bob2o14bo306b$5bob2ob2o7bob2o5b2o306b2o9bo2b2o307b$4b5o2b2o7b3obo3bo303bobo2bo11bo27b2o280b$4bo2b3obo8b2o5bo303bobo2bo40b2o8bobo269b$10bo12bo2b2o304bo56bo269b$23b2obo3b2o354bob2o269b$
-25bo361bo5b2o264b$392b3o264b$347b2o43b3o264b$11b2o377bob2o265b$11b2o334b2o41bobo266b$391bo267b$22bo325bobo308b$22bo326bo309b$23bo313b2o10bo309b$337b2o320b$22b2o635b$20bo2bobo633b$20bo4bo633b$20bo638b$21b3o635b$659b$345b2o312b$345b2o312b!`,
-"puffclimber": `x = 6464, y = 3703, rule = B3/S23
+25bo361bo5b2o264b$392b3o264b$347b2o43b3o264b$11b2o377bob2o265b$11b2o334b2o41bobo266b$391bo267b$22bo325bobo308b$22bo326bo309b$23bo313b2o10bo309b$337b2o320b$22b2o635b$20bo2bobo633b$20bo4bo633b$20bo638b$21b3o635b$659b$345b2o312b$345b2o312b!`,puffclimber:`x = 6464, y = 3703, rule = B3/S23
 1281b2o84b2o$1281b2o84b2o$1280bo2bo82bo2bo$1280b4o82b4o$1279bob2obo80bob2obo$1280bo2bo82bo2bo2$1279b2o2b2o80b2o2b2o$1264b2o12bo6bo78bo6bo12b2o$1264b2o118b2o$1263bo2bo12bo4bo80bo4bo12bo2bo$1263b4o13bo2bo82bo2bo13b4o$12
 62bob2obo13b2o84b2o13bob2obo$1263bo2bo116bo2bo$1278b2o4b2o78b2o4b2o$1262b2o2b2o9bo2bo2bo2bo76bo2bo2bo2bo9b2o2b2o$1261bo6bo9b2o4b2o78b2o4b2o9bo6bo$1279bo4bo80bo4bo$1262bo4bo114bo4bo8b2o$1263bo2bo116bo2bo9b2o$1264b2o118b2o9bo2bo$1395b4o$1261b2o4b2o112b
 2o4b2o5bob2obo$1260bo2bo2bo2bo110bo2bo2bo2bo5bo2bo$1261b2o4b2o112b2o4b2o$1262bo4bo114bo4bo6b2o2b2o$1393bo6bo2$1255b2o137bo4bo$1254bo2bo137bo2bo$1254bo2bo138b2o$1253bo4bo$1253bo4bo134b2o4b2o$1254b4o134bo2bo2bo2bo$1253b2o2b2o134b2o4b2o$1253bo4bo135bo4b
@@ -21118,8 +20906,7 @@ ob2o5b3o80b3o46b2o3bo4bo4bo$6306b2o138bo2b2o5b2obo2bo$6447bobo6b2o2bo$6447b2o$63
 b3ob2o$6321b3o2b2o7b3o7b4o6b2o3b3o18bo7b3o4bobo6b2o$6324bo6b2ob3o8b2o4b2o3b2o2bobo24b2obo4bo2bo5b2ob2o5b3o$6321bo2bo6bo13b2o4b2o3b2o2bobo24b2obo4bo2bo5bo2b2o10bo$6322b2o21b4o6b2o3b3o18bo7b3o4bobo5b4o6b2o3b3o$6345bo2b2o10bo22b3o4b3ob2o8b2o4b2o3b2o2bob
 o$6345b2ob2o5b3o25b3o18b2o4b2o3b2o2bobo$6346b2o56b4o6b2o3b3o$6404bo2b2o10bo$6404b2ob2o5b3o$6405b2o27$6395bo$6396bo$6394b3o4$6414b2o$6413bo2bo6bo$6416bo6b2ob3o$6413b3o2b2o7b3o$6420bo4b2o3bo$6420bo4b2o3bo$6413b3o2b2o7b3o$6416bo6b2ob3o$6413bo2bo6bo$6414
 b2o6$6416b4o7bo$6416bo3bo6bo$6415bo12bo2bo$6415bo3b2o5b3ob2obo$6415bo6b2o6b2ob2o$6415bo6b2o6b2ob2o$6415bo3b2o5b3ob2obo$6415bo12bo2bo$6416bo3bo6bo$6416b4o7bo4$6414b2o$6413b2ob2o5b3o$6413bo2b2o10bo$6413b4o6b2o3b3o$6413b2o4b2o3b2o2bobo$6413b2o4b2o3b2o2b
-obo$6413b4o6b2o3b3o$6413bo2b2o10bo$6413b2ob2o5b3o$6414b2o!`,
-"movingrak": `x = 2218, y = 609, rule = B3/S23
+obo$6413b4o6b2o3b3o$6413bo2b2o10bo$6413b2ob2o5b3o$6414b2o!`,movingrak:`x = 2218, y = 609, rule = B3/S23
 2025bo$2023b2obo$2023b2obo5b3ob2o$2024b2o3bo4b2o2b2o$2028b2o5bo4bo$2028b2o5bo4bo$2024b2o3bo4b2o2b2o$2023b2obo5b3ob2o$2004bo18b2obo$2003bobo5bo13bo19bo$1744b2o256b2obo3bo2bo2bo28bobo5bo$1744bobo6b2o2bo223bo22bo3bo3bobob
 2o25b2obo3bo2bo2bo$1743bo2b2o5b2obo2bo220bobo5bo18bo7b2ob2o25bo3bo3bobob2o$1744b2o3bo4bo4bo219b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o$1744bo5bo4bo2bobo220bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$1744bo5bo4bo2bobo223bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o$
 1744b2o3bo4bo4bo224bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$1743bo2b2o5b2obo2bo221bo3bo3bobob2o9bo39bobo5bo$1723b2o19bobo6b2o2bo221b2obo3bo2bo2bo52bo$1722bo2bo6bo11b2o18b2o194bo19bobo5bo$1725bo6b2ob3o25bo2bo6bo185bobo5bo13bo$1700b2o20b3o2b2o7b3o27bo6b2ob3o1
@@ -21237,17 +21024,11 @@ bo2bo$1643b2o6b2o56b2o3bo4bo4bo$1643b2o6b2o56bo5bo4bo2bobo263bo$1709bo5bo4bo2bob
 b2o3bo4bo4bo7b2o3bo4bo4bo25bo5bo4bo2bobo197b2obo3bo2bo2bo52bo$1636bo2b2o5b2obo2bo7bo5bo4bo2bobo24bo5bo4bo2bobo199bo3bo3bobob2o9bo39bobo5bo$1637bobo6b2o2bo9bo5bo4bo2bobo24b2o3bo4bo4bo203bo7b2ob2o6bobo5bo31b2obo3bo2bo2bo$1637b2o21b2o3bo4bo4bo24bo2b2o5b
 2obo2bo203bo7b2ob2o5b2obo3bo2bo2bo29bo3bo3bobob2o$1659bo2b2o5b2obo2bo25bobo6b2o2bo202bo3bo3bobob2o9bo3bo3bobob2o30bo7b2ob2o$1660bobo6b2o2bo7b2o18b2o212b2obo3bo2bo2bo14bo7b2ob2o28bo7b2ob2o$1660b2o18b2ob2o5b3o223bobo5bo18bo7b2ob2o25bo3bo3bobob2o$1680bo
 2b2o10bo221bo22bo3bo3bobob2o25b2obo3bo2bo2bo$1680b4o6b2o3b3o240b2obo3bo2bo2bo28bobo5bo$1680b2o4b2o3b2o2bobo241bobo5bo13bo19bo$1680b2o4b2o3b2o2bobo242bo18b2obo$1680b4o6b2o3b3o261b2obo5b3ob2o$1680bo2b2o10bo264b2o3bo4b2o2b2o$1680b2ob2o5b3o271b2o5bo4bo$1
-681b2o281b2o5bo4bo$1960b2o3bo4b2o2b2o$1959b2obo5b3ob2o$1959b2obo$1961bo!`,
-
-"rake2": `x = 23, y = 64, rule = B3/S23
+681b2o281b2o5bo4bo$1960b2o3bo4b2o2b2o$1959b2obo5b3ob2o$1959b2obo$1961bo!`,rake2:`x = 23, y = 64, rule = B3/S23
 15bobo5b$15bo2bo4b$18b2o3b$20bo2b$18b4ob$10bo6bo4bo$10bob2o5bo2bo$13bo5bo2bo$13bo7bob$15bob4o2b$15bo3bo3b$6b6o6bo4b$5bo5bo2b5o4b$11bo11b$5bo4bo3b5o4b$7b2o9bo4b$12bo2bo3bo3b$15bob4o2b$11bobo7bob$13bo5bo2bo$11b3o5bo2bo$17bo4bo$18b4ob$20bo2b$18b2o3b$15bo2
 bo4b$15bobo5b$23b$23b$23b$23b$23b$23b$23b$23b$23b$23b$10bobo10b$10bo2bo9b$13b2o8b$15bo7b$13b4o6b$12bo4bo5b$6b3o5bo2bo5b$8bo5bo2bo5b$6bobo7bo6b$10bob4o7b$7bo2bo3bo8b$2b2o9bo9b$o4bo3b5o9b$6bo16b$o5bo2b5o9b$b6o6bo9b$10bo3bo8b$10bob4o7b$8bo7bo6b$8bo5bo2bo5
-b$5bob2o5bo2bo5b$5bo6bo4bo5b$13b4o6b$15bo7b$13b2o8b$10bo2bo9b$10bobo10b!`,
-
-"doubleGlid": `x = 8, y = 9, rule = B3/S23
-obo5b$bo6b$bo4b2o$6b2o$8b$3bo3bo$4bo3b$3b2ob2o$4b2o2b!`,
-
-"test": `x = 22573, y = 22641, rule = B3/S23
+b$5bob2o5bo2bo5b$5bo6bo4bo5b$13b4o6b$15bo7b$13b2o8b$10bo2bo9b$10bobo10b!`,doubleGlid:`x = 8, y = 9, rule = B3/S23
+obo5b$bo6b$bo4b2o$6b2o$8b$3bo3bo$4bo3b$3b2ob2o$4b2o2b!`,test:`x = 22573, y = 22641, rule = B3/S23
 234b2o$234b2o2$234bo$234b2o$233bobo30$202b2o$203b2o$202bo23$177bo$177b2o$176bobo23$152bo$152b2o$151bobo47$103b2o$102bobo$104bo$88b2o$88b2o$81bo$80bobo$72b2o7bo$73bo$73bobo$74b2o5$104bo$75bob2o24bobo$73b3ob2o24bo2bo$72bo31b2o$73b3ob2o$75bobo$75bobo$76
 bo$80b3o$82bo$81bo$89b2o$89b2o6$80bo17bo$79bobo15bobo$79bobo14bo2bo$77b3ob2o14b2o$76bo$77b3ob2o$79bob2o2$89b2o$89b2o7b2o$98bo$96bobo$58bo37b2o$58b2o$57bobo$101b2o$76b2o22bo2bo38bo11b2o$76b2o23b2o38bobo10b2o$108b2o31bobo$109bo25b2o2b3ob2o$109bobo23bo2
 bo$110b2o21bobo3b3ob2o$92bo40b2o6bob2o$22bo68bobo$21bobo59b2o6bobo$21bo2bo57bo2bo6bo$22b2o58bobo8b3o$83bo11bo2$131b2o13b2o$131b2o13b2o$76bo84b2o$12b3o60bobo82bo2bo$74bo2bo83b2obo$75b2o12b2o73bo$89bobo72b2o$34b2o55bo4b2o51b2o$33bobo51b4ob2o2bo2bo50bo$
@@ -21385,14 +21166,10 @@ bo3b2obo105bo10bo$22280bo2bo23b2ob3o$22281bobo4b3o22bo$22282bo24b2ob3o$22308bobo
 3o$22279b2o9b2o$22278bobo16bo$22279bo16b3o$22285b2o8bo2bo4bo$22286bo8b3obo2bobo$22286bobo7b3o2b2o2b2o$22287b2o7bo5b5o$22296b2o$22295bo2bo$22298b3o$22298b4o66b2o$22301bo6b2o57bobo$22301bo6bo60bo$22309b3o$22311bo2$22345bo$22344bobo$22279b3o62bo2bo$2231
 3bo31b2o$22304bobo5bobo$22305b2o5bobo$22305bo7bo$22291b2o27bo6b2o$22291bo26b3o5bo2bo$22293bo23bo8bobo$22273b2o14b5o23b2o8bo48bo$22274bo13bo13b2o71bobo$22274bobo12b3o11bo71bo2bo$22275b2o15bo10bob2o69b2o$22289b4o11bo2bo$22284b2o3bo3b2o10b2o36b2o4bo$222
 84b2o4b3o2bo24b2o13b2o5bo2bobo2bo$22292bob2o24b2o13b2o8bo3b3o6b2o$22292bo50b2ob2o2b2o6b2o$22291b2o52bo$22345bobo21bo$22304bo41bobo20bo$22283b2o18bobo39bo23bo$22283bo18bo2bo43bo3bo$22284b3o16b2o18b2obo19bo3bob5o$22286bo36b2ob3o18bo6b2obo$22277bo51bo18
-bo3bo3bo$22276bobo44b2ob3o20b3o$22276bobo45bobo16bob2o$22277bo18b2o14b2o10bobo14b3ob2o$22295bo2bo13b2o11bo14bo$22295bobo43b3ob2o5b2o$22296bo46bobo6bo$22343bobo7b3o$22344bo10bo!`,
-
-"lwssGun2": `x = 40, y = 42, rule = B3/S23
+bo3bo3bo$22276bobo44b2ob3o20b3o$22276bobo45bobo16bob2o$22277bo18b2o14b2o10bobo14b3ob2o$22295bo2bo13b2o11bo14bo$22295bobo43b3ob2o5b2o$22296bo46bobo6bo$22343bobo7b3o$22344bo10bo!`,lwssGun2:`x = 40, y = 42, rule = B3/S23
 27b2o11b$27bo12b$21b2ob2obo12b$19bo2bobobo13b$19b2o4bo13bo$31b2o4b3o$4b2o9b2o12bo2bo3bo3b$5bo10bo11bo7b2o2b$5bobo8bobo8b2o11b$6b2o2b2o5b2o7b2o12b$10b2o23b2o3b$35b2o3b$40b$40b$40b$40b$40b$o9b3o27b$3o7bo2bo26b$3bo6bo3bo25b$2bobo9bo25b$2b2o6bo3bo25b$10bo
 2bo26b$2b2o6b3o27b$2bo37b$4bo35b$3b2o35b$40b$9b2o29b$9bo30b$10bo20b2o7b$11bobo8bo8b2o7b$12b2o7b2o17b$20bo19b$21b2o9b2o6b$22bo9bo7b$33b3o4b$15b2o4bo13bo4b$15bo2bobobo17b$17b2ob2obo16b$23bo16b$23b2o15b!
-`,
-
-"dubbreed": `x = 139, y = 186, rule = B3/S23
+`,dubbreed:`x = 139, y = 186, rule = B3/S23
 34bo13bo90b$33b3o11b3o89b$33bob2o4bo5bob2o88b$34b3o3b3o5b3o88b$34b2o3b2o2bo4b2o89b$39bo3bo95b$39bob2o50b3o11b3o29b$39b2o51bo2bo10bo2bo29b$95bo4b3o6bo29b$95bo4bo2bo5bo29b$49b3o4bo35bobo4bo3bo2bobo30b$49bo2bo2b3o41b4o36b$
 31bo17bo4b2obo42bo38b$30b3o4b3o9bo3b4o82b$30bob2o2bo2bo9bo5b2o37bo44b$31b3o2bo2bo3b2o4bo2bo40b3o43b$31b3o3bo2b2o3bo4b2o40b2obo43b$31b2o7b2o2bo5bo41b3o44b$40bo3bo5b3o40b2o44b$38bo2b3o6b3o86b$36b2o4bo15b3o42b2o34b$36bobo2bo15bo2bo42b2o34b$37b3o20bo78b$
 37b3o16bo3bo48b3o27b$39b3o18bo39b3o6bo2bo26b$40b2o15bobo39bo3bo5bo7b3o11b3o5b$40bo46b3o4bo3bo5bo4bo7bo2bo10bo2bo4b$41bo44bo2bo3b3o7bo6bobo4bo6b3o4bo7b$89bo3bob2o2b4o14bo5bo2bo4bo7b$85bo3bo4b3o21bobo2bo3bo4bobo4b$85bo3bo4b2o26b2obobo11b$89b2o31b2ob2o1
@@ -21407,31 +21184,23 @@ b2o7b2o4b3o3b3o84b$45bo2bo2b2obo84b$48bo2b3o85b$48bo2b3o85b$45bobo4b2o85b$53bo6b
 o12bobo14b3o3bo2bo47b2o35b$15b2o4b3o20b2obo3bo87b$14bobo27b3o4bo3bo83b$45b2o4bo3bo83b$50b2o87b$35b3o12b2o62bo24b$37bo12b2ob2o58b3o23b$36bo13bo2b2o17b2o39bob2o22b$49b2ob2o18b2o40b3o22b$50bobo61b3o22b$40b3o8bo23b2o37b3o22b$42bo32b2o37b2o23b$41bo97b$57b
 3o79b$56bo2bo5b3o71b$30bo14b3o11bo5bo2bo70b$30b2o15bo11bo5bo73b$29bobo14bo12bo5bo3bo69b$56bo4b3obo73b$56bo2b2o5bobo70b$57bob3obo75b$62bo76b$139b$83b2o54b$83b2o54b$98b2ob2o36b$98b2o3bo35b$80b2o18b3o36b$80b2o57b$139b$83b2o13b2o39b$83b2o12bo2bo38b$98b2o
 39b$139b$139b$50bo88b$50b2o87b$49bobo87b$84b2o53b$83bobo53b$85bo53b$139b$139b$139b$106bo32b$74bo4bo25b3o31b$73bo6bo24bob2o30b$72b2o32b3o30b$72bo2bo3b2o25b3o30b$72b6o3bo24b3o30b$66bobo11bo25b2o31b$67b2o70b$67bo71b$139b$139b$70bo68b$70b2o67b$69bobo67b$
-139b$139b$139b$99b3o37b$98bo2bo37b$101bo37b$97bo3bo37b$101bo37b$98bobo38b!`,
-
-"lwssGun3": `x = 95, y = 49, rule = B3/S23
+139b$139b$139b$99b3o37b$98bo2bo37b$101bo37b$97bo3bo37b$101bo37b$98bobo38b!`,lwssGun3:`x = 95, y = 49, rule = B3/S23
 41b3o21b2o3b2o2b2ob2o$16b2ob2o2b2o3b2o10bo2bo21bo4bobo2b4o$16b4o2bobo4bo13bo22b3obob2o3b2o$16b2o3b2obob3o14bo24bo2bob3o5bo$13bo5b3obo2bo13bobo26bo6bo3bo2bo$11bo2bo3bo6bo49b3o2bo2bo$11bo2bo2b3o45b2o4b3o3bo4bo$12bo4bo3b3o4b
 2o34bobo5bo$22bo5bobo34bo6bo$22bo6bo$73b2o11b2o$7b2o11b2o34b2o13b4o11b4o$5b4o11b4o13b2o13b2ob3o12bo8b3o8bo$4bo8b3o8bo12b3ob2o8b3ob2o12bo21bob2o$2obo21bo12b2ob3o8b2ob3o12bo19bo2b2o$2o2bo19bo12b3ob2o12b2o14b3o13b3o$5b3o13b3o48b2o13b2o$6b2o13b2o57bo$14b
 o15b2o31b2o15bo$14bo23bobo19bobo$30bo7b2o18b5o$57bo4bo14bo5bo$11bo5bo9b2o5b2o7b2o13b3ob2o12b3o3b3o$10b3o3b3o6b2o4bo4b2o6bo15bobo12bobobobobobo$9bobobobobobo9b2ob2o7b3o16bobo11b3ob2ob2ob3o$8b3ob2ob2ob3o4bobo7bobo3bo19bo13bobobobobobo$9bobobobobobo5bo2
 bobobobo2bo38b3o3b3o$10b3o3b3o5b5obobob5o38bo5bo$11bo5bo6bo4bo3bo4bo$25b3obobobob3o$27b2obob2obo38b3o7b3o$8b3o7b3o9bo37b2o2b7o3b7o2b2o$2b2o2b7o3b7o2b4obo37bo3b2obob2o3b2obob2o3bo$2bo3b2obob2o3b2obob2o3bo2bo40b2ob2ob2ob3ob2ob2ob2o$4b2ob2ob2ob3ob2ob2ob
 2o3bo37b4obo17bob4o$4obo17bob3o38bo2bob4o3bo3bo3b4obo2bo$o2bob4o3bo3bo3b4obo44bo2bo13bo2bo$4bo2bo13bo2bo46bo8bo8bo$5bo8bo8bo48bobo4bobo4bobo$6bobo4bobo4bobo52b2o3bo3b2o$9b2o3bo3b2o52bo2b2o7b2o2bo$6bo2b2o7b2o2bo48bobobo9bobobo$5bobobo9bobobo46bobob3o7
-b3obobo$4bobob3o7b3obobo45bo2b2o2bo5bo2b2o2bo$4bo2b2o2bo5bo2b2o2bo43b2ob2o5b2ob2o5b2ob2o$2b2ob2o5b2ob2o5b2ob2o42bobo6b2ob2o6bo2bo$2bo2bo6b2ob2o6bobo43bobo17bobo$3bobo17bobo44bo19bo$4bo19bo!`,
-
-"hwssGun2": `x = 46, y = 76, rule = B3/S23
+b3obobo$4bobob3o7b3obobo45bo2b2o2bo5bo2b2o2bo$4bo2b2o2bo5bo2b2o2bo43b2ob2o5b2ob2o5b2ob2o$2b2ob2o5b2ob2o5b2ob2o42bobo6b2ob2o6bo2bo$2bo2bo6b2ob2o6bobo43bobo17bobo$3bobo17bobo44bo19bo$4bo19bo!`,hwssGun2:`x = 46, y = 76, rule = B3/S23
 16bobo12bo$16bo2bo11b3o$7bo11b2o13bo$7bo9bo3b2o4b2o4b2o$12b2o5b2o6b2o$11bo4bo2bo$16bobo2$35b3o$34bo3bo$4b2o3b2o$6b3o24bo5bo$5bo3bo23b2o3b2o$6bobo$7bo$36bo$35bob2o$35bo$35bo3bo$4b3o29bo2bo$10bobo23b5o$4bobo4b2o23b5o$3b5o3b
 o23b2o3b2o$2b2o3b2o27b5o$2b2o3b2o20bobo5b3o$29b2o7bo$30bo$5bo12bo$3b2o14b2o$18b2o$2bo$23bo$3bo2bo14b2o$5b2o15b2o$2o35b2o$bo35b2o$bobo4bo$2b3ob4o$4b2obob2o30b2o$4bo2bob3o27bo4bo$5bobob2o14b6o14bo$o5b4o14bo5bo8bo5bo$3o5bo21bo9b6o$3bo20bo4bo$2b2o15b2o5b
 2o$20b2o$19bo2$23b2o$22b2o$24bo$12bo21b2o$2b2o3b2o3b2o18bo3bo$11bobo9bo7bo5bo$3bo3bo15bobo4b2obo3bo$4b3o19b2o3bo5bo$4b3o19b2o4bo3bo$26b2o6b2o$14b2o7bobo$7bo5bobo7bo$6b3o4bo$5bo3bo2b2o$7bo$4bo5bo$4bo5bo$5bo3bo$6b3o30b2o3b2o$41b3o$19bo20bo3bo$19bobo19b
-obo$20bobo4b2o13bo$20bo2bo3b2o$20bobo16b2o$19bobo18bo$19bo17b3o$37bo!`,
-
-"mwssg3": `x = 113, y = 72, rule = B3/S23
+obo$20bobo4b2o13bo$20bo2bo3b2o$20bobo16b2o$19bobo18bo$19bo17b3o$37bo!`,mwssg3:`x = 113, y = 72, rule = B3/S23
 70bo6b2o34b$70b3o5bo34b$73bo4bobo7bo24b$72b2o5b2o7bobo22b$91b2o6b2o12b$91b2o4bo3bo11b$91b2o3bo5bo10b$88bobo4b2obo3bo8b2o$88bo7bo5bo8b2o$75bo21bo3bo11b$74b3o22b2o12b$73b5o11bo23b$72b2o3b2o8b2o24b$88b2o6b2o15b$96b2o15b$64b
 2o47b$64b2o8b3o36b$74b3o36b$96bo16b$73bo6bo2bobo9bobo15b$64bo7bobo5bo13bo3bo14b$63b3o5bo3bo4b2o13b3o15b$62bo3bo5b3o5bobobo8b2o3b2o13b$61bob3obo2b2o3b2o4bo31b$12bo49b5o12bobo31b$10b3o67b2o31b$9bo103b$9b2o81b2o19b$91b2o20b$93bo19b$61b2o2bo47b$63bobo47b
 $6b3o56b2o46b$5bo3bo56b2o45b$64bob2o4b2o7bobo29b$4bo5bo2b2o49b3o5b2o6bo32b$4b2o3b2o3bo65bo13bo18b$14bob2o3b2o57bo2bo9b3o17b$15bo3bo3bo35b2o3b2o14b3o9b5o16b$7bo16bo13b2o22bo28b2o3b2o15b$5b2obo8bo2bo3bo13b2o19bo5bo47b$8bo9bo5bo10b2o6bo3b2o11b2ob2o6bobo
 39b$4bo3bo10bo3bo10b3o5bo3bobo12bobo8b2o39b$4bo2bo13b2o12b2o6b5o14bo9bo20b3o17b$3b5o18bobo9b2o4b3o15bo17b2o11b3o17b$3b5o18b2o10b2o39bo2bo30b$2b2o3b2o18bo51b3obo29b$3b5o71b3o2bo9b2o17b$4b3o5bobo79b2o17b$5bo7b2o47b2o49b$13bo48b2o16b2o31b$80b2o31b$81bo3
 1b$36bo2bo26bo2bo43b$22b4o14bo11b4o14bo11b4o27b$21bo3bo10bo3bo10bo3bo10bo3bo10bo3bo27b$2b2o21bo11b4o14bo11b4o14bo27b$3bo18bobo26bo2bo26bo2bo28b$3o8b2o100b$o10b2o4bo64bo30b$8b2o6b5ob2o52bo4b3o7bo21b$7b3o5bo2b2o4bo50bobo2bobobo5bobo20b$8b2o5b2o8bo50bo2
-b3ob3o5bo21b$2b2o7b2o4bo7bo8b2o44bobobo28b$bobo7b2o12bo8b2o45b3o29b$bo22bo88b$2o20b2o55b3o31b$78bobobo30b$74bo2b3ob3o5bo23b$73bobo2bobobo5bobo22b$74bo4b3o7bo23b$80bo32b!`,
-
-"greystretch2": `x = 247, y = 107, rule = B3/S23
+b3ob3o5bo21b$2b2o7b2o4bo7bo8b2o44bobobo28b$bobo7b2o12bo8b2o45b3o29b$bo22bo88b$2o20b2o55b3o31b$78bobobo30b$74bo2b3ob3o5bo23b$73bobo2bobobo5bobo22b$74bo4b3o7bo23b$80bo32b!`,greystretch2:`x = 247, y = 107, rule = B3/S23
 65bo3b3o5b3o3bo48b3o13b3o12bo3b3o5b3o3bo65b$62b2ob5ob2o3b2ob5ob2o43bo3bo11bo3bo9b2ob5ob2o3b2ob5ob2o62b$60bob2obo5bobobobo5bob2obo41bo15bo11bob2obo5bobobobo5bob2obo60b$59bo3bobo3b5ob5o3bobo3bo37b2obobo10b2obobo8bo3bobo3b
 5ob5o3bobo3bo59b$63b3o5b2o3b2o5b3o41b2o14b2o16b3o5b2o3b2o5b3o63b$60bo2bob3o13b3obo4bo36bo15bo12bo4bob3o13b3obo2bo60b$62bo23bo3b2o31bo4bo10bo4bo10b2o3bo23bo62b$88bo2b3o28bobo3bo9bobo3bo8b3o2bo88b$92b2ob2o25bob2o12bob2o8b2ob2o92b$95bo26b3o13b3o10bo95b$
 92bobo26bo5bo9bo5bo8bobo92b$95bo25b3o2bob2o7b3o2bob2o5bo95b$92bo2bo25bo6bo8bo6bo6bo2bo92b$96bo27b3o13b3o7bo96b$83bo9bo26b3ob2o10b3ob2o11bo9bo83b$83b2o8b4o23b3o13b3o11b4o8b2o83b$81bo2bo8bob2obo19b3obo11b3obo9bob2obo8bo2bo81b$80bo12bo24b3o13b3o16bo12bo
@@ -21457,9 +21226,7 @@ o2b2o9bobobobobo4b3obo7bo3bo5bob2obobobobobobobobobobobobobobobobobobob2obo5bo3b
 ob2o7b3o2bo3b2obobobobobobobobobobobobobobobobob2o3bo2b3o7b2ob2o2b2obo6bo3bo10bo2b2o52b$51bo3b2o10bob2o7bobo4bobo5bo5b2o6bo3bo3bo3bo3bo3bo3bo3bo3bo6b2o5bo5bobo4bobo7b2obo10b2o3bo51b$51bo2b3obo7b2obo6bobo2bo2bo2bobo4b4o2bobobobo33bobobobo2b4o4bobo2bo2
 bo2bobo6bob2o7bob3o2bo51b$55bo15bo4b2o2b2o2b2o2b2o7b2o2b2ob2o35b2ob2o2b2o7b2o2b2o2b2o2b2o4bo15bo55b$52bo2b2o2bo10b2o22b2o55b2o22b2o10bo2b2o2bo52b$55bobobo34bo57bo34bobobo55b$53b2o40bo55bo40b2o53b$94b2o55b2o94b$51b3o139b3o51b$50b2o2bo137bo2b2o50b$15bo
 5b2o5b2o5bo13bo4bo137bo4bo13bo5b2o5b2o5bo15b$13bo2b2ob2o2bo3bo2b2ob2o2bo10b3o145b3o10bo2b2ob2o2bo3bo2b2ob2o2bo13b$11b3o4bobo3bobo3bobo4b3o7b2o149b2o7b3o4bobo3bobo3bobo4b3o11b$11b2o2bo2b3ob2o3b2ob3o2bo2b2o6b2o151b2o6b2o2bo2b3ob2o3b2ob3o2bo2b2o11b$11b3
-o2b3o4bo3bo4b3o2b3o2b3obo153bob3o2b3o2b3o4bo3bo4b3o2b3o11b$12bobo2bo15bo2bobo3b2o159b2o3bobo2bo15bo2bobo12b$13bo23bo171bo23bo13b!`,
-
-"greystretch3": `x = 141, y = 77, rule = B3/S23
+o2b3o4bo3bo4b3o2b3o2b3obo153bob3o2b3o2b3o4bo3bo4b3o2b3o11b$12bobo2bo15bo2bobo3b2o159b2o3bobo2bo15bo2bobo12b$13bo23bo171bo23bo13b!`,greystretch3:`x = 141, y = 77, rule = B3/S23
 26b4o4b2o69b2o4b4o26b$25b3o2bo2b2obo67bob2o2bo2b3o25b$23b2ob4ob3o2bo7bo51bo7bo2b3ob4ob2o23b$24bo6bo10b2ob2o47b2ob2o10bo6bo24b$25bo4b2o2bobob3o5bo47bo5b3obobo2b2o4bo25b$23bob4o2b2o4bob2ob3ob2o3bo37bo3b2ob3ob2obo4b2o2b4obo
 23b$5bo12bo10b2o3bo3bo7bo4bo37bo4bo7bo3bo3b2o10bo12bo5b$4b2obob2o5bo2bo3b4o2b2o3bo4bo4b3o3bobo35bobo3b3o4bo4bo3b2o2b4o3bo2bo5b2obob2o4b$5bo3bob2obobo2bobobo3b2obo3bo5bo3b2o49b2o3bo5bo3bob2o3bobobo2bobob2obo3bo5b$4bo2b2o3bo6bo2bo3b2o4bo2b4ob5o4bo11b2o
 bob2o5b2obob2o11bo4b5ob4o2bo4b2o3bo2bo6bo3b2o2bo4b$5b2o5bo6b4o5bo7b2o5bo3b2o12bo2bo2bo5bo2bo2bo12b2o3bo5b2o7bo5b4o6bo5b2o5b$3bo10b2obo10bo18b2ob4o7bo2bo2bo5bo2bo2bo7b4ob2o18bo10bob2o10bo3b$3bobo13b2o25bobo4bo7b2o3b2o5b2o3b2o7bo4bobo25b2o13bobo3b$2bo3
@@ -21474,37 +21241,27 @@ o13bo35b3ob$b3o35bo3bobo3b2o6bobobobobobobobobobobobobobo6b2o3bobo3bo35b3ob$2b2o
 o4bo2bo2b2obo21bob2o2bo2bo4bo3b3o39b$5b2o33b2o3bo5b2ob3o2bo21bo2b3ob2o5bo3b2o33b2o5b$5b2o34b2o5b3o7b2obo17bob2o7b3o5b2o34b2o5b$6b2o34b2o4bo2b3o6bobo15bobo6b3o2bo4b2o34b2o6b$37b3o4bo4b2o7b2o2bo15bo2b2o7b2o4bo4b3o37b$45bo5b6o2bobo17bobo2b6o5bo45b$39bob
 o7b2o4b4o2b2o15b2o2b4o4b2o7bobo39b$39bo3b3o3bo2b2o4bobo19bobo4b2o2bo3b3o3bo39b$37b3o10b2obo2bobobo19bobobo2bob2o10b3o37b$37bobo11bob4ob2o21b2ob4obo11bobo37b$38b2o11bobo3bo25bo3bobo11b2o38b$38b2ob2o9bob2obo25bob2obo9b2ob2o38b$37b2o2b2o7bobobobo27bobob
 obo7b2o2b2o37b$35b2obo11b2o37b2o11bob2o35b$36bo3bo59bo3bo36b$37bo65bo37b$37bo2bo59bo2bo37b$37bob2o59b2obo37b$36b2ob2o59b2ob2o36b$35b3obobo57bobob3o35b$37bob3o57b3obo37b$37bo2b2o57b2o2bo37b$38b3o59b3o38b$36bo3bo59bo3bo36b$41bo57bo41b$37bobo61bobo37b$3
-6bo67bo36b$35bo2bo63bo2bo35b$36b2o65b2o36b!`,
-
-"antship": `x = 50, y = 112, rule = B3/S23
+6bo67bo36b$35bo2bo63bo2bo35b$36b2o65b2o36b!`,antship:`x = 50, y = 112, rule = B3/S23
 2b3o45b$4bo45b$3bo46b$2o48b$b2o47b$50b$3bo46b$3bo3b2o41b$3bo2bob2o40b$obo2b2obo2bo38b$8b2o2bo37b$12bo37b$5bo3b2obo2bo34b$10b2o3b2o9b2o22b$10b3o2b3o7bobo22b$11b2o2bob2o8bo22b$16b3obo3bo25b$14b2o4b2obobo24b$13b2o4bobo3bo24
 b$13b2o7b2o2bo23b$22bo2b2o23b$23bob2o3b2o18b$21b3obo3bobo18b$31bo18b$21bo3b2o23b$25b2obo6b2o13b$27b3o6b2o12b$23b2o4b3obo2bo13b$33bob2o13b$29bo5b2o13b$28bobo8bo10b$33bo2b5o9b$28bobo2bo2b2o2bo9b$30b2o4b3o11b$31bobo16b$32b3o15b$35b2o13b$50b$33bo2bo13b$3
 4bo5bo9b$36bo3b2o8b$35b2o13b$39bobo8b$37b2obo9b$34b4ob2o9b$36bobo11b$36bo4b2o7b$35bo4bobo7b$34bobo4bo8b$33b2ob2o6b5ob$33b2o2bo5bobo4b$30bo3b2ob2o3bo6bo$30bo2bo3bo7bo3bo$31bob2obo8bob2ob$35b2o5b2obo4b$35b2o9b2o2b$36bo9bo3b$34bo2bo9b2ob$33bo13bobo$37b2
 o7b2obo$37bo8bobob$35bob2o7bo3b$34bo3bo11b$33b3ob2o7bo3b$32bobo3bo7bobob$34bo2bo8b2obo$34bo3bo8bobo$34b2obo9b2ob$34bo11bo3b$35b2o9b2o2b$35bobo4b2obo4b$36b2o7bob2ob$45bo3bo$32b2o8bo6bo$33bob2o6bobo4b$37b2o5b5ob$33bo5bo10b$50b$33bo3b2o11b$34b3o13b$50b$
 36bo13b$34bo2bo12b$50b$33bo3b2o11b$34b5o11b$35bo14b$34b6o10b$34bo3bo11b$34bo3bo11b$38bo11b$36bob2o10b$36bo2bo10b$35b5o10b$35b2obo11b$36b2o12b$50b$36b2o12b$35b2obo11b$35b5o10b$36bo2bo10b$36bob2o10b$38bo11b$34bo3bo11b$34bo3bo11b$34b6o10b$35bo14b$34b5o1
-1b$33bo3b2o11b$50b$34bo2bo12b$36bo13b!`,
-
-"pfbr": `
+1b$33bo3b2o11b$50b$34bo2bo12b$36bo13b!`,pfbr:`
 #O  by Lewis » September 29th, 2014, 4:28 pm,
 #C Modified later by NickGotts » October 9th, 2014, 10:48 am
 x = 16, y = 16, rule = B3/S23
-12bo$12b2o$12bo2bo2$13bobo$14bo7$3o$bo2bo$5bo$2bobo!`,
-
-"pforfr": `
+12bo$12b2o$12bo2bo2$13bobo$14bo7$3o$bo2bo$5bo$2bobo!`,pforfr:`
 #O  by Lewis » September 29th, 2014, 4:28 pm, modified by me
 x = 54, y = 54, rule = B3/S23
 30b2o22b$30b2o22b$54b$54b$54b$54b$16b2o36b$16b2o15b3o18b$33bo20b$23b2o8b3o18b$23b2o5bob2o20b$30bo2bo4bo15b$33bo4bo15b$31b2o5bo15b$54b$54b$6b2o38b2o6b$6b2o38b2o6b$54b$54b$54b$54b$54b$9b2o43b$9b2o37bo5b$46b2ob3o2b$48b3ob2o$49bo4b$54b$50bo3b$2o8b2o38bo3b$2
 o11bo36bo3b$10bo2bo36bobob$7b6o38bo2b$7bobo44b$7bobo44b$54b$49bo4b$11b3o34b2o4b$48bo5b$49bobo2b$49bo2bob$50bobob$50bobob$51bo2b$54b$16b2o7bo28b$16b2o7bo28b$24bobo11b2o14b$25b3o9b2ob2o12b$25b2o2b4o9b2o10b$25bo7bo6bo3bo9b$26bo5bo8b3o10b$26bo27b!
-`,
-
-"diehard": `x = 32, y = 32, rule = B3/S23
+`,diehard:`x = 32, y = 32, rule = B3/S23
 bbbbbbboobbooobbbboobobobbboobbb$boobbboboobobboboboboobbooobooob$boooobooobobbobboobbooobobooboob$oobobboobbbooboobooobobobbbboobb$obobbbobooooobboboboobobboobbobb$boobooooobbbobboboobbobobbobbbbb$bobbobbobbbbbbobbbooooboobooooob$boobbbobobooooobobo
 ooooobooboobo$obbobooobobbboobobbboboboboobooo$bbobobboobbbbbbbboobobbobbbobbob$oooobooobboobobboboboobbobbobobb$boobobooooobbbobooobbobbobbooboo$obbooboobbbbbobbobbbbbbbobooobbo$oobobooobooobooobbooboboobbbbobo$bboooobbbobobbobooobobbooobbobob$boobb
 bboobooobooobobbbbbbbooobbb$bbbooobbbbbbboboooboooboobbbboob$bobobbooobbobooobobbobobbboooobb$obobbbbooboboobboooboooboooboboo$obbooobobbbbbbbobbobbbbbooboobbo$ooboobbobbobbooobobbboooooboboob$bbobobbobboobobobboboobboooboooo$bobbobbbobboboobbbbbbbbo
 obbobobb$oooboobobobobbboboobbbobooobobbo$oboobooboooooobobooooobobobbboob$booooobooboooobbbobbbbbbobbobbob$bbbbbobbobobboobobbobbboooooboob$bbobboobboboobobobbooooobobbbobo$bboobbbbobobooobooboobbboobboboo$booboobobooobboobbobboboooboooob$booobooobb
-oobobobobboboobobbboob$bbboobbboboboobbbbooobboobbbbbbb!`,
-
-"diehard2": `
+oobobobobboboobobbboob$bbboobbboboboobbbbooobboobbbbbbb!`,diehard2:`
 #O by dvgrn » March 31st, 2022, 5:53 am
 x = 32, y = 32, rule = B3/S23
 18b2o$14b2obo2bob2ob2o$14bob2o2b2obob2o2$6b2o$obobo2bo$bo13bo$bob2obo
@@ -21512,9 +21269,7 @@ x = 32, y = 32, rule = B3/S23
 11bobo$5bo3b2o4b3o$9bo$3bo7bo2bobo$3b2o5b2o3b2o$15bo9bo$13bobo6b5o$13b
 obo5bo4b2o$14bo6bo4bo$24b2o$2b2o4b2o15bo$2bobo2bobo2b2o13b3o$4bo2bo4bo
 5b2o5b2obob2o$4b2ob2o5bobo2bo5b2o3b2o$7bo2bo2b2ob2o8bobob2o$7bob2o14b
-2ob2o$3b2ob2obo15b3o$3b2obo2bo5b2o$7b2o6b2o!`,
-
-"diehard3": `
+2ob2o$3b2ob2obo15b3o$3b2obo2bo5b2o$7b2o6b2o!`,diehard3:`
 #O Dean Hickerson, 3/6/2022
 x = 32, y = 32, rule = B3/S23
 3b2o2b2obobo4bobo3bo$3bo5b2obobo2bo3bobo$2obo2b4o2b2o4bo2bo$bob2ob2o3b
@@ -21523,9 +21278,7 @@ bo2bo9bobo6bobo$4b2o4bobo6b4o6b2o$3bob2o4bo2bo3b2o2bo6bo$10b2o2bo13bob
 o$30bo$31bo$7b2o3b2o15bobo$b2o5bo2bobo6bo7bo2bo$b2o2b3o3b2o6bobo$5bo
 13bo2bo6b3o$b2o17bobo7b2o$ob6o13bo7bo$o4bo2bo15b2o4b2o$b3o3b2o14bobo2b
 obo$3b2o18b2o4bo2$6b2o$5bobo5b2o4b2o$5b2o6bo2bo3bo$17bo5b3o$14bob3o5b
-2o$ob2o2b2o8b2o3b2o$2obo2b2o6bo$15b3ob2o$14bo2b4o!`,
-
-"diehard4": `
+2o$ob2o2b2o8b2o3b2o$2obo2b2o6bo$15b3ob2o$14bo2b4o!`,diehard4:`
 #O by squareroot12621 » March 31st, 2022, 12:23 pm
 x = 103, y = 97, rule = B3/S23
 11bo$10bobo$9bobo$9b2o7bo$17bobo$17b2o$47bo$46bobo$47b2o$22b2o$22b2o3$
@@ -21535,9 +21288,7 @@ x = 103, y = 97, rule = B3/S23
 $obo32bo$bobo29b3o$2bo4$78b2o$76bo2bo$76b2o2$84b2o$84b2o2$36b2o$36bob
 o51bo$11b2o24bo51bobo$10bobo76b2o$11bo48b2o13bo$60b2o12bobo$74b2o3$55b
 2o$55bobo38b2o$56bo39b2o2$101b2o$100bobo$80bo18bobo$79bobo18bo$79b2o4$
-99bo$98bobo$98b2o6$83b2o$83bobo$84bo$33b2o37b2o$33bobo36bobo$34bo38bo`,
-
-"diehard5": `
+99bo$98bobo$98b2o6$83b2o$83bobo$84bo$33b2o37b2o$33bobo36bobo$34bo38bo`,diehard5:`
 #O by Pavgran » March 31st, 2022, 1:11 pm
 x = 90, y = 86, rule = B3/S23
 65bo9b2o$64bobo7bobo$45b2o18b2o7bo$45b2o26b2o2$54bo25b2o$52b3o24bo2bo$51bo28bobo$43b2o6b2o28bo2b3o$43bobo38bo$44bo40bo2$49b2o$49b2o5b2o$56b2o$52bo$51bobo$39b2o11bo$39b2o8bo10bo$48bobo8bobo$49bo4b2o3bobo$46bo7bobo3bo$45bob
@@ -21545,9 +21296,7 @@ o8bo$46bo9b2o$43bo$35b2o5bobo$35b2o6bo7b2o$40bo10b2o$39bobo13bo30b2o$40bo13bobo2
 b2o8bo9bo20b2o10b2o7b2o$11b2o6b3o6bo6bo28bobo$18bo8bobo4bo30b2o$3b2o13b2o8bo5b3o3bo41b2o$4bo9bo9b2o13bobo27bo11bobo$4bobo6bobo8b2o14bo14b2o5b2o4bobo11bo5b2o$5b2o7bo40b2o5b2o5bo18b2o$10b2o5bo25b2o6b2o$10b2o4bobo23bobo6b2o5b2o12bo$17bo21b2o2bo14b2o11bo
 bo4b2o$20bo17b2o32bo5b2o$2o17bobo18bo23b2o9bo7b2o$2o5bo12bo34b2o7b2o8bobo6bobo$6bobo14bo11b2o18b2o18bo9bo$6b2o14bobo10b2o25bo7b2o13b2o$23bo37bobo7bo$31b2o5b2o11b2o9bo5b3o6b2o$15b2o9bo4b2o5b2o11b2o6bo8bo8b2o$15b2o8bobo30bobo$26bo32bo11b2o$20b2o24b2o8b
 o13bo2bo$20b2o7b2o15b2o7bobo13b2o$29bobo24bo5b2o$30b2o9b2o10bo8b2o14bo$40bobo5b2o2bobo23b3o$40b2o6b2o3bo27bo$26b2o9bo42b2o$27bo8bobo$23bo3bobo7bo16b2o$22bobo3b2o4bo19b2o19bo$22bobo8bobo38bobo$23bo10bo8b2o5bo22bo2bo$31bo11b2o4bobo22b2o$30bobo16bo2bo$3
-1bo18b2o20b2o$26b2o43bobo$26b2o5b2o38bo$33b2o$50b2o$39bo9bo2bo$38bobo9bobo$31b2o6b2o10bo$32bo$29b3o13bo$29bo14bobo$44b2o$37b2o$37b2o!`,
-
-"demonoid2": `
+1bo18b2o20b2o$26b2o43bobo$26b2o5b2o38bo$33b2o$50b2o$39bo9bo2bo$38bobo9bobo$31b2o6b2o10bo$32bo$29b3o13bo$29bo14bobo$44b2o$37b2o$37b2o!`,demonoid2:`
 #O by ElijahKen » August 4th, 2026, 8:16 pm
 x = 12890, y = 13076, rule = B3/S23
 372b2o$371bobo$372bo3$342bo8b2o$341bobo7b2o$341bobo$342bo20bo$362bobo$363b2o$342b2o$342bobo$343bo46bo$390bo$390bo$367b2o$366bo2bo$367b2o5$351b2o$350bo2bo14b2o$351b2o3b2o10b2o$356b2o3$353b2o$353b2o2$356b2o$356b2o$364
@@ -21791,10 +21540,7 @@ ob3o21bobo6bo$12286bo4bo21bo2bo$12286b4o22bo2bo$12257bo28b2o2b2o20b3o17b2o$12256
 2241b2obo6b2o$12241b2ob3o3bobo$12247bo2bo$12241b2ob3o2b2o26b2o$12242bobo32b2o$12230b2o10bobo18b2o$12230b2o11bo18bobo$12262bo$12261b2o8b2o$12271bo$12272b3o$12274bo5$12537bo$12535b3o$12418bo115bo$12419bo114b2o$12417b3o120b2o$12539bobo$12541bo4$12524b2o
 $12523bobo5b2o$12523bo7b2o$12522b2o2$12536bo$12532b2obobo$12531bobobobo$12528bo2bobobobob2o$12528b4ob2o2bo2bo$12532bo4b2o$12530bobo$12530b2o3$12440bo$12441b2o$12440b2o28$12470bo$12471b2o$12470b2o21$12492bobo$12493b2o$12493bo22$12516bobo$12517b2o$1251
 7bo31$12565bo$12563b3o$12562bo$12562b2o3$12557bo12b2o$12555bobo13bo$12556b2o13bob2o$12563b2o4b3o2bo$12563b2o3bo3b2o$12568b4o$12554b2o15bo$12553bobo12b3o$12553bo13bo$12552b2o14b5o$12572bo$12570bo$12570b2o21$12535bo$12534bo$12534b3o21$12513bo$12511b2o$
-12512b2o21$12489bo$12489bobo$12489b2o11$12470b2o$12470b2o2$12474bo$12468b2o2b4o$12468b2o2bo2bo$12469b3obob2o$12470b2obob2o$12470bo4b2o$12471b4o$12473bo5$12464b3o!`,
-
-
-"blockPuffFancy": `
+12512b2o21$12489bo$12489bobo$12489b2o11$12470b2o$12470b2o2$12474bo$12468b2o2b4o$12468b2o2bo2bo$12469b3obob2o$12470b2obob2o$12470bo4b2o$12471b4o$12473bo5$12464b3o!`,blockPuffFancy:`
 #C A c/2 period 10 bi-block puffer.
 #C David I. Bell, 15 January 2026
 x = 143, y = 106, rule = B3/S23
@@ -21807,9 +21553,7 @@ o3bobo49bobo3bobo7bobo3bobo49bobo3bobo$ooboob5o47b5obooboo5booboob5o47b5obooboo$
 62boboo11boobo$62b3oboboo3boobob3o$61boo17boo$68bo5bo$68bo5bo$48b3o41b3o$47bobb5o10b3o7b3o10b5obbo$46bo3bobobooboo5boobo7boboo5booboobobo3bo$46bo6bo3boboobooboboo5boobobooboobo3bo6bo$48bo6bo4bobo17bobo4bo6bo$45bobo6bo3bobobobo13bobobobo3bo6bobo$44boo
 boboo6bobbobobbo11bobbobobbo6booboboo$43boboboboo5booboobooboo9booboobooboo5boobobobo$42boo3bobbo4bobbobobobobbo7bobbobobobobbo4bobbo3boo$41bo3bobobboo4bobobobobobo9bobobobobobo4boobbobo3bo$44bo12booboboboo11booboboboo12bo$41boo14booboboboo11boobobob
 oo14boo$57booboboboo11booboboboo$57bobbobobbo11bobbobobbo$53boob4o3b4oboo3boob4o3b4oboo$52bobbobbo5bobbobbobobbobbo5bobbobbo$53boo13boo3boo13boo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$
-69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo!`,
-
-"210puff": `
+69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo4$69booboo$69booboo!`,"210puff":`
 #C A c/2 period 210 dirty puffer.
 #C David I. Bell, 15 January 2026
 x = 144, y = 168, rule = B3/S23
@@ -21824,9 +21568,7 @@ bobbo6booboboo$45boboboo5boobbobobboo10booboobooboo5boobobobo$42boobobo3bo4boobb
 o$53bo6bobo6bo5b6o3b6o$53boo5bobo5boo7b3o5b3o$75booboo5booboo$53bo4bo5bo4bo4b3o11b3o$73boboo11boobo$52bo17bobbo3boo7boo3bo$52bo4bo7bo4bo3b5o7b5o$52bo5bo5bo5bo3booboo7booboo$53bo3bo7bo3bo3$75b3o$73boo3bo$73bo3bo$76bo$76bo$73b4o$75bobo$76boo$75boo$75bo
 4$79boo$78bobbo$77bo3bo$77bo3bo$75bobb6o$74bo7boo$74b4o4boo$74bobboo$73b3obobo$73b3o3bo$74boo5bo$74boo6bo$$79b3o$78boo$78bo3$81bo$72boobboobbo$71bobobo4bo$70booboboobbo$71boboobb3o$72b3obb3o3boo$78b3oboobo$79bobo4bo$79bobo$79boobboo3bo$80b4o4b3o$81bo
 8bo$75b3o7bobboob3o$79boo4boobbo3bo$79b3o7boboo$80bo3$82b3o7$74bo$74bo$74bo3$81boo$80bo$79bo$88boo$83boobooboo$80b3o4boo$80bo16bo$80bo5bobo3boo$81bobo3boo9boo$73boo7bo9boobo$73boo20b3o$96bo$94boo15$74boo$74boo7$82bo$82bo4boo$82bo4boo6$75boo$75boo7boo
-$83bobbo$82bo3bo$82bo3bo$83bobo$84bo!`,
-
-"50rake": `
+$83bobbo$82bo3bo$82bo3bo$83bobo$84bo!`,"50rake":`
 #C A c/2 period 50 forwards rake.
 #C This uses an old period 10 block puffer whose output is perturbed
 #C by two period 2 spaceships and two period 10 spaceships.
@@ -21844,9 +21586,7 @@ $33bo$9b3o34b3o$8bobb5o32bo$7bo3bobobooboo27bo$7bo6bo3boboobbo$9bo6bo4b3oboo$6bo
 4bobo22bobo$15bo5bobobo3bo5boo23bo$14boo6bobboboboo4bobo$8bo3boobobo7bo3bobo5boo$7b3oboboboboo7bobobboobbo3bo$6boo3bobobo4bo10bobobo$5boobbo3bobobobboo16boo$6bo3bobobbo5b5o10b4o$5boo8boboobobbobooboo5boobboo$3boobobo7b3obo3bo3bobooboobo$4boboboo5boob
 bo6bo4bobo26bo$boobobo3bo8boo4bo3bobobobo23b3oboo$boo3bo21bobbobobbo21boo3boboo4b3o$b3obo3boo16booboobooboo19boobbo4bo6bo$oo24bobbobobobobbo19bo5boboo4bo$25boobbobobobobboo17boo7boboo$25booboobobobooboo15booboboo6bo$24boobobbooboobboboo15bobobboobboo
 boboo$25b6o3b6o13boobobbobbo5boboo$27b3o5b3o15boobo5boobbobobbo$25booboo5booboo4boo7bobo13boboo$24b3o11b3o3boo6booboo10boboo$23boboo11boobo24bo4boo$23bo3boo7boo3bo9boboob3o8bobboo$24b5o7b5o9b3o5boo10bo13boo$24booboo7booboo8bo3bo5bo6boo3bo11bobo$59boo
-4bo19bo$48boobboo12bo$50bo$49bo8$96b3o$98bo$97bo!`,
-
-"50lwssrake": `
+4bo19bo$48boobboo12bo$50bo$49bo8$96b3o$98bo$97bo!`,"50lwssrake":`
 #C A demonstration c/2 period 50 sideways LWSS rake.
 #C This uses a period 50 forwards rake and a convoy which
 #C turns its output gliders into LWSSes.
@@ -21973,9 +21713,7 @@ bo3bobboobbobo7boobobobob3o$51bobobo10bo4bobobo3boo$47boo16boobbobobo3bobboo$47b
 76bo$54bo122boo$55bo120boo$53b3o$$372bobo$372boo$373bo28$237bobo$237boo$238bo$188bobo$67bo121boo$65bobo121bo$66boo$361bo$359boo$360boo28$226bo$224boo$225boo$201bo$79bo122boo$80bo120boo$78b3o$$347bobo$347boo$348bo30$212boo$212boo$92bo$90bobo$91boo$336
 bo$334boo$335boo18$212boo$212boo13$104bo$105bo$103b3o$$322bobo$322boo$323bo5$212boo$212boo24$212boo$212boo$117bo$115bobo$116boo$311bo$309boo$310boo18$212boo$212boo13$129bo$130bo$128b3o$$297bobo$297boo$298bo5$212boo$212boo24$212boo$212boo$142bo$140bob
 o$141boo$286bo$284boo$285boo18$212boo$212boo13$154bo$155bo$153b3o$$272bobo$272boo$273bo5$212boo$212boo24$212boo$212boo$167bo$165bobo$166boo$261bo$259boo$260boo18$212boo$212boo13$179bo$180bo$178b3o$$247bobo$247boo$248bo5$212boo$212boo24$212boo$212boo$
-192bo$190bobo$191boo$236bo$234boo$235boo18$212boo$212boo13$204bo$205bo$203b3o$$222bobo$222boo$223bo5$212boo$212boo24$224b4o$223bo3bo$227bo$223bobbo21$248bobbo$252bo$248bo3bo$249b4o23$274b4o$273bo3bo$277bo$273bobbo21$298bobbo$302bo$298bo3bo$299b4o!`,
-
-"kshipcat": `
+192bo$190bobo$191boo$236bo$234boo$235boo18$212boo$212boo13$204bo$205bo$203b3o$$222bobo$222boo$223bo5$212boo$212boo24$224b4o$223bo3bo$227bo$223bobbo21$248bobbo$252bo$248bo3bo$249b4o23$274b4o$273bo3bo$277bo$273bobbo21$298bobbo$302bo$298bo3bo$299b4o!`,kshipcat:`
 #O by Gustone » August 16th, 2026, 6:18 am
 x = 17388, y = 27893, rule = B3/S23
 9045b3o$9047bo$9046bo$9056b3o$9055bo2bo$9058bo$9058bo$9055bobo3$9064b3o$9064bo2bo$9064bo$9058bo5bo$9025bo17bo13b3o5bobo$9024b3o15b3o12bob2o$9023b2obo14b2obo13b3o$9023b3o15b3o14b2o$9023b3o16b2o$9024b2o2
@@ -23725,10 +23463,7 @@ o$15535b2o$15534bobo5$15564b2o$15565b2o$15564bo4$15594bo$15594b2o$15593bobo5$156
 38b2o789b2o$16537bobo789b2o5$16567b2o$16568b2o$16567bo4$16597bo$16597b2o$16596bobo5$16626b2o$16627b2o$16626bo4$16656bo$16656b2o$16655bobo5$16685b2o$16686b2o$16685bo4$16715bo$16715b2o$16714bobo5$16744b2o$16745b2o572b2o$16744bo574b2o4$16774bo$16774b2o$
 16773bobo5$16803b2o$16804b2o$16803bo4$16833bo$16833b2o$16832bobo5$16862b2o$16863b2o$16862bo4$16892bo$16892b2o$16891bobo5$16921b2o$16922b2o$16921bo4$16951bo$16951b2o$16950bobo356b2o$17309b2o4$16980b2o$16981b2o$16980bo4$17010bo$17010b2o$17009bobo5$1703
 9b2o$17040b2o$17039bo4$17069bo$17069b2o$17068bobo5$17098b2o$17099b2o$17098bo4$17128bo$17128b2o$17127bobo5$17157b2o$17158b2o$17157bo141b2o$17299b2o3$17187bo$17187b2o$17186bobo5$17216b2o$17217b2o$17216bo4$17246bo$17246b2o$17245bobo5$17275b2o$17276b2o$1
-7275bo!`,
-
-
-"r2x": `
+7275bo!`,r2x:`
 x = 9969, y = 20659, rule = B3/S23
 3837b3o$3839bo$3838bo$3831bo$3830bob3o$3831b3obo$3832bo2bo$3833b2o$3833bo$3832b2o$3835bo$3835bo$3832bobo22b3o$3856bo2bo$3859bo$3859bo$3856bobo3$3865b3o$3865bo2bo$3865bo$3859bo5bo$3826bo17bo13b3o5bobo$3825b3o15b3o12bob2o$3824b2obo14b2obo13b3o$3824b3o1
 5b3o14b2o$3824b3o16b2o$3825b2o6$3842b3o$3841bo2bo$3844bo$3844bo$3835b3o3bobo$3835bo2bo$3835bo$3835bo7b3o$3836bobo4bo2bo$3843bo$3843bo$3844bobo20b3o$3867bo2bo$3867bo$3867bo$3868bobo3$3875b3o$3874bo2bo$3810bo66bo$3809bobo57bo7bo$3809bo2bo23bo17bo13b3o3
@@ -25135,17 +24870,11 @@ $8570bo$8570b2o$8569bobo2$8584b3o104b2o$8586bo104b2o$8585bo$8599b2o$8600b2o$8599
 $9012b2o$9013b2o$9012bo4$9042bo$9042b2o$9041bobo5$9071b2o$9072b2o$9071bo4$9101bo$9101b2o$9100bobo4$9890b2o$9130b2o758b2o$9131b2o$9130bo4$9160bo$9160b2o$9159bobo5$9189b2o$9190b2o$9189bo4$9219bo$9219b2o$9218bobo5$9248b2o$9249b2o$9248bo4$9278bo$9278b2o$
 9277bobo5$9307b2o$9308b2o$9307bo4$9337bo542b2o$9337b2o541b2o$9336bobo5$9366b2o$9367b2o$9366bo4$9396bo$9396b2o$9395bobo5$9425b2o$9426b2o$9425bo4$9455bo$9455b2o$9454bobo5$9484b2o$9485b2o$9484bo4$9514bo$9514b2o$9513bobo5$9543b2o325b2o$9544b2o324b2o$9543
 bo4$9573bo$9573b2o$9572bobo5$9602b2o$9603b2o$9602bo4$9632bo$9632b2o$9631bobo5$9661b2o$9662b2o$9661bo4$9691bo$9691b2o$9690bobo5$9720b2o$9721b2o$9720bo4$9750bo$9750b2o108b2o$9749bobo108b2o5$9779b2o$9780b2o$9779bo4$9809bo$9809b2o$9808bobo5$9838b2o$9839b
-2o$9838bo!`,
-
-
-"buffguywithhatsynth": `x = 13, y = 191, rule = B3/S23
+2o$9838bo!`,buffguywithhatsynth:`x = 13, y = 191, rule = B3/S23
 5b3o5b$13b$13b$13b$5b3o5b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13
 b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$
 13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$2b2o5b2o2b$2b2o5b2o2b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$
-13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$2bo7bo2b$b2o7b2ob$obo7bobo$2o9b2o!`,
-
-
-"p152o": `x = 107, y = 105, rule = B3/S23
+13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$13b$2bo7bo2b$b2o7b2ob$obo7bobo$2o9b2o!`,p152o:`x = 107, y = 105, rule = B3/S23
 42b3o$45bo$41bo3bo$31bo8bobo2bo$31b3o4bo2bobo$34bo3bo3bo$33b2o3bo$39b
 3o$36bo$35bobo$31b2o2b2o$31b2o2$15bobo72b2o$18bo70bo2bo$14bo4bo2b2o52b
 o15bo$14b2obo2bob2o52b3o13bo$18b2o59bo9b2obo$29b2o47b2o9b2o$28bobo$30b
@@ -25158,9 +24887,7 @@ bobo$4bo4bo$5bo3bo$68bo$6b2o2bo58b2o$9bobo56b2o$10b2o$6b2o$5bobo$5bo5b
 2o$23b2o58bo2bo$16b2o4bo2bo57bobo$15bo2bo4bobo58bo$18bo5bo$18bo$15b2ob
 o9b2o55bobo$15b2o11bo59bo$29b3o52bo4bo2b2o$31bo52b2obo2bob2o$16b2o70b
 2o$16b2o2$75b2o$71b2o2b2o$70bobo$71bo2$67b2o4b2o$65bob2o4bo$64bo9b3o$
-67bo8bo$63b2obo$63b2o!`,
-
-"thankyou": `x = 1038, y = 1080, rule = B3/S23
+67bo8bo$63b2obo$63b2o!`,thankyou:`x = 1038, y = 1080, rule = B3/S23
 424b2o$423bobo63b2o$417b2o4bo64bobo$418bo2b2ob4o54b2o4bo$418bobobobo2bo55bo2b2ob4o$415b2obobobobo58bobobobo2bo$415b2obobob2o56b2obobobobo$419bo60b2obobob2o$484bo63b2o$432b2o113bobo$423b2o7bo64b2o42b2o4bo$423b2o5bobo55
 b2o7bo44bo2b2ob4o$430b2o56b2o5bobo44bobobobo2bo$495b2o42b2obobobobo$539b2obobob2o$543bo2$556b2o$547b2o7bo$420b2o125b2o5bobo$421bo63b2o67b2o$418b3o65bo$418bo64b3o$442b2o39bo$442b2o63b2o$108b2o336bo60b2o$107bobo63b2o251b2o14b5o64bo$101b2o4bo64bobo252bo
 13bo49b2o14b5o32b2o$102bo2b2ob4o54b2o4bo254bobo12b3o47bo13bo38bo$102bobobobo2bo55bo2b2ob4o251b2o15bo46bobo12b3o32b3o$99b2obobobobo58bobobobo2bo265b4o47b2o15bo31bo$99b2obobob2o56b2obobobobo263b2o3bo3b2o59b4o55b2o$103bo60b2obobob2o264b2o4b3o2bo53b2o3bo
@@ -25390,26 +25117,18 @@ $206bobo257b2o$207b2o250b2o5bobo$459b2o7bo$468b2o$442bo$227b2o211b3o12bo$227b2o2
 5bo8b2o58b2o3bo3b2o$209b3o103b2o55b2o71b4o$209bo161b2o58b2o15bo$388b2o40bobo12b3o$323b2o64bo40bo13bo$324bo64bob2o36b2o14b5o$324bob2o53b2o4b3o2bo56bo$316b2o4b3o2bo53b2o3bo3b2o53b2o$316b2o3bo3b2o59b4o55b2o$321b4o47b2o15bo31bo$307b2o15bo46bobo12b3o32b3o
 $306bobo12b3o47bo13bo38bo$306bo13bo49b2o14b5o32b2o$305b2o14b5o64bo$325bo27bo32b2o31bo$321b2o29b2o32b2o30b2o$321b2o29bobo7bo55bobo$297bo64b3o$297b3o65bo$300bo63b2o67b2o$299b2o125b2o5bobo$426b2o7bo$435b2o2$422bo$418b2obobob2o$374b2o42b2obobobobo$309b2o
 56b2o5bobo44bobobobo2bo$302b2o5bobo55b2o7bo44bo2b2ob4o$302b2o7bo64b2o42b2o4bo$311b2o113bobo$363bo63b2o$298bo60b2obobob2o$294b2obobob2o56b2obobobobo$294b2obobobobo58bobobobo2bo$297bobobobo2bo55bo2b2ob4o$297bo2b2ob4o54b2o4bo$296b2o4bo64bobo$302bobo63b2
-o$303b2o!`,
-
-
-"tubstretchbig": `x = 115, y = 69, rule = B3/S23
+o$303b2o!`,tubstretchbig:`x = 115, y = 69, rule = B3/S23
 96bo18b$95b2o18b$91bo3bobo17b$90b2o23b$86bo3bobo5b2o15b$85b2o11b2o15b$81bo3bobo5b2o14bo5b$80b2o11b2o5b2ob3obobobo3b$76bo3bobo5b2o9b3o4bobo3bo2b$75b2o11b2o5b2obo13bo2b$71bo3bobo5b2o9b3o6bo8b2ob$70b2o11b2o5b2obo9bobobobobo
 3b$66bo3bobo5b2o9b3o6bobo5bo8b$65b2o11b2o5b2obo24bob$61bo3bobo5b2o9b3o6bob2o15b3o$60b2o11b2o5b2obo13bo14bo2b$56bo3bobo5b2o9b3o6bob2o4bobo16b$55b2o11b2o5b2obo13bo4bo6b3o8b$51bo3bobo5b2o9b3o6bob2o4bobo10bo9bo$50b2o11b2o5b2obo13bo4bo12bo2b6ob$46bo3bobo5
 b2o9b3o6bob2o4bobo18bo7b$45b2o11b2o5b2obo13bo4bo20b2o5b$41bo3bobo5b2o9b3o6bob2o4bobo31b$40b2o11b2o5b2obo13bo4bo32b$36bo3bobo5b2o9b3o6bob2o4bobo36b$35b2o11b2o5b2obo13bo4bo37b$31bo3bobo5b2o9b3o6bob2o4bobo41b$30b2o11b2o5b2obo13bo4bo42b$26bo3bobo5b2o9b3o
 6bob2o4bobo46b$25b2o11b2o5b2obo13bo4bo47b$21bo3bobo5b2o9b3o6bob2o4bobo51b$20b2o11b2o5b2obo13bo4bo52b$16bo3bobo5b2o9b3o6bob2o4bobo56b$15b2o11b2o5b2obo13bo4bo57b$11bo3bobo5b2o9b3o6bob2o4bobo61b$10b2o11b2o5b2obo13bo4bo62b$6bo3bobo5b2o9b3o6bob2o4bobo66b$
 5b2o11b2o5b2obo13bo4bo67b$5bobo5b2o9b3o6bob2o4bobo71b$13b2o5b2obo13bo4bo72b$8b2o9b3o6bob2o4bobo76b$8b2o5b2obo13bo4bo77b$14b3o6bob2o4bobo81b$10b2obo13bo4bo82b$3o6b3o6bob2o4bobo86b$o5bobo13bo4bo87b$bo3b2o6bob2o4bobo91b$3b2o12bo4bo92b$4b3o3b2o4bobo96b$4
-bo3bo3bo4bo97b$5bo5bobo101b$3b2o7bo102b$7bo107b$3bob2o108b$4bo110b$115b$5b2o108b$5b2o108b$5bobo2b2o103b$10b2ob2o100b$7b3o3bobo99b$115b$9bo2bo102b$9b3o103b$9b2o104b$10b2o103b$7b2ob2o103b$7bo107b$8bo106b!`,
-
-
-"unorthogonalShips": `x = 101, y = 50, rule = B3/S23
+bo3bo3bo4bo97b$5bo5bobo101b$3b2o7bo102b$7bo107b$3bob2o108b$4bo110b$115b$5b2o108b$5b2o108b$5bobo2b2o103b$10b2ob2o100b$7b3o3bobo99b$115b$9bo2bo102b$9b3o103b$9b2o104b$10b2o103b$7b2ob2o103b$7bo107b$8bo106b!`,unorthogonalShips:`x = 101, y = 50, rule = B3/S23
 19b2o51bo18b3o7b$20b2o50b2o19bo7b$19bo32bo18bobo5bo12bo8b$16b2o34b2o25b2o8b2o10b$18bo32bobo15bobob2o3bobo9b2o9b$43bo23b2o7bo24b$16bo2bob3o17bobobo3b2o14b2o5bo4bo14bo8b$20bo2bo17bo2b3ob2o16b6o2bo2bo11bo2bo5b3o$17bo2bo6b2o13b2o4b2o42bo7bo$22bo5b2o15b2o
 bo41bob5o2bob$19b4o4bo69bo3b$17bobo4b2o22bobo44b2o4b$24b2o24bo50b$48b3o50b$47bobo51b$101b$101b$101b$101b$101b$101b$101b$101b$101b$101b$101b$101b$101b$101b$101b$101b$33bo67b$33b2o66b$32bobo30b2o34b$9b3o20bo31bobo31b2ob$11bo19bo34bo30bobob$9bo19b2obobo
 28bobo22b3o8bob$9bob4o13b4obo31bo22b2ob2o3bo4b$2bo11bo47bobob2o25bob2o4b$obobo3bobo2bo17bo4bo24b2o3b2o3b2o18b3o7b$o2b3ob2o20bo2bo3b2o22bobo6bo2bo28b$b2o4b2o20bo5bobo22b2o3b4o3bo17bobo3bo4b$4b2obo24b2o10bo19b3o3bo19b3obob2o3b$30bo3bo5b6o12b2o3b3ob3o23
 bo3bo3b$7bobo22bo2bo2bo6bo12bo3b4o25bo5b2o2b$9bo23bobo8bo16b2o4bo23bo6bo2b$7b3o18bo2b2obo2b2o26bo31bo3b$6bobo20bobo5b6o18bo39b$39b2o20bobo37b$39bo61b!
-`,
-
-"chickenShip": `
+`,chickenShip:`
 #O Amling 
 #C https://conwaylife.com/forums/viewtopic.php?p=168645&hilit=n#p168645
 x = 112, y = 239, rule = B3/S23
@@ -25439,10 +25158,7 @@ o2b2o4bo2bo4b3o4bo4b2o2b2o4bo4b3o4bo2bo4b2o2bo10bob3o6bo2b$2bo6bo2bo6bo4bobobo4b
 b2o3b2o3b2o2bo2bo3bobo4b2o6b3o12b2obo7b$7b3o2bobo4bo2b2o3bo2bob2obo4b4o3bo4b3o2b3o4bo3b4o4bob2obo2bo3b2o2bo4bobo2b3o7b$8bo3bobo12bo5bo2bo9bo3bo4b2o4bo3bo9bo2bo5bo12bobo3bo8b$7bo19bo6bo2b3obo2bo2b2o2b4o2b4o2b2o2bo2bob3o2bo6bo19bo7b$28bo6bo11bo2bo4b2o4
 bo2bo11bo6bo28b$32bo18b4o2b4o18bo32b$35bo19b2o19bo35b$53b2o2b2o53b$52bo2b2o2bo52b$53b2o2b2o53b$51b2o2b2o2b2o51b$50bo2bo4bo2bo50b$53bob2obo53b$53bob2obo53b$50b2o8b2o50b$50b4o4b4o50b$55b2o55b$53bo4bo53b$49b3obo4bob3o49b$53bo4bo53b$53b2o2b2o53b$48bo14bo
 48b$48b2o4bo2bo4b2o48b$50b2o3b2o3b2o50b$55b2o55b$54bo2bo54b$53b2o2b2o53b$52b3o2b3o52b$52bobo2bobo52b$53bo4bo53b$53b2o2b2o53b$51b2o6b2o51b$112b$51b2o6b2o51b$51b2obo2bob2o51b$49b2o10b2o49b$48b2o12b2o48b$47b2o3b2o4b2o3b2o47b$48b2o12b2o48b$48b3o10b3o48b$
-51b2o6b2o51b$51b2o6b2o51b$48b2o4bo2bo4b2o48b$51b2obo2bob2o51b$51bo3b2o3bo51b$50bo2b6o2bo50b$48bo4b2o2b2o4bo48b$47b2o6b2o6b2o47b!`,
-
-
-"thingyyy": `
+51b2o6b2o51b$51b2o6b2o51b$48b2o4bo2bo4b2o48b$51b2obo2bob2o51b$51bo3b2o3bo51b$50bo2b6o2bo50b$48bo4b2o2b2o4bo48b$47b2o6b2o6b2o47b!`,thingyyy:`
 #O Amling 
 #C https://conwaylife.com/forums/viewtopic.php?p=168645&hilit=n#p168645
 x = 131, y = 231, rule = B3/S23
@@ -25516,9 +25232,7 @@ b3o4b25obobobo5bobobob25o4b3o3b3o3b3o3b3o3b3ob$4b3o3b3o3b3o3b3o3b4o25b2obob2o3b2
 67o4b3o3b3o3b3o3b3o3b3ob$4b3o3b3o3b3o3b3o3b4o67b4o3b3o3b3o3b3o3b3o4b$b3o3b3o3b3o3b3o3b3o4b67o4b3o3b3o3b3o3b3o3b3ob$o3b3o3b3o3b3o3b3o3b4o67b4o3b3o3b3o3b3o3b3o3bo$b3o3b3o3b3o3b3o3b3o4b67o4b3o3b3o3b3o3b3o3b3ob$4b3o3b3o3b3o3b3o3b4o67b4o3b3o3b3o3b3o3b3o4b
 $b3o3b3o3b3o3b3o3b3o4b67o4b3o3b3o3b3o3b3o3b3ob$o3b3o3b3o3b3o3b3o3b4o67b4o3b3o3b3o3b3o3b3o3bo$b3o3b3o3b3o3b3o3b3o4b67o4b3o3b3o3b3o3b3o3b3ob$4b3o3b3o3b3o3b3o3b4o67b4o3b3o3b3o3b3o3b3o4b$b3o3b3o3b3o3b3o3b3o4b67o4b3o3b3o3b3o3b3o3b3ob$o3b3o3b3o3b3o3b3o3b4o
 67b4o3b3o3b3o3b3o3b3o3bo$b3o3b3o3b3o3b3o3b3o4b67o4b3o3b3o3b3o3b3o3b3ob$4b3o3b3o3b3o3b3o3b4o67b4o3b3o3b3o3b3o3b3o4b$b3o3b3o3b3o3b3o3b3o4b67o4b3o3b3o3b3o3b3o3b3ob$o3bobo3bobo3bobo3bobo3bo2bo3bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2bo2b
-o3bo2bo3bobo3bobo3bobo3bobo3bo$2ob2ob2ob2ob2ob2ob2ob2ob2ob2o2b2o65b2o2b2ob2ob2ob2ob2ob2ob2ob2ob2ob2o!`,
-
-"negagar": `
+o3bo2bo3bobo3bobo3bobo3bobo3bo$2ob2ob2ob2ob2ob2ob2ob2ob2ob2o2b2o65b2o2b2ob2ob2ob2ob2ob2ob2ob2ob2ob2o!`,negagar:`
 #O amling
 #C https://conwaylife.com/forums/viewtopic.php?p=156868&hilit=n#p156868
 x = 342, y = 461, rule = B3/S23
@@ -25533,9 +25247,7 @@ obo5bo313b$20b4ob2o2bo312b$20b2obo3b2o313b$21b2o319b$24bo5b312o$22ob6o313b$26bo3
 42o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$3
 42b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$3
 42o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$3
-42b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o!`,
-
-"negagar2": `x = 342, y = 461, rule = B3/S23
+42b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o!`,negagar2:`x = 342, y = 461, rule = B3/S23
 342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b
 $342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b
 $342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b
@@ -25547,9 +25259,7 @@ bobo2bo2b2o320b$6b3o2bob2o2bo3bob2o317b$6b2ob3o12bo317b$7b4o10bo7b313o$8bo12bob2
 42o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$3
 42b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$3
 42b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$3
-42b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o!`,
-
-"qbstretch2": `
+42b$342b$342o$342b$342b$342b$342o$342b$342b$342b$342b$342b$342b$342b$342o$342b$342b$342b$342o!`,qbstretch2:`
 #O modified by me
 x = 79, y = 455, rule = B3/S23
 51bo5bo21b$50b3o3b3o20b$50bob2o2bob2o19b$51b3o5bo19b$51b3o4b3o18b$51b2o3bo22b$56bo4bo17b$56bo22b$58b2obo17b$58bo20b$79b$64bo14b$58b3o2b3o13b$63bob2o12b$58bo5b3o12b$23b3o11b3o18b3o3b2o13b$23bo2bo10bo2bo16bo2b2o17b$23bo6b3
@@ -25569,10 +25279,7 @@ $79b$79b$79b$4b2o20b3o3b3o44b$3bobo19bo2bo2bo2bo44b$3b2o23bo6bo43b$24bo3bo2bo2b2
 0b$26b3o13b3o34b$25b2obo13bo2bo33b$4b2o19b3o7bo2bo3bo36b$3bobo19b3o6b3o5bo3bo32b$3b2o21b2o6bo4bo2bo36b$36b3o4bobo33b$79b$79b$79b$35bo43b$35bo43b$79b$79b$79b$3b2o74b$3b2o74b$79b$33b2o44b$33bo4bo40b$36b2obo39b$40bo38b$38bo40b$4b2o24b2obob2o42b$3bobo25b
 4o2bo41b$3b2o27b2o3bo4bo36b$34b3o5bo36b$34bo6bobo35b$36bo42b$35b2o6b2o34b$42b2o35b$42bo36b$79b$79b$79b$3b2o74b$3b2o74b$79b$79b$79b$79b$36b2o41b$30b2o3b2o42b$4b2o24b2o5bo41b$3bobo73b$3b2o74b$79b$79b$36bo42b$35b3o41b$35bob2o40b$26b2o8b3o40b$25b2o9b3o40
 b$27bo8b2o41b$79b$3b2o74b$3b2o74b$79b$79b$79b$79b$16b2o61b$15b2o62b$4b2o11bo61b$3bobo73b$3b2o74b$79b$79b$79b$79b$79b$79b$79b$79b$79b$3b2o74b$3b2o74b$79b$79b$79b$79b$79b$79b$4b2o73b$3bobo73b$3b2o74b$79b$79b$79b$79b$79b$6b2o71b$5b2o72b$7bo71b$79b$3b2o7
-4b$3b2o74b$79b$79b$79b$2b3o74b$2b3o74b$bo3bo73b$o5bo72b$bo3bo73b$2b3o74b$79b$79b$79b$79b$79b$79b$79b$79b$79b$3b2o74b$3b2o74b!`,
-
-
-"newpuffer": `
+4b$3b2o74b$79b$79b$79b$2b3o74b$2b3o74b$bo3bo73b$o5bo72b$bo3bo73b$2b3o74b$79b$79b$79b$79b$79b$79b$79b$79b$79b$3b2o74b$3b2o74b!`,newpuffer:`
 #O by iNoMed » September 11th, 2026, 12:59 am
 x = 499, y = 744, rule = B3/S23
 32bo$31bobo$30bo2bo$29b2obo$29b2o$26bo2b2o$25b2o$25bo$23b2o2bo$23b2o2$20b4o2bo$20b6o$20b4o2$16b2o$15bo2bo$15bo2bobo$14bo6bo$18bo2bo$11b3ob2obo2b2o$11bo2bo2bo3bobo$13b2o6b4o$8b3o11bo2bo$8bo2bo11bo8bo2bo$6bo16b2o6b2ob2o$5
@@ -25604,9 +25311,7 @@ bobo8bo$413bo2bo3bo8bo$415bo2b2o8bo$412b2obobo10bo$413bob2o10b2o$413bo12b3o$412b
 6b2obo4bo$366b3o12bo41bo2bo2bo$364bo15b2obo39b2o2bobo2bo6b3o$363b3ob2o9b2o47b2o10b3o$365b3obo8b2o58bo$361bo5bobo8b2o43b2o10bob2o$360b3o59bo2bo8bo$358bo3b2o57b2obo8bo4bo$357bob5o57b2o10bo$357bo60bo2b2o8b2ob2o$357bo59b2obo9bo3b2o$416bo16b2o$355b3o59bo1
 5b2o$353b2o59b2ob2o8b6o$353bo60bo2b2o$352bobo59bo3bo5bo$353bo57b2o2bobo5b3o$411bo13bo4bo$407b4o2bo7bob2o3b2o$406b2o2bo9b2obo2b2o$405bobo4bobo6b2o$404bo2b4obo11bo$403b4o6bo4bo5bo$403bo2bo11bo4bo$403bo2bo11bo4bo$403b2obo8bo2bo3bo$401b2o11bo3bo$401bo3b2
 o7bo3bo$403bo3bo4b2o2b2o$398b3o4bo5bo2b4o$398bo2bo8bo3b2o$396bo$395bob3obo8bo$394b2o2b3o8b2obo$407b2o$395bo11b2o$392b3o12b2o$391b4o$390bo$390bobo$391bo56$497bo$496bobo$494b2o2bo2$493bo$490b2o2b2o$490b2o$490bo$488bobo$488b2o$486bo2bo$485bo4bo$484bo5bo
-$481bo3bo$480bobo3b2o$479b2ob2o$478b2o4bobo$477b2o7bo$476bo9bo$477b2o$478bo$475bo3bo$474bobo$473bo3bob3o$477bo$471b2o$472b2o$468b4o2b2o$468b2o2$467bo$465bo2bo$465bo2bo$464bo$463bo$464b2o!`,
-
-"boatrotator": `
+$481bo3bo$480bobo3b2o$479b2ob2o$478b2o4bobo$477b2o7bo$476bo9bo$477b2o$478bo$475bo3bo$474bobo$473bo3bob3o$477bo$471b2o$472b2o$468b4o2b2o$468b2o2$467bo$465bo2bo$465bo2bo$464bo$463bo$464b2o!`,boatrotator:`
 #O by TheWayOfTheCon » Oct 3 2026, 7:08 pm
 x = 95, y = 95, rule = B3/S23
 15bo79b$15b3o77b$18bo76b$17b2o76b$18b3o52b2o20b$19bobo49bo2bo20b$18bo3bo72b$18b5o47bo24b$17b2o3b2o71b$18b5o48b2o22b$19b3o51bo21b$20bo74b$95b$70b2o3b2o18b$70b2o3b2o18b$27b2o9b2o14b2o15b5o17b2o$27b2o8b2o15b2o16bobo18bob$38b5o43bo4bobob$13b2o24b4o29b3o1
@@ -25614,10 +25319,7 @@ x = 95, y = 95, rule = B3/S23
 o5b2o8b2o37b3o3b3o15b$32b2o36b2ob2ob2ob2o14b$41bo27b3o7b3o13b$40bobo52b$41b2o5bo22bo7bo15b$47bo47b$44bo2b3o45b$43bobo49b$43b2o50b$95b$95b$95b$95b$15b2o5b2o37b2o32b$15bob2ob2obo37b2o8b2o5b2o15b$16bobobobo48b2o5b2o15b$16bobobobo72b$15bo7bo71b$95b$95b$9
 5b$17b2ob2o18b2o53b$15bo2bobo2bo16b2o53b$15b3o3b3o71b$16bo5bo72b$95b$15b2o78b$15b2o78b$95b$95b$49b2o9b3ob3o14bo13b$10bobo26b2o6b2ob2o7bob2ob2obo13bobo11b$10bo3bo24b2o6bo2bo7b2o7b2o4b2o7bobo10b$14bo5b3o24bo2bo8bob2ob2obo4bo2bo6bo2bo3b2o4b$10bo4bo4b3o2
 5b2o10b3ob3o5bo2bo6bobo4b2o4b$14bo60bo5bobo11b$2b2o6bo3bo33b2o25bo5bo13b$bobo6bobo34bo2bo22bobo19b$bo16b2o3b2o14b2o6bo2bo15b2o5bobo19b$2o17b5o15b2o6b2ob2o14b2o6bo20b$20b3o26b2o44b$21bo73b$71b2o3b2o17b$71bo5bo17b$95b$72bo3bo18b$73b3o19b$95b$95b$20b2o7
-3b$20b2o73b$76b2o17b$76bo18b$77b3o15b$79bo15b!`,
-
-
-"rpenthassle": `
+3b$20b2o73b$76b2o17b$76bo18b$77b3o15b$79bo15b!`,rpenthassle:`
 #O Idea by me, completed by EvinZL » Oct 6 2026, 5:15pm
 x = 198, y = 198, rule = B3/S23
 77b2o119b$76bo2bo118b$79bo118b$198b$78b2o118b$75bo122b$75bob2o119b$74bo123b$73b2ob3o119b$73bo3bo120b$71b3o124b$198b$198b$80bo117b$79bobo116b$79bobo116b$80bo117b$198b$83bobo112b$82bo2bo112b$82bo3bo111b$82bo2bo112b$83b3o112b$198b$73b2o123b$73b2o123b$19
@@ -25633,5 +25335,5 @@ $79bobo9bo3b2o64bobo2bo31b$74b2obobobobob2o6b3o65b2o2bobo30b$75bo3bobo3bo80bobo2
 17bo32bobo77b$30b3o24b2o9b4o13b2o31b2o78b$29bobo26bo139b$29b2o24b3o64b2o74b$55bo65bobo74b$121bo76b$121bobo74b$122b2o74b$198b$115bo82b$113b2o83b$118b2obo76b$113b5ob3o76b$112bob2o5bo5b2o69b$112b2o3b4o6bobo68b$129bo68b$119b2o8b2o67b$115b2o81b$115b2o6bo7
 4b$121b2obo73b$120bo77b$119bobo2bo73b$119bo2bo75b$120b2o76b$109bo88b$108bobo87b$108bobo87b$109bo88b$198b$112bobo83b$111bo2bo83b$111bo3bo82b$111bo2bo83b$112b3o83b$198b$102b2o94b$102b2o94b$198b$103bo94b$102bobo93b$97b2o2bo2bo19b2o72b$97b2obo25bob2o68b$
 101b2o19bo2bo2b2o68b$122bobo73b$123bo74b$198b$123b2o73b$123b2o73b$198b$198b$198b$198b$198b$198b$198b$117bo80b$116bobo79b$116bobo79b$117bo80b$198b$198b$124b3o71b$120bo3bo73b$119b3ob2o73b$123bo74b$119b2obo75b$122bo75b$118b2o78b$198b$118bo79b$118bo2bo76
-b$119b2o77b!`
-}
+b$119b2o77b!`};console.clear();var FPS_BUFFER_SIZE=120,frameTimestamps=Array(FPS_BUFFER_SIZE),frameIndex=0,numSamples=0,fps=0,rendered=0,lastDisplayUpdate=0,DISPLAY_UPDATE_INTERVAL=120;function sampleFPS(t=performance.now()){if(frameTimestamps[frameIndex]=t,frameIndex=(frameIndex+1)%FPS_BUFFER_SIZE,numSamples<FPS_BUFFER_SIZE&&numSamples++,t-lastDisplayUpdate>DISPLAY_UPDATE_INTERVAL){let n=0,r=t-1e3;for(let t=0;t<numSamples&&frameTimestamps[(frameIndex-1-t+FPS_BUFFER_SIZE)%FPS_BUFFER_SIZE]>r;++t)n++;fps=n/2,lastDisplayUpdate=t}requestAnimationFrame(sampleFPS)}requestAnimationFrame(sampleFPS);var canvas=document.getElementById(`gamecanvas`),ctx=canvas.getContext(`2d`,{alpha:!1}),display=document.getElementById(`display`),display2=document.getElementById(`display2`),importbtn=document.getElementById(`import`),import2btn=document.getElementById(`import2`),alertMsg=document.getElementById(`alerttext`),exportbtn=document.getElementById(`export`),tpsInput=document.getElementById(`tpsInput`),tptInput=document.getElementById(`tptInput`),promptMenu=document.getElementById(`promptMenu`),promptInput=document.getElementById(`promptInput`),promptBtn=document.getElementById(`promptBtn`),promptName=document.getElementById(`promptName`),promptDesc=document.getElementById(`promptDesc`),lexBtn=document.getElementById(`lex`),lexiconn=document.getElementById(`lexicon`),autoCamSlider=document.getElementById(`acs`),camInfo=document.getElementById(`camInfo`),offDisp=document.getElementById(`offscreenDisp`),offBox=document.getElementById(`offBox`),lexloaded=!0,patterns=``,startingArray=[],pixels=[],markers=[],camx=0,camy=0,zoom=10,keysPressed=[],paused=!0,sparseEnabled=!0,mouseX=0,mouseY=0,mousedown=0,clickedFirst=0,hoverX=0,hoverY=0,tickn=0,livePx=0,maxPx=0,minPx=0,maxReached=0,minReached=0,minPeriod=0,maxPeriod=0,autoCamMode=0,offscreenFit=!1,cmdPressed=!1,shiftpressed=!1,hiliteCorner1={x:-1,y:1},hiliteCorner2={x:1,y:-1},t2=0,tpt=0,tps=0,inputFocus=!1,markerColors=[`faa`,`afa`,`aaf`,`ffa`,`aff`,`faf`],colorIndex=0,selectedLivePixels=[],copiedPixels=[],pastePreviewActive=!1,pastePreviewOffset={x:0,y:0},draggingSelection=!1,dragStart=null,dragOffset={x:0,y:0},selectionOriginal=[],mouseButtonDown=null,RIGHT_MOUSE_BUTTON=2;function resetState(){pixels=startingArray.map(t=>({x:t.x,y:t.y})),tickn=0,paused=!0,selectedLivePixels=[],draggingSelection=!1,dragStart=null,selectionOriginal=[],pastePreviewActive=!1,getData(),maxPx=livePx,minPx=livePx,minReached=0,maxReached=0,minPeriod=-1,maxPeriod=-1}var confOpac=0;function saveCurrent(){startingArray=pixels.map(t=>({x:t.x,y:t.y})),alertMsg.textContent=`Saved`,alertOpac=100,animateAlert(),getData(),maxPx=livePx,minPx=livePx,minReached=0,maxReached=0,minPeriod=-1,maxPeriod=-1}var alertOpac=100;function animateAlert(){alertMsg.style.opacity=`${alertOpac}%`,alertOpac>0&&(alertOpac-=.5,requestAnimationFrame(animateAlert))}function zoomFit(t=3,n=!1){if(pixels.length>0&&(rendered!==livePx||!n)){let r=1/0,a=-1/0,o=1/0,s=-1/0;for(let t of pixels)t.x<r&&(r=t.x),t.x>a&&(a=t.x),t.y<o&&(o=t.y),t.y>s&&(s=t.y);let c=2;r-=2,a+=2,o-=2,s+=2;let l=a-r+1,u=s-o+1,d=canvas&&canvas.width?canvas.width:window.innerWidth,f=canvas&&canvas.height?canvas.height:window.innerHeight,m=d*1/l,h=f*1/u,g=Math.abs(Math.min(m,h))*(.9-(n?.2:0)),_=Math.round((r+a)/2),v=Math.round((o+s)/2);t===1?(camx=_,camy=v):t===2?(g<zoom&&(zoom=g),camx=_,camy=v):t===3&&(zoom=g,camx=_,camy=v)}}var loadCounter=0;function loadLexi(t,n=null){if(!lexloaded)return;if(setTimeout(()=>{inputFocus=!1},300),loadCounter>0){let t=new URL(window.location.href),n=new URLSearchParams(t.search);n.has(`tpt`)&&(n.delete(`tpt`),console.log(`REMOVED TPT`),t.search=n.toString()?`?${n.toString()}`:``,window.history.replaceState({},``,t))}loadCounter++;try{let t=new URLSearchParams(window.location.search).get(`tpt`);if(t!==null){let n=Number(t);!isNaN(n)&&tpt!==void 0&&(tpt=n,tptInput.value=n,console.log(`LOADED TPT: ${tpt}`))}}catch{console.log(`TPT FAIL`)}function r(t){let n=new URL(window.location.href),r=new URLSearchParams(n.search);r.set(`load`,t),n.search=r.toString(),window.history.replaceState({},``,n)}if(t.includes(`rand`)){let a=Number(t[4]+t[5]+t[6]);pixels=[],tickn=0;for(let t=a/-2;t<a/2;t++)for(let n=a/-2;n<a/2;n++)Math.random()<1/4&&pixels.push({x:n,y:t});paused=!0,lexiconn.style.opacity=`0%`,setTimeout(()=>{lexiconn.style.display=`none`},250),document.body.style.overflow=``,camx=0,camy=0,alertMsg.textContent=`Generated ${a}x${a} Board`,n!==null&&r(n),alertOpac=100,inputFocus=!1,animateAlert(),getData(),maxPx=livePx,maxReached=tickn,maxPeriod=-1,b,minPx=livePx,minReached=tickn,minPeriod=-1,zoomFit(3);return}if(Object.prototype.hasOwnProperty.call(patterns,t)){let a=patterns[t];if(typeof a==`string`){let t=a.split(/\r?\n/),n=``,r=0;for(;r<t.length;r++){let a=t[r].trim();if(!(a.startsWith(`#`)||a===``)){n=a;break}}n.match(/x\s*=\s*(\d+)\s*,\s*y\s*=\s*(\d+)/i)?r++:r=0;let o=t.slice(r).filter(t=>!t.trim().startsWith(`#`)).join(``),s=o.indexOf(`!`);s!==-1&&(o=o.slice(0,s+1));let c=0,l=0,u=n.match(/x\s*=\s*(\d+)\s*,\s*y\s*=\s*(\d+)/i);u&&(c=parseInt(u[1],10),l=parseInt(u[2],10));let d=[],f=0,m=0,h=``;for(let t=0;t<o.length;t++){let n=o[t];if(/\d/.test(n))h+=n;else if(n===`b`||n===`o`){let t=h?parseInt(h,10):1;for(let r=0;r<t;r++){if(n===`o`){let t=f-Math.floor(c/2),n=0-m+Math.floor(l/2);d.push({x:t,y:n})}f++}h=``}else if(n===`$`)m+=h?parseInt(h,10):1,f=0,h=``;else if(n===`!`)break}if(d.length===0){alertMsg.textContent=`No live cells found in RLE or invalid format.`,alertOpac=100,animateAlert();return}startingArray=d.slice()}else if(Array.isArray(a))startingArray=a.map(t=>({x:t.x,y:t.y}));else{alertMsg.textContent=`Pattern format invalid`,alertOpac=100,animateAlert();return}resetState(),saveCurrent(),paused=!0,lexiconn.style.opacity=`0%`,setTimeout(()=>{lexiconn.style.display=`none`},250),document.body.style.overflow=``,camx=0,camy=0,zoomFit(3),alertMsg.textContent=`Loaded ${t}`,n!==null&&r(n),alertOpac=100,mousedown=!1,inputFocus=!1,animateAlert(),getData(),maxPx=livePx,minPx=livePx,minReached=0,maxReached=0,minPeriod=-1,maxPeriod=-1}else alertMsg.textContent=`Unknown pattern: ${t}`,alertOpac=100,animateAlert()}function isLive(t){return pixels.some(n=>n.x===t.x&&n.y===t.y)}var prevStateHashes=new Set,prevTickHashes=[],MAX_STATE_HISTORY=100;function hashPixArr(t){let n=5381;for(let r=0;r<t.length;++r){let a=t[r],o=(a.x&65535)<<16|a.y&65535;n=(n<<5)+n^o}return n>>>0}function arraysEqualUnordered(t,n){if(t.length!==n.length)return!1;let r=new Set(t.map(t=>(t.x&65535)<<16|t.y&65535)),a=new Set(n.map(t=>(t.x&65535)<<16|t.y&65535));if(r.size!==a.size)return!1;for(let t of r)if(!a.has(t))return!1;return!0}function detectCycleOrStable(t){let n=hashPixArr(t);for(let r=0;r<prevTickHashes.length;++r)if(prevTickHashes[r].hash===n&&arraysEqualUnordered(prevTickHashes[r].arr,t))return{period:r+1,at:prevTickHashes[r]};return null}function getData(){livePx=pixels.length}function tick(){if(draggingSelection)return;let t=pixels.length,n=new Set;for(let r=0;r<t;++r){let t=pixels[r].x|0,a=pixels[r].y|0,o=(t&65535)<<16|a&65535;n.add(o)}let r=[0,1,1,1,0,-1,-1,-1],a=[1,1,0,-1,-1,-1,0,1],o=new Map;for(let n=0;n<t;++n){let t=pixels[n].x|0,s=pixels[n].y|0,c=(t&65535)<<16|s&65535,l=o.get(c);l?l.isLive=!0:o.set(c,{count:0,isLive:!0});for(let n=0;n<8;++n){let c=t+r[n],l=s+a[n],u=(c&65535)<<16|l&65535,d=o.get(u);d?d.count+=1:o.set(u,{count:1,isLive:!1})}}let s=[],c=[];o.forEach((t,n)=>{let r=t.count;if(t.isLive){if(r===2||r===3){let t=n>>16;t&32768&&(t|=4294901760);let r=n&65535;r&32768&&(r|=4294901760),s.push({x:t,y:r})}}else if(r===3){let t=n>>16;t&32768&&(t|=4294901760);let r=n&65535;r&32768&&(r|=4294901760),c.push({x:t,y:r})}});let l=s.concat(c);if(l.length<4096){let t=hashPixArr(l),n=detectCycleOrStable(l);if(n){if(n.period===1){tickn++,pixels=l;return}tickn++,pixels=l;return}prevTickHashes.unshift({hash:t,arr:l}),prevTickHashes.length>MAX_STATE_HISTORY&&(prevTickHashes.length=MAX_STATE_HISTORY)}else prevTickHashes.length=0;(c.length>0||s.length!==pixels.length)&&tickn++,pixels=l,getData(),livePx>maxPx&&(maxPx=livePx,maxPeriod=tickn-maxReached,maxReached=tickn),livePx<minPx&&(minPx=livePx,minPeriod=tickn-minReached,minReached=tickn)}function draw(){rendered=0,getData(),promptMenu.style.display===`block`&&(inputFocus=!0);{let t=canvas.getBoundingClientRect(),n=canvas.width/-2+(mouseX-t.left)*(canvas.width/t.width),r=canvas.height/2-(mouseY-t.top)*(canvas.height/t.height);hoverX=Math.floor(n/zoom+camx),hoverY=1+Math.floor(r/zoom+camy),(hoverX===1/0||hoverX===-1/0)&&(hoverX=0),(hoverY===1/0||hoverY===-1/0)&&(hoverY=0)}let t=Math.max(zoom,.4);function n(n,r,a=1){let o=(n-camx)*zoom+canvas.width/2,s=canvas.height/2-(r-camy)*zoom;return o+t>0&&o-t<canvas.width&&s+t>0&&s-t<canvas.height}let r=Math.max(Math.ceil(.5/zoom),1);sparseEnabled||(r=1);function a(){let t=Math.min(hiliteCorner1.x,hiliteCorner2.x),n=Math.max(hiliteCorner1.x,hiliteCorner2.x),r=Math.min(hiliteCorner1.y,hiliteCorner2.y),a=Math.max(hiliteCorner1.y,hiliteCorner2.y);return{minX:t,maxX:n,minY:r,maxY:a,area:(n-t+1)*(a-r+1)}}ctx.fillStyle=`#202525`,ctx.fillRect(0,0,canvas.width,canvas.height);{if(zoom>=2){ctx.strokeStyle=`#667373`,ctx.lineWidth=zoom/20;let t=Math.ceil(canvas.width/zoom)+2,n=Math.ceil(canvas.height/zoom)+2,r=Math.floor(camx-canvas.width/(2*zoom)),a=Math.floor(camy-canvas.height/(2*zoom));for(let n=0;n<=t;n++){ctx.beginPath();let t=(r+n-camx)*zoom+canvas.width/2;ctx.moveTo(t,0),ctx.lineTo(t,canvas.height),ctx.stroke()}for(let t=0;t<=n;t++){ctx.beginPath();let n=a+t,r=canvas.height/2-(n-camy)*zoom;ctx.moveTo(0,r),ctx.lineTo(canvas.width,r),ctx.stroke()}}let o=new Set(selectedLivePixels.map(t=>t.x+`,`+t.y));for(let a=0;a<pixels.length;a++){let s=pixels[a],c=s.x+`,`+s.y;draggingSelection&&o.has(c)||(s.x+s.y)%r===0&&n(s.x,s.y,t)&&(ctx.fillStyle=o.has(c)?`hsla(120,${(Math.sin(t2/10)+1.2)*25}%,80%,1)`:`white`,ctx.fillRect((s.x-camx)*zoom+canvas.width/2,canvas.height/2-(s.y-camy)*zoom,t,t),rendered++)}if(n(0,0,t)){if(ctx.fillStyle=`#fff2`,zoom>=4)ctx.fillRect((0-camx)*zoom+canvas.width/2,canvas.height/2-(0-camy)*zoom,t,t);else{let t=Math.max(Math.min(canvas.width,canvas.height)*.01,zoom);ctx.beginPath(),ctx.arc((0-camx)*zoom+canvas.width/2,canvas.height/2-(0-camy)*zoom,t/2,0,2*Math.PI),ctx.fill()}}if(draggingSelection&&selectionOriginal.length>0)for(let r=0;r<selectionOriginal.length;r++){let a=selectionOriginal[r].x+dragOffset.x,o=selectionOriginal[r].y+dragOffset.y;n(a,o,t)&&(ctx.fillStyle=`rgba(60,180,250,0.5)`,ctx.fillRect((a-camx)*zoom+canvas.width/2,canvas.height/2-(o-camy)*zoom,t,t))}if(pastePreviewActive&&copiedPixels.length>0){let r=Math.min(...copiedPixels.map(t=>t.x)),a=Math.min(...copiedPixels.map(t=>t.y)),o=hoverX-r,s=hoverY-a,c=new Set(pixels.map(t=>`${t.x},${t.y}`));for(let r=0;r<copiedPixels.length;r++){let a=copiedPixels[r].x+o,l=copiedPixels[r].y+s;n(a,l,t)&&(ctx.fillStyle=c.has(`${a},${l}`)?`hsla(0,100%,60%,0.4)`:`hsla(210,100%,60%,0.5)`,ctx.fillRect((a-camx)*zoom+canvas.width/2,canvas.height/2-(l-camy)*zoom,t,t))}}if(shiftpressed){ctx.globalAlpha=.15;let{minX:r,maxX:o,minY:s,maxY:c,area:l}=a();if(l>5e4){ctx.globalAlpha=1,ctx.save(),ctx.fillStyle=`#ccc`,ctx.lineWidth=10,ctx.beginPath();for(let a=r;a<=o;a++)n(a,s,t)&&ctx.fillRect((a-camx)*zoom+canvas.width/2,canvas.height/2-(s-camy)*zoom,t,t);if(c!==s)for(let a=r;a<=o;a++)n(a,c,t)&&ctx.fillRect((a-camx)*zoom+canvas.width/2,canvas.height/2-(c-camy)*zoom,t,t);for(let a=s+1;a<c;a++)n(r,a,t)&&ctx.fillRect((r-camx)*zoom+canvas.width/2,canvas.height/2-(a-camy)*zoom,t,t);if(o!==r)for(let r=s+1;r<c;r++)n(o,r,t)&&ctx.fillRect((o-camx)*zoom+canvas.width/2,canvas.height/2-(r-camy)*zoom,t,t);ctx.stroke(),ctx.restore()}else{ctx.fillStyle=`#aaa`;for(let a=r;a<=o;a++)for(let r=s;r<=c;r++)n(a,r,t)&&ctx.fillRect((a-camx)*zoom+canvas.width/2,canvas.height/2-(r-camy)*zoom,t,t)}ctx.globalAlpha=1}if(n(hoverX,hoverY,t)&&(ctx.globalAlpha=.5,ctx.fillStyle=`#888`,ctx.fillRect((hoverX-camx)*zoom+canvas.width/2,canvas.height/2-(hoverY-camy)*zoom,t,t)),ctx.globalAlpha=1,Array.isArray(markers)){ctx.save(),ctx.globalAlpha=.6;for(let r=0;r<markers.length;r++){let a=markers[r];n(a.x,a.y,t)&&(ctx.fillStyle=a.color||`#0ff`,ctx.fillRect((a.x-camx)*zoom+canvas.width/2,canvas.height/2-(a.y-camy)*zoom,t,t))}ctx.restore()}}if(shiftpressed&&(hiliteCorner2={x:hoverX,y:hoverY}),mousedown&&!draggingSelection){if(isLive({x:hoverX,y:hoverY})&&clickedFirst==0){if(!selectedLivePixels.find(t=>t.x===hoverX&&t.y===hoverY)){let t=pixels.findIndex(t=>t.x===hoverX&&t.y===hoverY);t!==-1&&pixels.splice(t,1)}}else clickedFirst==1&&!pixels.some(t=>t.x===hoverX&&t.y===hoverY)&&pixels.push({x:hoverX,y:hoverY})}if(keysPressed[`=`]||keysPressed[`+`]){let t=(mouseX-canvas.width/2)/zoom+camx,n=-(mouseY-canvas.height/2)/zoom+camy;zoom*=1.05;let r=(mouseX-canvas.width/2)/zoom+camx,a=-(mouseY-canvas.height/2)/zoom+camy;camx+=t-r,camy+=n-a}else if(keysPressed[`-`]){let t=(mouseX-canvas.width/2)/zoom+camx,n=-(mouseY-canvas.height/2)/zoom+camy;zoom/=1.05;let r=(mouseX-canvas.width/2)/zoom+camx,a=-(mouseY-canvas.height/2)/zoom+camy;camx+=t-r,camy+=n-a}(keysPressed.a||keysPressed.arrowleft&&!inputFocus)&&(camx-=1/Math.abs(Math.log(zoom+1.5))*1),(keysPressed.d&&!cmdPressed||keysPressed.arrowright&&!inputFocus)&&(camx+=1/Math.abs(Math.log(zoom+1.5))*1),(keysPressed.w||keysPressed.arrowup&&!inputFocus)&&(camy+=1/Math.abs(Math.log(zoom+1.5))*1),(keysPressed.s&&!cmdPressed||keysPressed.arrowdown&&!inputFocus)&&(camy-=1/Math.abs(Math.log(zoom+1.5))*1),display.textContent=`cam: (${camx.toFixed(2)},${camy.toFixed(2)}) hover: (${hoverX},${hoverY}) zoom: ${zoom.toFixed(3)}`,display2.textContent=`livepx: ${livePx} maxpx: ${maxPx}(${maxReached}${maxPeriod==-1?``:`,Δ${maxPeriod}`}) minpx: ${minPx}(${minReached}${minPeriod==-1?``:`,Δ${minPeriod}`}) Rendered: ${rendered} tick: ${tickn} fps: ${Math.ceil(fps)}`,autoCamMode>0&&autoCamMode<4&&zoomFit(autoCamMode,offscreenFit),requestAnimationFrame(draw)}function sleep(t){return new Promise(n=>setTimeout(n,t))}async function waitUntil(t){for(;!t();)await sleep(10)}async function tickLoop(){tps=tpsInput.value?tpsInput.value:60,tpt=tptInput.value?tptInput.value:1,tps<fps&&await sleep(600/tps),paused&&await waitUntil(()=>!paused);for(let t=0;t<tpt;t++)tick();requestAnimationFrame(tickLoop)}draw(),tickLoop(),sampleFPS();function seleToMarkers(){selectedLivePixels.forEach(t=>{markers.some(n=>n.x===t.x&&n.y===t.y)||markers.push({x:t.x,y:t.y,color:`#${markerColors[colorIndex]}`})}),alertMsg.textContent=`Added ${selectedLivePixels.length} markers from selection`,alertOpac=100,animateAlert()}function handleWheelZoom(t){let n=canvas.getBoundingClientRect(),r=t.clientX-n.left,a=t.clientY-n.top;isNaN(r)&&(r=mouseX),isNaN(a)&&(a=mouseY);let o;o=t.shiftKey&&Math.abs(t.deltaX)>0?t.deltaX:t.deltaY;let s=Math.abs(o)<8,c=o<0?1:-1,l=10,u=1e3/fps/10,d=s?1.004:1.02,f=function(t){if(t>10)return;let n=(r-canvas.width/2)/zoom+camx,o=-(a-canvas.height/2)/zoom+camy;c>0?zoom*=d:zoom/=d;let s=(r-canvas.width/2)/zoom+camx,l=-(a-canvas.height/2)/zoom+camy;camx+=n-s,camy+=o-l,t<10&&setTimeout(function(){f(t+1)},u)};f(1),t.preventDefault()}canvas.addEventListener(`wheel`,handleWheelZoom,{passive:!1});function resizeCanvas(){canvas.width=window.innerWidth-0,canvas.height=window.innerHeight-0}resizeCanvas(),window.addEventListener(`resize`,resizeCanvas);function exportRLE(){let t=document.getElementById(`export2`);if(t&&t.blur(),!pixels||pixels.length===0){alertMsg.textContent=`Board is empty`,alertOpac=100,animateAlert();return}let n=1/0,r=1/0,a=-1/0,o=-1/0;for(let t of pixels)t.x<n&&(n=t.x),t.x>a&&(a=t.x),t.y<r&&(r=t.y),t.y>o&&(o=t.y);let s=a-n+1,c=o-r+1,l=[];for(let t=0;t<c;t++){l[t]=[];for(let n=0;n<s;n++)l[t][n]=`b`}for(let t of pixels){let r=t.x-n,a=o-t.y;a<0||a>=c||r<0||r>=s||(l[a][r]=`o`)}let u=[];for(let t=0;t<c;t++){let n=l[t],r=``,a=1;for(let t=0;t<s;t++){let o=n[t],c=t+1<s?n[t+1]:null;c&&c===o?a++:(r+=a>1?a+o:o,a=1)}u.push(r)}let d=u.join(`$`)+`!`,f=`x = ${s}, y = ${c}, rule = B3/S23\n`;function m(t,n){let r=``;for(let a=0;a<t.length;a+=n)r+=t.substr(a,n),a+n<t.length&&(r+=`
+`);return r}let h=f+m(d,250);function g(t){navigator.clipboard&&window.isSecureContext?navigator.clipboard.writeText(t).then(function(){alertMsg.textContent=`RLE Copied`,alertOpac=100,animateAlert()},function(){n(t)}):n(t);function n(t){let n=document.createElement(`textarea`);n.value=t,document.body.appendChild(n),n.select();try{document.execCommand(`copy`),alertMsg.textContent=`RLE Copied`,alertOpac=100,animateAlert()}catch{alertMsg.textContent=`RLE Copy Failure`,alertOpac=100,animateAlert()}document.body.removeChild(n)}}g(h)}function importRLE(t){paused=!0;let n=t;if(!n||n.trim()===``){import2btn.blur(),promptMenu.style.display=`none`,promptMenu.style.opacity=`0%`,setTimeout(()=>{promptMenu.style.display=`none`},250),promptInput.value=``,alertMsg.textContent=`RLE Empty`,alertOpac=100,animateAlert();return}if(n.split(/\r?\n/).map(t=>t.trim()).filter(t=>t!==``).filter(t=>!t.startsWith(`#`)).findIndex(t=>/x\s*=\s*\d+\s*,\s*y\s*=\s*\d+\s*,\s*rule\s*=\s*.*$/i.test(t))==-1){import2btn.blur(),promptMenu.style.display=`none`,promptInput.value=``,alertMsg.textContent=`RLE Syntax Failed`,alertOpac=100,animateAlert();return}let r=n.split(/\r?\n/),a=``,o=0;for(;o<r.length;o++){let t=r[o].trim();if(!(t.startsWith(`#`)||t==``)){a=t;break}}let s=0,c=0,l=a.match(/x\s*=\s*(\d+)\s*,\s*y\s*=\s*(\d+)/i);l?(s=parseInt(l[1],10),c=parseInt(l[2],10),o++):o=0;let u=s?Math.floor(s/2):0,d=c?Math.floor(c/2):0,f=r.slice(o).filter(t=>!t.trim().startsWith(`#`)).join(``),m=f.indexOf(`!`);m!==-1&&(f=f.slice(0,m+1));let h=[],g=0,_=0,v=``;for(let t=0;t<f.length;t++){let n=f[t];if(/\d/.test(n))v+=n;else if(n===`b`||n===`o`){let t=v?parseInt(v,10):1;for(let r=0;r<t;r++)n===`o`&&h.push({x:g,y:0-_}),g++;v=``}else if(n===`$`)_+=v?parseInt(v,10):1,g=0,v=``;else if(n===`!`)break}if(h.length===0){alertMsg.textContent=`No live cells found in RLE or invalid format.`,alertOpac=100,animateAlert(),import2btn.blur(),promptMenu.style.opacity=`0%`,setTimeout(()=>{promptMenu.style.display=`none`},250),promptInput.value=``;return}startingArray=h.map(t=>({x:t.x-u,y:t.y+d})),import2btn.blur(),promptMenu.style.opacity=`0%`,setTimeout(()=>{promptMenu.style.display=`none`},250),promptInput.value=``,alertMsg.textContent=`RLE Loaded`,alertOpac=100,animateAlert();let y=new URL(window.location.href);y.search=``,window.history.replaceState({},``,y),resetState(),zoomFit(3)}var activeMenuId=1;import2btn.addEventListener(`click`,()=>{promptDesc.textContent=`Paste your RLE text below.`,promptName.textContent=`Load RLE File`,promptMenu.style.display=`block`,promptMenu.style.opacity=`0%`,setTimeout(()=>{promptMenu.style.opacity=`100%`},20),inputFocus=!0,promptInput.value=``,activeMenuId=1,promptInput.focus()}),importbtn.addEventListener(`click`,()=>{promptDesc.textContent=`Paste your pixels list below.`,promptName.textContent=`Load Pixels`,promptMenu.style.opacity=`0%`,promptMenu.style.display=`block`,setTimeout(()=>{promptMenu.style.opacity=`100%`},20),promptInput.value=``,inputFocus=!0,activeMenuId=2,promptInput.focus()});function importlist(string){paused=!0;let pixelListStr=string;if(pixelListStr===null||pixelListStr.trim()===``){importbtn.blur(),alertMsg.textContent=`List Empty`,alertOpac=100,animateAlert();return}pixelListStr=pixelListStr.replace(/\s+/g,``);try{let fixed=pixelListStr.replace(/([{,])"(x|y)":/g,`$1$2:`),imported=eval(fixed);Array.isArray(imported)&&imported.every(t=>t&&typeof t==`object`&&Number.isFinite(t.x)&&Number.isFinite(t.y))?startingArray=imported.map(t=>({x:t.x,y:t.y})):(alertMsg.textContent=`Invalid format. Please use: [{x:0,y:0},{x:1,y:1},...]`,alertOpac=100,animateAlert())}catch{alertMsg.textContent=`Invalid format. Please use: [{x:0,y:0},{x:1,y:1},...]`,alertOpac=100,animateAlert()}importbtn.blur(),resetState()}function exportlist(){if(exportbtn.blur(),pixels.length==0){alertMsg.textContent=`No live pixels to export.`,alertOpac=100,animateAlert();return}if(pixels.length<1/0){let t=`[`+pixels.map(t=>`{x:${t.x},y:${t.y}}`).join(`,`)+`]`;if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(function(){},function(n){let r=document.createElement(`textarea`);r.value=t,r.style.position=`fixed`,r.style.opacity=0,document.body.appendChild(r),r.focus(),r.select();try{document.execCommand(`copy`)}catch{}document.body.removeChild(r)});else{let n=document.createElement(`textarea`);n.value=t,n.style.position=`fixed`,n.style.opacity=0,document.body.appendChild(n),n.focus(),n.select();try{document.execCommand(`copy`)}catch{}document.body.removeChild(n)}alertMsg.textContent=`Copied Pixels to Clipboard`,alertOpac=100,animateAlert()}else alert("Too many pixels! Use this console command instead. copy('[' + pixels.map(p => `{x:${p.x},y:${p.y}}`).join(',') + ']')")}promptBtn.addEventListener(`click`,()=>{let t=promptInput.value;activeMenuId==1?importRLE(t):importlist(t),promptMenu.style.opacity=`0%`,setTimeout(()=>{promptMenu.style.display=`none`},250),import2btn.blur(),promptInput.value=``,promptInput.blur(),setTimeout(()=>{inputFocus=!1},300)}),document.getElementById(`closeBtn`).addEventListener(`click`,()=>{promptMenu.style.opacity=`0%`,setTimeout(()=>{promptMenu.style.display=`none`},250),import2btn.blur(),promptInput.value=``,promptInput.blur(),setTimeout(()=>{inputFocus=!1},300)});var inputList=[` `,`=`,`+`,`-`,`_`,`a`,`s`,`w`,`d`,`A`,`S`,`W`,`D`];tptInput.addEventListener(`keydown`,t=>{inputList.includes(t.key)&&tptInput.blur()}),tpsInput.addEventListener(`keydown`,t=>{inputList.includes(t.key)&&tpsInput.blur()}),tptInput.addEventListener(`focus`,()=>{inputFocus=!0}),tpsInput.addEventListener(`focus`,()=>{inputFocus=!0}),promptMenu.addEventListener(`focus`,()=>{inputFocus=!0}),promptInput.addEventListener(`focus`,()=>{inputFocus=!0}),tptInput.addEventListener(`blur`,()=>{inputFocus=!1}),tpsInput.addEventListener(`blur`,()=>{inputFocus=!1}),promptMenu.addEventListener(`blur`,()=>{inputFocus=!1}),promptInput.addEventListener(`blur`,()=>{inputFocus=!1}),tpsInput.addEventListener(`keydown`,t=>{t.key===`Enter`&&(tpsInput.blur(),inputFocus=!1)}),tptInput.addEventListener(`keydown`,t=>{t.key===`Enter`?tptInput.blur():t.key===`ArrowUp`?(tptInput.value++,t.preventDefault()):t.key===`ArrowDown`&&(tptInput.value=Math.max(1,Number(tptInput.value)-1),t.preventDefault())}),autoCamSlider.addEventListener(`input`,t=>{switch(autoCamMode=Number(t.target.value),autoCamMode){case 1:camInfo.textContent=`cam only |`;break;case 2:camInfo.textContent=`cam+zoomout |`;break;case 3:camInfo.textContent=`cam+zoomall |`;break;default:camInfo.textContent=`none |`}}),offBox.addEventListener(`click`,t=>{offBox.blur(),offscreenFit=!offscreenFit,offDisp.textContent=offscreenFit?`delayed`:`smooth`});var lastClickedLink=null;document.getElementById(`lex`).addEventListener(`click`,function(){lexiconn.style.opacity=`0%`,lexiconn.style.display=`block`,setTimeout(()=>{lexiconn.style.opacity=`100%`},20),inputFocus=!0,lastClickedLink?lastClickedLink.focus():document.getElementById(`invBtn`).focus()}),document.getElementById(`controls`).addEventListener(`click`,function(){document.getElementById(`controlsMenu`).style.opacity=`0%`,document.getElementById(`controlsMenu`).style.display=`block`,setTimeout(()=>{document.getElementById(`controlsMenu`).style.opacity=`100%`},20),inputFocus=!0,document.body.style.overflow=`hidden`}),document.getElementById(`lexBack`).addEventListener(`click`,function(){lexiconn.style.opacity=`0%`,setTimeout(()=>{lexiconn.style.display=`none`},250),document.body.style.overflow=``,inputFocus=!1}),document.getElementById(`contBack`).addEventListener(`click`,function(){document.getElementById(`controlsMenu`).style.opacity=`0%`,setTimeout(()=>{document.getElementById(`controlsMenu`).style.display=`none`},250),document.body.style.overflow=``,inputFocus=!1}),document.getElementById(`promptBack`).addEventListener(`click`,function(){promptMenu.style.opacity=`0%`,setTimeout(()=>{promptMenu.style.display=`none`},250),inputFocus=!1}),window.addEventListener(`keydown`,t=>{cmdPressed=t.metaKey||t.ctrlKey;let n=t.key?t.key.toLowerCase():``;if(keysPressed[n]=!0,Number(t.key)>0&&Number(t.key)<7&&!inputFocus&&loadLexi([`rand010`,`rand026`,`rand050`,`rand100`,`rand250`,`rand500`][Number(t.key)-1]),n===`f`){let t=markers.findIndex(t=>t.x===hoverX&&t.y===hoverY);t===-1?markers.push({x:hoverX,y:hoverY,color:`#${markerColors[colorIndex]}`}):markers.splice(t,1)}if(n===`o`&&(sparseEnabled=!sparseEnabled,alertMsg.textContent=`Render Optimise ${sparseEnabled}`,alertOpac=100,animateAlert()),n===`n`&&(colorIndex=(colorIndex+1)%markerColors.length),n===`j`&&selectedLivePixels.length>0&&seleToMarkers(),n===`z`&&(zoomFit(3),alertMsg.textContent=`Centered Camera`,alertOpac=100,animateAlert()),n===`p`&&cmdPressed&&markers.length>0){let n=new Set(pixels.map(t=>`${t.x},${t.y}`)),r=0;markers.forEach(t=>{let a=`${t.x},${t.y}`;n.has(a)||(pixels.push({x:t.x,y:t.y}),r++)}),alertMsg.textContent=`${r} markers converted to live pixels`,alertOpac=100,animateAlert(),markers=[],t.preventDefault();return}if(cmdPressed&&n===`g`&&(t.preventDefault(),markers=[],alertMsg.textContent=`All markers cleared`,alertOpac=100,animateAlert()),cmdPressed&&n===`c`&&!inputFocus){if(selectedLivePixels.length>0){let t=Math.min(...selectedLivePixels.map(t=>t.x)),n=Math.min(...selectedLivePixels.map(t=>t.y));copiedPixels=selectedLivePixels.map(r=>({x:r.x-t,y:r.y-n})),alertMsg.textContent=`Selection copied`,alertOpac=100,animateAlert()}else copiedPixels=[];t.preventDefault();return}if(cmdPressed&&n===`v`&&!inputFocus){copiedPixels.length>0&&(pastePreviewActive||(pastePreviewActive=!0,alertMsg.textContent=`Release V to paste`,alertOpac=100,animateAlert())),t.preventDefault();return}if(cmdPressed&&n===`d`){rotateSelection(1),t.preventDefault();return}if(cmdPressed&&n===`p`&&(t.preventDefault(),markers.length>0)){let t=new Set(markers.map(t=>`${t.x},${t.y}`)),n=new Set(pixels.map(t=>`${t.x},${t.y}`));markers.forEach(t=>{let r=`${t.x},${t.y}`;n.has(r)||pixels.push({x:t.x,y:t.y})}),alertMsg.textContent=`Converted all markers to live pixels`,alertOpac=100,animateAlert()}function r(){if(selectedLivePixels.length>0&&!draggingSelection){let t=Math.min(...selectedLivePixels.map(t=>t.x)),n=t+(Math.max(...selectedLivePixels.map(t=>t.x))-t)/2,r=new Set(selectedLivePixels.map(t=>`${t.x},${t.y}`));selectedLivePixels=selectedLivePixels.map(t=>({x:Math.round(2*n-t.x),y:t.y})),pixels=pixels.filter(t=>!r.has(`${t.x},${t.y}`)).concat(selectedLivePixels),alertMsg.textContent=`Flipped selection X axis`,alertOpac=100,animateAlert()}}function a(){if(selectedLivePixels.length>0&&!draggingSelection){let t=Math.min(...selectedLivePixels.map(t=>t.y)),n=t+(Math.max(...selectedLivePixels.map(t=>t.y))-t)/2,r=new Set(selectedLivePixels.map(t=>`${t.x},${t.y}`));selectedLivePixels=selectedLivePixels.map(t=>({x:t.x,y:Math.round(2*n-t.y)})),pixels=pixels.filter(t=>!r.has(`${t.x},${t.y}`)).concat(selectedLivePixels),alertMsg.textContent=`Flipped selection Y axis`,alertOpac=100,animateAlert()}}if(cmdPressed&&n===`,`){r(),t.preventDefault();return}if(cmdPressed&&n===`.`){a(),t.preventDefault();return}if((t.key===`Shift`||t.key===`ShiftRight`||t.key===`ShiftLeft`||t.shiftKey)&&(shiftpressed=!0,(!hiliteCorner1||hiliteCorner1.x===-1)&&(hiliteCorner1={x:hoverX,y:hoverY}),hiliteCorner2={x:hoverX,y:hoverY}),n==` `&&!inputFocus&&(paused=!paused),n==`r`){if(t.preventDefault(),cmdPressed){loadLexi(`blank`),camx=0,camy=0,zoom=10,alertMsg.textContent=`Reset board`,alertOpac=100,animateAlert();let t=new URL(window.location.href);t.search=``,window.history.replaceState({},``,t)}else resetState(),alertMsg.textContent=`Loaded save`,alertOpac=100,animateAlert()}if(n===`s`&&cmdPressed&&(t.preventDefault(),saveCurrent()),n===`t`&&paused&&tick(),n===`y`&&paused)for(let t=0;t<tptInput.value;t++)tick();if(n===`u`&&paused&&selectedLivePixels.length>0){let t=new Set(pixels.map(t=>`${t.x},${t.y}`)),n=new Set,r=[[0,0],[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]];selectedLivePixels.forEach(t=>{r.forEach(([r,a])=>{n.add(`${t.x+r},${t.y+a}`)})});let a=[],o=new Set(t),s=new Set,c=new Set;n.forEach(n=>{let[l,u]=n.split(`,`).map(Number),d=0;for(let[n,a]of r.slice(1)){let r=`${l+n},${u+a}`;t.has(r)&&d++}let f=t.has(n),m=!1;f?(d===2||d===3)&&(m=!0):d===3&&(m=!0),m?(a.push({x:l,y:u}),f||c.add(n)):f&&(o.delete(n),s.add(n))});let l=new Set(n),u=pixels.filter(t=>!l.has(`${t.x},${t.y}`));u=u.concat(a),pixels=u;let d=new Set(selectedLivePixels.map(t=>`${t.x},${t.y}`)),f=[];for(let t of a){let n=`${t.x},${t.y}`;(d.has(n)||c.has(n))&&f.push({x:t.x,y:t.y})}selectedLivePixels=f,tickn++,alertMsg.textContent=`Ticked selection`,alertOpac=100,animateAlert();return}}),window.addEventListener(`keyup`,t=>{if(keysPressed[t.key.toLowerCase()]=!1,cmdPressed&&(keysPressed=[]),cmdPressed=t.metaKey||t.ctrlKey,t.key.toLowerCase()===`v`&&pastePreviewActive){if(copiedPixels.length>0){let t=Math.min(...copiedPixels.map(t=>t.x)),n=Math.min(...copiedPixels.map(t=>t.y)),r=hoverX-t,a=hoverY-n,o=new Set(pixels.map(t=>`${t.x},${t.y}`)),s=[];for(let t=0;t<copiedPixels.length;t++){let n=copiedPixels[t].x+r,c=copiedPixels[t].y+a;o.has(`${n},${c}`)||(pixels.push({x:n,y:c}),s.push({x:n,y:c}),o.add(`${n},${c}`))}selectedLivePixels=s,alertMsg.textContent=`Pasted ${s.length} cells`,alertOpac=100,animateAlert()}pastePreviewActive=!1,t.preventDefault();return}if(t.key===`Shift`||t.key===`ShiftRight`||t.key===`ShiftLeft`){shiftpressed=!1;let t=Math.min(hiliteCorner1.x,hiliteCorner2.x),n=Math.max(hiliteCorner1.x,hiliteCorner2.x),r=Math.min(hiliteCorner1.y,hiliteCorner2.y),a=Math.max(hiliteCorner1.y,hiliteCorner2.y);selectedLivePixels=pixels.filter(o=>o.x>=t&&o.x<=n&&o.y>=r&&o.y<=a),hiliteCorner1={x:-1,y:1},hiliteCorner2={x:1,y:-1}}if(t.key.toLowerCase()===`i`&&!cmdPressed&&!inputFocus){if(selectedLivePixels.length===0){alertMsg.textContent=`No cells selected to move`,alertOpac=100,animateAlert(),t.preventDefault();return}let n=prompt(`Move selection X+ (right):`,`0`),r=prompt(`Move selection Y+ (up):`,`0`);if(n!==null&&r!==null){let t=parseInt(n,10),a=parseInt(r,10);if(!isNaN(t)&&!isNaN(a)){let n=new Set(selectedLivePixels.map(t=>`${t.x},${t.y}`));pixels=pixels.filter(t=>!n.has(`${t.x},${t.y}`));let r=new Set(pixels.map(t=>`${t.x},${t.y}`)),o=[];for(let n of selectedLivePixels){let s=n.x+t,c=n.y+a;r.has(`${s},${c}`)||(pixels.push({x:s,y:c}),o.push({x:s,y:c}),r.add(`${s},${c}`))}o.length>0?(selectedLivePixels=o,alertMsg.textContent=`Moved ${o.length} cell(s) by (${t},${a})`):(selectedLivePixels=[],alertMsg.textContent=`No moved cells (destination blocked or duplicate)`),alertOpac=100,animateAlert()}}t.preventDefault();return}if(t.key===`Delete`||t.key===`Backspace`&&cmdPressed&&!inputFocus){selectedLivePixels.length>0?(pixels=pixels.filter(t=>!selectedLivePixels.some(n=>n.x===t.x&&n.y===t.y)),alertMsg.textContent=`Deleted ${selectedLivePixels.length} selected cell(s)`,alertOpac=100,animateAlert(),selectedLivePixels=[]):(alertMsg.textContent=`No cells selected to delete`,alertOpac=100,animateAlert()),t.preventDefault();return}}),window.addEventListener(`mousemove`,t=>{if(mouseX=t.clientX,mouseY=t.clientY,shiftpressed&&hiliteCorner1&&hiliteCorner1.x!==-1&&(hiliteCorner2={x:hoverX,y:hoverY}),draggingSelection&&dragStart!=null){let t={x:hoverX,y:hoverY};dragOffset.x=t.x-dragStart.x,dragOffset.y=t.y-dragStart.y}}),canvas.addEventListener(`mousedown`,t=>{if(t.button,mousedown=!0,draggingSelection&&t.button===0){draggingSelection=!1,dragStart=null,dragOffset={x:0,y:0},selectionOriginal=[],t.preventDefault();return}if(t.button===RIGHT_MOUSE_BUTTON){if(t.preventDefault(),selectedLivePixels.some(t=>t.x===hoverX&&t.y===hoverY)&&selectedLivePixels.length>0){draggingSelection=!0,dragStart={x:hoverX,y:hoverY},dragOffset={x:0,y:0},selectionOriginal=selectedLivePixels.map(t=>({x:t.x,y:t.y})),t.preventDefault();return}}else selectedLivePixels=[];t.button===0&&(clickedFirst=+!isLive({x:hoverX,y:hoverY}))}),canvas.addEventListener(`contextmenu`,t=>{t.preventDefault()}),canvas.addEventListener(`mouseup`,t=>{if(mousedown=!1,draggingSelection){if(t.button===RIGHT_MOUSE_BUTTON){if(selectedLivePixels.length>0&&dragStart){pixels=pixels.filter(t=>!selectedLivePixels.some(n=>n.x===t.x&&n.y===t.y));let t=new Set(pixels.map(t=>`${t.x},${t.y}`)),n=[];for(let r=0;r<selectionOriginal.length;r++){let a=selectionOriginal[r].x+dragOffset.x,o=selectionOriginal[r].y+dragOffset.y;t.has(`${a},${o}`)||(pixels.push({x:a,y:o}),n.push({x:a,y:o}))}selectedLivePixels=n,draggingSelection=!1,dragStart=null,dragOffset={x:0,y:0},selectionOriginal=[]}}else draggingSelection=!1,dragStart=null,dragOffset={x:0,y:0},selectionOriginal=[]}});function rotatePoint(t,n,r,a,o){let s=t-r,c=n-a,l,u;return o===1?(l=a-c,u=r+s):o===2?(l=r-s,u=a-c):o===3?(l=a+c,u=r-s):(l=t,u=n),{x:Math.round(l),y:Math.round(u)}}function getIntegerBBoxCenter(t){let n=Math.min(...t.map(t=>t.x)),r=Math.min(...t.map(t=>t.y)),a=Math.max(...t.map(t=>t.x)),o=Math.max(...t.map(t=>t.y)),s=(n+a)/2,c=(r+o)/2;return s=(a-n+1)%2==0?Math.floor(s)+.5:Math.round(s),c=(o-r+1)%2==0?Math.floor(c)+.5:Math.round(c),{cx:s,cy:c}}function rotateSelection(t){if(selectedLivePixels.length===0||draggingSelection)return;let n=Math.min(...selectedLivePixels.map(t=>t.x)),r=Math.max(...selectedLivePixels.map(t=>t.x)),a=Math.min(...selectedLivePixels.map(t=>t.y)),o=Math.max(...selectedLivePixels.map(t=>t.y)),s=(n+r)/2,c=(a+o)/2;function l(t,n,r,a,o){let s=t-r,c=n-a,l,u;return o===1?(l=-c,u=s):o===2?(l=-s,u=-c):o===3?(l=c,u=-s):(l=s,u=c),{x:Math.round(l+r),y:Math.round(u+a)}}let u=selectedLivePixels.map(n=>l(n.x,n.y,s,c,t)),d=new Set(selectedLivePixels.map(t=>`${t.x},${t.y}`));pixels=pixels.filter(t=>!d.has(`${t.x},${t.y}`));let f=new Set(pixels.map(t=>`${t.x},${t.y}`)),m=[];for(let t=0;t<u.length;t++){let n=`${u[t].x},${u[t].y}`;f.has(n)||(pixels.push({x:u[t].x,y:u[t].y}),m.push({x:u[t].x,y:u[t].y}),f.add(n))}selectedLivePixels=m,alertMsg.textContent=`Rotated ${m.length} cells`,alertOpac=100,animateAlert()}setTimeout(()=>{const headers=document.getElementsByClassName(`header3`),links=document.getElementsByClassName(`link`),peas=document.querySelectorAll(`#lexicon-inner p`);for(let t=2;t<peas.length;t++){peas[t].style.position=`relative`;let n=document.createElement(`span`);n.style.color=`#899f`,n.textContent=`#${t-1}`,n.style.position=`absolute`,n.style.right=`0`,n.style.top=`0`,peas[t].appendChild(n)}for(let t=0;t<headers.length;t++){let n=headers[t];n.style.color=`hsl(${170+Math.sin(t/2)*30},50%,50%)`}for(let i=0;i<links.length;i++){let thislink=links[i];thislink.setAttribute(`tabindex`,i+25);let onclickAttr=thislink.getAttribute(`onclick`);if(onclickAttr&&/loadLexi\s*\(.*\)/.test(onclickAttr)){let loadLexiMatch=onclickAttr.match(/loadLexi\s*\(\s*(['"])(.*?)\1(?:\s*,\s*\d+)?\s*\)/);if(loadLexiMatch){let t=loadLexiMatch[2],n=`loadLexi('${t}', ${i+1})`;thislink.setAttribute(`onclick`,n),thislink.onkeydown=function(n){(n.key===`Enter`||n.keyCode===13||n.key==` `)&&(lastClickedLink=thislink,loadLexi(t,i+1),n.key==` `&&(paused=!1),n.preventDefault())},thislink.onclick=function(n){lastClickedLink=thislink,loadLexi(t,i+1)}}else thislink.onkeydown=function(e){(e.key===`Enter`||e.keyCode===13||e.key==` `)&&(lastClickedLink=thislink,eval(onclickAttr),e.key==` `&&(paused=!1,setTimeout(()=>{resetState()},16)),e.preventDefault())},thislink.onclick=function(e){lastClickedLink=thislink,eval(onclickAttr)}}else onclickAttr?(thislink.onkeydown=function(e){(e.key===`Enter`||e.keyCode===13||e.key==` `)&&(lastClickedLink=thislink,eval(onclickAttr),e.key==` `&&(paused=!1,setTimeout(()=>{resetState()},16)),e.preventDefault())},thislink.onclick=function(e){lastClickedLink=thislink,eval(onclickAttr)}):thislink.onclick=function(){lastClickedLink=thislink}}},100),localStorage.getItem(`firstVisit`)===null&&(document.getElementById(`controlsMenu`).style.opacity=`0%`,document.getElementById(`controlsMenu`).style.display=`block`,setTimeout(()=>{document.getElementById(`controlsMenu`).style.opacity=`100%`},20),inputFocus=!0,document.body.style.overflow=`hidden`,localStorage.setItem(`firstVisit`,`false`)),setTimeout(function(){patterns.length<=1&&(lexloaded=!1,alertMsg.textContent=`LEXICON LOAD FAILED`,alertOpac=100,animateAlert(),lexBtn.style.display=`none`)},5e3);var showCanvasInterval=setInterval(function(){if(typeof patterns==`object`&&patterns||lexloaded==0){canvas.style.display=`block`;let urlParams;try{urlParams=new URLSearchParams(window.location.search?window.location.search.replace(/^\?/,``):``)}catch{urlParams=new URLSearchParams}let loadParam=urlParams.get(`load`),apParam=urlParams.get(`ap`);if(apParam===`false`||apParam===`true`&&setTimeout(()=>{paused=!1},300),!loadParam||!/^\d+$/.test(loadParam)||Number(loadParam)<0)loadLexi(`blank`);else{var allPs=document.querySelectorAll(`#lexicon-inner p`),idx=parseInt(loadParam,10)+1;if(loadParam==1&&setTimeout(function(){loadLexi(`rand010`,1)},80),idx<allPs.length){var p=allPs[idx],linky=p.querySelector(`a.link[onclick^='loadLexi']`);if(linky){const onClickAttr=linky.getAttribute(`onclick`),funcMatch=onClickAttr.match(/loadLexi\s*\((.*)\)/);if(funcMatch&&funcMatch[1]){let argsRaw=funcMatch[1].trim();argsRaw=argsRaw.replace(/;$/,``);let args;try{args=eval(`[`+argsRaw+`]`)}catch{args=[]}typeof loadLexi==`function`&&setTimeout(function(){loadLexi.apply(null,args)},80)}}}}document.getElementById(`loadingMsg`).style.display=`none`,clearInterval(dotAnim),clearInterval(showCanvasInterval)}},100),isSafari=navigator.vendor&&navigator.vendor.indexOf(`Apple`)>-1&&navigator.userAgent&&navigator.userAgent.indexOf(`CriOS`)==-1&&navigator.userAgent.indexOf(`FxiOS`)==-1;if(isSafari){let t=document.querySelectorAll(`.buttons:not(input)`);for(let n=0;n<t.length;n++)t[n].style.paddingTop=`3px`,t[n].style.paddingBottom=`18px`;importbtn.style.marginBottom=`4px`,lexBtn.style.marginBottom=`4px`,tptInput.style.marginBottom=`8px`,tpsInput.style.marginBottom=`8px`,tpsInput.style.marginRight=`4px`}window.addEventListener(`beforeunload`,function(t){pixels.length>0&&(t.preventDefault(),t.returnValue=`You have unsaved changes. Are you sure you want to leave?`)}),patterns=lexpatterns;

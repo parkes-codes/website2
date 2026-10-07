@@ -1,0 +1,14 @@
+.vscode/
+
+.git/
+.DS_Store
+**/.DS_Store
+
+node_modules/
+
+GOL/*
+!GOL/index.html
+!GOL/assets/
+!GOL/assets/**
+
+playground/
