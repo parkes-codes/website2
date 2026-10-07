@@ -557,7 +557,7 @@
         <div id="project-list-section" aria-hidden="true">
           <input id="project-search-input" type="text" placeholder="Search for a project" style="padding-left: 5px;">
           <div class="project-list-grid" id="project-list-grid">
-            <button class="project-button site-text project-link" data-url="/GOL/" id="project-gol">Game of Life<span style="display:none;">gol conway conway's conways</span></button>
+            <button class="project-button site-text project-link" data-url="GOL/" id="project-gol">Game of Life<span style="display:none;">gol conway conway's conways</span></button>
             <button class="project-button site-text project-link" data-url="html/Amazing_Graphs_2" id="project-ag2">Amazing Graphs 2</button>
             <button class="project-button site-text project-link" data-url="html/trigslideshow">Trigonometery Slideshow</button>
             <button class="project-button site-text project-link" data-url="html/coreball" id="project-coreball" style="color: #000; font-weight: bold; text-shadow: 0px 0px 5px #ffff;">Coreball</button>
@@ -660,7 +660,7 @@
           e.currentTarget.getAttribute('type') !== 'submit' &&
           (!e.currentTarget.hasAttribute("onclick") || e.currentTarget.id === "fun-project-btn")
         ) {
-          if (url !== '/GOL/') {
+          if (url !== 'GOL/') {
             const protocol = window.location.protocol;
             if (protocol !== "https:") {
               if (!url.endsWith('.html')) url = url + '.html';
