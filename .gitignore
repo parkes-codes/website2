@@ -11,4 +11,11 @@ GOL/*
 !GOL/assets/
 !GOL/assets/**
 
+fivegame/*
+!fivegame/index.html
+!fivegame/assets/
+!fivegame/assets/**
+!fivegame/src/
+!fivegame/src/**
+
 playground/
