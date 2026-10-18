@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Encoding Things</title>
-    <link rel="icon" type="image/x-icon" href="../images/icon.ico" />
+    <link rel="icon" type="image/x-icon" href="https://parkes-codes.github.io/website2/images/icon.ico" />
     <meta name="format-detection" content="telephone=no">
     <style>
         body {
@@ -66,7 +66,6 @@
             min-height: 48px;
             resize: vertical;
         }
-        /* --- Time Display --- */
         #current-time-encoded {
             position: fixed;
             top: 18px;
@@ -94,7 +93,6 @@
     </style>
 </head>
 <body>
-    <!-- TIME ENCODED FLOATING DIV -->
     <div id="current-time-encoded"></div>
     <div class="container">
         <div class="action-block" id="encode-block">
@@ -112,9 +110,9 @@
             <div id="decode-output" class="output-block">Decoded: </div>
         </div>
     </div>
-<script src="../js/emojis.js"></script>
+<script src="https://parkes-codes.github.io/website2/js/emojis.js"></script>
 <script>
-// ------------------ GLOBAL ENCODER INFRA  -------------------
+
 
 const chars = [
   "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
@@ -129,13 +127,7 @@ const chars = [
   "₡", "ə", "₢", "Σ", "₥", "π", "ß", "ƛ", "ζ", "β"
 ];
 
-// For space, we are already using "Ξ₥"
-// Let's pick two uncommon pairs for punctuation/mark mapping:
-// We will use "℈₢", "₮₱", "₭⅁", "₦⅋", "§₡", "ə₢" etc, for up to 6 punctuation marks
-// You can expand further as needed. We'll do for common punctuation.
-
 const PUNCT_MAP = {
-    // mark: [encode, decode] mapping
     ".": "℈₢",
     ",": "₮₱",
     "!": "₭⅁",
@@ -166,15 +158,12 @@ const PUNCT_MAP = {
     "<": "µʖ",
     ">": "ʖµ"
 };
-// Build reverse map (sequence->punct)
 const REV_PUNCT_MAP = {};
 for (const [k, v] of Object.entries(PUNCT_MAP)) {
     REV_PUNCT_MAP[v] = k;
 }
 
-// Utility functions for text patching
 function encodeTextWithPunctSubs(str) {
-    // Replace spaces with "Ξ₥" AND each punctuation mark with its mapped sequence
     let out = "";
     for (let i = 0; i < str.length; ++i) {
         const ch = str[i];
@@ -186,11 +175,8 @@ function encodeTextWithPunctSubs(str) {
 }
 
 function decodeTextWithPunctSubs(str) {
-    // Undo the process: replace all custom sequences with their corresponding chars
     let out = "";
-    // First, restore spaces (safe first)
     str = str.replace(/Ξ₥/g, " ");
-    // Replace ALL 2-char sequences matching any values in REV_PUNCT_MAP with their mapped char
     let i = 0;
     while (i < str.length) {
         let two = str.slice(i, i+2);
@@ -245,7 +231,6 @@ function encodeToBase(n, b, set = "nums") {
     } else {
         charlist = chars;
     }
-    // Allow decimals: parse n as string, handle fractions
     let isNegative = false;
     let numStr = String(n);
     if (numStr.startsWith('-')) {
@@ -257,7 +242,6 @@ function encodeToBase(n, b, set = "nums") {
     let base = BigInt(b);
     if (base < 2n || base > BigInt(charlist.length)) return "(base out of supported range)";
     let encodedDigits = [];
-    // Encode integer part
     if (intNum === 0n) {
         encodedDigits.push(charlist[0]);
     } else {
@@ -269,10 +253,8 @@ function encodeToBase(n, b, set = "nums") {
         }
         encodedDigits = encodedDigits.reverse();
     }
-    // Encode fraction part
     let encodedFrac = '';
     if (fracStr && !/^0*$/.test(fracStr)) {
-        // Limit fractional precision to 12 places (arbitrary)
         let frac = "0." + fracStr;
         let value = Number(frac);
         if (isNaN(value)) return "(invalid decimal input)";
@@ -285,7 +267,6 @@ function encodeToBase(n, b, set = "nums") {
             value = value - digit;
             count++;
         }
-        // Optionally trim trailing zeros in encoding
     }
     let encoded = encodedDigits.join('') + encodedFrac;
     return isNegative ? '-' + encoded : encoded;
@@ -359,7 +340,6 @@ function decodeFromBase(n, b, set = "nums") {
         nStr = nStr.slice(1);
     }
 
-    // Handle decimals
     let [intStr, fracStr] = nStr.split('.');
     let intArr;
     if (set === "emoji") {
@@ -389,7 +369,6 @@ function decodeFromBase(n, b, set = "nums") {
         output += BigInt(digit) * power;
         power *= base;
     }
-    // Decode fraction
     let frac = 0;
     if (fracStr && fracStr.length > 0) {
         let divisor = Number(b);
@@ -404,7 +383,6 @@ function decodeFromBase(n, b, set = "nums") {
     }
     let result = Number(output) + frac;
     if (isNegative) result *= -1;
-    // Return as string to preserve decimals
     return fracStr && fracStr.length > 0 ? result.toString() : (isNegative ? output * -1n : output);
 }
 
@@ -414,11 +392,7 @@ function encodeToEmoji(bi) {
     return encodeToBase(bi, emojiList.length, "emoji");
 }
 
-// --- Emoji Encrypt ---
-
-// ENCODER PATCH FOR PUNCTUATION
 function emojiEncryptBase100ToEmoji(input) {
-    // Replace all spaces and punctuation marks with their marker pairs
     let str = typeof input === "string" ? encodeTextWithPunctSubs(input) : input;
     try {
         let base100Value = decodeFromBase(str, 100, "nums");
@@ -430,13 +404,13 @@ function emojiEncryptBase100ToEmoji(input) {
     }
 }
 
-// ==================== ENCODERS ====================
+// --- Changed below: update all relevant number input placeholders as requested ---
 const ENCODERS = [
     {
         name: "Base-N",
         id: "baseN",
         inputSpec: [
-            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 42.12 or -123", required: true },
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45 or -678.9", required: true },
             { name: "Base", id: "base", type: "base", placeholder: "e.g. 16", min: 2, max: chars.length, required: true }
         ],
         encode: (opts) => {
@@ -444,7 +418,6 @@ const ENCODERS = [
             let baseNum = Number(opts.base);
             if (!Number.isSafeInteger(baseNum) || baseNum < 2 || baseNum > chars.length)
                 return `(base must be 2-${chars.length})`;
-            // Allow decimals (removed the restriction)
             return encodeToBase(opts.number, baseNum, "nums");
         }
     },
@@ -455,7 +428,6 @@ const ENCODERS = [
             { name: "Text", id: "text", type: "string", placeholder: "Type text to encode", required: true }
         ],
         encode: (opts) => {
-            // Morse encoder does not require extra punctuation encoding, keep as is.
             return opts.text
                 .toUpperCase()
                 .split(/(\s+)/)
@@ -475,13 +447,12 @@ const ENCODERS = [
         name: "Base-😀",
         id: "emoji",
         inputSpec: [
-            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45", required: true }
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45 or -678.9", required: true }
         ],
         encode: (opts) => {
             if (typeof emojiList === "undefined" || !Array.isArray(emojiList) || !emojiList.length)
                 return "(emojiList not loaded)";
             if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
-            // Allow decimals (removed the restriction)
             return encodeToBase(opts.number, emojiList.length, "emoji");
         }
     },
@@ -489,10 +460,9 @@ const ENCODERS = [
         name: "Emoji Encrypt",
         id: "emoji-encrypt",
         inputSpec: [
-            { name: "Text", id: "digits", type: "numberstr", placeholder: "e.g. 01020304 (grouped as 2 digits)", required: true }
+            { name: "Text", id: "digits", type: "numberstr", placeholder: "e.g. Hello World", required: true }
         ],
         encode: (opts) => {
-            // Replace all spaces and punctuation with marker pairs
             let patchedInput = typeof opts.digits === "string" ? encodeTextWithPunctSubs(opts.digits) : opts.digits;
             return emojiEncryptBase100ToEmoji(patchedInput);
         }
@@ -501,11 +471,10 @@ const ENCODERS = [
         name: "Clock Notation",
         id: "clocks",
         inputSpec: [
-            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123", required: true }
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45 or -678.9", required: true }
         ],
         encode: (opts) => {
             if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
-            // Allow decimals
             return encodeToBase(opts.number, clocks.length, "clocks");
         }
     },
@@ -513,11 +482,10 @@ const ENCODERS = [
         name: "Arrow Notation",
         id: "arrows",
         inputSpec: [
-            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45", required: true }
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45 or -678.9", required: true }
         ],
         encode: (opts) => {
             if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
-            // Allow decimals
             return encodeToBase(opts.number, arrows.length, "arrows");
         }
     },
@@ -525,11 +493,10 @@ const ENCODERS = [
         name: "Braille Notation",
         id: "braille",
         inputSpec: [
-            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45", required: true }
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45 or -678.9", required: true }
         ],
         encode: (opts) => {
             if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
-            // Allow decimals
             return encodeToBase(opts.number, braille.length, "braille");
         }
     },
@@ -537,17 +504,15 @@ const ENCODERS = [
         name: "Bracket Notation",
         id: "brackets",
         inputSpec: [
-            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45", required: true }
+            { name: "Number", id: "number", type: "numberstr", placeholder: "e.g. 123.45 or -678.9", required: true }
         ],
         encode: (opts) => {
             if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(opts.number)) return "(input must be a valid number)";
-            // Allow decimals
             return encodeToBase(opts.number, brackets.length, "brackets");
         }
     }
 ];
 
-// ==================== DECODERS ====================
 const DECODERS = [
     {
         name: "Base-N",
@@ -573,7 +538,7 @@ const DECODERS = [
         name: "Morse Code",
         id: "morse",
         inputSpec: [
-            { name: "Morse Code", id: "morse", type: "string", placeholder: "Enter morse (letters separated by spaces)", required: true }
+            { name: "Morse Code", id: "morse", type: "string", placeholder: "Enter morse", required: true }
         ],
         decode: (opts) => {
             let chunks = (opts.morse || "").split(" ");
@@ -584,7 +549,7 @@ const DECODERS = [
         name: "Base-😀",
         id: "emoji",
         inputSpec: [
-            { name: "Base-😀 Goes Here", id: "emoji", type: "emoji", placeholder: "…" , required: true }
+            { name: "Base-😀 Goes Here", id: "emoji", type: "emoji", placeholder: "..." , required: true }
         ],
         decode: (opts) => {
             if (typeof emojiList === "undefined" || !Array.isArray(emojiList) || !emojiList.length)
@@ -757,8 +722,6 @@ function populateDropdown(drop, arr) {
     });
 }
 
-// ---------- APP INIT ----------
-
 window.addEventListener("DOMContentLoaded", function() {
     const encodeDropdown = document.getElementById("encoder-select");
     const decodeDropdown = document.getElementById("decoder-select");
@@ -828,7 +791,6 @@ window.addEventListener("DOMContentLoaded", function() {
     });
     rebuildDecodeInputs();
 
-    // ====== Animated Time Encode Box (top right) =======
     function getCurrentEncoderInfo() {
         const encoder = ENCODERS[curEncoderIdx];
         if (encoder.id === "baseN") {
