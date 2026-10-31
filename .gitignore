@@ -16,3 +16,6 @@ playground/
 sixgame/*
 !sixgame/index.html
 !sixgame/assets/
+
+defunct/stableui.js
+defunct/stablemain.js
