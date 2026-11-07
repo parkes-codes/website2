@@ -75,7 +75,223 @@
 
 // 530, 262
 // 630, 655
-  const prependAutoTypeSettings = `-- =========================================================
+const prependAutoTypeSettings = `
+
+-- =========================================================
+-- AUTO CLICKER
+-- =========================================================
+
+local autoClickerTimer = nil
+local autoClickerRunning = false
+local autoClickerDelay = 5
+local autoClickerHold = 1
+local clickDown = false
+local clickPosition = nil
+
+local function scheduleClick()
+
+    if not autoClickerRunning then return end
+
+    clickPosition = hs.mouse.absolutePosition()
+
+    hs.eventtap.event.newMouseEvent(
+        hs.eventtap.event.types.leftMouseDown,
+        clickPosition
+    ):post()
+
+    clickDown = true
+
+    autoClickerTimer = hs.timer.doAfter(autoClickerHold / 1000, function()
+
+        if clickDown then
+            hs.eventtap.event.newMouseEvent(
+                hs.eventtap.event.types.leftMouseUp,
+                clickPosition
+            ):post()
+
+            clickDown = false
+        end
+
+        if not autoClickerRunning then return end
+
+        local delay = math.max(
+            0,
+            autoClickerDelay / 1000 - autoClickerHold / 1000
+        )
+
+        autoClickerTimer = hs.timer.doAfter(delay, scheduleClick)
+
+    end)
+end
+
+local function startClicker()
+
+    autoClickerRunning = true
+
+    hs.alert.show(
+        "Auto Clicker Started\\nDelay: " .. autoClickerDelay ..
+        " ms | Hold: " .. autoClickerHold .. " ms"
+    )
+
+    scheduleClick()
+end
+
+local function stopClicker()
+
+    if not autoClickerRunning then return end
+
+    autoClickerRunning = false
+
+    if autoClickerTimer then
+        autoClickerTimer:stop()
+        autoClickerTimer = nil
+    end
+
+    if clickDown then
+        hs.eventtap.event.newMouseEvent(
+            hs.eventtap.event.types.leftMouseUp,
+            clickPosition
+        ):post()
+    end
+
+    clickDown = false
+
+    hs.alert.show("Auto Clicker Stopped 🛑")
+end
+
+-- C: Toggle auto-clicker ON/OFF
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "C", function()
+
+    if autoClickerRunning then
+        stopClicker()
+    else
+        startClicker()
+    end
+
+end)
+
+-- N: Set click interval
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
+
+    local button, input = hs.dialog.textPrompt(
+        "Auto Clicker Delay",
+        "Enter delay between clicks (milliseconds):",
+        tostring(autoClickerDelay),
+        "Set",
+        "Cancel"
+    )
+
+    if button == "Set" then
+
+        local delay = tonumber(input)
+
+        if delay and delay >= 0 then
+
+            autoClickerDelay = delay
+
+            hs.alert.show("Click Delay: " .. delay .. " ms")
+
+        else
+            hs.alert.show("Invalid delay")
+        end
+
+    end
+
+end)
+
+-- M: Set mouse hold duration
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "M", function()
+
+    local button, input = hs.dialog.textPrompt(
+        "Mouse Hold Duration",
+        "How many milliseconds should each click hold?",
+        tostring(autoClickerHold),
+        "Set",
+        "Cancel"
+    )
+
+    if button == "Set" then
+
+        local duration = tonumber(input)
+
+        if duration and duration > 0 then
+
+            autoClickerHold = duration
+
+            hs.alert.show("Mouse Hold: " .. duration .. " ms")
+
+        else
+            hs.alert.show("Invalid duration")
+        end
+
+    end
+
+end)
+
+
+-- =========================================================
+-- MOUSE POSITION LOGGER
+-- =========================================================
+
+-- Cmd + Option + Ctrl + P
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "P", function()
+
+    local pos = hs.mouse.absolutePosition()
+
+    hs.alert.show(
+        "Mouse: X=" .. math.floor(pos.x) ..
+        " Y=" .. math.floor(pos.y)
+    )
+
+end)
+
+
+-- =========================================================
+-- UP ARROW MACRO
+-- =========================================================
+
+local upArrowTimer = nil
+local upArrowDown = false
+
+-- Toggle: Cmd + Option + Ctrl + U
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "U", function()
+
+    if upArrowTimer then
+
+        upArrowTimer:stop()
+        upArrowTimer = nil
+
+        if upArrowDown then
+            hs.eventtap.event.newKeyEvent({}, "up", false):post()
+        end
+
+        upArrowDown = false
+
+        hs.alert.show("UP ARROW MACRO STOPPED 🛑")
+
+        return
+    end
+
+    upArrowDown = false
+
+    hs.alert.show("UP ARROW MACRO STARTED")
+
+    upArrowTimer = hs.timer.doEvery(0.005, function()
+
+        upArrowDown = not upArrowDown
+
+        hs.eventtap.event.newKeyEvent(
+            {},
+            "up",
+            upArrowDown
+        ):post()
+
+    end)
+
+end)
+
+
+-- =========================================================
 -- AUTO TYPE
 -- =========================================================
 
@@ -85,8 +301,7 @@ local typingTimer = nil
 local typingText = ""
 local typingIndex = 1
 
--- Toggle newline typing
-
+-- Toggle newline typing: Cmd + Option + Ctrl + K
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "K", function()
 
     newlineTyping = not newlineTyping
@@ -100,8 +315,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "K", function()
 end)
 
 
--- Start typing clipboard contents
-
+-- Start typing clipboard contents: Cmd + Option + Ctrl + T
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "T", function()
 
     if typingTimer then
@@ -132,7 +346,10 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "T", function()
 
         if typingIndex <= #typingText then
 
-            local character = typingText:sub(typingIndex, typingIndex)
+            local character = typingText:sub(
+                typingIndex,
+                typingIndex
+            )
 
             if character == "\\n" then
                 hs.eventtap.keyStroke({}, "return")
@@ -155,92 +372,16 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "T", function()
 
 end)
 
+
 ----------------------------------------------------------------
--- 🧩 USER MACROS BELOW
+-- USER MACROS BELOW
 ----------------------------------------------------------------
+
+
 `;
 
 
-  const rawAutoClickerCore = `
-----------------------------------------------------------------
--- 🔒 ALWAYS-LOADED CORE MACROS
-----------------------------------------------------------------
-
-autoClickerTimer = autoClickerTimer
-autoClickerMode = autoClickerMode or 1
-
-local clickModes = {
-    {name = "MAX SPEED ⚡", interval = 0},
-    {name = "5 ms", interval = 0.005},
-    {name = "25 ms", interval = 0.025},
-    {name = "50 ms", interval = 0.05},
-    {name = "100ms", interval = 0.1},
-    {name = "250ms", interval = 0.25},
-    {name = "500ms", interval = 0.5},
-    {name = "1000ms", interval = 1}
-}
-
-local function startClicker()
-    local mode = clickModes[autoClickerMode]
-    hs.alert.show("Auto Clicker: " .. mode.name)
-
-    local function click()
-        local pos = hs.mouse.absolutePosition()
-        hs.eventtap.event.newMouseEvent(hs.eventtap.event.types.leftMouseDown, pos):post()
-        hs.eventtap.event.newMouseEvent(hs.eventtap.event.types.leftMouseUp, pos):post()
-    end
-
-    if mode.interval == 0 then
-        autoClickerTimer = hs.timer.doWhile(
-            function() return autoClickerTimer ~= nil end,
-            function() click() end,
-            0
-        )
-    else
-        autoClickerTimer = hs.timer.doEvery(mode.interval, click)
-    end
-end
-
-local function stopClicker()
-    if autoClickerTimer then
-        autoClickerTimer:stop()
-        autoClickerTimer = nil
-        hs.alert.show("Auto Clicker Stopped 🛑")
-    end
-end
-
--- Toggle
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "C", function()
-    if autoClickerTimer then
-        stopClicker()
-    else
-        startClicker()
-    end
-end)
-
--- Cycle speed
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
-    autoClickerMode = autoClickerMode + 1
-    if autoClickerMode > #clickModes then
-        autoClickerMode = 1
-    end
-
-    hs.alert.show("Mode: " .. clickModes[autoClickerMode].name)
-
-    if autoClickerTimer then
-        stopClicker()
-        startClicker()
-    end
-end)
-
-
--- Mouse pos log macro
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "M", function()
-    local pos = hs.mouse.absolutePosition()
-    hs.alert.show("Mouse: X=" .. math.floor(pos.x) .. " Y=" .. math.floor(pos.y))
-end)
-`;
-
+  const rawAutoClickerCore = ''
   function escapeJsForLuaBlock(str) {
     return str
   }
