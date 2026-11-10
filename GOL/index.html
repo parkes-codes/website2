@@ -21,7 +21,7 @@
     <meta name="twitter:description" content="Explore Conway's Game of Life in your browser. Draw, simulate, and browse a vast handpicked lexicon of Life patterns!" />
     <meta name="twitter:image" content="https://parkes-codes.github.io/website2/images/golthumb.png"/>
     <link rel="icon" type="image/x-icon" href="https://parkes-codes.github.io/website2/images/icon.ico" />
-  <script type="module" crossorigin src="./assets/index-Du28nUtQ.js"></script>
+  <script type="module" crossorigin src="./assets/index-dkH5FW6t.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-DgfY93wf.css">
 </head>
 <body>
@@ -43,12 +43,10 @@
 <div id="alerttext"></div>
 <span id="watermark" style="left: 5px; top:5px; position: fixed; z-index: 3; font-size: 10px; opacity: 50%;">Written by <a target = "_blank" href="https://parkes-codes.github.io" style="color:#cde">parkes-codes</a> © 2026</span>
 <div id="btnrow">
-    <button id="export" class="buttons" tabindex="6">Export</button>
     <button id="import2" class="buttons" tabindex="7">Import RLE</button>
     <button id="export2" class="buttons" tabindex="8">Export RLE</button>
 </div>
 <div id="btnrow2">
-    <button id="import" class="buttons" tabindex="9">Import</button>
     <button id="lex" class="buttons" tabindex="10">Lexicon</button>
     <button id="controls" class="buttons" tabindex="11">Controls</button>
 </div>
@@ -199,7 +197,7 @@
         <p>p152 B Hassler <a class="link" onclick="loadLexi('p152o')">Spawn</a></p>
         <p>p690 Boat Rotator <a class="link" onclick="loadLexi('boatrotator')">Spawn</a></p>
         <p>p84 R Pentomino Hassler <a class="link" onclick="loadLexi('rpenthassle')">Spawn</a></p>
-        <p> Traffic Light Wire Oscillator  <a class="link" onclick="loadLexi('coolwire')">Spawn</a></p>
+        <p> Traffic Light Wire Oscillator <a  class="link" onclick="loadLexi('coolwire')">Spawn</a></p>
       </div>
     </div>
     
@@ -364,6 +362,7 @@
       <div class="collapsible-body">
         <p>c/4 Antstretcher <a class="link" onclick="loadLexi('wickstretcher')">Spawn</a></p>
         <p>c/2 Wickstretcher <a class="link" onclick="loadLexi('c2wick')">Spawn</a></p>
+        <p>p2 Diagonal Wickstretcher <a class="link" onclick="loadLexi('p2wick')">Spawn</a></p>
         <p>c/5 Wickstretcher <a class="link" onclick="loadLexi('c5wick')">Spawn</a></p>
         <p>Diagonal Wickstretcher <a class="link" onclick="loadLexi('diagWickstr')">Spawn</a></p>
         <p>c/5 Tubstretcher <a class="link" onclick="loadLexi('c/5tubstretcher')">Spawn</a></p>
@@ -374,9 +373,9 @@
         <p>Zigzag Wickstretcher <a class="link" onclick="loadLexi('zigzag-wickstretch')">Spawn</a></p>
         <p>Simple Queen Bee Stretcher <a class="link" onclick="loadLexi('qbstretch2')">Spawn</a></p>
         <p>Complex Queen Bee Stretcher <a class="link" onclick="loadLexi('qbstretch')">Spawn</a></p>
-        <p>Block Greystretcher <a class="link" onclick="loadLexi('greystretch')">Spawn</a></p>
-        <p>Wick Greystretcher <a class="link" onclick="loadLexi('greystretch2')">Spawn</a></p>
-        <p>Long Glider (?) Greystretcher <a class="link" onclick="loadLexi('greystretch3')">Spawn</a></p>
+        <p>2c/5 Greystretcher <a class="link" onclick="loadLexi('greystretch')">Spawn</a></p>
+        <p>c/5 Greystretcher <a class="link" onclick="loadLexi('greystretch2')">Spawn</a></p>
+        <p>c/4 Greystretcher<a class="link" onclick="loadLexi('greystretch3')">Spawn</a></p>
         <p>"Width 3 chicken wire negative wick stretcher" <a class="link" onclick="loadLexi('chiken')">Spawn</a></p>
         <p>c/2 Greystretcher <a class="link" onclick="loadLexi('c2grey')">Spawn</a></p>
         <p>c/2 Double Snakestretcher <a class="link" onclick="loadLexi('snakestretch')">Spawn</a></p>
@@ -395,8 +394,8 @@
         <p>Slide Breeder (large) <a class="link" onclick="loadLexi('slide-breeder')">Spawn</a></p>
         <p>LWSS Breeder <a class="link" onclick="loadLexi('lwssBreed')">Spawn</a></p>
         <p>c/10 Block-Laying cship Breeder <a class="link" onclick="loadLexi('idk193')">Spawn</a></p>
-        <p>Double Glider Gun Breeder <a class="link" onclick="loadLexi('dubbreed')">Spawn</a></p>
-        <p>Smallest Glider Gun Breeder <a class="link" onclick="loadLexi('gggbreeder')">Spawn</a></p>
+        <p>Double Glider Breeder <a class="link" onclick="loadLexi('dubbreed')">Spawn</a></p>
+        <p>Smallest Glider Breeder <a class="link" onclick="loadLexi('gggbreeder')">Spawn</a></p>
 
       </div>
     </div>
@@ -432,76 +431,88 @@
         <p>p27 <a class="link" onclick="loadLexi('27gun')">Spawn</a></p>
         <p>p28 <a class="link" onclick="loadLexi('28gun')">Spawn</a></p>
         <p>p30 <a class="link" onclick="loadLexi('gliderGun1')">Spawn</a></p>
+        <p>p32 <a class="link" onclick="loadLexi('32')">Spawn</a></p>
+        <p>p33 <a class="link" onclick="loadLexi('33')">Spawn</a></p>
+        <p>p34 <a class="link" onclick="loadLexi('34')">Spawn</a></p>
+        <p>p35 <a class="link" onclick="loadLexi('35')">Spawn</a></p>
+        <p>p36 <a class="link" onclick="loadLexi('36')">Spawn</a></p>
+        <p>p37 <a class="link" onclick="loadLexi('37')">Spawn</a></p>
+        <p>p38 <a class="link" onclick="loadLexi('38')">Spawn</a></p>
         <p>p39 <a class="link" onclick="loadLexi('p39gun')">Spawn</a></p>
+        <p>p40 <a class="link" onclick="loadLexi('40')">Spawn</a></p>
+        <p>p41 <a class="link" onclick="loadLexi('41')">Spawn</a></p>
+        <p>p44 <a class="link" onclick="loadLexi('44')">Spawn</a></p>
         <p>p46 <a class="link" onclick="loadLexi('twinbees_shuttlepair')">Spawn</a></p>
+        <p>p124 <a class="link" onclick="loadLexi('124')">Spawn</a></p>
+        <p>p148 <a class="link" onclick="loadLexi('148')">Spawn</a></p>
         <p>p165 <a class="link" onclick="loadLexi('165gun')">Spawn</a></p>
+        <p>p178 <a class="link" onclick="loadLexi('178')">Spawn</a></p>
+        <p>p246 <a class="link" onclick="loadLexi('246')">Spawn</a></p>
       </div>
     </div>
     <div class="collapsible-block">
       <div class="collapsible-header">Misc Glider Guns</div>
       <div class="collapsible-body">
-        <p>Simkin Glider Gun (p120) <a class="link" onclick="loadLexi('simkingun')">Spawn</a></p>
+        <p>Pseudo p14 Glider <a class="link" onclick="loadLexi('pseudo14GG')">Spawn</a></p>
+        <p>Simkin Glider (p120) <a class="link" onclick="loadLexi('simkingun')">Spawn</a></p>
         <p>B52 Bomber (p104 double gun) <a class="link" onclick="loadLexi('b52-bomber')">Spawn</a></p>
-        <p>Double Glider Gun (p46) <a class="link" onclick="loadLexi('doublebarrel')">Spawn</a></p>
+        <p>Double Glider (p46) <a class="link" onclick="loadLexi('doublebarrel')">Spawn</a></p>
         <p>Gunstar (p216) <a class="link" onclick="loadLexi('gunstar')">Spawn</a></p>
-        <p>4 Direction Glider Gun (p256) <a class="link" onclick="loadLexi('omnigun')">Spawn</a></p>
-        <p>P ~15000 Glider Gun <a class="link" onclick="loadLexi('idk15')">Spawn</a></p>
-        <p>Crystallization And Decay Based Gun (p4900 ish) <a class="link" onclick="loadLexi('idk9')">Spawn</a></p>
-        <p>Slowest Glider Gun (p103079214841) <a class="link" onclick="loadLexi('wrGlider')">Spawn</a></p>
+        <p>4 Direction Glider (p256) <a class="link" onclick="loadLexi('omnigun')">Spawn</a></p>
+        <p>P ~15000 Glider <a class="link" onclick="loadLexi('idk15')">Spawn</a></p>
+        <p>Crystallization And Decay Based (p4900 ish) <a class="link" onclick="loadLexi('idk9')">Spawn</a></p>
+        <p>Slowest Glider (p103079214841) <a class="link" onclick="loadLexi('wrGlider')">Spawn</a></p>
       </div>
     </div>
     <div class="collapsible-block">
       <div class="collapsible-header">Spaceship Guns</div>
       <div class="collapsible-body">
-        <p>LWSS Gun (p30) <a class="link" onclick="loadLexi('lwssGun')">Spawn</a></p>
-        <p>LWSS Gun Gliderless (p46) <a class="link" onclick="loadLexi('lwssGun2')">Spawn</a></p>
-        <p>LWSS Gun Gliderless 2 (p44) <a class="link" onclick="loadLexi('lwssGun3')">Spawn</a></p>
-        <p>MWSS Gun p46 <a class="link" onclick="loadLexi('p58mwssGun')">Spawn</a></p>
-        <p>MWSS Gun p44 <a class="link" onclick="loadLexi('p44MWSSgun')">Spawn</a></p>
-        <p>MWSS Gun pseudo p30 <a class="link" onclick="loadLexi('mwssg3')">Spawn</a></p>
-        <p>MWSS Slide Gun p878 <a class="link" onclick="loadLexi('mwssslide')">Spawn</a></p>
-        <p>HWSS Gun p30 <a class="link" onclick="loadLexi('hwssGun2')">Spawn</a></p>
-        <p>HWSS Gun Gliderless (p80) <a class="link" onclick="loadLexi('hwssgun')">Spawn</a></p>
-        <p>Blinker Ship Gun <a class="link" onclick="loadLexi('bsgun')">Spawn</a></p>
-        <p>Sidecar Gun <a class="link" onclick="loadLexi('sideCarGun')">Spawn</a></p>
-        <p>Half On HWSS Gun <a class="link" onclick="loadLexi('idk7')">Spawn</a></p>
-        <p>Loafer Gun <a class="link" onclick="loadLexi('loafergun')">Spawn</a></p>
-        <p>Faster Loafer Gun <a class="link" onclick="loadLexi('fastloafgun')">Spawn</a></p>
-        <p>p240 25P3H1V0.1 Gun <a class="link" onclick="loadLexi('idk8')">Spawn</a></p>
-        <p>Wide c2 Ship gun <a class="link" onclick="loadLexi('idk4')">Spawn</a></p>
-        <p>Big A Gun (p144) <a class="link" onclick="loadLexi('bigagun')">Spawn</a></p>
-        <p>P690 300x300 Weekender Gun <a class="link" onclick="loadLexi('smallweek')">Spawn</a></p>
-        <p>B29 (spaceship) Gun (p148) <a class="link" onclick="loadLexi('b29g')">Spawn</a></p>
-        <p>c/10 Ship Gun  <a class="link" onclick="loadLexi('c10gun')">Spawn</a></p>
-      </div>
-    </div>
-    <div class="collapsible-block">
-      <div class="collapsible-header">Misc Guns</div>
-      <div class="collapsible-body">
-        <p>Side-By-Side Glider Gun (vacuum) <a class="link" onclick="loadLexi('vacuumGun')">Spawn</a></p>
-        <p>Slide Gun <a class="link" onclick="loadLexi('slideGun')">Spawn</a></p>
-        <p>Double Slide Gun <a class="link" onclick="loadLexi('doubleslide')">Spawn</a></p>
-        <p>Slide Gun With Beehive <a class="link" onclick="loadLexi('slide3')">Spawn</a></p>
+        <p>LWSS p30 <a class="link" onclick="loadLexi('lwssGun')">Spawn</a></p>
+        <p>LWSS Gliderless p46 <a class="link" onclick="loadLexi('lwssGun2')">Spawn</a></p>
+        <p>LWSS Gliderless 2 p44 <a class="link" onclick="loadLexi('lwssGun3')">Spawn</a></p>
+        <p>MWSS p44 <a class="link" onclick="loadLexi('p44MWSSgun')">Spawn</a></p>
+        <p>MWSS p46 <a class="link" onclick="loadLexi('p58mwssGun')">Spawn</a></p>
+        <p>MWSS p80 <a class="link" onclick="loadLexi('newmwss')">Spawn</a></p>
+        <p>MWSS pseudo p30 <a class="link" onclick="loadLexi('mwssg3')">Spawn</a></p>
+        <p>MWSS Slide p878 <a class="link" onclick="loadLexi('mwssslide')">Spawn</a></p>
+        <p>HWSS p30 <a class="link" onclick="loadLexi('hwssGun2')">Spawn</a></p>
+        <p>HWSS p80 <a class="link" onclick="loadLexi('hwssgun')">Spawn</a></p>
+        <p>Side-By-Side Glider (vacuum) <a class="link" onclick="loadLexi('vacuumGun')">Spawn</a></p>
+        <p>Slide <a class="link" onclick="loadLexi('slideGun')">Spawn</a></p>
+        <p>Double Slide <a class="link" onclick="loadLexi('doubleslide')">Spawn</a></p>
+        <p>Slide With Beehive <a class="link" onclick="loadLexi('slide3')">Spawn</a></p>
         <p>Space Rake Gun <a class="link" onclick="loadLexi('spaceRakeGun')">Spawn</a></p>
-      </div>
-    </div>
-    <div class="collapsible-block">
-      <div class="collapsible-header">Very Large Guns</div>
-      <div class="collapsible-body">
-        <p>Dart Gun <a class="link" onclick="loadLexi('dartgun')">Spawn</a></p>
-        <p>P444 Weekender Gun <a class="link" onclick="loadLexi('idk5')">Spawn</a></p>
-        <p>Lobster Gun <a class="link" onclick="loadLexi('lobgun')">Spawn</a></p>
-        <p>Spaceship1 Gun (p416) <a class="link" onclick="loadLexi('spaceshipgun1')">Spawn</a></p>
-        <p>6-engine Cordership Gun <a class="link" onclick="loadLexi('6engcordgun')">Spawn</a></p>
+        <p>Blinker Ship <a class="link" onclick="loadLexi('bsgun')">Spawn</a></p>
+        <p>Sidecar <a class="link" onclick="loadLexi('sideCarGun')">Spawn</a></p>
+        <p>Half On HWSS <a class="link" onclick="loadLexi('idk7')">Spawn</a></p>
+        <p>Loafer <a  class="link" onclick="loadLexi('loafergun')">Spawn</a></p>
+        <p>Faster Loafer <a  class="link" onclick="loadLexi('fastloafgun')">Spawn</a></p>
+        <p>p240 25P3H1V0.1 <a  class="link" onclick="loadLexi('idk8')">Spawn</a></p>
+        <p>Wide c2 Ship <a  class="link" onclick="loadLexi('idk4')">Spawn</a></p>
+        <p>Big A  (p144) <a class="link" onclick="loadLexi('bigagun')">Spawn</a></p>
+        <p>P690 300x300 Weekender <a  class="link" onclick="loadLexi('smallweek')">Spawn</a></p>
+        <p>B29 (spaceship)  (p148) <a class="link" onclick="loadLexi('b29g')">Spawn</a></p>
+        <p>Fireship <a   class="link" onclick="loadLexi('c10gun')">Spawn</a></p>
+        <p>Copperhead <a  class="link" onclick="loadLexi('copgun')">Spawn</a></p>
+        <p>2-Engine Cordership <a  class="link" onclick="loadLexi('cordgun')">Spawn</a></p>
+        <p>Dart <a class="link" onclick="loadLexi('dartgun')">Spawn</a></p>
+        <p>P444 Weekender <a class="link" onclick="loadLexi('idk5')">Spawn</a></p>
+        <p>Lobster <a class="link" onclick="loadLexi('lobgun')">Spawn</a></p>
+        <p>Spaceship (p416) <a class="link" onclick="loadLexi('spaceshipgun1')">Spawn</a></p>
+        <p>6-engine Cordership <a class="link" onclick="loadLexi('6engcordgun')">Spawn</a></p>
         <p>7-engine Cordership V gun <a class="link" onclick="loadLexi('7engCSgun')">Spawn</a></p>
-        <p>Pseudo p14 Glider Gun <a class="link" onclick="loadLexi('pseudo14GG')">Spawn</a></p>
-        <p>"Infinite Corderships" Gun <a class="link" onclick="loadLexi('infinitecorderships')">Spawn</a></p>
-        <p>Smaller Spaceship1 Gun (p690) <a class="link" onclick="loadLexi('shipgunidk')">Spawn</a></p>
-        <p>Gliderless Coeship Gun <a class="link" onclick="loadLexi('coeshipGun')">Spawn</a></p>
-        <p>Very Slow Diagonal Spaceship Gun <a class="link" onclick="loadLexi('idkgun')">Spawn</a></p>
-        <p>Solifuge Gun (p8064) <a class="link" onclick="loadLexi('soligun')">Spawn</a></p>
-        <p>Spider Gun (p2619), 256k pix <a class="link" onclick="loadLexi('spidergun')">Spawn</a></p>
-        <p>p1000 74p2h1v0 Gun With Attachment <a class="link" onclick="loadLexi('idk3')">Spawn</a></p>
+        <p>"Infinite Corderships" <a class="link" onclick="loadLexi('infinitecorderships')">Spawn</a></p>
+        <p>Smaller Spaceship1 (p690) <a class="link" onclick="loadLexi('shipgunidk')">Spawn</a></p>
+        <p>Very Slow Diagonal Spaceship <a class="link" onclick="loadLexi('idkgun')">Spawn</a></p>
+        <p>Solifuge (p8064) <a class="link" onclick="loadLexi('soligun')">Spawn</a></p>
+        <p>Spider (p2619, 256k cells) <a class="link" onclick="loadLexi('spidergun')">Spawn</a></p>
+        <p>p1000 74p2h1v0 With Attachment <a class="link" onclick="loadLexi('idk3')">Spawn</a></p>
+        <p>Gliderless Loafer <a class="link" onclick="loadLexi('nogloafer')">Spawn</a></p>
+        <p>Gliderless 2-Eng Cordership <a class="link" onclick="loadLexi('nogcord')">Spawn</a></p>
+        <p>Gliderless LWSS on MWSS 3 <a class="link" onclick="loadLexi('lonw')">Spawn</a></p>
+        <p>Gliderless MWSS on MWSS 1 <a class="link" onclick="loadLexi('mwssonmwss')">Spawn</a></p>
+        <p>Gliderless Coeship <a class="link" onclick="loadLexi('coeshipGun')">Spawn</a></p>
+        <p>Gliderless LWSS Slide (p188) <a class="link" onclick="loadLexi('slidelwss')">Spawn</a></p>
       </div>
     </div>
     <div class="collapsible-block">
@@ -518,7 +529,7 @@
         <p>Shtshow (insanity) <a class="link" onclick="loadLexi('shtshow')">Spawn</a></p>
         <p>Turing Machine <a class="link" onclick="loadLexi('tmachine')">Spawn</a></p>
         <p>High Speed Telegraph <a class="link" onclick="loadLexi('telegraph')">Spawn</a></p>
-        <p>Solifuge-Based Glider Gun Breeder <a class="link" onclick="loadLexi('ggCam')">Spawn</a></p>
+        <p>Solifuge-Based Glider Breeder <a class="link" onclick="loadLexi('ggCam')">Spawn</a></p>
         <p>14c/65 Growing Fuse Extender <a class="link" onclick="loadLexi('idk6')">Spawn</a></p>
       </div>
     </div>
