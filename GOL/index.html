@@ -21,7 +21,7 @@
     <meta name="twitter:description" content="Explore Conway's Game of Life in your browser. Draw, simulate, and browse a vast handpicked lexicon of Life patterns!" />
     <meta name="twitter:image" content="https://parkes-codes.github.io/website2/images/golthumb.png"/>
     <link rel="icon" type="image/x-icon" href="https://parkes-codes.github.io/website2/images/icon.ico" />
-  <script type="module" crossorigin src="./assets/index-DqdnQZmE.js"></script>
+  <script type="module" crossorigin src="./assets/index-szhjrex8.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-D_-n4x6G.css">
 </head>
 <body>
@@ -148,7 +148,7 @@
     <h2 style="margin-top: -10px">Lexicon</h2>
     <button style="opacity:0;position:absolute;pointer-events:none;" tabindex="12" aria-hidden="true" id="invBtn"></button>
     <p>List of my favorite patterns in game of life. A couple are made by me.</p>
-    <p>Credit to <a href="https://conwaylife.com/wiki" target="_blank" rel="noopener noreferrer" tabindex="14">ConwayLife</a> Wiki and Forums, <a href="https://cannabrava.co/golly/" target="_blank" rel="noopener noreferrer" tabindex="15">Marcos</a> (a few), and <a href="https://catagolue.hatsya.com" target="_blank" rel="noopener noreferrer" tabindex="16">Catagolue</a></p>
+    <p>Credit to <a href="https://conwaylife.com/wiki" target="_blank" rel="noopener noreferrer" tabindex="14">ConwayLife</a> Wiki and Forums, <a href="https://golly.sourceforge.io/webapp/golly.html" target="_blank" rel="noopener noreferrer" tabindex="15">Golly</a> (a few), and <a href="https://catagolue.hatsya.com" target="_blank" rel="noopener noreferrer" tabindex="16">Catagolue</a></p>
     
     <button id="surprisebtn">Surprise Me</button>
     <div class="collapsible-block">
@@ -197,7 +197,9 @@
         <p>All Traffic Light Hasslers <a class="link" onclick="loadLexi('trafhassle')">Spawn</a></p>
         <p>LWSS Bouncer <a class="link" onclick="loadLexi('lwssbouncer')">Spawn</a></p>
         <p>Quad Puslar Hassler <a class="link" onclick="loadLexi('quadpulsar')">Spawn</a></p>
-        <p>Queen Bee Hassler <a class="link" onclick="loadLexi('qbhassle')">Spawn</a></p>
+        <p>Queen Bee Turner <a class="link" onclick="loadLexi('qbhassle')">Spawn</a></p>
+        <p>Extendable Low Periods <a class="link" onclick="loadLexi('lowper')">Spawn</a></p>
+        <p>Honey Farm Hasslers <a class="link" onclick="loadLexi('honeyfarms')">Spawn</a></p>
       </div>
     </div>
     
@@ -208,14 +210,16 @@
         <p>Orthogonal 2c/5 ship 2 <a class="link" onclick="loadLexi('spaceship5')">Spawn</a></p>
         <p>Orthogonal c/3 <a class="link" onclick="loadLexi('c/3spaceship')">Spawn</a></p>
         <p>Unorthogonal c/5 <a class="link" onclick="loadLexi('spaceship6')">Spawn</a></p>
-        <!-- <p>Spaceship4 Synthesis <a class="link" onclick="loadLexi('c/3synth')">Spawn</a></p> -->
         <p>295P5H1V1 <a class="link" onclick="loadLexi('diagship')">Spawn</a></p>
         <p>Growing 3c/7 Spaceship <a class="link" onclick="loadLexi('3c7grow')">Spawn</a></p>
         <p>Growing Wing (Flying Wing) <a class="link" onclick="loadLexi('flyingwing')">Spawn</a></p>
         <p>Snail (c/5) <a class="link" onclick="loadLexi('snail')">Spawn</a></p>
         <p>Weekender (2c/7) <a class="link" onclick="loadLexi('weekender')">Spawn</a></p>
-        <p>c/6 Ship <a class="link" onclick="loadLexi('c/6ship')">Spawn</a></p>
-        <p>c/7 Ship (loafer) <a class="link" onclick="loadLexi('loafer')">Spawn</a></p>
+        <p>c/4 <a class="link" onclick="loadLexi('c/4')">Spawn</a></p>
+        <p>c/5 Pulsar Pusher <a class="link" onclick="loadLexi('trafpush')">Spawn</a></p>
+        <p>c/6 <a class="link" onclick="loadLexi('c/6ship')">Spawn</a></p>
+        <p>c/7 (loafer) <a class="link" onclick="loadLexi('loafer')">Spawn</a></p>
+        <p>c/8d (walrus) <a class="link" onclick="loadLexi('c/8')">Spawn</a></p>
         <p>c7 Wave Ship <a class="link" onclick="loadLexi('c7wave')">Spawn</a></p>
         <p>3c/7 Ship <a class="link" onclick="loadLexi('3c/7')">Spawn</a></p>
         <p>c/10 Ship <a class="link" onclick="loadLexi('c10ship')">Spawn</a></p>
@@ -234,13 +238,7 @@
     <div class="collapsible-block">
       <div class="collapsible-header">Greyships</div>
       <div class="collapsible-body">
-        <p>(4c/8) Greyship 1 <a class="link" onclick="loadLexi('c2noway')">Spawn</a></p>
-        <p>(4c/8) Greyship 2 <a class="link" onclick="loadLexi('canada')">Spawn</a></p>
-        <p>c/3 Greyship <a class="link" onclick="loadLexi('c3greyship')">Spawn</a></p>
-        <p>c/4 Greyship <a class="link" onclick="loadLexi('c/4greyship')">Spawn</a></p>
-        <p>c/5 Greyship <a class="link" onclick="loadLexi('c/5greyship')">Spawn</a></p>
-        <p>2c/5 Perpendicular Stripes Greyship <a class="link" onclick="loadLexi('something')">Spawn</a></p>
-        <p>c5 Bubble Ship <a class="link" onclick="loadLexi('bubship')">Spawn</a></p>
+        <p>Greyships Collection <a class="link" onclick="loadLexi('greyships')">Spawn</a></p>
         <p>Width 2 Chickenwire Ship <a class="link" onclick="loadLexi('chickenShip')">Spawn</a></p>
         <p>Width 3 Chickenwire Ship <a class="link" onclick="loadLexi('chick3')">Spawn</a></p>
         <p>Chicken Wire-To-Negative Ship <a class="link" onclick="loadLexi('thingyyy')">Spawn</a></p>
@@ -317,6 +315,7 @@
         <p>Space Rake <a class="link" onclick="loadLexi('spacerake')">Spawn</a></p>
         <p>c/2 Backrake <a class="link" onclick="loadLexi('back-rake')">Spawn</a></p>
         <p>c/3 Backrake <a class="link" onclick="loadLexi('c3back')">Spawn</a></p>
+        <p>c/4 Backrake <a class="link" onclick="loadLexi('c4back')">Spawn</a></p>
         <p>3-engine Cordership Gun/Rake <a class="link" onclick="loadLexi('3engCorder_gun')">Spawn</a></p>
         <p>2c/5 Engineless Rake <a class="link" onclick="loadLexi('noengRake')">Spawn</a></p>
         <p>MWSS Forward Rake <a class="link" onclick="loadLexi('forwardMWSSrake')">Spawn</a></p>
@@ -328,6 +327,7 @@
         <p>c/2 LWSS Backrake <a class="link" onclick="loadLexi('lwssback')">Spawn</a></p>
         <p>c/4 Fuse Convoy <a class="link" onclick="loadLexi('fuseCarryer')">Spawn</a></p>
         <p>Long Boat Backrake <a class="link" onclick="loadLexi('boatrake')">Spawn</a></p>
+        <p>Knightship Backrake <a class="link" onclick="loadLexi('kshiprake')">Spawn</a></p>
       </div>
     </div>
     <div class="collapsible-block">
@@ -385,6 +385,8 @@
         <p>"Width 3 chicken wire negative wick stretcher" <a class="link" onclick="loadLexi('chiken')">Spawn</a></p>
         <p>c/2 Greystretcher <a class="link" onclick="loadLexi('c2grey')">Spawn</a></p>
         <p>c/2 Double Snakestretcher <a class="link" onclick="loadLexi('snakestretch')">Spawn</a></p>
+        <p>OWSS Stretcher (legendary) <a class="link" onclick="loadLexi('owss')">Spawn</a></p>
+        <p>Barberpole Stretcher <a class="link" onclick="loadLexi('barbstretch')">Spawn</a></p>
       </div>
     </div>
     <div class="collapsible-block">
@@ -408,14 +410,19 @@
     <div class="collapsible-block">
       <div class="collapsible-header">Spiral Growths</div>
       <div class="collapsible-body">
-        <p>Single Channel Spiral Growth <a class="link" onclick="loadLexi('spiralGrowth1')">Spawn</a></p>
-        <p>Smaller Spiral Growth <a class="link" onclick="loadLexi('spiralGrowth2')">Spawn</a></p>
-        <p>SSG at Depth 5, gen 1360794 <a class="link" onclick="loadLexi('spirald5')">Spawn</a></p>
+        <p>Spiral Growth Puffer <a class="link" onclick="loadLexi('sppuff')">Spawn</a></p>
+        <p>p256k Spiral Growth <a class="link" onclick="loadLexi('spiralGrowth1')">Spawn</a></p>
+        <p>p256k Spiral Growth But a Trapezoid <a class="link" onclick="loadLexi('iso')">Spawn</a></p>
+        <p>p60k Spiral Growth <a class="link" onclick="loadLexi('spiralGrowth2')">Spawn</a></p>
+        <p>p60k Spiral Growth But a Square <a class="link" onclick="loadLexi('square')">Spawn</a></p>
+        <p>p60k at Depth 5, gen 1,360,794 <a class="link" onclick="loadLexi('spirald5')">Spawn</a></p>
+        <p>p256k trapezoid at Depth 3, gen 3,428,417 <a class="link" onclick="loadLexi('scsg')">Spawn</a></p>
       </div>
     </div>
     <div class="collapsible-block">
       <div class="collapsible-header">Diehards</div>
       <div class="collapsible-body">
+        <p>t658 Diehard <a class="link" onclick="loadLexi('die658')">Spawn</a></p>
         <p>t2279 Diehard <a class="link" onclick="loadLexi('diehard4')">Spawn</a></p>
         <p>t2474 Diehard <a class="link" onclick="loadLexi('diehard')">Spawn</a></p>
         <p>t9044 Diehard <a class="link" onclick="loadLexi('diehard2')">Spawn</a></p>
@@ -549,14 +556,20 @@
       </div>
     </div>
     <div class="collapsible-block">
+      <div class="collapsible-header">Synthesis</div>
+      <div class="collapsible-body">
+        <p>Crabstretcher <a class="link" onclick="loadLexi('crabsynth')">Spawn</a></p>
+        <p>Canada Greyship <a class="link" onclick="loadLexi('canadasynth')">Spawn</a></p>
+        <p>Pinwheel <a class="link" onclick="loadLexi('pinwheelsynth')">Spawn</a></p>
+        <p>c/2 Ships <a class="link" onclick="loadLexi('c2synths')">Spawn</a></p>
+        <p>Spaceships <a class="link" onclick="loadLexi('c2synths')">Spawn</a></p>
+      </div>
+    </div>
+    <div class="collapsible-block">
       <div class="collapsible-header">Miscellaneous</div>
       <div class="collapsible-body">
         <p>Otismo's 2023 Exploratorium <a class="link" onclick="loadLexi('explore2023')">Spawn</a></p>
-        <p>4 Glider Creator <a class="link" onclick="loadLexi('4gc')">Spawn</a></p>
         <p>12 Glider Creator <a class="link" onclick="loadLexi('12spawn')">Spawn</a></p>
-        <p>Synthesis of Crabstretcher <a class="link" onclick="loadLexi('crabsynth')">Spawn</a></p>
-        <p>Synthesis of Canada Greyship <a class="link" onclick="loadLexi('canadasynth')">Spawn</a></p>
-        <p>Pinwheel Synth <a class="link" onclick="loadLexi('pinwheelsynth')">Spawn</a></p>
         <p>Trombone Slide <a class="link" onclick="loadLexi('tromboneSlide')">Spawn</a></p>
         <p>Bobsled Run Revised <a class="link" onclick="loadLexi('bobsled')">Spawn</a></p>
         <p>Glider Eater <a class="link" onclick="loadLexi('glidereater')">Spawn</a></p>
@@ -593,6 +606,7 @@
         <p>Gliders made of LWSS <a class="link" onclick="loadLexi('gliderception')">Spawn</a></p>
         <p>Solifuge Eater <a class="link" onclick="loadLexi('solifugeeat')">Spawn</a></p>
         <p>Sir Robin Eater <a class="link" onclick="loadLexi('knighteater')">Spawn</a></p>
+        <p>Spiral Snarkstretcher <a class="link" onclick="loadLexi('snarkstretch')">Spawn</a></p>
       </div>
     </div>
   </div>
